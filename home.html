@@ -178,7 +178,7 @@
     overflow:hidden;scroll-margin-top:60px;
     rotate:var(--rot,0deg);transition:rotate .35s ease;
   }
-  .win:hover{rotate:0deg}
+  @media (hover:hover){.win:hover{rotate:0deg}}
   .win::after{
     content:'';position:absolute;inset:0;pointer-events:none;
     background:repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
@@ -302,10 +302,18 @@
     background:rgba(255,255,255,.04);border:1.5px solid var(--a);border-radius:4px;
     transition:transform .15s, box-shadow .15s, background .15s;
   }
-  .tile:hover,.tile:focus-visible{
-    transform:translateY(-4px) skewX(-4deg);background:rgba(255,255,255,.09);outline:none;
+  .tile:focus-visible{
+    transform:translateY(-4px);background:rgba(255,255,255,.09);outline:none;
     box-shadow:0 0 0 1px var(--a), 0 0 20px var(--glow), 5px 5px 0 #000;
   }
+  @media (hover:hover){
+    .tile:hover{
+      transform:translateY(-4px) skewX(-4deg);background:rgba(255,255,255,.09);
+      box-shadow:0 0 0 1px var(--a), 0 0 20px var(--glow), 5px 5px 0 #000;
+    }
+    .tile:hover .ico{animation:glitchy .35s steps(3)}
+  }
+  .tile:active{background:rgba(255,255,255,.12);box-shadow:0 0 0 1px var(--a), 0 0 18px var(--glow)}
   .ico{
     width:54px;height:54px;border-radius:10px;flex:none;
     display:grid;place-items:center;overflow:hidden;
@@ -315,7 +323,7 @@
   .ico.fav{background:#fff}
   .ico.fav img{filter:none;width:32px;height:32px;image-rendering:pixelated}
   .ico svg{width:100%;height:100%;display:block}
-  .tile:hover .ico,.tile:focus-visible .ico{animation:glitchy .35s steps(3)}
+
   @keyframes glitchy{
     33%{transform:translate(-3px,1px);filter:drop-shadow(-3px 0 0 #ff1a2e) drop-shadow(3px 0 0 #01cdfe)}
     66%{transform:translate(3px,-1px) skewX(8deg);filter:drop-shadow(3px 0 0 #ff1a2e) drop-shadow(-3px 0 0 #01cdfe)}
@@ -414,8 +422,31 @@
   /* hiệu ứng con trỏ + click */
   .px{position:fixed;pointer-events:none;z-index:90;width:5px;height:5px;transform:translate(-50%,-50%);animation:px .8s ease-out forwards}
   @keyframes px{to{opacity:0;transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.4)}}
-  body.jolt .board,body.jolt .hero{animation:jolt .14s steps(2) 2}
-  @keyframes jolt{0%{transform:translate(-6px,1px) skewX(-3deg);filter:hue-rotate(60deg)}100%{transform:translate(5px,-1px);filter:none}}
+
+  /* ===== thỏ, sói, đom đóm ===== */
+  #critters{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden}
+  .bunny,.wolf{position:absolute;left:0;top:0;will-change:transform}
+  .bunny svg{display:block;width:36px;height:auto;filter:drop-shadow(0 0 5px rgba(255,255,255,.55))}
+  .wolf svg{display:block;width:var(--ww,180px);height:auto;filter:drop-shadow(0 0 2px rgba(1,205,254,.7)) drop-shadow(0 0 9px rgba(255,113,206,.8))}
+  .wolf .leg{transform-box:fill-box;transform-origin:50% 0;animation:wolfLeg .95s ease-in-out infinite alternate}
+  .wolf .leg.b{animation-direction:alternate-reverse}
+  .wolf .tail{transform-box:fill-box;transform-origin:100% 20%;animation:wolfTail 1.9s ease-in-out infinite alternate}
+  .wolf .body{animation:wolfBob .95s ease-in-out infinite alternate}
+  .wolf.stop .leg,.wolf.stop .body{animation-play-state:paused}
+  .wolf .eye{animation:wolfEye 2.2s ease-in-out infinite}
+  .wolf.stop .eye{animation-duration:.5s}
+  @keyframes wolfLeg{from{transform:rotate(16deg)}to{transform:rotate(-16deg)}}
+  @keyframes wolfTail{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+  @keyframes wolfBob{to{transform:translateY(1.5px)}}
+  @keyframes wolfEye{50%{opacity:.35}}
+  .mote{position:absolute;left:0;top:0;animation:moteUp linear infinite}
+  .mote i{display:block;width:4px;height:4px;border-radius:50%;background:var(--c);box-shadow:0 0 8px 2px var(--c);animation:twinkleM 1.6s ease-in-out infinite alternate}
+  @keyframes moteUp{
+    0%{transform:translate(var(--x),105vh);opacity:0}
+    10%,85%{opacity:.9}
+    100%{transform:translate(calc(var(--x) + var(--dx)),-5vh);opacity:0}
+  }
+  @keyframes twinkleM{to{opacity:.25;transform:scale(.6)}}
 
   html.js .reveal{opacity:0;transform:translateY(22px)}
   html.js .reveal.in{opacity:1;transform:none;transition:opacity .5s ease, transform .6s cubic-bezier(.2,1.4,.4,1)}
@@ -507,7 +538,7 @@
       <div class="tb"><span>♫ music.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
       <div class="wb">
         <h2>♫ music <span class="sub">— listen &amp; rate</span></h2>
-        <p class="lead">playlists, scrobbles and album reviews.</p>
+        <p class="lead">playlists, scrobbles, ratings and album reviews.</p>
         <div class="tiles">
           <a class="tile" style="--brand:#1ED760" href="https://open.spotify.com/user/315rpcaxgfhfg4tdfaxhmdlhcy3u?si=584a9e2fa14b4ea8" target="_blank" rel="noopener">
             <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/spotify.svg" alt=""></span>
@@ -520,6 +551,10 @@
           <a class="tile" style="--brand:#222222" href="https://www.albumoftheyear.org/user/anrevy/" target="_blank" rel="noopener">
             <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/albumoftheyear.svg" alt=""></span>
             <span class="t-name">AOTY</span><span class="t-handle">anrevy</span>
+          </a>
+          <a class="tile" style="--brand:#1d2b4f" href="https://rateyourmusic.com/~RYM_Anrevy" target="_blank" rel="noopener">
+            <span class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#1d2b4f"/><circle cx="16" cy="13" r="9" fill="#0b0b14" stroke="#fff" stroke-width=".8"/><circle cx="16" cy="13" r="6.2" fill="none" stroke="#3a3a55" stroke-width=".7"/><circle cx="16" cy="13" r="3" fill="#ff71ce"/><circle cx="16" cy="13" r=".9" fill="#0b0b14"/><g fill="#ffcf3f"><path d="M5 25.2l.9 1.9 2 .2-1.5 1.3.5 2-1.9-1.1-1.8 1.1.4-2-1.5-1.3 2-.2z"/><path d="M11.5 25.2l.9 1.9 2 .2-1.5 1.3.5 2-1.9-1.1-1.8 1.1.4-2-1.5-1.3 2-.2z"/><path d="M18 25.2l.9 1.9 2 .2-1.5 1.3.5 2-1.9-1.1-1.8 1.1.4-2-1.5-1.3 2-.2z"/><path d="M24.5 25.2l.9 1.9 2 .2-1.5 1.3.5 2-1.9-1.1V25.2z"/></g></svg></span>
+            <span class="t-name">RYM</span><span class="t-handle">RYM_Anrevy</span>
           </a>
         </div>
       </div>
@@ -1112,6 +1147,9 @@
     © 2026 ANREVY HOUSE · made with ♡ on neocities
   </footer>
 
+  <!-- thỏ trắng, sói đen chạy trên màn hình -->
+  <div id="critters" aria-hidden="true"></div>
+
   <div id="idle" aria-hidden="true">ａｒｅ　ｙｏｕ<br>ｓｔｉｌｌ　ｔｈｅｒｅ？</div>
 
 <script>
@@ -1224,7 +1262,7 @@
 
     // sọc cắt ngang mặt trời
     sg.globalCompositeOperation = 'destination-out';
-    const N = 9, ph = (t / 2600) % 1;
+    const N = 9, ph = (t / 1700) % 1;
     for (let i = 0; i < N; i++){
       const p = (i + ph) / N, y = R * .95 + p * R * 1.1, h = 1 + p * R * .13;
       sg.fillRect(0, y, d, h);
@@ -1252,7 +1290,7 @@
   function grid(t){
     g.fillStyle = floor; g.fillRect(0, HZ, W, H - HZ);
     g.strokeStyle = '#ff71ce'; g.lineWidth = 1;
-    const N = 16, ph = (t / 1100) % 1;
+    const N = 16, ph = (t / 650) % 1;
     for (let i = 0; i < N; i++){
       const z = (i + ph) / N, y = Math.round(HZ + (H - HZ) * z * z) + .5;
       g.globalAlpha = .2 + .8 * z;
@@ -1299,7 +1337,7 @@
     g.save(); g.globalAlpha = a; g.fillStyle = pick(tiles); g.translate(ox, oy); g.fillRect(-ox, -oy, W, H); g.restore();
   }
 
-  let last = 0, burstUntil = 0;
+  let last = 0, burstUntil = 0, meteors = [];
   function frame(t){
     if (!reduce) requestAnimationFrame(frame);
     if (t - last < 33) return;
@@ -1310,7 +1348,7 @@
 
     g.fillStyle = sky; g.fillRect(0, 0, W, HZ);
     for (const s of stars){
-      g.globalAlpha = .35 + .65 * Math.abs(Math.sin(s.p + t / 900));
+      g.globalAlpha = .35 + .65 * Math.abs(Math.sin(s.p + t / 600));
       g.fillStyle = '#fff'; g.fillRect(s.x | 0, s.y | 0, s.s, s.s);
     }
     g.globalAlpha = 1;
@@ -1323,8 +1361,20 @@
 
     g.lineWidth = 1;
     const narrow = W * S < 700; // điện thoại: đưa khối hình xuống thấp để không che tiêu đề
-    wire(CUBE_V, CUBE_E, W * (narrow ? .12 : .12), H * (narrow ? .47 : .26), Math.min(W, H) * .06, t * .0006, t * .0009, '#01cdfe');
-    wire(PYR_V, PYR_E, W * (narrow ? .88 : .88), H * (narrow ? .43 : .2), Math.min(W, H) * .07, t * .0008, .35, '#05ffa1');
+    wire(CUBE_V, CUBE_E, W * (narrow ? .12 : .12), H * (narrow ? .47 : .26), Math.min(W, H) * .06, t * .001, t * .0014, '#01cdfe');
+    wire(PYR_V, PYR_E, W * (narrow ? .88 : .88), H * (narrow ? .43 : .2), Math.min(W, H) * .07, t * .0013, .35, '#05ffa1');
+
+    // sao băng
+    if (!reduce && Math.random() < .012 && meteors.length < 2)
+      meteors.push({ x: rand(W * .25, W * 1.05), y: rand(0, HZ * .35), v: rand(3.5, 6), life: 1 });
+    for (const m of meteors){
+      const tx = m.x + 26, ty = m.y - 13, gr = g.createLinearGradient(m.x, m.y, tx, ty);
+      gr.addColorStop(0, 'rgba(255,255,255,' + m.life + ')'); gr.addColorStop(1, 'rgba(255,113,206,0)');
+      g.strokeStyle = gr; g.lineWidth = 1.5; g.beginPath(); g.moveTo(m.x, m.y); g.lineTo(tx, ty); g.stroke();
+      m.x -= m.v; m.y += m.v * .5; m.life -= .025;
+    }
+    meteors = meteors.filter(m => m.life > 0);
+    g.lineWidth = 1;
 
     noise(.06);
     if (t < burstUntil) noise(.35);
@@ -1343,7 +1393,7 @@
     const s = document.createElement('span');
     s.className = 'ghost';
     s.textContent = pick(GHOSTS);
-    const dur = rand(45, 110);
+    const dur = rand(28, 65);
     s.style.cssText = `top:${rand(3, 92).toFixed(1)}%;font-size:${rand(22, 80) | 0}px;color:${pick(['#ff71ce', '#01cdfe', '#b967ff', '#fff'])};--o:${rand(.08, .2).toFixed(2)};` +
       `animation-duration:${dur.toFixed(0)}s, ${rand(3, 7).toFixed(1)}s;animation-delay:${(-rand(0, dur)).toFixed(0)}s, 0s;` +
       (Math.random() < .5 ? 'animation-direction:reverse, normal;' : '');
@@ -1410,7 +1460,7 @@
   renderCal(); showNote(today.getFullYear(), today.getMonth(), today.getDate());
 
   /* ================= NHẠC YOUTUBE PHÁT NGAY TRONG TRANG ================= */
-  const MUSIC_ID = 'HUUy3mnAhCE'; // ĐỔI NHẠC: mã video YouTube (phần sau youtu.be/)
+  const MUSIC_ID = 'VJtg7pJO3hQ'; // ĐỔI NHẠC: mã video YouTube (phần sau youtu.be/)
   const earPlayer = $('#earPlayer'), earMsg = $('#earMsg'), earTitle = $('#earTitle'), heroPlay = $('#heroPlay');
   let yt = null, ytReady = false, ytDead = false, soundOn = false, userMuted = false, gestured = false;
   function sndUI(){
@@ -1503,6 +1553,86 @@
 
   if (reduce) return;
 
+  /* ================= ĐOM ĐÓM BAY LÊN ================= */
+  const MC = ['#fffb96', '#ff71ce', '#01cdfe', '#05ffa1', '#ffffff'];
+  for (let i = 0; i < (innerWidth < 700 ? 9 : 18); i++){
+    const m = document.createElement('span'), dur = rand(14, 30);
+    m.className = 'mote';
+    m.style.cssText = `--x:${rand(0, innerWidth) | 0}px;--dx:${rand(-120, 120) | 0}px;--c:${pick(MC)};` +
+      `animation-duration:${dur.toFixed(1)}s;animation-delay:${(-rand(0, dur)).toFixed(1)}s`;
+    m.appendChild(document.createElement('i'));
+    gbox.appendChild(m);
+  }
+
+  /* ================= THỎ TRẮNG & SÓI ĐEN ================= */
+  const critters = $('#critters');
+  const BUNNY = '<svg viewBox="0 0 40 30"><ellipse cx="9" cy="17" rx="3.2" ry="3" fill="#fff"/><ellipse cx="19" cy="19" rx="11" ry="7.5" fill="#fff"/><ellipse cx="14" cy="25.5" rx="5.5" ry="2.3" fill="#f3f3f8"/><ellipse cx="27" cy="26" rx="2.6" ry="1.5" fill="#f3f3f8"/><circle cx="30" cy="13" r="6" fill="#fff"/><ellipse cx="28" cy="4.5" rx="2.2" ry="6" transform="rotate(-18 28 6)" fill="#fff"/><ellipse cx="28" cy="4.8" rx="1" ry="4.4" transform="rotate(-18 28 6)" fill="#ffb3d4"/><ellipse cx="31.5" cy="4" rx="2.1" ry="5.6" transform="rotate(8 31.5 6)" fill="#fff"/><circle cx="32.4" cy="12" r="1.1" fill="#2a2140"/><circle cx="35.6" cy="14" r=".9" fill="#ff71ce"/></svg>';
+  const WOLF = '<svg viewBox="0 0 120 70"><g fill="#060009">' +
+    '<path class="tail" d="M21 26C11 24 4 30 1 41c5-2 8 0 5 6 6-4 12-8 18-13z"/>' +
+    '<rect class="leg a" x="24" y="34" width="6" height="32" rx="3"/><rect class="leg b" x="33" y="34" width="6" height="32" rx="3"/>' +
+    '<rect class="leg b" x="68" y="34" width="6" height="32" rx="3"/><rect class="leg a" x="77" y="34" width="6" height="32" rx="3"/>' +
+    '<g class="body"><path d="M18 27c8-7 31-9 51-7 9 1 15 3 18 6l-3 13c-14 4-41 4-58 1-7-3-11-8-8-13z"/>' +
+    '<path d="M78 20 88 10 90 0l5 8 4-6 2 9c5 2 11 5 18 8l-1 3-12 2-6 4-10 6-10 2z"/>' +
+    '<circle class="eye" cx="101" cy="13" r="2" fill="#ff1a2e"/><circle class="eye" cx="101" cy="13" r="5" fill="#ff1a2e" opacity=".25"/></g>' +
+    '</g></svg>';
+
+  let wolfOn = false;
+  function bunnyRun(dir, opts = {}){
+    const W = innerWidth, H = innerHeight;
+    const n = opts.n || (Math.random() < .5 ? 1 : (Math.random() < .6 ? 2 : 3));
+    const base = opts.y ?? rand(H * .35, H * .9);
+    const speed = opts.speed || rand(150, 230);
+    for (let k = 0; k < n; k++){
+      const el = document.createElement('div');
+      el.className = 'bunny'; el.innerHTML = BUNNY;
+      critters.appendChild(el);
+      const b = { x: dir > 0 ? -60 - k * rand(40, 80) : W + 20 + k * rand(40, 80), y: base + rand(-18, 18),
+                  sp: speed * rand(.9, 1.1), ph: rand(0, 1), hop: rand(12, 22), per: rand(.36, .48), sc: rand(.8, 1.1) };
+      let lastT = performance.now();
+      (function step(now){
+        const dt = Math.min(.05, (now - lastT) / 1000); lastT = now;
+        b.x += dir * b.sp * dt; b.ph = (b.ph + dt / b.per) % 1;
+        const up = Math.abs(Math.sin(Math.PI * b.ph)) * b.hop, tilt = Math.cos(Math.PI * b.ph) * -12;
+        el.style.transform = `translate(${b.x}px,${b.y - up}px) scale(${dir > 0 ? b.sc : -b.sc},${b.sc}) rotate(${tilt}deg)`;
+        if ((dir > 0 && b.x > W + 80) || (dir < 0 && b.x < -120)) return el.remove();
+        requestAnimationFrame(step);
+      })(lastT);
+    }
+  }
+  function wolfWalk(){
+    if (wolfOn) return;
+    wolfOn = true;
+    const W = innerWidth, H = innerHeight, ww = W < 700 ? 120 : 180, wh = ww * 70 / 120;
+    const dir = Math.random() < .5 ? 1 : -1;
+    const el = document.createElement('div');
+    el.className = 'wolf'; el.style.setProperty('--ww', ww + 'px'); el.innerHTML = WOLF;
+    critters.appendChild(el);
+    let x = dir > 0 ? -ww - 10 : W + 10;
+    const y = H - wh + 4, sp = rand(26, 38);
+    let stopUntil = 0, nextStop = performance.now() + rand(5000, 9000), lastT = performance.now();
+    // thỏ hoảng sợ chạy trốn trước mặt sói
+    if (Math.random() < .65) setTimeout(() => bunnyRun(dir, { n: 2, speed: rand(280, 340), y: H - rand(40, 70) }), rand(1200, 2500));
+    (function step(now){
+      const dt = Math.min(.05, (now - lastT) / 1000); lastT = now;
+      if (now < stopUntil){ el.classList.add('stop'); }
+      else {
+        el.classList.remove('stop');
+        x += dir * sp * dt;
+        if (now > nextStop && x > 40 && x < W - ww - 40){ stopUntil = now + rand(1800, 3200); nextStop = now + rand(7000, 12000); }
+      }
+      el.style.transform = `translate(${x}px,${y}px) scale(${dir},1)`;
+      if ((dir > 0 && x > W + 20) || (dir < 0 && x < -ww - 20)){ el.remove(); wolfOn = false; return; }
+      requestAnimationFrame(step);
+    })(lastT);
+  }
+  window.__critters = { bunnyRun, wolfWalk };
+  (function rabbits(first){
+    setTimeout(() => { if (!document.hidden) bunnyRun(Math.random() < .5 ? 1 : -1); rabbits(false); }, first ? 4000 : rand(8000, 16000));
+  })(true);
+  (function wolves(first){
+    setTimeout(() => { if (!document.hidden) wolfWalk(); wolves(false); }, first ? 15000 : rand(35000, 65000));
+  })(true);
+
   /* ================= HỘP THOẠI LỖI ================= */
   const TITLES = ['System Error', 'ＷＩＲＥＤ.exe', 'Warning', 'untitled.exe', 'message_12082001'];
   function popup(msg, x, y){
@@ -1564,8 +1694,6 @@
   addEventListener('pointerdown', e => {
     if (e.target.closest('.err')) return;
     for (let i = 0; i < 10; i++){ const a = rand(0, 6.28), r = rand(20, 60); px(e.clientX, e.clientY, Math.cos(a) * r | 0, Math.sin(a) * r | 0); }
-    document.body.classList.remove('jolt'); void document.body.offsetWidth; document.body.classList.add('jolt');
-    setTimeout(() => document.body.classList.remove('jolt'), 300);
   });
 })();
 </script>
