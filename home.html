@@ -158,7 +158,7 @@
     width:100%;max-width:1900px;margin:0 auto;padding:0 clamp(12px,2vw,28px) 30px;
     grid-auto-flow:row dense;
   }
-  .s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s7{grid-column:span 7}.s12{grid-column:1 / -1}
+  .s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:1 / -1}
   @media (max-width:1180px){
     .board{grid-template-columns:repeat(2,minmax(0,1fr))}
     .board > *{grid-column:span 1}
@@ -220,6 +220,7 @@
   .c-play   {--a:#fffb96;--bd:#24210a;--glow:rgba(255,251,150,.3)}
   .c-old    {--a:#ff1a2e;--bd:#000;--glow:rgba(255,26,46,.45)}
   .c-creep  {--a:#9dff00;--bd:#050a02;--glow:rgba(157,255,0,.35)}
+  .c-museum {--a:#e8c37a;--bd:#17120a;--glow:rgba(232,195,122,.32)}
   .c-news   {--a:#f2f2f2;--bd:#121212;--glow:rgba(255,255,255,.22)}
   .c-old .tb{background:linear-gradient(90deg,#000,#3a0a12);color:#ff1a2e;text-shadow:-1px 0 0 #01cdfe}
   .c-news .tb{background:linear-gradient(90deg,#d9d9d9,#3a3a3a);color:#111;text-shadow:none}
@@ -320,6 +321,38 @@
   }
   .t-name{font-family:'Silkscreen',monospace;font-size:12px;line-height:1.2;letter-spacing:.02em}
   .t-handle{font-family:'VT323',monospace;font-size:17px;line-height:1;color:var(--a);overflow-wrap:anywhere;opacity:.9}
+
+  /* danh sách link gọn (icon + tên + mô tả) */
+  .more-h{
+    display:flex;align-items:center;gap:8px;margin:16px 0 8px;
+    font-family:'Silkscreen',monospace;font-weight:400;font-size:11px;letter-spacing:.08em;color:var(--a);
+  }
+  .more-h::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--a),transparent);opacity:.55}
+  .mini{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:6px}
+  .mini a{
+    display:flex;align-items:center;gap:10px;min-height:50px;padding:6px 8px;
+    text-decoration:none;color:var(--text);
+    background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.13);border-radius:3px;
+    transition:transform .12s, border-color .12s, background .12s, box-shadow .12s;
+  }
+  .mini a:hover,.mini a:focus-visible{
+    border-color:var(--a);background:rgba(255,255,255,.08);outline:none;
+    box-shadow:0 0 14px var(--glow);transform:translateX(3px);
+  }
+  .mi{
+    flex:none;width:32px;height:32px;border-radius:7px;overflow:hidden;
+    display:grid;place-items:center;background:#fff;box-shadow:0 0 0 1.5px var(--a);
+    font-family:'Silkscreen',monospace;font-size:15px;color:#000;
+  }
+  .mi img{width:22px;height:22px;image-rendering:auto}
+  .mini a:hover .mi,.mini a:focus-visible .mi{animation:glitchy .35s steps(3)}
+  .mt{min-width:0;display:flex;flex-direction:column;line-height:1.12}
+  .mt b{font-family:'Silkscreen',monospace;font-weight:400;font-size:11px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mt small{
+    font-family:'VT323',monospace;font-size:16px;color:var(--text-dim);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .warn{color:#ffb13d}
 
   /* hoạt hình trong icon tự vẽ */
   .spin{transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite}
@@ -534,8 +567,8 @@
     <section class="win reveal s12 c-radio tilt-s wide" id="radio">
       <div class="tb"><span>☊ tune_in.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
       <div class="wb">
-        <h2>☊ tune in <span class="sub">— radio, genres &amp; time travel</span></h2>
-        <p class="lead">music from every city, every decade and every genre. for 3am thoughts.</p>
+        <h2>☊ tune in <span class="sub">— radio, ambience &amp; time travel</span></h2>
+        <p class="lead">music from every city, decade and genre, plus rain, cafés and windows. for 3am thoughts.</p>
         <div class="tiles">
           <a class="tile" style="--brand:#ff5fa2" href="https://plaza.one/" target="_blank" rel="noopener">
             <span class="ico">
@@ -640,11 +673,32 @@
             <span class="t-name">Radiooooo app</span><span class="t-handle">pick a country &amp; decade</span>
           </a>
         </div>
+        <h3 class="more-h">+ more stations</h3>
+        <ul class="mini">
+          <li><a href="https://somafm.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=somafm.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>SomaFM</b><small>commercial-free indie radio, dozens of channels</small></span></a></li>
+          <li><a href="https://radio.garden/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=radio.garden&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Radio Garden</b><small>spin the globe, hear live radio anywhere</small></span></a></li>
+          <li><a href="https://rekt.network/eq" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=rekt.network&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Rekt Network</b><small>24/7 synthwave &amp; cyberpunk radio</small></span></a></li>
+          <li><a href="https://webamp.org/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=webamp.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Webamp</b><small>winamp 2, right in your browser</small></span></a></li>
+          <li><a href="https://musicforprogramming.net/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=musicforprogramming.net&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Music for Programming</b><small>long mixes for deep focus</small></span></a></li>
+          <li><a href="https://generative.fm/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=generative.fm&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Generative.fm</b><small>endless ambient music made by code</small></span></a></li>
+          <li><a href="http://thenostalgiamachine.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=thenostalgiamachine.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>The Nostalgia Machine</b><small>pick a year, hear its hits</small></span></a></li>
+        </ul>
+        <h3 class="more-h">+ ambience</h3>
+        <ul class="mini">
+          <li><a href="https://imissmycafe.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=imissmycafe.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>I Miss My Cafe</b><small>mix the sounds of a cosy café</small></span></a></li>
+          <li><a href="https://asoftmurmur.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=asoftmurmur.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>A Soft Murmur</b><small>rain, thunder, wind &amp; fire mixer</small></span></a></li>
+          <li><a href="https://mynoise.net/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=mynoise.net&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>myNoise</b><small>custom soundscapes on sliders</small></span></a></li>
+          <li><a href="https://www.noisli.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.noisli.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Noisli</b><small>background noise for focus</small></span></a></li>
+          <li><a href="https://lifeat.io/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=lifeat.io&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>LifeAt</b><small>virtual workspace with calm scenes</small></span></a></li>
+          <li><a href="https://www.window-swap.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.window-swap.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>WindowSwap</b><small>someone else&#x27;s window, somewhere</small></span></a></li>
+          <li><a href="https://earth.fm/nature-soundmap/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=earth.fm&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Earth.fm</b><small>a map of nature recordings</small></span></a></li>
+          <li><a href="https://bigsoundbank.com/museumofsounds/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=bigsoundbank.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Museum of Lost Sounds</b><small>sounds of objects that are disappearing</small></span></a></li>
+        </ul>
       </div>
     </section>
 
     <!-- ◎ GET LOST -->
-    <section class="win reveal s7 c-lost" id="lost">
+    <section class="win reveal s8 c-lost" id="lost">
       <div class="tb"><span>◎ get_lost.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
       <div class="wb">
         <h2>◎ get lost <span class="sub">— art &amp; endless worlds</span></h2>
@@ -756,14 +810,24 @@
             <span class="t-name">C. McKenney</span><span class="t-handle">surreal photos</span>
           </a>
         </div>
+        <h3 class="more-h">+ more worlds</h3>
+        <ul class="mini">
+          <li><a href="https://www.eboy.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.eboy.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>eBoy</b><small>dense isometric pixel cities</small></span></a></li>
+          <li><a href="https://oskarstalberg.com/Townscaper/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=oskarstalberg.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Townscaper</b><small>click to build towns on the sea</small></span></a></li>
+          <li><a href="https://orb.farm/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=orb.farm&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Orb.Farm</b><small>a tiny ecosystem in a glass orb</small></span></a></li>
+          <li><a href="https://dinosaurpictures.org/ancient-earth/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=dinosaurpictures.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Ancient Earth</b><small>the globe across 750 million years</small></span></a></li>
+          <li><a href="https://bruno-simon.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=bruno-simon.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Bruno Simon</b><small>drive a little car through a 3D world</small></span></a></li>
+          <li><a href="https://hiddenfolks.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=hiddenfolks.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Hidden Folks</b><small>hand-drawn hide-and-seek worlds</small></span></a></li>
+          <li><a href="https://www.habbo.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.habbo.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Habbo</b><small>the pixel hotel social world</small></span></a></li>
+        </ul>
       </div>
     </section>
 
     <!-- ✦ PLAY -->
-    <section class="win reveal s5 c-play tilt-l" id="play">
+    <section class="win reveal s12 c-play tilt-s wide" id="play">
       <div class="tb" style="color:#2a2006;text-shadow:none"><span>✦ play.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
       <div class="wb">
-        <h2>✦ play</h2>
+        <h2>✦ play <span class="sub">— toys &amp; things that make sound</span></h2>
         <p class="lead">toys, games, pixels to paint together, dancing cats and useless websites.</p>
         <div class="tiles">
           <a class="tile" style="--brand:#ffcf3f" href="https://neal.fun/" target="_blank" rel="noopener">
@@ -840,6 +904,87 @@
             <span class="t-name">The Useless Web</span><span class="t-handle">take me somewhere useless</span>
           </a>
         </div>
+        <h3 class="more-h">+ toys</h3>
+        <ul class="mini">
+          <li><a href="https://cat-bounce.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=cat-bounce.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Cat Bounce</b><small>throw bouncing cats around</small></span></a></li>
+          <li><a href="https://optical.toys/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=optical.toys&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Optical Toys</b><small>interactive optical illusions</small></span></a></li>
+          <li><a href="https://koalastothemax.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=koalastothemax.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Koalas to the Max</b><small>split circles to reveal a picture</small></span></a></li>
+          <li><a href="https://pointerpointer.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=pointerpointer.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Pointer Pointer</b><small>photos of people pointing at your cursor</small></span></a></li>
+          <li><a href="https://findtheinvisiblecow.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=findtheinvisiblecow.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Find the Invisible Cow</b><small>follow the moo</small></span></a></li>
+          <li><a href="https://weavesilk.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=weavesilk.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Silk</b><small>draw glowing symmetrical silk</small></span></a></li>
+          <li><a href="https://drawing.garden/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=drawing.garden&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Drawing Garden</b><small>grow an emoji garden with your mouse</small></span></a></li>
+          <li><a href="https://thisissand.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=thisissand.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Thisissand</b><small>pour layers of coloured sand</small></span></a></li>
+          <li><a href="https://sandspiel.club/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=sandspiel.club&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Sandspiel</b><small>falling sand with water, fire &amp; plants</small></span></a></li>
+          <li><a href="https://madebyevan.com/webgl-water/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=madebyevan.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>WebGL Water</b><small>3D water ripples and reflections</small></span></a></li>
+          <li><a href="https://paveldogreat.github.io/WebGL-Fluid-Simulation/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=paveldogreat.github.io&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Fluid Simulation</b><small>swirl neon fluid with your finger</small></span></a></li>
+          <li><a href="https://www.adultswim.com/etcetera/elastic-man/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.adultswim.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Elastic Man</b><small>stretch a rubbery 3D face</small></span></a></li>
+          <li><a href="https://papertoilet.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=papertoilet.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Paper Toilet</b><small>unroll the toilet paper. that’s it</small></span></a></li>
+          <li><a href="https://vectorpark.com/head/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=vectorpark.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Feed the Head</b><small>poke a very strange head</small></span></a></li>
+          <li><a href="https://humanbenchmark.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=humanbenchmark.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Human Benchmark</b><small>test your reaction time &amp; memory</small></span></a></li>
+          <li><a href="https://supercook.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=supercook.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Supercook</b><small>recipes from what&#x27;s in your fridge</small></span></a></li>
+        </ul>
+        <h3 class="more-h">+ make sound</h3>
+        <ul class="mini">
+          <li><a href="https://www.incredibox.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.incredibox.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Incredibox</b><small>drag icons to build a beatbox band</small></span></a></li>
+          <li><a href="https://patatap.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=patatap.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Patatap</b><small><span class="warn">⚠</span> keys become sounds &amp; shapes · flashing</small></span></a></li>
+          <li><a href="https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=artsandculture.google.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Blob Opera</b><small>sing opera with four blobs</small></span></a></li>
+          <li><a href="https://dinahmoelabs.com/plink/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=dinahmoelabs.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Plink</b><small>jam with strangers online</small></span></a></li>
+          <li><a href="https://typatone.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=typatone.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Typatone</b><small>your words turn into music</small></span></a></li>
+          <li><a href="https://fallingfalling.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=fallingfalling.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Falling Falling</b><small>endless falling colours &amp; sound</small></span></a></li>
+          <li><a href="https://musiclab.chromeexperiments.com/Experiments" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=musiclab.chromeexperiments.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Chrome Music Lab</b><small>playful music experiments</small></span></a></li>
+          <li><a href="https://touchpianist.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=touchpianist.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Touch Pianist</b><small>tap in rhythm to play classical piano</small></span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ◇ MUSEUM -->
+    <section class="win reveal s12 c-museum tilt-s wide" id="museum">
+      <div class="tb"><span>◇ museum.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>◇ museum <span class="sub">— painting, exhibitions, sculpture &amp; architecture</span></h2>
+        <p class="lead">the world's collections, open all night.</p>
+        <h3 class="more-h">// painting</h3>
+        <ul class="mini">
+          <li><a href="https://www.nationalgallery.org.uk/paintings/explore-the-collection" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.nationalgallery.org.uk&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>The National Gallery</b><small>european painting · london</small></span></a></li>
+          <li><a href="https://www.rijksmuseum.nl/en/collection" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.rijksmuseum.nl&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Rijksmuseum</b><small>rembrandt, vermeer &amp; dutch masters</small></span></a></li>
+          <li><a href="https://www.musee-orsay.fr/en/collections" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.musee-orsay.fr&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Musée d&#x27;Orsay</b><small>impressionism &amp; post-impressionism</small></span></a></li>
+          <li><a href="https://www.museodelprado.es/en/the-collection" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.museodelprado.es&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Museo del Prado</b><small>velázquez, goya, bosch</small></span></a></li>
+          <li><a href="https://www.uffizi.it/en/artworks" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.uffizi.it&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Uffizi Galleries</b><small>renaissance painting &amp; sculpture</small></span></a></li>
+          <li><a href="https://www.artic.edu/collection" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.artic.edu&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Art Institute of Chicago</b><small>centuries of art in one collection</small></span></a></li>
+          <li><a href="https://theme.npm.edu.tw/selection/index.aspx?lang=2" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=theme.npm.edu.tw&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>National Palace Museum</b><small>chinese painting &amp; calligraphy</small></span></a></li>
+          <li><a href="https://www.nationalgallery.sg/sg/en/our-collections.html" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.nationalgallery.sg&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>National Gallery Singapore</b><small>southeast asian art, incl. vietnam</small></span></a></li>
+        </ul>
+        <h3 class="more-h">// exhibitions &amp; installations</h3>
+        <ul class="mini">
+          <li><a href="https://www.moma.org/calendar/exhibitions" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.moma.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>MoMA</b><small>modern &amp; contemporary exhibitions</small></span></a></li>
+          <li><a href="https://www.tate.org.uk/art" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.tate.org.uk&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Tate</b><small>works &amp; guides, incl. installation art</small></span></a></li>
+          <li><a href="https://www.guggenheim.org/artwork" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.guggenheim.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Guggenheim</b><small>painting, sculpture, photo &amp; video</small></span></a></li>
+          <li><a href="https://www.centrepompidou.fr/en/collection" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.centrepompidou.fr&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Centre Pompidou</b><small>modern &amp; contemporary art · paris</small></span></a></li>
+          <li><a href="https://www.mori.art.museum/en/exhibitions/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.mori.art.museum&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Mori Art Museum</b><small>contemporary art · tokyo</small></span></a></li>
+          <li><a href="https://www.mplus.org.hk/en/collection/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.mplus.org.hk&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>M+</b><small>visual culture from asia</small></span></a></li>
+          <li><a href="https://www.inhotim.org.br/en/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.inhotim.org.br&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Inhotim</b><small>art pavilions in a garden · brazil</small></span></a></li>
+          <li><a href="https://zeitzmocaa.museum/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=zeitzmocaa.museum&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Zeitz MOCAA</b><small>contemporary african art</small></span></a></li>
+        </ul>
+        <h3 class="more-h">// sculpture</h3>
+        <ul class="mini">
+          <li><a href="https://www.musee-rodin.fr/en/museum/collections" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.musee-rodin.fr&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Musée Rodin</b><small>the sculpture of auguste rodin</small></span></a></li>
+          <li><a href="https://henry-moore.org/discover-and-research/discover-henry-moore/henry-moores-artwork/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=henry-moore.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Henry Moore Foundation</b><small>sculpture &amp; drawings by henry moore</small></span></a></li>
+          <li><a href="https://www.noguchi.org/artworks/collection/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.noguchi.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>The Noguchi Museum</b><small>isamu noguchi’s sculpture &amp; design</small></span></a></li>
+          <li><a href="https://ysp.org.uk/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=ysp.org.uk&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Yorkshire Sculpture Park</b><small>sculpture across open landscape</small></span></a></li>
+          <li><a href="https://www.hakone-oam.or.jp/en/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.hakone-oam.or.jp&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Hakone Open-Air Museum</b><small>open-air sculpture · japan</small></span></a></li>
+          <li><a href="https://sculpturemagazine.art/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=sculpturemagazine.art&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Sculpture Magazine</b><small>interviews &amp; reviews on sculpture</small></span></a></li>
+        </ul>
+        <h3 class="more-h">// architecture</h3>
+        <ul class="mini">
+          <li><a href="https://www.archdaily.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.archdaily.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>ArchDaily</b><small>buildings &amp; drawings worldwide</small></span></a></li>
+          <li><a href="https://www.dezeen.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.dezeen.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Dezeen</b><small>architecture, interiors &amp; design</small></span></a></li>
+          <li><a href="https://divisare.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=divisare.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Divisare</b><small>an atlas of architecture photos</small></span></a></li>
+          <li><a href="https://architizer.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=architizer.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Architizer</b><small>projects &amp; firms</small></span></a></li>
+          <li><a href="https://architectuul.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=architectuul.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Architectuul</b><small>buildings, architects &amp; history</small></span></a></li>
+          <li><a href="https://www.archnet.org/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.archnet.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Archnet</b><small>architecture of islamic societies</small></span></a></li>
+          <li><a href="https://hiddenarchitecture.net/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=hiddenarchitecture.net&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Hidden Architecture</b><small>forgotten buildings &amp; ideas</small></span></a></li>
+          <li><a href="https://worldarchitecture.org/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=worldarchitecture.org&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>World Architecture Community</b><small>projects &amp; awards</small></span></a></li>
+        </ul>
       </div>
     </section>
 
@@ -867,7 +1012,7 @@
     </section>
 
     <!-- ⌘ OLD WEB -->
-    <section class="win reveal s5 c-old tilt-r" id="oldweb">
+    <section class="win reveal s7 c-old tilt-r" id="oldweb">
       <div class="tb"><span>⌈ old_web.lnk ⌋</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
       <div class="wb">
         <h2>⌘ old web oddities</h2>
@@ -927,11 +1072,18 @@
             <span class="t-name">Cameron's World</span><span class="t-handle">geocities collage</span>
           </a>
         </div>
+        <h3 class="more-h">+ more oddities</h3>
+        <ul class="mini">
+          <li><a href="https://auvreil.github.io/88x31/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=auvreil.github.io&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>The 88x31 Project</b><small>a wall of tiny old-web buttons</small></span></a></li>
+          <li><a href="https://condimentpacket.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=condimentpacket.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Condiment Packet Archive</b><small>a museum of sauce packets</small></span></a></li>
+          <li><a href="https://onekoshima.pages.dev/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=onekoshima.pages.dev&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>Onekoshima</b><small>pixel cats chase your cursor</small></span></a></li>
+          <li><a href="http://www.nooo.me/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=www.nooo.me&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>nooo.me</b><small>one button. NOOO.</small></span></a></li>
+        </ul>
       </div>
     </section>
 
     <!-- ☠ TURN BACK -->
-    <section class="win reveal s3 c-creep tilt-l" id="turnback">
+    <section class="win reveal s5 c-creep tilt-l" id="turnback">
       <div class="tb"><span>[ DEAD_END ].lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
       <div class="wb">
         <h2>☠ turn back <span class="sub">— cryptic &amp; creepy</span></h2>
@@ -966,6 +1118,10 @@
             <span class="t-name">Angus Nicneven</span><span class="t-handle">⚠ terminal 00</span>
           </a>
         </div>
+        <h3 class="more-h">+ deeper</h3>
+        <ul class="mini">
+          <li><a href="https://973-eht-namuh-973.com/" target="_blank" rel="noopener"><span class="mi"><img src="https://www.google.com/s2/favicons?domain=973-eht-namuh-973.com&amp;sz=64" alt="" loading="lazy"></span><span class="mt"><b>973-eht-namuh-973</b><small>a cryptic maze of words &amp; symbols</small></span></a></li>
+        </ul>
       </div>
     </section>
 
@@ -1332,7 +1488,7 @@
   });
 
   /* ================= LINK NGẪU NHIÊN ================= */
-  const allTiles = [...document.querySelectorAll('.tile')];
+  const allTiles = [...document.querySelectorAll('.tile, .mini a')];
   $('#linkCount').textContent = `${allTiles.length} links inside`;
   $('#portal').addEventListener('click', () => {
     const t = pick(allTiles);
@@ -1340,6 +1496,12 @@
     t.focus({ preventScroll: true });
     window.open(t.href, '_blank', 'noopener');
   });
+
+  /* icon dự phòng cho danh sách gọn: chữ cái đầu */
+  document.querySelectorAll('.mi img').forEach(img => img.addEventListener('error', () => {
+    const a = img.closest('a'), name = a ? a.querySelector('.mt b').textContent.trim() : '?';
+    img.replaceWith(document.createTextNode(name.charAt(0).toUpperCase()));
+  }));
 
   /* nút trên thanh cửa sổ: lắc */
   document.querySelectorAll('.tb-btns i').forEach(b => b.addEventListener('click', () => {
