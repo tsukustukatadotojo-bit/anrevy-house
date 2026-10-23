@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>⌈ＡＮＲＥＶＹ　ＨＯＵＳＥ⌋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ffb6d6;
+    --pink-light:#ffd8ea;
+    --pink-deep:#ff3d8f;
+    --magenta:#c2126a;
+    --white:#ffffff;
+    --cyan:#5ff4ff;
+    --yellow:#fff27a;
+    --lilac:#b48cff;
+    --mint:#7dffb2;
+    --bars:linear-gradient(90deg,#fff 0 14.28%,var(--yellow) 0 28.57%,var(--cyan) 0 42.85%,var(--mint) 0 57.14%,#ff7fd1 0 71.42%,var(--pink-deep) 0 85.71%,var(--lilac) 0);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{
+    background:var(--pink);
+    color:var(--white);
+    font-family:'VT323','DotGothic16',monospace;
+    cursor:crosshair;
+    -webkit-font-smoothing:none;
+    user-select:none;
+  }
+
+  /* ===== NỀN: dither hồng / trắng ===== */
+  .bg-dither{
+    position:fixed;inset:0;z-index:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(255,255,255,.8), transparent 38%),
+      radial-gradient(circle at 88% 92%, rgba(255,255,255,.65), transparent 42%),
+      repeating-conic-gradient(var(--pink) 0 25%, var(--pink-light) 0 50%) 0 0 / 4px 4px;
+  }
+  .bg-stripes{
+    position:fixed;inset:-150px;z-index:1;
+    background:repeating-linear-gradient(135deg, rgba(255,255,255,.30) 0 26px, rgba(255,255,255,0) 26px 72px);
+    animation:stripes 5s linear infinite;
+  }
+  @keyframes stripes{to{transform:translateX(101.82px)}}
+
+  #fx{position:fixed;inset:0;width:100%;height:100%;z-index:2;image-rendering:pixelated;pointer-events:none}
+
+  #floats{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+  .float{
+    position:absolute;bottom:-60px;white-space:nowrap;color:#fff;
+    font-family:'DotGothic16',monospace;
+    text-shadow:1px 1px 0 var(--pink-deep);
+    animation-name:floatUp, flick;
+    animation-timing-function:linear, steps(1);
+    animation-iteration-count:infinite, infinite;
+  }
+  @keyframes floatUp{to{transform:translateY(calc(-100vh - 140px))}}
+  @keyframes flick{0%,88%{visibility:visible}89%,92%{visibility:hidden}93%{visibility:visible}}
+
+  /* ===== KHỐI GIỮA ===== */
+  .center{
+    position:fixed;inset:0;z-index:5;
+    display:flex;overflow-y:auto;
+    padding:24px 16px;
+  }
+  .frame{
+    position:relative;margin:auto;text-align:center;
+    padding:8px 0;
+    max-width:min(1150px,100%);
+  }
+  .head{position:relative;display:inline-block;padding:clamp(14px,2.4vh,26px) clamp(18px,3vw,40px)}
+  .corner{position:absolute;width:clamp(16px,2.2vw,30px);height:clamp(16px,2.2vw,30px);border:0 solid #fff;filter:drop-shadow(3px 3px 0 var(--pink-deep))}
+  .c-tl{top:0;left:0;border-top-width:4px;border-left-width:4px}
+  .c-tr{top:0;right:0;border-top-width:4px;border-right-width:4px}
+  .c-bl{bottom:0;left:0;border-bottom-width:4px;border-left-width:4px}
+  .c-br{bottom:0;right:0;border-bottom-width:4px;border-right-width:4px}
+
+  .pre{
+    font-family:'DotGothic16',monospace;
+    font-size:clamp(12px,1.5vw,17px);
+    color:var(--magenta);letter-spacing:.04em;
+    min-height:1.5em;margin-bottom:clamp(8px,1.6vh,18px);
+    text-shadow:1px 1px 0 rgba(255,255,255,.85);
+  }
+
+  .glitch{
+    position:relative;display:inline-block;
+    font-family:'VT323',monospace;font-weight:400;
+    font-size:clamp(36px,min(5.6vw,9.5vh),90px);
+    line-height:.95;letter-spacing:.04em;
+    color:#fff;
+    text-shadow:
+      3px 3px 0 var(--pink-deep),
+      6px 6px 0 rgba(194,18,106,.45),
+      -3px 0 0 rgba(95,244,255,.95);
+    text-wrap:balance;
+    animation:jitter 4s steps(1) infinite;
+  }
+  .glitch::before,.glitch::after{
+    content:attr(data-text);
+    position:absolute;inset:0;
+    text-shadow:none;pointer-events:none;
+    clip-path:inset(100% 0 0 0);
+  }
+  .glitch::before{color:var(--cyan);animation:sliceA 2.6s steps(1) infinite}
+  .glitch::after{color:var(--pink-deep);animation:sliceB 3.3s steps(1) infinite}
+  @keyframes sliceA{
+    0%{clip-path:inset(12% 0 70% 0);transform:translate(-6px,0)}
+    4%{clip-path:inset(55% 0 28% 0);transform:translate(7px,0)}
+    8%{clip-path:inset(82% 0 4% 0);transform:translate(-3px,0)}
+    12%,100%{clip-path:inset(100% 0 0 0);transform:none}
+  }
+  @keyframes sliceB{
+    0%,48%{clip-path:inset(100% 0 0 0);transform:none}
+    50%{clip-path:inset(30% 0 52% 0);transform:translate(8px,0)}
+    53%{clip-path:inset(66% 0 18% 0);transform:translate(-9px,0)}
+    56%{clip-path:inset(4% 0 84% 0);transform:translate(4px,0)}
+    59%,100%{clip-path:inset(100% 0 0 0);transform:none}
+  }
+  @keyframes jitter{
+    0%,100%{transform:none}
+    31%{transform:translate(3px,-1px) skewX(5deg)}
+    32%{transform:none}
+    67%{transform:translate(-4px,1px)}
+    68%{transform:none}
+  }
+
+  .jp{
+    font-family:'DotGothic16',monospace;
+    font-size:clamp(13px,1.6vw,19px);
+    color:var(--magenta);letter-spacing:.35em;
+    margin-top:clamp(8px,1.4vh,16px);
+    text-shadow:1px 1px 0 rgba(255,255,255,.85);
+  }
+
+  /* ===== MÀN HÌNH MÁY TÍNH CRT ===== */
+  .crt{
+    --w:min(440px,78vw,44vh);
+    width:var(--w);
+    margin:clamp(16px,3vh,30px) auto 0;
+    filter:drop-shadow(6px 8px 0 rgba(194,18,106,.35));
+  }
+  .crt-body{
+    position:relative;
+    background:linear-gradient(160deg,#fffafc 0%,#ffeaf3 45%,#f4cde0 100%);
+    border:2px solid #e9b3cc;
+    border-radius:calc(var(--w) * .06);
+    padding:calc(var(--w) * .055) calc(var(--w) * .055) 0;
+    box-shadow:inset 0 3px 0 #fff, inset 0 -6px 0 rgba(194,18,106,.12);
+  }
+  .crt-bezel{
+    background:linear-gradient(180deg,#efcadb,#fbe6ef);
+    border-radius:calc(var(--w) * .045);
+    padding:calc(var(--w) * .03);
+    box-shadow:inset 2px 2px 0 rgba(160,40,100,.25), inset -2px -2px 0 #fff;
+  }
+  .crt-screen{
+    position:relative;aspect-ratio:4/3;overflow:hidden;
+    background:#12060f;
+    border-radius:7% / 9%;
+    box-shadow:inset 0 0 2px #000;
+  }
+  .crt-content{position:absolute;inset:0;transform-origin:50% 50%}
+  .yt-wrap{position:absolute;inset:0;filter:saturate(1.15) contrast(1.05)}
+  .yt-wrap iframe{
+    position:absolute;left:-30%;top:-10%;
+    width:160%;height:120%;border:0;
+    pointer-events:none;
+  }
+  #crtNoise{
+    position:absolute;inset:0;width:100%;height:100%;
+    image-rendering:pixelated;opacity:1;transition:opacity .4s steps(3);
+  }
+  .crt-msg{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    font-family:'DotGothic16',monospace;color:#fff;text-align:center;padding:0 8%;
+    text-shadow:-2px 0 0 var(--pink-deep), 2px 0 0 var(--cyan);
+  }
+  .crt-msg b{font-weight:400;font-size:calc(var(--w) * .055);background:rgba(0,0,0,.55);padding:2px 10px;animation:blink 1.4s steps(1) infinite}
+  .crt-msg small{font-size:calc(var(--w) * .03);color:#ffd8ea;text-shadow:none;background:rgba(0,0,0,.55);padding:2px 6px}
+  .crt-screen[data-state="playing"] #crtNoise{opacity:.08}
+  .crt-screen[data-state="playing"] .crt-msg{display:none}
+  .crt-tint{position:absolute;inset:0;background:rgba(255,80,160,.10);mix-blend-mode:screen;pointer-events:none}
+  .crt-lines{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      repeating-linear-gradient(to bottom, rgba(0,0,0,.28) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(255,0,0,.05) 0 1px, rgba(0,255,0,.035) 1px 2px, rgba(0,0,255,.05) 2px 3px);
+    animation:crtflicker .12s steps(2) infinite;
+  }
+  @keyframes crtflicker{50%{opacity:.85}}
+  .crt-glass{
+    position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+    background:
+      radial-gradient(ellipse at 28% 18%, rgba(255,255,255,.22), transparent 42%),
+      linear-gradient(170deg, rgba(255,255,255,.08), transparent 40%);
+    box-shadow:inset 0 0 calc(var(--w) * .09) rgba(0,0,0,.85);
+  }
+  /* bật / tắt màn hình kiểu CRT */
+  .crt-content.boot{animation:crtOn .7s ease-out}
+  @keyframes crtOn{
+    0%{transform:scale(1,.005);filter:brightness(5)}
+    35%{transform:scale(1,.005);filter:brightness(5)}
+    65%{transform:scale(1,1);filter:brightness(2.2)}
+    100%{transform:none;filter:none}
+  }
+  .crt-screen.off .crt-content{animation:crtOff .5s ease-in forwards}
+  @keyframes crtOff{
+    0%{transform:none;filter:none;opacity:1}
+    45%{transform:scale(1,.006);filter:brightness(4);opacity:1}
+    75%{transform:scale(.01,.006);filter:brightness(6);opacity:1}
+    100%{transform:scale(0,0);opacity:0}
+  }
+
+  .crt-chin{
+    display:flex;align-items:center;justify-content:space-between;
+    height:calc(var(--w) * .14);padding:0 calc(var(--w) * .02);
+  }
+  .crt-brand{font-family:'DotGothic16',monospace;font-size:calc(var(--w) * .036);color:#d2689c;letter-spacing:.2em}
+  .crt-vents{
+    flex:1;height:calc(var(--w) * .028);margin:0 calc(var(--w) * .05);
+    background:repeating-linear-gradient(90deg, rgba(194,18,106,.28) 0 3px, transparent 3px 7px);
+    border-radius:2px;
+  }
+  .crt-ctrls{display:flex;align-items:center;gap:calc(var(--w) * .025)}
+  .led{width:calc(var(--w) * .022);aspect-ratio:1;border-radius:50%;background:#8a6676;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+  .led.wait{background:#ffb13d;box-shadow:0 0 6px #ffb13d;animation:blink 1s steps(1) infinite}
+  .led.on{background:#3dff8f;box-shadow:0 0 7px #3dff8f}
+  .led.err{background:#ff2a2a;box-shadow:0 0 7px #ff2a2a}
+  .pwr{
+    width:calc(var(--w) * .07);aspect-ratio:1;border-radius:50%;
+    border:2px solid #e3a9c3;cursor:pointer;
+    background:radial-gradient(circle at 35% 35%, #fff, #f3cadc);
+    display:grid;place-items:center;color:var(--magenta);
+  }
+  .pwr svg{width:55%;height:55%}
+  .pwr:active{transform:translateY(1px);box-shadow:inset 0 2px 3px rgba(0,0,0,.2)}
+  .pwr:focus-visible{outline:2px dashed var(--magenta);outline-offset:2px}
+  .sticker{
+    position:absolute;top:calc(var(--w) * .012);right:calc(var(--w) * .07);
+    transform:rotate(8deg);
+    font-family:'DotGothic16',monospace;font-size:calc(var(--w) * .028);
+    background:var(--pink-deep);color:#fff;padding:1px 6px;
+    box-shadow:2px 2px 0 rgba(194,18,106,.35);
+  }
+  .crt-neck{
+    width:26%;height:calc(var(--w) * .05);margin:0 auto;
+    background:linear-gradient(#ecc0d4,#f9e1ec);
+    border-left:2px solid #e9b3cc;border-right:2px solid #e9b3cc;
+  }
+  .crt-base{
+    width:52%;height:calc(var(--w) * .045);margin:0 auto;
+    background:linear-gradient(#fff4f9,#efc4d8);
+    border:2px solid #e9b3cc;
+    border-radius:40% 40% 8px 8px / 80% 80% 8px 8px;
+  }
+
+  .login{
+    display:inline-block;margin-top:clamp(18px,3.5vh,36px);
+    font-family:'VT323',monospace;font-size:clamp(26px,3vw,40px);letter-spacing:.14em;
+    text-decoration:none;color:var(--pink-deep);
+    background:#fff;padding:.12em .8em .06em;
+    border:2px solid var(--pink-deep);
+    box-shadow:4px 4px 0 var(--pink-deep);
+    cursor:pointer;
+  }
+  .login:hover,.login:focus-visible{
+    background:var(--pink-deep);color:#fff;outline:none;
+    box-shadow:4px 4px 0 #fff, 8px 8px 0 var(--cyan);
+  }
+  .login:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--pink-deep)}
+  .cursor{animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* ===== HUD 4 góc ===== */
+  .hud{
+    position:fixed;z-index:6;
+    font-size:clamp(15px,1.4vw,19px);line-height:1.25;letter-spacing:.04em;
+    color:var(--magenta);
+    text-shadow:1px 1px 0 rgba(255,255,255,.85);
+  }
+  .hud-tl{top:20px;left:16px}
+  .hud-tr{top:20px;right:16px;text-align:right}
+  .hud-bl{bottom:20px;left:16px}
+  .hud-br{bottom:20px;right:16px;text-align:right}
+  .dot{display:inline-block;width:8px;height:8px;background:var(--pink-deep);margin-right:6px;vertical-align:1px;animation:blink 1s steps(1) infinite}
+
+  .music{display:flex;align-items:center;gap:8px}
+  .mbtn{
+    font:inherit;font-size:inherit;letter-spacing:.06em;
+    color:#fff;background:var(--pink-deep);
+    border:2px solid #fff;padding:0 .5em;cursor:pointer;
+    box-shadow:2px 2px 0 var(--magenta);
+  }
+  .mbtn:focus-visible{outline:2px dashed var(--magenta);outline-offset:2px}
+  .eq{display:inline-flex;align-items:flex-end;gap:2px;height:14px}
+  .eq i{display:block;width:3px;height:3px;background:var(--pink-deep)}
+  body.playing .eq i{animation:eq .55s steps(4) infinite alternate}
+  .eq i:nth-child(2){animation-delay:-.2s!important}
+  .eq i:nth-child(3){animation-delay:-.4s!important}
+  .eq i:nth-child(4){animation-delay:-.1s!important}
+  .eq i:nth-child(5){animation-delay:-.3s!important}
+  @keyframes eq{to{height:14px}}
+  .track{white-space:nowrap}
+  #trackName{display:inline-block;max-width:min(34vw,320px);overflow:hidden;text-overflow:ellipsis;vertical-align:bottom}
+
+  .hint{
+    position:fixed;left:50%;bottom:clamp(60px,9vh,90px);transform:translateX(-50%);
+    z-index:6;display:none;white-space:nowrap;
+    font-family:'DotGothic16',monospace;font-size:clamp(12px,1.4vw,16px);
+    color:#fff;background:var(--pink-deep);padding:4px 10px;
+    animation:blink 1.2s steps(1) infinite;
+  }
+  .hint.show{display:block}
+
+  /* ===== DẢI SỌC MÀU LỖI KỸ THUẬT ===== */
+  .strip{
+    position:fixed;left:0;right:0;height:8px;z-index:6;
+    background:var(--bars);background-size:280px 100%;
+    animation:strip 4s linear infinite;
+  }
+  .strip-top{top:0}
+  .strip-bottom{bottom:0;animation-direction:reverse}
+  @keyframes strip{to{background-position:280px 0}}
+
+  .testcard{
+    position:fixed;inset:0;z-index:7;pointer-events:none;opacity:0;
+    background:
+      var(--bars) top/100% 67% no-repeat,
+      linear-gradient(90deg,var(--lilac) 0 14.28%,var(--pink) 0 28.57%,#ff7fd1 0 42.85%,#fff 0 57.14%,var(--cyan) 0 71.42%,var(--pink-light) 0 85.71%,#fff 0) 0 72.8%/100% 8% no-repeat,
+      linear-gradient(90deg,#5a1238 0 18%,#fff 0 36%,#3a0a24 0 54%,var(--pink-deep) 0 72%,#2a0a1c 0) bottom/100% 25% no-repeat;
+  }
+
+  .scanlines{
+    position:fixed;inset:0;z-index:8;pointer-events:none;
+    background:repeating-linear-gradient(to bottom, rgba(120,10,60,.08) 0 1px, transparent 1px 3px);
+    box-shadow:inset 0 0 180px rgba(194,18,106,.28);
+    animation:flicker .15s steps(2) infinite;
+  }
+  @keyframes flicker{50%{opacity:.88}}
+  .roll{
+    position:fixed;left:0;right:0;top:-22vh;height:20vh;z-index:9;pointer-events:none;
+    background:linear-gradient(to bottom, transparent, rgba(255,255,255,.22) 45%, rgba(255,61,143,.10) 55%, transparent);
+    animation:roll 7s linear infinite;
+  }
+  @keyframes roll{to{transform:translateY(145vh)}}
+
+  body.glitching .frame{animation:jolt .16s steps(2) infinite}
+  body.glitching .bg-stripes{filter:hue-rotate(55deg) saturate(1.6)}
+  body.glitching .strip{transform:translateX(14px) scaleY(2.2)}
+  @keyframes jolt{
+    0%{transform:translate(-9px,2px) skewX(-7deg)}
+    50%{transform:translate(11px,-3px) skewX(6deg)}
+    100%{transform:translate(-3px,0)}
+  }
+
+  @media (max-width:600px){
+    .hud-tr,.hud-br{display:none}
+    .center{padding:64px 12px 72px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bg-stripes,.roll,.scanlines,.crt-lines,.glitch,.float,.strip,.hint,.cursor,.dot,.crt-msg b,body.playing .eq i{animation:none!important}
+    .glitch::before,.glitch::after{display:none}
+    body.glitching .frame{animation:none}
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-dither"></div>
+  <div class="bg-stripes"></div>
+  <canvas id="fx"></canvas>
+  <div id="floats"></div>
+
+  <div class="strip strip-top"></div>
+  <div class="strip strip-bottom"></div>
+
+  <div class="hud hud-tl">
+    <div><span class="dot"></span>ＡＮＲＥＶＹ　ＨＯＵＳＥ</div>
+    <div>node_01 // status: online</div>
+  </div>
+  <div class="hud hud-tr">
+    <div id="clock">----.--.-- --:--:--</div>
+    <div>signal: ▂▃▅▆▇ unstable</div>
+  </div>
+
+  <main class="center">
+    <div class="frame">
+      <div class="head">
+        <span class="corner c-tl"></span><span class="corner c-tr"></span>
+        <span class="corner c-bl"></span><span class="corner c-br"></span>
+        <p class="pre" id="pre">&nbsp;</p>
+        <h1 class="glitch" id="title" data-text="WELCOME TO ANREVY HOUSE" aria-label="Welcome to Anrevy House">WELCOME TO ANREVY HOUSE</h1>
+        <p class="jp">アンレヴィ・ハウスへようこそ</p>
+      </div>
+
+      <!-- Màn hình máy tính CRT: chiếu video YouTube và phát nhạc -->
+      <div class="crt">
+        <div class="crt-body">
+          <span class="sticker">♡ wired</span>
+          <div class="crt-bezel">
+            <div class="crt-screen" id="crtScreen" data-state="loading">
+              <div class="crt-content" id="crtContent">
+                <div class="yt-wrap" aria-hidden="true"><div id="yt"></div></div>
+                <canvas id="crtNoise" width="96" height="72"></canvas>
+                <div class="crt-msg"><b id="crtMsg">ＬＯＡＤＩＮＧ…</b><small id="crtSub" hidden></small></div>
+              </div>
+              <div class="crt-tint"></div>
+              <div class="crt-lines"></div>
+              <div class="crt-glass"></div>
+            </div>
+          </div>
+          <div class="crt-chin">
+            <span class="crt-brand">ＡＮＲＥＶＹ</span>
+            <span class="crt-vents"></span>
+            <span class="crt-ctrls">
+              <span class="led wait" id="led"></span>
+              <button class="pwr" id="pwr" aria-label="Bật hoặc tắt màn hình" title="Power">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 3v8"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="crt-neck"></div>
+        <div class="crt-base"></div>
+      </div>
+
+      <a href="login.html" class="login" id="login">WIRED/LOGIN<span class="cursor">_</span></a>
+    </div>
+  </main>
+
+  <div class="hud hud-bl music">
+    <button id="musicToggle" class="mbtn" aria-pressed="false" aria-label="Bật hoặc tắt tiếng nhạc">♪ OFF</button>
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="track">║▒░ <span id="trackName">Duvet — Bôa</span> ░▒║</span>
+  </div>
+
+  <div class="hud hud-br">
+    <div>© 2026 ANREVY HOUSE</div>
+    <div>best viewed at 800×600</div>
+  </div>
+
+  <div id="hint" class="hint">[ ｃｌｉｃｋ　ａｎｙｗｈｅｒｅ　ｔｏ　ｃｏｎｎｅｃｔ ♫ ]</div>
+
+  <div id="testcard" class="testcard"></div>
+  <div class="scanlines"></div>
+  <div class="roll"></div>
+
+<script>
+(() => {
+  /* ======= CÀI ĐẶT ======= */
+  // ĐỔI NHẠC/VIDEO: dán mã video YouTube (phần sau "youtu.be/" hoặc "v=")
+  const VIDEO_ID = 'hKKJyZYZQkk'; // Duvet — Bôa
+  const VOLUME = 70;
+  /* ======================= */
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s);
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const pick = a => a[(Math.random() * a.length) | 0];
+  const toFull = s => s.replace(/[!-~]/g, c => String.fromCharCode(c.charCodeAt(0) + 0xFEE0)).replace(/ /g, '　');
+
+  /* ---------- canvas nền: nhiễu + thanh sọc lỗi ---------- */
+  const cv = $('#fx'), ctx = cv.getContext('2d');
+  const SCALE = 3;
+  let W = 0, H = 0;
+  function resize(){ W = cv.width = Math.ceil(innerWidth / SCALE); H = cv.height = Math.ceil(innerHeight / SCALE); }
+  resize(); addEventListener('resize', resize);
+
+  const COLORS = ['#ffffff','#ff3d8f','#5ff4ff','#fff27a','#ff9ed0','#b48cff','#7dffb2','#c2126a'];
+  let bars = [];
+  function addBar(big){
+    const wide = Math.random() < .55;
+    const w = wide ? W : rand(W * .15, W * .7);
+    bars.push({
+      x: wide ? 0 : rand(-10, W - w), y: rand(0, H), w,
+      h: big ? rand(3, 22) : rand(1, 4),
+      life: (big ? rand(4, 12) : rand(2, 9)) | 0,
+      color: pick(COLORS),
+      stripes: Math.random() < .45,
+      step: (rand(2, 7)) | 0,
+      seed: (Math.random() * 8) | 0,
+      a: rand(.25, .75),
+      drift: rand(-3, 3)
+    });
+  }
+  function drawBar(b){
+    ctx.globalAlpha = b.a;
+    if (b.stripes){
+      for (let x = b.x, k = b.seed; x < b.x + b.w; x += b.step, k++){
+        ctx.fillStyle = COLORS[k % COLORS.length];
+        ctx.fillRect(x | 0, b.y | 0, b.step, b.h);
+      }
+    } else {
+      ctx.fillStyle = b.color;
+      ctx.fillRect(b.x | 0, b.y | 0, b.w, b.h);
+    }
+  }
+  function noise(){
+    const n = (W * H * (reduce ? .0008 : .003)) | 0;
+    for (let i = 0; i < n; i++){
+      ctx.globalAlpha = Math.random() * .6 + .2;
+      ctx.fillStyle = Math.random() < .6 ? '#fff' : '#ff3d8f';
+      ctx.fillRect((Math.random() * W) | 0, (Math.random() * H) | 0, 1, 1);
+    }
+  }
+
+  /* nhiễu trên màn hình CRT */
+  const nc = $('#crtNoise'), nctx = nc.getContext('2d'), nimg = nctx.createImageData(96, 72);
+
+  let last = 0;
+  function loop(t){
+    requestAnimationFrame(loop);
+    if (t - last < 33) return;
+    last = t;
+    ctx.clearRect(0, 0, W, H);
+    noise();
+    if (Math.random() < (reduce ? .02 : .12)) addBar(false);
+    if (Math.random() < (reduce ? .004 : .03)) addBar(true);
+    for (const b of bars){ b.x += b.drift; drawBar(b); b.life--; }
+    bars = bars.filter(b => b.life > 0);
+    ctx.globalAlpha = 1;
+
+    const d = nimg.data;
+    for (let i = 0; i < d.length; i += 4){
+      const v = (Math.random() * 255) | 0;
+      d[i] = v; d[i+1] = (v * .85) | 0; d[i+2] = (v * .92) | 0; d[i+3] = 255;
+    }
+    nctx.putImageData(nimg, 0, 0);
+  }
+  requestAnimationFrame(loop);
+
+  /* ---------- glitch mạnh định kỳ ---------- */
+  const tc = $('#testcard');
+  let burstTimer;
+  function burst(strong){
+    const n = strong ? 20 : (rand(5, 10) | 0);
+    for (let i = 0; i < n; i++) addBar(true);
+    document.body.classList.add('glitching');
+    if (strong || Math.random() < .45){
+      const top = rand(0, 70), bottom = rand(0, 100 - top - 8);
+      tc.style.clipPath = `inset(${top}% 0 ${bottom}% 0)`;
+      tc.style.transform = `translateX(${rand(-30, 30)}px)`;
+      tc.style.opacity = strong ? .7 : rand(.25, .5).toFixed(2);
+    }
+    clearTimeout(burstTimer);
+    burstTimer = setTimeout(() => {
+      document.body.classList.remove('glitching');
+      tc.style.opacity = 0;
+    }, strong ? 520 : rand(120, 320));
+  }
+  (function schedule(){
+    setTimeout(() => { if (!reduce) burst(false); schedule(); }, rand(2200, 6500));
+  })();
+
+  /* ---------- chữ trôi trong nền ---------- */
+  const WORDS = ['ANREVY','LOADING...','NO SIGNAL','ERR_0x04','♡','01101001','HELLO?','CONNECT','HOME','SYS//OK','✦','ここにいるよ','接続中','REC ●','♫','WIRED','LOGIN?','♡♡'];
+  const floats = $('#floats');
+  const N = reduce ? 0 : (innerWidth < 600 ? 12 : 22);
+  for (let i = 0; i < N; i++){
+    const s = document.createElement('span');
+    s.className = 'float';
+    const w = pick(WORDS);
+    s.textContent = /[A-Za-z0-9]/.test(w) ? toFull(w) : w;
+    const dur = rand(18, 42);
+    s.style.left = rand(0, 92) + '%';
+    s.style.fontSize = rand(12, 30).toFixed(0) + 'px';
+    s.style.opacity = rand(.25, .7).toFixed(2);
+    s.style.animationDuration = `${dur.toFixed(1)}s, ${rand(2, 6).toFixed(1)}s`;
+    s.style.animationDelay = `${(-rand(0, dur)).toFixed(1)}s, 0s`;
+    floats.appendChild(s);
+  }
+
+  /* ---------- tiêu đề: lâu lâu đổi ký tự như lỗi ---------- */
+  const h1 = $('#title'), ORIG = h1.dataset.text, GL = '#%&$@/\\?!*=+<>_';
+  function scramble(){
+    const arr = [...ORIG];
+    const k = (rand(1, 4)) | 0;
+    for (let i = 0; i < k; i++){
+      const j = (Math.random() * arr.length) | 0;
+      if (arr[j] !== ' ') arr[j] = pick(GL);
+    }
+    h1.textContent = h1.dataset.text = arr.join('');
+    setTimeout(() => { h1.textContent = h1.dataset.text = ORIG; }, rand(60, 160));
+  }
+  if (!reduce) (function sched(){ setTimeout(() => { scramble(); sched(); }, rand(1500, 4000)); })();
+
+  /* ---------- dòng chữ gõ phím ---------- */
+  const pre = $('#pre');
+  let typeIv;
+  function type(text, cb){
+    clearInterval(typeIv);
+    let i = 0;
+    pre.textContent = '';
+    typeIv = setInterval(() => {
+      pre.textContent = text.slice(0, ++i);
+      if (i >= text.length){ clearInterval(typeIv); cb && cb(); }
+    }, 55);
+  }
+  type(toFull('connecting to the wired...'), () =>
+    setTimeout(() => type(toFull('connected.') + ' ♡'), 900));
+
+  /* ---------- đồng hồ ---------- */
+  const clk = $('#clock');
+  const pad = n => String(n).padStart(2, '0');
+  function tick(){
+    const d = new Date();
+    clk.textContent = `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())} · ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---------- màn hình CRT + nhạc YouTube ---------- */
+  const screen = $('#crtScreen'), content = $('#crtContent'), msg = $('#crtMsg'), sub = $('#crtSub');
+  const led = $('#led'), pwr = $('#pwr'), btn = $('#musicToggle'), hint = $('#hint'), trackName = $('#trackName');
+  let player = null, ready = false, errored = false, powered = true;
+  let soundOn = false, userMuted = false, gestured = false;
+
+  function setLed(c){ led.className = 'led ' + c; }
+  function setMsg(big, small){
+    msg.textContent = big;
+    if (small){ sub.textContent = small; sub.hidden = false; } else sub.hidden = true;
+  }
+  function boot(){
+    content.classList.remove('boot');
+    void content.offsetWidth;
+    content.classList.add('boot');
+  }
+  function ui(){
+    const on = soundOn && powered && !errored;
+    document.body.classList.toggle('playing', on);
+    btn.textContent = on ? '♪ ON' : '♪ OFF';
+    btn.setAttribute('aria-pressed', on);
+    hint.classList.toggle('show', ready && !errored && powered && !soundOn && !userMuted);
+  }
+  function fail(big, small){
+    errored = true;
+    screen.dataset.state = 'error';
+    setMsg(big, small);
+    setLed('err');
+    trackName.textContent = 'no signal';
+    ui();
+  }
+  function updateTitle(){
+    try {
+      const d = player.getVideoData();
+      if (d && d.title){ trackName.textContent = d.title; trackName.title = d.title; }
+    } catch (e) {}
+  }
+  function applySound(){
+    if (!ready || errored || !powered) return;
+    player.unMute();
+    player.setVolume(VOLUME);
+    player.playVideo();
+    soundOn = true;
+    ui();
+  }
+
+  if (location.protocol === 'file:'){
+    // YouTube không cho nhúng video khi mở file trực tiếp từ máy
+    fail('ＮＯ　ＳＩＧＮＡＬ', 'YouTube chỉ chạy khi trang được mở qua web (http/https)');
+  } else {
+    window.onYouTubeIframeAPIReady = () => {
+      player = new YT.Player('yt', {
+        videoId: VIDEO_ID,
+        width: '640', height: '360',
+        playerVars: {
+          autoplay: 1, mute: 1, controls: 0, disablekb: 1, fs: 0,
+          iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0,
+          loop: 1, playlist: VIDEO_ID, origin: location.origin
+        },
+        events: {
+          onReady: e => {
+            ready = true;
+            const f = e.target.getIframe();
+            f.setAttribute('tabindex', '-1');
+            f.setAttribute('title', 'Video nhạc nền');
+            e.target.mute();
+            e.target.playVideo();
+            updateTitle();
+            if (gestured && !userMuted) applySound();
+            ui();
+          },
+          onStateChange: e => {
+            const S = YT.PlayerState;
+            if (e.data === S.PLAYING){
+              if (screen.dataset.state !== 'playing') boot();
+              screen.dataset.state = 'playing';
+              setLed('on');
+              updateTitle();
+            } else if (e.data === S.BUFFERING && screen.dataset.state !== 'playing'){
+              setMsg('ＬＯＡＤＩＮＧ…');
+              setLed('wait');
+            } else if (e.data === S.ENDED){
+              player.seekTo(0); player.playVideo();
+            } else if (e.data === S.PAUSED && powered){
+              screen.dataset.state = 'paused';
+              setMsg('▶　ＰＬＡＹ', 'click để phát');
+              setLed('wait');
+            }
+            ui();
+          },
+          onError: () => fail('ＮＯ　ＳＩＧＮＡＬ', 'video này không cho phép nhúng')
+        }
+      });
+    };
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    tag.onerror = () => fail('ＮＯ　ＳＩＧＮＡＬ', 'không tải được YouTube');
+    document.head.appendChild(tag);
+    setTimeout(() => { if (!ready && !errored) fail('ＮＯ　ＳＩＧＮＡＬ', 'không tải được YouTube'); }, 15000);
+  }
+
+  // Trình duyệt chặn nhạc có tiếng khi chưa tương tác -> bật tiếng ở lần chạm/nhấn đầu tiên
+  function onGesture(e){
+    if (e.target.closest && e.target.closest('#musicToggle, #pwr')) return;
+    gestured = true;
+    if (!userMuted && !soundOn) applySound();
+    else if (ready && powered && screen.dataset.state === 'paused') player.playVideo();
+  }
+  ['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, onGesture));
+
+  btn.addEventListener('click', () => {
+    gestured = true;
+    if (!ready || errored) return;
+    if (soundOn){
+      player.mute();
+      soundOn = false; userMuted = true;
+    } else {
+      userMuted = false;
+      if (!powered) powerOn();
+      applySound();
+    }
+    ui();
+  });
+
+  function powerOff(){
+    powered = false;
+    screen.classList.add('off');
+    setLed('');
+    if (ready && !errored) player.pauseVideo();
+    ui();
+  }
+  function powerOn(){
+    powered = true;
+    screen.classList.remove('off');
+    boot();
+    if (errored){ setLed('err'); return ui(); }
+    setLed('wait');
+    if (ready){
+      if (!userMuted && gestured) applySound(); else player.playVideo();
+    }
+    ui();
+  }
+  pwr.addEventListener('click', () => {
+    gestured = true;
+    powered ? powerOff() : powerOn();
+  });
+
+  /* ---------- WIRED/LOGIN ---------- */
+  const login = $('#login');
+  login.addEventListener('click', e => {
+    e.preventDefault();
+    burst(true);
+    type(toFull('access granted.') + ' ♡');
+    const href = login.getAttribute('href');
+    if (href && href !== '#') setTimeout(() => { location.href = href; }, 1100);
+  });
+})();
+</script>
+</body>
+</html>

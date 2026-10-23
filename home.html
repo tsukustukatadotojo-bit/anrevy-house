@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>⌈ＡＮＲＥＶＹ　ＨＯＵＳＥ⌋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=Monoton&amp;family=Silkscreen:wght@400;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vp-pink:#ff71ce;
+    --vp-blue:#01cdfe;
+    --vp-green:#05ffa1;
+    --vp-purple:#b967ff;
+    --vp-yellow:#fffb96;
+    --text:#f1e6ff;
+    --text-dim:#b9a3d6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;background:#05000d}
+  body{
+    color:var(--text);
+    font-family:'DotGothic16',monospace;font-size:15px;line-height:1.65;
+    overflow-x:hidden;cursor:crosshair;
+  }
+  a{color:var(--vp-pink)}
+  ::selection{background:var(--vp-pink);color:#000}
+  button{font:inherit;color:inherit;cursor:pointer}
+
+  /* ================= NỀN: canvas mặt trời + lưới + con mắt ================= */
+  #bg{position:fixed;inset:0;width:100%;height:100%;z-index:-2;image-rendering:pixelated}
+  #ghosts{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .ghost{
+    position:absolute;white-space:nowrap;font-family:'DotGothic16',monospace;
+    filter:blur(.6px);animation-name:drift, ghostflick;
+    animation-timing-function:linear, steps(1);animation-iteration-count:infinite, infinite;
+  }
+  @keyframes drift{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+  @keyframes ghostflick{0%,86%{opacity:var(--o)}87%,90%{opacity:0}91%{opacity:var(--o)}95%{opacity:calc(var(--o) * 2.2)}96%{opacity:var(--o)}}
+
+  /* lớp phủ CRT */
+  .crt-over{
+    position:fixed;inset:0;z-index:65;pointer-events:none;
+    background:
+      repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px),
+      radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%);
+    animation:crtflick .14s steps(2) infinite;
+  }
+  @keyframes crtflick{50%{opacity:.9}}
+
+  /* chữ OSD kiểu băng VHS */
+  .osd{
+    position:fixed;z-index:70;pointer-events:none;
+    font-family:'VT323',monospace;font-size:clamp(18px,2vw,28px);line-height:1.05;letter-spacing:.06em;
+    color:#fff;text-shadow:2px 2px 0 #000, 0 0 6px rgba(255,255,255,.55);
+  }
+  .osd.tl{top:12px;left:16px}
+  .osd.tr{top:12px;right:16px;text-align:right}
+  .osd.bl{bottom:12px;left:16px}
+  .osd.br{bottom:12px;right:16px;text-align:right}
+  .osd .blk{animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  @media (max-width:700px){.osd.tr,.osd.br{display:none}}
+  /* khi đã cuộn khỏi hero: OSD thu nhỏ, mờ đi để không che chữ */
+  .osd{transition:opacity .4s, font-size .4s}
+  body.deep .osd{font-size:16px;opacity:.55}
+  body.deep .osd.tr,body.deep .osd.br{opacity:0}
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;min-height:94vh;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:clamp(70px,13vh,140px) 16px 0;
+  }
+  .hero-jp{
+    font-size:clamp(13px,1.7vw,22px);letter-spacing:.55em;
+    color:var(--vp-blue);text-shadow:0 0 10px var(--vp-blue);
+  }
+  .title{
+    position:relative;max-width:100%;
+    font-family:'Monoton',cursive;font-weight:400;
+    font-size:clamp(36px,7vw,130px);line-height:1.02;letter-spacing:.02em;
+    margin:12px 0 8px;
+    background:linear-gradient(180deg,var(--vp-yellow) 8%,var(--vp-pink) 46%,var(--vp-purple) 64%,var(--vp-blue) 96%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 10px rgba(255,113,206,.75)) drop-shadow(0 0 32px rgba(185,103,255,.5));
+    transform:skewX(-6deg);
+  }
+  .title::before,.title::after{
+    content:attr(data-text);position:absolute;inset:0;
+    background:none;-webkit-background-clip:border-box;background-clip:border-box;
+    clip-path:inset(100% 0 0 0);pointer-events:none;
+  }
+  .title::before{color:var(--vp-blue);animation:sliceA 3s steps(1) infinite}
+  .title::after{color:#ff1a2e;animation:sliceB 3.7s steps(1) infinite}
+  @keyframes sliceA{
+    0%{clip-path:inset(14% 0 66% 0);transform:translate(-8px,0)}
+    4%{clip-path:inset(56% 0 26% 0);transform:translate(9px,0)}
+    8%{clip-path:inset(80% 0 4% 0);transform:translate(-5px,0)}
+    12%,100%{clip-path:inset(100% 0 0 0);transform:none}
+  }
+  @keyframes sliceB{
+    0%,46%{clip-path:inset(100% 0 0 0);transform:none}
+    48%{clip-path:inset(34% 0 52% 0);transform:translate(10px,0)}
+    51%{clip-path:inset(68% 0 16% 0);transform:translate(-11px,0)}
+    54%,100%{clip-path:inset(100% 0 0 0);transform:none}
+  }
+  .hero-sub{
+    font-size:clamp(12px,1.5vw,18px);letter-spacing:.3em;color:var(--vp-pink);
+    text-shadow:0 0 8px var(--vp-pink);
+  }
+  .hero-play{
+    margin-top:22px;cursor:pointer;
+    font-family:'DotGothic16',monospace;font-size:clamp(13px,1.5vw,17px);letter-spacing:.15em;
+    color:#000;background:var(--vp-yellow);padding:5px 16px;border:2px solid #000;
+    box-shadow:0 0 0 2px var(--vp-pink), 0 0 22px rgba(255,113,206,.7);
+    animation:heroPlay 1.8s ease-in-out infinite;
+  }
+  .hero-play:hover,.hero-play:focus-visible{background:var(--vp-pink);outline:none}
+  .hero-play[aria-pressed="true"]{animation:none;background:var(--vp-green)}
+  @keyframes heroPlay{50%{box-shadow:0 0 0 2px var(--vp-blue), 0 0 34px rgba(1,205,254,.8)}}
+  .ear-msg{
+    position:absolute;left:0;right:0;bottom:0;z-index:1;pointer-events:none;
+    padding:4px 8px;text-align:center;background:rgba(0,0,0,.65);
+    font-family:'VT323',monospace;font-size:18px;color:var(--vp-yellow);
+    animation:blink 1.3s steps(1) infinite;
+  }
+  .player.on .ear-msg{display:none}
+  .vert{
+    position:absolute;top:16vh;writing-mode:vertical-rl;
+    font-size:clamp(16px,2vw,28px);letter-spacing:.45em;
+    color:var(--vp-pink);text-shadow:0 0 10px var(--vp-pink);opacity:.85;
+  }
+  .vert.l{left:clamp(14px,4vw,64px)}
+  .vert.r{right:clamp(14px,4vw,64px);color:var(--vp-blue);text-shadow:0 0 10px var(--vp-blue)}
+  .vert span{display:inline-block;animation:blink 2.4s steps(1) infinite}
+  @media (max-width:700px){.vert{display:none}}
+  .enter{
+    position:absolute;bottom:5vh;left:50%;transform:translateX(-50%);
+    font-family:'VT323',monospace;font-size:22px;letter-spacing:.3em;color:var(--vp-yellow);
+    text-decoration:none;text-shadow:0 0 8px var(--vp-yellow);animation:blink 1.4s steps(1) infinite;white-space:nowrap;
+  }
+
+  .marquee{
+    position:relative;overflow:hidden;white-space:nowrap;margin-bottom:22px;
+    background:linear-gradient(90deg,#1a0533,#3a0a4f,#1a0533);
+    border-top:2px solid var(--vp-pink);border-bottom:2px solid var(--vp-blue);
+    box-shadow:0 0 18px rgba(255,113,206,.45);
+    font-family:'VT323',monospace;font-size:22px;line-height:34px;color:var(--vp-yellow);
+  }
+  .marquee span{display:inline-block;padding-left:100%;animation:marq 30s linear infinite}
+  @keyframes marq{to{transform:translateX(-100%)}}
+
+  /* ================= BẢNG CỬA SỔ TRẢI NGANG ================= */
+  .board{
+    display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;
+    width:100%;max-width:1900px;margin:0 auto;padding:0 clamp(12px,2vw,28px) 30px;
+    grid-auto-flow:row dense;
+  }
+  .s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s7{grid-column:span 7}.s12{grid-column:1 / -1}
+  @media (max-width:1180px){
+    .board{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .board > *{grid-column:span 1}
+    .board > .wide{grid-column:span 2}
+  }
+  @media (max-width:700px){
+    .board{grid-template-columns:1fr}
+    .board > *,.board > .wide{grid-column:auto}
+  }
+
+  .win{
+    --a:var(--vp-pink);--bd:#170622;--glow:rgba(255,113,206,.4);
+    position:relative;align-self:start;
+    background:var(--bd);color:var(--text);
+    border:2px solid var(--a);border-radius:4px;
+    box-shadow:0 0 0 2px #000, 0 0 24px var(--glow), 8px 8px 0 rgba(0,0,0,.6);
+    overflow:hidden;scroll-margin-top:60px;
+    rotate:var(--rot,0deg);transition:rotate .35s ease;
+  }
+  .win:hover{rotate:0deg}
+  .win::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
+  }
+  .tb{
+    display:flex;align-items:center;gap:8px;padding:3px 4px 3px 8px;
+    background:linear-gradient(90deg,var(--a),#1a0533 85%);
+    color:#fff;font-family:'Silkscreen',monospace;font-size:12px;letter-spacing:.06em;line-height:1.5;
+    text-shadow:1px 1px 0 #000;border-bottom:2px solid #000;
+  }
+  .tb-btns{margin-left:auto;display:flex;gap:3px}
+  .tb-btns i{
+    width:17px;height:15px;display:grid;place-items:center;
+    background:#c0c0c0;color:#000;border:2px outset #fff;
+    font-style:normal;font-size:9px;line-height:1;text-shadow:none;cursor:pointer;
+  }
+  .tb-btns i:active{border-style:inset}
+  .wb{padding:14px 16px 16px}
+  .win.shake{animation:shake .4s steps(6)}
+  @keyframes shake{20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+
+  h2{
+    font-family:'Silkscreen',monospace;font-weight:700;font-size:17px;line-height:1.3;letter-spacing:.04em;
+    color:var(--a);text-shadow:0 0 10px var(--glow);
+    display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;
+  }
+  h2 .sub{font-family:'VT323',monospace;font-weight:400;font-size:19px;color:var(--text-dim);letter-spacing:0;text-shadow:none}
+  .lead{color:var(--text-dim);margin:2px 0 12px;font-size:14px}
+
+  /* màu từng hạng mục */
+  .c-about  {--a:#ff71ce;--bd:#1b0626;--glow:rgba(255,113,206,.4)}
+  .c-cal    {--a:#8f7bff;--bd:#0e0b2e;--glow:rgba(143,123,255,.4)}
+  .c-ear    {--a:#ff71ce;--bd:#160424;--glow:rgba(255,113,206,.4)}
+  .c-music  {--a:#b967ff;--bd:#1a0b33;--glow:rgba(185,103,255,.45)}
+  .c-movies {--a:#05ffa1;--bd:#03231b;--glow:rgba(5,255,161,.35)}
+  .c-socials{--a:#01cdfe;--bd:#03192f;--glow:rgba(1,205,254,.4)}
+  .c-radio  {--a:#ff9f43;--bd:#2a1405;--glow:rgba(255,159,67,.4)}
+  .c-lost   {--a:#ff2fa0;--bd:#2a0420;--glow:rgba(255,47,160,.45)}
+  .c-play   {--a:#fffb96;--bd:#24210a;--glow:rgba(255,251,150,.3)}
+  .c-old    {--a:#ff1a2e;--bd:#000;--glow:rgba(255,26,46,.45)}
+  .c-creep  {--a:#9dff00;--bd:#050a02;--glow:rgba(157,255,0,.35)}
+  .c-news   {--a:#f2f2f2;--bd:#121212;--glow:rgba(255,255,255,.22)}
+  .c-old .tb{background:linear-gradient(90deg,#000,#3a0a12);color:#ff1a2e;text-shadow:-1px 0 0 #01cdfe}
+  .c-news .tb{background:linear-gradient(90deg,#d9d9d9,#3a3a3a);color:#111;text-shadow:none}
+  .c-creep .tb{background:linear-gradient(90deg,#000,#1d3300);color:#9dff00;text-shadow:1px 0 0 #000}
+
+  .tilt-s{--rot:.35deg}
+  .tilt-l{--rot:-1.2deg}.tilt-r{--rot:1deg}.tilt-r2{--rot:1.6deg}
+
+  /* about */
+  .about p + p{margin-top:8px}
+  .blinkies{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .blinkie{
+    min-width:150px;height:22px;padding:0 8px;white-space:nowrap;display:grid;place-items:center;
+    font-family:'VT323',monospace;font-size:17px;line-height:1;border:1px solid #000;color:#000;
+    animation:blinkie 1s steps(1) infinite;
+  }
+  .blinkie.b1{--x:#ff71ce;--y:#ffb3e6}
+  .blinkie.b2{--x:#01cdfe;--y:#8fe9ff}
+  .blinkie.b3{--x:#05ffa1;--y:#9dffd6}
+  .blinkie.b4{--x:#b967ff;--y:#dcb6ff}
+  @keyframes blinkie{0%,100%{background:var(--x)}50%{background:var(--y)}}
+
+  .portal{margin-top:12px!important;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .portal button{
+    padding:4px 12px;background:#c0c0c0;color:#000;border:2px outset #fff;
+    font-family:'Silkscreen',monospace;font-size:12px;
+  }
+  .portal button:active{border-style:inset}
+  .portal span{font-family:'VT323',monospace;font-size:18px;color:var(--vp-yellow)}
+
+  /* lịch */
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .cal-head button{
+    width:30px;height:26px;background:#c0c0c0;color:#000;border:2px outset #fff;font-size:12px;line-height:1;
+  }
+  .cal-head button:active{border-style:inset}
+  .cal-title{font-family:'Silkscreen',monospace;font-size:13px;text-align:center;line-height:1.2;color:var(--a);text-shadow:0 0 8px var(--glow)}
+  .cal-title small{display:block;font-family:'DotGothic16',monospace;font-size:11px;color:var(--text-dim);text-shadow:none}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+  .cal-grid .wd{font-family:'Silkscreen',monospace;font-size:9px;color:var(--text-dim);padding-bottom:2px}
+  .cal-grid .wd:nth-child(6),.cal-grid .wd:nth-child(7){color:var(--vp-pink)}
+  .day{
+    position:relative;aspect-ratio:1;border:1px solid rgba(255,255,255,.14);border-radius:3px;
+    background:rgba(255,255,255,.03);color:#e9dcff;
+    font-family:'VT323',monospace;font-size:18px;line-height:1;display:grid;place-items:center;
+  }
+  .day:hover{background:rgba(143,123,255,.25);border-color:var(--a)}
+  .day.we{color:var(--vp-pink)}
+  .day.today{background:var(--vp-pink);color:#000;border-color:#fff;box-shadow:0 0 12px var(--vp-pink);animation:todayPulse 1.6s ease-in-out infinite}
+  @keyframes todayPulse{50%{box-shadow:0 0 22px var(--vp-pink)}}
+  .day.special::after{content:'♥';position:absolute;top:-5px;right:-3px;font-size:10px;color:var(--vp-yellow);text-shadow:0 0 4px #000}
+  .day.cursed::after{content:'☠';position:absolute;top:-6px;right:-4px;font-size:10px;color:#ff1a2e}
+  .day.sel{outline:2px dashed var(--vp-yellow);outline-offset:1px}
+  .cal-note{
+    margin-top:10px;padding:6px 8px;border:1px dashed var(--a);border-radius:4px;background:rgba(0,0,0,.35);
+    font-size:13px;line-height:1.45;min-height:44px;
+  }
+  .cal-note b{display:block;font-family:'Silkscreen',monospace;font-weight:400;font-size:11px;color:var(--vp-yellow)}
+
+  /* nhạc đang nghe */
+  .player{
+    position:relative;aspect-ratio:16/9;overflow:hidden;
+    border:2px solid #000;outline:2px solid var(--a);box-shadow:0 0 18px var(--glow);
+    background:#000;border-radius:3px;
+  }
+  .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .now{display:flex;align-items:center;gap:8px;margin-top:10px;font-family:'VT323',monospace;font-size:19px;color:var(--text-dim)}
+  .eq{display:inline-flex;align-items:flex-end;gap:2px;height:16px}
+  .eq i{display:block;width:4px;background:var(--a);box-shadow:0 0 6px var(--a);animation:eq .6s steps(4) infinite alternate}
+  .eq i:nth-child(2){animation-delay:-.2s}.eq i:nth-child(3){animation-delay:-.4s}.eq i:nth-child(4){animation-delay:-.1s}
+  @keyframes eq{from{height:3px}to{height:16px}}
+
+  /* ô liên kết */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px}
+  .tile{
+    display:flex;flex-direction:column;align-items:center;gap:5px;
+    padding:12px 6px 10px;text-decoration:none;color:var(--text);text-align:center;
+    background:rgba(255,255,255,.04);border:1.5px solid var(--a);border-radius:4px;
+    transition:transform .15s, box-shadow .15s, background .15s;
+  }
+  .tile:hover,.tile:focus-visible{
+    transform:translateY(-4px) skewX(-4deg);background:rgba(255,255,255,.09);outline:none;
+    box-shadow:0 0 0 1px var(--a), 0 0 20px var(--glow), 5px 5px 0 #000;
+  }
+  .ico{
+    width:54px;height:54px;border-radius:10px;flex:none;
+    display:grid;place-items:center;overflow:hidden;
+    background:var(--brand);border:2px solid #000;box-shadow:0 0 0 1.5px var(--a), inset 0 -4px 0 rgba(0,0,0,.2);
+  }
+  .ico img{width:28px;height:28px;filter:invert(1)}
+  .ico.fav{background:#fff}
+  .ico.fav img{filter:none;width:32px;height:32px;image-rendering:pixelated}
+  .ico svg{width:100%;height:100%;display:block}
+  .tile:hover .ico,.tile:focus-visible .ico{animation:glitchy .35s steps(3)}
+  @keyframes glitchy{
+    33%{transform:translate(-3px,1px);filter:drop-shadow(-3px 0 0 #ff1a2e) drop-shadow(3px 0 0 #01cdfe)}
+    66%{transform:translate(3px,-1px) skewX(8deg);filter:drop-shadow(3px 0 0 #ff1a2e) drop-shadow(-3px 0 0 #01cdfe)}
+  }
+  .t-name{font-family:'Silkscreen',monospace;font-size:12px;line-height:1.2;letter-spacing:.02em}
+  .t-handle{font-family:'VT323',monospace;font-size:17px;line-height:1;color:var(--a);overflow-wrap:anywhere;opacity:.9}
+
+  /* hoạt hình trong icon tự vẽ */
+  .spin{transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite}
+  .spin.slow{animation-duration:28s}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .pulse circle{transform-box:fill-box;transform-origin:center;animation:pulse 2s ease-out infinite}
+  .pulse circle:nth-child(2){animation-delay:.3s}.pulse circle:nth-child(3){animation-delay:.6s}
+  @keyframes pulse{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.15);opacity:.15}}
+  .wormy{transform-box:fill-box;transform-origin:center;animation:wormy .9s ease-in-out infinite alternate}
+  @keyframes wormy{to{transform:skewX(-10deg) translateY(-2px)}}
+  .waves{animation:blink 1.2s steps(1) infinite}
+
+
+  footer{text-align:center;padding:10px 16px 70px;font-size:13px;color:var(--text-dim)}
+  .back{
+    display:inline-block;margin-bottom:10px;
+    font-family:'Silkscreen',monospace;font-size:12px;text-decoration:none;
+    background:#000;color:#ff1a2e;padding:6px 12px;border:2px solid #ff1a2e;box-shadow:0 0 14px rgba(255,26,46,.5);
+  }
+  .back:hover{background:#ff1a2e;color:#000}
+
+  /* ================= HỘP THOẠI LỖI ================= */
+  .err{
+    position:fixed;z-index:75;width:min(290px,calc(100vw - 24px));
+    background:#c0c0c0;color:#000;border:2px outset #fff;box-shadow:6px 6px 0 rgba(0,0,0,.6), 0 0 30px rgba(255,26,46,.25);
+    font-family:'DotGothic16',monospace;font-size:13px;
+    animation:errIn .25s steps(3);
+  }
+  @keyframes errIn{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.05) skewX(6deg)}}
+  .err-tb{
+    display:flex;align-items:center;gap:6px;padding:2px 3px 2px 6px;cursor:move;user-select:none;
+    background:linear-gradient(90deg,#000080,#ff71ce);color:#fff;font-family:'Silkscreen',monospace;font-size:11px;
+  }
+  .err-tb button{margin-left:auto;width:17px;height:15px;background:#c0c0c0;color:#000;border:2px outset #fff;font-size:9px;line-height:1}
+  .err-body{display:flex;gap:12px;align-items:flex-start;padding:14px 12px 8px}
+  .err-ic{
+    flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+    background:#ff1a2e;color:#fff;font-size:18px;border:2px solid #000;
+  }
+  .err-btns{display:flex;justify-content:center;gap:8px;padding:4px 0 12px}
+  .err-btns button{min-width:72px;padding:2px 10px;background:#c0c0c0;border:2px outset #fff;font-size:13px}
+  .err-btns button:active,.err-tb button:active{border-style:inset}
+  .err-btns button:focus-visible{outline:1px dotted #000;outline-offset:-5px}
+
+  /* "are you still there?" */
+  #idle{
+    position:fixed;inset:0;z-index:80;display:none;place-items:center;pointer-events:none;
+    background:rgba(0,0,0,.72);
+    font-family:'DotGothic16',monospace;font-size:clamp(18px,3vw,36px);letter-spacing:.2em;color:#fff;text-align:center;
+    text-shadow:-3px 0 0 #ff1a2e, 3px 0 0 #01cdfe;
+  }
+  #idle.on{display:grid;animation:idleflick 2.4s steps(1) infinite}
+  @keyframes idleflick{0%,70%{opacity:1}71%,74%{opacity:0}75%,90%{opacity:1}91%{opacity:.3}}
+
+  /* hiệu ứng con trỏ + click */
+  .px{position:fixed;pointer-events:none;z-index:90;width:5px;height:5px;transform:translate(-50%,-50%);animation:px .8s ease-out forwards}
+  @keyframes px{to{opacity:0;transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.4)}}
+  body.jolt .board,body.jolt .hero{animation:jolt .14s steps(2) 2}
+  @keyframes jolt{0%{transform:translate(-6px,1px) skewX(-3deg);filter:hue-rotate(60deg)}100%{transform:translate(5px,-1px);filter:none}}
+
+  html.js .reveal{opacity:0;transform:translateY(22px)}
+  html.js .reveal.in{opacity:1;transform:none;transition:opacity .5s ease, transform .6s cubic-bezier(.2,1.4,.4,1)}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    html.js .reveal{opacity:1;transform:none}
+    .title::before,.title::after{display:none}
+    .ear-msg{animation:none}
+  }
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div id="ghosts" aria-hidden="true"></div>
+
+  <!-- chữ OSD băng VHS -->
+  <div class="osd tl" aria-hidden="true"><span class="blk">▶</span> PLAY</div>
+  <div class="osd tr" aria-hidden="true">CH 12<br><span style="font-size:.7em">ＴＨＥ　ＷＩＲＥＤ</span></div>
+  <div class="osd bl" aria-hidden="true">AUG.12 2001<br><span id="vhsTime">03:33:00 AM</span></div>
+  <div class="osd br" aria-hidden="true">SP<br><span style="font-size:.7em">TRACKING ▮▮▮▯▯</span></div>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <p class="vert l" aria-hidden="true">アンレヴィ・ハウス<span>。</span></p>
+    <p class="vert r" aria-hidden="true">見ている<span>…</span>ずっと</p>
+    <p class="hero-jp">ようこそ　・　ＷＥＬＣＯＭＥ</p>
+    <h1 class="title" data-text="ANREVY HOUSE">ANREVY HOUSE</h1>
+    <p class="hero-sub">ｗｅ'ｖｅ　ｂｅｅｎ　ｗａｉｔｉｎｇ　ｆｏｒ　ｙｏｕ</p>
+    <button class="hero-play" id="heroPlay" aria-pressed="false">♪ ＣＬＩＣＫ　ＦＯＲ　ＳＯＵＮＤ</button>
+    <a class="enter" href="#board">▼ ｅｎｔｅｒ ▼</a>
+  </header>
+
+  <div class="marquee" aria-hidden="true"><span>✦ welcome home ✦ アンレヴィ・ハウスへようこそ ✦ my favourite corners of the internet ✦ music · movies · art · radio · strange websites ✦ don't close the tab ✦ 見ている ✦ you came back ✦ the wired remembers ✦ 12.08.2001 ✦</span></div>
+
+  <!-- ===== BẢNG CỬA SỔ ===== -->
+  <main class="board" id="board">
+
+    <!-- ABOUT -->
+    <section class="win reveal s4 c-about tilt-l" id="about">
+      <div class="tb"><span>about.txt</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
+      <div class="wb about">
+        <h2>✦ hi, i'm anrevy</h2>
+        <!-- ĐỔI LỜI GIỚI THIỆU: sửa 2 đoạn bên dưới -->
+        <p>welcome to my little corner of the wired. this is my collection of favourite places on the internet: music, movies, art, radio, news and strange websites worth getting lost in.</p>
+        <p>click anything. stay as long as you like. we don't mind ✦</p>
+        <p class="portal"><button id="portal">▶ take me somewhere random</button> <span id="linkCount"></span></p>
+        <div class="blinkies" aria-hidden="true">
+          <span class="blinkie b1">♡ pink forever ♡</span>
+          <span class="blinkie b2">♫ music addict ♫</span>
+          <span class="blinkie b3">▶ movie night ▶</span>
+          <span class="blinkie b4">☾ awake at 3am ☾</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- LỊCH -->
+    <section class="win reveal s3 c-cal tilt-r" id="calendar">
+      <div class="tb"><span>calendar.exe</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <div class="cal-head">
+          <button id="calPrev" aria-label="Tháng trước">◀</button>
+          <div class="cal-title" id="calTitle" aria-live="polite">—</div>
+          <button id="calNext" aria-label="Tháng sau">▶</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-note" id="calNote" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- NHẠC ĐANG NGHE -->
+    <section class="win reveal s5 c-ear wide" id="earworm">
+      <div class="tb"><span>now_playing.mp4</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>♪ current earworm</h2>
+        <div class="player" id="earPlayer" style="margin-top:10px">
+          <div id="yt"></div>
+          <span class="ear-msg" id="earMsg">♪ click anywhere for sound</span>
+        </div>
+        <div class="now"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span> <span id="earTitle">on repeat since 2001</span></div>
+      </div>
+    </section>
+
+    <!-- ♫ MUSIC -->
+    <section class="win reveal s4 c-music tilt-r" id="music">
+      <div class="tb"><span>♫ music.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>♫ music <span class="sub">— listen &amp; rate</span></h2>
+        <p class="lead">playlists, scrobbles and album reviews.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#1ED760" href="https://open.spotify.com/user/315rpcaxgfhfg4tdfaxhmdlhcy3u?si=584a9e2fa14b4ea8" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/spotify.svg" alt=""></span>
+            <span class="t-name">Spotify</span><span class="t-handle">playlists</span>
+          </a>
+          <a class="tile" style="--brand:#D51007" href="https://www.last.fm/user/Anrevy" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/lastdotfm.svg" alt=""></span>
+            <span class="t-name">Last.fm</span><span class="t-handle">Anrevy</span>
+          </a>
+          <a class="tile" style="--brand:#222222" href="https://www.albumoftheyear.org/user/anrevy/" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/albumoftheyear.svg" alt=""></span>
+            <span class="t-name">AOTY</span><span class="t-handle">anrevy</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▶ MOVIES -->
+    <section class="win reveal s3 c-movies tilt-l" id="movies">
+      <div class="tb"><span>▶ movies.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>▶ movies</h2>
+        <p class="lead">film diary &amp; reviews.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#202830" href="https://letterboxd.com/haanvie/" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/letterboxd.svg" alt=""></span>
+            <span class="t-name">Letterboxd</span><span class="t-handle">haanvie</span>
+          </a>
+          <a class="tile" style="--brand:#000000" href="https://www.threads.com/@moviesstorage" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/threads.svg" alt=""></span>
+            <span class="t-name">Threads</span><span class="t-handle">@moviesstorage</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✉ SOCIALS -->
+    <section class="win reveal s5 c-socials" id="socials">
+      <div class="tb"><span>✉ socials.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>✉ socials <span class="sub">— say hi</span></h2>
+        <p class="lead">photos, thoughts and everyday stuff.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#FF0069" href="https://www.instagram.com/_haanvie_?psln=MWQyM3NuODE0cDkyNg==" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/instagram.svg" alt=""></span>
+            <span class="t-name">Instagram</span><span class="t-handle">@_haanvie_</span>
+          </a>
+          <a class="tile" style="--brand:#FF0069" href="https://www.instagram.com/anrevy_?exln=MW0wZHV6enVkbG1lbw==" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/instagram.svg" alt=""></span>
+            <span class="t-name">Instagram</span><span class="t-handle">@anrevy_</span>
+          </a>
+          <a class="tile" style="--brand:#000000" href="https://www.threads.com/@_haanvie_" target="_blank" rel="noopener">
+            <span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@16.35.0/icons/threads.svg" alt=""></span>
+            <span class="t-name">Threads</span><span class="t-handle">@_haanvie_</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ☊ TUNE IN -->
+    <section class="win reveal s12 c-radio tilt-s wide" id="radio">
+      <div class="tb"><span>☊ tune_in.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>☊ tune in <span class="sub">— radio, genres &amp; time travel</span></h2>
+        <p class="lead">music from every city, every decade and every genre. for 3am thoughts.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#ff5fa2" href="https://plaza.one/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gPlaza" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b1d6e"/><stop offset=".62" stop-color="#ff5fa2"/><stop offset="1" stop-color="#ffb36b"/></linearGradient>
+                  <clipPath id="cPlazaSun"><circle cx="32" cy="34" r="14"/></clipPath>
+                </defs>
+                <rect width="64" height="64" fill="url(#gPlaza)"/>
+                <g clip-path="url(#cPlazaSun)">
+                  <rect x="18" y="20" width="28" height="28" fill="#ffe36b"/>
+                  <g fill="#ff7fb6"><rect x="18" y="35" width="28" height="1.6"/><rect x="18" y="39" width="28" height="2.4"/><rect x="18" y="43" width="28" height="3.2"/></g>
+                </g>
+                <rect y="44" width="64" height="20" fill="#2a0f4f"/>
+                <g stroke="#5ff4ff" stroke-width="1.2"><path d="M0 48h64M0 53h64M0 60h64"/><path d="M32 44v20M24 44 12 64M40 44l12 20M16 44 0 58M48 44l16 14"/></g>
+                <path class="waves" d="M47 10a6 6 0 0 1 0 9M51 7a11 11 0 0 1 0 15" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="t-name">Nightwave Plaza</span><span class="t-handle">vaporwave radio</span>
+          </a>
+          <a class="tile" style="--brand:#ffcf3f" href="https://poolsuite.net/" target="_blank" rel="noopener">
+            <span class="ico fav"><img src="https://www.google.com/s2/favicons?domain=poolsuite.net&amp;sz=128" alt="" data-fallback="☀"></span>
+            <span class="t-name">Poolsuite</span><span class="t-handle">summer radio</span>
+          </a>
+          <a class="tile" style="--brand:#c98a5a" href="https://www.lofi.cafe/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs><linearGradient id="gLofi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9b8"/><stop offset="1" stop-color="#e9c6ff"/></linearGradient></defs>
+                <rect width="64" height="64" fill="url(#gLofi)"/>
+                <circle cx="50" cy="13" r="5" fill="#fff6c9"/>
+                <path class="waves" d="M24 22c-2.5-3 2.5-5 0-9M32 22c-2.5-3 2.5-5 0-9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                <path d="M16 27h28v11a11 11 0 0 1-11 11h-6a11 11 0 0 1-11-11z" fill="#fff" stroke="#6b3b2a" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M44 31h3a5.5 5.5 0 0 1 0 11h-4" fill="none" stroke="#6b3b2a" stroke-width="3" stroke-linecap="round"/>
+                <rect x="17.5" y="28.5" width="25" height="4" fill="#9a5a38"/>
+                <path d="M23 38h14" stroke="#ff8fc0" stroke-width="3" stroke-linecap="round"/>
+                <rect x="12" y="51" width="36" height="4" rx="2" fill="#6b3b2a"/>
+                <path d="M46 20v-9l6 2" fill="none" stroke="#ff5fa2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="43.6" cy="20.5" r="2.8" fill="#ff5fa2"/>
+              </svg>
+            </span>
+            <span class="t-name">lofi.cafe</span><span class="t-handle">lofi beats</span>
+          </a>
+          <a class="tile" style="--brand:#ff71ce" href="https://driveandlisten.app/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs><linearGradient id="gDrive" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b0a3a"/><stop offset=".55" stop-color="#ff71ce"/><stop offset=".551" stop-color="#2a2a3a"/><stop offset="1" stop-color="#151520"/></linearGradient></defs>
+                <rect width="64" height="64" fill="url(#gDrive)"/>
+                <path d="M0 35V24h6v-6h5v10h4V14h6v21h3V20h5v15h4V18h7v8h5v-4h6v13h13z" fill="#120626"/>
+                <g fill="#fffb96"><rect x="17" y="18" width="2" height="2"/><rect x="17" y="24" width="2" height="2"/><rect x="17" y="29" width="2" height="2"/><rect x="35" y="22" width="2" height="2"/><rect x="35" y="28" width="2" height="2"/><rect x="26" y="24" width="2" height="2"/></g>
+                <path d="M30 35h4l26 29H4z" fill="#3a3a4e"/>
+                <g fill="#fffb96"><rect x="31.5" y="38" width="1" height="3"/><rect x="31" y="44" width="2" height="5"/><rect x="30.5" y="53" width="3" height="8"/></g>
+                <path class="waves" d="M51 7a5 5 0 0 1 0 7M54 4a10 10 0 0 1 0 13" stroke="#01cdfe" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="t-name">Drive &amp; Listen</span><span class="t-handle">city drives + local radio</span>
+          </a>
+          <a class="tile" style="--brand:#0b0b14" href="https://www.everynoise.com/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#0b0b14"/>
+                <g>
+                  <circle cx="12" cy="14" r="3" fill="#ff71ce"/><circle cx="24" cy="10" r="2" fill="#01cdfe"/><circle class="waves" cx="38" cy="15" r="3.5" fill="#fffb96"/><circle cx="52" cy="11" r="2.5" fill="#05ffa1"/>
+                  <circle cx="16" cy="28" r="2.5" fill="#b967ff"/><circle cx="29" cy="24" r="4" fill="#ff9f43"/><circle cx="45" cy="27" r="2" fill="#ff2fa0"/><circle cx="55" cy="32" r="3" fill="#01cdfe"/>
+                  <circle cx="10" cy="42" r="3.5" fill="#05ffa1"/><circle cx="23" cy="38" r="2" fill="#fffb96"/><circle cx="35" cy="40" r="3" fill="#ff71ce"/><circle class="waves" cx="48" cy="44" r="4" fill="#b967ff"/>
+                  <circle cx="18" cy="53" r="2.5" fill="#ff9f43"/><circle cx="31" cy="54" r="3.5" fill="#01cdfe"/><circle cx="44" cy="57" r="2" fill="#fffb96"/><circle cx="56" cy="52" r="2.5" fill="#ff71ce"/>
+                </g>
+                <g opacity=".55"><rect x="16" y="13" width="7" height="1.5" fill="#ff71ce"/><rect x="34" y="23" width="8" height="1.5" fill="#ff9f43"/><rect x="14" y="41.5" width="6" height="1.5" fill="#05ffa1"/><rect x="36" y="53.5" width="7" height="1.5" fill="#01cdfe"/></g>
+              </svg>
+            </span>
+            <span class="t-name">Every Noise</span><span class="t-handle">every genre on one map</span>
+          </a>
+          <a class="tile" style="--brand:#ff6b5e" href="https://radiooooo.com/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#ffe1c2"/>
+                <path d="M16 18 7 7" stroke="#2a0a14" stroke-width="2" stroke-linecap="round"/><circle cx="7" cy="7" r="2" fill="#2a0a14"/>
+                <rect x="8" y="18" width="48" height="36" rx="6" fill="#ff6b5e" stroke="#2a0a14" stroke-width="2.5"/>
+                <circle cx="23" cy="36" r="10" fill="#2a0a14"/>
+                <circle cx="23" cy="36" r="6" fill="none" stroke="#ff6b5e" stroke-width="1.4"/>
+                <circle cx="23" cy="36" r="2.5" fill="#ff6b5e"/>
+                <rect x="36" y="25" width="15" height="10" rx="1.5" fill="#fffb96" stroke="#2a0a14" stroke-width="1.5"/>
+                <text x="43.5" y="32.5" text-anchor="middle" font-family="monospace" font-weight="700" font-size="6.5" fill="#2a0a14">60s</text>
+                <path class="waves" d="M47 26v8" stroke="#ff1a2e" stroke-width="1.4"/>
+                <circle cx="39.5" cy="45" r="3" fill="#2a0a14"/><circle cx="48" cy="45" r="3" fill="#2a0a14"/>
+              </svg>
+            </span>
+            <span class="t-name">Radiooooo</span><span class="t-handle">music time machine</span>
+          </a>
+          <a class="tile" style="--brand:#13294b" href="https://app.radiooooo.com/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#13294b"/>
+                <circle cx="32" cy="29" r="18" fill="#3fb8ff" stroke="#fff" stroke-width="2"/>
+                <g fill="#7dffb2"><path d="M18 22c4-4 10-3 12 1s-2 8-7 8-8-5-5-9z"/><path d="M35 31c4-2 9 0 10 4s-3 8-7 7-6-9-3-11z"/><path d="M33 13c3-1 6 1 6 3s-3 3-5 2-3-4-1-5z"/></g>
+                <ellipse cx="32" cy="29" rx="8" ry="18" fill="none" stroke="#fff" stroke-opacity=".5"/>
+                <path d="M14 29h36" stroke="#fff" stroke-opacity=".5"/>
+                <g class="waves"><path d="M45 9a5 5 0 0 1 5 5c0 4-5 9-5 9s-5-5-5-9a5 5 0 0 1 5-5z" fill="#ff6b5e" stroke="#fff" stroke-width="1.2"/><circle cx="45" cy="14" r="1.8" fill="#fff"/></g>
+                <rect x="18" y="51" width="28" height="9" rx="2" fill="#fffb96"/>
+                <text x="32" y="58" text-anchor="middle" font-family="monospace" font-weight="700" font-size="7" fill="#13294b">1970s</text>
+              </svg>
+            </span>
+            <span class="t-name">Radiooooo app</span><span class="t-handle">pick a country &amp; decade</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ◎ GET LOST -->
+    <section class="win reveal s7 c-lost" id="lost">
+      <div class="tb"><span>◎ get_lost.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>◎ get lost <span class="sub">— art &amp; endless worlds</span></h2>
+        <p class="lead">surreal art, infinite zooms and giant worlds. some never end.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#b07cff" href="https://zzz.zoomquilt.org/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#1a1440"/>
+                <g class="spin" fill="none" stroke-width="3">
+                  <rect x="8" y="8" width="48" height="48" stroke="#ff5fa2"/>
+                  <rect x="13" y="13" width="38" height="38" stroke="#ffcf3f" transform="rotate(12 32 32)"/>
+                  <rect x="18" y="18" width="28" height="28" stroke="#5ff4ff" transform="rotate(24 32 32)"/>
+                  <rect x="22.5" y="22.5" width="19" height="19" stroke="#b07cff" transform="rotate(36 32 32)"/>
+                  <rect x="26.5" y="26.5" width="11" height="11" stroke="#7dffb2" transform="rotate(48 32 32)"/>
+                </g>
+                <circle cx="32" cy="32" r="2" fill="#fff"/>
+              </svg>
+            </span>
+            <span class="t-name">Zoomquilt</span><span class="t-handle">endless zoom</span>
+          </a>
+          <a class="tile" style="--brand:#ff8fc0" href="https://arkadia.xyz/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#fff1dc"/>
+                <g fill="#5bbf7a"><path d="M8 58c6-15 16-19 24-17-4 9-13 15-24 17z"/><path d="M56 58c-6-15-16-19-24-17 4 9 13 15 24 17z"/></g>
+                <path d="M32 40v18" stroke="#3f9a5b" stroke-width="3"/>
+                <g class="spin slow">
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff8fc0"/>
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff5fa2" transform="rotate(45 32 28)"/>
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff8fc0" transform="rotate(90 32 28)"/>
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff5fa2" transform="rotate(135 32 28)"/>
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff8fc0" transform="rotate(180 32 28)"/>
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff5fa2" transform="rotate(225 32 28)"/>
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff8fc0" transform="rotate(270 32 28)"/>
+                  <ellipse cx="32" cy="15" rx="6" ry="11" fill="#ff5fa2" transform="rotate(315 32 28)"/>
+                </g>
+                <circle cx="32" cy="28" r="6.5" fill="#ffcf3f"/>
+                <circle cx="32" cy="28" r="2.6" fill="#ff9f43"/>
+              </svg>
+            </span>
+            <span class="t-name">Arkadia</span><span class="t-handle">infinite garden</span>
+          </a>
+          <a class="tile" style="--brand:#4fb3ff" href="https://floor796.com/#t4r2,212,49" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#1d2140"/>
+                <g class="waves"><circle cx="9" cy="10" r="1" fill="#fff"/><circle cx="54" cy="8" r="1.2" fill="#fff"/><circle cx="58" cy="30" r="1" fill="#fff"/><circle cx="6" cy="34" r="1" fill="#fff"/></g>
+                <path d="M32 26 50 35 32 44 14 35z" fill="#b07cff"/>
+                <path d="M14 35 32 44v5L14 40z" fill="#7a4fd1"/>
+                <path d="M32 44 50 35v5L32 49z" fill="#5a36a8"/>
+                <path d="M32 13 50 22 32 31 14 22z" fill="#7fd6ff"/>
+                <path d="M14 22 32 31v5L14 27z" fill="#3d8fd6"/>
+                <path d="M32 31 50 22v5L32 36z" fill="#2a6cb0"/>
+                <path d="M23 20.5l3-1.5 3 1.5-3 1.5zM35 20.5l3-1.5 3 1.5-3 1.5zM29 24.5l3-1.5 3 1.5-3 1.5z" fill="#ffd3e6"/>
+                <path d="M19 30.5v2M24 33v2M40 33v2M45 30.5v2" stroke="#fff27a" stroke-width="1.6"/>
+                <text x="32" y="60" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="#fff27a" letter-spacing="1">796</text>
+              </svg>
+            </span>
+            <span class="t-name">floor796</span><span class="t-handle">huge animated world</span>
+          </a>
+          <a class="tile" style="--brand:#1c0f2e" href="https://infiniteflowers.net/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#1c0f2e"/>
+                <g class="spin slow">
+                  <ellipse cx="32" cy="11" rx="6" ry="10" fill="#ff71ce" transform="rotate(0 32 32)"/><ellipse cx="32" cy="11" rx="6" ry="10" fill="#ff71ce" transform="rotate(60 32 32)"/><ellipse cx="32" cy="11" rx="6" ry="10" fill="#ff71ce" transform="rotate(120 32 32)"/><ellipse cx="32" cy="11" rx="6" ry="10" fill="#ff71ce" transform="rotate(180 32 32)"/><ellipse cx="32" cy="11" rx="6" ry="10" fill="#ff71ce" transform="rotate(240 32 32)"/><ellipse cx="32" cy="11" rx="6" ry="10" fill="#ff71ce" transform="rotate(300 32 32)"/>
+                </g>
+                <g class="spin">
+                  <ellipse cx="32" cy="20" rx="4" ry="6.5" fill="#fffb96" transform="rotate(30 32 32)"/><ellipse cx="32" cy="20" rx="4" ry="6.5" fill="#fffb96" transform="rotate(90 32 32)"/><ellipse cx="32" cy="20" rx="4" ry="6.5" fill="#fffb96" transform="rotate(150 32 32)"/><ellipse cx="32" cy="20" rx="4" ry="6.5" fill="#fffb96" transform="rotate(210 32 32)"/><ellipse cx="32" cy="20" rx="4" ry="6.5" fill="#fffb96" transform="rotate(270 32 32)"/><ellipse cx="32" cy="20" rx="4" ry="6.5" fill="#fffb96" transform="rotate(330 32 32)"/>
+                </g>
+                <g class="spin slow">
+                  <ellipse cx="32" cy="26" rx="2.3" ry="3.8" fill="#01cdfe" transform="rotate(0 32 32)"/><ellipse cx="32" cy="26" rx="2.3" ry="3.8" fill="#01cdfe" transform="rotate(72 32 32)"/><ellipse cx="32" cy="26" rx="2.3" ry="3.8" fill="#01cdfe" transform="rotate(144 32 32)"/><ellipse cx="32" cy="26" rx="2.3" ry="3.8" fill="#01cdfe" transform="rotate(216 32 32)"/><ellipse cx="32" cy="26" rx="2.3" ry="3.8" fill="#01cdfe" transform="rotate(288 32 32)"/>
+                </g>
+                <circle cx="32" cy="32" r="2.4" fill="#fff"/>
+              </svg>
+            </span>
+            <span class="t-name">Infinite Flowers</span><span class="t-handle">endless zoom painting</span>
+          </a>
+          <a class="tile" style="--brand:#c9a14a" href="https://beinart.org/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#c9a14a"/>
+                <rect x="4" y="4" width="56" height="56" fill="none" stroke="#7a5a1c" stroke-width="2"/>
+                <rect x="9" y="9" width="46" height="46" fill="#1b2a4a"/>
+                <circle cx="44" cy="20" r="5.5" fill="#fffb96"/><circle cx="46.5" cy="18.5" r="4.5" fill="#1b2a4a"/>
+                <path d="M18 40c4-3 10-4 14-2s10 1 12-1c-1 6-6 11-14 11s-11-4-12-8z" fill="#7a4a2a"/>
+                <path d="M18 40c4-3 10-4 14-2s10 1 12-1c-2 2-8 3-12 2s-10-1-14 1z" fill="#5bbf7a"/>
+                <path d="M30 37v-7" stroke="#2a1a0a" stroke-width="1.6"/><circle cx="30" cy="27.5" r="3.5" fill="#ff71ce"/>
+                <g class="waves" fill="#fff"><circle cx="16" cy="16" r=".9"/><circle cx="24" cy="13" r=".7"/><circle cx="37" cy="27" r=".7"/></g>
+                <path d="M30 52v3" stroke="#7a4a2a" stroke-width="1.4" stroke-dasharray="1 1.5"/>
+              </svg>
+            </span>
+            <span class="t-name">Beinart</span><span class="t-handle">surreal art gallery</span>
+          </a>
+          <a class="tile" style="--brand:#e9e4da" href="https://www.christophermckenneyart.com/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs><linearGradient id="gFog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa0a6"/><stop offset="1" stop-color="#3a3f45"/></linearGradient></defs>
+                <rect width="64" height="64" fill="#e9e4da"/>
+                <rect x="8" y="6" width="48" height="42" fill="url(#gFog)"/>
+                <g stroke="#2a2e33" stroke-width="2"><path d="M13 6v42M20 6v42M44 6v42M51 6v42"/></g>
+                <g stroke="#555b62" stroke-width="1.2"><path d="M16.5 6v42M47.5 6v42"/></g>
+                <rect x="8" y="38" width="48" height="10" fill="#d8dadc" opacity=".55"/>
+                <g class="wormy"><circle cx="32" cy="20" r="2.6" fill="#111"/><path d="M29.5 23h5l1.2 10h-7.4z" fill="#111"/></g>
+                <ellipse cx="32" cy="42" rx="4" ry="1" fill="#111" opacity=".35"/>
+              </svg>
+            </span>
+            <span class="t-name">C. McKenney</span><span class="t-handle">surreal photos</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✦ PLAY -->
+    <section class="win reveal s5 c-play tilt-l" id="play">
+      <div class="tb" style="color:#2a2006;text-shadow:none"><span>✦ play.lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>✦ play</h2>
+        <p class="lead">toys, games, pixels to paint together, dancing cats and useless websites.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#ffcf3f" href="https://neal.fun/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#fff07a"/>
+                <circle cx="21" cy="23" r="10" fill="#ff5fa2"/>
+                <rect class="spin" x="34" y="13" width="18" height="18" rx="3" fill="#4fb3ff"/>
+                <path d="M12 52 22 35 32 52z" fill="#2fcf96"/>
+                <path class="spin" d="M44 37l2.35 5.76 6.21.46-4.76 4.02 1.49 6.04L44 50l-5.29 3.28 1.49-6.04-4.76-4.02 6.21-.46z" fill="#b07cff"/>
+              </svg>
+            </span>
+            <span class="t-name">neal.fun</span><span class="t-handle">fun little toys</span>
+          </a>
+          <a class="tile" style="--brand:#4fb3ff" href="https://wplace.live/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs><pattern id="pWplace" width="5" height="5" x="14.5" y="16" patternUnits="userSpaceOnUse"><path d="M5 0H0V5" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width=".6"/></pattern></defs>
+                <rect width="64" height="64" fill="#8fd3ff"/>
+                <path d="M3 41c6-6 15-4 19 2s-4 15-12 15S-1 47 3 41z" fill="#9be59a"/>
+                <path d="M41 4c8-2 19 4 19 12s-8 10-14 8-11-18-5-20z" fill="#9be59a"/>
+                <path d="M19.5 16h10v5h-10zM34.5 16h10v5h-10zM14.5 21h35v10h-35zM19.5 31h25v5h-25zM24.5 36h15v5h-15zM29.5 41h5v5h-5z" fill="#ff3d8f"/>
+                <rect x="19.5" y="21" width="5" height="5" fill="#ffd3e6"/>
+                <rect width="64" height="64" fill="url(#pWplace)"/>
+                <path d="M44 55l10-10 4 4-10 10h-4z" fill="#ffcf3f" stroke="#5b2a4a" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="t-name">wplace</span><span class="t-handle">paint the world</span>
+          </a>
+          <a class="tile" style="--brand:#b967ff" href="https://pixel.land/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#241b3a"/>
+                <g>
+                  <rect x="7" y="7" width="10" height="10" fill="#ff71ce"/><rect x="20" y="7" width="10" height="10" fill="#fffb96"/><rect x="33" y="7" width="10" height="10" fill="#01cdfe"/><rect class="waves" x="46" y="7" width="10" height="10" fill="#05ffa1"/>
+                  <rect x="7" y="20" width="10" height="10" fill="#b967ff"/><rect x="20" y="20" width="10" height="10" fill="#ff9f43"/><rect x="33" y="20" width="10" height="10" fill="#ff2fa0"/><rect x="46" y="20" width="10" height="10" fill="#4fb3ff"/>
+                  <rect x="7" y="33" width="10" height="10" fill="#7dffb2"/><rect class="waves" x="20" y="33" width="10" height="10" fill="#ffffff"/><rect x="33" y="33" width="10" height="10" fill="#ffcf3f"/>
+                  <rect x="7" y="46" width="10" height="10" fill="#ff5f5f"/><rect x="20" y="46" width="10" height="10" fill="#8f7bff"/>
+                </g>
+                <path d="M40 34v22l5.5-5.5 4 8.5 3.5-1.6-4-8.4h7.5z" fill="#fff" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="t-name">PixelLand</span><span class="t-handle">draw pixels together</span>
+          </a>
+          <a class="tile" style="--brand:#ff9f43" href="https://procatinator.com/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#2a2140"/>
+                <path d="M15 26 13 10l12 9zM49 26l2-16-12 9z" fill="#ff9f43"/>
+                <path d="M17 22l-1-8 6 5zM47 22l1-8-6 5z" fill="#ffb3d4"/>
+                <ellipse cx="32" cy="34" rx="19" ry="16" fill="#ff9f43"/>
+                <path d="M10 34a22 22 0 0 1 44 0" fill="none" stroke="#01cdfe" stroke-width="3"/>
+                <rect x="6" y="30" width="7" height="12" rx="3" fill="#01cdfe"/><rect x="51" y="30" width="7" height="12" rx="3" fill="#01cdfe"/>
+                <g fill="#2a2140"><ellipse cx="25" cy="32" rx="2.2" ry="3"/><ellipse cx="39" cy="32" rx="2.2" ry="3"/></g>
+                <path d="M30 38h4l-2 2z" fill="#ff71ce"/>
+                <path d="M32 40c-1 2-4 2-5 1M32 40c1 2 4 2 5 1" fill="none" stroke="#2a2140" stroke-width="1.2" stroke-linecap="round"/>
+                <g class="waves" fill="#fffb96"><path d="M50 8v8"/><circle cx="48.5" cy="16.5" r="2.2"/><rect x="49.6" y="7" width="1.6" height="9.5"/><path d="M51 7l4 1.5v2.5l-4-1.5z"/></g>
+              </svg>
+            </span>
+            <span class="t-name">Procatinator</span><span class="t-handle">cats + music</span>
+          </a>
+          <a class="tile" style="--brand:#ff71ce" href="https://theuselessweb.com/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#ffe3f0"/>
+                <ellipse cx="32" cy="44" rx="22" ry="8" fill="#9a2a5e"/>
+                <rect x="10" y="34" width="44" height="10" fill="#9a2a5e"/>
+                <ellipse cx="32" cy="34" rx="22" ry="8" fill="#c23a7a"/>
+                <g class="wormy"><ellipse cx="32" cy="28" rx="15" ry="6" fill="#a8205e"/><rect x="17" y="18" width="30" height="10" fill="#ff3d8f"/><ellipse cx="32" cy="18" rx="15" ry="6" fill="#ff71ce"/>
+                <text x="32" y="21" text-anchor="middle" font-family="monospace" font-weight="700" font-size="7" fill="#fff">???</text></g>
+                <path class="waves" d="M52 6l1.4 3.6 3.6 1.4-3.6 1.4L52 16l-1.4-3.6L47 11l3.6-1.4zM10 8l1 2.5 2.5 1-2.5 1L10 15l-1-2.5-2.5-1 2.5-1z" fill="#ffcf3f"/>
+              </svg>
+            </span>
+            <span class="t-name">The Useless Web</span><span class="t-handle">take me somewhere useless</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ☰ NEWS -->
+    <section class="win reveal s4 c-news tilt-r" id="news">
+      <div class="tb"><span>news.txt</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>☰ news <span class="sub">— music &amp; culture</span></h2>
+        <p class="lead">what i read to keep up with the world.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#fff" href="https://www.pastemagazine.com/" target="_blank" rel="noopener">
+            <span class="ico fav"><img src="https://www.google.com/s2/favicons?domain=pastemagazine.com&amp;sz=128" alt="" data-fallback="P"></span>
+            <span class="t-name">Paste</span><span class="t-handle">music, film &amp; tv</span>
+          </a>
+          <a class="tile" style="--brand:#fff" href="https://pitchfork.com/" target="_blank" rel="noopener">
+            <span class="ico fav"><img src="https://www.google.com/s2/favicons?domain=pitchfork.com&amp;sz=128" alt="" data-fallback="P"></span>
+            <span class="t-name">Pitchfork</span><span class="t-handle">music reviews</span>
+          </a>
+          <a class="tile" style="--brand:#fff" href="https://www.npr.org/" target="_blank" rel="noopener">
+            <span class="ico fav"><img src="https://www.google.com/s2/favicons?domain=npr.org&amp;sz=128" alt="" data-fallback="N"></span>
+            <span class="t-name">NPR</span><span class="t-handle">news &amp; tiny desk</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⌘ OLD WEB -->
+    <section class="win reveal s5 c-old tilt-r" id="oldweb">
+      <div class="tb"><span>⌈ old_web.lnk ⌋</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>⌘ old web oddities</h2>
+        <p class="lead">strange corners of the early internet that never went offline.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#ff1a2e" href="https://fauux.neocities.org/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#0b0b0f"/>
+                <g class="pulse" fill="none" stroke="#ff1a2e" stroke-width="2"><circle cx="32" cy="28" r="8"/><circle cx="32" cy="28" r="15"/><circle cx="32" cy="28" r="22"/></g>
+                <circle cx="32" cy="28" r="3" fill="#ff1a2e"/>
+                <text x="32" y="58" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#3df0ff" letter-spacing="1">WIRED</text>
+              </svg>
+            </span>
+            <span class="t-name">fauux</span><span class="t-handle">wired sound</span>
+          </a>
+          <a class="tile" style="--brand:#ffffff" href="http://www.staggeringbeauty.com/" target="_blank" rel="noopener" title="Cảnh báo: trang có ánh sáng nhấp nháy mạnh">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#fff"/>
+                <g class="wormy">
+                  <path d="M10 50c6-16 14 8 20-8s12 10 18-6 6-14 6-14" fill="none" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+                  <circle cx="52.3" cy="21.5" r="1.6" fill="#fff"/><circle cx="56" cy="20.6" r="1.6" fill="#fff"/>
+                </g>
+              </svg>
+            </span>
+            <span class="t-name">Staggering Beauty</span><span class="t-handle">⚠ flashing lights</span>
+          </a>
+          <a class="tile" style="--brand:#000000" href="https://wwwwwwwww.jodi.org/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#000"/>
+                <g font-family="monospace" font-size="6.5" fill="#00ff3c">
+                  <text x="3" y="10">#~%20.@_</text>
+                  <text x="3" y="19">|\/|..w~~</text>
+                  <text x="3" y="28">,.;:*wwww</text>
+                  <text x="3" y="37">%%%%_/ -.</text>
+                  <text x="3" y="46">..wwwwwwwww</text>
+                  <text x="3" y="55">@*!jod1;;</text>
+                </g>
+                <rect class="waves" x="44" y="50" width="6" height="7" fill="#00ff3c"/>
+              </svg>
+            </span>
+            <span class="t-name">JODI</span><span class="t-handle">net.art chaos</span>
+          </a>
+          <a class="tile" style="--brand:#000080" href="https://www.cameronsworld.net/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs><clipPath id="cCam"><rect y="44" width="64" height="10"/></clipPath></defs>
+                <rect width="64" height="64" fill="#000080"/>
+                <g><rect y="6" width="64" height="3" fill="#ff1a2e"/><rect y="9" width="64" height="3" fill="#ff9f43"/><rect y="12" width="64" height="3" fill="#fffb96"/><rect y="15" width="64" height="3" fill="#05ffa1"/><rect y="18" width="64" height="3" fill="#01cdfe"/><rect y="21" width="64" height="3" fill="#b967ff"/></g>
+                <text x="30" y="37" text-anchor="middle" font-family="serif" font-size="10" font-style="italic" font-weight="700" fill="#fffb96">welcome!</text>
+                <g clip-path="url(#cCam)"><rect y="44" width="64" height="10" fill="#ffd400"/><path d="M-4 54 6 44h6L2 54zM8 54l10-10h6L14 54zM20 54l10-10h6L26 54zM32 54l10-10h6L38 54zM44 54l10-10h6L50 54zM56 54l10-10h6L62 54z" fill="#000"/></g>
+                <path class="waves" d="M54 27l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z" fill="#fff"/>
+              </svg>
+            </span>
+            <span class="t-name">Cameron's World</span><span class="t-handle">geocities collage</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ☠ TURN BACK -->
+    <section class="win reveal s3 c-creep tilt-l" id="turnback">
+      <div class="tb"><span>[ DEAD_END ].lnk</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>✕</i></span></div>
+      <div class="wb">
+        <h2>☠ turn back <span class="sub">— cryptic &amp; creepy</span></h2>
+        <p class="lead">rabbit holes with no exit. you have been warned.</p>
+        <div class="tiles">
+          <a class="tile" style="--brand:#000000" href="https://mebious.neocities.org/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#050a02"/>
+                <path d="M14 10v38M26 10v38M38 10v38M50 10v38M14 10h36M14 22h36M14 34h36M14 46h36" stroke="#2f5a10" stroke-width="1.2"/>
+                <g fill="#9dff00"><circle cx="32" cy="16" r="4.2"/><circle cx="44" cy="28" r="4.2"/><circle cx="20" cy="40" r="4.2"/><circle class="waves" cx="32" cy="40" r="4.2"/><circle cx="44" cy="40" r="4.2"/></g>
+                <text x="32" y="59" text-anchor="middle" font-family="monospace" font-size="7" font-weight="700" fill="#9dff00" letter-spacing=".6">MEBIOUS</text>
+              </svg>
+            </span>
+            <span class="t-name">Mebious</span><span class="t-handle">find mebious</span>
+          </a>
+          <a class="tile" style="--brand:#0a0a0a" href="https://angusnicneven.com/" target="_blank" rel="noopener">
+            <span class="ico">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" fill="#0a0a0a"/>
+                <path d="M0 64 24 44h16l24 20z" fill="#161616"/>
+                <g stroke="#8a8a8a" stroke-width="1.2" fill="none">
+                  <path d="M0 0 24 22M64 0 40 22M0 64 24 44M64 64 40 44"/>
+                  <rect x="12" y="11" width="40" height="43" stroke="#4a4a4a"/>
+                  <rect x="24" y="22" width="16" height="22"/>
+                </g>
+                <rect x="25" y="23" width="14" height="20" fill="#000"/>
+                <g class="waves" fill="#e8e8e8"><circle cx="32" cy="30" r="2.2"/><rect x="30.4" y="32.4" width="3.2" height="9"/></g>
+                <text x="32" y="8" text-anchor="middle" font-family="monospace" font-size="7" font-weight="700" fill="#ff1a2e" letter-spacing=".6">T-00</text>
+              </svg>
+            </span>
+            <span class="t-name">Angus Nicneven</span><span class="t-handle">⚠ terminal 00</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <a class="back" href="index.html">← back to the wired</a><br>
+    © 2026 ANREVY HOUSE · made with ♡ on neocities
+  </footer>
+
+  <div id="idle" aria-hidden="true">ａｒｅ　ｙｏｕ<br>ｓｔｉｌｌ　ｔｈｅｒｅ？</div>
+
+<script>
+(() => {
+  /* ======= CÀI ĐẶT ======= */
+  // NGÀY ĐẶC BIỆT TRÊN LỊCH: 'tháng-ngày': 'ghi chú'
+  const SPECIAL_DAYS = {
+    '01-01': '✿ happy new year',
+    '02-14': '♡ valentine’s day',
+    '08-12': '♡ it all began (12.08.2001)',
+    '10-23': '✦ anrevy house opened',
+    '10-31': '☾ halloween',
+    '12-25': '☃ christmas'
+  };
+  // TIN NHẮN HỘP THOẠI LỖI
+  const ERRORS = [
+    'someone else is viewing this page right now.',
+    'are you still there?',
+    'the wired remembers you.',
+    'file 12082001.mp4 is corrupted.',
+    'you have been here before.',
+    '見ている。',
+    'do not trust the calendar.',
+    'connection unstable. please stay.'
+  ];
+  /* ======================= */
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s);
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const pick = a => a[(Math.random() * a.length) | 0];
+  const pad = n => String(n).padStart(2, '0');
+
+  let mx = .5, my = .4;
+  addEventListener('pointermove', e => { mx = e.clientX / innerWidth; my = e.clientY / innerHeight; });
+
+  /* ================= NỀN CANVAS ================= */
+  const cv = $('#bg'), g = cv.getContext('2d');
+  const sunC = document.createElement('canvas'), sg = sunC.getContext('2d');
+  const S = 2;
+  let W, H, HZ, R, sky, floor, glow, stars = [], veins = [];
+
+  function resize(){
+    W = cv.width = Math.ceil(innerWidth / S);
+    H = cv.height = Math.ceil(innerHeight / S);
+    HZ = Math.round(H * .62);
+    R = Math.round(Math.min(W, H) * .23);
+    sunC.width = sunC.height = R * 2;
+    sky = g.createLinearGradient(0, 0, 0, HZ);
+    sky.addColorStop(0, '#03000a'); sky.addColorStop(.5, '#170430'); sky.addColorStop(.85, '#4a0d5c'); sky.addColorStop(1, '#8a1a6e');
+    floor = g.createLinearGradient(0, HZ, 0, H);
+    floor.addColorStop(0, '#2a0638'); floor.addColorStop(1, '#000');
+    glow = g.createRadialGradient(W / 2, HZ, 0, W / 2, HZ, W * .55);
+    glow.addColorStop(0, 'rgba(255,113,206,.45)'); glow.addColorStop(1, 'rgba(255,113,206,0)');
+    stars = Array.from({ length: Math.round(W * HZ / 700) }, () => ({ x: Math.random() * W, y: Math.random() * HZ * .85, p: Math.random() * 6.28, s: Math.random() < .12 ? 2 : 1 }));
+    veins = Array.from({ length: 7 }, () => {
+      const side = Math.random() < .5 ? -1 : 1, y0 = rand(-.25, .25);
+      return [[side * .78, y0], [side * rand(.45, .6), y0 + rand(-.12, .12)], [side * rand(.3, .4), y0 + rand(-.08, .08)]];
+    });
+  }
+  resize();
+  addEventListener('resize', resize);
+
+  // con mắt trong mặt trời
+  const eye = { open: 0, target: 0, blinkAt: 0 };
+  function eyeCycle(){
+    eye.target = 1;
+    setTimeout(() => { eye.target = 0; setTimeout(eyeCycle, rand(7000, 14000)); }, rand(3500, 6500));
+  }
+  setTimeout(eyeCycle, 3500);
+
+  function almond(c, cx, cy, ew, eh){
+    c.beginPath();
+    c.moveTo(cx - ew, cy);
+    c.quadraticCurveTo(cx, cy - eh * 2, cx + ew, cy);
+    c.quadraticCurveTo(cx, cy + eh * 2, cx - ew, cy);
+    c.closePath();
+  }
+  function drawSun(t){
+    const d = R * 2;
+    sg.clearRect(0, 0, d, d);
+    const gr = sg.createLinearGradient(0, 0, 0, d);
+    gr.addColorStop(0, '#fffb96'); gr.addColorStop(.45, '#ff9bd0'); gr.addColorStop(1, '#ff2fa0');
+    sg.fillStyle = gr;
+    sg.beginPath(); sg.arc(R, R, R, 0, Math.PI * 2); sg.fill();
+
+    let o = eye.open;
+    if (eye.blinkAt && t - eye.blinkAt < 220) o *= Math.abs(1 - (t - eye.blinkAt) / 110);
+    if (o > .03){
+      const ew = R * .8, eh = R * .4 * o;
+      sg.save();
+      almond(sg, R, R * 1.02, ew, eh);
+      sg.fillStyle = '#fff2f8'; sg.fill(); sg.clip();
+      sg.strokeStyle = 'rgba(230,20,80,.55)'; sg.lineWidth = Math.max(1, R / 70);
+      for (const v of veins){
+        sg.beginPath();
+        v.forEach(([x, y], i) => i ? sg.lineTo(R + x * R, R + y * R) : sg.moveTo(R + x * R, R + y * R));
+        sg.stroke();
+      }
+      const ix = R + (mx - .5) * ew * .9, iy = R * 1.02 + (my - .5) * eh * .9, ir = R * .32;
+      const ig = sg.createRadialGradient(ix, iy, ir * .15, ix, iy, ir);
+      ig.addColorStop(0, '#05ffa1'); ig.addColorStop(.55, '#01cdfe'); ig.addColorStop(1, '#2a0a5e');
+      sg.fillStyle = ig; sg.beginPath(); sg.arc(ix, iy, ir, 0, Math.PI * 2); sg.fill();
+      sg.fillStyle = '#000'; sg.beginPath(); sg.arc(ix, iy, ir * (.42 + .08 * Math.sin(t / 260)), 0, Math.PI * 2); sg.fill();
+      sg.fillStyle = 'rgba(255,255,255,.9)'; sg.beginPath(); sg.arc(ix - ir * .32, iy - ir * .32, ir * .14, 0, Math.PI * 2); sg.fill();
+      sg.restore();
+      sg.strokeStyle = '#3a0a3e'; sg.lineWidth = Math.max(1.5, R / 34);
+      almond(sg, R, R * 1.02, ew, eh); sg.stroke();
+    }
+
+    // sọc cắt ngang mặt trời
+    sg.globalCompositeOperation = 'destination-out';
+    const N = 9, ph = (t / 2600) % 1;
+    for (let i = 0; i < N; i++){
+      const p = (i + ph) / N, y = R * .95 + p * R * 1.1, h = 1 + p * R * .13;
+      sg.fillRect(0, y, d, h);
+    }
+    sg.globalCompositeOperation = 'source-over';
+  }
+
+  function mountains(){
+    const ranges = [
+      [[0, 0], [.07, -.16], [.13, -.07], [.2, -.22], [.3, -.05], [.36, 0]],
+      [[1, 0], [.94, -.19], [.88, -.08], [.81, -.15], [.72, -.03], [.66, 0]]
+    ];
+    for (const r of ranges){
+      g.beginPath();
+      r.forEach(([x, y], i) => { const px = x * W, py = HZ + y * H * .55; i ? g.lineTo(px, py) : g.moveTo(px, py); });
+      g.closePath();
+      g.fillStyle = '#10021c'; g.fill();
+      g.strokeStyle = '#b967ff'; g.lineWidth = 1; g.stroke();
+      g.globalAlpha = .35; g.beginPath();
+      for (let i = 1; i < r.length - 1; i++){ g.moveTo(r[i][0] * W, HZ + r[i][1] * H * .55); g.lineTo(r[i][0] * W + (i % 2 ? 10 : -10), HZ); }
+      g.stroke(); g.globalAlpha = 1;
+    }
+  }
+
+  function grid(t){
+    g.fillStyle = floor; g.fillRect(0, HZ, W, H - HZ);
+    g.strokeStyle = '#ff71ce'; g.lineWidth = 1;
+    const N = 16, ph = (t / 1100) % 1;
+    for (let i = 0; i < N; i++){
+      const z = (i + ph) / N, y = Math.round(HZ + (H - HZ) * z * z) + .5;
+      g.globalAlpha = .2 + .8 * z;
+      g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke();
+    }
+    g.globalAlpha = .85;
+    g.beginPath();
+    const cx = W / 2;
+    for (let k = -14; k <= 14; k++){ g.moveTo(cx + k * W * .012, HZ); g.lineTo(cx + k * W * .13, H); }
+    g.stroke();
+    g.globalAlpha = 1;
+    g.fillStyle = '#ff9bd0'; g.fillRect(0, HZ, W, 1);
+  }
+
+  // khối hình học lơ lửng
+  const CUBE_V = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+  const CUBE_E = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  const PYR_V = [[0,-1.3,0],[-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1]];
+  const PYR_E = [[0,1],[0,2],[0,3],[0,4],[1,2],[2,3],[3,4],[4,1]];
+  function wire(V, E, cx, cy, s, a, b, col){
+    const P = V.map(([x, y, z]) => {
+      const x1 = x * Math.cos(a) - z * Math.sin(a), z1 = x * Math.sin(a) + z * Math.cos(a);
+      const y1 = y * Math.cos(b) - z1 * Math.sin(b), z2 = y * Math.sin(b) + z1 * Math.cos(b);
+      const p = 5 / (5 + z2);
+      return [cx + x1 * s * p, cy + y1 * s * p];
+    });
+    g.strokeStyle = col; g.beginPath();
+    for (const [i, j] of E){ g.moveTo(P[i][0], P[i][1]); g.lineTo(P[j][0], P[j][1]); }
+    g.stroke();
+  }
+
+  // ô nhiễu
+  const tiles = Array.from({ length: 3 }, () => {
+    const c = document.createElement('canvas'); c.width = c.height = 80;
+    const x = c.getContext('2d'), img = x.createImageData(80, 80), d = img.data;
+    for (let i = 0; i < d.length; i += 4){
+      if (Math.random() < .4){ const v = (120 + Math.random() * 135) | 0; d[i] = v; d[i+1] = v * .8; d[i+2] = v; d[i+3] = 255; }
+    }
+    x.putImageData(img, 0, 0);
+    return g.createPattern(c, 'repeat');
+  });
+  function noise(a){
+    const ox = (Math.random() * 80) | 0, oy = (Math.random() * 80) | 0;
+    g.save(); g.globalAlpha = a; g.fillStyle = pick(tiles); g.translate(ox, oy); g.fillRect(-ox, -oy, W, H); g.restore();
+  }
+
+  let last = 0, burstUntil = 0;
+  function frame(t){
+    if (!reduce) requestAnimationFrame(frame);
+    if (t - last < 33) return;
+    last = t;
+
+    eye.open += (eye.target - eye.open) * .1;
+    if (eye.target === 1 && !reduce && Math.random() < .008) eye.blinkAt = t;
+
+    g.fillStyle = sky; g.fillRect(0, 0, W, HZ);
+    for (const s of stars){
+      g.globalAlpha = .35 + .65 * Math.abs(Math.sin(s.p + t / 900));
+      g.fillStyle = '#fff'; g.fillRect(s.x | 0, s.y | 0, s.s, s.s);
+    }
+    g.globalAlpha = 1;
+    g.fillStyle = glow; g.fillRect(0, 0, W, H);
+
+    drawSun(t);
+    g.drawImage(sunC, W / 2 - R, HZ - R * 1.25);
+    mountains();
+    grid(t);
+
+    g.lineWidth = 1;
+    const narrow = W * S < 700; // điện thoại: đưa khối hình xuống thấp để không che tiêu đề
+    wire(CUBE_V, CUBE_E, W * (narrow ? .12 : .12), H * (narrow ? .47 : .26), Math.min(W, H) * .06, t * .0006, t * .0009, '#01cdfe');
+    wire(PYR_V, PYR_E, W * (narrow ? .88 : .88), H * (narrow ? .43 : .2), Math.min(W, H) * .07, t * .0008, .35, '#05ffa1');
+
+    noise(.06);
+    if (t < burstUntil) noise(.35);
+    else if (!reduce && Math.random() < .006) burstUntil = t + rand(60, 180);
+    if (!reduce && Math.random() < .03){
+      const y = rand(0, H) | 0, h = rand(2, H * .1) | 0;
+      g.drawImage(cv, 0, y, W, h, rand(-14, 14) | 0, y, W, h);
+    }
+  }
+  requestAnimationFrame(frame);
+
+  /* ================= CHỮ MA TRÔI ================= */
+  const GHOSTS = ['見ている', 'ここにいるよ', '帰ってきたね', '消えないで', 'ようこそ', '夢', 'ＷＩＲＥＤ', '２００１', '接続中', 'ＨＥＬＬＯ？'];
+  const gbox = $('#ghosts');
+  if (!reduce) for (let i = 0; i < (innerWidth < 700 ? 6 : 12); i++){
+    const s = document.createElement('span');
+    s.className = 'ghost';
+    s.textContent = pick(GHOSTS);
+    const dur = rand(45, 110);
+    s.style.cssText = `top:${rand(3, 92).toFixed(1)}%;font-size:${rand(22, 80) | 0}px;color:${pick(['#ff71ce', '#01cdfe', '#b967ff', '#fff'])};--o:${rand(.08, .2).toFixed(2)};` +
+      `animation-duration:${dur.toFixed(0)}s, ${rand(3, 7).toFixed(1)}s;animation-delay:${(-rand(0, dur)).toFixed(0)}s, 0s;` +
+      (Math.random() < .5 ? 'animation-direction:reverse, normal;' : '');
+    gbox.appendChild(s);
+  }
+
+  /* OSD thu nhỏ khi cuộn khỏi hero */
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(([e]) => document.body.classList.toggle('deep', !e.isIntersecting), { threshold: .25 })
+      .observe(document.querySelector('.hero'));
+  }
+
+  /* ================= GIỜ VHS ================= */
+  const vhs = $('#vhsTime'), t0 = Date.now();
+  setInterval(() => {
+    const sec = 3 * 3600 + 33 * 60 + Math.floor((Date.now() - t0) / 1000);
+    vhs.textContent = `${pad(Math.floor(sec / 3600) % 12 || 12)}:${pad(Math.floor(sec / 60) % 60)}:${pad(sec % 60)} AM`;
+  }, 1000);
+
+  /* ================= XUẤT HIỆN KHI CUỘN ================= */
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .08 }) : null;
+  document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+  /* ================= LỊCH ================= */
+  const MONTHS = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+  const WD = ['MO','TU','WE','TH','FR','SA','SU'];
+  const now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  let viewY = today.getFullYear(), viewM = today.getMonth(), selKey = null;
+  const calGrid = $('#calGrid'), calNote = $('#calNote');
+  const keyOf = (mm, dd) => `${pad(mm + 1)}-${pad(dd)}`;
+  const isCursed = (y, mm, dd) => dd === 13 && new Date(y, mm, dd).getDay() === 5;
+
+  function showNote(y, mm, dd){
+    const k = keyOf(mm, dd);
+    const isToday = y === today.getFullYear() && mm === today.getMonth() && dd === today.getDate();
+    let txt = SPECIAL_DAYS[k] || (isCursed(y, mm, dd) ? '☠ friday the 13th. don’t open the door.' : 'nothing planned ☁ …or is there?');
+    calNote.innerHTML = `<b>${pad(dd)}.${pad(mm + 1)}.${y}${isToday ? ' · today' : ''}</b>${txt}`;
+  }
+  function renderCal(){
+    $('#calTitle').innerHTML = `${MONTHS[viewM]} ${viewY}<small>${viewY}年${viewM + 1}月</small>`;
+    let html = WD.map(w => `<span class="wd">${w}</span>`).join('');
+    const first = (new Date(viewY, viewM, 1).getDay() + 6) % 7, len = new Date(viewY, viewM + 1, 0).getDate();
+    for (let i = 0; i < first; i++) html += '<span></span>';
+    for (let d = 1; d <= len; d++){
+      const wd = (first + d - 1) % 7, k = keyOf(viewM, d), cls = ['day'];
+      if (wd >= 5) cls.push('we');
+      if (SPECIAL_DAYS[k]) cls.push('special');
+      else if (isCursed(viewY, viewM, d)) cls.push('cursed');
+      if (viewY === today.getFullYear() && viewM === today.getMonth() && d === today.getDate()) cls.push('today');
+      if (selKey === `${viewY}-${k}`) cls.push('sel');
+      html += `<button class="${cls.join(' ')}" data-d="${d}" aria-label="${d} ${MONTHS[viewM]}">${d}</button>`;
+    }
+    calGrid.innerHTML = html;
+  }
+  calGrid.addEventListener('click', e => {
+    const b = e.target.closest('.day'); if (!b) return;
+    const d = +b.dataset.d; selKey = `${viewY}-${keyOf(viewM, d)}`;
+    renderCal(); showNote(viewY, viewM, d);
+  });
+  $('#calPrev').addEventListener('click', () => { if (--viewM < 0){ viewM = 11; viewY--; } renderCal(); });
+  $('#calNext').addEventListener('click', () => { if (++viewM > 11){ viewM = 0; viewY++; } renderCal(); });
+  renderCal(); showNote(today.getFullYear(), today.getMonth(), today.getDate());
+
+  /* ================= NHẠC YOUTUBE PHÁT NGAY TRONG TRANG ================= */
+  const MUSIC_ID = 'HUUy3mnAhCE'; // ĐỔI NHẠC: mã video YouTube (phần sau youtu.be/)
+  const earPlayer = $('#earPlayer'), earMsg = $('#earMsg'), earTitle = $('#earTitle'), heroPlay = $('#heroPlay');
+  let yt = null, ytReady = false, ytDead = false, soundOn = false, userMuted = false, gestured = false;
+  function sndUI(){
+    heroPlay.textContent = soundOn ? '♪ ＳＯＵＮＤ　ＯＮ' : (gestured ? '♪ ＳＯＵＮＤ　ＯＦＦ' : '♪ ＣＬＩＣＫ　ＦＯＲ　ＳＯＵＮＤ');
+    heroPlay.setAttribute('aria-pressed', soundOn);
+    earPlayer.classList.toggle('on', soundOn);
+  }
+  function noSignal(txt){ ytDead = true; earMsg.textContent = 'NO SIGNAL · ' + txt; soundOn = false; sndUI(); }
+  function soundUp(){
+    if (!ytReady || ytDead) return;
+    yt.unMute(); yt.setVolume(80); yt.playVideo();
+    soundOn = true; sndUI();
+  }
+  function soundDown(){ if (ytReady) yt.mute(); soundOn = false; sndUI(); }
+  if (location.protocol === 'file:'){
+    noSignal('chỉ chạy khi mở qua web');
+  } else {
+    window.onYouTubeIframeAPIReady = () => {
+      yt = new YT.Player('yt', {
+        videoId: MUSIC_ID,
+        playerVars: { autoplay: 1, mute: 1, controls: 1, fs: 1, iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0, loop: 1, playlist: MUSIC_ID, origin: location.origin },
+        events: {
+          onReady: e => {
+            ytReady = true;
+            e.target.getIframe().setAttribute('title', 'Current earworm');
+            e.target.mute(); e.target.playVideo();
+            try { const d = e.target.getVideoData(); if (d && d.title) earTitle.textContent = d.title; } catch (err) {}
+            if (gestured && !userMuted) soundUp();
+          },
+          onStateChange: e => {
+            if (e.data === YT.PlayerState.ENDED){ e.target.seekTo(0); e.target.playVideo(); }
+            if (e.data === YT.PlayerState.PLAYING){ try { const d = e.target.getVideoData(); if (d && d.title) earTitle.textContent = d.title; } catch (err) {} }
+          },
+          onError: () => noSignal('video không cho phép nhúng')
+        }
+      });
+    };
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    tag.onerror = () => noSignal('không tải được YouTube');
+    document.head.appendChild(tag);
+    setTimeout(() => { if (!ytReady && !ytDead) noSignal('không tải được YouTube'); }, 15000);
+  }
+  // trình duyệt chỉ cho phát tiếng sau lần bấm/gõ phím đầu tiên
+  function onGesture(e){
+    if (e.target.closest && e.target.closest('#heroPlay')) return;
+    gestured = true;
+    if (!userMuted && !soundOn) soundUp(); else sndUI();
+  }
+  ['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, onGesture, true));
+  heroPlay.addEventListener('click', () => {
+    gestured = true;
+    if (soundOn){ userMuted = true; soundDown(); }
+    else { userMuted = false; soundUp(); }
+  });
+
+  /* ================= LINK NGẪU NHIÊN ================= */
+  const allTiles = [...document.querySelectorAll('.tile')];
+  $('#linkCount').textContent = `${allTiles.length} links inside`;
+  $('#portal').addEventListener('click', () => {
+    const t = pick(allTiles);
+    t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    t.focus({ preventScroll: true });
+    window.open(t.href, '_blank', 'noopener');
+  });
+
+  /* nút trên thanh cửa sổ: lắc */
+  document.querySelectorAll('.tb-btns i').forEach(b => b.addEventListener('click', () => {
+    const w = b.closest('.win'); w.classList.remove('shake'); void w.offsetWidth; w.classList.add('shake');
+  }));
+
+  /* logo dự phòng nếu favicon lỗi */
+  document.querySelectorAll('img[data-fallback]').forEach(img => img.addEventListener('error', () => {
+    const s = document.createElement('span');
+    s.textContent = img.dataset.fallback; s.style.cssText = 'font-size:28px;line-height:1;font-weight:700;color:' + (img.dataset.fallback === '☀' ? '#ffb72b' : '#111');
+    img.replaceWith(s);
+  }));
+
+  /* đổi tiêu đề tab khi rời đi */
+  const realTitle = document.title;
+  document.addEventListener('visibilitychange', () => {
+    document.title = document.hidden ? 'ｃｏｍｅ　ｂａｃｋ…' : realTitle;
+  });
+
+  if (reduce) return;
+
+  /* ================= HỘP THOẠI LỖI ================= */
+  const TITLES = ['System Error', 'ＷＩＲＥＤ.exe', 'Warning', 'untitled.exe', 'message_12082001'];
+  function popup(msg, x, y){
+    if (document.querySelectorAll('.err').length >= 2) return;
+    const d = document.createElement('div');
+    d.className = 'err';
+    d.setAttribute('role', 'alertdialog');
+    d.innerHTML =
+      `<div class="err-tb"><span>${pick(TITLES)}</span><button aria-label="Đóng">✕</button></div>` +
+      `<div class="err-body"><span class="err-ic" aria-hidden="true">${pick(['!', '✕', '?'])}</span><p></p></div>` +
+      `<div class="err-btns"><button>OK</button><button>Cancel</button></div>`;
+    d.querySelector('p').textContent = msg;
+    const w = Math.min(290, innerWidth - 24);
+    d.style.left = (x ?? rand(12, innerWidth - w - 12)) + 'px';
+    d.style.top = (y ?? rand(60, innerHeight - 190)) + 'px';
+    document.body.appendChild(d);
+    d.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      const r = d.getBoundingClientRect();
+      d.remove();
+      if (Math.random() < .2) setTimeout(() => popup(msg, r.left + 24, r.top + 24), 400); // đóng rồi vẫn hiện lại…
+    }));
+    // kéo thả bằng thanh tiêu đề
+    const tb = d.querySelector('.err-tb');
+    tb.addEventListener('pointerdown', e => {
+      if (e.target.closest('button')) return;
+      const sx = e.clientX - d.offsetLeft, sy = e.clientY - d.offsetTop;
+      tb.setPointerCapture(e.pointerId);
+      const mv = ev => { d.style.left = (ev.clientX - sx) + 'px'; d.style.top = (ev.clientY - sy) + 'px'; };
+      tb.addEventListener('pointermove', mv);
+      tb.addEventListener('pointerup', () => tb.removeEventListener('pointermove', mv), { once: true });
+    });
+  }
+  (function schedule(first){
+    setTimeout(() => { if (!document.hidden) popup(pick(ERRORS)); schedule(false); }, first ? 12000 : rand(25000, 50000));
+  })(true);
+
+  /* ================= "are you still there?" ================= */
+  const idle = $('#idle');
+  let idleT;
+  function wake(){ idle.classList.remove('on'); clearTimeout(idleT); idleT = setTimeout(() => idle.classList.add('on'), 45000); }
+  ['pointermove', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev => addEventListener(ev, wake, { passive: true }));
+  wake();
+
+  /* ================= CON TRỎ + CLICK ================= */
+  const PX = ['#ff71ce', '#01cdfe', '#05ffa1', '#b967ff', '#fffb96'];
+  let lastPx = 0;
+  function px(x, y, dx, dy){
+    const s = document.createElement('span');
+    s.className = 'px';
+    s.style.cssText = `left:${x}px;top:${y}px;background:${pick(PX)};--dx:${dx}px;--dy:${dy}px`;
+    document.body.appendChild(s);
+    s.addEventListener('animationend', () => s.remove());
+  }
+  addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const t = performance.now(); if (t - lastPx < 30) return; lastPx = t;
+    px(e.clientX, e.clientY, rand(-14, 14) | 0, rand(10, 40) | 0);
+  });
+  addEventListener('pointerdown', e => {
+    if (e.target.closest('.err')) return;
+    for (let i = 0; i < 10; i++){ const a = rand(0, 6.28), r = rand(20, 60); px(e.clientX, e.clientY, Math.cos(a) * r | 0, Math.sin(a) * r | 0); }
+    document.body.classList.remove('jolt'); void document.body.offsetWidth; document.body.classList.add('jolt');
+    setTimeout(() => document.body.classList.remove('jolt'), 300);
+  });
+})();
+</script>
+</body>
+</html>
