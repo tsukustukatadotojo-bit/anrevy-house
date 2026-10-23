@@ -1,0 +1,6 @@
+isgd-anrevy	https://is.gd/anrevy
+isgd-random	https://is.gd/MzT6bg
+tinyurl	https://tinyurl.com/2dzwb3yd
+check-isgd-anrevy	200 https://tsukustukatadotojo-bit.github.io/anrevy-house/
+check-isgd-random	200 https://tsukustukatadotojo-bit.github.io/anrevy-house/
+check-tinyurl	200 https://tsukustukatadotojo-bit.github.io/anrevy-house/
