@@ -5,17 +5,21 @@ on:
 permissions:
   contents: read
 jobs:
-  yt:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check YouTube embed
+      - name: Check billiards sites
         run: |
-          for id in R0zVL1YePDY; do
-            u="https://www.youtube.com/watch?v=$id"
-            code=$(curl -s -o o.json -w '%{http_code}' --max-time 20 "https://www.youtube.com/oembed?format=json&url=$u")
-            title=$(python3 -c "import json;d=json.load(open('o.json'));print(d.get('title','')+' | '+d.get('author_name',''))" 2>/dev/null || head -c 120 o.json)
-            ecode=$(curl -s -o e.html -w '%{http_code}' --max-time 20 -A 'Mozilla/5.0' "https://www.youtube.com/embed/$id")
-            flag=$(grep -o '"playableInEmbed":[a-z]*' e.html | head -1)
-            status=$(grep -o '"status":"[A-Z_]*"' e.html | head -1)
-            echo "::notice title=$id::oembed=$code $title || embed=$ecode $flag $status"
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
+          for u in \
+            https://poki.com/en/g/8-ball-billiards-classic \
+            https://www.crazygames.com/game/8-ball-billiards-classic \
+            https://www.247billiards.com/ \
+            https://8ballpool.com/ \
+            https://www.miniclip.com/games/8-ball-pool-multiplayer \
+            https://www.coolmathgames.com/0-8-ball-pool \
+            https://www.mathplayground.com/8_ball_pool.html ; do
+            r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
+            t=$(grep -o -i '<title>[^<]*' p.html | head -1 | cut -c8-90)
+            echo "::notice title=$(echo $u | cut -d/ -f3)::$r | $t | $(wc -c < p.html) bytes"
           done
