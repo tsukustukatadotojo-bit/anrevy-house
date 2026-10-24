@@ -3,34 +3,19 @@ on:
   push:
     branches: [link-check]
 permissions:
-  contents: write
+  contents: read
 jobs:
-  check:
+  yt:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Check every URL
+      - name: Check YouTube embed
         run: |
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-          : > results.tsv
-          while IFS=$'\t' read -r id url; do
-            [ -z "$url" ] && continue
-            rm -f body.html
-            meta=$(curl -sSL -A "$UA" -H "Accept-Language: en" -o body.html -w '%{http_code}\t%{url_effective}' --max-time 30 --connect-timeout 12 "$url" 2>err.txt || true)
-            err=$(tr '\n' ' ' < err.txt | cut -c1-80)
-            size=$(wc -c < body.html 2>/dev/null || echo 0)
-            title=$(python3 -c "import re,html
-          try: t=open('body.html','rb').read().decode('utf-8','ignore')
-          except Exception: t=''
-          m=re.search(r'<title[^>]*>(.*?)</title>',t,re.S|re.I)
-          print(html.unescape(re.sub(r'\s+',' ',m.group(1))).strip()[:90] if m else '')")
-            printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$id" "$url" "$meta" "$size" "$title" "$err" >> results.tsv
-          done < urls.tsv
-          cat results.tsv
-      - name: Save results
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add results.tsv
-          git commit -m "Link check results [skip ci]"
-          git push
+          for id in R0zVL1YePDY; do
+            u="https://www.youtube.com/watch?v=$id"
+            code=$(curl -s -o o.json -w '%{http_code}' --max-time 20 "https://www.youtube.com/oembed?format=json&url=$u")
+            title=$(python3 -c "import json;d=json.load(open('o.json'));print(d.get('title','')+' | '+d.get('author_name',''))" 2>/dev/null || head -c 120 o.json)
+            ecode=$(curl -s -o e.html -w '%{http_code}' --max-time 20 -A 'Mozilla/5.0' "https://www.youtube.com/embed/$id")
+            flag=$(grep -o '"playableInEmbed":[a-z]*' e.html | head -1)
+            status=$(grep -o '"status":"[A-Z_]*"' e.html | head -1)
+            echo "::notice title=$id::oembed=$code $title || embed=$ecode $flag $status"
+          done
