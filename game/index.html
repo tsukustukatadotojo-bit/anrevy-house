@@ -6,7 +6,7 @@
 <title>⌈ＧＡＭＥ　ＲＯＯＭ⌋</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Monoton&amp;family=Silkscreen:wght@400;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Monoton&amp;family=Patrick+Hand&amp;family=Silkscreen:wght@400;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --pink:#ff2a6d; --cyan:#05d9e8; --gold:#ffd23f; --violet:#9b5cff; --lime:#2bff88;
@@ -36,8 +36,23 @@
       box-shadow:0 0 12px rgba(255,210,63,.7);
     }
     .hit:hover::after{opacity:1}
+    .hit.vn::after{font:400 16px 'VT323',monospace;letter-spacing:.04em}
   }
   body.dragging .hit::after{opacity:0!important}
+  .kb-bulb{animation:bulb 1s steps(1) infinite}
+  .kb-bulb.b{animation-delay:-.5s}
+  .kb-belt{animation:belt 4s linear infinite}
+  @keyframes belt{from{transform:translateX(0)}to{transform:translateX(-18px)}}
+  .kb-star{transform-box:fill-box;transform-origin:center;animation:kbStar 1.8s ease-in-out infinite alternate}
+  @keyframes kbStar{to{transform:scale(.55) rotate(30deg);opacity:.5}}
+  .kb-tail{transform-box:fill-box;transform-origin:20% 90%;animation:kbTail 2.4s ease-in-out infinite alternate}
+  @keyframes kbTail{to{transform:rotate(8deg)}}
+  .gt-rim{animation:gtRim 3s linear infinite}
+  @keyframes gtRim{50%{opacity:.55}}
+  .gt-needle{transform-box:fill-box;transform-origin:center;animation:needle 3.2s ease-in-out infinite alternate}
+  @keyframes needle{from{transform:rotate(-24deg)}to{transform:rotate(30deg)}}
+  .gt-glint{animation:twinkle 1.6s steps(2) infinite}
+  @keyframes twinkle{50%{opacity:.15}}
 
   /* biển neon trên tường sau */
   .neon{
@@ -431,6 +446,118 @@
 
     <!-- DÃY MÁY ARCADE (tạo bằng JS) -->
     <div id="cabs"></div>
+
+
+    <!-- BẢNG "TUỔI THƠ AN VY" TRÊN TƯỜNG -->
+    <a class="o hit vn kid" id="kid" href="https://socnhi.com/Cong-vien-game/detail/396/Tiem-sushi-bang-chuyen.html" target="_blank" rel="noopener" data-tag="Tuổi thơ An Vy ↗" aria-label="Tuổi thơ An Vy: chơi Tiệm sushi băng chuyền trên Sóc nhí (mở thẻ mới)">
+      <svg viewBox="0 0 170 90" aria-hidden="true">
+        <defs><linearGradient id="kbWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8642f"/><stop offset="1" stop-color="#6b3416"/></linearGradient>
+          <clipPath id="kbClip"><rect x="9" y="9" width="152" height="72" rx="5"/></clipPath></defs>
+        <rect x="1.5" y="1.5" width="167" height="87" rx="9" fill="url(#kbWood)" stroke="#3a1a08" stroke-width="2"/>
+        <g fill="#ffe58a"><circle class="kb-bulb" cx="12.0" cy="5.5" r="2.2"/><circle class="kb-bulb b" cx="12.0" cy="84.5" r="2.2"/><circle class="kb-bulb b" cx="30.2" cy="5.5" r="2.2"/><circle class="kb-bulb" cx="30.2" cy="84.5" r="2.2"/><circle class="kb-bulb" cx="48.5" cy="5.5" r="2.2"/><circle class="kb-bulb b" cx="48.5" cy="84.5" r="2.2"/><circle class="kb-bulb b" cx="66.8" cy="5.5" r="2.2"/><circle class="kb-bulb" cx="66.8" cy="84.5" r="2.2"/><circle class="kb-bulb" cx="85.0" cy="5.5" r="2.2"/><circle class="kb-bulb b" cx="85.0" cy="84.5" r="2.2"/><circle class="kb-bulb b" cx="103.2" cy="5.5" r="2.2"/><circle class="kb-bulb" cx="103.2" cy="84.5" r="2.2"/><circle class="kb-bulb" cx="121.5" cy="5.5" r="2.2"/><circle class="kb-bulb b" cx="121.5" cy="84.5" r="2.2"/><circle class="kb-bulb b" cx="139.8" cy="5.5" r="2.2"/><circle class="kb-bulb" cx="139.8" cy="84.5" r="2.2"/><circle class="kb-bulb" cx="158.0" cy="5.5" r="2.2"/><circle class="kb-bulb b" cx="158.0" cy="84.5" r="2.2"/><circle class="kb-bulb b" cx="5.5" cy="25.2" r="2.2"/><circle class="kb-bulb" cx="164.5" cy="25.2" r="2.2"/><circle class="kb-bulb" cx="5.5" cy="45.0" r="2.2"/><circle class="kb-bulb b" cx="164.5" cy="45.0" r="2.2"/><circle class="kb-bulb b" cx="5.5" cy="64.8" r="2.2"/><circle class="kb-bulb" cx="164.5" cy="64.8" r="2.2"/></g>
+        <rect x="9" y="9" width="152" height="72" rx="5" fill="#ffe3ef"/>
+        <g clip-path="url(#kbClip)">
+          <circle cx="150" cy="18" r="22" fill="#fff6b8" opacity=".55"/>
+          <rect x="13" y="13" width="144" height="64" rx="4" fill="none" stroke="#ff9cc4" stroke-width="1.4" stroke-dasharray="3 3"/>
+          <path d="M100 77H170" stroke="#9a8a9a" stroke-width="3"/><path d="M100 76H170" stroke="#d8c8d8" stroke-width="1"/>
+          <g class="kb-belt"><g transform="translate(112 0)"><rect x="0" y="70.5" width="9" height="5" rx="2" fill="#fff"/><rect x="-.4" y="68.6" width="9.8" height="3.4" rx="1.6" fill="#ff8a5c"/><path d="M2 69.4l1.6 2M5 69.4l1.6 2" stroke="#ffd0b8" stroke-width=".6"/></g><g transform="translate(130 0)"><rect x="0" y="70.5" width="9" height="5" rx="2" fill="#fff"/><rect x="-.4" y="68.6" width="9.8" height="3.4" rx="1.6" fill="#ff8a5c"/><path d="M2 69.4l1.6 2M5 69.4l1.6 2" stroke="#ffd0b8" stroke-width=".6"/></g><g transform="translate(148 0)"><rect x="0" y="70.5" width="9" height="5" rx="2" fill="#fff"/><rect x="-.4" y="68.6" width="9.8" height="3.4" rx="1.6" fill="#ff8a5c"/><path d="M2 69.4l1.6 2M5 69.4l1.6 2" stroke="#ffd0b8" stroke-width=".6"/></g><g transform="translate(166 0)"><rect x="0" y="70.5" width="9" height="5" rx="2" fill="#fff"/><rect x="-.4" y="68.6" width="9.8" height="3.4" rx="1.6" fill="#ff8a5c"/><path d="M2 69.4l1.6 2M5 69.4l1.6 2" stroke="#ffd0b8" stroke-width=".6"/></g></g>
+        </g>
+        <g fill="#ffd23f"><path class="kb-star" d="M58 18l1.6 3.4 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z"/><path class="kb-star" style="animation-delay:-.9s" d="M150 30l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z"/></g>
+        <text x="102" y="41" text-anchor="middle" font-family="'Patrick Hand', cursive" font-size="23" fill="#e8467c">Tuổi thơ</text>
+        <text x="104" y="65" text-anchor="middle" font-family="'Patrick Hand', cursive" font-size="27" fill="#5a3ea8">An Vy ♡</text>
+        <g>
+          <path class="kb-tail" d="M28 70c-12-2-16-14-10-24 5-8 16-8 18 0 1 5-4 7-6 4 6 2 4-7-2-6-6 1-8 10-3 16 3 4 8 6 9 8z" fill="#d9894a" stroke="#8a4a20" stroke-width=".8"/>
+          <ellipse cx="38" cy="64" rx="8" ry="10" fill="#e09a5a" stroke="#8a4a20" stroke-width=".8"/>
+          <circle cx="43" cy="50" r="6.5" fill="#e09a5a" stroke="#8a4a20" stroke-width=".8"/>
+          <path d="M39 45l-1-6 4 4zM45 44l2-5 1 6z" fill="#e09a5a" stroke="#8a4a20" stroke-width=".8"/>
+          <circle cx="45" cy="49" r="1.2" fill="#2a1406"/><circle cx="49" cy="51.5" r=".9" fill="#2a1406"/>
+          <ellipse cx="38" cy="66" rx="4.5" ry="6" fill="#f6d2a8"/>
+          <ellipse cx="44" cy="62" rx="3.4" ry="3" fill="#8a5a2a"/><path d="M41 60h6" stroke="#5a3a1a" stroke-width="1.6" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </a>
+
+    <!-- BÀN CHƠI GIẢI ĐỐ -->
+    <div class="o gtable" id="gtable">
+      <svg viewBox="0 0 300 190">
+        <defs>
+          <linearGradient id="gtRimG" x1="0" x2="1"><stop offset="0" stop-color="#05d9e8"/><stop offset=".5" stop-color="#9b5cff"/><stop offset="1" stop-color="#ff2a6d"/></linearGradient>
+          <radialGradient id="gtTop" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#2c2448"/><stop offset="1" stop-color="#120d20"/></radialGradient>
+        </defs>
+        <ellipse cx="150" cy="183" rx="122" ry="7" fill="rgba(0,0,0,.6)"/>
+        <g>
+          <path d="M20 124l-3 54M52 124l3 54" stroke="#1a1426" stroke-width="3"/><ellipse cx="36" cy="122" rx="20" ry="6.5" fill="#05d9e8" opacity=".85"/><ellipse cx="36" cy="120" rx="20" ry="6.5" fill="#1a1426"/>
+          <path d="M248 124l-3 54M280 124l3 54" stroke="#1a1426" stroke-width="3"/><ellipse cx="264" cy="122" rx="20" ry="6.5" fill="#ff2a6d" opacity=".85"/><ellipse cx="264" cy="120" rx="20" ry="6.5" fill="#1a1426"/>
+        </g>
+        <path d="M141 126h18l8 50h-34z" fill="#15101f"/>
+        <ellipse cx="150" cy="177" rx="46" ry="8" fill="#0d0a16" stroke="url(#gtRimG)" stroke-width="2"/>
+        <ellipse cx="150" cy="105" rx="140" ry="46" fill="#0d0a16"/>
+        <ellipse class="gt-rim" cx="150" cy="99" rx="141" ry="47" fill="none" stroke="url(#gtRimG)" stroke-width="3.4"/>
+        <ellipse cx="150" cy="98" rx="138" ry="45" fill="url(#gtTop)"/>
+        <g stroke="#9b5cff" stroke-opacity=".12" stroke-width=".8" fill="none"><ellipse cx="150" cy="98" rx="100" ry="32"/><ellipse cx="150" cy="98" rx="60" ry="19"/><path d="M12 98H288M150 53V143"/></g>
+        <a class="bg-link" href="https://frvr.com/tags/maze/" target="_blank" rel="noopener" aria-label="Chơi trò giải mê cung (mở thẻ mới)">
+          <g class="piece" transform="translate(-8 0)">
+          <ellipse cx="54" cy="104" rx="15" ry="8" fill="#5a3a10"/><ellipse cx="54" cy="101" rx="15" ry="8" fill="#c9a24a"/>
+          <ellipse cx="54" cy="100.6" rx="12" ry="6.2" fill="#fbf4e2"/>
+          <g fill="#2a1006" font-family="VT323, monospace" font-size="4.6" text-anchor="middle"><text x="54" y="96">N</text><text x="54" y="107.6">S</text><text x="64" y="102">E</text><text x="44" y="102">W</text></g>
+          <g class="gt-needle"><path d="M54 95.6l1.6 5h-3.2z" fill="#e01e37"/><path d="M54 105.6l1.6-5h-3.2z" fill="#3a3a44"/></g>
+          <circle cx="54" cy="100.6" r=".9" fill="#c9a24a"/><path d="M50 92.4q4-3 8 0" stroke="#c9a24a" stroke-width="2" fill="none"/>
+          <path d="M40 98a14 7 0 0 1 8-4" stroke="#fff" stroke-width=".8" opacity=".6" fill="none"/>
+          </g>
+          <ellipse cx="54" cy="104" rx="22" ry="14" fill="transparent" transform="translate(-8 0)"/>
+          <g class="tag"><rect x="25" y="123.6" width="42" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/><text x="46" y="131.9" text-anchor="middle" font-family="VT323, monospace" font-size="9" fill="#2a1006">MÊ CUNG</text></g>
+        </a>
+        <a class="bg-link" href="https://www.crazygames.com/t/escape" target="_blank" rel="noopener" aria-label="Chơi Escape Room online (mở thẻ mới)">
+          <g class="piece" transform="translate(-2 0)">
+          <g transform="rotate(-14 100 112)">
+            <path d="M84 115h30" stroke="#5a3a10" stroke-width="5" stroke-linecap="round" transform="translate(1 3)" opacity=".5"/>
+            <circle cx="82" cy="112" r="7" fill="none" stroke="#ffd23f" stroke-width="3.2"/><circle cx="82" cy="112" r="2.4" fill="#120d20"/>
+            <path d="M89 112h29" stroke="#ffd23f" stroke-width="3.2" stroke-linecap="round"/>
+            <path d="M110 112v6h3v-4h2v5h3v-7" fill="none" stroke="#ffd23f" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M80 108a5 5 0 0 1 5 0" stroke="#fff6c8" stroke-width="1" fill="none"/>
+            <circle class="gt-glint" cx="96" cy="111" r="1.2" fill="#fff"/>
+          </g>
+          </g>
+          <ellipse cx="100" cy="104" rx="22" ry="14" fill="transparent" transform="translate(-2 0)"/>
+          <g class="tag"><rect x="77" y="135.7" width="42" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/><text x="98" y="144.0" text-anchor="middle" font-family="VT323, monospace" font-size="9" fill="#2a1006">ESCAPE</text></g>
+        </a>
+        <a class="bg-link" href="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/" target="_blank" rel="noopener" aria-label="Chơi game giải đố: Simon Tatham Puzzles (mở thẻ mới)">
+          <g class="piece">
+          <path d="M150 112c0 8 12 6 18 14" stroke="#111" stroke-width="1.6" fill="none"/>
+          <path d="M126 96c4-6 10-6 16-4h16c6-2 12-2 16 4 4 6 6 16 1 18-4 2-8-3-11-7h-28c-3 4-7 9-11 7-5-2-3-12 1-18z" fill="#ece8f6" stroke="#4a3a6a" stroke-width="1.2"/>
+          <path d="M138 96v8M134 100h8" stroke="#4a3a6a" stroke-width="2.6" stroke-linecap="round"/>
+          <g><circle cx="163" cy="96.5" r="2" fill="#2bff88"/><circle cx="167.5" cy="100" r="2" fill="#ff2a6d"/><circle cx="158.5" cy="100" r="2" fill="#05d9e8"/><circle cx="163" cy="103.5" r="2" fill="#ffd23f"/></g>
+          <circle cx="146" cy="105" r="3" fill="#4a3a6a"/><circle cx="155" cy="105" r="3" fill="#4a3a6a"/>
+          <rect class="gt-glint" x="148.6" y="95" width="4" height="2" rx="1" fill="#9b5cff"/>
+          </g>
+          <ellipse cx="150" cy="104" rx="22" ry="14" fill="transparent"/>
+          <g class="tag"><rect x="129" y="139.0" width="42" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/><text x="150" y="147.3" text-anchor="middle" font-family="VT323, monospace" font-size="9" fill="#2a1006">GIẢI ĐỐ</text></g>
+        </a>
+        <a class="bg-link" href="https://www.crazygames.com/vn/game/millionaire-quiz" target="_blank" rel="noopener" aria-label="Chơi Ai là triệu phú online (mở thẻ mới)">
+          <g class="piece" transform="translate(2 0)">
+          <g transform="rotate(-10 200 108)"><rect x="181" y="99" width="38" height="18" rx="1.5" fill="#2d8a4e" stroke="#14532d" stroke-width=".8"/></g>
+          <g transform="rotate(6 200 108)"><rect x="181" y="98" width="38" height="18" rx="1.5" fill="#3aa35f" stroke="#14532d" stroke-width=".8"/>
+            <rect x="184" y="101" width="32" height="12" rx="1" fill="none" stroke="#c8f0d0" stroke-width=".6"/>
+            <circle cx="200" cy="107" r="4.6" fill="#c8f0d0"/><text x="200" y="109.6" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="7" fill="#14532d">$</text>
+            <text x="188" y="105.6" font-family="Arial, sans-serif" font-weight="700" font-size="3.6" fill="#e8ffe8">1.000.000</text>
+            <text x="212" y="111.4" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="3.6" fill="#e8ffe8">VND</text></g>
+          </g>
+          <ellipse cx="200" cy="104" rx="22" ry="14" fill="transparent" transform="translate(2 0)"/>
+          <g class="tag"><rect x="181" y="135.7" width="42" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/><text x="202" y="144.0" text-anchor="middle" font-family="VT323, monospace" font-size="9" fill="#2a1006">TRIỆU PHÚ</text></g>
+        </a>
+        <a class="bg-link" href="https://test.mensa.no/" target="_blank" rel="noopener" aria-label="Làm bài Test IQ của Mensa (mở thẻ mới)">
+          <g class="piece" transform="translate(8 0)">
+          <path d="M252 106l12 10" stroke="#3a2412" stroke-width="5" stroke-linecap="round"/>
+          <path d="M252 106l12 10" stroke="#8a5a2a" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="244" cy="99" rx="11" ry="9" fill="rgba(160,230,255,.28)" stroke="#c9c9d6" stroke-width="2.6"/>
+          <text x="244" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="8" fill="#ffd23f" opacity=".9">IQ</text>
+          <path d="M237 95a8 6 0 0 1 6-3" stroke="#fff" stroke-width="1.2" fill="none" opacity=".8"/>
+          </g>
+          <ellipse cx="246" cy="104" rx="22" ry="14" fill="transparent" transform="translate(8 0)"/>
+          <g class="tag"><rect x="233" y="123.6" width="42" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/><text x="254" y="131.9" text-anchor="middle" font-family="VT323, monospace" font-size="9" fill="#2a1006">TEST IQ</text></g>
+        </a>
+      </svg>
+    </div>
 
     <!-- MÁY ĐUA XE -->
     <a class="o hit racing" id="racing" href="https://slowroads.io/" target="_blank" rel="noopener" data-tag="SLOW ROADS ↗" aria-label="Máy đua xe: chơi Slow Roads (mở thẻ mới)">
@@ -877,7 +1004,7 @@
     shelf:   { X: -6.6,  d: 4.4,  w: 1.7,  a: 1 / .86 },
     claw:    { X: -5.0,  d: 4.4,  w: 1.0,  a: 300 / 160, glow: '#ff4fa3' },
     useless: { X: -3.8,  d: 4.4,  w: .95,  a: 300 / 160, glow: '#36d6c4' },
-    shoot:   { X: -3.35, d: 5.8,  w: 1.0,  a: 310 / 170, glow: '#ff8a00' },
+    shoot:   { X: -3.75, d: 5.8,  w: 1.0,  a: 310 / 170, glow: '#ff8a00' },
     racing:  { X: 6.6,   d: 5.8,  w: 1.7,  a: 175 / 170, glow: '#ff2a6d' },
     hoops:   { X: 7.05,  d: 4.4,  w: 1.05, a: 240 / 105, glow: '#ff8a00' },
     door:    { X: 4.95,  d: 7.9,  w: 1.2,  a: 270 / 120, glow: '#ffb347' },
@@ -885,6 +1012,8 @@
     board:   { X: -3.0,  d: 3.0,  w: 1.55, a: 212 / 300 },
     bill:    { X: 0,     d: 3.1,  w: 2.6,  a: 232 / 400, glow: '#2bff88' },
     lamp:    { X: 0,     d: 3.1,  w: 1.3,  a: 300 / 200, top: CEIL },
+    kid:     { X: 3.2,   d: 7.95, w: 1.7,  a: 90 / 170,  y: 1.08 },
+    gtable:  { X: 2.4,   d: 3.3,  w: 1.85, a: 190 / 300, glow: '#9b5cff' },
   };
   const P = (X, Y, d) => [W / 2 + (X - camX) * F / d, HZ + (EYE - Y) * F / d];
 
@@ -1294,27 +1423,16 @@
         '<g fill="#535353"><rect x="20" y="70.5" width="1.5" height=".6"/><rect x="34" y="71" width="1" height=".6"/><rect x="50" y="70.4" width="2" height=".6"/></g>' +
         '<g class="cact" fill="#535353"><path d="M62 69v-9h2v9zM60 64h2v1.4h-2v-3h1.4zM64 63h1.4v-2h1v3.4H64z"/></g>' +
         '<g class="djump" fill="#535353"><path d="M14 69v-3h1v-2h-1v-3h1v-1h1v-1h2v-4h1v-1h5v1h1v3h-3v1h2v1h-3v2h1v1h-1v3h-1v2h-1v2h-1v-2h-1v2h-1v-2h-2v-1z"/><rect x="20" y="56" width=".9" height=".9" fill="#f7f7f7"/></g>';
-    },
-    invaders(){
-      const A = 'M0 1h1V0h1v1h2V0h1v1h1v1h1v2H6v1H5v1H4V5H3v1H2V5H1V4H0z';
-      let s = '<rect x="9" y="33" width="54" height="42" fill="#000"/><text x="11" y="37.6" font-family="monospace" font-size="3.4" fill="#fff">SCORE 0420</text><g class="inv">';
-      const cols = ['#ff71ce', '#2bff88', '#2bff88'];
-      for (let r = 0; r < 3; r++) for (let c = 0; c < 5; c++) s += `<path d="${A}" transform="translate(${15.5 + c * 8.5} ${41 + r * 5.6}) scale(.85)" fill="${cols[r]}"/>`;
-      s += '</g><g fill="#2bff88"><path d="M16 66a4 3 0 0 1 8 0v2h-8zM32 66a4 3 0 0 1 8 0v2h-8zM48 66a4 3 0 0 1 8 0v2h-8z"/></g>' +
-        '<path d="M33.5 73h5v-1.6h-1.2v-1h-.8v-1h-1v1h-.8v1h-1.2z" fill="#2bff88"/>' +
-        '<rect class="shot" x="35.6" y="66" width=".8" height="2.4" fill="#fff"/>';
-      return s;
-    },
+    }
   };
   // [id, tên trên bảng, link, màu thân, màu đậm, nền bảng, chữ bảng, màu điểm nhấn, X]
   const GAMES = [
-    ['tetris',   'TETRIS',      'https://tetris.com/play-tetris',                   '#1f2a8a', '#0b0f3a', '#0b0f3a', '#00e5f0', '#f0a000', -2.4],
-    ['pacman',   'PAC-MAN',     'https://www.google.com/logos/2010/pacman10-i.html', '#1a1a1a', '#000000', '#ffd400', '#1a1aff', '#ff2020', -1.6],
-    ['snake',    'SNAKE',       'https://playsnake.org/',                           '#3c4f1e', '#1f2a10', '#a3b86c', '#1f2a10', '#ffd23f', -.8],
-    ['mines',    'MINESWEEPER', 'https://minesweeper.online/',                      '#4a5a6a', '#1c2630', '#c0c0c0', '#0000c0', '#ff2020', 0],
-    ['t2048',    '2048',        'https://play2048.co/',                             '#8f7a66', '#4a3c30', '#edc22e', '#ffffff', '#f67c5f', .8],
-    ['dino',     'DINO RUN',    'https://chromedino.com/',                          '#cfcfcf', '#7a7a7a', '#535353', '#f7f7f7', '#535353', 1.6],
-    ['invaders', 'INVADERS',    'https://freeinvaders.org/',                        '#0d2b0d', '#041204', '#000000', '#2bff88', '#ff2a6d', 2.4],
+    ['tetris',   'TETRIS',      'https://tetris.com/play-tetris',                   '#1f2a8a', '#0b0f3a', '#0b0f3a', '#00e5f0', '#f0a000', -2.8],
+    ['pacman',   'PAC-MAN',     'https://www.google.com/logos/2010/pacman10-i.html', '#1a1a1a', '#000000', '#ffd400', '#1a1aff', '#ff2020', -2.0],
+    ['snake',    'SNAKE',       'https://playsnake.org/',                           '#3c4f1e', '#1f2a10', '#a3b86c', '#1f2a10', '#ffd23f', -1.2],
+    ['mines',    'MINESWEEPER', 'https://minesweeper.online/',                      '#4a5a6a', '#1c2630', '#c0c0c0', '#0000c0', '#ff2020', -.4],
+    ['t2048',    '2048',        'https://play2048.co/',                             '#8f7a66', '#4a3c30', '#edc22e', '#ffffff', '#f67c5f', .4],
+    ['dino',     'DINO RUN',    'https://chromedino.com/',                          '#cfcfcf', '#7a7a7a', '#535353', '#f7f7f7', '#535353', 1.2],
   ];
   const cabsHTML = GAMES.map(([id, t, u, main, dark, marq, mt, acc]) => {
     const fs = t.length > 9 ? 5.6 : t.length > 6 ? 7.2 : 8.6;
@@ -1344,6 +1462,7 @@
   GAMES.forEach(g => { PLACE['cab-' + g[0]] = { X: g[8], d: 5.8, w: .72, a: 175 / 72, glow: g[7] === '#535353' ? '#cfcfcf' : g[7] }; });
 
   // bấm vào máy: màn hình loé sáng, trừ 1 xu, mở game ở thẻ mới
+  document.querySelectorAll('#gtable a, #kid').forEach(a => a.addEventListener('click', () => { spend(); hideHint(); }));
   document.querySelectorAll('.cab, #racing, #hoops').forEach(m => m.addEventListener('click', () => {
     spend(); hideHint();
     m.classList.remove('press'); void m.getBoundingClientRect(); m.classList.add('press');
