@@ -11,16 +11,27 @@ jobs:
       - name: Check 0
         run: |
           UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
-          for u in https://minesweeper.online/ https://www.minesweeperonline.com/ https://tetris.com/play-tetris https://www.google.com/logos/2010/pacman10-i.html https://freepacman.org/ https://playsnake.org/ https://play2048.co/ https://chromedino.com/; do
+          for u in https://socnhi.com/Cong-vien-game/detail/396/Tiem-sushi-bang-chuyen.html https://mhieu.itch.io/ailatrieuphu https://www.gamevui.vn/ai-la-trieu-phu/game https://www.mensa.org/mensa-iq-challenge/ https://test.mensa.no/ https://www.escapeventure.com/en/online-escape-game https://www.crazygames.com/t/escape https://www.mazebattles.com/; do
             r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
-            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | cut -c1-70)
-            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b"
+            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | tr -d '\r\n' | cut -c1-80)
+            ip=$(getent hosts $(echo $u | cut -d/ -f3) | awk '{print $1}' | head -1)
+            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b | ip=$ip"
           done
       - name: Check 8
         run: |
           UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
-          for u in https://freeinvaders.org/ https://slowroads.io/ https://basketball.frvr.com/ https://www.crazygames.com/game/basketball-stars-2019 https://cardgames.io/ https://www.solitr.com/ https://poki.com/en/g/basketball-stars; do
+          for u in https://frvr.com/tags/maze/ https://www.chiark.greenend.org.uk/~sgtatham/puzzles/ https://frvr.com/tags/escape-room/ https://thophim.xyz/ https://chophim.app/ https://www.rophim.ink/phimhay https://guphim.com/ https://streamimdb.ru/; do
             r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
-            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | cut -c1-70)
-            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b"
+            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | tr -d '\r\n' | cut -c1-80)
+            ip=$(getent hosts $(echo $u | cut -d/ -f3) | awk '{print $1}' | head -1)
+            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b | ip=$ip"
+          done
+      - name: Check 16
+        run: |
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
+          for u in https://tramphim.top/ https://motphimz.ac/ https://chillphimm.net/ https://phimleak.com/ https://motchilll.online/ https://sofaflix.mom/ https://tizihay.com/; do
+            r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
+            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | tr -d '\r\n' | cut -c1-80)
+            ip=$(getent hosts $(echo $u | cut -d/ -f3) | awk '{print $1}' | head -1)
+            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b | ip=$ip"
           done
