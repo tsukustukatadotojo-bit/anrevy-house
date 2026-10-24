@@ -8,30 +8,11 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check 0
+      - name: Recheck movie sites
         run: |
           UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
-          for u in https://socnhi.com/Cong-vien-game/detail/396/Tiem-sushi-bang-chuyen.html https://mhieu.itch.io/ailatrieuphu https://www.gamevui.vn/ai-la-trieu-phu/game https://www.mensa.org/mensa-iq-challenge/ https://test.mensa.no/ https://www.escapeventure.com/en/online-escape-game https://www.crazygames.com/t/escape https://www.mazebattles.com/; do
-            r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
-            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | tr -d '\r\n' | cut -c1-80)
-            ip=$(getent hosts $(echo $u | cut -d/ -f3) | awk '{print $1}' | head -1)
-            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b | ip=$ip"
-          done
-      - name: Check 8
-        run: |
-          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
-          for u in https://frvr.com/tags/maze/ https://www.chiark.greenend.org.uk/~sgtatham/puzzles/ https://frvr.com/tags/escape-room/ https://thophim.xyz/ https://chophim.app/ https://www.rophim.ink/phimhay https://guphim.com/ https://streamimdb.ru/; do
-            r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
-            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | tr -d '\r\n' | cut -c1-80)
-            ip=$(getent hosts $(echo $u | cut -d/ -f3) | awk '{print $1}' | head -1)
-            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b | ip=$ip"
-          done
-      - name: Check 16
-        run: |
-          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
-          for u in https://tramphim.top/ https://motphimz.ac/ https://chillphimm.net/ https://phimleak.com/ https://motchilll.online/ https://sofaflix.mom/ https://tizihay.com/; do
-            r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
-            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | tr -d '\r\n' | cut -c1-80)
-            ip=$(getent hosts $(echo $u | cut -d/ -f3) | awk '{print $1}' | head -1)
-            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b | ip=$ip"
+          for u in https://www.rophim.ink/phimhay https://rophim.ink/ https://thophim.xyz/ http://thophim.xyz/ https://chillphimm.net/ https://sofaflix.mom/ https://tizihay.com/ https://motphimz.ac/; do
+            out=$(curl -sS -L -A "$UA" -o p.html -w '%{http_code} %{url_effective} n=%{num_redirects}' --max-time 40 "$u" 2>&1 | tr '\n' ' ' | cut -c1-160)
+            t=$(grep -o -i '<title[^>]*>[^<]*' p.html 2>/dev/null | head -1 | sed 's/<title[^>]*>//' | cut -c1-60); rm -f p.html
+            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $out | $t"
           done
