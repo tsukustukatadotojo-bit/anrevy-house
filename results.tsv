@@ -1,22 +1,78 @@
-r01	https://www.listentotheclouds.com/	000	https://www.listentotheclouds.com/	0		curl: (6) Could not resolve host: www.listentotheclouds.com 
-r02	http://listentotheclouds.com/	000	http://listentotheclouds.com/	0		curl: (6) Could not resolve host: listentotheclouds.com 
-r03	https://www.poolchoi.com/	000	https://www.poolchoi.com/	0		curl: (6) Could not resolve host: www.poolchoi.com 
-r04	http://poolchoi.com/	000	http://poolchoi.com/	0		curl: (6) Could not resolve host: poolchoi.com 
-r05	https://www.rainy.cafe/	000	https://www.rainy.cafe/	0		curl: (6) Could not resolve host: www.rainy.cafe 
-r06	http://rainy.cafe/	000	http://rainy.cafe/	0		curl: (6) Could not resolve host: rainy.cafe 
-r07	https://www.noisli.com/	200	https://www.noisli.com/	93385	Noisli - Background Noise Generator and Ambient Sounds for Focus, Sleep and Relaxation	
-r08	http://noisli.com/	200	https://www.noisli.com/	93385	Noisli - Background Noise Generator and Ambient Sounds for Focus, Sleep and Relaxation	
-r09	http://thenostalgiamachine.com/	200	http://thenostalgiamachine.com/	8548	The Nostalgia Machine	
-r10	https://www.thenostalgiamachine.com/	000	https://www.thenostalgiamachine.com/	0		curl: (60) SSL: no alternative certificate subject name matches target host name
-r11	http://nooo.me/	200	http://www.nooo.me/	3497	Noooooo	
-r12	https://www.nooo.me/	000	https://www.nooo.me/	0		curl: (28) SSL connection timeout 
-r13	http://www.nobodyhere.com/justme/me.here	000	http://www.nobodyhere.com/justme/me.here	0		curl: (28) Failed to connect to www.nobodyhere.com port 80 after 12002 ms: Timeo
-r14	http://nobodyhere.com/	000	http://nobodyhere.com/	0		curl: (28) Failed to connect to nobodyhere.com port 80 after 12002 ms: Timeout w
-r15	http://973-eht-namuh-973.com/	403	https://973-eht-namuh-973.com/	0		
-r16	https://www.973-eht-namuh-973.com/	403	https://www.973-eht-namuh-973.com/	0		
-r17	https://www.jaysvibes.uk/	000	https://www.jaysvibes.uk/	0		curl: (6) Could not resolve host: www.jaysvibes.uk 
-r18	https://supercook.com/recipes	403	https://supercook.com/recipes	5499	Just a moment...	
-r19	https://condimentpacket.com/	200	https://condimentpacket.com/	17801	tearhere	
-r20	https://typatone.com/	200	https://typatone.com/	3225		
-r21	https://musicforprogramming.net/latest/	200	https://musicforprogramming.net/latest/	6040		
-r22	https://generative.fm/browse	404	https://generative.fm/browse	7522		
+g01	https://www.wikiart.org/	200	https://www.wikiart.org/	398357	WikiArt.org - Visual Art Encyclopedia	
+g02	https://www.artsy.net/	200	https://www.artsy.net/	289114	Artsy — Discover and Buy Fine Art	
+g03	https://artsandculture.google.com/	200	https://artsandculture.google.com/	1499455	Google Arts & Culture	
+g04	https://www.are.na/	200	https://www.are.na/	144276	Are.na	
+g05	https://www.nationalgallery.org.uk/paintings/explore-the-collection	200	https://www.nationalgallery.org.uk/paintings/explore-the-collection	984324	Explore the collection | Paintings | National Gallery, London	
+g06	https://www.rijksmuseum.nl/en/collection	200	https://www.rijksmuseum.nl/en/collection	174649	Collection - Rijksmuseum	
+g07	https://www.musee-orsay.fr/en/collections	403	https://www.musee-orsay.fr/en/collections	5488	Attention Required! | Cloudflare	
+g08	https://www.museodelprado.es/en/the-collection	403	https://www.museodelprado.es/en/the-collection	5490	Attention Required! | Cloudflare	
+g09	https://www.uffizi.it/en/artworks	200	https://www.uffizi.it/en/artworks	225075	Artworks | Uffizi Galleries	
+g10	https://www.artic.edu/collection	403	https://www.artic.edu/collection	5636	Just a moment...	
+g11	https://theme.npm.edu.tw/selection/index.aspx?lang=2	200	https://theme.npm.edu.tw/selection/index.aspx?lang=2	176051	National Palace Museum>Selections	
+g12	https://www.nationalgallery.sg/sg/en/our-collections.html	200	https://www.nationalgallery.sg/sg/en/our-collections.html	143387	Our Collections | National Gallery Singapore	
+g13	https://www.moma.org/calendar/exhibitions	403	https://www.moma.org/calendar/exhibitions	5686	Just a moment...	
+g14	https://www.tate.org.uk/art	200	https://www.tate.org.uk/art	213262	Discover art highlights from Tate's collection | Tate	
+g15	https://www.guggenheim.org/artwork	200	https://www.guggenheim.org/artwork	111158	Artworks | The Guggenheim Museums and Foundation	
+g16	https://www.centrepompidou.fr/en/collection	200	https://www.centrepompidou.fr/en/collection	75715	Collection - Centre Pompidou	
+g17	https://www.mori.art.museum/en/exhibitions/	200	https://www.mori.art.museum/en/exhibitions/	24108	Current / Upcoming Exhibitions | Mori Art Museum	
+g18	https://www.mplus.org.hk/en/collection/	200	https://www.mplus.org.hk/en/collection/	186763	Explore the M+ Collection Online | M+ Museum	
+g19	https://www.inhotim.org.br/en/	200	https://www.inhotim.org.br/en/	139667	Home - Inhotim	
+g20	https://zeitzmocaa.museum/	200	https://zeitzmocaa.museum/	224484	Zeitz MOCAA - Museum of Contemporary Art - Zeitz MOCAA	
+g21	https://www.musee-rodin.fr/en/museum/collections	200	https://www.musee-rodin.fr/en/museum/collections	91769	Collections | Musée Rodin	
+g22	https://henry-moore.org/discover-and-research/discover-henry-moore/henry-moores-artwork/	200	https://henry-moore.org/discover-and-research/discover-henry-moore/henry-moores-artwork/	60772	Henry Moore's art | Henry Moore Foundation	
+g23	https://www.noguchi.org/artworks/collection/	200	https://www.noguchi.org/artworks/collection/	177536	Collection - The Noguchi Museum	
+g24	https://ysp.org.uk/	200	https://ysp.org.uk/	250988	Home | Yorkshire Sculpture Park	
+g25	https://www.hakone-oam.or.jp/en/	200	https://www.hakone-oam.or.jp/en/	18819	THE HAKONE OPEN-AIR MUSEUM	
+g26	https://sculpturemagazine.art/	200	https://sculpturemagazine.art/	98516	Sculpture - A publication of the International Sculpture Center	
+g27	https://beinart.org/	200	https://beinart.org/	567255	Beinart Gallery | Exhibiting Surreal & Imaginative Figurative Art	
+g28	https://www.wikiart.org/en/zdzislaw-beksinski	200	https://www.wikiart.org/en/zdzislaw-beksinski	352941	Zdzislaw Beksinski - 708 artworks - painting	
+g29	https://www.naotohattori.com/	200	https://www.naotohattori.com/	103695	Naoto Hattori Online Store	
+g30	https://www.christophermckenneyart.com/	200	https://www.christophermckenneyart.com/	435029	Surrealism - Christopher McKenney	
+g31	https://www.hr-fm.com/	200	https://www.hr-fm.com/	40006	HR-FM.COM - HOME	
+g32	https://www.erikjo.com/	200	https://www.erikjo.com/	322571	ERIK JOHANSSON	
+g33	https://floor796.com/	200	https://floor796.com/	9022	Floor796	
+g34	https://wplace.live/	200	https://wplace.live/	21969	Wplace - Collaborative Pixel Art on a World Map	
+g35	https://eboy.com/	200	https://www.eboy.com/	278748	eBoy	
+g36	https://pixel.land/	200	https://pixel.land/	3079	PixelLand - Draw Pixel Art Online With Friends	
+g37	https://hiddenfolks.com/	200	https://hiddenfolks.com/	7026	Hidden Folks games	
+g38	https://fauux.neocities.org/	200	https://fauux.neocities.org/	26108	⌈Ｗｉｒｅｄ Ｓｏｕｎｄ ｆｏｒ Ｗｉｒｅｄ Ｐｅｏｐｌｅ⌋	
+g39	https://windows93.net/	200	https://windows93.net/	3582	WINDOWS93	
+g40	https://webdesignmuseum.org/	403	https://webdesignmuseum.org/	5332	Attention Required! | Cloudflare	
+g41	https://neocities.org/browse?tag=vaporwave	200	https://neocities.org/browse?tag=vaporwave	229697	Neocities - Sites tagged vaporwave	
+g42	https://blackwings.neocities.org/	200	https://blackwings.neocities.org/	7200	「Ｂｌａｃｋ Ｗｉｎｇｓ Ｓｏｃｉｅｔｙ」	
+g43	https://mebious.neocities.org/	200	https://mebious.neocities.org/	10357	wired.entry.neocities	
+g44	https://wiredcollective.neocities.org/	200	https://wiredcollective.neocities.org/	5785	Wired Collective — Lain, Cyberpunk & Webring	
+g45	https://wwwwwwwww.jodi.org/	200	https://wwwwwwwww.jodi.org/	14637	%Location | http://wwwwwwwww.jodi.org	
+g46	https://www.cameronsworld.net/	200	https://www.cameronsworld.net/	129677	Cameron's World	
+g47	https://angusnicneven.com/	200	https://angusnicneven.com/	14408	Terminal 00	
+g48	https://973-eht-namuh-973.com/	403	https://973-eht-namuh-973.com/	0		
+g49	https://nobodyhere.com/justme/me.here	000	https://nobodyhere.com/justme/me.here	0		curl: (28) Failed to connect to nobodyhere.com port 443 after 12002 ms: Timeout 
+g50	https://superbad.com/	200	https://superbad.com/	1327	__________________________________superbad	
+g51	https://optical.toys/	200	https://optical.toys/	29148	Optical Toys | Optical Illusions and Toys	
+g52	https://madebyevan.com/webgl-water/	200	https://madebyevan.com/webgl-water/	2928	WebGL Water	
+g53	https://koalastothemax.com/	200	https://koalastothemax.com/	17245	Koalas to the Max dot Com	
+g54	https://paveldogreat.github.io/WebGL-Fluid-Simulation/	200	https://paveldogreat.github.io/WebGL-Fluid-Simulation/	6735	WebGL Fluid Simulation	
+g55	https://www.adultswim.com/etcetera/elastic-man/	200	https://www.adultswim.com/etcetera/elastic-man	40358	Adult Swim - Etcetera - Elastic Man	
+g56	https://zoomquilt.org/	200	https://zoomquilt.org/	8492	Zoomquilt - The infinitely zooming image	
+g57	https://weavesilk.com/	200	https://weavesilk.com/	23455	Silk – Interactive Generative Art	
+g58	https://drawing.garden/	200	https://drawing.garden/	3432	drawing.garden	
+g59	https://patatap.com/	200	https://patatap.com/	2595		
+g60	https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw	200	https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw	658551	Blob Opera — Google Arts & Culture	
+g61	https://fallingfalling.com/	200	https://fallingfalling.com/	3057	collection of hampus lindwall, falling falling .com by rafaël rozendaal, 2011. sound by gl	
+g62	https://infiniteflowers.net/	200	https://infiniteflowers.net/	5629	Infinite Flowers Zoomquilt – An infinitely zooming painting by Nikolaus Baumgarten	
+g63	https://vectorpark.com/head/	200	https://vectorpark.com/head/	773	Feed the Head	
+g64	https://www.maninthedark.com/	200	https://www.maninthedark.com/	7097	maninthedark.com by Miltos Manetas and Aaron Russ Clinger , 2004.	
+g65	https://thisissand.com/	200	https://thisissand.com/	2437	Thisissand	
+g66	https://sandspiel.club/	200	https://sandspiel.club/	3027	sandspiel	
+g67	https://oskarstalberg.com/Townscaper/	200	https://oskarstalberg.com/Townscaper/	3010	Townscaper	
+g68	https://bruno-simon.com/	200	https://bruno-simon.com/	58809	Bruno's	
+g69	https://www.archdaily.com/	200	https://www.archdaily.com/	1008208	ArchDaily | Broadcasting Architecture Worldwide	
+g70	https://www.dezeen.com/	200	https://www.dezeen.com/	347714	Dezeen | architecture and design magazine	
+g71	https://divisare.com/	200	https://divisare.com/	97276	Divisare · Atlas of Architecture	
+g72	https://architizer.com/	403	https://architizer.com/	5488	Attention Required! | Cloudflare	
+g73	https://architectuul.com/	403	https://architectuul.com/	5502	Just a moment...	
+g74	https://www.archnet.org/	429	https://www.archnet.org/	34217	Vercel Security Checkpoint	
+g75	https://hiddenarchitecture.net/	200	https://hiddenarchitecture.net/	31155	Hidden Architecture »	
+g76	https://worldarchitecture.org/	200	https://worldarchitecture.org/	72980	World Architecture Community | Architecture News & Awards	
+g77	https://www.archilovers.com/	200	https://www.archilovers.com/	72468	Archilovers | The professional network for Architects and Designers	
+p3arkadia	https://arkadia.xyz/	200	https://arkadia.xyz/	5941	Arkadia Zoomquilt – An infinitely zooming floral botanical painting	
