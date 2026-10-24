@@ -5,31 +5,32 @@ on:
 permissions:
   contents: write
 jobs:
-  shorten:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create short links
+      - name: Check every URL
         run: |
-          LONG="https://tsukustukatadotojo-bit.github.io/anrevy-house/"
-          ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$LONG")
-          : > short.txt
-          for name in anrevy anrvy anrevyhouse; do
-            r=$(curl -s --max-time 20 "https://is.gd/create.php?format=simple&url=$ENC&shorturl=$name" || true)
-            printf 'isgd-%s\t%s\n' "$name" "$r" >> short.txt
-            case "$r" in https://*) break;; esac
-          done
-          printf 'isgd-random\t%s\n' "$(curl -s --max-time 20 "https://is.gd/create.php?format=simple&url=$ENC" || true)" >> short.txt
-          printf 'tinyurl\t%s\n' "$(curl -s --max-time 20 "https://tinyurl.com/api-create.php?url=$ENC" || true)" >> short.txt
-          cp short.txt list.txt
-          while IFS=$'\t' read -r k u; do
-            case "$u" in https://*) printf 'check-%s\t%s\n' "$k" "$(curl -s -o /dev/null -w '%{http_code} %{url_effective}' -L --max-time 20 "$u" || true)" >> short.txt;; esac
-          done < list.txt
-          cat short.txt
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          : > results.tsv
+          while IFS=$'\t' read -r id url; do
+            [ -z "$url" ] && continue
+            rm -f body.html
+            meta=$(curl -sSL -A "$UA" -H "Accept-Language: en" -o body.html -w '%{http_code}\t%{url_effective}' --max-time 30 --connect-timeout 12 "$url" 2>err.txt || true)
+            err=$(tr '\n' ' ' < err.txt | cut -c1-80)
+            size=$(wc -c < body.html 2>/dev/null || echo 0)
+            title=$(python3 -c "import re,html
+          try: t=open('body.html','rb').read().decode('utf-8','ignore')
+          except Exception: t=''
+          m=re.search(r'<title[^>]*>(.*?)</title>',t,re.S|re.I)
+          print(html.unescape(re.sub(r'\s+',' ',m.group(1))).strip()[:90] if m else '')")
+            printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$id" "$url" "$meta" "$size" "$title" "$err" >> results.tsv
+          done < urls.tsv
+          cat results.tsv
       - name: Save results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add short.txt
-          git commit -m "Short link results"
+          git add results.tsv
+          git commit -m "Link check results [skip ci]"
           git push
