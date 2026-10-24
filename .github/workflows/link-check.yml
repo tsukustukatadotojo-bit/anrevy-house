@@ -9,19 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find YouTube videos
+      - name: Brokers and CDN
         run: |
-          python3 tools/ytfind.py tools/q.txt
-          python3 - <<'PY'
-          t = open('out.txt', encoding='utf-8').read()
-          parts = t.split('\n## ')
-          chunks, cur = [], ''
-          for i, p in enumerate(parts):
-              p = p if i == 0 else '## ' + p
-              if len(cur) + len(p) > 3500: chunks.append(cur); cur = ''
-              cur += p + '\n'
-          chunks.append(cur)
-          for k, c in enumerate(chunks[:10]):
-              msg = c.replace('%', '%25').replace('\r', '').replace('\n', '%0A')
-              print(f'::notice title=yt{k}::{msg}')
-          PY
+          cd tools && npm init -y >/dev/null && npm i mqtt@5.10.1 >/dev/null 2>&1
+          node brokers.mjs || true
+          echo "::notice title=brokers::$(sed ':a;N;$!ba;s/\n/%0A/g' out.txt)"
+          c1=$(curl -sS -o /dev/null -w '%{http_code} %{size_download}' https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js)
+          c2=$(curl -sS -o /dev/null -w '%{http_code}' -A 'Mozilla/5.0 Chrome/129' 'https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=VT323&display=swap')
+          t1=$(timeout 8 bash -c 'echo > /dev/tcp/openrelay.metered.ca/443' && echo open || echo closed)
+          t2=$(timeout 8 bash -c 'echo > /dev/tcp/openrelay.metered.ca/80' && echo open || echo closed)
+          echo "::notice title=cdn::mqtt.min.js $c1 | fredoka css $c2 | openrelay 443 $t1, 80 $t2"
