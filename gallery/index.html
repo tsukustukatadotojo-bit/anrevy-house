@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>An Vy's Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap">
+<style>
+:root{
+  /* Layout: vỏ kiểu Google Ảnh — thanh trên cố định, cột điều hướng trái (Phòng tranh / Khám phá), lưới hàng đều nhóm theo năm trên tường trắng phòng triển lãm.
+     Trình xem treo một tác phẩm giữa tường; mặt sau là vải toan, khung gỗ và tờ ghi chú. Mục Khám phá là danh mục 77 địa chỉ đánh số như thẻ catalogue.
+     Một giao diện sáng duy nhất, cố ý: nền là tường phòng tranh. */
+  --wall:#F6F6F3;
+  --surface:#FFFFFF;
+  --ink:#1D1E1B;
+  --ink-2:#5B5D57;
+  --ink-3:#8A8C85;
+  --hair:#E1E1DB;
+  --field:#ECECE7;
+  --accent:#2C45A6;      /* xanh ultramarine, màu bột màu */
+  --accent-hover:#22378A;
+  --accent-soft:#ECEFFA;
+  --accent-line:#CBD3F0;
+  --wood:#C6A47A;
+  --wood-edge:#A6845A;
+  --linen:#D8CCB2;
+  --linen-line:rgba(110,92,62,.11);
+  --stamp:#9A3B2E;
+  --note-ink:#2A2A26;
+  --ph:#DCDCD6;
+  --font-ui:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-display:"Cormorant Garamond","Cormorant",Garamond,"Times New Roman",serif;
+  --font-read:"Literata",Georgia,"Times New Roman",serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --topbar-h:68px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--wall);color:var(--ink)}
+body{margin:0;font-family:var(--font-ui);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--wall)}
+
+/* ---------- Thanh trên ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;height:var(--topbar-h);background:var(--wall);border-bottom:1px solid var(--hair);display:grid;grid-template-columns:236px minmax(0,1fr) auto;align-items:center;gap:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;flex-direction:column;justify-content:center;min-width:0;text-decoration:none;line-height:1;padding:4px 0;border-radius:6px}
+.wm-1{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:29px;letter-spacing:-.005em;white-space:nowrap}
+.wm-2{margin-top:3px;font-size:10.5px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.search{justify-self:center;width:min(680px,100%);height:46px;display:flex;align-items:center;gap:12px;padding:0 18px;border-radius:999px;background:var(--field);color:var(--ink-2)}
+.search:focus-within{background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08),0 2px 10px rgba(0,0,0,.08)}
+.search svg{flex:none}
+.search input{flex:1;min-width:0;height:100%;border:0;background:transparent;font-size:15px;color:var(--ink);outline:none}
+.search input::placeholder{color:var(--ink-3)}
+.top-count{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ---------- Khung chính ---------- */
+.shell{display:grid;grid-template-columns:236px minmax(0,1fr);gap:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.rail{position:sticky;top:calc(var(--topbar-h) + env(safe-area-inset-top,0px));align-self:start;display:flex;flex-direction:column;gap:2px;padding-block:14px 24px;margin-left:-16px;max-height:calc(100vh - var(--topbar-h));overflow:auto}
+.rail-label{padding:14px 24px 6px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.rail-label:first-child{padding-top:2px}
+.rail-item{display:flex;align-items:center;gap:16px;height:42px;padding:0 18px 0 24px;border:0;border-radius:0 999px 999px 0;background:none;color:var(--ink-2);font-weight:500;text-align:left;cursor:pointer;white-space:nowrap}
+.rail-item:hover{background:var(--field)}
+.rail-item[aria-current="true"]{background:var(--accent-soft);color:var(--accent)}
+.rail-item svg{flex:none}
+a.rail-item{text-decoration:none}
+.rail-count{margin-left:auto;font-size:12.5px;font-weight:400;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.rail-item[aria-current="true"] .rail-count{color:var(--accent)}
+.rail-sub{display:flex;align-items:baseline;gap:10px;min-height:32px;padding:6px 18px 6px 62px;border:0;border-radius:0 999px 999px 0;background:none;color:var(--ink-2);font-size:13px;text-align:left;cursor:pointer;line-height:1.3}
+.rail-sub:hover{background:var(--field);color:var(--ink)}
+.rail-sub .no{font-family:var(--font-mono);font-size:11px;color:var(--ink-3)}
+
+main{min-width:0;padding-block:10px 240px}
+
+/* ---------- Phòng tranh ---------- */
+.intro{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;padding:12px 0 4px}
+.intro h1{margin:0;font-family:var(--font-display);font-weight:500;font-size:34px;line-height:1.1;letter-spacing:-.01em}
+.intro p{margin:0;max-width:62ch;color:var(--ink-2)}
+.notice{margin-top:14px;padding:12px 16px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;color:var(--ink-2)}
+.group{padding-top:24px}
+.group-head{display:flex;align-items:baseline;gap:12px;margin:0 0 12px}
+.group-head .y{font-family:var(--font-display);font-size:30px;font-weight:500;line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.group-head .n{font-size:13px;color:var(--ink-3)}
+.row{display:flex;gap:4px;margin-bottom:4px}
+.tile{position:relative;flex:none;display:block;padding:0;border:0;overflow:hidden;background:var(--ph);cursor:pointer}
+.tile img{display:block;width:100%;height:100%;object-fit:cover}
+.tile.broken::after{content:"Không tải được ảnh";position:absolute;inset:0;display:grid;place-items:center;font-size:12px;color:var(--ink-2)}
+.tile-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 8px;color:#fff;font-size:12.5px;line-height:1.3;text-align:left;background:linear-gradient(to top,rgba(0,0,0,.58),rgba(0,0,0,0));visibility:hidden}
+.tile-cap small{display:block;opacity:.8;font-size:11.5px}
+.tile:hover .tile-cap,.tile:focus-visible .tile-cap{visibility:visible}
+.tile:focus-visible{outline-offset:-3px}
+.empty{margin:72px auto 0;max-width:46ch;text-align:center;color:var(--ink-2)}
+.empty h2{font-family:var(--font-display);font-weight:500;font-size:28px;color:var(--ink);margin:0 0 6px;text-wrap:balance}
+.empty p{margin:0}
+
+/* ---------- Khám phá nghệ thuật ---------- */
+.lv-head{padding:12px 0 6px}
+.lv-head h1{margin:0;font-family:var(--font-display);font-weight:500;font-size:40px;line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+.lv-head p{margin:8px 0 0;max-width:68ch;color:var(--ink-2);font-size:15px;line-height:1.55}
+.lv-index{list-style:none;margin:22px 0 4px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:6px 18px;border-top:1px solid var(--hair);padding-top:14px}
+.lv-index button{display:flex;align-items:baseline;gap:10px;width:100%;padding:6px 8px;margin-left:-8px;border:0;border-radius:6px;background:none;text-align:left;cursor:pointer;color:var(--ink)}
+.lv-index button:hover{background:var(--field)}
+.lv-index .no{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3)}
+.lv-index .ct{margin-left:auto;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.lg{padding-top:34px;scroll-margin-top:calc(var(--topbar-h) + env(safe-area-inset-top,0px) + 8px)}
+.lg-head{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:baseline;margin-bottom:14px}
+.lg-head .no{font-family:var(--font-mono);font-size:13px;color:var(--accent);font-weight:500}
+.lg-head h2{margin:0;font-family:var(--font-display);font-weight:500;font-size:28px;line-height:1.15;letter-spacing:-.005em;text-wrap:balance}
+.lg-head p{grid-column:2;margin:4px 0 0;color:var(--ink-2);max-width:70ch}
+.lk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px}
+.lk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 14px;align-items:start;padding:14px 14px 15px 16px;min-width:0;background:var(--surface);border:1px solid var(--hair);border-radius:10px;text-decoration:none;color:var(--ink)}
+.lk:hover{border-color:var(--accent-line);background:var(--accent-soft)}
+.lk-no{padding-top:3px;font-family:var(--font-mono);font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.lk-body{min-width:0;display:flex;flex-direction:column;gap:2px}
+.lk-name{font-weight:600;font-size:15px;line-height:1.3}
+.lk-host{font-family:var(--font-mono);font-size:11.5px;color:var(--accent);overflow-wrap:anywhere}
+.lk-desc{margin-top:6px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.lk-go{padding-top:2px;color:var(--ink-3)}
+.lk:hover .lk-go{color:var(--accent)}
+.lv-empty{margin:48px 0;color:var(--ink-2)}
+mark{background:#FFF0B8;color:inherit;padding:0 1px;border-radius:2px}
+
+.site-foot{margin-top:56px;padding-top:16px;border-top:1px solid var(--hair);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px;font-size:12px;color:var(--ink-3)}
+.site-foot .wm{font-family:var(--font-display);font-style:italic;font-size:17px;color:var(--ink-2)}
+
+/* ---------- Nhạc nền ---------- */
+.music{position:fixed;z-index:60;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:258px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.06),0 10px 28px rgba(0,0,0,.12);overflow:hidden}
+.music-head{display:flex;align-items:center;gap:8px;height:34px;padding:0 4px 0 12px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
+.music-head .note-glyph{font-size:14px;color:var(--accent)}
+.music-head .grow{flex:1}
+.music-head .icon-btn{width:28px;height:28px}
+.music-body iframe{display:block;width:256px;height:144px;border:0;background:#000}
+.music-link{display:flex;align-items:center;gap:10px;padding:10px 12px 12px;color:var(--accent);font-weight:500;text-decoration:none;font-size:13px}
+.music-link:hover{text-decoration:underline}
+.music-link .play{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center}
+.music.collapsed{width:auto}
+.music.collapsed .music-body{position:absolute;left:-10000px;top:0}
+
+/* ---------- Nút chung ---------- */
+.icon-btn{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:none;display:grid;place-items:center;color:var(--ink-2);cursor:pointer}
+.icon-btn:hover{background:var(--field);color:var(--ink)}
+.icon-btn:disabled{opacity:.3;cursor:default;background:none}
+.pill-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--hair);background:var(--surface);font-weight:500;font-size:13.5px;cursor:pointer;white-space:nowrap}
+.pill-btn:hover{background:var(--field)}
+
+/* ---------- Trình xem toàn màn hình ---------- */
+.viewer{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;background:var(--wall);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.v-bar{flex:none;display:flex;align-items:center;gap:8px;height:58px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.v-head{flex:1;min-width:0;display:flex;align-items:baseline;gap:10px}
+.v-head b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v-head span{flex:none;font-family:var(--font-mono);font-size:12px;color:var(--ink-3)}
+.v-actions{display:flex;align-items:center;gap:6px}
+.v-stage{flex:1;min-height:0;display:grid;grid-template-columns:64px minmax(0,1fr) 64px;grid-template-rows:minmax(0,1fr);padding-block:6px}
+.v-nav{align-self:center;justify-self:center;width:48px;height:48px;background:var(--surface);border:1px solid var(--hair)}
+.v-art{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center}
+.v-art img{display:block;max-width:100%;max-height:100%;object-fit:contain;cursor:pointer;background:var(--ph);box-shadow:0 1px 2px rgba(35,28,16,.2),0 22px 44px -16px rgba(35,28,16,.38)}
+.v-label{flex:none;padding:10px 16px 20px;text-align:center}
+.v-label .t{margin:0;font-family:var(--font-display);font-size:21px;line-height:1.2}
+.v-label .t i{font-style:italic}
+.v-label .m{margin:3px 0 0;font-size:13px;color:var(--ink-2)}
+.v-label .h{margin:6px 0 0;font-size:12px;color:var(--ink-3)}
+
+/* Mặt sau: vải lanh, khung gỗ căng toan, tờ ghi chú */
+.back{position:relative;max-width:100%;max-height:100%;cursor:pointer;background-color:var(--linen);background-image:repeating-linear-gradient(0deg,var(--linen-line) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,var(--linen-line) 0 1px,transparent 1px 4px);box-shadow:0 1px 2px rgba(35,28,16,.2),0 22px 44px -16px rgba(35,28,16,.38)}
+.back::before{content:"";position:absolute;inset:6px;border:22px solid var(--wood);box-shadow:inset 0 0 0 1px var(--wood-edge),0 0 0 1px var(--wood-edge);pointer-events:none}
+.sheet{position:absolute;inset:44px;overflow:auto;cursor:auto;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.2);padding:28px clamp(18px,4vw,44px) 34px}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.eyebrow{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.sheet h3{margin:6px 0 4px;font-family:var(--font-display);font-weight:500;font-size:clamp(26px,3vw,36px);line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+.sheet .meta{margin:0;color:var(--ink-2);font-size:13.5px}
+.stamp{flex:none;margin-top:4px;padding:6px 9px;border:2px solid var(--stamp);color:var(--stamp);font-family:var(--font-mono);font-size:10.5px;line-height:1.35;letter-spacing:.06em;text-align:center;text-transform:uppercase;transform:rotate(-5deg);opacity:.8}
+.sheet hr{border:0;border-top:1px solid var(--hair);margin:20px 0 16px}
+.note-head{margin-bottom:10px}
+.note-head b{color:var(--ink-2);font-weight:500}
+.note{margin:0;max-width:65ch;font-family:var(--font-read);font-size:17px;line-height:1.78;color:var(--note-ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.note.empty-note{color:var(--ink-3);font-style:italic}
+.sheet-foot{margin-top:22px;font-size:12px;color:var(--ink-3)}
+
+/* ---------- Màn hình hẹp ---------- */
+@media (max-width:900px){
+  .topbar{grid-template-columns:auto minmax(0,1fr) auto}
+  .top-count{display:none}
+  .shell{grid-template-columns:minmax(0,1fr);gap:0}
+  .rail{position:static;flex-direction:row;align-items:center;gap:8px;margin-left:0;padding-block:12px 2px;max-height:none;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+  .rail::-webkit-scrollbar{display:none}
+  .rail-label,.rail-sub{display:none}
+  .rail-item{flex:none;height:36px;gap:8px;padding:0 14px;border:1px solid var(--hair);border-radius:999px;background:var(--surface)}
+  .rail-item[aria-current="true"]{border-color:var(--accent-line)}
+  .rail-item svg{width:18px;height:18px}
+  .rail-count{margin-left:2px}
+  .lv-index{grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 14px}
+  .lv-index button{padding:6px 8px;font-size:13.5px}
+}
+@media (max-width:560px){
+  .topbar{gap:12px}
+  .wm-1{font-size:23px}
+  .wm-2{font-size:9px;letter-spacing:.28em}
+  .search{height:42px;padding:0 14px}
+  .intro h1{font-size:28px}
+  .lv-head h1{font-size:32px}
+  .group-head .y{font-size:26px}
+  .music{width:202px}
+  .music-body iframe{width:200px;height:113px}
+  .v-stage{grid-template-columns:40px minmax(0,1fr) 40px}
+  .v-nav{width:36px;height:36px}
+  .v-actions .pill-btn .long{display:none}
+  .v-head span{display:none}
+  .sheet{inset:34px;padding:22px 18px 28px}
+  .sheet-head .eyebrow{white-space:nowrap}
+  .stamp{font-size:9.5px;padding:4px 6px;border-width:1.5px}
+  .back::before{border-width:16px}
+  .note{font-size:16px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" id="brand" aria-label="An Vy’s Gallery, về phòng tranh">
+    <span class="wm-1">An Vy’s</span><span class="wm-2">Gallery</span>
+  </a>
+  <label class="search" for="q">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+    <span class="sr-only">Tìm kiếm</span>
+    <input id="q" type="search" autocomplete="off" placeholder="Tìm tác phẩm theo tên, chất liệu, năm…">
+  </label>
+  <span class="top-count" id="topCount"></span>
+</header>
+
+<div class="shell">
+  <nav class="rail" id="rail" aria-label="Điều hướng"></nav>
+  <main id="main">
+    <section id="galleryView" aria-labelledby="gTitle">
+      <div class="intro">
+        <h1 id="gTitle">Phòng tranh</h1>
+        <p>Tranh và ảnh An Vy lưu giữ, xếp theo năm. Bấm một tác phẩm để xem toàn màn hình, bấm thêm lần nữa để lật ra mặt sau đọc ghi chú.</p>
+      </div>
+      <div class="notice" id="notice" hidden></div>
+      <div id="groups"></div>
+      <div class="empty" id="empty" hidden></div>
+    </section>
+
+    <section id="linksView" hidden aria-labelledby="lTitle">
+      <header class="lv-head">
+        <h1 id="lTitle">Khám phá nghệ thuật</h1>
+        <p id="lvLead"></p>
+      </header>
+      <ol class="lv-index" id="lvIndex"></ol>
+      <div id="lvGroups"></div>
+      <p class="lv-empty" id="lvEmpty" hidden></p>
+    </section>
+
+    <footer class="site-foot">
+      <span class="wm">An Vy’s Gallery</span>
+      <span>Tranh và ảnh lưu giữ riêng · Danh mục liên kết cập nhật ngày 24/10/2026 · <a href="../home.html">← Về ANREVY HOUSE</a></span>
+    </footer>
+  </main>
+</div>
+
+<div class="music" id="music">
+  <div class="music-head">
+    <span class="note-glyph" aria-hidden="true">♪</span>
+    <span class="grow">Nhạc nền</span>
+    <button class="icon-btn" id="musicToggle" type="button" aria-label="Thu nhỏ trình phát nhạc" aria-expanded="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path id="musicToggleIcon" d="M6 12h12"/></svg>
+    </button>
+  </div>
+  <div class="music-body" id="musicBody"></div>
+</div>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="vTitle">
+  <div class="v-bar">
+    <button class="icon-btn" id="vClose" type="button" aria-label="Đóng (Esc)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="v-head"><b id="vTitle"></b><span id="vCat"></span></div>
+    <div class="v-actions">
+      <button class="pill-btn" id="vFlip" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9M20 4v5h-5M20 12a8 8 0 0 1-13.7 5.6L4 15M4 20v-5h5"/></svg>
+        <span id="vFlipLabel">Lật<span class="long"> mặt sau</span></span>
+      </button>
+      <button class="icon-btn" id="vFull" type="button" aria-label="Toàn màn hình">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="v-stage">
+    <button class="icon-btn v-nav" id="vPrev" type="button" aria-label="Tác phẩm trước (←)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+    </button>
+    <div class="v-art" id="vArt">
+      <img id="vImg" alt="">
+      <div class="back" id="vBack" hidden></div>
+    </div>
+    <button class="icon-btn v-nav" id="vNext" type="button" aria-label="Tác phẩm sau (→)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="v-label">
+    <p class="t"><i id="vlTitle"></i><span id="vlYear"></span></p>
+    <p class="m" id="vlMeta"></p>
+    <p class="h" id="vlHint"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= Cấu hình ================= */
+var YT_ID = "57H8hbnqvMM";
+var YT_URL = "https://youtu.be/57H8hbnqvMM?si=-uCXWZrmbFVN9sxy";
+var IN_ARTIFACT = (typeof window.claude === "object" && window.claude !== null && typeof window.claude.use === "function") || /claude/i.test(location.hostname);
+
+/* Danh mục liên kết (trích từ tệp "Website hội họa, tranh ảnh, triển lãm, điêu khắc", 24/10/2026) */
+var LINK_GROUPS = [{"n": 1, "short": "Nền tảng", "title": "Nền tảng khám phá và xây dựng bộ sưu tập", "desc": "Tra cứu tác phẩm, theo dõi nghệ sĩ và lưu những hình ảnh phù hợp với sở thích.", "items": [{"no": "01", "name": "WikiArt", "url": "https://www.wikiart.org/", "host": "wikiart.org", "desc": "Tra cứu tranh theo họa sĩ, trường phái, phong cách, thể loại và thời kỳ. Phù hợp để lần từ một tác phẩm yêu thích sang những nghệ sĩ và hướng hội họa liên quan."}, {"no": "02", "name": "Artsy", "url": "https://www.artsy.net/", "host": "artsy.net", "desc": "Khám phá nghệ sĩ, theo dõi người sáng tác và lưu tác phẩm yêu thích. Nền tảng hướng nhiều đến thị trường mua bán nghệ thuật."}, {"no": "03", "name": "Google Arts and Culture", "url": "https://artsandculture.google.com/", "host": "artsandculture.google.com", "desc": "Xem tác phẩm, triển lãm trực tuyến và nội dung từ các bảo tàng. Nhiều tác phẩm có ảnh cho phép phóng lớn để quan sát chi tiết."}, {"no": "04", "name": "Are.na", "url": "https://www.are.na/", "host": "are.na", "desc": "Lưu hình ảnh, đường dẫn, video và văn bản thành các bộ sưu tập. Có thể xây dựng kho tham khảo riêng hoặc cùng người khác để kết nối ý tưởng và phát triển gu thẩm mỹ."}]}, {"n": 2, "short": "Hội họa", "title": "Hội họa và bộ sưu tập bảo tàng", "desc": "Tranh và tư liệu từ các bảo tàng tại châu Âu, châu Mỹ và châu Á.", "items": [{"no": "05", "name": "The National Gallery", "url": "https://www.nationalgallery.org.uk/paintings/explore-the-collection", "host": "nationalgallery.org.uk", "desc": "Bộ sưu tập hội họa châu Âu, phù hợp để khám phá tranh cổ điển và những họa sĩ nổi tiếng. Mở Explore the collection hoặc Virtual Gallery."}, {"no": "06", "name": "Rijksmuseum", "url": "https://www.rijksmuseum.nl/en/collection", "host": "rijksmuseum.nl", "desc": "Bộ sưu tập nghệ thuật Hà Lan và nhiều loại hiện vật, có tranh của các bậc thầy như Rembrandt và Vermeer. Mở Artworks hoặc Art Explorer."}, {"no": "07", "name": "Musée d'Orsay", "url": "https://www.musee-orsay.fr/en/collections", "host": "musee-orsay.fr", "desc": "Hội họa, bản vẽ và các bộ sưu tập của bảo tàng; đặc biệt phù hợp nếu thích tranh Ấn tượng và Hậu Ấn tượng. Lọc Paintings và Has images."}, {"no": "08", "name": "Museo Nacional del Prado", "url": "https://www.museodelprado.es/en/the-collection", "host": "museodelprado.es", "desc": "Hội họa châu Âu với các tác phẩm của Velázquez, Goya, Bosch và nhiều họa sĩ khác. Tìm theo họa sĩ hoặc tên tác phẩm."}, {"no": "09", "name": "Uffizi Galleries", "url": "https://www.uffizi.it/en/artworks", "host": "uffizi.it", "desc": "Tranh và điêu khắc từ các bộ sưu tập Uffizi, Pitti Palace và Boboli; phù hợp để khám phá nghệ thuật Phục hưng. Mở Artworks hoặc Hypervisions."}, {"no": "10", "name": "Art Institute of Chicago", "url": "https://www.artic.edu/collection", "host": "artic.edu", "desc": "Bộ sưu tập nhiều thời kỳ, gồm hội họa, điêu khắc, nhiếp ảnh và các loại hình nghệ thuật khác. Tìm theo nghệ sĩ hoặc loại tác phẩm."}, {"no": "11", "name": "National Palace Museum", "url": "https://theme.npm.edu.tw/selection/index.aspx?lang=2", "host": "theme.npm.edu.tw", "desc": "Tranh, thư pháp và hiện vật trong bộ sưu tập Cố Cung; phù hợp để xem nghệ thuật truyền thống Trung Hoa. Chọn Painting hoặc Calligraphy."}, {"no": "12", "name": "National Gallery Singapore", "url": "https://www.nationalgallery.sg/sg/en/our-collections.html", "host": "nationalgallery.sg", "desc": "Nghệ thuật Singapore và Đông Nam Á, gồm tác phẩm từ Việt Nam và nhiều nước trong khu vực. Mở Search Our Collections."}]}, {"n": 3, "short": "Triển lãm", "title": "Triển lãm và nghệ thuật sắp đặt", "desc": "Khám phá tác phẩm đương đại và cách nghệ thuật được trưng bày trong không gian.", "items": [{"no": "13", "name": "MoMA", "url": "https://www.moma.org/calendar/exhibitions", "host": "moma.org", "desc": "Triển lãm và các khu trưng bày nghệ thuật hiện đại, đương đại, với hồ sơ giới thiệu từng dự án. Mở một triển lãm hoặc tìm trong lịch sử triển lãm."}, {"no": "14", "name": "Tate", "url": "https://www.tate.org.uk/art", "host": "tate.org.uk", "desc": "Tác phẩm, nghệ sĩ và bài giải thích các loại hình nghệ thuật, bao gồm sắp đặt và điêu khắc. Tìm Installation art hoặc tên nghệ sĩ."}, {"no": "15", "name": "Guggenheim", "url": "https://www.guggenheim.org/artwork", "host": "guggenheim.org", "desc": "Bộ sưu tập trực tuyến về nghệ thuật hiện đại và đương đại, gồm tranh, điêu khắc, ảnh và video. Mở Collection Online và lọc tác phẩm."}, {"no": "16", "name": "Centre Pompidou", "url": "https://www.centrepompidou.fr/en/collection", "host": "centrepompidou.fr", "desc": "Tác phẩm nghệ thuật hiện đại và đương đại, kèm nội dung giới thiệu, video và tư liệu bộ sưu tập. Mở Masterpieces hoặc Collection departments."}, {"no": "17", "name": "Mori Art Museum", "url": "https://www.mori.art.museum/en/exhibitions/", "host": "mori.art.museum", "desc": "Triển lãm nghệ thuật đương đại và các nội dung số; phù hợp để xem cách tác phẩm được tổ chức trong không gian. Mở Exhibitions hoặc MAM Digital."}, {"no": "18", "name": "M+", "url": "https://www.mplus.org.hk/en/collection/", "host": "mplus.org.hk", "desc": "Bộ sưu tập trực tuyến về nghệ thuật và văn hóa thị giác, với trọng tâm châu Á. Mở Collection Online và tìm theo nghệ sĩ hoặc loại hình."}, {"no": "19", "name": "Inhotim", "url": "https://www.inhotim.org.br/en/", "host": "inhotim.org.br", "desc": "Nghệ thuật đương đại kết hợp các phòng trưng bày, tác phẩm ngoài trời và cảnh quan vườn. Mở Collections, Galleries hoặc Works in galleries."}, {"no": "20", "name": "Zeitz MOCAA", "url": "https://zeitzmocaa.museum/", "host": "zeitzmocaa.museum", "desc": "Nghệ thuật đương đại từ châu Phi và cộng đồng gốc Phi, với nội dung về triển lãm và nghệ sĩ. Mở Exhibitions hoặc Our Story."}]}, {"n": 4, "short": "Điêu khắc", "title": "Điêu khắc và nghệ thuật ngoài trời", "desc": "Tác phẩm, hồ sơ nghệ sĩ, công viên điêu khắc và tạp chí chuyên ngành.", "items": [{"no": "21", "name": "Musée Rodin", "url": "https://www.musee-rodin.fr/en/museum/collections", "host": "musee-rodin.fr", "desc": "Điêu khắc và các tư liệu trong bộ sưu tập Rodin, có mục khám phá tác phẩm theo chủ đề. Mở Artworks, Theme Gallery hoặc Rodin in the world."}, {"no": "22", "name": "Henry Moore Foundation", "url": "https://henry-moore.org/discover-and-research/discover-henry-moore/henry-moores-artwork/", "host": "henry-moore.org", "desc": "Tra cứu các tác phẩm điêu khắc, phác thảo và tư liệu của Henry Moore. Chọn Sculptures hoặc Search the whole catalogue."}, {"no": "23", "name": "The Noguchi Museum", "url": "https://www.noguchi.org/artworks/collection/", "host": "noguchi.org", "desc": "Bộ sưu tập điêu khắc, mô hình và thiết kế của Isamu Noguchi. Mở Museum Collection và chọn từng tác phẩm."}, {"no": "24", "name": "Yorkshire Sculpture Park", "url": "https://ysp.org.uk/", "host": "ysp.org.uk", "desc": "Tác phẩm điêu khắc ngoài trời và triển lãm, phù hợp để quan sát nghệ thuật trong cảnh quan. Mở Art outdoors hoặc Exhibitions."}, {"no": "25", "name": "The Hakone Open-Air Museum", "url": "https://www.hakone-oam.or.jp/en/", "host": "hakone-oam.or.jp", "desc": "Bảo tàng điêu khắc ngoài trời với thông tin tác phẩm, các khu trưng bày và sơ đồ khám phá. Mở Permanent Exhibits hoặc Map of Outdoor Exhibits."}, {"no": "26", "name": "Sculpture Magazine", "url": "https://sculpturemagazine.art/", "host": "sculpturemagazine.art", "desc": "Tạp chí của International Sculpture Center, có bài phỏng vấn nghệ sĩ và giới thiệu triển lãm điêu khắc. Mở Interviews hoặc Reviews."}]}, {"n": 5, "short": "Siêu thực và nhiếp ảnh", "title": "Tranh siêu thực và nhiếp ảnh nghệ thuật", "desc": "Các họa sĩ, nghệ sĩ hình ảnh, nhiếp ảnh gia và phòng tranh mang thẩm mỹ khác lạ.", "items": [{"no": "27", "name": "Beinart Gallery", "url": "https://beinart.org/", "host": "beinart.org", "desc": "Tác phẩm của nhiều nghệ sĩ theo đuổi tranh siêu thực, sinh vật tưởng tượng và điêu khắc kỳ quái."}, {"no": "28", "name": "Zdzisław Beksiński", "url": "https://www.wikiart.org/en/zdzislaw-beksinski", "host": "wikiart.org", "desc": "Bộ sưu tập tranh với những cảnh quan, kiến trúc và hình thể thường gợi cảm giác ác mộng."}, {"no": "29", "name": "Naoto Hattori", "url": "https://www.naotohattori.com/", "host": "naotohattori.com", "desc": "Những sinh vật tưởng tượng, đôi mắt lớn và các hình thể lai giàu chi tiết."}, {"no": "30", "name": "Christopher McKenney", "url": "https://www.christophermckenneyart.com/", "host": "christophermckenneyart.com", "desc": "Ảnh siêu thực với những nhân vật, hình thể và khung cảnh mang sắc thái ma mị."}, {"no": "31", "name": "HR-FM", "url": "https://www.hr-fm.com/", "host": "hr-fm.com", "desc": "Hình ảnh theo ý tưởng hóa thạch của tương lai, kết hợp những thời điểm không tương thích."}, {"no": "32", "name": "Erik Johansson", "url": "https://www.erikjo.com/", "host": "erikjo.com", "desc": "Ảnh ghép các cảnh bất khả thi nhưng giữ cảm giác chân thực của nhiếp ảnh."}]}, {"n": 6, "short": "Pixel art", "title": "Pixel art và tranh giàu chi tiết", "desc": "Khám phá thế giới pixel, tranh có nhiều lớp chi tiết và các không gian vẽ cộng đồng.", "items": [{"no": "33", "name": "Floor796", "url": "https://floor796.com/", "host": "floor796.com", "desc": "Một thế giới pixel theo góc nhìn isometric, có nhiều hoạt ảnh và chi tiết để khám phá."}, {"no": "34", "name": "Wplace", "url": "https://wplace.live/", "host": "wplace.live", "desc": "Canvas pixel cộng đồng đặt trên bản đồ thế giới; mọi người cùng vẽ và cập nhật tác phẩm."}, {"no": "35", "name": "eBoy", "url": "https://eboy.com/", "host": "eboy.com", "desc": "Tranh pixel với thành phố đông đúc, kiến trúc isometric và nhiều chi tiết nhỏ."}, {"no": "36", "name": "Pixel Land", "url": "https://pixel.land/", "host": "pixel.land", "desc": "Không gian pixel tương tác để khám phá bằng thao tác phóng to và thu nhỏ."}, {"no": "37", "name": "Hidden Folks", "url": "https://hiddenfolks.com/", "host": "hiddenfolks.com", "desc": "Trang giới thiệu trò tìm đồ vật trong tranh vẽ tay đen trắng giàu chi tiết. Đây là trang của một trò chơi; không mặc định toàn bộ trò chơi chạy miễn phí trên web."}]}, {"n": 7, "short": "Nghệ thuật web", "title": "Nghệ thuật web và văn hóa thị giác", "desc": "Những không gian hình ảnh gắn với glitch, cyberpunk, collage và Internet thời đầu.", "items": [{"no": "38", "name": "Wired Sound for Wired People", "url": "https://fauux.neocities.org/", "host": "fauux.neocities.org", "desc": "Nghệ thuật web lấy cảm hứng từ Serial Experiments Lain, với hình ảnh glitch và âm nhạc."}, {"no": "39", "name": "Windows93", "url": "https://windows93.net/", "host": "windows93.net", "desc": "Một hệ điều hành giả trong trình duyệt với ứng dụng, trò chơi và nhiều chi tiết kỳ quặc."}, {"no": "40", "name": "Web Design Museum", "url": "https://webdesignmuseum.org/", "host": "webdesignmuseum.org", "desc": "Khám phá lịch sử thiết kế website qua ảnh chụp và các bộ sưu tập theo thời kỳ."}, {"no": "41", "name": "Neocities Vaporwave", "url": "https://neocities.org/browse?tag=vaporwave", "host": "neocities.org", "desc": "Danh sách các website cá nhân gắn thẻ vaporwave để tiếp tục khám phá."}, {"no": "42", "name": "Black Wings Society", "url": "https://blackwings.neocities.org/", "host": "blackwings.neocities.org", "desc": "Nghệ thuật web mang chủ đề Lain, cyberpunk và những biểu tượng bí ẩn."}, {"no": "43", "name": "Mebious", "url": "https://mebious.neocities.org/", "host": "mebious.neocities.org", "desc": "Một góc The Wired với các mục gắn với Serial Experiments Lain và giao diện bí ẩn."}, {"no": "44", "name": "Wired Collective", "url": "https://wiredcollective.neocities.org/", "host": "wiredcollective.neocities.org", "desc": "Cộng đồng yêu thích Lain, cyberpunk và Internet thời đầu, với giao diện kiểu desktop."}, {"no": "45", "name": "JODI", "url": "https://wwwwwwwww.jodi.org/", "host": "wwwwwwwww.jodi.org", "desc": "Nghệ thuật web với ký tự, hình ảnh và cách điều hướng tạo cảm giác giao diện bị lỗi."}, {"no": "46", "name": "Cameron's World", "url": "https://www.cameronsworld.net/", "host": "cameronsworld.net", "desc": "Collage từ hình ảnh và nội dung GeoCities, tái hiện sự hỗn loạn của Internet thời đầu."}, {"no": "47", "name": "Terminal 00", "url": "https://angusnicneven.com/", "host": "angusnicneven.com", "desc": "Mê cung nghệ thuật trực tuyến với hình ảnh glitch, những trang bí ẩn và câu đố."}, {"no": "48", "name": "973 Eht Namuh 973", "url": "https://973-eht-namuh-973.com/", "host": "973-eht-namuh-973.com", "desc": "Mê cung chữ, con số và biểu tượng mang màu sắc huyền bí."}, {"no": "49", "name": "Superbad", "url": "https://superbad.com/", "host": "superbad.com", "desc": "Mê cung hình ảnh và liên kết siêu thực theo tinh thần nghệ thuật web thời đầu."}]}, {"n": 8, "short": "Tương tác thị giác", "title": "Nghệ thuật tương tác và thử nghiệm thị giác", "desc": "Tác phẩm chuyển động, công cụ vẽ và các thử nghiệm kết hợp hình ảnh, âm thanh hoặc mô phỏng.", "items": [{"no": "50", "name": "Optical Toys", "url": "https://optical.toys/", "host": "optical.toys", "desc": "Bộ sưu tập ảo giác thị giác và thính giác có thể tương tác."}, {"no": "51", "name": "WebGL Water", "url": "https://madebyevan.com/webgl-water/", "host": "madebyevan.com", "desc": "Mặt nước, quả cầu và các hiệu ứng phản chiếu trong một mô phỏng 3D."}, {"no": "52", "name": "Koalas to the Max", "url": "https://koalastothemax.com/", "host": "koalastothemax.com", "desc": "Di chuột để chia các hình tròn thành những vòng tròn nhỏ hơn, dần hé lộ một hình ảnh."}, {"no": "53", "name": "WebGL Fluid Simulation", "url": "https://paveldogreat.github.io/WebGL-Fluid-Simulation/", "host": "paveldogreat.github.io", "desc": "Khuấy và vẽ các luồng chất lưu màu neon bằng chuột hoặc cảm ứng."}, {"no": "54", "name": "Elastic Man", "url": "https://www.adultswim.com/etcetera/elastic-man/", "host": "adultswim.com", "desc": "Kéo giãn một khuôn mặt 3D mềm như cao su."}, {"no": "55", "name": "Zoomquilt", "url": "https://zoomquilt.org/", "host": "zoomquilt.org", "desc": "Bức tranh siêu thực liên tục phóng sâu vào những cảnh nối tiếp nhau."}, {"no": "56", "name": "Silk", "url": "https://weavesilk.com/", "host": "weavesilk.com", "desc": "Vẽ các dải sáng đối xứng và hoa văn chuyển động."}, {"no": "57", "name": "Drawing Garden", "url": "https://drawing.garden/", "host": "drawing.garden", "desc": "Trồng một khu vườn bằng emoji khi di chuyển chuột, kèm âm thanh."}, {"no": "58", "name": "Patatap", "url": "https://patatap.com/", "host": "patatap.com", "desc": "Gõ phím để tạo âm thanh cùng các hình khối chuyển động. Trang có hình ảnh nhấp nháy."}, {"no": "59", "name": "Blob Opera", "url": "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw", "host": "artsandculture.google.com", "desc": "Kéo bốn nhân vật để thay đổi cao độ, nguyên âm và tạo hòa âm opera bằng mô hình máy học. Một thử nghiệm kết hợp hình khối hoạt họa 3D với âm thanh."}, {"no": "60", "name": "Falling Falling", "url": "https://fallingfalling.com/", "host": "fallingfalling.com", "desc": "Những lớp màu rơi liên tục kết hợp âm thanh, tạo cảm giác chuyển động không dứt."}, {"no": "61", "name": "Infinite Flowers", "url": "https://infiniteflowers.net/", "host": "infiniteflowers.net", "desc": "Những hình ảnh hoa nối vào nhau trong một chuyển động phóng sâu liên tục."}, {"name": "Arkadia", "url": "https://arkadia.xyz/", "host": "arkadia.xyz", "desc": "Bức tranh thực vật phóng sâu không dứt của Sophia Schomberg và Nikolaus Baumgarten, cùng nhóm tác giả với Zoomquilt và Infinite Flowers.", "no": "62"}, {"no": "63", "name": "Vectorpark Head", "url": "https://vectorpark.com/head/", "host": "vectorpark.com", "desc": "Trò tương tác siêu thực với một cái đầu và những biến đổi khó đoán."}, {"no": "64", "name": "Man in the Dark", "url": "https://www.maninthedark.com/", "host": "maninthedark.com", "desc": "Một hình người mềm oặt di chuyển theo con trỏ trong nền tối."}, {"no": "65", "name": "Thisissand", "url": "https://thisissand.com/", "host": "thisissand.com", "desc": "Đổ những lớp cát màu để tạo tranh và phong cảnh trừu tượng."}, {"no": "66", "name": "Sandspiel", "url": "https://sandspiel.club/", "host": "sandspiel.club", "desc": "Vẽ bằng cát, nước, lửa, cây và các vật liệu có tương tác với nhau."}, {"no": "67", "name": "Townscaper Demo", "url": "https://oskarstalberg.com/Townscaper/", "host": "oskarstalberg.com", "desc": "Nhấp để dựng những cụm nhà nhiều màu trên mặt nước trong bản demo trình duyệt."}, {"no": "68", "name": "Bruno Simon", "url": "https://bruno-simon.com/", "host": "bruno-simon.com", "desc": "Lái một chiếc xe trong thế giới 3D để khám phá portfolio và những bí mật được giấu bên trong."}]}, {"n": 9, "short": "Kiến trúc", "title": "Kiến trúc và cộng đồng thiết kế", "desc": "Công trình, bản vẽ, kho ảnh và các nền tảng dành cho người yêu kiến trúc.", "items": [{"no": "69", "name": "ArchDaily", "url": "https://www.archdaily.com/", "host": "archdaily.com", "desc": "Hồ sơ công trình với ảnh, thông tin thiết kế và nhiều bản vẽ kiến trúc. Tìm theo loại công trình hoặc tên quốc gia."}, {"no": "70", "name": "Dezeen", "url": "https://www.dezeen.com/", "host": "dezeen.com", "desc": "Tạp chí về kiến trúc, nội thất và thiết kế, giới thiệu nhiều dự án và ý tưởng mới. Bắt đầu từ mục Architecture."}, {"no": "71", "name": "Divisare", "url": "https://divisare.com/", "host": "divisare.com", "desc": "Atlas kiến trúc thiên về ảnh và bộ sưu tập công trình; có thể khám phá theo thành phố hoặc yếu tố thiết kế. Chọn Cities hoặc Elements."}, {"no": "72", "name": "Architizer", "url": "https://architizer.com/", "host": "architizer.com", "desc": "Kho dự án, ảnh công trình và hồ sơ các hãng kiến trúc; phù hợp để tìm ý tưởng theo loại hình. Mở Projects hoặc Images."}, {"no": "73", "name": "Architectuul", "url": "https://architectuul.com/", "host": "architectuul.com", "desc": "Hồ sơ công trình và kiến trúc sư, kết hợp tư liệu về lịch sử kiến trúc và các dự án tiêu biểu. Mở Explore, Dossiers hoặc Random."}, {"no": "74", "name": "Archnet", "url": "https://www.archnet.org/", "host": "archnet.org", "desc": "Thư viện số về kiến trúc, đô thị, cảnh quan và di sản, với tư liệu hình ảnh và các bộ sưu tập nghiên cứu. Tìm theo địa điểm, công trình hoặc bộ sưu tập."}, {"no": "75", "name": "Hidden Architecture", "url": "https://hiddenarchitecture.net/", "host": "hiddenarchitecture.net", "desc": "Tạp chí và atlas kiến trúc, giới thiệu công trình qua bài viết, ảnh và tư liệu thiết kế. Mở Journal hoặc Atlas."}, {"no": "76", "name": "World Architecture Community", "url": "https://worldarchitecture.org/", "host": "worldarchitecture.org", "desc": "Dự án, bài viết và giải thưởng kiến trúc từ cộng đồng thiết kế ở nhiều quốc gia. Khám phá Projects và WA Awards."}, {"no": "77", "name": "Archilovers", "url": "https://www.archilovers.com/", "host": "archilovers.com", "desc": "Mạng xã hội về kiến trúc và thiết kế với hồ sơ cá nhân, dự án, tính năng theo dõi và trao đổi ý kiến. Phù hợp để khám phá công trình thông qua cộng đồng."}]}];
+
+/* ================= Tiện ích ================= */
+function $(id){ return document.getElementById(id); }
+function el(tag, cls, text){ var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function fold(s){ return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d"); }
+function wordCount(s){ var t=String(s||"").trim(); return t ? t.split(/\s+/).length : 0; }
+function str(v,max){ return typeof v==="string" ? v.slice(0,max||2000) : ""; }
+
+/* ================= Vẽ tranh mẫu bằng canvas ================= */
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function R(r,a,b){ return a+r()*(b-a); }
+function gauss(r){ return (r()+r()+r()-1.5)*1.15; }
+function seedOf(r){ return ((r()*4294967295)>>>0)|1; }
+function hex(c){ c=c.replace("#",""); return [parseInt(c.slice(0,2),16),parseInt(c.slice(2,4),16),parseInt(c.slice(4,6),16)]; }
+function mix(a,b,t){ var x=hex(a),y=hex(b); return "rgb("+Math.round(x[0]+(y[0]-x[0])*t)+","+Math.round(x[1]+(y[1]-x[1])*t)+","+Math.round(x[2]+(y[2]-x[2])*t)+")"; }
+function dab(c,x,y,len,ang,wid,col,al){ c.globalAlpha=al; c.strokeStyle=col; c.lineWidth=wid; c.lineCap="round"; c.beginPath(); c.moveTo(x,y); var ex=x+Math.cos(ang)*len, ey=y+Math.sin(ang)*len; c.quadraticCurveTo((x+ex)/2+Math.sin(ang)*wid*0.7,(y+ey)/2-Math.cos(ang)*wid*0.7,ex,ey); c.stroke(); }
+function blob(c,x,y,rad,col,al){ c.globalAlpha=al; c.fillStyle=col; c.beginPath(); c.arc(x,y,Math.max(0.5,rad),0,Math.PI*2); c.fill(); }
+function pathPts(c,pts){ c.moveTo(pts[0][0],pts[0][1]); for(var i=1;i<pts.length;i++) c.lineTo(pts[i][0],pts[i][1]); }
+function grain(c,w,h,amt,seed){ var img=c.getImageData(0,0,w,h), d=img.data, s=seed>>>0||1; for(var i=0;i<d.length;i+=4){ s^=s<<13; s^=s>>>17; s^=s<<5; var n=((s>>>0)/4294967296-0.5)*amt; d[i]+=n; d[i+1]+=n; d[i+2]+=n; } c.putImageData(img,0,0); }
+function weave(c,w,h,step,al){ c.save(); c.fillStyle="#000"; c.globalAlpha=al; for(var y=0;y<h;y+=step) c.fillRect(0,y,w,1); c.globalAlpha=al*0.7; for(var x=0;x<w;x+=step) c.fillRect(x,0,1,h); c.restore(); }
+function crescent(c,x,y,L,d,col,al){ c.globalAlpha=al; c.fillStyle=col; c.beginPath(); c.moveTo(x-L,y-d*0.1); c.quadraticCurveTo(x,y+d*1.1,x+L,y-d*0.5); c.quadraticCurveTo(x,y+d*0.35,x-L,y-d*0.1); c.closePath(); c.fill(); }
+
+var PAINT = {
+  tea: function(c,w,h,r){
+    var g=c.createLinearGradient(0,0,0,h*0.62); g.addColorStop(0,"#D4C39E"); g.addColorStop(0.6,"#EADBB9"); g.addColorStop(1,"#F3E8CF");
+    c.globalAlpha=1; c.fillStyle=g; c.fillRect(0,0,w,h);
+    var sx=w*0.72, sy=h*0.21, sr=w*0.045;
+    var rg=c.createRadialGradient(sx,sy,0,sx,sy,sr*6); rg.addColorStop(0,"rgba(255,248,226,0.95)"); rg.addColorStop(0.25,"rgba(255,240,206,0.5)"); rg.addColorStop(1,"rgba(255,240,206,0)");
+    c.fillStyle=rg; c.fillRect(0,0,w,h);
+    c.fillStyle="#FFF8E6"; c.beginPath(); c.arc(sx,sy,sr,0,Math.PI*2); c.fill();
+    for(var i=0;i<500;i++) dab(c,r()*w,r()*h*0.5,R(r,w*0.02,w*0.08),R(r,-0.05,0.05),R(r,2,6),r()<0.5?"#F6EBD3":"#CDB993",0.06);
+    var L=7;
+    for(var k=0;k<L;k++){
+      var t=k/(L-1), base=h*(0.36+t*0.52), amp=h*(0.025+t*0.05);
+      var f1=(1.1+r()*1.4)*Math.PI*2/w, f2=f1*(2.1+r()), p1=r()*6.28, p2=r()*6.28, pts=[];
+      for(var n=0;n<=96;n++){ var x=w*n/96; pts.push([x, base+Math.sin(x*f1+p1)*amp+Math.sin(x*f2+p2)*amp*0.35]); }
+      var col=mix("#B3C0A4","#203F28",Math.pow(t,0.9));
+      c.globalAlpha=1; c.fillStyle=col; c.beginPath(); pathPts(c,pts); c.lineTo(w,h); c.lineTo(0,h); c.closePath(); c.fill();
+      if(t<0.7){ var hg=c.createLinearGradient(0,base-amp,0,base+amp*2); hg.addColorStop(0,"rgba(243,232,207,0.32)"); hg.addColorStop(1,"rgba(243,232,207,0)"); c.fillStyle=hg; c.fillRect(0,base-amp*1.4,w,amp*3.4); }
+      if(t>0.25){
+        for(var j=1;j<=10;j++){
+          var off=j*h*0.014*(0.6+t); c.globalAlpha=0.42; c.strokeStyle=mix(col,"#8DAE67",0.45); c.lineWidth=1+t*2.6; c.beginPath();
+          for(var q=0;q<pts.length;q++){ var yy=pts[q][1]+off+Math.sin(pts[q][0]*0.05+j)*1.2; if(q) c.lineTo(pts[q][0],yy); else c.moveTo(pts[q][0],yy); }
+          c.stroke();
+        }
+      }
+      for(var m=0;m<260;m++){ var dx=r()*w, idx=Math.min(96,Math.round(dx/w*96)); dab(c,dx,pts[idx][1]+r()*h*0.12,R(r,w*0.006,w*0.03),R(r,-0.2,0.2),R(r,1.5,4)*(0.6+t),r()<0.5?mix(col,"#E8D9A8",0.35):mix(col,"#0E2214",0.3),0.18); }
+    }
+    c.globalAlpha=1; weave(c,w,h,3,0.035); grain(c,w,h,16,seedOf(r));
+  },
+  flood: function(c,w,h,r){
+    var H=h*0.47, i;
+    var g=c.createLinearGradient(0,0,0,H); g.addColorStop(0,"#BFCBCB"); g.addColorStop(1,"#EAE1CC");
+    c.globalAlpha=1; c.fillStyle=g; c.fillRect(0,0,w,H+2);
+    for(i=0;i<500;i++) dab(c,r()*w,r()*H*0.9,R(r,w*0.03,w*0.12),R(r,-0.03,0.03),R(r,3,9),r()<0.5?"#F1E9D6":"#AFBDBE",0.07);
+    var tl=[], v=0;
+    for(var x=0;x<=w+1;x+=w/120){ v=v*0.6+(r()-0.3)*h*0.03; tl.push([x,H-Math.max(h*0.006,Math.abs(v))-h*0.008]); }
+    c.globalAlpha=1; c.fillStyle="#4C5848"; c.beginPath(); c.moveTo(0,H+h*0.004); for(i=0;i<tl.length;i++) c.lineTo(tl[i][0],tl[i][1]); c.lineTo(w,H+h*0.004); c.closePath(); c.fill();
+    g=c.createLinearGradient(0,H,0,h); g.addColorStop(0,"#C9CCBE"); g.addColorStop(0.5,"#97A39C"); g.addColorStop(1,"#62756F");
+    c.fillStyle=g; c.fillRect(0,H,w,h-H);
+    for(i=0;i<1000;i++){ var yy=H+Math.pow(r(),1.6)*h*0.09; dab(c,r()*w,yy,R(r,w*0.01,w*0.05),0,R(r,1.5,4),"#4C5848",0.22*(1-(yy-H)/(h*0.09))); }
+    for(i=0;i<1800;i++){ var y2=H+r()*(h-H); dab(c,r()*w,y2,R(r,w*0.015,w*0.08)*(0.5+(y2-H)/(h-H)),R(r,-0.01,0.01),R(r,1.2,3.5),r()<0.6?"#E6DFCC":"#BFCBCB",0.13); }
+    var bx=w*0.62, by=h*0.71, BL=w*0.075, d=h*0.022;
+    for(i=0;i<40;i++) dab(c,bx+R(r,-BL,BL),by+R(r,d*0.6,d*2.8),R(r,w*0.01,w*0.03),0,R(r,1.5,3),"#2E2C27",0.28);
+    crescent(c,bx,by,BL,d,"#2E2C27",1);
+    var px=bx+BL*0.35, py=by-d*0.1;
+    c.globalAlpha=1; c.strokeStyle="#2E2C27"; c.lineWidth=w*0.006; c.lineCap="round"; c.beginPath(); c.moveTo(px,py); c.lineTo(px-w*0.002,py-h*0.045); c.stroke();
+    c.fillStyle="#D8CBA6"; c.beginPath(); c.moveTo(px-w*0.016,py-h*0.045); c.lineTo(px+w*0.016,py-h*0.045); c.lineTo(px,py-h*0.062); c.closePath(); c.fill();
+    c.lineWidth=w*0.0025; c.beginPath(); c.moveTo(px+w*0.004,py-h*0.032); c.lineTo(px+w*0.05,py+h*0.055); c.stroke();
+    c.globalAlpha=1; weave(c,w,h,3,0.03); grain(c,w,h,14,seedOf(r));
+  },
+  street: function(c,w,h,r){
+    var i;
+    c.globalAlpha=1; c.fillStyle="#F3EFE5"; c.fillRect(0,0,w,h);
+    for(i=0;i<140;i++) blob(c,r()*w,r()*h*0.32,R(r,w*0.06,w*0.2),"#A7B4C0",0.03);
+    var base=h*0.63, pal=["#C9A46B","#7FA3A0","#C98B7B","#E0CB98","#9AA6B5","#B7B08A"], houses=[], x=-w*0.03;
+    while(x<w){ var hw=w*R(r,0.1,0.19); houses.push({x:x,hw:hw,top:h*R(r,0.15,0.34),col:pal[Math.floor(r()*pal.length)],lit:r()<0.45}); x+=hw+w*0.006; }
+    houses.forEach(function(o){
+      c.globalAlpha=0.78; c.fillStyle=o.col; c.fillRect(o.x,o.top,o.hw,base-o.top);
+      c.globalAlpha=0.22; c.fillRect(o.x+R(r,-2,2),o.top+R(r,-3,3),o.hw+R(r,-3,3),base-o.top);
+      c.globalAlpha=0.6; c.fillStyle=mix(o.col,"#3A3A3A",0.45); c.fillRect(o.x-w*0.004,o.top-h*0.01,o.hw+w*0.008,h*0.016);
+      for(var wy=o.top+h*0.045; wy<base-h*0.1; wy+=h*0.065){ for(var k=0;k<2;k++){ c.globalAlpha=0.65; c.fillStyle=mix(o.col,"#2A2A2A",0.55); c.fillRect(o.x+o.hw*(0.2+k*0.4),wy,o.hw*0.2,h*0.03); } }
+      c.globalAlpha=0.6; c.fillStyle=mix(o.col,"#2A2A2A",0.6); c.fillRect(o.x+o.hw*0.08,base-h*0.07,o.hw*0.84,h*0.07);
+      if(o.lit){ c.globalAlpha=0.75; c.fillStyle="#EDBE6E"; c.fillRect(o.x+o.hw*0.18,base-h*0.055,o.hw*0.5,h*0.045); }
+    });
+    var sg=c.createLinearGradient(0,base,0,h); sg.addColorStop(0,"rgba(120,128,134,0.55)"); sg.addColorStop(1,"rgba(214,210,200,0.35)");
+    c.globalAlpha=1; c.fillStyle=sg; c.fillRect(0,base,w,h-base);
+    houses.forEach(function(o){
+      for(var i2=0;i2<55;i2++) dab(c,o.x+r()*o.hw,base+h*0.005,R(r,h*0.04,h*0.26),Math.PI/2+R(r,-0.03,0.03),R(r,2,5),o.col,0.16);
+      if(o.lit) for(var j=0;j<25;j++) dab(c,o.x+o.hw*R(r,0.2,0.65),base+h*0.01,R(r,h*0.05,h*0.2),Math.PI/2,R(r,1.5,4),"#EDBE6E",0.25);
+    });
+    c.globalAlpha=0.7; c.strokeStyle="#33373B"; c.lineWidth=Math.max(1,w*0.0016);
+    for(var k=0;k<3;k++){ var y0=h*(0.12+k*0.035); c.beginPath(); c.moveTo(-5,y0); c.quadraticCurveTo(w*0.5,y0+h*R(r,0.03,0.07),w+5,y0+h*R(r,-0.02,0.02)); c.stroke(); }
+    var ux=w*0.32, uy=h*0.74, ur=w*0.045;
+    for(i=0;i<14;i++) dab(c,ux+R(r,-ur*0.8,ur*0.8),uy+h*0.065,R(r,h*0.03,h*0.08),Math.PI/2,R(r,1.5,3),"#5A2A2A",0.2);
+    c.globalAlpha=1; c.fillStyle="#2B2B2B"; c.fillRect(ux-w*0.01,uy+h*0.005,w*0.02,h*0.055);
+    c.globalAlpha=0.92; c.fillStyle="#7A2E2E"; c.beginPath(); c.arc(ux,uy,ur,Math.PI,0); c.closePath(); c.fill();
+    c.globalAlpha=1; grain(c,w,h,14,seedOf(r));
+  },
+  field: function(c,w,h,r){
+    c.globalAlpha=1; c.fillStyle="#5A211C"; c.fillRect(0,0,w,h);
+    for(var i=0;i<2600;i++) dab(c,r()*w,r()*h,R(r,w*0.05,w*0.22),R(r,-0.08,0.08),R(r,6,20),r()<0.5?"#6F2A22":"#4A1A17",0.07);
+    function soft(x0,y0,x1,y1,col,col2){
+      for(var j=0;j<16;j++){ var ins=j*w*0.0028; c.globalAlpha=0.085; c.fillStyle=col; c.fillRect(x0+ins+R(r,-2,2),y0+ins+R(r,-2,2),(x1-x0)-ins*2,(y1-y0)-ins*2); }
+      for(var k=0;k<900;k++) dab(c,R(r,x0+w*0.03,x1-w*0.03),R(r,y0+h*0.02,y1-h*0.02),R(r,w*0.04,w*0.15),R(r,-0.06,0.06),R(r,5,16),r()<0.5?col:col2,0.07);
+    }
+    soft(w*0.08,h*0.065,w*0.92,h*0.535,"#C4552C","#D9733F");
+    soft(w*0.08,h*0.595,w*0.92,h*0.935,"#2E1A1F","#43242A");
+    c.globalAlpha=1; weave(c,w,h,3,0.04); grain(c,w,h,10,seedOf(r));
+  },
+  lotus: function(c,w,h,r){
+    var i;
+    c.globalAlpha=1; c.fillStyle="#EEE6D3"; c.fillRect(0,0,w,h);
+    c.lineWidth=0.7; c.strokeStyle="#BBAA86";
+    for(i=0;i<900;i++){ var x=r()*w, y=r()*h, a=r()*6.28, l=R(r,6,34); c.globalAlpha=0.22; c.beginPath(); c.moveTo(x,y); c.quadraticCurveTo(x+Math.cos(a+0.6)*l*0.5,y+Math.sin(a+0.6)*l*0.5,x+Math.cos(a)*l,y+Math.sin(a)*l); c.stroke(); }
+    [[0.36,0.66,0.27],[0.7,0.5,0.2],[0.52,0.84,0.18]].forEach(function(L){
+      var cx=L[0]*w, cy=L[1]*h, s=L[2]*w, j;
+      for(j=0;j<220;j++){ var a=r()*6.28, dd=Math.sqrt(r())*s; blob(c,cx+Math.cos(a)*dd,cy+Math.sin(a)*dd*0.55,R(r,s*0.06,s*0.22),"#2A2A28",0.03); }
+      c.strokeStyle="#1E1E1C";
+      for(j=0;j<5;j++){ c.globalAlpha=0.25; c.lineWidth=R(r,1.5,4); var a0=r()*6.28; c.beginPath(); c.ellipse(cx,cy,s*R(r,0.85,1.05),s*0.55*R(r,0.85,1.05),0,a0,a0+R(r,0.6,1.6)); c.stroke(); }
+      c.lineWidth=1.2;
+      for(j=0;j<9;j++){ var b=j/9*6.28+r()*0.3; c.globalAlpha=0.18; c.beginPath(); c.moveTo(cx,cy); c.lineTo(cx+Math.cos(b)*s*0.85,cy+Math.sin(b)*s*0.47); c.stroke(); }
+    });
+    [[0.30,0.25,0.40],[0.46,0.16,0.62],[0.58,0.35,0.30],[0.66,0.12,0.74],[0.40,0.42,0.18]].forEach(function(S,idx){
+      var sx=S[0]*w, ex=S[2]*w, ey=S[1]*h, cxp=sx+(ex-sx)*0.2+R(r,-w*0.05,w*0.05);
+      c.globalAlpha=0.8; c.strokeStyle="#1C1C1A"; c.lineWidth=w*R(r,0.006,0.01); c.lineCap="round";
+      c.beginPath(); c.moveTo(sx,h*1.01); c.quadraticCurveTo(cxp,h*0.55,ex,ey); c.stroke();
+      for(var t=0;t<14;t++){ var u=r(), bx=(1-u)*(1-u)*sx+2*(1-u)*u*cxp+u*u*ex, by=(1-u)*(1-u)*h+2*(1-u)*u*h*0.55+u*u*ey; blob(c,bx+R(r,-3,3),by,w*0.0025,"#1C1C1A",0.6); }
+      if(idx===1||idx===3){
+        c.save(); c.translate(ex,ey); c.rotate((idx===1?1:-1)*R(r,0.4,1.1));
+        c.globalAlpha=0.85; c.fillStyle="#262624"; c.beginPath(); c.moveTo(-w*0.05,-h*0.016); c.lineTo(w*0.05,-h*0.016); c.lineTo(w*0.022,h*0.012); c.lineTo(-w*0.022,h*0.012); c.closePath(); c.fill();
+        for(var p=0;p<6;p++) blob(c,-w*0.035+p*w*0.014,-h*0.016,w*0.005,"#EEE6D3",0.55);
+        c.restore();
+      }
+    });
+    var ss=w*0.075, sx0=w*0.08, sy0=h*0.885;
+    c.globalAlpha=0.88; c.fillStyle="#A8362A"; c.fillRect(sx0,sy0,ss,ss);
+    c.globalAlpha=0.95; c.strokeStyle="#EEE6D3"; c.lineWidth=ss*0.07; c.lineCap="square"; c.beginPath();
+    c.moveTo(sx0+ss*0.25,sy0+ss*0.22); c.lineTo(sx0+ss*0.25,sy0+ss*0.78); c.moveTo(sx0+ss*0.25,sy0+ss*0.5); c.lineTo(sx0+ss*0.45,sy0+ss*0.5);
+    c.moveTo(sx0+ss*0.62,sy0+ss*0.2); c.lineTo(sx0+ss*0.62,sy0+ss*0.8); c.moveTo(sx0+ss*0.62,sy0+ss*0.35); c.lineTo(sx0+ss*0.8,sy0+ss*0.35); c.moveTo(sx0+ss*0.62,sy0+ss*0.65); c.lineTo(sx0+ss*0.8,sy0+ss*0.65);
+    c.stroke();
+    c.globalAlpha=1; grain(c,w,h,12,seedOf(r));
+  },
+  sea: function(c,w,h,r){
+    var H=h*0.56, i;
+    var g=c.createLinearGradient(0,0,0,H); g.addColorStop(0,"#7E93B4"); g.addColorStop(0.55,"#D5A8A2"); g.addColorStop(1,"#F2D4AE");
+    c.globalAlpha=1; c.fillStyle=g; c.fillRect(0,0,w,H+1);
+    for(i=0;i<700;i++) dab(c,r()*w,Math.pow(r(),0.8)*H*0.9,R(r,w*0.03,w*0.14),R(r,-0.02,0.02),R(r,2,7),r()<0.6?"#F4DCCB":"#9DA9C2",0.1);
+    var sx=w*0.4;
+    var rg=c.createRadialGradient(sx,H,0,sx,H,w*0.2); rg.addColorStop(0,"rgba(255,236,205,0.6)"); rg.addColorStop(1,"rgba(255,236,205,0)");
+    c.globalAlpha=1; c.fillStyle=rg; c.fillRect(0,0,w,H);
+    c.fillStyle="#FFEACB"; c.beginPath(); c.arc(sx,H,w*0.028,Math.PI,0); c.fill();
+    g=c.createLinearGradient(0,H,0,h); g.addColorStop(0,"#7891A6"); g.addColorStop(1,"#2E4A60");
+    c.fillStyle=g; c.fillRect(0,H,w,h-H);
+    for(i=0;i<2600;i++){ var y=H+Math.pow(r(),1.2)*(h*0.86-H), dep=(y-H)/(h-H); dab(c,r()*w,y,R(r,w*0.006,w*0.035)*(0.4+dep*1.6),R(r,-0.02,0.02),R(r,1,3)*(0.5+dep*1.5),r()<0.5?"#A9BCCB":"#22394C",0.14); }
+    for(i=0;i<1300;i++){ var y3=H+Math.pow(r(),1.3)*(h*0.84-H), d3=(y3-H)/(h-H); dab(c,sx+gauss(r)*w*(0.012+d3*0.09),y3,R(r,w*0.004,w*0.02)*(0.5+d3*2),0,R(r,1,2.6)*(0.6+d3),"#F8DDB6",0.32); }
+    var fy=h*0.86;
+    function shore(x){ return fy+Math.sin(x/w*9+1)*h*0.012+Math.sin(x/w*23)*h*0.004; }
+    c.globalAlpha=1; c.fillStyle="#CDB48D"; c.beginPath(); c.moveTo(0,h); for(var x=0;x<=w+1;x+=w/100) c.lineTo(x,shore(x)); c.lineTo(w,h); c.closePath(); c.fill();
+    c.globalAlpha=0.9; c.strokeStyle="#EFE9DE"; c.lineWidth=h*0.012; c.beginPath(); for(var x2=0;x2<=w+1;x2+=w/100){ if(x2) c.lineTo(x2,shore(x2)); else c.moveTo(x2,shore(x2)); } c.stroke();
+    for(i=0;i<600;i++) dab(c,r()*w,R(r,fy+h*0.015,h),R(r,w*0.01,w*0.05),0,R(r,1,3),r()<0.5?"#B89A70":"#DCC6A2",0.18);
+    c.globalAlpha=1; weave(c,w,h,3,0.03); grain(c,w,h,14,seedOf(r));
+  },
+  geo: function(c,w,h,r){
+    c.globalAlpha=1; c.fillStyle="#ECE4D4"; c.fillRect(0,0,w,h);
+    for(var i=0;i<900;i++) dab(c,r()*w,r()*h,R(r,w*0.03,w*0.1),r()*3.14,R(r,4,10),r()<0.5?"#F3EDE1":"#E1D8C5",0.08);
+    function disc(x,y,rad,col,a0,a1){
+      c.globalAlpha=1; c.fillStyle=col; c.beginPath(); if(a1-a0<6){ c.moveTo(x,y); } c.arc(x,y,rad,a0,a1); c.closePath(); c.fill();
+      for(var k=0;k<160;k++){ var a=R(r,a0,a1), dd=Math.sqrt(r())*rad*0.9; dab(c,x+Math.cos(a)*dd,y+Math.sin(a)*dd,R(r,rad*0.05,rad*0.2),r()*3.14,R(r,3,8),"#FFFFFF",0.035); }
+    }
+    disc(w*0.4,h*0.43,w*0.25,"#1F3354",0,Math.PI*2);
+    disc(w*0.63,h*0.6,w*0.14,"#D9A13B",0,Math.PI*2);
+    disc(w*0.24,h*0.8,w*0.11,"#C2412D",Math.PI,Math.PI*2);
+    function wob(x0,y0,x1,y1,lw){ c.globalAlpha=0.9; c.strokeStyle="#161616"; c.lineCap="round"; c.lineWidth=lw; c.beginPath(); c.moveTo(x0,y0); for(var n=1;n<=24;n++){ var t=n/24; c.lineTo(x0+(x1-x0)*t+R(r,-0.9,0.9),y0+(y1-y0)*t+R(r,-0.9,0.9)); } c.stroke(); }
+    wob(w*0.07,h*0.9,w*0.93,h*0.12,w*0.0045); wob(w*0.14,h*0.08,w*0.86,h*0.95,w*0.0022); wob(w*0.06,h*0.62,w*0.95,h*0.62,w*0.0016);
+    c.globalAlpha=1; c.fillStyle="#161616";
+    for(var a=0;a<5;a++) for(var b=0;b<5;b++){ c.beginPath(); c.arc(w*(0.7+a*0.04),h*(0.1+b*0.04),w*0.005,0,Math.PI*2); c.fill(); }
+    c.strokeStyle="#161616"; c.lineWidth=w*0.003; c.strokeRect(w*0.6,h*0.82,w*0.26,h*0.09);
+    c.fillRect(w*0.12,h*0.2,w*0.05,w*0.05);
+    c.globalAlpha=1; weave(c,w,h,3,0.035); grain(c,w,h,10,seedOf(r));
+  },
+  lacquer: function(c,w,h,r){
+    c.globalAlpha=1; c.fillStyle="#141010"; c.fillRect(0,0,w,h);
+    var N=10, cur=[], k, i;
+    for(k=0;k<=N;k++){ var base=h*(-0.02+k*0.108), pts=[]; for(i=0;i<=96;i++){ var x=w*i/96; pts.push([x, base+Math.sin(x/w*Math.PI*1.25+k*0.55)*h*0.07+Math.sin(x/w*Math.PI*3.2+k*1.3)*h*0.015]); } cur.push(pts); }
+    var kinds=["black","gold","red","egg","gold","brown","red","gold","egg","red"], u=w/1500;
+    for(k=0;k<N;k++){
+      var A=cur[k], B=cur[k+1], minY=Infinity, maxY=-Infinity;
+      A.forEach(function(p){ if(p[1]<minY) minY=p[1]; }); B.forEach(function(p){ if(p[1]>maxY) maxY=p[1]; });
+      c.save(); c.beginPath(); pathPts(c,A); for(i=B.length-1;i>=0;i--) c.lineTo(B[i][0],B[i][1]); c.closePath(); c.clip();
+      var kind=kinds[k];
+      if(kind==="gold"){
+        c.globalAlpha=1; c.fillStyle="#B48D3E"; c.fillRect(0,minY,w,maxY-minY);
+        for(i=0;i<60;i++){ var gs=w*R(r,0.03,0.06); c.globalAlpha=0.08; c.fillStyle=r()<0.5?"#E8CE84":"#7E5F25"; c.fillRect(r()*w,R(r,minY,maxY),gs,gs); }
+        for(i=0;i<2600;i++){ c.globalAlpha=0.55; c.fillStyle=r()<0.5?"#E3C46F":"#86652A"; var fs=R(r,1,4)*u+0.5; c.fillRect(r()*w,R(r,minY,maxY),fs,fs); }
+      } else if(kind==="red"){
+        c.globalAlpha=1; c.fillStyle="#8A2316"; c.fillRect(0,minY,w,maxY-minY);
+        for(i=0;i<500;i++) dab(c,r()*w,R(r,minY,maxY),R(r,w*0.03,w*0.12),R(r,-0.05,0.05),R(r,3,9),r()<0.5?"#B0391F":"#5E160D",0.08);
+      } else if(kind==="egg"){
+        c.globalAlpha=1; c.fillStyle="#231B17"; c.fillRect(0,minY,w,maxY-minY);
+        c.fillStyle="#EAE2CC";
+        for(i=0;i<1700;i++){ var ex=r()*w, ey=R(r,minY,maxY), es=R(r,w*0.003,w*0.009), nv=3+Math.floor(r()*3); c.globalAlpha=0.92; c.beginPath(); for(var v=0;v<nv;v++){ var an=v/nv*6.28+R(r,-0.4,0.4), rr=es*R(r,0.6,1); if(v) c.lineTo(ex+Math.cos(an)*rr,ey+Math.sin(an)*rr); else c.moveTo(ex+Math.cos(an)*rr,ey+Math.sin(an)*rr); } c.closePath(); c.fill(); }
+      } else if(kind==="brown"){
+        c.globalAlpha=1; c.fillStyle="#4D301E"; c.fillRect(0,minY,w,maxY-minY);
+        for(i=0;i<400;i++) dab(c,r()*w,R(r,minY,maxY),R(r,w*0.03,w*0.1),R(r,-0.05,0.05),R(r,3,8),r()<0.5?"#6A4429":"#38210F",0.09);
+      } else {
+        for(i=0;i<300;i++) dab(c,r()*w,R(r,minY,maxY),R(r,w*0.03,w*0.1),R(r,-0.05,0.05),R(r,3,8),"#2A2120",0.1);
+      }
+      c.restore();
+      if(k>0){ c.globalAlpha=0.85; c.strokeStyle="#D3AF5C"; c.lineWidth=Math.max(1.2,w*0.0016); c.beginPath(); pathPts(c,A); c.stroke(); }
+    }
+    var sh=c.createLinearGradient(0,0,w,h); sh.addColorStop(0,"rgba(255,255,255,0)"); sh.addColorStop(0.45,"rgba(255,250,235,0.08)"); sh.addColorStop(0.55,"rgba(255,250,235,0.02)"); sh.addColorStop(1,"rgba(255,255,255,0)");
+    c.globalAlpha=1; c.fillStyle=sh; c.fillRect(0,0,w,h);
+    grain(c,w,h,6,seedOf(r));
+  },
+  silk: function(c,w,h,r){
+    var i, y, x;
+    c.globalAlpha=1; c.fillStyle="#D5CEBB"; c.fillRect(0,0,w,h);
+    var g=c.createLinearGradient(0,0,0,h*0.5); g.addColorStop(0,"rgba(150,163,163,0.55)"); g.addColorStop(1,"rgba(150,163,163,0)"); c.fillStyle=g; c.fillRect(0,0,w,h*0.5);
+    var mx=w*0.66, my=h*0.19, mr=w*0.075;
+    var rg=c.createRadialGradient(mx,my,mr*0.8,mx,my,mr*4.5); rg.addColorStop(0,"rgba(244,239,222,0.6)"); rg.addColorStop(1,"rgba(244,239,222,0)"); c.fillStyle=rg; c.fillRect(0,0,w,h);
+    c.globalAlpha=0.95; c.fillStyle="#F2ECDA"; c.beginPath(); c.arc(mx,my,mr,0,Math.PI*2); c.fill();
+    function ridge(base,amp,col,al){ c.globalAlpha=al; c.fillStyle=col; c.beginPath(); c.moveTo(0,h); var v=0; for(var xx=0;xx<=w+1;xx+=w/80){ v=v*0.7+(r()-0.5)*amp; c.lineTo(xx,base+Math.sin(xx/w*4+base)*amp*1.5+v); } c.lineTo(w,h); c.closePath(); c.fill(); }
+    ridge(h*0.4,h*0.05,"#9AA39E",0.5); ridge(h*0.47,h*0.035,"#7E8984",0.55);
+    g=c.createLinearGradient(0,h*0.46,0,h*0.58); g.addColorStop(0,"rgba(240,236,224,0)"); g.addColorStop(0.5,"rgba(240,236,224,0.7)"); g.addColorStop(1,"rgba(240,236,224,0)");
+    c.globalAlpha=1; c.fillStyle=g; c.fillRect(0,h*0.46,w,h*0.12);
+    c.fillStyle="rgba(168,177,174,0.45)"; c.fillRect(0,h*0.56,w,h*0.44);
+    for(i=0;i<60;i++) dab(c,mx+gauss(r)*w*0.03,R(r,h*0.58,h*0.82),R(r,w*0.01,w*0.05),0,R(r,1.5,3.5),"#F3EEDC",0.45);
+    c.globalAlpha=0.72; c.fillStyle="#56605B"; c.beginPath(); c.moveTo(0,h*0.78); c.quadraticCurveTo(w*0.25,h*0.8,w*0.45,h*0.92); c.lineTo(w*0.5,h); c.lineTo(0,h); c.closePath(); c.fill();
+    for(var b=0;b<5;b++){
+      var bx=w*(0.04+b*0.06+r()*0.03), tx=bx+w*R(r,0.02,0.07), ty=h*R(r,0.3,0.45);
+      c.globalAlpha=0.55; c.strokeStyle="#3F4743"; c.lineWidth=w*0.006; c.lineCap="round"; c.beginPath(); c.moveTo(bx,h*0.86); c.quadraticCurveTo(bx+w*0.02,h*0.6,tx,ty); c.stroke();
+      for(var l=0;l<9;l++){ var t=R(r,0.35,1), lx=bx+(tx-bx)*t, ly=h*0.86+(ty-h*0.86)*t, ang=r()<0.5?R(r,0.25,1.1):Math.PI-R(r,0.25,1.1); dab(c,lx,ly,w*R(r,0.04,0.07),ang,w*0.008,"#3F4743",0.5); }
+    }
+    var qx=w*0.4, qy=h*0.7;
+    crescent(c,qx,qy,w*0.06,h*0.012,"#3A403D",0.82);
+    var lgx=qx-w*0.03, lgy=qy-h*0.014;
+    var lg=c.createRadialGradient(lgx,lgy,0,lgx,lgy,w*0.045); lg.addColorStop(0,"rgba(233,184,106,0.55)"); lg.addColorStop(1,"rgba(233,184,106,0)");
+    c.globalAlpha=1; c.fillStyle=lg; c.fillRect(lgx-w*0.05,lgy-w*0.05,w*0.1,w*0.1);
+    blob(c,lgx,lgy,w*0.007,"#E3A955",1);
+    for(i=0;i<10;i++) dab(c,lgx+R(r,-w*0.01,w*0.01),qy+h*R(r,0.01,0.06),R(r,w*0.006,w*0.02),0,R(r,1,2.5),"#E3A955",0.3);
+    c.globalAlpha=1;
+    for(y=0;y<h;y+=2){ c.fillStyle=r()<0.5?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.035)"; c.fillRect(0,y,w,1); }
+    c.fillStyle="rgba(0,0,0,0.02)"; for(x=0;x<w;x+=3) c.fillRect(x,0,1,h);
+    grain(c,w,h,6,seedOf(r));
+  },
+  roof: function(c,w,h,r){
+    c.globalAlpha=1; c.fillStyle="#6E3222"; c.fillRect(0,0,w,h);
+    var rows=[], y=h+h*0.03, rh=h*0.085;
+    while(y>-rh){ rows.push({y:y,rh:rh}); y-=rh*0.78; rh*=0.95; }
+    rows.reverse();
+    rows.forEach(function(row,ri){
+      var tw=row.rh*1.15, off=(ri%2)*tw*0.5;
+      for(var x=-tw+off; x<w+tw; x+=tw){
+        var tone=R(r,-0.12,0.12), g=c.createLinearGradient(0,row.y-row.rh,0,row.y);
+        g.addColorStop(0,"#4A2016"); g.addColorStop(0.35,mix("#A85237","#C9744F",0.5+tone)); g.addColorStop(0.9,mix("#C46A47","#DB8A63",0.5+tone)); g.addColorStop(1,"#8E4129");
+        c.globalAlpha=1; c.fillStyle=g; c.beginPath(); c.moveTo(x,row.y-row.rh); c.lineTo(x,row.y-row.rh*0.25); c.quadraticCurveTo(x+tw/2,row.y+row.rh*0.2,x+tw,row.y-row.rh*0.25); c.lineTo(x+tw,row.y-row.rh); c.closePath(); c.fill();
+        c.globalAlpha=0.45; c.strokeStyle="#E7A47C"; c.lineWidth=Math.max(1,row.rh*0.03); c.beginPath(); c.moveTo(x+tw*0.08,row.y-row.rh*0.2); c.quadraticCurveTo(x+tw/2,row.y+row.rh*0.15,x+tw*0.92,row.y-row.rh*0.2); c.stroke();
+        c.globalAlpha=0.5; c.strokeStyle="#3A1810"; c.lineWidth=Math.max(1,row.rh*0.02); c.beginPath(); c.moveTo(x,row.y-row.rh); c.lineTo(x,row.y-row.rh*0.25); c.stroke();
+        if(r()<0.35){ for(var m=0;m<10;m++) blob(c,x+R(r,0,tw),row.y-row.rh*R(r,0.1,0.5),R(r,1,row.rh*0.06),r()<0.5?"#6E7A3A":"#8C8A4A",0.5); }
+      }
+    });
+    var g2=c.createLinearGradient(0,0,w,h); g2.addColorStop(0,"rgba(255,226,180,0.22)"); g2.addColorStop(0.6,"rgba(0,0,0,0)"); g2.addColorStop(1,"rgba(0,0,0,0.3)");
+    c.globalAlpha=1; c.fillStyle=g2; c.fillRect(0,0,w,h);
+    var vg=c.createRadialGradient(w/2,h/2,Math.min(w,h)*0.35,w/2,h/2,Math.max(w,h)*0.75); vg.addColorStop(0,"rgba(0,0,0,0)"); vg.addColorStop(1,"rgba(0,0,0,0.35)");
+    c.fillStyle=vg; c.fillRect(0,0,w,h);
+    grain(c,w,h,20,seedOf(r));
+  },
+  charcoal: function(c,w,h,r){
+    var i;
+    c.globalAlpha=1; c.fillStyle="#EDE9DF"; c.fillRect(0,0,w,h);
+    for(i=0;i<40;i++) blob(c,R(r,w*0.15,w*0.85),R(r,h*0.1,h*0.6),R(r,w*0.05,w*0.15),"#7A7670",0.035);
+    var tx=w*0.5;
+    for(i=0;i<260;i++){ var t=r(), y0=h*(0.95-t*0.52), spread=w*0.03*(1.25-t*0.6); dab(c,tx+gauss(r)*spread*0.6,y0,R(r,h*0.03,h*0.09),-Math.PI/2+R(r,-0.08,0.08),R(r,1,2.6),"#2A2824",R(r,0.12,0.32)); }
+    [0.66,0.56,0.47,0.39,0.33].forEach(function(ty,ti){
+      var y=h*ty;
+      [-1,1].forEach(function(dir){
+        var len=w*R(r,0.2,0.36)*(1-ti*0.13), ex=tx+dir*len, ey=y-h*R(r,0.01,0.05), s, k, q;
+        for(s=0;s<6;s++){ c.globalAlpha=R(r,0.18,0.4); c.strokeStyle="#26241F"; c.lineWidth=R(r,1,3)*(1-ti*0.12); c.lineCap="round"; c.beginPath(); c.moveTo(tx+R(r,-3,3),y+R(r,-3,3)); c.quadraticCurveTo(tx+dir*len*0.5,y+h*R(r,-0.02,0.015),ex+R(r,-4,4),ey+R(r,-4,4)); c.stroke(); }
+        for(k=0;k<34;k++){ var u=R(r,0.15,1.05), cx=tx+dir*len*u, cy=y+(ey-y)*u-h*R(r,0.005,0.07), n=6+Math.floor(r()*6); for(q=0;q<n;q++) dab(c,cx+q*w*0.004+R(r,-2,2),cy+R(r,-2,2),R(r,w*0.01,w*0.026),-1.05+R(r,-0.12,0.12),R(r,0.8,1.6),"#2C2A25",R(r,0.18,0.38)); }
+      });
+    });
+    for(i=0;i<120;i++) dab(c,R(r,w*0.1,w*0.9),h*R(r,0.93,0.98),R(r,w*0.02,w*0.08),R(r,-0.04,0.04),R(r,0.8,2),"#3A3732",0.25);
+    c.globalAlpha=1; grain(c,w,h,18,seedOf(r));
+  },
+  wind: function(c,w,h,r){
+    var i;
+    c.globalAlpha=1; c.fillStyle="#F4F0E5"; c.fillRect(0,0,w,h);
+    for(i=0;i<150;i++) blob(c,R(r,-w*0.1,w*0.8),R(r,-h*0.1,h*0.4),R(r,w*0.05,w*0.18),"#9CB6CB",0.03);
+    for(i=0;i<60;i++) blob(c,r()*w,R(r,h*0.44,h*0.52),R(r,w*0.02,w*0.06),"#8FA08A",0.05);
+    for(i=0;i<200;i++) blob(c,r()*w,R(r,h*0.5,h*1.05),R(r,w*0.04,w*0.14),r()<0.55?"#CFC57D":"#8DA35A",0.035);
+    var tx=w*0.79, ty=h*0.47;
+    c.globalAlpha=0.7; c.strokeStyle="#4E5A3E"; c.lineWidth=w*0.003; c.beginPath(); c.moveTo(tx,ty); c.lineTo(tx+w*0.004,ty-h*0.06); c.stroke();
+    for(i=0;i<30;i++) blob(c,tx+w*0.012+gauss(r)*w*0.014,ty-h*0.075+gauss(r)*h*0.022,R(r,w*0.004,w*0.012),"#55704A",0.25);
+    var cols=["#6E8A3F","#A3A05A","#C8B36A","#55703A"];
+    c.lineCap="round";
+    for(i=0;i<1800;i++){ var y=R(r,h*0.52,h*1.02), dep=(y-h*0.5)/(h*0.5), len=h*(0.015+dep*0.09)*R(r,0.6,1.3), x=r()*w; c.globalAlpha=0.35; c.strokeStyle=cols[Math.floor(r()*4)]; c.lineWidth=R(r,0.6,1.8)*(0.6+dep); c.beginPath(); c.moveTo(x,y); c.quadraticCurveTo(x+len*0.08,y-len*0.6,x+len*R(r,0.35,0.6),y-len); c.stroke(); }
+    var kx=w*0.3, ky=h*0.18, ks=w*0.03;
+    c.globalAlpha=0.35; c.strokeStyle="#444444"; c.lineWidth=1; c.beginPath(); c.moveTo(kx,ky+ks*0.2); c.quadraticCurveTo(w*0.45,h*0.45,w*0.55,h*0.75); c.stroke();
+    c.globalAlpha=0.6; c.strokeStyle="#7A3A2E"; c.lineWidth=1.2; c.beginPath(); c.moveTo(kx,ky+ks*1.3); c.bezierCurveTo(kx-ks,ky+ks*3,kx+ks*1.5,ky+ks*4,kx+ks*0.2,ky+ks*6); c.stroke();
+    for(var b=1;b<=3;b++) blob(c,kx+Math.sin(b*1.7)*ks*0.6,ky+ks*(1.3+b*1.4),ks*0.12,"#B8402E",0.8);
+    c.globalAlpha=0.92; c.fillStyle="#B8402E"; c.beginPath(); c.moveTo(kx,ky-ks); c.lineTo(kx+ks*0.7,ky); c.lineTo(kx,ky+ks*1.3); c.lineTo(kx-ks*0.7,ky); c.closePath(); c.fill();
+    c.globalAlpha=1; grain(c,w,h,12,seedOf(r));
+  }
+};
+
+/* ================= Tranh mẫu ================= */
+var SAMPLE_DATA = [
+  {p:"tea", seed:11, title:"Nắng sớm trên đồi chè", year:2025, medium:"Sơn dầu trên toan", size:"60 × 90 cm", a:1.5, ph:"#9DAE8A",
+   note:"Bức này bắt đầu từ một bản phác chì vẽ vội lúc năm giờ rưỡi sáng, khi sương còn nằm thành từng dải giữa các luống chè. Mặt trời lên rất nhanh. Chỉ khoảng hai mươi phút là ánh sáng đã đổi hẳn từ hồng nhạt sang vàng, nên tôi chỉ kịp ghi lại các mảng sáng tối chính và vài vệt màu thử ở mép giấy.\n\nVề đến nhà, tôi dựng toan 60 × 90 cm và lót nền bằng một lớp đất vàng loãng pha nhiều dầu thông để mặt toan bớt trắng. Các lớp đồi xa được làm trước, bằng màu lục pha xám và một chút trắng để chúng lùi ra sau. Càng về gần, tôi càng thêm lục đậm và nâu, nét cọ cũng dày hơn để các hàng chè nổi lên.\n\nKhó nhất là mặt trời. Tôi vẽ lại ba lần. Lần đầu quá vàng nên trông như buổi trưa. Lần thứ hai quá nhỏ nên mất điểm nhìn. Lần cuối tôi để quầng sáng loang rộng ra và gần như không có viền, giống cách mắt mình nhìn thấy khi bị chói.\n\nChất liệu: sơn dầu loại học viện, cọ dẹt số 8 và số 12, dao vẽ cho các mảng sáng trên đồi gần. Phủ một lớp véc-ni mờ sau sáu tháng, khi sơn đã khô hẳn.\n\nTình trạng: tốt. Có một vết xước nhỏ ở góc dưới bên phải do va vào khung cửa khi chuyển nhà, đã dặm lại bằng màu cùng tông.\n\nNơi treo hiện tại: phòng khách, bức tường đối diện cửa sổ. Tránh nắng chiều chiếu thẳng vào tranh.\n\nGhi thêm cho lần sau: nếu vẽ tiếp đề tài này, nên đến sớm hơn mười lăm phút để kịp bắt lúc sương còn dày. Mang theo một tấm toan nhỏ 30 × 40 để vẽ nháp màu tại chỗ thay vì chỉ dùng chì."},
+  {p:"flood", seed:23, title:"Mùa nước nổi", year:2025, medium:"Acrylic trên toan", size:"80 × 80 cm", a:1, ph:"#A3AFA8",
+   note:"Vẽ theo trí nhớ về những tháng nước lên: cả cánh đồng biến thành một tấm gương lớn, hàng cây xa chỉ còn là một đường kẻ thẫm màu. Tôi đặt đường chân trời gần giữa tranh để bầu trời và mặt nước cân nhau, như hai nửa của cùng một màu.\n\nChiếc xuồng được thêm vào sau cùng, khi tranh đã khô. Ban đầu không có người, nhưng nhìn lâu thấy mặt nước quá vắng, nên tôi đặt thêm một người đội nón lá đang chống sào.\n\nChất liệu: acrylic, phủ lớp bảo vệ mờ. Toan vuông 80 × 80 cm căng sẵn."},
+  {p:"street", seed:37, title:"Phố cũ sau mưa", year:2024, medium:"Màu nước trên giấy", size:"38 × 28 cm", a:28/38, ph:"#C8BBA4",
+   note:"Ký hoạ tại chỗ dưới mái hiên một quán nước, mất khoảng bốn mươi phút. Không khí ẩm làm màu nước khô rất chậm, nên các mảng phản chiếu dưới mặt đường loang ra tự nhiên hơn hẳn những lần vẽ trong phòng.\n\nGiấy cotton 300 gsm, vân thô. Không dùng màu trắng: chỗ sáng nhất là giấy để trống.\n\nBảo quản: giấy đã hơi gợn sóng ở mép trên. Nên lồng kính có passe-partout để mặt giấy không chạm vào kính."},
+  {p:"field", seed:41, title:"Trường màu số 7", year:2024, medium:"Sơn dầu trên toan", size:"120 × 90 cm", a:0.75, ph:"#7A3326",
+   note:"Bức thứ bảy trong loạt tranh trường màu bắt đầu từ năm 2022. Cả loạt theo một quy tắc: hai mảng chữ nhật viền mềm trên một nền đậm hơn. Điều thay đổi giữa các bức là nhiệt độ màu và khoảng cách giữa hai mảng.\n\nVới bức này, tôi muốn khoảng hở ở giữa đủ hẹp để mắt người xem bị kéo vào đó. Mảng cam gỉ sắt được phủ khoảng mười hai lớp sơn rất loãng, mỗi lớp cách nhau hai ngày.\n\nTreo: khổ lớn nên cần treo ở tầm mắt, tâm tranh cách sàn khoảng 145 cm. Khoảng cách đứng xem đẹp nhất là chừng hai mét."},
+  {p:"lotus", seed:53, title:"Sen tàn", year:2024, medium:"Mực tàu trên giấy dó", size:"90 × 45 cm", a:0.5, ph:"#D9D0BC",
+   note:"Cuối tháng Tám, đầm sen sau nhà đã qua mùa. Lá sen khô quăn lại, gương sen cúi xuống, thân gãy gập thành những góc rất đẹp. Tôi vẽ bức này trong một buổi chiều, trực tiếp bằng mực, không phác chì trước.\n\nGiấy dó loại dày hai lớp. Giấy dó ăn mực rất nhanh nên mỗi nét chỉ có một lần. Chậm tay một chút là mực loang thành vệt to; nhanh tay quá thì nét bị khô và rỗ. Các mảng lá được vẽ bằng bút lông to thấm nước trước, rồi chấm mực đặc vào giữa để mực tự lan ra.\n\nThân sen là phần tôi thích nhất. Tôi dùng bút lông nhỏ, kéo một hơi từ dưới lên, thỉnh thoảng nhấn bút để tạo những đốt gai.\n\nCon dấu đỏ ở góc dưới là ấn triện tự khắc trên đá, đóng bằng mực son sau khi mực tàu đã khô hẳn.\n\nBảo quản: tranh giấy dó rất nhạy với độ ẩm. Đã bồi lên một lớp giấy lót và làm trục cuốn. Mỗi năm mở ra một lần vào mùa hanh khô cho giấy được thoáng.\n\nGhi thêm: bản thứ hai cùng đề tài, khổ nhỏ hơn, đã tặng một người bạn năm 2025."},
+  {p:"sea", seed:67, title:"Biển lúc năm giờ", year:2023, medium:"Sơn dầu trên toan", size:"50 × 100 cm", a:2, ph:"#8C93A0",
+   note:"Lần thứ ba tôi vẽ biển buổi sớm, và là lần đầu để mặt trời mới nhô một nửa khỏi mặt nước. Ánh sáng lúc đó gần như không có bóng đổ; mọi thứ được tạo ra từ những khác biệt rất nhỏ giữa hồng, cam và xanh xám.\n\nKhổ toan dài 50 × 100 cm để đường chân trời chạy ngang trọn tầm mắt. Vệt sáng trên mặt nước được làm bằng những nét cọ ngắn, đặt chồng lên nhau khi lớp dưới còn ướt."},
+  {p:"geo", seed:71, title:"Hình học tháng Ba", year:2023, medium:"Acrylic trên toan", size:"70 × 70 cm", a:1, ph:"#B7A98C",
+   note:"Bài tập bố cục: chỉ dùng hình tròn, đường thẳng và bốn màu (xanh đen, vàng đất, đỏ, đen) trên nền ngà. Tôi tự đặt luật không dùng thước cho các đường chéo, nên các đường hơi rung, và chính điều đó làm tranh bớt khô.\n\nVẽ vào tháng Ba, sau một đợt ốm dài. Có lẽ vì thế mà bố cục rất tĩnh."},
+  {p:"lacquer", seed:83, title:"Ruộng bậc thang", year:2023, medium:"Sơn mài trên vóc", size:"60 × 80 cm", a:4/3, ph:"#5B3A22",
+   note:"Bức sơn mài đầu tiên tôi hoàn thành trọn vẹn, sau gần năm tháng làm việc ở xưởng.\n\nQuy trình, ghi lại để nhớ:\n\n1. Làm vóc. Tấm gỗ được bó vải màn bằng sơn ta trộn mùn cưa, sau đó hom nhiều lớp. Mỗi lớp phải ủ trong buồng ẩm cho khô rồi mới mài phẳng.\n\n2. Lót sơn then. Ba lớp sơn đen, mài nước sau mỗi lớp.\n\n3. Vẽ và gắn chất liệu. Các thửa ruộng vàng được dát vàng quỳ. Phần trắng là vỏ trứng vịt cẩn từng mảnh nhỏ. Các mảng đỏ dùng sơn cánh gián pha son.\n\n4. Phủ và mài. Phủ nhiều lớp sơn cánh gián lên toàn bộ mặt tranh, rồi mài dần bằng giấy ráp và nước cho đến khi hình hiện lên. Đây là bước khó lường nhất: mài nông thì hình còn chìm, mài sâu thêm một chút là thủng lớp vàng.\n\n5. Đánh bóng. Bằng tay với bột than mịn và tóc rối, cuối cùng là bằng lòng bàn tay.\n\nNhững đường viền vàng mảnh giữa các thửa ruộng là chỗ tôi cố ý mài thủng lớp phủ để lộ vàng bên dưới.\n\nBảo quản: tránh ánh nắng trực tiếp, không lau bằng hoá chất. Chỉ dùng khăn mềm và khô."},
+  {p:"silk", seed:97, title:"Đêm trăng trên sông", year:2022, medium:"Lụa", size:"60 × 40 cm", a:2/3, ph:"#B7BBB2",
+   note:"Tranh lụa vẽ theo lối nhuộm: mỗi lớp màu rất loãng, để khô, rửa nhẹ dưới vòi nước rồi mới lên lớp tiếp theo. Bức này qua khoảng hai mươi lần nhuộm.\n\nTrăng là phần lụa được giữ gần như nguyên, chỉ phủ một lớp phấn rất mỏng. Ngọn đèn trên chiếc thuyền nhỏ là chấm màu ấm duy nhất trong tranh."},
+  {p:"roof", seed:101, title:"Mái ngói", year:2022, medium:"Ảnh chụp, in trên giấy mỹ thuật", size:"45 × 30 cm", a:2/3, ph:"#8E4129",
+   note:"Chụp từ tầng ba một ngôi nhà cũ, nhìn xuống mái ngói của căn bên cạnh, khoảng bốn giờ chiều, lúc nắng xiên làm nổi rõ từng gờ ngói.\n\nThông số: ống kính 50 mm, khẩu độ f/8, tốc độ 1/250 giây, ISO 200. Chỉnh màu nhẹ, tăng tương phản vùng tối để rêu hiện rõ hơn.\n\nIn trên giấy cotton mặt nhám, khổ 45 × 30 cm, ấn bản 1/10. Bản số 2 và số 3 đã tặng gia đình.\n\nCăn nhà đó đã thay mái tôn năm 2024, nên đây có lẽ là tấm ảnh cuối cùng còn lại của mái ngói này."},
+  {p:"charcoal", seed:113, title:"Cây bàng đầu ngõ", year:2021, medium:"Chì, than trên giấy", size:"30 × 42 cm", a:1.4, ph:"#C9C5BC",
+   note:"Cây bàng đầu ngõ có từ trước khi tôi sinh ra. Các tầng cành của nó xoè ngang như những chiếc khay xếp chồng, nên chỉ phác vài nét là đã nhận ra.\n\nVẽ bằng than liễu và than nén trên giấy croquis. Tán lá được đánh bóng bằng những nét chéo ngắn; thân cây được miết bằng ngón tay rồi tẩy để lấy lại các vệt sáng.\n\nThan rất dễ nhoè. Đã xịt keo cố định hai lớp mỏng. Khi lồng khung phải có lớp đệm để mặt tranh không chạm kính.\n\nMùa đông năm đó cây rụng hết lá đỏ. Tôi định vẽ thêm một bức cùng góc nhìn vào mùa ấy, đến giờ vẫn chưa vẽ."},
+  {p:"wind", seed:127, title:"Cánh đồng gió", year:2020, medium:"Màu nước trên giấy", size:"30 × 40 cm", a:4/3, ph:"#BDBE8E",
+   note:"Bức màu nước đầu tiên tôi giữ lại thay vì bỏ đi. Vẽ ngoài đồng, gió mạnh đến mức phải dùng kẹp giữ giấy vào bảng. Những nét cỏ nghiêng về một phía là nét thật của buổi chiều hôm đó.\n\nCon diều đỏ được thêm vào ở nhà, vẽ theo trí nhớ."}
+];
+
+/* ================= Trạng thái ================= */
+var state = {
+  works: [], samples: [], loaded: false, usingSamples: false,
+  view: (location.hash === "#kham-pha") ? "links" : "gallery",
+  filter: "all", q: "",
+  viewList: [],
+  v: { list:[], i:-1, flipped:false }
+};
+
+SAMPLE_DATA.forEach(function(s,i){
+  state.samples.push({
+    key:"s:"+(i+1), id:"s"+(i+1), src:"sample", title:s.title, artist:"Tranh mẫu", year:s.year, medium:s.medium, size:s.size,
+    catalog:"MẪU-"+String(i+1).padStart(2,"0"), note:s.note, aspect:s.a, ph:s.ph, order:i, url:"", _p:s.p, _seed:s.seed
+  });
+});
+
+function kind(w){ var m=(w.medium||"").toLowerCase(); if(/^ảnh/.test(m)) return "photo"; if(/điêu khắc|tượng|gốm|phù điêu/.test(m)) return "sculpture"; return "painting"; }
+function allWorks(){ return state.usingSamples ? state.samples : state.works; }
+function matchFilter(w,f){ return f==="all" || kind(w)===f; }
+function visibleWorks(){
+  var q=fold(state.q.trim());
+  var list=allWorks().filter(function(w){ return matchFilter(w,state.filter); });
+  if(q) list=list.filter(function(w){ return fold([w.title,w.artist,w.medium,w.year,w.size,w.catalog,w.note].join(" ")).indexOf(q)!==-1; });
+  list.sort(function(a,b){ var ya=a.year||0, yb=b.year||0; if(ya!==yb) return yb-ya; return (a.order||0)-(b.order||0); });
+  return list;
+}
+
+/* ================= Điều hướng trái ================= */
+var ICONS = {
+  all:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7"/><rect x="13.5" y="3.5" width="7" height="7"/><rect x="3.5" y="13.5" width="7" height="7"/><rect x="13.5" y="13.5" width="7" height="7"/></svg>',
+  painting:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14"/><path d="m3 15 5-5 4 4 3-3 6 6"/><path d="M9 22l3-4 3 4"/></svg>',
+  photo:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="3.6"/></svg>',
+  sculpture:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="6.5" r="3"/><path d="M8.5 16c0-3 1.5-6 3.5-6s3.5 3 3.5 6"/><path d="M6 16h12v4H6z"/></svg>',
+  home:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 6 4 12l6 6"/><path d="M4 12h11a5 5 0 0 1 5 5v1"/></svg>',
+  links:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 3.6 5.4 3.6 8.5s-1 5.9-3.6 8.5c-2.6-2.6-3.6-5.4-3.6-8.5s1-5.9 3.6-8.5z"/></svg>'
+};
+var FILTERS = [["all","Tất cả tác phẩm"],["painting","Tranh vẽ"],["photo","Ảnh chụp"],["sculpture","Điêu khắc"]];
+var LINK_TOTAL = LINK_GROUPS.reduce(function(n,g){ return n+g.items.length; },0);
+
+function railItem(icon,label,count,current,onClick){
+  var b=el("button","rail-item"); b.type="button";
+  b.setAttribute("aria-current", current ? "true" : "false");
+  b.innerHTML=ICONS[icon];
+  b.appendChild(el("span",null,label));
+  if(count!=null) b.appendChild(el("span","rail-count",String(count)));
+  b.addEventListener("click",onClick);
+  return b;
+}
+function renderRail(){
+  var rail=$("rail"), works=allWorks();
+  rail.textContent="";
+  rail.appendChild(el("div","rail-label","Phòng tranh"));
+  FILTERS.forEach(function(f){
+    var n=works.filter(function(w){ return matchFilter(w,f[0]); }).length;
+    if(f[0]!=="all" && !n) return;
+    rail.appendChild(railItem(f[0],f[1],n,state.view==="gallery" && state.filter===f[0],function(){ state.filter=f[0]; setView("gallery"); }));
+  });
+  rail.appendChild(el("div","rail-label","Khám phá"));
+  rail.appendChild(railItem("links","Liên kết nghệ thuật",LINK_TOTAL,state.view==="links",function(){ setView("links"); }));
+  if(state.view==="links"){
+    LINK_GROUPS.forEach(function(g){
+      var s=el("button","rail-sub"); s.type="button";
+      s.appendChild(el("span","no",String(g.n).padStart(2,"0")));
+      s.appendChild(el("span",null,g.short));
+      s.addEventListener("click",function(){ jumpTo(g.n); });
+      rail.appendChild(s);
+    });
+  }
+  rail.appendChild(el("div","rail-label","ANREVY HOUSE"));
+  var home=el("a","rail-item"); home.href="../home.html"; home.innerHTML=ICONS.home; home.appendChild(el("span",null,"Về ANREVY HOUSE"));
+  rail.appendChild(home);
+  // Trên điện thoại, cột trái thành hàng thẻ cuộn ngang: kéo thẻ đang chọn vào tầm nhìn.
+  var cur=rail.querySelector('[aria-current="true"]');
+  if(cur && getComputedStyle(rail).flexDirection==="row") rail.scrollLeft=Math.max(0,cur.offsetLeft-rail.offsetLeft-16);
+}
+
+function setView(v){
+  state.view=v;
+  $("galleryView").hidden = v!=="gallery";
+  $("linksView").hidden = v!=="links";
+  $("q").placeholder = v==="links" ? "Tìm trong "+LINK_TOTAL+" liên kết nghệ thuật…" : "Tìm tác phẩm theo tên, chất liệu, năm…";
+  try{ history.replaceState(null,"", v==="links" ? "#kham-pha" : location.pathname+location.search); }catch(e){}
+  render();
+  window.scrollTo(0,0);
+}
+function jumpTo(n){ var t=$("lg-"+n); if(t) t.scrollIntoView({block:"start"}); }
+$("brand").addEventListener("click",function(e){ e.preventDefault(); state.filter="all"; state.q=""; $("q").value=""; setView("gallery"); });
+
+/* ================= Lưới ảnh kiểu Google Ảnh ================= */
+var tiles=new Map(), groupsModel=[];
+function tileFor(w){
+  var t=tiles.get(w.key);
+  if(!t){
+    t=el("button","tile"); t.type="button";
+    var img=document.createElement("img"); img.alt=""; img.decoding="async"; img.loading="lazy"; img.draggable=false;
+    img.addEventListener("error",function(){ t.classList.add("broken"); });
+    img.addEventListener("load",function(){ t.classList.remove("broken"); });
+    t.appendChild(img); t.appendChild(el("span","tile-cap"));
+    t.addEventListener("click",function(){ openViewer(t.dataset.key); });
+    tiles.set(w.key,t);
+  }
+  t.dataset.key=w.key;
+  t.style.setProperty("--ph", w.ph || "#DCDCD6");
+  var im=t.firstChild; if(w.url && im.getAttribute("src")!==w.url) im.src=w.url;
+  var cap=t.lastChild; cap.textContent=w.title;
+  cap.appendChild(el("small",null,[w.year||"",w.medium||""].filter(Boolean).join(" · ")));
+  t.setAttribute("aria-label", w.title+(w.year?", "+w.year:"")+". Mở xem toàn màn hình");
+  return t;
+}
+function renderGallery(){
+  var list=visibleWorks(); state.viewList=list;
+  var groupsEl=$("groups"); groupsEl.textContent=""; groupsModel=[];
+  var byYear=new Map();
+  list.forEach(function(w){ var y=w.year||0; if(!byYear.has(y)) byYear.set(y,[]); byYear.get(y).push(w); });
+  byYear.forEach(function(items,y){
+    var sec=el("section","group"), head=el("h2","group-head");
+    head.appendChild(el("span","y", y ? String(y) : "Không rõ năm"));
+    head.appendChild(el("span","n", items.length+" tác phẩm"));
+    var rows=el("div","rows"); sec.appendChild(head); sec.appendChild(rows); groupsEl.appendChild(sec);
+    groupsModel.push({items:items,rowsEl:rows});
+  });
+  var notice=$("notice");
+  notice.hidden = !(state.usingSamples && !state.q);
+  if(state.usingSamples) notice.textContent="Những tác phẩm đầu tiên của An Vy sắp được treo. Trong lúc chờ, các bức có nhãn “Tranh mẫu” dưới đây được vẽ tự động để minh hoạ cách trưng bày.";
+  var empty=$("empty"); empty.textContent="";
+  if(state.loaded && !list.length){
+    empty.hidden=false;
+    empty.appendChild(el("h2",null, state.q ? "Không tìm thấy tác phẩm nào" : "Chưa có tác phẩm trong mục này"));
+    empty.appendChild(el("p",null, state.q ? "Không có tên tranh, chất liệu hay ghi chú nào khớp với “"+state.q.trim()+"”." : "Hãy quay lại sau, phòng tranh vẫn đang được treo thêm."));
+  } else empty.hidden=true;
+  layout();
+}
+var lastW=0;
+function layout(){
+  if(state.view!=="gallery") return;
+  var W=Math.floor($("groups").getBoundingClientRect().width); if(!W) return; lastW=W;
+  var tH = W<520 ? 128 : W<900 ? 178 : 228, gap=4;
+  groupsModel.forEach(function(g){
+    var frag=document.createDocumentFragment(), row=[], sumA=0;
+    function flush(h,full){
+      var div=el("div","row"), hh=Math.round(h), used=0; div.style.height=hh+"px";
+      row.forEach(function(w,idx){
+        var t=tileFor(w), tw;
+        if(full && idx===row.length-1) tw=W-used-gap*(row.length-1); else tw=Math.max(24,Math.round((w.aspect||1)*h));
+        used+=tw; t.style.width=tw+"px"; t.style.height=hh+"px"; div.appendChild(t);
+      });
+      frag.appendChild(div); row=[]; sumA=0;
+    }
+    g.items.forEach(function(w){ row.push(w); sumA+=(w.aspect||1); if(sumA*tH+gap*(row.length-1)>=W) flush((W-gap*(row.length-1))/sumA,true); });
+    if(row.length){ var h=tH; if(sumA*h+gap*(row.length-1)>W) h=(W-gap*(row.length-1))/sumA; flush(h,false); }
+    g.rowsEl.textContent=""; g.rowsEl.appendChild(frag);
+  });
+}
+var rafId=0;
+if(typeof ResizeObserver==="function"){
+  new ResizeObserver(function(){ var W=Math.floor($("groups").getBoundingClientRect().width); if(W!==lastW){ cancelAnimationFrame(rafId); rafId=requestAnimationFrame(layout); } }).observe($("groups"));
+} else window.addEventListener("resize",function(){ cancelAnimationFrame(rafId); rafId=requestAnimationFrame(layout); });
+
+/* ================= Khám phá nghệ thuật ================= */
+function hl(text,q){
+  var frag=document.createDocumentFragment();
+  if(!q){ frag.appendChild(document.createTextNode(text)); return frag; }
+  var f=fold(text), i=0, at;
+  while((at=f.indexOf(q,i))!==-1){
+    if(at>i) frag.appendChild(document.createTextNode(text.slice(i,at)));
+    frag.appendChild(el("mark",null,text.slice(at,at+q.length)));
+    i=at+q.length;
+  }
+  if(i<text.length) frag.appendChild(document.createTextNode(text.slice(i)));
+  return frag;
+}
+function renderLinks(){
+  var q=fold(state.q.trim());
+  $("lvLead").textContent=LINK_TOTAL+" địa chỉ trong "+LINK_GROUPS.length+" nhóm để khám phá tranh, nhiếp ảnh, triển lãm, điêu khắc, nghệ thuật số và kiến trúc. Mỗi liên kết mở trong một thẻ mới.";
+  var idx=$("lvIndex"), wrap=$("lvGroups"); idx.textContent=""; wrap.textContent="";
+  var shown=0;
+  LINK_GROUPS.forEach(function(g){
+    var items=g.items.filter(function(it){ return !q || fold(it.name+" "+it.host+" "+it.desc).indexOf(q)!==-1; });
+    if(!items.length) return;
+    shown+=items.length;
+    var li=el("li"), b=el("button"); b.type="button";
+    b.appendChild(el("span","no",String(g.n).padStart(2,"0"))); b.appendChild(el("span",null,g.short)); b.appendChild(el("span","ct",String(items.length)));
+    b.addEventListener("click",function(){ jumpTo(g.n); }); li.appendChild(b); idx.appendChild(li);
+
+    var sec=el("section","lg"); sec.id="lg-"+g.n;
+    var head=el("div","lg-head");
+    head.appendChild(el("span","no",String(g.n).padStart(2,"0")));
+    head.appendChild(el("h2",null,g.title));
+    head.appendChild(el("p",null,g.desc));
+    sec.appendChild(head);
+    var grid=el("div","lk-grid");
+    items.forEach(function(it){
+      var a=el("a","lk"); a.href=it.url; a.target="_blank"; a.rel="noopener noreferrer";
+      a.appendChild(el("span","lk-no",it.no));
+      var body=el("span","lk-body");
+      var nm=el("span","lk-name"); nm.appendChild(hl(it.name,q)); body.appendChild(nm);
+      body.appendChild(el("span","lk-host",it.host));
+      var ds=el("span","lk-desc"); ds.appendChild(hl(it.desc,q)); body.appendChild(ds);
+      a.appendChild(body);
+      var go=el("span","lk-go"); go.setAttribute("aria-hidden","true");
+      go.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+      a.appendChild(go);
+      a.setAttribute("aria-label", it.name+", "+it.host+" (mở thẻ mới)");
+      grid.appendChild(a);
+    });
+    sec.appendChild(grid); wrap.appendChild(sec);
+  });
+  var em=$("lvEmpty"); em.hidden = shown>0;
+  if(!shown) em.textContent="Không có liên kết nào khớp với “"+state.q.trim()+"”.";
+}
+
+function render(){
+  renderRail();
+  $("topCount").textContent = state.view==="links" ? LINK_TOTAL+" liên kết" : (state.usingSamples ? "" : state.works.length+" tác phẩm");
+  if(state.view==="gallery") renderGallery(); else renderLinks();
+}
+
+/* ================= Nạp tác phẩm ================= */
+function mapWork(d,i){
+  if(!d || typeof d!=="object") return null;
+  var img=str(d.image,300); if(!img) return null;
+  var w=Number(d.w)||0, h=Number(d.h)||0, y=Number(d.year); y=(y>0&&y<3000)?Math.floor(y):null;
+  return { key:"w:"+(str(d.id,60)||i), id:str(d.id,60)||String(i), src:"work", title:str(d.title,160)||"Không tên", artist:str(d.artist,100), year:y, medium:str(d.medium,100), size:str(d.size,60), catalog:str(d.catalog,40), note:str(d.note,100000), aspect:(w&&h)?w/h:1, ph:/^#[0-9a-fA-F]{6}$/.test(d.ph||"")?d.ph:"#DCDCD6", order:Number(d.order)||i, url:img };
+}
+function loadWorks(){
+  var done=function(list){
+    state.works=list; state.usingSamples=!list.length; state.loaded=true;
+    if(state.usingSamples) paintSamples();
+    render();
+  };
+  if(typeof fetch!=="function"){ done([]); return; }
+  fetch("works.json",{cache:"no-store"}).then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(data){ var arr=(data && Array.isArray(data.works)) ? data.works : []; done(arr.map(mapWork).filter(Boolean)); })
+    .catch(function(){ done([]); });
+}
+
+/* Tranh mẫu chỉ vẽ khi phòng tranh chưa có tác phẩm thật */
+function paintSamples(){
+  var i=0;
+  function next(){
+    if(i>=state.samples.length) return;
+    var s=state.samples[i++];
+    try{
+      var LONG=1500, w, h;
+      if(s.aspect>=1){ w=LONG; h=Math.round(LONG/s.aspect); } else { h=LONG; w=Math.round(LONG*s.aspect); }
+      var cv=document.createElement("canvas"); cv.width=w; cv.height=h;
+      PAINT[s._p](cv.getContext("2d"),w,h,mulberry32(s._seed));
+      cv.toBlob(function(b){
+        if(b){ s.url=URL.createObjectURL(b); if(tiles.get(s.key)) tileFor(s); if(currentWork()===s) $("vImg").src=s.url; }
+        setTimeout(next,0);
+      },"image/jpeg",0.9);
+    }catch(e){ setTimeout(next,0); }
+  }
+  setTimeout(next,0);
+}
+
+/* ================= Trình xem toàn màn hình ================= */
+var viewer=$("viewer"), vImg=$("vImg"), vBack=$("vBack"), lastFocus=null;
+var musicCtl={ viewing:function(){} };
+function currentWork(){ var v=state.v; return (v.i>=0 && v.list[v.i]) || null; }
+function openViewer(key){
+  var i=state.viewList.findIndex(function(w){ return w.key===key; }); if(i<0) return;
+  lastFocus=document.activeElement;
+  state.v.list=state.viewList.slice(); state.v.i=i;
+  viewer.hidden=false; document.documentElement.style.overflow="hidden";
+  musicCtl.viewing(true);
+  showWork(); $("vClose").focus();
+}
+function closeViewer(){
+  if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+  viewer.hidden=true; document.documentElement.style.overflow="";
+  musicCtl.viewing(false); state.v.i=-1;
+  if(lastFocus && document.contains(lastFocus)) lastFocus.focus();
+}
+function showWork(){
+  var w=currentWork(); if(!w) return;
+  state.v.flipped=false;
+  vImg.style.setProperty("--ph", w.ph||"#DCDCD6");
+  if(w.url) vImg.src=w.url; else vImg.removeAttribute("src");
+  vImg.alt=w.title;
+  $("vTitle").textContent=w.title; $("vCat").textContent=w.catalog||"";
+  $("vlTitle").textContent=w.title; $("vlYear").textContent=w.year?", "+w.year:"";
+  $("vlMeta").textContent=[w.artist,w.medium,w.size].filter(Boolean).join(" · ");
+  $("vPrev").disabled=state.v.i<=0; $("vNext").disabled=state.v.i>=state.v.list.length-1;
+  $("vFull").hidden=!(document.fullscreenEnabled && viewer.requestFullscreen);
+  applyFlip();
+}
+function backSize(){
+  var w=currentWork(), r=$("vArt").getBoundingClientRect(), a=(w&&w.aspect)||1;
+  var fw=Math.min(r.width,r.height*a), fh=fw/a;
+  return [Math.floor(Math.min(r.width,Math.max(fw,Math.min(r.width,680)))), Math.floor(Math.min(r.height,Math.max(fh,Math.min(r.height,560))))];
+}
+function applyFlip(){
+  var f=state.v.flipped;
+  vImg.hidden=f; vBack.hidden=!f;
+  $("vFlipLabel").innerHTML = f ? 'Xem<span class="long"> mặt trước</span>' : 'Lật<span class="long"> mặt sau</span>';
+  $("vlHint").textContent = f ? "Mặt sau. Bấm vào khung gỗ để xem lại mặt trước." : "Bấm vào tranh để lật ra mặt sau.";
+  if(f){ renderBack(); var s=backSize(); vBack.style.width=s[0]+"px"; vBack.style.height=s[1]+"px"; }
+}
+function flip(to){ state.v.flipped=(to===undefined)?!state.v.flipped:to; applyFlip(); }
+function renderBack(){
+  var w=currentWork(); if(!w) return;
+  vBack.textContent=""; vBack.setAttribute("aria-label","Mặt sau của "+w.title);
+  var sheet=el("article","sheet"); sheet.addEventListener("click",function(e){ e.stopPropagation(); });
+  var head=el("div","sheet-head"), left=el("div");
+  left.appendChild(el("div","eyebrow","Mặt sau"+(w.catalog?" · "+w.catalog:"")));
+  left.appendChild(el("h3",null,w.title));
+  left.appendChild(el("p","meta",[w.artist,w.year,w.medium,w.size].filter(Boolean).join(" · ")));
+  head.appendChild(left);
+  var stamp=el("div","stamp"); stamp.appendChild(document.createTextNode("An Vy’s Gallery")); stamp.appendChild(document.createElement("br")); stamp.appendChild(document.createTextNode(w.year?String(w.year):"—"));
+  head.appendChild(stamp); sheet.appendChild(head); sheet.appendChild(document.createElement("hr"));
+  var nh=el("div","note-head eyebrow"); nh.appendChild(el("b",null,"Ghi chú"));
+  var wc=wordCount(w.note); if(wc) nh.appendChild(document.createTextNode(" · "+wc.toLocaleString("vi-VN")+" chữ"));
+  sheet.appendChild(nh);
+  sheet.appendChild(el("p","note"+(w.note?"":" empty-note"), w.note || "Chưa có ghi chú cho tác phẩm này."));
+  if(w.src==="sample") sheet.appendChild(el("p","sheet-foot","Tranh mẫu được vẽ tự động để minh hoạ. Ghi chú cũng là ghi chú mẫu."));
+  vBack.appendChild(sheet);
+}
+vImg.addEventListener("click",function(){ flip(true); });
+vBack.addEventListener("click",function(){ flip(false); });
+$("vFlip").addEventListener("click",function(){ flip(); });
+$("vClose").addEventListener("click",closeViewer);
+$("vPrev").addEventListener("click",function(){ if(state.v.i>0){ state.v.i--; showWork(); } });
+$("vNext").addEventListener("click",function(){ if(state.v.i<state.v.list.length-1){ state.v.i++; showWork(); } });
+$("vFull").addEventListener("click",function(){ if(document.fullscreenElement) document.exitFullscreen().catch(function(){}); else if(viewer.requestFullscreen) viewer.requestFullscreen().catch(function(){}); });
+window.addEventListener("resize",function(){ if(!viewer.hidden && state.v.flipped){ var s=backSize(); vBack.style.width=s[0]+"px"; vBack.style.height=s[1]+"px"; } });
+
+/* ================= Phím tắt & tìm kiếm ================= */
+document.addEventListener("keydown",function(e){
+  var tag=(e.target&&e.target.tagName)||"", typing=tag==="INPUT"||tag==="TEXTAREA";
+  if(!viewer.hidden){
+    if(e.key==="Escape") closeViewer();
+    else if(e.key==="ArrowLeft") $("vPrev").click();
+    else if(e.key==="ArrowRight") $("vNext").click();
+    else if((e.key==="f"||e.key==="F") && !typing) flip();
+    return;
+  }
+  if(e.key==="/" && !typing){ e.preventDefault(); $("q").focus(); }
+});
+$("q").addEventListener("input",function(e){ state.q=e.target.value; render(); });
+
+/* ================= Nhạc nền ================= */
+(function initMusic(){
+  var music=$("music"), body=$("musicBody"), tg=$("musicToggle"), icon=$("musicToggleIcon");
+  if(IN_ARTIFACT){
+    var a=document.createElement("a"); a.className="music-link"; a.href=YT_URL; a.target="_blank"; a.rel="noopener noreferrer";
+    a.innerHTML='<span class="play" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span><span>Mở nhạc nền trên YouTube</span>';
+    body.appendChild(a);
+  } else {
+    var f=document.createElement("iframe");
+    f.src="https://www.youtube-nocookie.com/embed/"+YT_ID+"?rel=0&loop=1&playlist="+YT_ID+"&playsinline=1";
+    f.title="Nhạc nền"; f.loading="lazy";
+    f.setAttribute("allow","autoplay; encrypted-media; picture-in-picture");
+    f.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
+    f.setAttribute("allowfullscreen","");
+    body.appendChild(f);
+  }
+  function setCollapsed(v,noSave){
+    music.classList.toggle("collapsed",v);
+    tg.setAttribute("aria-expanded",v?"false":"true");
+    tg.setAttribute("aria-label",v?"Mở rộng trình phát nhạc":"Thu nhỏ trình phát nhạc");
+    icon.setAttribute("d",v?"M12 6v12M6 12h12":"M6 12h12");
+    if(!noSave) lsSet("pt-music-collapsed",v?"1":"0");
+  }
+  var saved=lsGet("pt-music-collapsed");
+  setCollapsed(saved===null ? window.innerWidth<560 : saved==="1", true);
+  var auto=false;
+  tg.addEventListener("click",function(){ auto=false; setCollapsed(!music.classList.contains("collapsed")); });
+  musicCtl.viewing=function(on){
+    if(on){ if(!music.classList.contains("collapsed")){ auto=true; setCollapsed(true,true); } }
+    else if(auto){ auto=false; setCollapsed(false,true); }
+  };
+})();
+
+/* ================= Khởi động ================= */
+setView(state.view);
+loadWorks();
+})();
+</script>
+</body>
+</html>
