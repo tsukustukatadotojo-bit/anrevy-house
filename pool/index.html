@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>⌈ＴＨＥ　ＰＯＯＬ⌋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --water:#7fd8e0;
+    --tile:#f2f6f5;
+    --ink:#2f5a60;
+    --ink-soft:#5f8d92;
+    --glow:#f4feff;
+    --fog:#d6f1f1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{background:var(--fog);color:var(--ink);font-family:'VT323',monospace;cursor:crosshair;-webkit-tap-highlight-color:transparent}
+
+  #scene{position:fixed;inset:0;width:100%;height:100%;display:block}
+
+  /* dự phòng khi máy không chạy được WebGL */
+  .fallback{
+    position:fixed;inset:0;display:none;
+    background:
+      linear-gradient(180deg, rgba(214,241,241,0) 52%, rgba(127,216,224,.85) 52%, rgba(90,180,190,.95) 100%),
+      repeating-linear-gradient(0deg, #c9d7d6 0 2px, transparent 2px 40px),
+      repeating-linear-gradient(90deg, #c9d7d6 0 2px, transparent 2px 40px),
+      #f2f6f5;
+  }
+  body.no-gl .fallback{display:block}
+
+  /* lớp mơ màng: viền tối nhẹ, ánh sáng trần, hạt nhiễu */
+  .veil{
+    position:fixed;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.55), transparent 55%),
+      radial-gradient(ellipse at center, transparent 55%, rgba(70,130,138,.38) 100%);
+    mix-blend-mode:normal;
+  }
+  .grain{
+    position:fixed;inset:-50%;pointer-events:none;opacity:.07;
+    background-image:radial-gradient(#000 .6px, transparent .7px);background-size:3px 3px;
+    animation:grain .9s steps(4) infinite;
+  }
+  @keyframes grain{25%{transform:translate(1%,-1%)}50%{transform:translate(-1%,1%)}75%{transform:translate(1%,1%)}}
+
+  /* HUD */
+  .hud{
+    position:fixed;z-index:20;font-size:clamp(16px,1.6vw,20px);line-height:1.15;letter-spacing:.08em;
+    color:var(--ink);text-shadow:0 0 8px rgba(255,255,255,.9);
+  }
+  .hud-tl{top:calc(14px + env(safe-area-inset-top,0px));left:max(16px,env(safe-area-inset-left,0px))}
+  .hud-tr{top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));text-align:right}
+  .hud-bl{bottom:calc(14px + env(safe-area-inset-bottom,0px));left:max(16px,env(safe-area-inset-left,0px))}
+  .hud-br{bottom:calc(14px + env(safe-area-inset-bottom,0px));right:max(16px,env(safe-area-inset-right,0px));text-align:right}
+  .hud small{display:block;font-size:.8em;color:var(--ink)}
+  .hud a,.hud button{
+    font:inherit;letter-spacing:inherit;color:var(--ink);text-decoration:none;cursor:pointer;
+    background:rgba(255,255,255,.55);border:1px solid rgba(47,90,96,.35);padding:2px 10px;border-radius:999px;
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  }
+  .hud a:hover,.hud button:hover,.hud a:focus-visible,.hud button:focus-visible{background:#fff;outline:none;box-shadow:0 0 14px rgba(255,255,255,.9)}
+
+  /* link kỳ dị giấu trong nước */
+  #links{position:fixed;inset:0;z-index:10;pointer-events:none}
+  .hl{
+    --v:0;
+    position:absolute;transform:translate(-50%,-50%);pointer-events:auto;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    text-decoration:none;color:var(--ink);padding:8px;
+  }
+  .hl-g{
+    display:block;font-size:26px;line-height:1;
+    opacity:calc(.13 + var(--v) * .87);
+    filter:blur(calc((1 - var(--v)) * 1.6px));
+    text-shadow:0 0 calc(var(--v) * 16px) #fff, 0 0 calc(var(--v) * 4px) #fff;
+    animation:bob var(--d,7s) ease-in-out infinite alternate;
+  }
+  .hl-n{
+    font-size:17px;letter-spacing:.06em;white-space:nowrap;
+    padding:0 7px;border-radius:4px;background:rgba(255,255,255,.7);
+    opacity:var(--v);transform:translateY(calc((1 - var(--v)) * 6px));
+  }
+  .hl-n small{display:block;font-size:13px;color:var(--ink-soft);text-align:center}
+  .hl:focus-visible{outline:none;--v:1}
+  .hl:focus-visible .hl-n{box-shadow:0 0 0 2px var(--ink)}
+  @keyframes bob{from{transform:translateY(-5px) rotate(-4deg)}to{transform:translateY(6px) rotate(4deg)}}
+
+  /* gợn nước khi chạm */
+  .ripple{
+    position:fixed;z-index:9;left:0;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;pointer-events:none;
+    border:2px solid rgba(255,255,255,.95);border-radius:50%;
+    animation:ripple 1.6s ease-out forwards;
+  }
+  .ripple.b{animation-delay:.25s;opacity:0}
+  @keyframes ripple{0%{transform:scale(.3);opacity:1}100%{transform:scale(11);opacity:0}}
+
+  /* câu thoại */
+  .dlg{
+    position:fixed;z-index:30;left:50%;bottom:calc(64px + env(safe-area-inset-bottom,0px));
+    width:min(640px,calc(100% - 32px));transform:translateX(-50%);
+    padding:18px 22px 22px;border-radius:14px;cursor:pointer;
+    background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);
+    box-shadow:0 10px 40px rgba(60,120,128,.25), inset 0 0 0 1px rgba(47,90,96,.12);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;
+    font-size:clamp(20px,2.4vw,27px);line-height:1.35;color:#2a4d52;
+    opacity:0;transition:opacity .9s ease;
+  }
+  .dlg.on{opacity:1}
+  .dlg-who{display:block;font-family:'VT323',monospace;font-style:normal;font-size:16px;letter-spacing:.2em;color:var(--ink-soft);margin-bottom:6px}
+  .dlg-more{position:absolute;right:16px;bottom:8px;font-style:normal;font-size:16px;animation:blink 1s steps(1) infinite;opacity:0}
+  .dlg.done .dlg-more{opacity:1}
+  @keyframes blink{50%{opacity:0}}
+  .hint{
+    position:fixed;z-index:20;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);
+    font-size:17px;letter-spacing:.12em;color:var(--ink-soft);white-space:nowrap;
+    opacity:0;transition:opacity 1.2s;text-shadow:0 0 8px #fff;
+  }
+  .hint.on{opacity:1}
+  @media (max-width:640px){
+    .hint{top:auto;bottom:calc(52px + env(safe-area-inset-bottom,0px));font-size:15px}
+    .hl-g{font-size:22px}
+    .hl-n{font-size:14px}
+    .hl-n small{font-size:12px}
+    .hud{font-size:16px}
+    .hud .wide{display:none}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .grain,.hl-g,.dlg-more{animation:none!important}
+  }
+</style>
+</head>
+<body>
+
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="fallback" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="hud hud-tl" aria-hidden="true">LEVEL 37<span class="wide"> · THE POOLROOMS</span><small id="depth">depth 2.5 m</small></div>
+  <div class="hud hud-tr"><a href="../home.html">↑ surface</a></div>
+  <div class="hud hud-bl"><button id="amb" aria-pressed="false">♪ ambience: off</button></div>
+  <div class="hud hud-br" aria-live="polite"><span id="found">found 0 / 0</span><small class="wide">things hidden in the water</small></div>
+
+  <div class="hint" id="hint">move through the water to find what's hidden</div>
+
+  <nav id="links" aria-label="Những lối đi ẩn trong nước"></nav>
+
+  <div class="dlg" id="dlg" role="status" aria-live="polite">
+    <span class="dlg-who">◌ ＴＨＥ　ＰＯＯＬ</span>
+    <span id="dlgText"></span>
+    <span class="dlg-more" aria-hidden="true">▼</span>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+  /* ======= CÀI ĐẶT ======= */
+  // CÂU THOẠI khi vào trang (xuống dòng bằng \n)
+  const LINE = 'Chỗ này sâu 2-3m;\nnhấn chìm mình hay thả trôi mình trong nước là dạng gột rửa';
+  // LINK KỲ DỊ giấu trong nước: [tên, link, ghi chú, ký hiệu]
+  const LINKS = [
+    ['Mebious', 'https://mebious.neocities.org/', 'find mebious', '◌'],
+    ['Terminal 00', 'https://angusnicneven.com/', 'turn back', '⌂'],
+    ['973-eht-namuh-973', 'https://973-eht-namuh-973.com/', 'eht namuh', '∴'],
+    ['JODI', 'https://wwwwwwwww.jodi.org/', '%%%%', '⌇'],
+    ['fauux', 'https://fauux.neocities.org/', 'wired sound', '☾'],
+    ['Staggering Beauty', 'http://www.staggeringbeauty.com/', '⚠ flashing lights', '∿'],
+    ["Cameron's World", 'https://www.cameronsworld.net/', 'geocities', '✧'],
+    ['The Useless Web', 'https://theuselessweb.com/', 'somewhere useless', '◇'],
+    ['Zoomquilt', 'https://zzz.zoomquilt.org/', 'endless zoom', '◎'],
+    ['Infinite Flowers', 'https://infiniteflowers.net/', 'endless flowers', '✿'],
+    ['Elastic Man', 'https://www.adultswim.com/etcetera/elastic-man/', 'stretch', '☺'],
+    ['Find the Invisible Cow', 'https://findtheinvisiblecow.com/', 'listen', '?'],
+    ['Pointer Pointer', 'https://pointerpointer.com/', 'someone is pointing', '☞'],
+    ['Paper Toilet', 'https://papertoilet.com/', 'unroll', '⌒'],
+    ['Optical Toys', 'https://optical.toys/', 'illusions', '⊚'],
+    ['Falling Falling', 'https://fallingfalling.com/', 'falling', '≋'],
+    ['Onekoshima', 'https://onekoshima.pages.dev/', 'pixel cats', '⋆'],
+    ['C. McKenney', 'https://www.christophermckenneyart.com/', 'surreal photos', '◐'],
+  ];
+  /* ======================= */
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s);
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+  /* ================= CẢNH 3D: PHÒNG BỂ BƠI VÔ TẬN ================= */
+  const canvas = $('#scene');
+  let renderer = null;
+  try {
+    if (!window.THREE) throw new Error('no three');
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'low-power' });
+  } catch (e) { document.body.classList.add('no-gl'); }
+
+  let mouseX = 0, mouseY = 0, travel = 0;
+  addEventListener('pointermove', e => {
+    mouseX = (e.clientX / innerWidth) * 2 - 1;
+    mouseY = (e.clientY / innerHeight) * 2 - 1;
+  });
+
+  if (renderer){
+    const CELL = 8, PERIOD = 16, FOG_NEAR = 5, FOG_FAR = 34, WATER = 0, FLOOR = -2.6, CEIL = 4.2;
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
+    const scene = new THREE.Scene();
+    const FOG = new THREE.Color('#d6f1f1');
+    scene.background = FOG;
+    scene.fog = new THREE.Fog(FOG, FOG_NEAR, FOG_FAR);
+    const camera = new THREE.PerspectiveCamera(72, 1, 0.05, 80);
+    camera.rotation.order = 'YXZ';
+
+    const U = {
+      uTime: { value: 0 }, uOff: { value: new THREE.Vector3() }, uCam: { value: new THREE.Vector3() },
+      uFogColor: { value: FOG }, uFogNear: { value: FOG_NEAR }, uFogFar: { value: FOG_FAR }
+    };
+    const GLSL_COMMON = `
+      uniform float uTime; uniform vec3 uOff; uniform vec3 uCam;
+      uniform vec3 uFogColor; uniform float uFogNear; uniform float uFogFar;
+      varying vec3 vPos; varying vec3 vNrm; varying float vDepth;
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float caustic(vec2 p, float t){
+        float v = sin(p.x * 1.3 + t * 0.9 + sin(p.y * 0.8 + t * 0.5) * 1.4)
+                + sin(p.y * 1.7 - t * 0.7 + sin(p.x * 0.9 - t * 0.6) * 1.3)
+                + sin((p.x + p.y) * 1.1 + t * 0.8);
+        v = abs(v) / 3.0;
+        return pow(1.0 - v, 6.0);
+      }`;
+    const VERT = `
+      varying vec3 vPos; varying vec3 vNrm; varying float vDepth;
+      void main(){
+        vec4 wp = modelMatrix * vec4(position, 1.0);
+        vPos = wp.xyz;
+        vNrm = normalize(mat3(modelMatrix) * normal);
+        vec4 mv = viewMatrix * wp;
+        vDepth = -mv.z;
+        gl_Position = projectionMatrix * mv;
+      }`;
+    // gạch men: kẻ ô theo toạ độ thật, có ánh sáng phản chiếu từ mặt nước
+    const tileMat = (base, grout, size, caus) => new THREE.ShaderMaterial({
+      uniforms: Object.assign({ uBase: { value: new THREE.Color(base) }, uGrout: { value: new THREE.Color(grout) },
+                                uTile: { value: size }, uCaus: { value: caus } }, U),
+      vertexShader: VERT,
+      fragmentShader: GLSL_COMMON + `
+        uniform vec3 uBase; uniform vec3 uGrout; uniform float uTile; uniform float uCaus;
+        void main(){
+          vec3 n = normalize(vNrm); vec3 a = abs(n);
+          vec3 P = vPos + uOff;
+          vec2 uv = a.y > 0.5 ? P.xz : (a.x > 0.5 ? P.zy : P.xy);
+          vec2 g = uv / uTile; vec2 f = fract(g);
+          float edge = min(min(f.x, 1.0 - f.x), min(f.y, 1.0 - f.y));
+          float grout = 1.0 - smoothstep(0.025, 0.06, edge);
+          vec3 col = uBase * (0.965 + 0.05 * hash(mod(floor(g), 16.0 / uTile)));
+          col = mix(col, uGrout, grout * 0.85);
+          col *= 0.80 + 0.10 * abs(n.y) + 0.10 * dot(n, normalize(vec3(0.45, 0.6, 0.35))) + 0.08 * max(-n.y, 0.0);
+          if (vPos.y > 0.0) {
+            float c = caustic(vec2(P.x + P.z, P.y * 2.2) * 1.5, uTime) * smoothstep(1.9, 0.0, vPos.y) * (1.0 - a.y);
+            col += c * 0.24 * uCaus;
+            col += smoothstep(3.2, 4.2, vPos.y) * 0.05;
+          } else {
+            float d = clamp(-vPos.y / 2.8, 0.0, 1.0);
+            col = mix(col, vec3(0.43, 0.79, 0.83), 0.32 + d * 0.38);
+            col += caustic(P.xz * 1.25, uTime * 1.15) * (0.22 + 0.3 * a.y) * uCaus;
+          }
+          float fogF = smoothstep(uFogNear, uFogFar, vDepth);
+          gl_FragColor = vec4(mix(col, uFogColor, fogF), 1.0);
+        }`
+    });
+    const waterMat = new THREE.ShaderMaterial({
+      uniforms: U, transparent: true, depthWrite: false,
+      vertexShader: VERT,
+      fragmentShader: GLSL_COMMON + `
+        void main(){
+          vec3 P = vPos + uOff;
+          float c = caustic(P.xz * 0.95, uTime * 0.85);
+          float r = sin(P.x * 3.1 + uTime * 1.3) * sin(P.z * 2.7 - uTime * 1.1);
+          vec3 viewDir = normalize(uCam - vPos);
+          float fres = pow(1.0 - clamp(viewDir.y, 0.0, 1.0), 3.0);
+          vec3 col = mix(vec3(0.40, 0.77, 0.81), vec3(0.86, 0.97, 0.97), 0.25 + 0.6 * fres);
+          col += c * 0.22 + r * 0.025;
+          float alpha = mix(0.48, 0.93, fres);
+          float fogF = smoothstep(uFogNear, uFogFar, vDepth);
+          gl_FragColor = vec4(mix(col, uFogColor, fogF), mix(alpha, 1.0, fogF));
+        }`
+    });
+
+    // gộp nhiều khối hộp thành một hình để vẽ nhanh
+    function merge(boxes){
+      const pos = [], nrm = [], idx = []; let off = 0;
+      for (const [w, h, d, x, y, z] of boxes){
+        const g = new THREE.BoxGeometry(w, h, d);
+        g.translate(x, y, z);
+        pos.push(...g.attributes.position.array); nrm.push(...g.attributes.normal.array);
+        for (const i of g.index.array) idx.push(i + off);
+        off += g.attributes.position.count; g.dispose();
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+      geo.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+      geo.setIndex(idx);
+      return geo;
+    }
+
+    const H = CEIL - FLOOR, CY = (CEIL + FLOOR) / 2, T = 0.3;
+    const solids = [], lights = [], markers = [];
+    for (let i = -3; i <= 4; i++){                    // cột ở góc mỗi ô (x = ±4, ±12, …)
+      const px = i * CELL - 4;
+      for (let z = -56; z <= 16; z += CELL){
+        solids.push([1, H, 1, px, CY, z]);
+        if (Math.abs(px) === 4 && z <= 8) markers.push([px, z]);
+      }
+    }
+    for (let zz = -48; zz <= 16; zz += PERIOD){        // tường ngang, cửa ở giữa mỗi ô
+      for (let cx = -24; cx <= 24; cx += CELL){
+        const side = (CELL - 1 - 2.4) / 2;
+        solids.push([side, H, T, cx - 1.2 - side / 2, CY, zz]);
+        solids.push([side, H, T, cx + 1.2 + side / 2, CY, zz]);
+        solids.push([2.4, CEIL - 2.4, T, cx, (CEIL + 2.4) / 2, zz]);
+      }
+    }
+    for (let zs = -56; zs <= 8; zs += PERIOD){        // tường dọc so le tạo hành lang
+      for (let k = -1; k <= 1; k++){
+        solids.push([T, H, CELL - 1, 4 + k * PERIOD, CY, zs + CELL / 2]);
+        solids.push([T, H, CELL - 1, -4 + k * PERIOD, CY, zs + CELL / 2 + CELL]);
+      }
+    }
+    // bậc thềm dưới nước dọc chân tường
+    for (let zs = -56; zs <= 8; zs += PERIOD){
+      solids.push([0.6, 1.2, CELL - 1, 3.55, -1.8, zs + CELL / 2]);
+      solids.push([0.6, 1.2, CELL - 1, -3.55, -1.8, zs + CELL / 2 + CELL]);
+    }
+    for (let x = -24; x <= 24; x += CELL){              // ô kính lấy sáng trên trần
+      for (let z = -52; z <= 12; z += CELL) lights.push([2.2, 0.05, 2.2, x, CEIL - 0.03, z]);
+    }
+    scene.add(new THREE.Mesh(merge(solids), tileMat('#f3f7f6', '#b9c9c9', 0.25, 1.0)));
+    scene.add(new THREE.Mesh(merge(lights), new THREE.MeshBasicMaterial({ color: 0xffffff, fog: true })));
+
+    const water = new THREE.Mesh(new THREE.PlaneGeometry(160, 160), waterMat);
+    water.rotation.x = -Math.PI / 2; water.position.y = WATER; scene.add(water);
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(160, 160), tileMat('#bfe6ec', '#86b9c1', 0.25, 1.0));
+    floor.rotation.x = -Math.PI / 2; floor.position.y = FLOOR; scene.add(floor);
+    const ceil = new THREE.Mesh(new THREE.PlaneGeometry(160, 160), tileMat('#eef3f2', '#c8d4d3', 1.0, 0.0));
+    ceil.rotation.x = Math.PI / 2; ceil.position.y = CEIL; scene.add(ceil);
+
+    // thang bể bơi bằng thép
+    const steel = new THREE.MeshBasicMaterial({ color: 0xdfe8e9, fog: true });
+    const ladder = [];
+    for (let zs = -56; zs <= 8; zs += PERIOD){
+      const z0 = zs + CELL / 2 + 1.5;
+      for (const dz of [-0.28, 0.28]){
+        ladder.push([0.06, 2.6, 0.06, 3.1, -0.6, z0 + dz]);
+        ladder.push([0.6, 0.06, 0.06, 3.4, 0.7, z0 + dz]);
+      }
+      for (let y = -1.6; y <= 0.2; y += 0.45) ladder.push([0.08, 0.04, 0.56, 3.1, y, z0]);
+    }
+    scene.add(new THREE.Mesh(merge(ladder), steel));
+
+    // biển độ sâu trên cột
+    function label(text){
+      const c = document.createElement('canvas'); c.width = 256; c.height = 128;
+      const g = c.getContext('2d');
+      g.fillStyle = '#2f6f78'; g.font = 'bold 76px Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+      g.fillText(text, 128, 66);
+      const tex = new THREE.CanvasTexture(c);
+      return new THREE.MeshBasicMaterial({ map: tex, transparent: true, fog: true });
+    }
+    const LBL = [label('2M'), label('2.5M'), label('3M')];
+    markers.forEach(([px, z], i) => {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.31), LBL[((z / CELL) % 3 + 3) % 3]);
+      m.position.set(px > 0 ? px - 0.505 : px + 0.505, 0.55, z);
+      m.rotation.y = px > 0 ? -Math.PI / 2 : Math.PI / 2;
+      scene.add(m);
+    });
+
+    function resize(){
+      const w = innerWidth, h = innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.fov = w < h ? 86 : 72;
+      camera.updateProjectionMatrix();
+    }
+    resize(); addEventListener('resize', resize);
+
+    const depthEl = $('#depth');
+    let last = performance.now(), lookX = 0, lookY = 0;
+    function frame(now){
+      requestAnimationFrame(frame);
+      const dt = Math.min(0.05, (now - last) / 1000); last = now;
+      const t = now / 1000;
+      if (!reduce) travel += dt * 0.55;
+      const wz = travel % PERIOD;
+      U.uOff.value.set(0, 0, -(travel - wz));
+      U.uTime.value = reduce ? 0 : t;
+      const x = reduce ? 0 : Math.sin(travel * 0.05) * 0.9;
+      camera.position.set(x, 0.34 + (reduce ? 0 : Math.sin(t * 0.7) * 0.05), -wz);
+      lookX += (mouseX - lookX) * 0.03; lookY += (mouseY - lookY) * 0.03;
+      camera.rotation.y = (reduce ? 0 : Math.sin(t * 0.07) * 0.32) - lookX * 0.55;
+      camera.rotation.x = -0.03 - lookY * 0.22 + (reduce ? 0 : Math.sin(t * 0.5) * 0.01);
+      camera.rotation.z = reduce ? 0 : Math.sin(t * 0.4) * 0.012;
+      U.uCam.value.copy(camera.position);
+      water.position.x = floor.position.x = ceil.position.x = camera.position.x;
+      water.position.z = floor.position.z = ceil.position.z = camera.position.z;
+      depthEl.textContent = 'depth ' + (2.5 + 0.5 * Math.sin(travel * 0.09)).toFixed(1) + ' m';
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ================= LINK GIẤU TRONG NƯỚC ================= */
+  const box = $('#links'), foundEl = $('#found');
+  const SPOTS = [
+    [12, 22], [31, 15], [52, 26], [72, 16], [89, 27],
+    [8, 45], [24, 38], [44, 47], [63, 40], [83, 46],
+    [15, 66], [35, 60], [57, 68], [76, 62], [92, 70],
+    [26, 82], [48, 86], [69, 83]
+  ];
+  const narrow = innerWidth < 640;
+  const items = LINKS.map((l, i) => {
+    const a = document.createElement('a');
+    a.className = 'hl'; a.href = l[1]; a.target = '_blank'; a.rel = 'noopener';
+    a.setAttribute('aria-label', l[0] + ' (mở thẻ mới)');
+    let [x, y] = SPOTS[i % SPOTS.length];
+    if (narrow){ x = 22 + (x - 8) / 84 * 56; y = 14 + (y - 15) * 0.92; }
+    a.style.left = (x + rand(-2, 2)) + '%'; a.style.top = (y + rand(-2, 2)) + '%';
+    a.innerHTML = `<span class="hl-g" style="--d:${rand(5, 9).toFixed(1)}s;animation-delay:${(-rand(0, 8)).toFixed(1)}s">${l[3]}</span>` +
+                  `<span class="hl-n">${l[0]}<small>${l[2]}</small></span>`;
+    box.appendChild(a);
+    return { a, v: 0, hold: 0, seen: false };
+  });
+  let found = 0;
+  foundEl.textContent = `found 0 / ${items.length}`;
+  function mark(it){
+    if (!it.seen && it.v > 0.85){
+      it.seen = true; found++;
+      foundEl.textContent = `found ${found} / ${items.length}` + (found === items.length ? ' ✧' : '');
+    }
+  }
+  let px = -999, py = -999;
+  addEventListener('pointermove', e => { if (e.pointerType === 'mouse'){ px = e.clientX; py = e.clientY; } });
+  document.addEventListener('mouseleave', () => { px = py = -999; });
+
+  function ripple(x, y){
+    for (const c of ['', ' b']){
+      const r = document.createElement('span');
+      r.className = 'ripple' + c; r.style.left = x + 'px'; r.style.top = y + 'px';
+      document.body.appendChild(r);
+      r.addEventListener('animationend', () => r.remove());
+    }
+  }
+  addEventListener('pointerdown', e => {
+    if (e.target.closest('.hl, .hud, .dlg')) return;
+    ripple(e.clientX, e.clientY);
+    const now = performance.now();
+    for (const it of items){
+      const r = it.a.getBoundingClientRect();
+      if (Math.hypot(r.left + r.width / 2 - e.clientX, r.top + r.height / 2 - e.clientY) < (narrow ? 120 : 210)) it.hold = now + 3200;
+    }
+  });
+  // thỉnh thoảng một thứ tự nổi lên
+  setInterval(() => {
+    if (document.hidden) return;
+    const it = items[(Math.random() * items.length) | 0];
+    it.hold = Math.max(it.hold, performance.now() + 1600);
+  }, 5200);
+
+  (function loop(){
+    requestAnimationFrame(loop);
+    const now = performance.now();
+    for (const it of items){
+      const r = it.a.getBoundingClientRect();
+      const d = Math.hypot(r.left + r.width / 2 - px, r.top + r.height / 2 - py);
+      let target = clamp(1 - (d - 40) / (narrow ? 90 : 150), 0, 1);
+      if (now < it.hold) target = Math.max(target, 1);
+      it.v += (target - it.v) * 0.12;
+      it.a.style.setProperty('--v', it.v.toFixed(3));
+      mark(it);
+    }
+  })();
+
+  /* ================= CÂU THOẠI ================= */
+  const dlg = $('#dlg'), dlgText = $('#dlgText'), hint = $('#hint');
+  let typing = null, closed = false;
+  function closeDlg(){
+    if (closed) return;
+    closed = true; clearInterval(typing);
+    dlg.classList.remove('on');
+    setTimeout(() => { dlg.style.display = 'none'; hint.classList.add('on'); setTimeout(() => hint.classList.remove('on'), 7000); }, 900);
+  }
+  setTimeout(() => {
+    dlg.classList.add('on');
+    let i = 0;
+    typing = setInterval(() => {
+      i++;
+      const s = LINE.slice(0, i);
+      dlgText.innerHTML = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\n/g, '<br>');
+      if (i >= LINE.length){ clearInterval(typing); dlg.classList.add('done'); setTimeout(closeDlg, 12000); }
+    }, reduce ? 1 : 55);
+  }, 1300);
+  dlg.addEventListener('click', () => {
+    if (!dlg.classList.contains('done')){
+      clearInterval(typing);
+      dlgText.innerHTML = LINE.replace(/\n/g, '<br>'); dlg.classList.add('done');
+      setTimeout(closeDlg, 9000);
+    } else closeDlg();
+  });
+
+  /* ================= ÂM THANH NƯỚC (tạo trong trình duyệt) ================= */
+  const ambBtn = $('#amb');
+  let ac = null, master = null, on = false, userOff = false, dripT = null;
+  function initAudio(){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    ac = new AC();
+    master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+    // tiếng nước và máy lọc ù ù
+    const len = ac.sampleRate * 3, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+    let b = 0;
+    for (let i = 0; i < len; i++){ b = (b + 0.02 * (Math.random() * 2 - 1)) / 1.02; d[i] = b * 3.5; }
+    const noise = ac.createBufferSource(); noise.buffer = buf; noise.loop = true;
+    const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 520;
+    const ng = ac.createGain(); ng.gain.value = 0.55;
+    noise.connect(lp); lp.connect(ng); ng.connect(master); noise.start();
+    const hum = ac.createOscillator(); hum.type = 'sine'; hum.frequency.value = 58;
+    const hg = ac.createGain(); hg.gain.value = 0.05; hum.connect(hg); hg.connect(master); hum.start();
+    // vang trong phòng
+    const echo = ac.createDelay(1.5); echo.delayTime.value = 0.31;
+    const fb = ac.createGain(); fb.gain.value = 0.45;
+    echo.connect(fb); fb.connect(echo); echo.connect(master);
+    function drip(){
+      if (!on) return;
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime, f = rand(900, 1500);
+      o.type = 'sine'; o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 0.35, t + 0.12);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.18, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+      o.connect(g); g.connect(master); g.connect(echo); o.start(t); o.stop(t + 0.2);
+      dripT = setTimeout(drip, rand(1800, 6000));
+    }
+    master._drip = drip;
+    return true;
+  }
+  function setOn(v){
+    if (v && !ac && !initAudio()) return;
+    on = v;
+    if (ac){
+      if (ac.state === 'suspended') ac.resume();
+      master.gain.cancelScheduledValues(ac.currentTime);
+      master.gain.setTargetAtTime(v ? 0.5 : 0, ac.currentTime, 0.6);
+      clearTimeout(dripT); if (v) dripT = setTimeout(master._drip, 900);
+    }
+    ambBtn.textContent = '♪ ambience: ' + (v ? 'on' : 'off');
+    ambBtn.setAttribute('aria-pressed', v);
+  }
+  ambBtn.addEventListener('click', () => { userOff = on; setOn(!on); });
+  ['pointerdown', 'keydown'].forEach(ev => addEventListener(ev, e => {
+    if (e.target.closest && e.target.closest('#amb')) return;
+    if (!on && !userOff) setOn(true);
+  }, { once: false }));
+})();
+</script>
+</body>
+</html>
