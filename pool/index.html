@@ -65,6 +65,39 @@
   }
   .hud a:hover,.hud button:hover,.hud a:focus-visible,.hud button:focus-visible{background:#fff;outline:none;box-shadow:0 0 14px rgba(255,255,255,.9)}
 
+  /* màn hình nhạc nhỏ ở góc trên trái, thu nhỏ được */
+  .hud-tl{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+  .tv{
+    --tvw:clamp(160px,17vw,240px);
+    position:relative;width:var(--tvw);overflow:hidden;border-radius:10px;
+    background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.95);
+    box-shadow:0 6px 24px rgba(60,120,128,.22), inset 0 0 0 1px rgba(47,90,96,.12);
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  }
+  .tv-bar{display:flex;align-items:center;gap:4px;padding:3px 4px 3px 9px;font-size:15px;line-height:1;letter-spacing:.08em}
+  .tv-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tv-t i{font-style:normal;display:inline-block;width:1.1em}
+  .tv.on .tv-t i{animation:note 1.2s ease-in-out infinite alternate}
+  @keyframes note{to{transform:translateY(-3px)}}
+  .hud .tv-bar button{font-size:14px;line-height:1.1;padding:1px 8px}
+  .tv-scr{position:relative;aspect-ratio:16/9;background:#cfe9ea;overflow:hidden}
+  .tv-scr iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.9) brightness(1.04)}
+  .tv-scr::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(214,241,241,.1),rgba(127,216,224,.16));
+    box-shadow:inset 0 0 18px rgba(214,241,241,.65);
+  }
+  .tv-msg{
+    position:absolute;z-index:1;left:0;right:0;bottom:0;padding:3px 6px;text-align:center;
+    font-size:14px;letter-spacing:.06em;color:var(--ink);background:rgba(255,255,255,.72);
+  }
+  .tv-msg small{display:block;font-size:12px;color:var(--ink-soft)}
+  .tv.on .tv-msg{display:none}
+  .tv.dead .tv-msg{display:flex;flex-direction:column;justify-content:center;top:0;background:rgba(214,241,241,.85)}
+  /* thu nhỏ: chỉ còn thanh tiêu đề, nhạc vẫn phát */
+  .tv.min{width:auto}
+  .tv.min .tv-scr{position:absolute;top:100%;left:0;width:var(--tvw);opacity:0;pointer-events:none}
+
   /* link kỳ dị giấu trong nước */
   #links{position:fixed;inset:0;z-index:10;pointer-events:none}
   .hl{
@@ -129,10 +162,12 @@
     .hl-n small{font-size:12px}
     .hud{font-size:16px}
     .hud .wide{display:none}
+    .tv{--tvw:156px}
+    .tv-bar{font-size:14px}
   }
 
   @media (prefers-reduced-motion: reduce){
-    .grain,.hl-g,.dlg-more{animation:none!important}
+    .grain,.hl-g,.dlg-more,.tv-t i{animation:none!important}
   }
 </style>
 </head>
@@ -143,7 +178,17 @@
   <div class="veil" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
-  <div class="hud hud-tl" aria-hidden="true">LEVEL 37<span class="wide"> · THE POOLROOMS</span><small id="depth">depth 2.5 m</small></div>
+  <div class="hud hud-tl">
+    <div class="tv" id="tv">
+      <div class="tv-bar">
+        <span class="tv-t"><i aria-hidden="true">♪</i>pool.tv</span>
+        <button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt tiếng nhạc">off</button>
+        <button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Thu nhỏ màn hình">–</button>
+      </div>
+      <div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div>
+    </div>
+    <div class="lvl" aria-hidden="true">LEVEL 37<span class="wide"> · THE POOLROOMS</span><small id="depth">depth 2.5 m</small></div>
+  </div>
   <div class="hud hud-tr"><a href="../home.html">↑ surface</a></div>
   <div class="hud hud-bl"><button id="amb" aria-pressed="false">♪ ambience: off</button></div>
   <div class="hud hud-br" aria-live="polite"><span id="found">found 0 / 0</span><small class="wide">things hidden in the water</small></div>
@@ -164,6 +209,8 @@
   /* ======= CÀI ĐẶT ======= */
   // CÂU THOẠI khi vào trang (xuống dòng bằng \n)
   const LINE = 'Chỗ này sâu 2-3m;\nnhấn chìm mình hay thả trôi mình trong nước là dạng gột rửa';
+  // NHẠC & VIDEO ở góc trên trái (mã video YouTube)
+  const MUSIC = 'R0zVL1YePDY';
   // LINK KỲ DỊ giấu trong nước: [tên, link, ghi chú, ký hiệu]
   const LINKS = [
     ['Mebious', 'https://mebious.neocities.org/', 'find mebious', '◌'],
@@ -183,6 +230,7 @@
     ['Optical Toys', 'https://optical.toys/', 'illusions', '⊚'],
     ['Falling Falling', 'https://fallingfalling.com/', 'falling', '≋'],
     ['Onekoshima', 'https://onekoshima.pages.dev/', 'pixel cats', '⋆'],
+    ['The 88x31 Project', 'https://auvreil.github.io/88x31/', 'tiny old buttons', '▦'],
     ['C. McKenney', 'https://www.christophermckenneyart.com/', 'surreal photos', '◐'],
   ];
   /* ======================= */
@@ -415,10 +463,10 @@
   /* ================= LINK GIẤU TRONG NƯỚC ================= */
   const box = $('#links'), foundEl = $('#found');
   const SPOTS = [
-    [12, 22], [31, 15], [52, 26], [72, 16], [89, 27],
-    [8, 45], [24, 38], [44, 47], [63, 40], [83, 46],
-    [15, 66], [35, 60], [57, 68], [76, 62], [92, 70],
-    [26, 82], [48, 86], [69, 83]
+    [31, 16], [50, 25], [69, 15], [87, 26],
+    [8, 45], [25, 37], [42, 47], [59, 38], [76, 46], [93, 37],
+    [14, 65], [33, 58], [52, 67], [71, 60], [89, 68],
+    [24, 83], [44, 87], [63, 81], [81, 86]
   ];
   const narrow = innerWidth < 640;
   const items = LINKS.map((l, i) => {
@@ -426,7 +474,7 @@
     a.className = 'hl'; a.href = l[1]; a.target = '_blank'; a.rel = 'noopener';
     a.setAttribute('aria-label', l[0] + ' (mở thẻ mới)');
     let [x, y] = SPOTS[i % SPOTS.length];
-    if (narrow){ x = 22 + (x - 8) / 84 * 56; y = 14 + (y - 15) * 0.92; }
+    if (narrow){ x = 22 + (x - 8) / 85 * 56; y = 27 + (y - 15) * 0.76; }
     a.style.left = (x + rand(-2, 2)) + '%'; a.style.top = (y + rand(-2, 2)) + '%';
     a.innerHTML = `<span class="hl-g" style="--d:${rand(5, 9).toFixed(1)}s;animation-delay:${(-rand(0, 8)).toFixed(1)}s">${l[3]}</span>` +
                   `<span class="hl-n">${l[0]}<small>${l[2]}</small></span>`;
@@ -512,7 +560,7 @@
 
   /* ================= ÂM THANH NƯỚC (tạo trong trình duyệt) ================= */
   const ambBtn = $('#amb');
-  let ac = null, master = null, on = false, userOff = false, dripT = null;
+  let ac = null, master = null, on = false, dripT = null;
   function initAudio(){
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return false;
@@ -549,17 +597,87 @@
     if (ac){
       if (ac.state === 'suspended') ac.resume();
       master.gain.cancelScheduledValues(ac.currentTime);
-      master.gain.setTargetAtTime(v ? 0.5 : 0, ac.currentTime, 0.6);
+      master.gain.setTargetAtTime(v ? 0.4 : 0, ac.currentTime, 0.6);
       clearTimeout(dripT); if (v) dripT = setTimeout(master._drip, 900);
     }
     ambBtn.textContent = '♪ ambience: ' + (v ? 'on' : 'off');
     ambBtn.setAttribute('aria-pressed', v);
   }
-  ambBtn.addEventListener('click', () => { userOff = on; setOn(!on); });
-  ['pointerdown', 'keydown'].forEach(ev => addEventListener(ev, e => {
-    if (e.target.closest && e.target.closest('#amb')) return;
-    if (!on && !userOff) setOn(true);
-  }, { once: false }));
+  ambBtn.addEventListener('click', () => setOn(!on));
+
+  /* ================= NHẠC & VIDEO YOUTUBE (góc trên trái) ================= */
+  const tv = $('#tv'), tvMsg = $('#tvMsg'), snd = $('#snd'), tvMin = $('#tvMin');
+  let yt = null, ytReady = false, ytDead = false, soundOn = false, userMuted = false, gestured = false;
+  function sndUI(){
+    snd.textContent = soundOn ? 'on' : 'off';
+    snd.setAttribute('aria-pressed', soundOn);
+    tv.classList.toggle('on', soundOn);
+  }
+  function noSignal(txt){
+    ytDead = true; soundOn = false; tv.classList.add('dead');
+    tvMsg.innerHTML = 'no signal<small>' + txt + '</small>'; sndUI();
+  }
+  function soundUp(){
+    if (!ytReady || ytDead) return;
+    yt.unMute(); yt.setVolume(75); yt.playVideo();
+    soundOn = true; sndUI();
+  }
+  function soundDown(){ if (ytReady) yt.mute(); soundOn = false; sndUI(); }
+
+  if (location.protocol === 'file:'){
+    noSignal('chỉ chạy khi mở qua web');
+  } else {
+    window.onYouTubeIframeAPIReady = () => {
+      yt = new YT.Player('yt', {
+        videoId: MUSIC,
+        playerVars: {
+          autoplay: 1, mute: 1, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3,
+          modestbranding: 1, playsinline: 1, rel: 0, loop: 1, playlist: MUSIC, origin: location.origin
+        },
+        events: {
+          onReady: e => {
+            ytReady = true;
+            e.target.getIframe().setAttribute('title', 'Nhạc của bể bơi');
+            e.target.mute(); e.target.playVideo();
+            if (gestured && !userMuted) soundUp();
+          },
+          onStateChange: e => { if (e.data === YT.PlayerState.ENDED){ e.target.seekTo(0); e.target.playVideo(); } },
+          onError: () => noSignal('video không cho phép nhúng')
+        }
+      });
+    };
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    tag.onerror = () => noSignal('không tải được YouTube');
+    document.head.appendChild(tag);
+    setTimeout(() => { if (!ytReady && !ytDead) noSignal('không tải được YouTube'); }, 15000);
+  }
+
+  // trình duyệt chỉ cho phát tiếng sau lần chạm / gõ phím đầu tiên
+  function onGesture(e){
+    if (e.target.closest && e.target.closest('#snd')) return;
+    gestured = true;
+    if (!userMuted && !soundOn) soundUp();
+  }
+  ['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, onGesture, true));
+  snd.addEventListener('click', () => {
+    gestured = true;
+    if (soundOn){ userMuted = true; soundDown(); }
+    else { userMuted = false; soundUp(); }
+  });
+
+  // thu nhỏ / mở lại màn hình (nhạc vẫn phát), nhớ lựa chọn cho lần sau
+  function setMin(m){
+    tv.classList.toggle('min', m);
+    tvMin.textContent = m ? '▢' : '–';
+    tvMin.setAttribute('aria-expanded', !m);
+    tvMin.setAttribute('aria-label', m ? 'Mở lại màn hình' : 'Thu nhỏ màn hình');
+    try { localStorage.setItem('pool-tv-min', m ? '1' : '0'); } catch (e) {}
+  }
+  let startMin = false;
+  try { startMin = localStorage.getItem('pool-tv-min') === '1'; } catch (e) {}
+  setMin(startMin);
+  tvMin.addEventListener('click', () => setMin(!tv.classList.contains('min')));
 })();
 </script>
 </body>
