@@ -8,18 +8,33 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check billiards sites
+      - name: Check sites and videos
         run: |
           UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
           for u in \
-            https://poki.com/en/g/8-ball-billiards-classic \
-            https://www.crazygames.com/game/8-ball-billiards-classic \
-            https://www.247billiards.com/ \
-            https://8ballpool.com/ \
-            https://www.miniclip.com/games/8-ball-pool-multiplayer \
-            https://www.coolmathgames.com/0-8-ball-pool \
-            https://www.mathplayground.com/8_ball_pool.html ; do
+            https://www.bored.com/category/random-rabbit-hole \
+            https://superbad.com/index1.html \
+            https://superbad.com/ \
+            https://www.windows93.net/ \
+            https://adarkroom.doublespeakgames.com/ \
+            https://lichess.org/ \
+            https://www.chess.com/play/computer \
+            https://gamevui.vn/co-ca-ngua/game \
+            https://www.crazygames.com/game/ludo-king \
+            https://www.crazygames.com/game/ludo-hero \
+            https://poki.com/en/g/ludo-hero \
+            https://ludoking.com/ \
+            https://www.ludoking.com/play/ \
+            https://www.247games.com/ludo \
+            https://playludo.online/ \
+            https://www.coolmathgames.com/0-ludo \
+            https://www.mathplayground.com/ludo.html ; do
             r=$(curl -s -L -A "$UA" -o p.html -w '%{http_code} %{url_effective}' --max-time 25 "$u" || echo "ERR")
-            t=$(grep -o -i '<title>[^<]*' p.html | head -1 | cut -c8-90)
-            echo "::notice title=$(echo $u | cut -d/ -f3)::$r | $t | $(wc -c < p.html) bytes"
+            t=$(grep -o -i '<title[^>]*>[^<]*' p.html | head -1 | sed 's/<title[^>]*>//' | cut -c1-80)
+            echo "::notice title=$(echo $u | cut -d/ -f3)::$u => $r | $t | $(wc -c < p.html)b"
+          done
+          for id in aTfDtUFiquY PaFHwTjy1yE MXFlwm0347M WSLMN6g_Od4 inkJ39DQBt8 QPrcFnPyyyA; do
+            code=$(curl -s -o o.json -w '%{http_code}' --max-time 20 "https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=$id")
+            title=$(python3 -c "import json;d=json.load(open('o.json'));print(d.get('title','')[:90]+' | '+d.get('author_name',''))" 2>/dev/null || head -c 80 o.json)
+            echo "::notice title=yt-$id::oembed=$code $title"
           done
