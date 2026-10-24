@@ -242,10 +242,10 @@
 
       <form class="field" id="gate" autocomplete="off" novalidate>
         <label for="date" class="sr">Nhập mật mã gồm 6 chữ số</label>
-        <input id="date" type="text" inputmode="numeric" maxlength="6"
-               placeholder="••••••" autocomplete="off" spellcheck="false">
+        <input id="date" type="text" inputmode="numeric" maxlength="7"
+               placeholder="•••••••" autocomplete="off" spellcheck="false">
       </form>
-      <p class="fmt">ｅｎｔｅｒ　６　ｄｉｇｉｔｓ</p>
+      <p class="fmt">ｅｎｔｅｒ　７　ｄｉｇｉｔｓ</p>
       <p id="status" class="sr" aria-live="polite"></p>
     </div>
   </main>
@@ -264,7 +264,7 @@
 (() => {
   /* ======= CÀI ĐẶT ======= */
   const CONFIG = {
-    answer: '111213',       // mật mã đúng: 6 chữ số
+    answer: '1109011',      // mật mã đúng: 7 chữ số
     next:   'home.html',    // trang mở ra khi nhập đúng
     music:  '-f8M62qEETE'   // nhạc trang này: mã video YouTube (phần sau youtu.be/)
   };
@@ -521,13 +521,13 @@
   let checkT;
 
   function format(v){
-    return v.replace(/\D/g, '').slice(0, 6); // chỉ nhận số, tối đa 6 chữ số
+    return v.replace(/\D/g, '').slice(0, 7); // chỉ nhận số, tối đa 7 chữ số
   }
   input.addEventListener('input', () => {
     const f = format(input.value);
     if (f !== input.value) input.value = f;
     clearTimeout(checkT);
-    if (f.length === 6) checkT = setTimeout(check, 280);
+    if (f.length === 7) checkT = setTimeout(check, 280);
   });
   form.addEventListener('submit', e => {
     e.preventDefault();
