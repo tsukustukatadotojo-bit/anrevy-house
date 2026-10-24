@@ -77,12 +77,32 @@
   .foot{position:absolute;left:3%;right:3%;bottom:16%;height:1.2em;display:flex;justify-content:space-between;align-items:center}
   .foot i{width:.7em;height:.7em;border-radius:50%;background:#ffe2a8;box-shadow:0 0 .6em #ffb347,0 0 1.4em rgba(255,179,71,.6)}
 
-  /* nhạc cụ */
-  #piano {--x:15.5%;--w:26%; --b:73%;  z-index:5}
-  #drums {--x:42%;  --w:16%; --b:64%;  z-index:4}
-  #mic   {--x:48.7%;--w:2.8%;--b:75.5%;z-index:6}
-  #sax   {--x:60%;  --w:5.4%;--b:71.5%;z-index:5}
-  #violin{--x:67%;  --w:5%;  --b:71.5%;z-index:5}
+  /* khung sân khấu: thu hẹp lại để hai bên tường có chỗ cho cửa */
+  .set{position:absolute;left:13%;width:74%;top:0;height:100%;font-size:.74em;pointer-events:none}
+
+  /* nhạc cụ — hàng sau (trên bục) rồi hàng trước */
+  #riser   {--x:38.5%;--w:24%;  --b:64.6%;z-index:3}
+  #drums   {--x:41.6%;--w:17.6%;--b:62%;  z-index:4}
+  #cello   {--x:33.4%;--w:5.8%; --b:65.6%;z-index:4}
+  #bass    {--x:61.4%;--w:6.6%; --b:66.2%;z-index:4}
+  #piano   {--x:8.6%; --w:25.5%;--b:73%;  z-index:6}
+  #violin  {--x:35.2%;--w:4.4%; --b:73.6%;z-index:6}
+  #mic     {--x:48.6%;--w:2.8%; --b:75.5%;z-index:8}
+  #trumpet {--x:51.8%;--w:2.7%; --b:74.6%;z-index:7}
+  .bstand  {--w:8.2%; --b:72.6%;z-index:6}
+  #bs1{--x:54.4%} #bs2{--x:63%} #bs3{--x:71.6%}
+  #trombone{--x:69.6%;--w:3.4%; --b:74.4%;z-index:7}
+  #clarinet{--x:79%;  --w:1.5%; --b:73.8%;z-index:7}
+  #sax     {--x:80.4%;--w:5%;   --b:74.4%;z-index:7}
+
+  /* hai cánh cửa trên tường gạch */
+  .door{z-index:5;display:block;text-decoration:none;color:inherit}
+  #doorL{--x:1.2%; --w:11%;--b:81.5%}
+  #doorR{--x:87.8%;--w:11%;--b:81.5%}
+  .door .glow{animation:dglow 3.2s ease-in-out infinite alternate}
+  @keyframes dglow{from{opacity:.55}to{opacity:1}}
+  .door .neon{animation:flick 7s infinite}
+  #doorR .neon{animation-delay:-3s}
 
   /* ánh đèn sân khấu */
   .beam{
@@ -130,10 +150,10 @@
 
   /* bàn khán giả + kệ đĩa */
   .tbl{z-index:14}
-  #t1{--x:24%;--w:12%;--b:100.5%}
-  #t2{--x:46%;--w:11%;--b:99%}
-  #t3{--x:67%;--w:12%;--b:100.5%}
-  #rack{--x:1.5%;--w:15%;--b:98%;z-index:15}
+  #t1{--x:31%;--w:11.5%;--b:100.5%}
+  #t2{--x:49%;--w:11%;--b:99%}
+  #t3{--x:67%;--w:11.5%;--b:100.5%}
+  #rack{--x:14%;--w:13.5%;--b:99%;z-index:15}
   .flame{animation:flame 1.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
   .halo{animation:halo 2.3s ease-in-out infinite alternate}
   @keyframes flame{0%{transform:scale(1,1)}40%{transform:scale(.9,1.12)}70%{transform:scale(1.08,.94)}100%{transform:scale(.95,1.06)}}
@@ -178,11 +198,21 @@
   body.portrait .sign .s1{font-size:12em}
   body.portrait .sign .s2{font-size:4.2em}
   body.portrait .platform{--x:1%;--y:38%;--w:98%;--h:15%}
-  body.portrait #piano {--x:4%;  --w:41%; --b:48%}
-  body.portrait #drums {--x:43%; --w:27%; --b:42%}
-  body.portrait #mic   {--x:47.6%;--w:4.6%;--b:49.6%}
-  body.portrait #sax   {--x:70.5%;--w:9%;  --b:47%}
-  body.portrait #violin{--x:81%; --w:8%;  --b:47%}
+  body.portrait .set{left:0;width:100%;font-size:1em}
+  body.portrait #riser   {--x:31%; --w:38%; --b:43.6%}
+  body.portrait #drums   {--x:37%; --w:26%; --b:41.8%}
+  body.portrait #cello   {--x:23.5%;--w:8.6%;--b:43.8%}
+  body.portrait #bass    {--x:67%; --w:9.6%;--b:44.2%}
+  body.portrait #piano   {--x:.5%; --w:37%; --b:48.2%}
+  body.portrait #violin  {--x:34.6%;--w:6.4%;--b:48.6%}
+  body.portrait #mic     {--x:47.6%;--w:4.6%;--b:49.6%}
+  body.portrait #trumpet {--x:51.6%;--w:4%;  --b:49.2%}
+  body.portrait .bstand  {--w:11%;--b:47.8%}
+  body.portrait #bs1{--x:55%} body.portrait #bs2{--x:65.6%} body.portrait #bs3{--x:76.2%}
+  body.portrait #trombone{--x:74%; --w:4.8%;--b:49.2%}
+  body.portrait #clarinet,body.portrait #sax{display:none}
+  body.portrait #doorL{--x:2%; --w:17%;--b:76.5%}
+  body.portrait #doorR{--x:81%;--w:17%;--b:76.5%}
   body.portrait .beam{top:4.5%}
   body.portrait .beam.b1{left:4%;width:42%;height:43%}
   body.portrait .beam.b2{left:40%;width:32%;height:37%}
@@ -196,9 +226,9 @@
   body.portrait .tieback.r{right:3.2%}
   body.portrait .valance{left:-1%;right:-1%;height:5.4%}
   body.portrait .pros{left:0;width:100%;height:55%}
-  body.portrait #rack{--x:3%;--w:44%;--b:93%}
-  body.portrait #t1{--x:54%;--w:24%;--b:77%}
-  body.portrait #t2{--x:73%;--w:24%;--b:89%}
+  body.portrait #rack{--x:3%;--w:40%;--b:99%}
+  body.portrait #t1{--x:47%;--w:23%;--b:84%}
+  body.portrait #t2{--x:63%;--w:22%;--b:90%}
   body.portrait #t3{display:none}
   body.portrait .cine{left:2%;width:96%;top:5%}
 
@@ -338,6 +368,7 @@
   <div class="hud hud-tr" aria-hidden="true"><span class="live"><b>●</b> LIVE</span></div>
 
   <main class="stage" id="stage">
+    <div class="set">
     <div class="box backdrop deco" aria-hidden="true"></div>
     <div class="sign" aria-hidden="true"><span class="s1">AnreVy</span><span class="s2">JAZZ CLUB</span></div>
 
@@ -353,6 +384,61 @@
         <rect y="140" width="1000" height="5" fill="#c9a24a"/>
       </svg>
       <div class="foot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <!-- BỤC TRỐNG -->
+    <div class="o deco" id="riser" aria-hidden="true">
+      <svg viewBox="0 0 300 46">
+        <defs><linearGradient id="rsTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a2210"/><stop offset="1" stop-color="#8a4a22"/></linearGradient></defs>
+        <path d="M16 0H284L300 20H0Z" fill="url(#rsTop)"/>
+        <path d="M60 0 52 20M120 0 116 20M180 0 184 20M240 0 248 20" stroke="#2a1006" stroke-width="1.4" opacity=".6"/>
+        <rect y="20" width="300" height="24" fill="#1a0804"/>
+        <rect y="20" width="300" height="2.6" fill="#e2b84e"/>
+        <g fill="#ffe2a8"><circle cx="30" cy="33" r="2"/><circle cx="80" cy="33" r="2"/><circle cx="130" cy="33" r="2"/><circle cx="170" cy="33" r="2"/><circle cx="220" cy="33" r="2"/><circle cx="270" cy="33" r="2"/></g>
+      </svg>
+    </div>
+
+    <!-- ĐÀN CELLO -->
+    <div class="o deco" id="cello" aria-hidden="true">
+      <svg viewBox="0 0 70 190">
+        <defs><radialGradient id="ceG" cx=".42" cy=".38" r=".75"><stop offset="0" stop-color="#e0893e"/><stop offset=".55" stop-color="#9a3f14"/><stop offset="1" stop-color="#4e1a06"/></radialGradient></defs>
+        <ellipse cx="35" cy="186" rx="28" ry="3.4" fill="rgba(0,0,0,.65)"/>
+        <path d="M18 186 28 160M52 186 42 160M22 178H48" stroke="#1a1012" stroke-width="2.4" fill="none"/>
+        <path d="M35 166V186" stroke="#aaa" stroke-width="1.6"/>
+        <path d="M35 62C19 62 13 72 15 82 17 90 23 92 23 98 23 104 10 108 11 124 12 146 24 166 35 166 46 166 58 146 59 124 60 108 47 104 47 98 47 92 53 90 55 82 57 72 51 62 35 62Z" fill="url(#ceG)" stroke="#2a0c02"/>
+        <path d="M35 64C22 64 16 72 17 82" stroke="#fff" stroke-opacity=".22" stroke-width="1.4" fill="none"/>
+        <path d="M27 106c-3 6 3 12 0 20M43 106c3 6-3 12 0 20" stroke="#1a0802" stroke-width="1.5" fill="none"/>
+        <rect x="32.6" y="14" width="4.8" height="50" fill="#9a3f14"/>
+        <path d="M32 24H38L39 128H31Z" fill="#111"/>
+        <circle cx="35" cy="10" r="5" fill="#9a3f14" stroke="#2a0c02"/>
+        <path d="M32.6 10a2.6 2.6 0 1 1 2.6 2.6" stroke="#2a0c02" fill="none" stroke-width=".8"/>
+        <path d="M31 17h-4M39 17h4M31 22h-4M39 22h4" stroke="#111" stroke-width="2"/>
+        <path d="M33.6 24V150M34.6 24V150M35.4 24V150M36.4 24V150" stroke="#eee" stroke-width=".35"/>
+        <path d="M29 132H41L40 136H30Z" fill="#e9cf9b"/>
+        <path d="M31 140H39L37.6 158H32.4Z" fill="#111"/>
+        <path d="M59 26 65 182" stroke="#3a2412" stroke-width="1.6"/><path d="M61 28 66.4 178" stroke="#eee" stroke-width=".6"/>
+      </svg>
+    </div>
+
+    <!-- CONTRABASS -->
+    <div class="o deco" id="bass" aria-hidden="true">
+      <svg viewBox="0 0 80 232">
+        <defs><radialGradient id="bsG" cx=".4" cy=".4" r=".8"><stop offset="0" stop-color="#c9772e"/><stop offset=".55" stop-color="#7a3210"/><stop offset="1" stop-color="#3a1404"/></radialGradient></defs>
+        <ellipse cx="40" cy="228" rx="30" ry="3.6" fill="rgba(0,0,0,.65)"/>
+        <g transform="rotate(5 40 226)">
+          <path d="M40 202V226" stroke="#aaa" stroke-width="2"/>
+          <path d="M40 76C30 76 23 80 21 88 19 97 26 106 26 114 26 122 11 126 11 150 11 180 25 203 40 203 55 203 69 180 69 150 69 126 54 122 54 114 54 106 61 97 59 88 57 80 50 76 40 76Z" fill="url(#bsG)" stroke="#220a02"/>
+          <path d="M40 78C31 78 25 82 23 89" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" fill="none"/>
+          <path d="M30 128c-3 7 3 14 0 23M50 128c3 7-3 14 0 23" stroke="#1a0802" stroke-width="1.8" fill="none"/>
+          <rect x="37.4" y="16" width="5.2" height="62" fill="#7a3210"/>
+          <path d="M36.6 22H43.4L44.6 158H35.4Z" fill="#111"/>
+          <path d="M37 14Q32 4 40 3Q48 4 43 14Z" fill="#7a3210" stroke="#220a02"/>
+          <g fill="#8a8a92"><rect x="32" y="16.6" width="5" height="2.6" rx="1"/><rect x="32" y="23.6" width="5" height="2.6" rx="1"/><rect x="43" y="16.6" width="5" height="2.6" rx="1"/><rect x="43" y="23.6" width="5" height="2.6" rx="1"/></g>
+          <path d="M38.4 22V180M39.6 22V180M40.6 22V180M41.8 22V180" stroke="#eee" stroke-width=".4"/>
+          <path d="M33 160H47L46 165H34Z" fill="#e9cf9b"/>
+          <path d="M35.6 170H44.4L42.8 194H37.2Z" fill="#111"/>
+        </g>
+      </svg>
     </div>
 
     <!-- ĐÀN PIANO -->
@@ -429,6 +515,120 @@
       </svg>
     </div>
 
+    <!-- KÈN TRUMPET -->
+    <div class="o deco" id="trumpet" aria-hidden="true">
+      <svg viewBox="0 0 40 110">
+        <defs><linearGradient id="tpG" gradientUnits="userSpaceOnUse" x1="6" x2="34"><stop offset="0" stop-color="#8a6414"/><stop offset=".45" stop-color="#ffe58a"/><stop offset="1" stop-color="#a8781e"/></linearGradient></defs>
+        <ellipse cx="20" cy="107" rx="16" ry="2.6" fill="rgba(0,0,0,.65)"/>
+        <path d="M20 66V100M20 100 8 108M20 100 32 108M20 100V108" stroke="#222" stroke-width="2"/>
+        <path d="M18.4 38C18.4 52 12 58 6 66H34C28 58 21.6 52 21.6 38Z" fill="url(#tpG)" stroke="#6a4a0a" stroke-width=".6"/>
+        <ellipse cx="20" cy="66" rx="14" ry="2.6" fill="#ffe58a" stroke="#8a6414" stroke-width=".6"/>
+        <path d="M20 38V30" stroke="url(#tpG)" stroke-width="3.2"/>
+        <rect x="13.6" y="17" width="3.4" height="15" fill="url(#tpG)"/><rect x="18.3" y="17" width="3.4" height="15" fill="url(#tpG)"/><rect x="23" y="17" width="3.4" height="15" fill="url(#tpG)"/>
+        <g fill="#fff3c4"><rect x="13.2" y="13.6" width="4.2" height="2.6" rx="1"/><rect x="17.9" y="13.6" width="4.2" height="2.6" rx="1"/><rect x="22.6" y="13.6" width="4.2" height="2.6" rx="1"/></g>
+        <path d="M26 30C34 30 34 20 26 20" stroke="url(#tpG)" stroke-width="2.4" fill="none"/>
+        <path d="M14 18 11 4" stroke="url(#tpG)" stroke-width="2.4"/>
+        <path d="M9.4 4H12.6L12 1H10Z" fill="#d8d8de"/>
+      </svg>
+    </div>
+
+    <!-- GIÁ NHẠC CỦA BAND -->
+    <div class="o deco bstand" id="bs1" aria-hidden="true">
+      <svg viewBox="0 0 110 122">
+        <defs>
+          <linearGradient id="bsF1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a1022"/><stop offset="1" stop-color="#2e0610"/></linearGradient>
+          <linearGradient id="bsL1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe58a"/><stop offset="1" stop-color="#8a6414"/></linearGradient>
+        </defs>
+        <ellipse cx="55" cy="119" rx="48" ry="3.4" fill="rgba(0,0,0,.65)"/>
+        <rect x="32" y="0" width="46" height="24" rx="5" fill="#2a1208" stroke="#120804"/>
+        <rect x="35" y="3" width="40" height="5" rx="2" fill="#5a2a12"/>
+        <path d="M18 12H92L97 33H13Z" fill="#f3ead6"/>
+        <g stroke="#6a5a4a" stroke-width=".55" opacity=".8"><path d="M22 16H88M21 19H89M20 22H90M19 25H91M18 28H92"/></g>
+        <g fill="#2a1a12"><circle cx="34" cy="19" r="1"/><circle cx="46" cy="22" r="1"/><circle cx="60" cy="18" r="1"/><circle cx="72" cy="25" r="1"/><circle cx="80" cy="21" r="1"/></g>
+        <rect x="6" y="32" width="98" height="7" rx="2" fill="url(#bsL1)"/>
+        <path d="M10 39H100L94 113H16Z" fill="url(#bsF1)" stroke="#120408"/>
+        <path d="M15 43H95L90 109H20Z" fill="none" stroke="#e2b84e" stroke-width="1.2" opacity=".85"/>
+        <g stroke="#e2b84e" stroke-width=".8" opacity=".55"><path d="M55 109 30 47M55 109 42 47M55 109 55 47M55 109 68 47M55 109 80 47"/></g>
+        <circle cx="55" cy="72" r="15" fill="#2e0610" stroke="#e2b84e" stroke-width="2"/>
+        <text x="55" y="77.4" text-anchor="middle" font-family="Limelight, serif" font-size="14" fill="#ffe58a">AV</text>
+        <rect x="12" y="113" width="86" height="5" rx="1" fill="#120604"/>
+      </svg>
+    </div>
+    <div class="o deco bstand" id="bs2" aria-hidden="true">
+      <svg viewBox="0 0 110 122">
+        <defs>
+          <linearGradient id="bsF2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a1022"/><stop offset="1" stop-color="#2e0610"/></linearGradient>
+          <linearGradient id="bsL2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe58a"/><stop offset="1" stop-color="#8a6414"/></linearGradient>
+        </defs>
+        <ellipse cx="55" cy="119" rx="48" ry="3.4" fill="rgba(0,0,0,.65)"/>
+        <rect x="32" y="0" width="46" height="24" rx="5" fill="#2a1208" stroke="#120804"/>
+        <rect x="35" y="3" width="40" height="5" rx="2" fill="#5a2a12"/>
+        <path d="M18 12H92L97 33H13Z" fill="#f3ead6"/>
+        <g stroke="#6a5a4a" stroke-width=".55" opacity=".8"><path d="M22 16H88M21 19H89M20 22H90M19 25H91M18 28H92"/></g>
+        <g fill="#2a1a12"><circle cx="34" cy="19" r="1"/><circle cx="46" cy="22" r="1"/><circle cx="60" cy="18" r="1"/><circle cx="72" cy="25" r="1"/><circle cx="80" cy="21" r="1"/></g>
+        <rect x="6" y="32" width="98" height="7" rx="2" fill="url(#bsL2)"/>
+        <path d="M10 39H100L94 113H16Z" fill="url(#bsF2)" stroke="#120408"/>
+        <path d="M15 43H95L90 109H20Z" fill="none" stroke="#e2b84e" stroke-width="1.2" opacity=".85"/>
+        <g stroke="#e2b84e" stroke-width=".8" opacity=".55"><path d="M55 109 30 47M55 109 42 47M55 109 55 47M55 109 68 47M55 109 80 47"/></g>
+        <circle cx="55" cy="72" r="15" fill="#2e0610" stroke="#e2b84e" stroke-width="2"/>
+        <text x="55" y="77.4" text-anchor="middle" font-family="Limelight, serif" font-size="14" fill="#ffe58a">AV</text>
+        <rect x="12" y="113" width="86" height="5" rx="1" fill="#120604"/>
+      </svg>
+    </div>
+    <div class="o deco bstand" id="bs3" aria-hidden="true">
+      <svg viewBox="0 0 110 122">
+        <defs>
+          <linearGradient id="bsF3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a1022"/><stop offset="1" stop-color="#2e0610"/></linearGradient>
+          <linearGradient id="bsL3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe58a"/><stop offset="1" stop-color="#8a6414"/></linearGradient>
+        </defs>
+        <ellipse cx="55" cy="119" rx="48" ry="3.4" fill="rgba(0,0,0,.65)"/>
+        <rect x="32" y="0" width="46" height="24" rx="5" fill="#2a1208" stroke="#120804"/>
+        <rect x="35" y="3" width="40" height="5" rx="2" fill="#5a2a12"/>
+        <path d="M18 12H92L97 33H13Z" fill="#f3ead6"/>
+        <g stroke="#6a5a4a" stroke-width=".55" opacity=".8"><path d="M22 16H88M21 19H89M20 22H90M19 25H91M18 28H92"/></g>
+        <g fill="#2a1a12"><circle cx="34" cy="19" r="1"/><circle cx="46" cy="22" r="1"/><circle cx="60" cy="18" r="1"/><circle cx="72" cy="25" r="1"/><circle cx="80" cy="21" r="1"/></g>
+        <rect x="6" y="32" width="98" height="7" rx="2" fill="url(#bsL3)"/>
+        <path d="M10 39H100L94 113H16Z" fill="url(#bsF3)" stroke="#120408"/>
+        <path d="M15 43H95L90 109H20Z" fill="none" stroke="#e2b84e" stroke-width="1.2" opacity=".85"/>
+        <g stroke="#e2b84e" stroke-width=".8" opacity=".55"><path d="M55 109 30 47M55 109 42 47M55 109 55 47M55 109 68 47M55 109 80 47"/></g>
+        <circle cx="55" cy="72" r="15" fill="#2e0610" stroke="#e2b84e" stroke-width="2"/>
+        <text x="55" y="77.4" text-anchor="middle" font-family="Limelight, serif" font-size="14" fill="#ffe58a">AV</text>
+        <rect x="12" y="113" width="86" height="5" rx="1" fill="#120604"/>
+      </svg>
+    </div>
+
+    <!-- KÈN TROMBONE -->
+    <div class="o deco" id="trombone" aria-hidden="true">
+      <svg viewBox="0 0 50 180">
+        <defs><linearGradient id="tbG" gradientUnits="userSpaceOnUse" x1="4" x2="46"><stop offset="0" stop-color="#8a6414"/><stop offset=".45" stop-color="#ffe58a"/><stop offset="1" stop-color="#a8781e"/></linearGradient></defs>
+        <ellipse cx="25" cy="177" rx="20" ry="3" fill="rgba(0,0,0,.65)"/>
+        <path d="M22 150V170M22 170 10 178M22 170 34 178" stroke="#222" stroke-width="2"/>
+        <path d="M20 112C20 134 12 146 4 156H40C32 146 24 134 24 112Z" fill="url(#tbG)" stroke="#6a4a0a" stroke-width=".6"/>
+        <ellipse cx="22" cy="156" rx="18" ry="3.2" fill="#ffe58a" stroke="#8a6414" stroke-width=".6"/>
+        <path d="M22 112V66" stroke="url(#tbG)" stroke-width="3.6"/>
+        <path d="M22 66C22 58 32 58 32 66V96" stroke="url(#tbG)" stroke-width="3" fill="none"/>
+        <path d="M30 96V8M38 96V8" stroke="url(#tbG)" stroke-width="3.2"/>
+        <path d="M30 8C30 2 38 2 38 8" stroke="url(#tbG)" stroke-width="3.2" fill="none"/>
+        <path d="M29 70H39M29 40H39" stroke="#c9a24a" stroke-width="2"/>
+        <path d="M38 96V104" stroke="url(#tbG)" stroke-width="2.4"/><path d="M36.4 104H39.6L39 108H37Z" fill="#d8d8de"/>
+      </svg>
+    </div>
+
+    <!-- KÈN CLARINET -->
+    <div class="o deco" id="clarinet" aria-hidden="true">
+      <svg viewBox="0 0 20 120">
+        <ellipse cx="10" cy="117" rx="9" ry="2" fill="rgba(0,0,0,.65)"/>
+        <path d="M10 104V116M10 116 3 119M10 116 17 119" stroke="#222" stroke-width="1.6"/>
+        <path d="M8.6 2H11.4L12 12H8Z" fill="#222"/>
+        <rect x="7.8" y="12" width="4.4" height="84" fill="#141414"/>
+        <path d="M7.8 96H12.2L16 108H4Z" fill="#141414"/>
+        <ellipse cx="10" cy="108" rx="6" ry="1.4" fill="#2a2a2a"/>
+        <g fill="#d8d8de"><rect x="7.4" y="30" width="5.2" height="1.4"/><rect x="7.4" y="54" width="5.2" height="1.4"/><rect x="7.4" y="78" width="5.2" height="1.4"/>
+          <circle cx="10" cy="38" r="1"/><circle cx="10" cy="44" r="1"/><circle cx="10" cy="62" r="1"/><circle cx="10" cy="68" r="1"/><circle cx="10" cy="86" r="1"/></g>
+        <path d="M11.6 16V92" stroke="#fff" stroke-opacity=".35" stroke-width=".6"/>
+      </svg>
+    </div>
+
     <!-- KÈN SAXOPHONE -->
     <div class="o deco" id="sax" aria-hidden="true">
       <svg viewBox="0 0 80 170">
@@ -486,8 +686,64 @@
     <div class="tieback r" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M4 14Q20 24 36 14" stroke="#e2b84e" stroke-width="3.4" fill="none"/><circle cx="20" cy="20" r="3.6" fill="#ffe58a"/><path d="M17 22h6l2 14H15z" fill="#e2b84e"/><path d="M16 26h8M15.6 30h8.8" stroke="#8a6414" stroke-width=".8"/></svg></div>
     <div class="valance velvet" aria-hidden="true"></div>
     <div class="rod" aria-hidden="true"></div>
+    </div>
 
     <div class="dim" aria-hidden="true"></div>
+
+    <!-- CỬA TRÁI: PHÒNG TRAVIS SCOTT -->
+    <a class="o hit door" id="doorL" href="../travis/" data-tag="TRAVIS ROOM →" aria-label="Cửa trái: sang phòng Travis Scott">
+      <svg viewBox="0 0 120 262">
+        <defs>
+          <linearGradient id="dlLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a2416"/><stop offset=".6" stop-color="#1e120b"/><stop offset="1" stop-color="#120a06"/></linearGradient>
+          <radialGradient id="dlGlow" cx=".5" cy=".55" r=".55"><stop offset="0" stop-color="#ff7a1a" stop-opacity=".55"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></radialGradient>
+          <filter id="dlBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+        </defs>
+        <ellipse class="glow" cx="60" cy="150" rx="70" ry="120" fill="url(#dlGlow)"/>
+        <ellipse class="glow" cx="60" cy="258" rx="64" ry="5" fill="#ff7a1a" opacity=".55"/>
+        <g class="neon">
+          <text x="60" y="22" text-anchor="middle" font-family="Limelight, serif" font-size="12.6" letter-spacing="1.6" fill="#ffe2c4" stroke="#ff7a1a" stroke-width=".5" filter="url(#dlBlur)" opacity=".9">TRAVIS ROOM</text>
+          <text x="60" y="22" text-anchor="middle" font-family="Limelight, serif" font-size="12.6" letter-spacing="1.6" fill="#fff1e0">TRAVIS ROOM</text>
+        </g>
+        <rect x="4" y="34" width="112" height="224" fill="#0c0705" stroke="#3a2416" stroke-width="2"/>
+        <rect x="9" y="39" width="102" height="219" fill="#ff7a1a" opacity=".5" class="glow"/>
+        <rect x="11" y="41" width="98" height="215" fill="url(#dlLeaf)"/>
+        <g fill="#6a4a32"><circle cx="17" cy="48" r="1.6"/><circle cx="103" cy="48" r="1.6"/><circle cx="17" cy="248" r="1.6"/><circle cx="103" cy="248" r="1.6"/><circle cx="17" cy="148" r="1.6"/><circle cx="103" cy="148" r="1.6"/></g>
+        <rect x="22" y="56" width="76" height="66" rx="3" fill="none" stroke="#5a3a24" stroke-width="2"/>
+        <g fill="#c9a578" opacity=".8"><path d="M58 112V74a4 4 0 0 1 8 0v38z"/><path d="M58 96H48a4 4 0 0 1-4-4v-8a3 3 0 0 1 6 0v6h8z"/><path d="M66 90h8v-6a3 3 0 0 1 6 0v8a4 4 0 0 1-4 4h-10z"/></g>
+        <rect x="18" y="148" width="84" height="8" rx="4" fill="#8a8a92"/><rect x="18" y="148" width="84" height="3" rx="1.5" fill="#c8c8d0"/>
+        <rect x="22" y="200" width="76" height="40" rx="3" fill="none" stroke="#5a3a24" stroke-width="2"/>
+        <rect x="11" y="253" width="98" height="3" fill="#ffb066"/>
+      </svg>
+    </a>
+
+    <!-- CỬA PHẢI: PHÒNG NÓI CHUYỆN -->
+    <a class="o hit door" id="doorR" href="../lounge/" data-tag="THE LOUNGE →" aria-label="Cửa phải: sang phòng nói chuyện The Lounge">
+      <svg viewBox="0 0 120 262">
+        <defs>
+          <linearGradient id="drLeaf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a2c14"/><stop offset=".5" stop-color="#8a4a22"/><stop offset="1" stop-color="#5a2c14"/></linearGradient>
+          <radialGradient id="drWin" cx=".45" cy=".4" r=".6"><stop offset="0" stop-color="#fff0c2"/><stop offset=".6" stop-color="#ffc66b"/><stop offset="1" stop-color="#b8701e"/></radialGradient>
+          <radialGradient id="drGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#9dffc8" stop-opacity=".45"/><stop offset="1" stop-color="#9dffc8" stop-opacity="0"/></radialGradient>
+          <filter id="drBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+        </defs>
+        <ellipse class="glow" cx="60" cy="22" rx="62" ry="26" fill="url(#drGlow)"/>
+        <g class="neon">
+          <text x="60" y="25" text-anchor="middle" font-family="Yellowtail, cursive" font-size="24" fill="#d8ffe8" stroke="#3dff9a" stroke-width=".8" filter="url(#drBlur)" opacity=".9">Lounge</text>
+          <text x="60" y="25" text-anchor="middle" font-family="Yellowtail, cursive" font-size="24" fill="#f2fff6">Lounge</text>
+        </g>
+        <rect x="4" y="34" width="112" height="224" rx="2" fill="#2a1208" stroke="#c9a24a" stroke-width="2"/>
+        <rect x="11" y="41" width="98" height="215" fill="url(#drLeaf)"/>
+        <circle cx="60" cy="88" r="21" fill="#c9a24a"/><circle cx="60" cy="88" r="17" fill="url(#drWin)"/>
+        <path d="M60 71V105M43 88H77" stroke="#8a6414" stroke-width="1.6"/>
+        <rect x="22" y="124" width="76" height="52" rx="3" fill="none" stroke="#3a1a0a" stroke-width="2.4"/>
+        <rect x="22" y="188" width="76" height="56" rx="3" fill="none" stroke="#3a1a0a" stroke-width="2.4"/>
+        <rect x="30" y="134" width="60" height="16" rx="2" fill="#e2b84e" stroke="#8a6414"/>
+        <text x="60" y="145.6" text-anchor="middle" font-family="Limelight, serif" font-size="8.4" letter-spacing="1.2" fill="#2a1006">THE LOUNGE</text>
+        <g transform="translate(55 156)"><rect x="0" y="5" width="10" height="8" rx="1.4" fill="#e2b84e"/><path d="M2 5V3a3 3 0 0 1 6 0v2" stroke="#e2b84e" stroke-width="1.6" fill="none"/><circle cx="5" cy="9" r="1.2" fill="#2a1006"/></g>
+        <circle cx="96" cy="170" r="5" fill="#ffe58a" stroke="#8a6414"/><rect x="92" y="176" width="8" height="12" rx="2" fill="#c9a24a"/>
+        <rect x="11" y="253" width="98" height="3" fill="#ffd28a" opacity=".8"/>
+        <ellipse cx="60" cy="258" rx="58" ry="4" fill="#ffd28a" opacity=".25"/>
+      </svg>
+    </a>
 
     <!-- BÀN KHÁN GIẢ -->
     <div class="o deco tbl" id="t1" aria-hidden="true"></div>
@@ -630,7 +886,7 @@
 
   // gợi ý
   const hint = $('#hint');
-  hint.textContent = touch ? 'tap a curtain for the cinema · tap the record rack' : 'click a curtain for the cinema · click the record rack';
+  hint.textContent = touch ? 'tap a curtain for the cinema · doors left & right' : 'click a curtain for the cinema · the record rack · doors left & right';
   let hintT = setTimeout(() => { hint.classList.add('on'); hintT = setTimeout(hideHint, 9000); }, 1400);
   function hideHint(){ clearTimeout(hintT); hint.classList.remove('on'); }
 
