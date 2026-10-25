@@ -1,0 +1,126 @@
+/* Lõi giao diện chung cho các phòng gọi thoại (The Lounge, phòng sau bức tranh đỏ) */
+
+  :root{--gold:#e2b84e;--cream:#fff1d6;--ink:#fff7ea;--dim:#cdb79a;--wine:#7a1a26;--ok:#5be38a;--bad:#ff5a5a;--panel:rgba(24,14,10,.94)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;touch-action:none}
+  body{background:#0d0807;color:var(--ink);font-family:'Fredoka',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+  button,input{font:inherit;color:inherit}
+  #room{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none}
+  body.inside #room{cursor:pointer}
+
+  /* HUD */
+  .hud{position:fixed;z-index:30;font:400 18px 'VT323',monospace;letter-spacing:.08em}
+  .hud-tl{top:calc(14px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:8px}
+  .hud a{display:inline-block;color:var(--ink);text-decoration:none;padding:2px 12px;border-radius:999px;background:rgba(16,8,6,.8);border:1.5px solid var(--gold);box-shadow:0 0 12px rgba(226,184,78,.3)}
+  .hud a:hover,.hud a:focus-visible{background:var(--gold);color:#1a0b04;outline:none}
+  .status{position:fixed;z-index:30;top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));
+    display:flex;align-items:center;gap:8px;padding:5px 12px 5px 10px;border-radius:999px;background:rgba(16,8,6,.85);border:1.5px solid var(--gold);font-size:15px;font-weight:600;white-space:nowrap}
+  .status .dot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  .status.locked .dot{background:var(--bad);box-shadow:0 0 8px var(--bad)}
+  .status.off .dot{background:#888;box-shadow:none}
+  .status small{font-weight:500;color:var(--dim);font-size:13px}
+
+  /* thanh điều khiển trong phòng */
+  .bar{position:fixed;z-index:30;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:none;align-items:center;gap:8px;
+    padding:8px;border-radius:16px;background:var(--panel);border:1.5px solid var(--gold);box-shadow:0 8px 30px rgba(0,0,0,.5)}
+  body.inside .bar{display:flex}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;height:44px;padding:0 12px;border-radius:12px;cursor:pointer;
+    background:#2a1a12;border:1.5px solid rgba(226,184,78,.55);font-weight:600;font-size:15px;white-space:nowrap}
+  .btn:hover,.btn:focus-visible{border-color:var(--gold);background:#3a2416;outline:none}
+  .btn svg{width:22px;height:22px;flex:none}
+  .btn.off{background:#4a1418;border-color:#ff7a7a}
+  .btn.hot{background:var(--gold);color:#1a0b04;border-color:var(--gold)}
+  .chat{display:flex;gap:6px}
+  .chat input{width:220px;height:44px;padding:0 12px;border-radius:12px;background:#120a07;border:1.5px solid rgba(226,184,78,.4);outline:none;font-size:15px}
+  .chat input:focus{border-color:var(--gold)}
+  #chatBtn{display:none}
+
+  /* thẻ cửa phòng (trước khi vào) */
+  .gate{position:fixed;z-index:50;inset:0;display:flex;align-items:center;justify-content:center;padding:70px 14px 24px;
+    background:rgba(10,5,4,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);overflow:auto}
+  body.inside .gate{display:none}
+  .card{width:min(440px,100%);margin:auto;padding:22px 22px 20px;border-radius:18px;background:var(--panel);border:2px solid var(--gold);box-shadow:0 0 0 6px rgba(20,10,6,.8),0 20px 60px rgba(0,0,0,.6)}
+  .card h1{font:400 44px/1 'VT323',monospace;letter-spacing:.12em;color:var(--cream);text-align:center;text-shadow:0 0 14px rgba(226,184,78,.55)}
+  .card .sub{text-align:center;color:var(--dim);font-size:14px;margin-top:4px}
+  .gstate{margin:14px 0 4px;padding:10px 12px;border-radius:12px;background:#140c08;border:1px solid rgba(226,184,78,.3);font-size:15px;display:flex;gap:10px;align-items:flex-start}
+  .gstate .ico{font-size:22px;line-height:1}
+  .gstate b{display:block;font-weight:600}
+  .gstate span{display:block;color:var(--dim);font-size:13.5px;margin-top:2px}
+  .who{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .who i{font-style:normal;font-size:12.5px;padding:2px 9px;border-radius:999px;background:#2a1a12;border:1px solid rgba(226,184,78,.35)}
+  .lbl{display:block;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:12px 0 6px}
+  .field{width:100%;height:46px;padding:0 14px;border-radius:12px;background:#120a07;border:1.5px solid rgba(226,184,78,.45);outline:none;font-size:17px}
+  .field:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(226,184,78,.2)}
+  .swatches,.hats{display:flex;flex-wrap:wrap;gap:7px}
+  .sw{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;box-shadow:inset 0 0 0 2px rgba(0,0,0,.35)}
+  .sw[aria-checked="true"]{border-color:var(--cream);transform:scale(1.08)}
+  .hat{width:42px;height:42px;border-radius:12px;cursor:pointer;background:#2a1a12;border:1.5px solid rgba(226,184,78,.35);display:flex;align-items:center;justify-content:center}
+  .hat canvas{width:38px;height:38px}
+  .hat[aria-checked="true"]{border-color:var(--gold);background:#4a2e1a}
+  .sw:focus-visible,.hat:focus-visible{outline:2px dashed var(--gold);outline-offset:2px}
+  .pw{display:none}
+  .gate.locked .pw{display:block}
+  .err{min-height:20px;margin-top:8px;color:#ff9a9a;font-size:14px;text-align:center}
+  .go{width:100%;height:52px;margin-top:6px;border-radius:14px;cursor:pointer;background:var(--gold);color:#1a0b04;border:0;font-weight:700;font-size:19px;letter-spacing:.04em;box-shadow:0 4px 0 #8a6414}
+  .go:hover,.go:focus-visible{filter:brightness(1.08);outline:none}
+  .go:active{transform:translateY(2px);box-shadow:0 2px 0 #8a6414}
+  .go[disabled]{opacity:.55;cursor:wait}
+  .note{margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--dim);text-align:center}
+  .shake{animation:shake .4s}
+  @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+  /* hộp thoại khoá phòng */
+  .modal{position:fixed;z-index:70;inset:0;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(10,5,4,.6)}
+  .modal.open{display:flex}
+  .modal .card h2{font:400 32px/1 'VT323',monospace;letter-spacing:.1em;color:var(--cream);text-align:center}
+  .row{display:flex;gap:8px;margin-top:14px}
+  .row .go{margin:0}
+  .ghost{flex:none;width:auto;padding:0 18px;background:#2a1a12;color:var(--ink);border:1.5px solid rgba(226,184,78,.5);box-shadow:none}
+
+  /* thông báo */
+  .toasts{position:fixed;z-index:80;left:50%;top:calc(62px + env(safe-area-inset-top,0px));transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:min(92vw,520px)}
+  .toast{padding:9px 16px;border-radius:12px;background:rgba(24,14,10,.96);border:1.5px solid var(--gold);font-size:15px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.5);animation:tin .25s}
+  .toast.warn{border-color:#ff8a6a}
+  @keyframes tin{from{opacity:0;transform:translateY(-8px)}}
+  .tapaudio{position:fixed;z-index:85;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:none}
+  .tapaudio.on{display:block}
+
+  /* ===== MÀN HÌNH NHẠC JAZZ ===== */
+  .tv{--tvw:clamp(170px,17vw,240px);position:fixed;z-index:35;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));
+    width:var(--tvw);overflow:hidden;border-radius:10px;background:rgba(16,8,6,.92);border:1.5px solid var(--gold);box-shadow:0 0 14px rgba(226,184,78,.35);font-family:'VT323',monospace}
+  .tv-bar{display:flex;align-items:center;gap:4px;padding:3px 4px 3px 9px;font-size:15px;line-height:1;letter-spacing:.08em}
+  .tv-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tv-t i{font-style:normal;display:inline-block;width:1.1em;color:var(--gold)}
+  .tv.on .tv-t i{animation:note 1.2s ease-in-out infinite alternate}
+  @keyframes note{to{transform:translateY(-3px)}}
+  .tv-bar button{font-size:14px;line-height:1.1;padding:1px 8px;border-radius:999px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(226,184,78,.6);color:var(--ink)}
+  .tv-bar button:hover,.tv-bar button:focus-visible{background:var(--gold);color:#1a0b04;outline:none}
+  .tv-scr{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+  .tv-scr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .tv-msg{position:absolute;z-index:1;left:0;right:0;bottom:0;padding:3px 6px;text-align:center;font-size:14px;letter-spacing:.06em;background:rgba(16,8,6,.8)}
+  .tv-msg small{display:block;font-size:12px;color:var(--dim)}
+  .tv.on .tv-msg{display:none}
+  .tv.dead .tv-msg{display:flex;flex-direction:column;justify-content:center;top:0;background:rgba(16,8,6,.92)}
+  .tv.min{width:auto}
+  .tv.min .tv-scr{position:absolute;top:100%;left:0;width:var(--tvw);opacity:0;pointer-events:none}
+
+  @media (max-width:760px){
+    .bar{left:max(10px,env(safe-area-inset-left,0px));transform:none;gap:6px;padding:6px}
+    .btn{min-width:42px;height:42px;padding:0 9px}
+    .btn .t{display:none}
+    #chatBtn{display:inline-flex}
+    .chat{display:none;position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom,0px));padding:8px;border-radius:14px;background:var(--panel);border:1.5px solid var(--gold)}
+    .chat.open{display:flex}
+    .chat input{flex:1;width:auto}
+    .tv{--tvw:150px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+    .tv-bar{font-size:13px;gap:3px;padding:2px 3px 2px 7px}
+    .tv-bar button{font-size:12px;padding:0 6px}
+    .hud{font-size:15px}
+    .status{font-size:13px;padding:4px 10px 4px 8px;top:calc(50px + env(safe-area-inset-top,0px))}
+    .status small{font-size:12px}
+    .card h1{font-size:36px}
+  }
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important;transition-duration:.01s!important} }
+  /* chuyển phòng: màn tối dần */
+  .fade{position:fixed;inset:0;z-index:200;background:#000;opacity:0;pointer-events:none;transition:opacity .7s}
+  .fade.on{opacity:1;pointer-events:auto}

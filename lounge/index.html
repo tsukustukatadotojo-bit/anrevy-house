@@ -7,270 +7,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
-<style>
-  :root{--gold:#e2b84e;--cream:#fff1d6;--ink:#fff7ea;--dim:#cdb79a;--wine:#7a1a26;--ok:#5be38a;--bad:#ff5a5a;--panel:rgba(24,14,10,.94)}
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;overflow:hidden;touch-action:none}
-  body{background:#0d0807;color:var(--ink);font-family:'Fredoka',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-  button,input{font:inherit;color:inherit}
-  #room{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none}
-  body.inside #room{cursor:pointer}
-
-  /* HUD */
-  .hud{position:fixed;z-index:30;font:400 18px 'VT323',monospace;letter-spacing:.08em}
-  .hud-tl{top:calc(14px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:8px}
-  .hud a{display:inline-block;color:var(--ink);text-decoration:none;padding:2px 12px;border-radius:999px;background:rgba(16,8,6,.8);border:1.5px solid var(--gold);box-shadow:0 0 12px rgba(226,184,78,.3)}
-  .hud a:hover,.hud a:focus-visible{background:var(--gold);color:#1a0b04;outline:none}
-  .status{position:fixed;z-index:30;top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));
-    display:flex;align-items:center;gap:8px;padding:5px 12px 5px 10px;border-radius:999px;background:rgba(16,8,6,.85);border:1.5px solid var(--gold);font-size:15px;font-weight:600;white-space:nowrap}
-  .status .dot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
-  .status.locked .dot{background:var(--bad);box-shadow:0 0 8px var(--bad)}
-  .status.off .dot{background:#888;box-shadow:none}
-  .status small{font-weight:500;color:var(--dim);font-size:13px}
-
-  /* thanh điều khiển trong phòng */
-  .bar{position:fixed;z-index:30;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:none;align-items:center;gap:8px;
-    padding:8px;border-radius:16px;background:var(--panel);border:1.5px solid var(--gold);box-shadow:0 8px 30px rgba(0,0,0,.5)}
-  body.inside .bar{display:flex}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;height:44px;padding:0 12px;border-radius:12px;cursor:pointer;
-    background:#2a1a12;border:1.5px solid rgba(226,184,78,.55);font-weight:600;font-size:15px;white-space:nowrap}
-  .btn:hover,.btn:focus-visible{border-color:var(--gold);background:#3a2416;outline:none}
-  .btn svg{width:22px;height:22px;flex:none}
-  .btn.off{background:#4a1418;border-color:#ff7a7a}
-  .btn.hot{background:var(--gold);color:#1a0b04;border-color:var(--gold)}
-  .chat{display:flex;gap:6px}
-  .chat input{width:220px;height:44px;padding:0 12px;border-radius:12px;background:#120a07;border:1.5px solid rgba(226,184,78,.4);outline:none;font-size:15px}
-  .chat input:focus{border-color:var(--gold)}
-  #chatBtn{display:none}
-
-  /* thẻ cửa phòng (trước khi vào) */
-  .gate{position:fixed;z-index:50;inset:0;display:flex;align-items:center;justify-content:center;padding:70px 14px 24px;
-    background:rgba(10,5,4,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);overflow:auto}
-  body.inside .gate{display:none}
-  .card{width:min(440px,100%);margin:auto;padding:22px 22px 20px;border-radius:18px;background:var(--panel);border:2px solid var(--gold);box-shadow:0 0 0 6px rgba(20,10,6,.8),0 20px 60px rgba(0,0,0,.6)}
-  .card h1{font:400 44px/1 'VT323',monospace;letter-spacing:.12em;color:var(--cream);text-align:center;text-shadow:0 0 14px rgba(226,184,78,.55)}
-  .card .sub{text-align:center;color:var(--dim);font-size:14px;margin-top:4px}
-  .gstate{margin:14px 0 4px;padding:10px 12px;border-radius:12px;background:#140c08;border:1px solid rgba(226,184,78,.3);font-size:15px;display:flex;gap:10px;align-items:flex-start}
-  .gstate .ico{font-size:22px;line-height:1}
-  .gstate b{display:block;font-weight:600}
-  .gstate span{display:block;color:var(--dim);font-size:13.5px;margin-top:2px}
-  .who{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  .who i{font-style:normal;font-size:12.5px;padding:2px 9px;border-radius:999px;background:#2a1a12;border:1px solid rgba(226,184,78,.35)}
-  .lbl{display:block;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:12px 0 6px}
-  .field{width:100%;height:46px;padding:0 14px;border-radius:12px;background:#120a07;border:1.5px solid rgba(226,184,78,.45);outline:none;font-size:17px}
-  .field:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(226,184,78,.2)}
-  .swatches,.hats{display:flex;flex-wrap:wrap;gap:7px}
-  .sw{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;box-shadow:inset 0 0 0 2px rgba(0,0,0,.35)}
-  .sw[aria-checked="true"]{border-color:var(--cream);transform:scale(1.08)}
-  .hat{width:42px;height:42px;border-radius:12px;cursor:pointer;background:#2a1a12;border:1.5px solid rgba(226,184,78,.35);display:flex;align-items:center;justify-content:center}
-  .hat canvas{width:38px;height:38px}
-  .hat[aria-checked="true"]{border-color:var(--gold);background:#4a2e1a}
-  .sw:focus-visible,.hat:focus-visible{outline:2px dashed var(--gold);outline-offset:2px}
-  .pw{display:none}
-  .gate.locked .pw{display:block}
-  .err{min-height:20px;margin-top:8px;color:#ff9a9a;font-size:14px;text-align:center}
-  .go{width:100%;height:52px;margin-top:6px;border-radius:14px;cursor:pointer;background:var(--gold);color:#1a0b04;border:0;font-weight:700;font-size:19px;letter-spacing:.04em;box-shadow:0 4px 0 #8a6414}
-  .go:hover,.go:focus-visible{filter:brightness(1.08);outline:none}
-  .go:active{transform:translateY(2px);box-shadow:0 2px 0 #8a6414}
-  .go[disabled]{opacity:.55;cursor:wait}
-  .note{margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--dim);text-align:center}
-  .shake{animation:shake .4s}
-  @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-
-  /* hộp thoại khoá phòng */
-  .modal{position:fixed;z-index:70;inset:0;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(10,5,4,.6)}
-  .modal.open{display:flex}
-  .modal .card h2{font:400 32px/1 'VT323',monospace;letter-spacing:.1em;color:var(--cream);text-align:center}
-  .row{display:flex;gap:8px;margin-top:14px}
-  .row .go{margin:0}
-  .ghost{flex:none;width:auto;padding:0 18px;background:#2a1a12;color:var(--ink);border:1.5px solid rgba(226,184,78,.5);box-shadow:none}
-
-  /* thông báo */
-  .toasts{position:fixed;z-index:80;left:50%;top:calc(62px + env(safe-area-inset-top,0px));transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:min(92vw,520px)}
-  .toast{padding:9px 16px;border-radius:12px;background:rgba(24,14,10,.96);border:1.5px solid var(--gold);font-size:15px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.5);animation:tin .25s}
-  .toast.warn{border-color:#ff8a6a}
-  @keyframes tin{from{opacity:0;transform:translateY(-8px)}}
-  .tapaudio{position:fixed;z-index:85;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:none}
-  .tapaudio.on{display:block}
-
-  /* ===== MÀN HÌNH NHẠC JAZZ ===== */
-  .tv{--tvw:clamp(170px,17vw,240px);position:fixed;z-index:35;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));
-    width:var(--tvw);overflow:hidden;border-radius:10px;background:rgba(16,8,6,.92);border:1.5px solid var(--gold);box-shadow:0 0 14px rgba(226,184,78,.35);font-family:'VT323',monospace}
-  .tv-bar{display:flex;align-items:center;gap:4px;padding:3px 4px 3px 9px;font-size:15px;line-height:1;letter-spacing:.08em}
-  .tv-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .tv-t i{font-style:normal;display:inline-block;width:1.1em;color:var(--gold)}
-  .tv.on .tv-t i{animation:note 1.2s ease-in-out infinite alternate}
-  @keyframes note{to{transform:translateY(-3px)}}
-  .tv-bar button{font-size:14px;line-height:1.1;padding:1px 8px;border-radius:999px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(226,184,78,.6);color:var(--ink)}
-  .tv-bar button:hover,.tv-bar button:focus-visible{background:var(--gold);color:#1a0b04;outline:none}
-  .tv-scr{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
-  .tv-scr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .tv-msg{position:absolute;z-index:1;left:0;right:0;bottom:0;padding:3px 6px;text-align:center;font-size:14px;letter-spacing:.06em;background:rgba(16,8,6,.8)}
-  .tv-msg small{display:block;font-size:12px;color:var(--dim)}
-  .tv.on .tv-msg{display:none}
-  .tv.dead .tv-msg{display:flex;flex-direction:column;justify-content:center;top:0;background:rgba(16,8,6,.92)}
-  .tv.min{width:auto}
-  .tv.min .tv-scr{position:absolute;top:100%;left:0;width:var(--tvw);opacity:0;pointer-events:none}
-
-  @media (max-width:760px){
-    .bar{left:max(10px,env(safe-area-inset-left,0px));transform:none;gap:6px;padding:6px}
-    .btn{min-width:42px;height:42px;padding:0 9px}
-    .btn .t{display:none}
-    #chatBtn{display:inline-flex}
-    .chat{display:none;position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom,0px));padding:8px;border-radius:14px;background:var(--panel);border:1.5px solid var(--gold)}
-    .chat.open{display:flex}
-    .chat input{flex:1;width:auto}
-    .tv{--tvw:150px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
-    .tv-bar{font-size:13px;gap:3px;padding:2px 3px 2px 7px}
-    .tv-bar button{font-size:12px;padding:0 6px}
-    .hud{font-size:15px}
-    .status{font-size:13px;padding:4px 10px 4px 8px;top:calc(50px + env(safe-area-inset-top,0px))}
-    .status small{font-size:12px}
-    .card h1{font-size:36px}
-  }
-  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important;transition-duration:.01s!important} }
-</style>
+<link rel="stylesheet" href="engine.css">
 </head>
 <body>
-  <canvas id="room" tabindex="0" aria-label="Phòng chờ nhìn từ trên xuống. Bấm xuống sàn để đi tới. Phím mũi tên cũng di chuyển được."></canvas>
-
-  <nav class="hud hud-tl" aria-label="Lối ra">
-    <a href="../jazz/" data-leave>← JAZZ CLUB</a>
-    <a href="../home.html" data-leave>⌂ ANREVY HOUSE</a>
-  </nav>
-  <div class="status off" id="status" role="status" aria-live="polite"><span class="dot"></span><span id="stTxt">đang kết nối…</span></div>
-
-  <!-- CỬA PHÒNG -->
-  <div class="gate" id="gate">
-    <form class="card" id="gateForm" autocomplete="off">
-      <h1>THE LOUNGE</h1>
-      <p class="sub">phòng nói chuyện của AnreVy · gọi thoại cùng nhau</p>
-      <div class="gstate"><span class="ico" id="gIco">⏳</span><div><b id="gHead">Đang kết nối tới phòng…</b><span id="gSub"></span><div class="who" id="gWho"></div></div></div>
-      <label class="lbl" for="name">Tên của bạn</label>
-      <input class="field" id="name" maxlength="16" placeholder="vd. An Vy" required>
-      <span class="lbl" id="colLbl">Màu</span>
-      <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="colLbl"></div>
-      <span class="lbl" id="hatLbl">Mũ</span>
-      <div class="hats" id="hats" role="radiogroup" aria-labelledby="hatLbl"></div>
-      <div class="pw">
-        <label class="lbl" for="pwIn">Mật khẩu phòng</label>
-        <input class="field" id="pwIn" type="password" maxlength="32" placeholder="nhập mật khẩu người khoá phòng đã đặt" autocomplete="off">
-      </div>
-      <p class="err" id="gErr" role="alert"></p>
-      <button class="go" id="goBtn" type="submit">Vào phòng</button>
-      <p class="note">Trang sẽ xin quyền dùng micro để nói chuyện. Khi đang nói chuyện bạn phải ở lại trang này: rời trang thì micro tự tắt, rời quá 60 giây thì cuộc gọi bị ngắt.</p>
-    </form>
-  </div>
-
-  <!-- THANH ĐIỀU KHIỂN -->
-  <div class="bar" id="bar">
-    <button class="btn" id="micBtn" aria-pressed="true" aria-label="Bật hoặc tắt micro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/><path class="slash" d="M4 4l16 16" style="display:none"/></svg><span class="t" id="micT">Mic</span></button>
-    <button class="btn" id="lockBtn" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path id="shackle" d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="t" id="lockT">Khoá phòng</span></button>
-    <button class="btn" id="chatBtn" aria-label="Nhắn tin" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
-    <form class="chat" id="chat"><input id="chatIn" maxlength="140" placeholder="Nhắn gì đó… (Enter)" aria-label="Tin nhắn"><button class="btn" type="submit" aria-label="Gửi">➤</button></form>
-    <button class="btn" id="leaveBtn" aria-label="Rời phòng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h10"/></svg><span class="t">Rời phòng</span></button>
-  </div>
-
-  <!-- KHOÁ PHÒNG -->
-  <div class="modal" id="lockModal" role="dialog" aria-modal="true" aria-labelledby="lmTitle">
-    <form class="card" id="lockForm" autocomplete="off">
-      <h2 id="lmTitle">KHOÁ PHÒNG</h2>
-      <p class="sub" id="lmSub">Tự đặt mật khẩu. Ai vào sau phải nhập đúng mật khẩu này. Phòng tự mở khoá sau 2 tiếng.</p>
-      <div id="lmSet">
-        <label class="lbl" for="pw1">Mật khẩu mới</label>
-        <input class="field" id="pw1" type="password" minlength="4" maxlength="32" placeholder="ít nhất 4 ký tự" autocomplete="new-password">
-        <label class="lbl" for="pw2">Nhập lại</label>
-        <input class="field" id="pw2" type="password" minlength="4" maxlength="32" autocomplete="new-password">
-      </div>
-      <p class="err" id="lmErr" role="alert"></p>
-      <div class="row"><button class="go ghost" type="button" id="lmCancel">Huỷ</button><button class="go" type="submit" id="lmOk">Khoá 2 tiếng</button></div>
-    </form>
-  </div>
-
-  <div class="toasts" id="toasts" aria-live="polite"></div>
-  <button class="btn hot tapaudio" id="tapAudio">🔊 Chạm để nghe mọi người</button>
-  <div id="audios" hidden></div>
-
-  <!-- NHẠC JAZZ -->
-  <div class="tv" id="tv">
-    <div class="tv-bar">
-      <span class="tv-t"><i aria-hidden="true">♪</i>lounge.fm</span>
-      <button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt tiếng nhạc">off</button>
-      <button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Thu nhỏ màn hình">–</button>
-    </div>
-    <div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div>
-  </div>
-
-<script src="https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js"></script>
 <script>
+/* ===== THE LOUNGE — phòng chờ nói chuyện (cấu hình riêng; phần chung nằm ở engine.js) ===== */
 (() => {
-  /* ======= CÀI ĐẶT ======= */
-  const MUSIC = 'mM1dIwGO00w';              // nhạc jazz phát liên tục (YouTube live)
-  const LOCK_MS = 2 * 60 * 60 * 1000;       // phòng tự mở khoá sau 2 tiếng
-  let AWAY_KICK_MS = 60 * 1000;             // rời trang quá 60 giây thì ngắt cuộc gọi
-  const MAX_PEOPLE = 10;                    // gọi thoại kiểu mạng lưới: tối đa 10 người
-  const PREFIX = 'anrevy-house-9q2/lounge/v1';
-  // máy chủ chuyển tin công cộng (MQTT qua WebSocket) — dùng song song cả hai cho chắc
-  let BROKERS = ['wss://broker.emqx.io:8084/mqtt', 'wss://test.mosquitto.org:8081/mqtt'];
-  // máy chủ giúp hai máy tìm đường kết nối thoại (STUN). Nếu có tài khoản TURN (vd. Metered, Cloudflare)
-  // thì thêm vào đây dạng { urls: 'turn:…', username: '…', credential: '…' } để mạng di động khó tính cũng gọi được.
-  const ICE = [
-    { urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302', 'stun:stun.cloudflare.com:3478'] }
-  ];
-  /* ======================= */
-
-  const qs = new URLSearchParams(location.search);
-  if (qs.get('broker')) BROKERS = qs.get('broker').split(',');
-  let LOCK_DUR = LOCK_MS;   // thời gian khoá khi mình bấm khoá (chỉ có thể ngắn hơn 2 tiếng)
-  if (qs.get('lockms')) LOCK_DUR = Math.max(3000, Math.min(LOCK_MS, +qs.get('lockms') || LOCK_MS));
-  if (qs.get('awayms')) AWAY_KICK_MS = Math.max(2000, Math.min(60000, +qs.get('awayms') || 60000));
-  const $ = s => document.querySelector(s);
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-  const rid = (n = 10) => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => (b % 36).toString(36)).join('');
-  const cleanName = s => String(s || '').replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
-  const cleanText = s => String(s || '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
-  async function sha(s){ const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); }
-  function toast(msg, warn){ const t = document.createElement('div'); t.className = 'toast' + (warn ? ' warn' : ''); t.textContent = msg; $('#toasts').appendChild(t); setTimeout(() => t.remove(), 4200); }
-  const fmt = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(x).padStart(2, '0'); };
-
-  const COLORS = ['#ff6b6b', '#ffa94d', '#ffd43b', '#69db7c', '#38d9a9', '#4dabf7', '#9775fa', '#f783ac', '#f1f3f5', '#5c636a'];
-  const HATS = ['none', 'top', 'beret', 'crown', 'cowboy', 'phones', 'party', 'flower'];
-  const me = (() => { let id = ''; try { id = sessionStorage.getItem('lounge-id') || ''; } catch (e) {} if (!/^[a-z0-9]{10}$/.test(id)){ id = rid(10); try { sessionStorage.setItem('lounge-id', id); } catch (e) {} } return id; })();
-  let prof = { name: '', col: COLORS[Math.floor(Math.random() * 6)], hat: HATS[Math.floor(Math.random() * HATS.length)] };
-  try { const p = JSON.parse(localStorage.getItem('lounge-profile') || 'null'); if (p){ prof.name = cleanName(p.name); if (COLORS.includes(p.col)) prof.col = p.col; if (HATS.includes(p.hat)) prof.hat = p.hat; } } catch (e) {}
-
-  /* ================= THẾ GIỚI (phòng nhìn từ trên xuống) ================= */
   const W = 1200, H = 1000;
   const FL = { x0: 40, y0: 150, x1: 1160, y1: 960 };
-  const BOUND = { x0: 72, y0: 190, x1: 1128, y1: 944 };
   const RUG = { x0: 380, y0: 360, x1: 860, y1: 760 };
   const DOOR = { x0: 160, x1: 290 };
-  const PANEL = { x: 322, y: 940 };
-  const OB = [
-    { r: [40, 150, 486, 266] }, { r: [40, 150, 176, 580] },
-    { c: [540, 222, 26] }, { c: [860, 228, 34] }, { c: [985, 250, 64] },
-    { r: [1076, 320, 1160, 452] }, { r: [992, 540, 1132, 664] }, { c: [1096, 724, 32] },
-    { r: [420, 834, 980, 960] }, { r: [40, 640, 146, 866] },
-    { c: [92, 920, 30] }, { c: [1112, 910, 30] }
-  ];
-  const AR = 18;
-  function blocked(x, y){
-    if (x < BOUND.x0 || x > BOUND.x1 || y < BOUND.y0 || y > BOUND.y1) return true;
-    for (const o of OB){
-      if (o.r){ const [a, b, c, d] = o.r; if (x > a - AR && x < c + AR && y > b - AR * .6 && y < d + AR * .4) return true; }
-      else { const [cx, cy, r] = o.c; if (Math.hypot(x - cx, (y - cy) * 1.15) < r + AR) return true; }
-    }
-    return false;
-  }
-  const SPAWN = { x: 226, y: 905 };
+  // tranh trên tường: [x, y, rộng, cao, màu]
+  const FRAMES = [[70, 26, 92, 56, '#6a4a7a'], [180, 40, 48, 36, '#2a6a5a'], [250, 18, 150, 50, '#9fb3c8'], [420, 30, 56, 56, '#d98a2a'], [620, 20, 120, 80, '#5a7a9a'], [760, 26, 60, 42, '#e0c070'], [840, 22, 92, 60, '#b3261e'], [950, 44, 46, 34, '#3a5a3a'], [1010, 20, 120, 76, '#b0c4d8']];
+  const RED = FRAMES[6];   // bức tranh đỏ
 
-  /* ----- vẽ nền tĩnh vào canvas phụ ----- */
-  const bg = document.createElement('canvas');
-  const BGS = 1.6; bg.width = W * BGS; bg.height = H * BGS;
-  function rr(g, x, y, w, h, r){ g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
-  function drawBG(){
-    const g = bg.getContext('2d'); g.setTransform(BGS, 0, 0, BGS, 0, 0);
+  function drawBG(g, K, S){
+    const rr = K.rr; g.setTransform(S, 0, 0, S, 0, 0);
     g.fillStyle = '#120c0e'; g.fillRect(0, 0, W, H);
     // sàn gỗ xương cá
     g.save(); g.beginPath(); g.rect(FL.x0, FL.y0, FL.x1 - FL.x0, FL.y1 - FL.y0); g.clip();
@@ -286,7 +38,6 @@
       }
     }
     for (let i = 0; i < 3000; i++){ g.fillStyle = Math.random() < .5 ? 'rgba(90,50,20,.07)' : 'rgba(255,240,210,.06)'; g.fillRect(FL.x0 + Math.random() * (FL.x1 - FL.x0), FL.y0 + Math.random() * (FL.y1 - FL.y0), 2, 2); }
-    // bóng tối mép tường
     const sh = g.createLinearGradient(0, FL.y0, 0, FL.y0 + 70); sh.addColorStop(0, 'rgba(0,0,0,.45)'); sh.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = sh; g.fillRect(FL.x0, FL.y0, FL.x1 - FL.x0, 70);
     g.restore();
     // thảm đỏ viền vàng
@@ -295,18 +46,17 @@
     g.strokeStyle = '#e09a3a'; g.lineWidth = 6; g.strokeRect(RUG.x0 + 18, RUG.y0 + 18, RUG.x1 - RUG.x0 - 36, RUG.y1 - RUG.y0 - 36);
     g.lineWidth = 2.5; g.strokeRect(RUG.x0 + 30, RUG.y0 + 30, RUG.x1 - RUG.x0 - 60, RUG.y1 - RUG.y0 - 60);
     for (let i = 0; i < 900; i++){ g.fillStyle = 'rgba(60,0,0,.18)'; g.fillRect(RUG.x0 + Math.random() * (RUG.x1 - RUG.x0), RUG.y0 + Math.random() * (RUG.y1 - RUG.y0), 2, 2); }
-    // tường trên (mặt tường có tranh)
+    // tường trên có tranh
     const wg = g.createLinearGradient(0, 0, 0, FL.y0); wg.addColorStop(0, '#231a24'); wg.addColorStop(1, '#3a2c36');
     g.fillStyle = wg; g.fillRect(FL.x0, 0, FL.x1 - FL.x0, FL.y0);
     for (let x = FL.x0; x < FL.x1; x += 26){ g.fillStyle = 'rgba(255,255,255,.025)'; g.fillRect(x, 0, 12, FL.y0 - 34); }
     g.fillStyle = '#4a2e1e'; g.fillRect(FL.x0, FL.y0 - 34, FL.x1 - FL.x0, 34);
     g.fillStyle = '#6a4228'; g.fillRect(FL.x0, FL.y0 - 36, FL.x1 - FL.x0, 5);
-    const FR = [[70, 26, 92, 56, '#8a2a3a'], [180, 40, 48, 36, '#2a6a5a'], [250, 18, 150, 50, '#9fb3c8'], [420, 30, 56, 56, '#c94a2a'], [620, 20, 120, 80, '#5a7a9a'], [760, 26, 60, 42, '#e0c070'], [840, 22, 92, 60, '#7a2a2a'], [950, 44, 46, 34, '#3a5a3a'], [1010, 20, 120, 76, '#b0c4d8']];
-    FR.forEach(([x, y, w, h, c]) => { g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(x + 4, y + 5, w, h); g.fillStyle = '#c9963a'; g.fillRect(x, y, w, h); g.fillStyle = c; g.fillRect(x + 5, y + 5, w - 10, h - 10); g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(x + 5, y + 5, w - 10, (h - 10) * .4); });
-    // tường bao (nhìn từ trên)
+    FRAMES.forEach(([x, y, w, h, c]) => { g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(x + 4, y + 5, w, h); g.fillStyle = '#c9963a'; g.fillRect(x, y, w, h); g.fillStyle = c; g.fillRect(x + 5, y + 5, w - 10, h - 10); g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(x + 5, y + 5, w - 10, (h - 10) * .4); });
+    // tường bao
     g.fillStyle = '#0d0a0c'; g.fillRect(0, 0, FL.x0, H); g.fillRect(FL.x1, 0, W - FL.x1, H); g.fillRect(0, FL.y1, W, H - FL.y1);
     g.fillStyle = '#2a2226'; g.fillRect(FL.x0 - 8, 0, 8, H); g.fillRect(FL.x1, 0, 8, H); g.fillRect(0, FL.y1, W, 8);
-    // khung cửa ra (dưới bên trái)
+    // khung cửa ra
     g.fillStyle = '#3a2a1e'; g.fillRect(DOOR.x0 - 10, FL.y1 - 4, DOOR.x1 - DOOR.x0 + 20, 48);
     g.fillStyle = '#1a120c'; g.fillRect(DOOR.x0, FL.y1, DOOR.x1 - DOOR.x0, 40);
     g.fillStyle = '#b07a3a'; g.fillRect(DOOR.x0, FL.y1 - 2, DOOR.x1 - DOOR.x0, 4);
@@ -321,7 +71,7 @@
     g.strokeStyle = 'rgba(0,0,0,.3)'; g.lineWidth = 2;
     for (let i = 0; i < 4; i++){ rr(g, 104 + i * 92, 210, 86, 46, 10); g.stroke(); rr(g, 102, 270 + i * 74, 66, 68, 10); g.stroke(); }
     g.fillStyle = '#c9b090'; rr(g, 120, 196, 40, 30, 8); g.fill(); g.fillStyle = '#e8d8b8'; rr(g, 380, 196, 40, 30, 8); g.fill();
-    // quầy bar + kệ chai phía sau
+    // quầy bar + kệ chai
     g.fillStyle = '#2a1a12'; g.fillRect(420, 920, 560, 40);
     const bot = ['#3a6a3a', '#8a2a2a', '#c9a24a', '#2a4a6a', '#6a3a1a', '#d8d8c8'];
     for (let i = 0; i < 22; i++){ g.fillStyle = bot[i % bot.length]; rr(g, 430 + i * 25, 926, 14, 26, 5); g.fill(); g.fillStyle = 'rgba(255,255,255,.3)'; g.fillRect(434 + i * 25, 930, 3, 16); }
@@ -330,16 +80,15 @@
     g.fillStyle = '#6a3e22'; rr(g, 430, 842, 540, 50, 20); g.fill();
     g.strokeStyle = '#2a160c'; g.lineWidth = 3; rr(g, 420, 834, 560, 84, 26); g.stroke();
     [[470, 860, '#e8f4ff'], [560, 856, '#c9e8a0'], [700, 862, '#e8f4ff'], [770, 856, '#ffd28a'], [900, 860, '#e8f4ff']].forEach(([x, y, c]) => { g.fillStyle = 'rgba(0,0,0,.25)'; g.beginPath(); g.ellipse(x + 3, y + 4, 12, 8, 0, 0, 7); g.fill(); g.fillStyle = c; g.beginPath(); g.ellipse(x, y, 11, 8, 0, 0, 7); g.fill(); g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 1.5; g.stroke(); });
-    // xe đẩy rượu bên trái
+    // xe đẩy rượu
     g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(48, 650, 104, 222);
     g.strokeStyle = '#b07a3a'; g.lineWidth = 5; rr(g, 44, 642, 100, 222, 10); g.stroke();
     g.fillStyle = '#3a2a24'; rr(g, 50, 650, 88, 96, 6); g.fill(); rr(g, 50, 760, 88, 96, 6); g.fill();
     [[72, 674, '#2a3a4a'], [104, 690, '#3a4a5a'], [76, 716, '#2a3a4a'], [86, 790, '#d8d8c8'], [114, 800, '#8a2a2a']].forEach(([x, y, c]) => { g.fillStyle = c; g.beginPath(); g.arc(x, y, 13, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,.25)'; g.beginPath(); g.arc(x - 4, y - 4, 4, 0, 7); g.fill(); });
   }
-  drawBG();
 
-  /* ----- đồ vật cao (vẽ xen kẽ với nhân vật theo chiều sâu) ----- */
-  function drawLamp(g, t){
+  /* đồ vật cao: vẽ xen kẽ với nhân vật theo chiều sâu */
+  function drawLamp(g){
     g.fillStyle = 'rgba(0,0,0,.3)'; g.beginPath(); g.ellipse(544, 236, 30, 10, 0, 0, 7); g.fill();
     g.fillStyle = '#1e1a1c'; g.beginPath(); g.arc(540, 226, 22, 0, 7); g.fill();
     g.strokeStyle = '#1e1a1c'; g.lineWidth = 6; g.beginPath(); g.moveTo(540, 226); g.lineTo(540, 160); g.stroke();
@@ -367,7 +116,8 @@
     g.fillStyle = '#b07a3a'; g.beginPath(); g.moveTo(940, 186); g.quadraticCurveTo(985, 120, 1048, 170); g.lineTo(1040, 182); g.quadraticCurveTo(990, 146, 950, 194); g.fill();
     g.strokeStyle = '#6a4a2a'; g.lineWidth = 2; g.beginPath(); g.moveTo(960, 168); g.quadraticCurveTo(990, 150, 1020, 160); g.stroke();
   }
-  function drawArmchair(g){
+  function drawArmchair(g, K){
+    const rr = K.rr;
     g.fillStyle = 'rgba(0,0,0,.3)'; rr(g, 998, 552, 140, 122, 30); g.fill();
     g.fillStyle = '#8a5a3a'; rr(g, 990, 540, 142, 124, 34); g.fill();
     g.fillStyle = '#a8724a'; rr(g, 1000, 558, 96, 88, 22); g.fill();
@@ -375,8 +125,8 @@
     g.strokeStyle = 'rgba(0,0,0,.3)'; g.lineWidth = 2.5; rr(g, 990, 540, 142, 124, 34); g.stroke();
     g.fillStyle = '#c9a07a'; rr(g, 1010, 570, 70, 64, 16); g.fill();
   }
-  function drawJukebox(g, t){
-    const on = soundOn;
+  function drawJukebox(g, t, K){
+    const rr = K.rr, on = K.soundOn;
     g.fillStyle = 'rgba(0,0,0,.35)'; rr(g, 1068, 330, 92, 130, 14); g.fill();
     g.fillStyle = '#5a2a14'; rr(g, 1076, 318, 84, 134, 30); g.fill();
     const gl = g.createLinearGradient(1076, 0, 1160, 0); gl.addColorStop(0, '#ff7a3a'); gl.addColorStop(.5, '#ffe08a'); gl.addColorStop(1, '#ff7a3a');
@@ -392,539 +142,40 @@
     for (let i = 0; i < 9; i++){ const a = i / 9 * Math.PI * 2; g.fillStyle = i % 2 ? '#3f8a4a' : '#56a85a'; g.beginPath(); g.ellipse(x + Math.cos(a) * 18, y - 22 + Math.sin(a) * 14, 16, 8, a, 0, 7); g.fill(); }
     g.fillStyle = '#6ac06a'; g.beginPath(); g.arc(x, y - 24, 12, 0, 7); g.fill();
   }
-  function drawPanel(g, t){
-    const locked = lockOn();
-    g.fillStyle = '#1a1214'; rr(g, PANEL.x - 16, PANEL.y - 18, 32, 34, 6); g.fill();
-    g.strokeStyle = '#c9963a'; g.lineWidth = 2; rr(g, PANEL.x - 16, PANEL.y - 18, 32, 34, 6); g.stroke();
-    g.fillStyle = locked ? '#ff5a5a' : '#5be38a'; g.shadowColor = g.fillStyle; g.shadowBlur = 10 + Math.sin(t * 4) * 4;
-    g.beginPath(); g.arc(PANEL.x, PANEL.y - 6, 5, 0, 7); g.fill(); g.shadowBlur = 0;
-    g.strokeStyle = '#e8d8b8'; g.lineWidth = 2; g.beginPath(); g.rect(PANEL.x - 6, PANEL.y + 2, 12, 9); g.stroke();
-    g.beginPath(); locked ? g.arc(PANEL.x, PANEL.y + 2, 4, Math.PI, 0) : g.arc(PANEL.x + 4, PANEL.y + 1, 4, Math.PI, 0); g.stroke();
-    // thanh chắn khi phòng khoá
-    if (locked){ g.fillStyle = 'rgba(255,90,90,.25)'; g.fillRect(DOOR.x0, FL.y1 - 6, DOOR.x1 - DOOR.x0, 8); }
-  }
-  const PROPS = [
-    { y: 236, d: drawLamp }, { y: 236, d: g => drawSideTable(g, 860, 228, false) }, { y: 300, d: drawGlobe },
-    { y: 452, d: drawJukebox }, { y: 664, d: drawArmchair }, { y: 742, d: g => drawSideTable(g, 1096, 724, true) },
-    { y: 932, d: g => drawPlant(g, 92, 918) }, { y: 924, d: g => drawPlant(g, 1112, 908) }, { y: 980, d: drawPanel }
-  ];
-  const HOTSPOTS = [
-    { r: [1068, 312, 1164, 456], tag: 'jukebox', act: () => toggleMusic() },
-    { r: [DOOR.x0, FL.y1 - 30, DOOR.x1, FL.y1 + 40], tag: 'door', act: () => { if (!self) return; self.tx = (DOOR.x0 + DOOR.x1) / 2; self.ty = BOUND.y1; exitPending = true; marker = { x: self.tx, y: self.ty, t: clock }; sendMove(); toast('Đi ra cửa… (bấm chỗ khác để ở lại)'); } },
-    { r: [PANEL.x - 22, PANEL.y - 26, PANEL.x + 22, PANEL.y + 22], tag: 'lock', act: () => openLock() }
-  ];
 
-  /* ----- nhân vật ----- */
-  function drawHat(g, hat, x, y, col){
-    g.lineJoin = 'round';
-    switch (hat){
-      case 'top': g.fillStyle = '#1a1416'; g.beginPath(); g.ellipse(x, y + 4, 24, 7, 0, 0, 7); g.fill(); g.fillRect(x - 15, y - 26, 30, 30); g.fillStyle = '#c0392b'; g.fillRect(x - 15, y - 4, 30, 6); g.fillStyle = 'rgba(255,255,255,.15)'; g.fillRect(x - 12, y - 24, 5, 20); break;
-      case 'beret': g.fillStyle = '#c0392b'; g.beginPath(); g.ellipse(x + 3, y - 2, 25, 11, -.15, 0, 7); g.fill(); g.fillStyle = '#8a2218'; g.fillRect(x + 2, y - 16, 3, 7); break;
-      case 'crown': g.fillStyle = '#f5c542'; g.beginPath(); g.moveTo(x - 18, y + 4); g.lineTo(x - 20, y - 16); g.lineTo(x - 9, y - 6); g.lineTo(x, y - 20); g.lineTo(x + 9, y - 6); g.lineTo(x + 20, y - 16); g.lineTo(x + 18, y + 4); g.closePath(); g.fill(); g.strokeStyle = '#b8862b'; g.lineWidth = 2; g.stroke(); g.fillStyle = '#e03a5a'; g.beginPath(); g.arc(x, y - 3, 3.4, 0, 7); g.fill(); break;
-      case 'cowboy': g.fillStyle = '#8a5a2a'; g.beginPath(); g.ellipse(x, y + 3, 32, 9, 0, 0, 7); g.fill(); g.beginPath(); g.moveTo(x - 16, y + 2); g.quadraticCurveTo(x - 16, y - 22, x, y - 18); g.quadraticCurveTo(x + 16, y - 22, x + 16, y + 2); g.fill(); g.fillStyle = '#4a2a12'; g.fillRect(x - 16, y - 4, 32, 4); break;
-      case 'phones': g.strokeStyle = '#2a2a30'; g.lineWidth = 5; g.beginPath(); g.arc(x, y + 14, 25, Math.PI * 1.08, Math.PI * 1.92); g.stroke(); g.fillStyle = '#ff5a8a'; rr(g, x - 30, y + 8, 11, 20, 5); g.fill(); rr(g, x + 19, y + 8, 11, 20, 5); g.fill(); break;
-      case 'party': g.fillStyle = '#4dabf7'; g.beginPath(); g.moveTo(x - 14, y + 4); g.lineTo(x + 2, y - 30); g.lineTo(x + 16, y + 4); g.closePath(); g.fill(); g.fillStyle = '#ffd43b'; [[x - 6, y - 4], [x + 4, y - 14], [x + 8, y - 2]].forEach(([a, b]) => { g.beginPath(); g.arc(a, b, 3, 0, 7); g.fill(); }); g.fillStyle = '#ff6b6b'; g.beginPath(); g.arc(x + 2, y - 31, 5, 0, 7); g.fill(); break;
-      case 'flower': for (let i = 0; i < 5; i++){ const a = i / 5 * Math.PI * 2; g.fillStyle = '#ffb3d1'; g.beginPath(); g.arc(x + 14 + Math.cos(a) * 7, y + 2 + Math.sin(a) * 7, 6, 0, 7); g.fill(); } g.fillStyle = '#ffd43b'; g.beginPath(); g.arc(x + 14, y + 2, 4.5, 0, 7); g.fill(); break;
-    }
-  }
-  function drawChar(g, p, t, opts = {}){
-    const x = p.x, y = p.y, walking = p.moving, f = p.face || 1;
-    const bob = walking ? Math.abs(Math.sin(t * 13 + p.ph)) * -4 : Math.sin(t * 2 + p.ph) * 1.2;
-    const alpha = p.away ? .45 : 1;
-    g.save(); g.globalAlpha = alpha;
-    // vòng sáng khi đang nói
-    if (p.speaking > .05 && !p.away){ const r = 30 + p.speaking * 14; g.strokeStyle = `rgba(91,227,138,${.35 + p.speaking * .5})`; g.lineWidth = 4; g.beginPath(); g.ellipse(x, y, r, r * .38, 0, 0, 7); g.stroke(); }
-    g.fillStyle = 'rgba(0,0,0,.28)'; g.beginPath(); g.ellipse(x, y, 26, 9, 0, 0, 7); g.fill();
-    // chân
-    const st = walking ? Math.sin(t * 13 + p.ph) * 5 : 0;
-    g.fillStyle = '#e8902a'; g.beginPath(); g.ellipse(x - 10, y - 3 + st * .3, 9, 5, 0, 0, 7); g.fill(); g.beginPath(); g.ellipse(x + 10, y - 3 - st * .3, 9, 5, 0, 0, 7); g.fill();
-    // thân tròn
-    const by = y - 34 + bob;
-    g.fillStyle = p.col; g.beginPath(); g.ellipse(x, by, 25, 30, 0, 0, 7); g.fill();
-    g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 3; g.stroke();
-    g.fillStyle = 'rgba(255,255,255,.32)'; g.beginPath(); g.ellipse(x + f * 3, by + 8, 15, 16, 0, 0, 7); g.fill();
-    g.fillStyle = 'rgba(255,255,255,.35)'; g.beginPath(); g.ellipse(x - f * 10, by - 16, 6, 9, -.4 * f, 0, 7); g.fill();
-    // mắt + má
-    const blink = (Math.sin(t * .9 + p.ph * 3) > .985);
-    const ex = x + f * 6;
-    [-9, 9].forEach(dx => { g.fillStyle = '#fff'; g.beginPath(); g.ellipse(ex + dx, by - 6, 6, blink ? 1.2 : 7.5, 0, 0, 7); g.fill(); if (!blink){ g.fillStyle = '#1a1416'; g.beginPath(); g.arc(ex + dx + f * 2, by - 5, 3.4, 0, 7); g.fill(); } });
-    g.fillStyle = 'rgba(255,110,140,.45)'; g.beginPath(); g.ellipse(ex - 15, by + 5, 5, 3, 0, 0, 7); g.fill(); g.beginPath(); g.ellipse(ex + 15, by + 5, 5, 3, 0, 0, 7); g.fill();
-    // tay vẫy nhẹ khi nói
-    g.fillStyle = p.col; g.strokeStyle = 'rgba(0,0,0,.3)'; g.lineWidth = 2;
-    const wave = p.speaking > .2 ? Math.sin(t * 10) * .5 : 0;
-    g.save(); g.translate(x - 23, by + 6); g.rotate(.5 + wave); g.beginPath(); g.ellipse(0, 6, 6, 11, 0, 0, 7); g.fill(); g.stroke(); g.restore();
-    g.save(); g.translate(x + 23, by + 6); g.rotate(-.5); g.beginPath(); g.ellipse(0, 6, 6, 11, 0, 0, 7); g.fill(); g.stroke(); g.restore();
-    drawHat(g, p.hat, x, by - 28, p.col);
-    // tên
-    const ny = y - 86;
-    g.font = '700 16px Fredoka, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
-    g.lineWidth = 4; g.strokeStyle = 'rgba(0,0,0,.85)'; g.strokeText(p.name, x, ny); g.fillStyle = opts.self ? '#ffe066' : '#ffffff'; g.fillText(p.name, x, ny);
-    const nw = g.measureText(p.name).width;
-    if (!p.mic){ const mx = x + nw / 2 + 12, my = ny - 6; g.fillStyle = '#ff5a5a'; g.beginPath(); g.arc(mx, my, 8, 0, 7); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2; g.beginPath(); g.moveTo(mx - 1.5, my - 4); g.lineTo(mx - 1.5, my + 1); g.moveTo(mx + 1.5, my - 4); g.lineTo(mx + 1.5, my + 1); g.moveTo(mx - 4, my - 4); g.lineTo(mx + 4, my + 4); g.stroke(); }
-    if (p.away){ g.fillStyle = '#cdb79a'; g.font = '700 14px Fredoka, sans-serif'; g.fillText('zZ · vắng mặt', x, ny - 20); }
-    g.restore();
-    // bong bóng chat
-    if (p.bubble && t < p.bubbleUntil){
-      g.font = '500 15px Fredoka, sans-serif';
-      const words = p.bubble.split(' '), lines = []; let cur = '';
-      words.forEach(w => { const tryL = cur ? cur + ' ' + w : w; if (g.measureText(tryL).width > 190 && cur){ lines.push(cur); cur = w; } else cur = tryL; });
-      if (cur) lines.push(cur);
-      const L = lines.slice(0, 4), bw = Math.max(...L.map(l => g.measureText(l).width)) + 22, bh = L.length * 19 + 12;
-      const bx = x - bw / 2, byy = ny - (p.away ? 26 : 12) - bh - 10;
-      g.fillStyle = 'rgba(0,0,0,.3)'; rr(g, bx + 2, byy + 3, bw, bh, 10); g.fill();
-      g.fillStyle = '#fffaf0'; rr(g, bx, byy, bw, bh, 10); g.fill();
-      g.beginPath(); g.moveTo(x - 7, byy + bh); g.lineTo(x, byy + bh + 9); g.lineTo(x + 7, byy + bh); g.fill();
-      g.fillStyle = '#2a1a12'; g.textAlign = 'center'; L.forEach((l, i) => g.fillText(l, x, byy + 21 + i * 19));
-    }
-  }
-
-  /* ================= TRẠNG THÁI ================= */
-  const peers = new Map();   // id -> nhân vật người khác
-  let self = null, inside = false, roomState = { locked: false, at: 0 }, stateKnown = false, leaving = false, exitPending = false;
-  const lockOn = () => { const s = roomState; return !!(s && s.locked && Date.now() < Math.min(+s.until || 0, (+s.at || 0) + LOCK_MS)); };
-  const lockLeft = () => Math.min(+roomState.until || 0, (+roomState.at || 0) + LOCK_MS) - Date.now();
-  const freshPeers = () => [...peers.values()].filter(p => Date.now() - p.seen < 45000);
-
-  /* ================= MẠNG (MQTT) ================= */
-  const T_STATE = PREFIX + '/state', T_P = PREFIX + '/p/', T_MOVE = PREFIX + '/m', T_CHAT = PREFIX + '/c', T_SIG = PREFIX + '/s/', T_BYE = PREFIX + '/bye';
-  const clients = []; const seen = new Map();
-  let connectedCount = 0;
-  function pub(topic, obj, retain){
-    const payload = obj === null ? '' : JSON.stringify(Object.assign({ k: rid(8) }, obj));
-    clients.forEach(c => { if (c.connected) c.publish(topic, payload, { qos: 0, retain: !!retain }); });
-  }
-  function onMsg(topic, buf){
-    const str = buf && buf.length ? buf.toString() : '';
-    let d = null;
-    if (str){ try { d = JSON.parse(str); } catch (e) { return; } if (!d || typeof d !== 'object') return;
-      if (d.k){ if (seen.has(d.k)) return; seen.set(d.k, Date.now()); if (seen.size > 800){ const cut = Date.now() - 60000; for (const [k, v] of seen) if (v < cut) seen.delete(k); } } }
-    if (topic === T_STATE) return onState(d);
-    if (topic.startsWith(T_P)) return onPresence(topic.slice(T_P.length), d);
-    if (topic === T_MOVE) return d && onMove(d);
-    if (topic === T_CHAT) return d && onChat(d);
-    if (topic === T_BYE) return d && dropPeer(String(d.id));
-    if (topic === T_SIG + me) return d && onSignal(d);
-  }
-  function connectNet(){
-    if (!window.mqtt){ netDown('không tải được thư viện kết nối'); return; }
-    BROKERS.forEach((url, i) => {
-      let c;
-      try {
-        c = mqtt.connect(url, { clientId: 'anrevy_' + me + '_' + i + rid(3), clean: true, keepalive: 30, reconnectPeriod: 5000, connectTimeout: 12000,
-          will: { topic: T_P + me, payload: '', qos: 0, retain: true } });
-      } catch (e) { return; }
-      c.on('connect', () => {
-        c.subscribe([T_STATE, T_P + '+', T_MOVE, T_CHAT, T_BYE, T_SIG + me], { qos: 0 });
-        connectedCount = clients.filter(x => x.connected).length;
-        setTimeout(() => { if (!stateKnown){ stateKnown = true; ui(); } }, 1500);
-        if (inside) publishPresence();
-        ui();
-      });
-      c.on('message', onMsg);
-      c.on('close', () => { connectedCount = clients.filter(x => x.connected).length; ui(); });
-      c.on('error', () => {});
-      clients.push(c);
-    });
-    setTimeout(() => { if (!connectedCount) netDown('chưa kết nối được máy chủ phòng, đang thử lại…'); }, 12000);
-  }
-  let netNote = '';
-  function netDown(msg){ netNote = msg; ui(); }
-
-  function onState(d){
-    if (!d){ if (!stateKnown){ stateKnown = true; ui(); } return; }
-    if ((+d.at || 0) < (+roomState.at || 0) || (+d.at || 0) > Date.now() + 60000) return;
-    roomState = { locked: !!d.locked, salt: String(d.salt || ''), hash: String(d.hash || ''), at: +d.at || 0, until: +d.until || 0, by: cleanName(d.by) };
-    stateKnown = true; ui();
-  }
-  function onPresence(id, d){
-    if (!/^[a-z0-9]{10}$/.test(id) || id === me) return;
-    if (!d){ const p = peers.get(id); if (p) p.lwt = Date.now(); return; }
-    if (Date.now() - (+d.t || 0) > 60000) return;   // dấu vết cũ
-    let p = peers.get(id);
-    const fresh = !p;
-    if (!p){ p = { id, x: +d.x || SPAWN.x, y: +d.y || SPAWN.y, tx: +d.x || SPAWN.x, ty: +d.y || SPAWN.y, ph: Math.random() * 6, face: 1, speaking: 0 }; peers.set(id, p); }
-    p.name = cleanName(d.name) || 'khách'; p.col = COLORS.includes(d.col) ? d.col : COLORS[0]; p.hat = HATS.includes(d.hat) ? d.hat : 'none';
-    p.mic = !!d.mic; p.away = !!d.away; p.seen = Date.now(); p.lwt = 0;
-    if (!p.moving && d.x != null){ p.tx = clamp(+d.x, 0, W); p.ty = clamp(+d.y, 0, H); }
-    if (fresh){ if (inside){ toast(p.name + ' vừa vào phòng'); ensurePeer(id); (early[id] || []).splice(0).forEach(onSignal); } ui(); }
-  }
-  function onMove(d){
-    const p = peers.get(String(d.id)); if (!p) return;
-    const x = clamp(+d.x, 0, W), y = clamp(+d.y, 0, H);
-    if (Math.hypot(p.x - x, p.y - y) > 140){ p.x = x; p.y = y; }
-    p.tx = clamp(+d.tx, 0, W); p.ty = clamp(+d.ty, 0, H); p.seen = Date.now();
-  }
-  function onChat(d){
-    const p = String(d.id) === me ? self : peers.get(String(d.id)); if (!p) return;
-    p.bubble = cleanText(d.text); p.bubbleUntil = clock + 7;
-  }
-  function dropPeer(id){
-    if (!peers.has(id)) return;
-    const p = peers.get(id); peers.delete(id); closePeer(id);
-    if (inside) toast(p.name + ' đã rời phòng');
-    ui();
-  }
-  function publishPresence(){
-    if (!inside || !self) return;
-    pub(T_P + me, { id: me, name: self.name, col: self.col, hat: self.hat, x: Math.round(self.x), y: Math.round(self.y), mic: self.mic, away: self.away, t: Date.now() }, true);
-  }
-  setInterval(() => { if (inside) publishPresence(); }, 12000);
-  setInterval(() => { const now = Date.now(); for (const [id, p] of peers) if (p.seen < now - 45000 || (p.lwt && now - p.lwt > 15000)) dropPeer(id); }, 3000);
-
-  /* ================= GỌI THOẠI (WebRTC) ================= */
-  let localStream = null, actx = null, localAn = null;
-  const pcs = new Map();
-  const early = {};
-  function sig(to, data){ const st = pcs.get(to); pub(T_SIG + to, { from: me, sid: st ? st.sid : '', d: data }); }
-  function analyser(stream){
-    if (!actx) return null;
-    try { const src = actx.createMediaStreamSource(stream); const an = actx.createAnalyser(); an.fftSize = 512; src.connect(an); return { an, buf: new Uint8Array(an.fftSize) }; } catch (e) { return null; }
-  }
-  const level = a => { if (!a) return 0; a.an.getByteTimeDomainData(a.buf); let s = 0; for (let i = 0; i < a.buf.length; i++){ const v = (a.buf[i] - 128) / 128; s += v * v; } return Math.sqrt(s / a.buf.length); };
-  function ensurePeer(id){
-    if (!inside || pcs.has(id) || id === me) return pcs.get(id);
-    if (pcs.size >= MAX_PEOPLE - 1) return null;
-    const pc = new RTCPeerConnection({ iceServers: ICE });
-    const st = { pc, sid: rid(6), rsid: '', polite: me > id, makingOffer: false, ignoreOffer: false, pending: [], audio: null, an: null };
-    pcs.set(id, st);
-    if (localStream) localStream.getTracks().forEach(tr => pc.addTrack(tr, localStream));
-    else pc.addTransceiver('audio', { direction: 'recvonly' });
-    pc.onicecandidate = e => { if (e.candidate) sig(id, { ice: e.candidate.toJSON ? e.candidate.toJSON() : e.candidate }); };
-    pc.onnegotiationneeded = async () => {
-      try { st.makingOffer = true; await pc.setLocalDescription(); sig(id, { sdp: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription }); }
-      catch (e) {} finally { st.makingOffer = false; }
-    };
-    pc.ontrack = e => {
-      const stream = e.streams && e.streams[0] ? e.streams[0] : new MediaStream([e.track]);
-      if (!st.audio){ st.audio = document.createElement('audio'); st.audio.autoplay = true; st.audio.setAttribute('playsinline', ''); $('#audios').appendChild(st.audio); }
-      st.audio.srcObject = stream;
-      const pr = st.audio.play(); if (pr && pr.catch) pr.catch(() => $('#tapAudio').classList.add('on'));
-      st.an = analyser(stream);
-    };
-    pc.onconnectionstatechange = () => {
-      if (pc.connectionState === 'failed'){ try { pc.restartIce(); } catch (e) {} }
-      if (pc.connectionState === 'connected'){ const p = peers.get(id); if (p) p.linked = true; }
-    };
-    return st;
-  }
-  async function onSignal(m){
-    const from = String(m.from || ''); if (!inside || !/^[a-z0-9]{10}$/.test(from) || !m.d) return;
-    if (!peers.has(from)){ (early[from] = early[from] || []).push(m); setTimeout(() => { delete early[from]; }, 8000); return; }
-    let st = ensurePeer(from); if (!st) return;
-    const rs = String(m.sid || '');
-    if (st.rsid && rs && rs !== st.rsid){ closePeer(from); st = ensurePeer(from); if (!st) return; }
-    if (rs) st.rsid = rs;
-    const pc = st.pc, d = m.d;
-    try {
-      if (d.sdp){
-        const collision = d.sdp.type === 'offer' && (st.makingOffer || pc.signalingState !== 'stable');
-        st.ignoreOffer = !st.polite && collision;
-        if (st.ignoreOffer) return;
-        await pc.setRemoteDescription(d.sdp);
-        for (const c of st.pending.splice(0)) { try { await pc.addIceCandidate(c); } catch (e) {} }
-        if (d.sdp.type === 'offer'){ await pc.setLocalDescription(); sig(from, { sdp: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription }); }
-      } else if (d.ice){
-        if (!pc.remoteDescription) st.pending.push(d.ice);
-        else { try { await pc.addIceCandidate(d.ice); } catch (e) {} }
-      }
-    } catch (e) {}
-  }
-  function closePeer(id){
-    const st = pcs.get(id); if (!st) return;
-    pcs.delete(id);
-    try { st.pc.close(); } catch (e) {}
-    if (st.audio){ st.audio.srcObject = null; st.audio.remove(); }
-  }
-  $('#tapAudio').addEventListener('click', () => { $('#tapAudio').classList.remove('on'); if (actx) actx.resume(); pcs.forEach(st => st.audio && st.audio.play().catch(() => {})); });
-
-  /* ================= VÀO / RỜI PHÒNG ================= */
-  const gate = $('#gate'), goBtn = $('#goBtn'), gErr = $('#gErr');
-  async function enter(){
-    gErr.textContent = '';
-    const name = cleanName($('#name').value);
-    if (!name){ gErr.textContent = 'Nhập tên của bạn trước nhé.'; $('#name').focus(); return; }
-    prof.name = name; try { localStorage.setItem('lounge-profile', JSON.stringify(prof)); } catch (e) {}
-    if (connectedCount && !stateKnown){ gErr.textContent = 'Đang đọc trạng thái phòng, thử lại sau một giây…'; return; }
-    if (lockOn()){
-      const pw = $('#pwIn').value;
-      if (!pw || await sha(roomState.salt + ':' + pw) !== roomState.hash){ gErr.textContent = 'Sai mật khẩu. Hỏi người đã khoá phòng nhé.'; $('#gateForm').classList.remove('shake'); void $('#gateForm').offsetWidth; $('#gateForm').classList.add('shake'); $('#pwIn').select(); return; }
-    }
-    if (freshPeers().length >= MAX_PEOPLE){ gErr.textContent = 'Phòng đã đủ ' + MAX_PEOPLE + ' người, đợi một lát nhé.'; return; }
-    goBtn.disabled = true; goBtn.textContent = 'Đang xin quyền micro…';
-    try { actx = new (window.AudioContext || window.webkitAudioContext)(); actx.resume(); } catch (e) { actx = null; }
-    let micOk = false;
-    if (!localStream && navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
-      try { localStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false }); micOk = true; }
-      catch (e) { localStream = null; }
-    } else micOk = !!localStream;
-    goBtn.disabled = false; goBtn.textContent = 'Vào phòng';
-    if (!micOk) toast('Không dùng được micro — bạn vẫn nghe được mọi người và nhắn tin được.', true);
-    localAn = localStream ? analyser(localStream) : null;
-    self = { id: me, name, col: prof.col, hat: prof.hat, x: SPAWN.x, y: SPAWN.y, tx: SPAWN.x, ty: SPAWN.y - 120, ph: 0, face: 1, mic: !!localStream, away: false, speaking: 0, moving: false };
-    inside = true; leaving = false; document.body.classList.add('inside');
-    publishPresence(); sendMove();
-    freshPeers().forEach(p => ensurePeer(p.id));
-    micUI(); ui(); musicDuck();
-    $('#room').focus({ preventScroll: true });
-    toast(connectedCount ? 'Đã vào phòng. Bấm xuống sàn để đi lại.' : 'Chưa kết nối được máy chủ — bạn đang ở một mình trong phòng.', !connectedCount);
-  }
-  function leave(reason){
-    if (!inside) return;
-    inside = false; document.body.classList.remove('inside');
-    pub(T_P + me, null, true); pub(T_BYE, { id: me });
-    [...pcs.keys()].forEach(closePeer);
-    if (localStream){ localStream.getTracks().forEach(t => t.stop()); localStream = null; }
-    self = null; clearTimeout(awayT); musicDuck(); ui();
-    if (reason) { gErr.textContent = reason; }
-  }
-  function leaveTo(href){ leaving = true; leave(); setTimeout(() => { location.href = href; }, 160); }
-  document.querySelectorAll('[data-leave]').forEach(a => a.addEventListener('click', e => { if (!inside) return; e.preventDefault(); leaveTo(a.href); }));
-  $('#gateForm').addEventListener('submit', e => { e.preventDefault(); enter(); });
-  $('#leaveBtn').addEventListener('click', () => leave());
-  addEventListener('beforeunload', e => { if (inside && !leaving){ e.preventDefault(); e.returnValue = ''; } });
-  addEventListener('pagehide', () => { if (inside){ pub(T_P + me, null, true); pub(T_BYE, { id: me }); } });
-
-  // bắt buộc ở lại trang khi đang nói chuyện
-  let awayT = null, micBeforeAway = true;
-  document.addEventListener('visibilitychange', () => {
-    if (!inside || !self) return;
-    if (document.hidden){
-      micBeforeAway = self.mic; setMic(false, true); self.away = true; publishPresence();
-      clearTimeout(awayT); awayT = setTimeout(() => { leave('Bạn đã rời trang quá ' + Math.round(AWAY_KICK_MS / 1000) + ' giây nên cuộc gọi đã ngắt. Bấm “Vào phòng” để nói tiếp.'); }, AWAY_KICK_MS);
-    } else {
-      clearTimeout(awayT); self.away = false; setMic(micBeforeAway, true); publishPresence();
-      toast('Mừng bạn quay lại — micro đã bật lại như cũ.');
-    }
-  });
-
-  /* mic */
-  function setMic(on, quiet){
-    if (!self) return;
-    if (on && !localStream){ if (!quiet) toast('Không có micro để bật.', true); on = false; }
-    self.mic = on; if (localStream) localStream.getAudioTracks().forEach(t => { t.enabled = on; });
-    micUI(); if (!quiet) publishPresence();
-  }
-  function micUI(){
-    const on = !!(self && self.mic);
-    const b = $('#micBtn'); b.classList.toggle('off', !on); b.setAttribute('aria-pressed', on);
-    b.querySelector('.slash').style.display = on ? 'none' : ''; $('#micT').textContent = on ? 'Mic bật' : 'Mic tắt';
-  }
-  $('#micBtn').addEventListener('click', () => { if (self) setMic(!self.mic); });
-
-  /* khoá phòng */
-  const lockModal = $('#lockModal');
-  function openLock(){
-    if (!inside) return;
-    $('#lmErr').textContent = '';
-    if (lockOn()){
-      $('#lmTitle').textContent = 'MỞ KHOÁ PHÒNG'; $('#lmSub').textContent = 'Phòng đang khoá' + (roomState.by ? ' (bởi ' + roomState.by + ')' : '') + ', tự mở sau ' + fmt(lockLeft()) + '. Mở khoá ngay để ai cũng vào được?';
-      $('#lmSet').style.display = 'none'; $('#lmOk').textContent = 'Mở khoá';
-    } else {
-      $('#lmTitle').textContent = 'KHOÁ PHÒNG'; $('#lmSub').textContent = 'Tự đặt mật khẩu. Ai vào sau phải nhập đúng mật khẩu này. Phòng tự mở khoá sau 2 tiếng.';
-      $('#lmSet').style.display = ''; $('#lmOk').textContent = 'Khoá 2 tiếng'; $('#pw1').value = ''; $('#pw2').value = '';
-    }
-    lockModal.classList.add('open');
-    setTimeout(() => (lockOn() ? $('#lmOk') : $('#pw1')).focus(), 30);
-  }
-  function closeLock(){ lockModal.classList.remove('open'); $('#room').focus({ preventScroll: true }); }
-  $('#lockBtn').addEventListener('click', openLock);
-  $('#lmCancel').addEventListener('click', closeLock);
-  lockModal.addEventListener('click', e => { if (e.target === lockModal) closeLock(); });
-  $('#lockForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    if (lockOn()){
-      roomState = { locked: false, at: Date.now(), by: self ? self.name : '' };
-      pub(T_STATE, roomState, true); closeLock(); ui(); toast('Đã mở khoá phòng.'); sysChat('đã mở khoá phòng 🔓');
-      return;
-    }
-    const a = $('#pw1').value, b = $('#pw2').value;
-    if (a.length < 4){ $('#lmErr').textContent = 'Mật khẩu cần ít nhất 4 ký tự.'; return; }
-    if (a !== b){ $('#lmErr').textContent = 'Hai lần nhập chưa khớp.'; return; }
-    const salt = rid(12), at = Date.now();
-    roomState = { locked: true, salt, hash: await sha(salt + ':' + a), at, until: at + LOCK_DUR, by: self ? self.name : '' };
-    pub(T_STATE, roomState, true); closeLock(); ui();
-    toast('Đã khoá phòng trong 2 tiếng. Gửi mật khẩu cho người bạn muốn mời.'); sysChat('đã khoá phòng 🔒');
-  });
-  addEventListener('keydown', e => { if (e.key === 'Escape' && lockModal.classList.contains('open')) closeLock(); });
-  // hết 2 tiếng: dọn trạng thái khoá trên máy chủ
-  setInterval(() => { if (inside && roomState.locked && !lockOn() && roomState.at){ roomState = { locked: false, at: Date.now(), by: '' }; pub(T_STATE, roomState, true); toast('Đã hết 2 tiếng — phòng tự mở khoá.'); } }, 5000);
-
-  /* chat */
-  function sysChat(text){ if (!self) return; pub(T_CHAT, { id: me, text }); self.bubble = text; self.bubbleUntil = clock + 5; }
-  $('#chat').addEventListener('submit', e => {
-    e.preventDefault(); const v = cleanText($('#chatIn').value); if (!v || !self) return;
-    pub(T_CHAT, { id: me, text: v }); self.bubble = v; self.bubbleUntil = clock + 7; $('#chatIn').value = '';
-    if (matchMedia('(max-width:760px)').matches){ $('#chat').classList.remove('open'); $('#chatBtn').setAttribute('aria-expanded', 'false'); $('#room').focus({ preventScroll: true }); }
-  });
-  $('#chatIn').addEventListener('keydown', e => { if (e.key === 'Escape'){ e.preventDefault(); $('#chatIn').blur(); $('#chat').classList.remove('open'); $('#room').focus({ preventScroll: true }); } });
-  $('#chatBtn').addEventListener('click', () => { const o = !$('#chat').classList.contains('open'); $('#chat').classList.toggle('open', o); $('#chatBtn').setAttribute('aria-expanded', o); if (o) $('#chatIn').focus(); });
-
-  /* ================= GIAO DIỆN ================= */
-  // bảng màu + mũ
-  const swRoot = $('#swatches'), hatRoot = $('#hats');
-  COLORS.forEach(c => { const b = document.createElement('button'); b.type = 'button'; b.className = 'sw'; b.style.background = c; b.setAttribute('role', 'radio'); b.setAttribute('aria-label', 'màu ' + c); b.dataset.c = c; swRoot.appendChild(b); });
-  HATS.forEach(h => { const b = document.createElement('button'); b.type = 'button'; b.className = 'hat'; b.setAttribute('role', 'radio'); b.dataset.h = h; b.setAttribute('aria-label', { none: 'không mũ', top: 'mũ chóp', beret: 'mũ nồi', crown: 'vương miện', cowboy: 'mũ cao bồi', phones: 'tai nghe', party: 'mũ tiệc', flower: 'hoa' }[h]); const cv = document.createElement('canvas'); cv.width = 80; cv.height = 80; b.appendChild(cv); hatRoot.appendChild(b); });
-  function paintPicker(){
-    swRoot.querySelectorAll('.sw').forEach(b => { const on = b.dataset.c === prof.col; b.setAttribute('aria-checked', on); b.tabIndex = on ? 0 : -1; });
-    hatRoot.querySelectorAll('.hat').forEach(b => {
-      const on = b.dataset.h === prof.hat; b.setAttribute('aria-checked', on); b.tabIndex = on ? 0 : -1;
-      const g = b.firstChild.getContext('2d'); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, 80, 80); g.setTransform(.7, 0, 0, .7, 1.5, 4);
-      drawChar(g, { x: 55, y: 100, name: '', col: prof.col, hat: b.dataset.h, mic: true, ph: 1, face: 1, speaking: 0 }, 0);
-    });
-  }
-  swRoot.addEventListener('click', e => { const b = e.target.closest('.sw'); if (!b) return; prof.col = b.dataset.c; paintPicker(); });
-  hatRoot.addEventListener('click', e => { const b = e.target.closest('.hat'); if (!b) return; prof.hat = b.dataset.h; paintPicker(); });
-  [swRoot, hatRoot].forEach(root => root.addEventListener('keydown', e => {
-    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return; e.preventDefault();
-    const items = [...root.children], i = items.findIndex(b => b.getAttribute('aria-checked') === 'true'), n = items[(i + (e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 1) + items.length) % items.length];
-    n.click(); n.focus();
-  }));
-  $('#name').value = prof.name;
-  paintPicker();
-
-  const status = $('#status'), stTxt = $('#stTxt');
-  function ui(){
-    const n = freshPeers().length + (inside ? 1 : 0);
-    const locked = lockOn();
-    status.classList.toggle('locked', locked); status.classList.toggle('off', !connectedCount);
-    if (!connectedCount) stTxt.innerHTML = netNote ? 'ngoại tuyến' : 'đang kết nối…';
-    else stTxt.innerHTML = (locked ? '🔒 Đang khoá' : '🔓 Phòng mở') + ' · ' + n + ' người' + (locked ? ' <small>· mở sau ' + fmt(lockLeft()) + '</small>' : '');
-    gate.classList.toggle('locked', locked && !inside);
-    const gIco = $('#gIco'), gHead = $('#gHead'), gSub = $('#gSub');
-    if (!connectedCount){ gIco.textContent = '⏳'; gHead.textContent = netNote ? 'Chưa kết nối được tới phòng' : 'Đang kết nối tới phòng…'; gSub.textContent = netNote ? 'Bạn vẫn có thể vào đi dạo và nghe nhạc. Trang sẽ tự kết nối lại.' : ''; }
-    else if (locked){ gIco.textContent = '🔒'; gHead.textContent = 'Phòng đang khoá' + (roomState.by ? ' bởi ' + roomState.by : ''); gSub.textContent = 'Nhập đúng mật khẩu để vào. Tự mở khoá sau ' + fmt(lockLeft()) + '.'; }
-    else { gIco.textContent = '🔓'; gHead.textContent = 'Phòng đang mở'; gSub.textContent = freshPeers().length ? 'Mọi người đang ở trong phòng:' : 'Chưa có ai — bạn vào trước nhé.'; }
-    const who = $('#gWho'); who.textContent = '';
-    freshPeers().slice(0, 12).forEach(p => { const i = document.createElement('i'); i.textContent = p.name + (p.mic ? '' : ' 🔇'); who.appendChild(i); });
-    $('#lockT').textContent = locked ? 'Mở khoá' : 'Khoá phòng';
-    $('#lockBtn').classList.toggle('hot', locked);
-    $('#shackle').setAttribute('d', locked ? 'M8 11V7a4 4 0 0 1 8 0v4' : 'M8 11V7a4 4 0 0 1 7.7-1.5');
-  }
-  setInterval(ui, 1000);
-
-  /* ================= VẼ + DI CHUYỂN ================= */
-  const cv = $('#room'), ctx = cv.getContext('2d');
-  let DPR = 1, view = { s: 1, ox: 0, oy: 0 }, clock = 0, marker = null;
-  function resize(){ DPR = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(innerWidth * DPR); cv.height = Math.round(innerHeight * DPR); }
-  resize(); addEventListener('resize', resize);
-  function camera(){
-    const vw = innerWidth, vh = innerHeight, small = vw < 760;
-    const padT = small ? 92 : 64, padB = small ? 72 : 78;
-    const fit = Math.min(vw / W, (vh - padT - padB) / H);
-    const s = Math.max(fit, small ? .52 : .4);
-    let cx, cy;
-    const focus = self || { x: W / 2, y: H / 2 + 60 };
-    if (W * s <= vw) cx = (vw - W * s) / 2; else cx = clamp(vw / 2 - focus.x * s, vw - W * s, 0);
-    const availH = vh - padT - padB;
-    if (H * s <= availH) cy = padT + (availH - H * s) / 2; else cy = clamp(padT + availH / 2 - (focus.y - 40) * s, vh - padB - H * s, padT);
-    // camera trôi mượt
-    view.s = s; view.ox = view.ox ? view.ox + (cx - view.ox) * .15 : cx; view.oy = view.oy ? view.oy + (cy - view.oy) * .15 : cy;
-  }
-  const toWorld = (sx, sy) => ({ x: (sx - view.ox) / view.s, y: (sy - view.oy) / view.s });
-  function sendMove(){ if (!self) return; pub(T_MOVE, { id: me, x: Math.round(self.x), y: Math.round(self.y), tx: Math.round(self.tx), ty: Math.round(self.ty) }); clearTimeout(sendMove._t); sendMove._t = setTimeout(publishPresence, 1200); }
-  cv.addEventListener('pointerdown', e => {
-    const w = toWorld(e.clientX, e.clientY);
-    for (const h of HOTSPOTS){ const [a, b, c, d] = h.r; if (w.x >= a && w.x <= c && w.y >= b && w.y <= d){ if (inside || h.tag === 'jukebox') h.act(); return; } }
-    if (!inside || !self) return;
-    exitPending = false;
-    self.tx = clamp(w.x, BOUND.x0, BOUND.x1); self.ty = clamp(w.y, BOUND.y0, BOUND.y1);
-    marker = { x: self.tx, y: self.ty, t: clock };
-    sendMove();
-  });
-  const keys = new Set();
-  addEventListener('keydown', e => {
-    if (!inside || e.target.closest('input,button,textarea') || lockModal.classList.contains('open')) return;
-    const k = e.key.toLowerCase(); if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'].includes(k)){ keys.add(k); e.preventDefault(); }
-    if (k === 'enter'){ e.preventDefault(); if (matchMedia('(max-width:760px)').matches) $('#chatBtn').click(); else $('#chatIn').focus(); }
-  });
-  addEventListener('keyup', e => keys.delete(e.key.toLowerCase()));
-  addEventListener('blur', () => keys.clear());
-
-  function step(p, dt, speed){
-    const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy);
-    if (d < 3){ p.moving = false; return; }
-    p.moving = true; if (Math.abs(dx) > 2) p.face = dx > 0 ? 1 : -1;
-    const m = Math.min(d, speed * dt), nx = p.x + dx / d * m, ny = p.y + dy / d * m;
-    if (p === self){
-      if (!blocked(nx, ny)){ p.x = nx; p.y = ny; }
-      else if (!blocked(nx, p.y)){ p.x = nx; }
-      else if (!blocked(p.x, ny)){ p.y = ny; }
-      else { p.tx = p.x; p.ty = p.y; p.moving = false; sendMove(); }
-    } else { p.x = nx; p.y = ny; }
-  }
-  let last = performance.now(), lastKeySend = 0;
-  function frame(now){
-    requestAnimationFrame(frame);
-    const dt = Math.min(.05, (now - last) / 1000); last = now; clock += dt;
-    if (self && keys.size){
-      const vx = (keys.has('arrowright') || keys.has('d') ? 1 : 0) - (keys.has('arrowleft') || keys.has('a') ? 1 : 0);
-      const vy = (keys.has('arrowdown') || keys.has('s') ? 1 : 0) - (keys.has('arrowup') || keys.has('w') ? 1 : 0);
-      if (vx || vy){ self.tx = clamp(self.x + vx * 60, BOUND.x0, BOUND.x1); self.ty = clamp(self.y + vy * 60, BOUND.y0, BOUND.y1); if (now - lastKeySend > 250){ lastKeySend = now; sendMove(); } }
-    }
-    if (self && exitPending && !self.moving && self.y > BOUND.y1 - 14 && self.x > DOOR.x0 && self.x < DOOR.x1){ exitPending = false; leaveTo('../jazz/'); }
-    if (self){ step(self, dt, 250); self.speaking += ((self.mic && !self.away ? clamp((level(localAn) - .02) * 14, 0, 1) : 0) - self.speaking) * .3; }
-    peers.forEach(p => { step(p, dt, 250); const st = pcs.get(p.id); p.speaking += ((st && st.an ? clamp((level(st.an) - .02) * 14, 0, 1) : 0) - p.speaking) * .3; });
-
-    camera();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = '#0d0807'; ctx.fillRect(0, 0, cv.width, cv.height);
-    ctx.setTransform(view.s * DPR, 0, 0, view.s * DPR, view.ox * DPR, view.oy * DPR);
-    ctx.drawImage(bg, 0, 0, W, H);
-    // dấu chấm cam nơi bấm tới
-    if (marker){ const a = clock - marker.t; if (a > .7) marker = null; else { ctx.globalAlpha = 1 - a / .7; ctx.fillStyle = '#e8902a'; ctx.beginPath(); ctx.ellipse(marker.x, marker.y, 34 + a * 20, 14 + a * 8, 0, 0, 7); ctx.fill(); ctx.globalAlpha = 1; } }
-    const list = PROPS.map(p => ({ y: p.y, d: p.d }));
-    peers.forEach(p => list.push({ y: p.y, d: g => drawChar(g, p, clock) }));
-    if (self) list.push({ y: self.y + .1, d: g => drawChar(g, self, clock, { self: true }) });
-    list.sort((a, b) => a.y - b.y).forEach(o => o.d(ctx, clock));
-    // ánh đèn ấm phủ lên
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-  }
-  requestAnimationFrame(frame);
-
-  /* ================= NHẠC JAZZ (YouTube live) ================= */
-  const tv = $('#tv'), tvMsg = $('#tvMsg'), snd = $('#snd'), tvMin = $('#tvMin');
-  let yt = null, ytReady = false, ytDead = false, soundOn = false, userMuted = false, gestured = false;
-  const vol = () => inside ? 35 : 70;
-  function sndUI(){ snd.textContent = soundOn ? 'on' : 'off'; snd.setAttribute('aria-pressed', soundOn); tv.classList.toggle('on', soundOn); }
-  function noSignal(txt){ ytDead = true; soundOn = false; tv.classList.add('dead'); tvMsg.innerHTML = 'no signal<small>' + txt + '</small>'; sndUI(); }
-  function soundUp(){ if (!ytReady || ytDead) return; yt.unMute(); yt.setVolume(vol()); yt.playVideo(); soundOn = true; sndUI(); }
-  function soundDown(){ if (ytReady) yt.mute(); soundOn = false; sndUI(); }
-  function musicDuck(){ if (ytReady && soundOn) yt.setVolume(vol()); }
-  function toggleMusic(){ gestured = true; if (soundOn){ userMuted = true; soundDown(); } else { userMuted = false; soundUp(); } }
-  if (location.protocol === 'file:') noSignal('chỉ chạy khi mở qua web');
-  else {
-    window.onYouTubeIframeAPIReady = () => {
-      yt = new YT.Player('yt', {
-        videoId: MUSIC,
-        playerVars: { autoplay: 1, mute: 1, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0, origin: location.origin },
-        events: {
-          onReady: e => { ytReady = true; e.target.getIframe().setAttribute('title', 'Nhạc jazz của phòng'); e.target.mute(); e.target.playVideo(); if (gestured && !userMuted) soundUp(); },
-          onStateChange: e => { if (e.data === YT.PlayerState.ENDED || e.data === YT.PlayerState.PAUSED){ setTimeout(() => { if (ytReady) e.target.playVideo(); }, 800); } },
-          onError: () => noSignal('video không phát được')
-        }
-      });
-    };
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    tag.onerror = () => noSignal('không tải được YouTube');
-    document.head.appendChild(tag);
-    setTimeout(() => { if (!ytReady && !ytDead) noSignal('không tải được YouTube'); }, 15000);
-  }
-  ['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, e => {
-    if (e.target.closest && e.target.closest('#snd')) return;
-    gestured = true; if (!userMuted && !soundOn) soundUp();
-  }, true));
-  snd.addEventListener('click', toggleMusic);
-  function setMin(m){ tv.classList.toggle('min', m); tvMin.textContent = m ? '▢' : '–'; tvMin.setAttribute('aria-expanded', !m); tvMin.setAttribute('aria-label', m ? 'Mở lại màn hình' : 'Thu nhỏ màn hình'); try { localStorage.setItem('lounge-tv-min', m ? '1' : '0'); } catch (e) {} }
-  let startMin = innerWidth < 760; try { const v = localStorage.getItem('lounge-tv-min'); if (v) startMin = v === '1'; } catch (e) {}
-  setMin(startMin);
-  tvMin.addEventListener('click', () => setMin(!tv.classList.contains('min')));
-
-  /* ================= KHỞI ĐỘNG ================= */
-  ui(); connectNet();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintPicker);
-  window.__lounge = { me, peers, pcs, get inside(){ return inside; }, get state(){ return roomState; }, get self(){ return self; }, get connected(){ return connectedCount; }, lockOn, enter, leave, setMic, test: { pubState: st => pub(T_STATE, st, true), clients } };
+  window.ROOM = {
+    key: 'lounge',
+    prefix: 'anrevy-house-9q2/lounge/v1',
+    title: 'THE LOUNGE', sub: 'phòng nói chuyện của AnreVy · gọi thoại cùng nhau', tvName: 'lounge.fm',
+    links: [['← JAZZ CLUB', '../jazz/'], ['⌂ ANREVY HOUSE', '../home.html']],
+    exitHref: '../jazz/',
+    music: 'mM1dIwGO00w',          // nhạc jazz phát liên tục (YouTube live)
+    W, H, FL, DOOR,
+    BOUND: { x0: 72, y0: 190, x1: 1128, y1: 944 },
+    PANEL: { x: 322, y: 940 },
+    SPAWN: { x: 226, y: 905 },
+    OB: [
+      { r: [40, 150, 486, 266] }, { r: [40, 150, 176, 580] },
+      { c: [540, 222, 26] }, { c: [860, 228, 34] }, { c: [985, 250, 64] },
+      { r: [1076, 320, 1160, 452] }, { r: [992, 540, 1132, 664] }, { c: [1096, 724, 32] },
+      { r: [420, 834, 980, 960] }, { r: [40, 640, 146, 866] },
+      { c: [92, 920, 30] }, { c: [1112, 910, 30] }
+    ],
+    drawBG,
+    props: K => [
+      { y: 236, d: g => drawLamp(g) }, { y: 236, d: g => drawSideTable(g, 860, 228, false) }, { y: 300, d: g => drawGlobe(g) },
+      { y: 452, d: (g, t) => drawJukebox(g, t, K) }, { y: 664, d: g => drawArmchair(g, K) }, { y: 742, d: g => drawSideTable(g, 1096, 724, true) },
+      { y: 932, d: g => drawPlant(g, 92, 918) }, { y: 924, d: g => drawPlant(g, 1112, 908) }
+    ],
+    hotspots: K => [
+      { r: [1068, 312, 1164, 456], always: true, act: () => K.toggleMusic() },
+      // bức tranh đỏ: không có dấu hiệu gì, bấm vào là sang căn phòng phía sau
+      { r: [RED[0], RED[1], RED[0] + RED[2], RED[1] + RED[3]], act: () => K.leaveTo('red/', true) }
+    ]
+  };
 })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js"></script>
+<script src="engine.js"></script>
 </body>
 </html>
