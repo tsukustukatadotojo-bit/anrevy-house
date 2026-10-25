@@ -9,9 +9,10 @@ const CANDS = {
 };
 const out = [];
 const br = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] });
-const pg = await br.newPage();
-await pg.goto('about:blank');
+const ctx = await br.newContext({ permissions: ['microphone'] }); const pg = await ctx.newPage();
+await pg.goto('https://example.com/');
 for (const [name, ice] of Object.entries(CANDS)){
+  try {
   const r = await pg.evaluate(async (ice) => {
     const cfg = { iceServers: ice, iceTransportPolicy: 'relay' };
     const a = new RTCPeerConnection(cfg), b = new RTCPeerConnection(cfg);
@@ -32,6 +33,8 @@ for (const [name, ice] of Object.entries(CANDS)){
     return res;
   }, ice);
   out.push(name + ': ' + JSON.stringify(r));
+  } catch (e){ out.push(name + ': ERROR ' + String(e.message).slice(0, 200)); }
+  fs.writeFileSync('out.txt', out.join('\n'));
 }
 await br.close();
 console.log(out.join('\n')); fs.writeFileSync('out.txt', out.join('\n'));
