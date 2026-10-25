@@ -11,20 +11,15 @@ async function page(path, name){
   await pg.fill('#name', name); await pg.click('#goBtn');
   return pg;
 }
-const S = `({conn:__lounge.connected, modes:[...__lounge.peers.values()].map(p=>p.name+':'+__lounge.linkMode(p.id)+':'+p.speaking.toFixed(2)), rx:__lounge.relayRx, tx:Math.round(__lounge.relayTx)})`;
+const S = `({inside:__lounge.inside, gate:document.getElementById('gHead').textContent, conn:__lounge.connected, modes:[...__lounge.peers.values()].map(p=>p.name+':'+__lounge.linkMode(p.id)+':'+p.speaking.toFixed(2)), rx:__lounge.relayRx, tx:Math.round(__lounge.relayTx)})`;
 try {
-  // 1) gọi thẳng bình thường
-  const A = await page('lounge/?v=' + Date.now(), 'LiveA'); await A.waitForTimeout(1500);
-  const B = await page('lounge/?v=' + Date.now(), 'LiveB'); await B.waitForTimeout(9000);
-  out.push('direct A: ' + JSON.stringify(await A.evaluate(S)));
-  out.push('direct B: ' + JSON.stringify(await B.evaluate(S)));
-  await A.click('#leaveBtn'); await B.click('#leaveBtn'); await A.waitForTimeout(1500);
   // 2) ép đi vòng qua máy chủ thật (mô phỏng mạng chặn kết nối thẳng)
-  const C = await page('lounge/red/?nop2p=1&v=' + Date.now(), 'LiveC'); await C.waitForTimeout(1500);
-  const D = await page('lounge/red/?nop2p=1&v=' + Date.now(), 'LiveD');
+  const C = await page('lounge/?nop2p=1&v=' + Date.now(), 'LiveC'); await C.waitForTimeout(1500);
+  const D = await page('lounge/?nop2p=1&v=' + Date.now(), 'LiveD');
   for (const t of [8, 16, 24]){ await C.waitForTimeout(8000); out.push(`relay t${t} C: ` + JSON.stringify(await C.evaluate(S)) + ' D: ' + JSON.stringify(await D.evaluate(S))); }
-  await C.click('#leaveBtn'); await D.click('#leaveBtn');
-  out.push('errors ' + JSON.stringify([A.errs, B.errs, C.errs, D.errs].map(e => e.slice(0, 2))));
+  await C.evaluate('__lounge.leave()'); await D.evaluate('__lounge.leave()');
+  out.push('errors ' + JSON.stringify([C.errs, D.errs].map(e => e.slice(0, 2))));
+  const R = await page('lounge/red/?v=' + Date.now(), 'LiveR'); await R.waitForTimeout(3000); out.push('red room gate: ' + JSON.stringify(await R.evaluate(S)));
 } catch (e){ out.push('FAIL ' + e.message); }
 await br.close();
 console.log(out.join('\n')); fs.writeFileSync('out.txt', out.join('\n'));
