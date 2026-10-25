@@ -30,7 +30,7 @@
       </div>
       <p class="err" id="gErr" role="alert"></p>
       <button class="go" id="goBtn" type="submit">Vào phòng</button>
-      <p class="note">Trang sẽ xin quyền dùng micro để nói chuyện. Khi đang nói chuyện bạn phải ở lại trang này: rời trang thì micro tự tắt, rời quá 60 giây thì cuộc gọi bị ngắt.</p>
+      <p class="note">Trang sẽ xin quyền dùng micro để nói chuyện. Khi đang nói chuyện bạn phải ở lại trang này: rời trang thì micro tự tắt, rời quá 60 giây thì cuộc gọi bị ngắt. Nên dùng tai nghe để tiếng không bị vọng.</p>
     </form>
   </div>
   <div class="bar" id="bar">
@@ -162,6 +162,7 @@
     g.font = '700 16px Fredoka, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
     g.lineWidth = 4; g.strokeStyle = 'rgba(0,0,0,.85)'; g.strokeText(p.name, x, ny); g.fillStyle = isSelf ? '#ffe066' : '#ffffff'; g.fillText(p.name, x, ny);
     const nw = g.measureText(p.name).width;
+    if (!isSelf && inside){ const m = linkMode(p.id), dx = x - nw / 2 - 11, dy = ny - 6; g.fillStyle = m === 'p2p' ? '#5be38a' : m === 'relay' ? '#ffb84d' : `rgba(200,200,200,${.4 + .4 * Math.sin(t * 6)})`; g.beginPath(); g.arc(dx, dy, 4.5, 0, 7); g.fill(); g.strokeStyle = 'rgba(0,0,0,.7)'; g.lineWidth = 1.5; g.stroke(); }
     if (!p.mic){ const mx = x + nw / 2 + 12, my = ny - 6; g.fillStyle = '#ff5a5a'; g.beginPath(); g.arc(mx, my, 8, 0, 7); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2; g.beginPath(); g.moveTo(mx - 1.5, my - 4); g.lineTo(mx - 1.5, my + 1); g.moveTo(mx + 1.5, my - 4); g.lineTo(mx + 1.5, my + 1); g.moveTo(mx - 4, my - 4); g.lineTo(mx + 4, my + 4); g.stroke(); }
     if (p.away){ g.fillStyle = '#cdb79a'; g.font = '700 14px Fredoka, sans-serif'; g.fillText('zZ · vắng mặt', x, ny - 20); }
     g.restore();
@@ -207,6 +208,7 @@
     clients.forEach(c => { if (c.connected) c.publish(topic, payload, { qos: 0, retain: !!retain }); });
   }
   function onMsg(topic, buf){
+    if (topic === T_AUD) return onAudio(buf);
     const str = buf && buf.length ? buf.toString() : '';
     let d = null;
     if (str){ try { d = JSON.parse(str); } catch (e) { return; } if (!d || typeof d !== 'object') return;
@@ -229,6 +231,7 @@
       } catch (e) { return; }
       c.on('connect', () => {
         c.subscribe([T_STATE, T_X, T_P + '+', T_MOVE, T_CHAT, T_BYE, T_SIG + me], { qos: 0 });
+        if (inside) c.subscribe(T_AUD, { qos: 0 });
         connectedCount = clients.filter(x => x.connected).length;
         setTimeout(() => { if (!stateKnown){ stateKnown = true; ui(); } }, 1500);
         if (inside) publishPresence();
@@ -267,7 +270,8 @@
     if (Date.now() - (+d.t || 0) > 60000) return;
     let p = peers.get(id);
     const fresh = !p;
-    if (!p){ p = { id, x: +d.x || SPAWN.x, y: +d.y || SPAWN.y, tx: +d.x || SPAWN.x, ty: +d.y || SPAWN.y, ph: Math.random() * 6, face: 1, speaking: 0, seat: -1 }; peers.set(id, p); }
+    if (!p){ p = { id, x: +d.x || SPAWN.x, y: +d.y || SPAWN.y, tx: +d.x || SPAWN.x, ty: +d.y || SPAWN.y, ph: Math.random() * 6, face: 1, speaking: 0, seat: -1, joinT: Date.now() }; peers.set(id, p); }
+    if (typeof d.pk === 'string' && d.pk.length < 200 && d.pk !== p.pk){ p.pk = d.pk; if (inside) sendKey(id); }
     p.name = cleanName(d.name) || 'khách'; p.col = COLORS.includes(d.col) ? d.col : COLORS[0]; p.hat = HATS.includes(d.hat) ? d.hat : 'none';
     p.mic = !!d.mic; p.away = !!d.away; p.seen = Date.now(); p.lwt = 0;
     const seat = Number.isInteger(d.seat) && d.seat >= 0 && d.seat < SEATS.length ? d.seat : -1;
@@ -288,13 +292,13 @@
   }
   function dropPeer(id){
     if (!peers.has(id)) return;
-    const p = peers.get(id); peers.delete(id); closePeer(id);
+    const p = peers.get(id); peers.delete(id); closePeer(id); peerKey.delete(id); sentKey.delete(id); rx.delete(id);
     if (inside) toast(p.name + ' đã rời phòng');
     ui();
   }
   function publishPresence(){
     if (!inside || !self) return;
-    pub(T_P + me, { id: me, name: self.name, col: self.col, hat: self.hat, x: Math.round(self.x), y: Math.round(self.y), mic: self.mic, away: self.away, seat: self.seat, t: Date.now() }, true);
+    pub(T_P + me, { id: me, name: self.name, col: self.col, hat: self.hat, x: Math.round(self.x), y: Math.round(self.y), mic: self.mic, away: self.away, seat: self.seat, pk: myPub, t: Date.now() }, true);
   }
   setInterval(() => { if (inside) publishPresence(); }, 12000);
   setInterval(() => { const now = Date.now(); for (const [id, p] of peers) if (p.seen < now - 45000 || (p.lwt && now - p.lwt > 15000)) dropPeer(id); }, 3000);
@@ -336,7 +340,7 @@
   function ensurePeer(id){
     if (!inside || pcs.has(id) || id === me) return pcs.get(id);
     if (pcs.size >= MAX_PEOPLE - 1) return null;
-    const pc = new RTCPeerConnection({ iceServers: ICE });
+    const pc = new RTCPeerConnection(qs.get('nop2p') ? { iceServers: [], iceTransportPolicy: 'relay' } : { iceServers: ICE });   // nop2p: chỉ để chạy thử đường vòng
     // chỉ một bên (mã nhỏ hơn) chủ động mời để hai bên không mời chéo nhau
     const st = { pc, sid: rid(6), rsid: '', init: me < id, pending: [], audio: null, an: null, t0: Date.now() };
     pcs.set(id, st);
@@ -345,15 +349,15 @@
     pc.onicecandidate = e => { if (e.candidate) sig(id, { ice: e.candidate.toJSON ? e.candidate.toJSON() : e.candidate }); };
     pc.onnegotiationneeded = async () => {
       if (!st.init) return;
-      try { await pc.setLocalDescription(); note('send', pc.localDescription.type, 'to', id); sig(id, { sdp: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription }); }
+      try { await pc.setLocalDescription(await pc.createOffer()); note('send', pc.localDescription.type, 'to', id); sig(id, { sdp: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription }); }
       catch (e) { note('nego-err', id, e.message); }
     };
     pc.ontrack = e => {
       const stream = e.streams && e.streams[0] ? e.streams[0] : new MediaStream([e.track]);
-      if (!st.audio){ st.audio = document.createElement('audio'); st.audio.autoplay = true; st.audio.setAttribute('playsinline', ''); $('#audios').appendChild(st.audio); }
-      st.audio.srcObject = stream;
+      if (!st.audio){ st.audio = pool.pop() || document.createElement('audio'); st.audio.autoplay = true; st.audio.setAttribute('playsinline', ''); if (!st.audio.parentNode) $('#audios').appendChild(st.audio); }
+      st.audio.muted = false; st.audio.volume = 1; st.audio.srcObject = stream;
       const pr = st.audio.play(); if (pr && pr.catch) pr.catch(() => $('#tapAudio').classList.add('on'));
-      st.an = analyser(stream);
+      st.receiver = e.receiver;
     };
     pc.onconnectionstatechange = () => {
       note('conn', id, pc.connectionState);
@@ -362,8 +366,9 @@
     return st;
   }
   async function onSignal(m){
-    const from = String(m.from || ''); if (!inside || !/^[a-z0-9]{10}$/.test(from) || !m.d) return;
+    const from = String(m.from || ''); if (!inside || !/^[a-z0-9]{10}$/.test(from) || !(m.d || m.kx)) return;
     if (!peers.has(from)){ (early[from] = early[from] || []).push(m); setTimeout(() => { delete early[from]; }, 8000); return; }
+    if (m.kx) return onKey(from, m.kx);
     let st = ensurePeer(from); if (!st) return;
     const rs = String(m.sid || '');
     if (st.rsid && rs && rs !== st.rsid){ closePeer(from); st = ensurePeer(from); if (!st) return; }
@@ -376,7 +381,7 @@
           if (st.init) return;
           await pc.setRemoteDescription(d.sdp);
           for (const c of st.pending.splice(0)) { try { await pc.addIceCandidate(c); } catch (e) {} }
-          await pc.setLocalDescription(); sig(from, { sdp: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription });
+          await pc.setLocalDescription(await pc.createAnswer()); sig(from, { sdp: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription });
         } else {
           if (pc.signalingState !== 'have-local-offer') return;
           await pc.setRemoteDescription(d.sdp);
@@ -403,8 +408,174 @@
     const st = pcs.get(id); if (!st) return;
     pcs.delete(id);
     try { st.pc.close(); } catch (e) {}
-    if (st.audio){ st.audio.srcObject = null; st.audio.remove(); }
+    if (st.audio){ st.audio.srcObject = null; pool.push(st.audio); }
   }
+  /* ================= TIẾNG ĐI VÒNG QUA MÁY CHỦ =================
+     Khi hai máy không nối thẳng được với nhau (thường do mạng 4G hoặc tường lửa),
+     tiếng nói được nén (ADPCM 12 kHz), mã hoá AES-GCM bằng khoá chỉ người trong phòng có
+     (trao qua ECDH), rồi gửi qua máy chủ chuyển tin. Chỉ gửi khi đang nói. */
+  const T_AUD = PREFIX + '/a';
+  const RATE = 12000, FRAME = 720;   // khung 60 ms
+  const b64 = u => btoa(String.fromCharCode(...u));
+  const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  let kp = null, myPub = '', audKey = null, audKeyRaw = null;
+  const peerKey = new Map(), sentKey = new Map();
+  async function cryptoInit(){
+    if (kp || !crypto.subtle) return;
+    try {
+      kp = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveKey']);
+      myPub = b64(new Uint8Array(await crypto.subtle.exportKey('raw', kp.publicKey)));
+      audKeyRaw = crypto.getRandomValues(new Uint8Array(16));
+      audKey = await crypto.subtle.importKey('raw', audKeyRaw, 'AES-GCM', false, ['encrypt']);
+    } catch (e) { kp = null; note('crypto-err', e.message); }
+  }
+  async function pairKey(pk){
+    const pub = await crypto.subtle.importKey('raw', unb64(pk), { name: 'ECDH', namedCurve: 'P-256' }, false, []);
+    return crypto.subtle.deriveKey({ name: 'ECDH', public: pub }, kp.privateKey, { name: 'AES-GCM', length: 128 }, false, ['encrypt', 'decrypt']);
+  }
+  async function sendKey(id){
+    const p = peers.get(id); if (!inside || !p || !p.pk || !kp || sentKey.get(id) === p.pk) return;
+    sentKey.set(id, p.pk);
+    try { const k = await pairKey(p.pk), iv = crypto.getRandomValues(new Uint8Array(12)); const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, k, audKeyRaw)); pub(T_SIG + id, { from: me, kx: b64(iv) + '.' + b64(ct) }); }
+    catch (e) { sentKey.delete(id); note('kx-err', e.message); }
+  }
+  async function onKey(from, kx){
+    const p = peers.get(from); if (!p || !p.pk || !kp) return;
+    try { const [a, b] = String(kx).split('.'); const k = await pairKey(p.pk); const raw = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(a) }, k, unb64(b)); peerKey.set(from, await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt'])); note('key-from', from); }
+    catch (e) { note('kx-dec-err', e.message); }
+  }
+  // cặp nào chưa nối thẳng được sau vài giây thì dùng đường vòng
+  function needRelay(id){
+    const p = peers.get(id); if (!p || Date.now() - p.seen > 45000) return false;
+    const st = pcs.get(id), cs = st ? st.pc.connectionState : 'none';
+    if (cs === 'connected') return false;
+    return Date.now() - p.joinT > 7000 || cs === 'failed';
+  }
+  const linkMode = id => { const st = pcs.get(id); if (st && st.pc.connectionState === 'connected') return 'p2p'; return needRelay(id) ? 'relay' : 'wait'; };
+
+  // nén ADPCM (IMA) 4 bit
+  const STEP = [7,8,9,10,11,12,13,14,16,17,19,21,23,25,28,31,34,37,41,45,50,55,60,66,73,80,88,97,107,118,130,143,157,173,190,209,230,253,279,307,337,371,408,449,494,544,598,658,724,796,876,963,1060,1166,1282,1411,1552,1707,1878,2066,2272,2499,2749,3024,3327,3660,4026,4428,4871,5358,5894,6484,7132,7845,8630,9493,10442,11487,12635,13899,15289,16818,18500,20350,22385,24623,27086,29794,32767];
+  const IDXT = [-1,-1,-1,-1,2,4,6,8,-1,-1,-1,-1,2,4,6,8];
+  let encIdx = 0;
+  function adpcmEncode(f32){
+    const out = new Uint8Array(3 + f32.length / 2);
+    let pred = Math.max(-32768, Math.min(32767, Math.round(f32[0] * 32767))), idx = encIdx;
+    out[0] = pred & 255; out[1] = (pred >> 8) & 255; out[2] = idx;
+    for (let i = 0; i < f32.length; i++){
+      const s = Math.max(-32768, Math.min(32767, Math.round(f32[i] * 32767)));
+      let step = STEP[idx], d = s - pred, code = 0;
+      if (d < 0){ code = 8; d = -d; }
+      let delta = step >> 3;
+      if (d >= step){ code |= 4; d -= step; delta += step; } step >>= 1;
+      if (d >= step){ code |= 2; d -= step; delta += step; } step >>= 1;
+      if (d >= step){ code |= 1; delta += step; }
+      pred += (code & 8) ? -delta : delta; pred = Math.max(-32768, Math.min(32767, pred));
+      idx = Math.max(0, Math.min(88, idx + IDXT[code]));
+      if (i & 1) out[3 + (i >> 1)] |= code << 4; else out[3 + (i >> 1)] = code;
+    }
+    encIdx = idx;
+    return out;
+  }
+  function adpcmDecode(u){
+    let pred = (u[0] | (u[1] << 8)); if (pred > 32767) pred -= 65536;
+    let idx = Math.min(88, u[2]);
+    const n = (u.length - 3) * 2, out = new Float32Array(n);
+    for (let i = 0; i < n; i++){
+      const code = i & 1 ? u[3 + (i >> 1)] >> 4 : u[3 + (i >> 1)] & 15;
+      const step = STEP[idx];
+      let delta = step >> 3;
+      if (code & 4) delta += step; if (code & 2) delta += step >> 1; if (code & 1) delta += step >> 2;
+      pred += (code & 8) ? -delta : delta; pred = Math.max(-32768, Math.min(32767, pred));
+      idx = Math.max(0, Math.min(88, idx + IDXT[code]));
+      out[i] = pred / 32768;
+    }
+    return out;
+  }
+
+  // thu tiếng từ micro → khung 60 ms
+  let proc = null, procSrc = null, lpf = 0, rsPos = 0, accN = 0, seq = 0, vadHang = 0, echoLvl = 0;
+  const acc = new Float32Array(FRAME);
+  function startCapture(){
+    if (!actx || !localStream || proc) return;
+    try {
+      procSrc = actx.createMediaStreamSource(localStream);
+      proc = actx.createScriptProcessor(2048, 1, 1);
+      const sink = actx.createGain(); sink.gain.value = 0;
+      procSrc.connect(proc); proc.connect(sink); sink.connect(actx.destination);
+      const ratio = actx.sampleRate / RATE, a = 1 - Math.exp(-2 * Math.PI * 5000 / actx.sampleRate);
+      proc.onaudioprocess = e => {
+        const x = e.inputBuffer.getChannelData(0);
+        for (let i = 0; i < x.length; i++){
+          lpf += (x[i] - lpf) * a;
+          if ((rsPos += 1) >= ratio){ rsPos -= ratio; acc[accN++] = lpf; if (accN === FRAME){ accN = 0; frameOut(acc); } }
+        }
+      };
+    } catch (e) { note('capture-err', e.message); proc = null; }
+  }
+  function stopCapture(){ try { if (procSrc) procSrc.disconnect(); if (proc){ proc.onaudioprocess = null; proc.disconnect(); } } catch (e) {} proc = null; procSrc = null; }
+  async function frameOut(f){
+    if (!inside || !self || !self.mic || self.away || !audKey) return;
+    let s = 0; for (let i = 0; i < FRAME; i++) s += f[i] * f[i];
+    const rms = Math.sqrt(s / FRAME);
+    if (rms > Math.max(.012, echoLvl * 1.8)) vadHang = 6; else if (vadHang > 0) vadHang--; else return;
+    if (![...peers.keys()].some(needRelay)) return;
+    const plain = adpcmEncode(f), iv = crypto.getRandomValues(new Uint8Array(12)), n = ++seq;
+    let ct;
+    try { ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, audKey, plain)); } catch (e) { return; }
+    const pkt = new Uint8Array(27 + ct.length);
+    pkt[0] = 1; for (let i = 0; i < 10; i++) pkt[1 + i] = me.charCodeAt(i);
+    pkt[11] = n >>> 24; pkt[12] = (n >>> 16) & 255; pkt[13] = (n >>> 8) & 255; pkt[14] = n & 255;
+    pkt.set(iv, 15); pkt.set(ct, 27);
+    clients.forEach(c => { if (c.connected) c.publish(T_AUD, pkt, { qos: 0, retain: false }); });
+    relayTx = performance.now();
+  }
+  let relayTx = 0, relayRx = 0;
+
+  // nhận và phát lại, có đệm chống giật
+  const rx = new Map();
+  async function onAudio(buf){
+    if (!inside || !actx || !buf || buf.length < 40 || buf[0] !== 1) return;
+    const from = String.fromCharCode(...buf.subarray(1, 11));
+    if (from === me || !needRelay(from)) return;
+    const key = peerKey.get(from); if (!key) return;
+    const n = ((buf[11] << 24) >>> 0) + (buf[12] << 16) + (buf[13] << 8) + buf[14];
+    let r = rx.get(from);
+    if (!r){ r = { next: 0, seen: new Set(), g: actx.createGain() }; r.g.connect(actx.destination); rx.set(from, r); }
+    if (r.seen.has(n)) return; r.seen.add(n); if (r.seen.size > 120) r.seen = new Set([...r.seen].slice(-60));
+    let plain;
+    try { plain = new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: buf.slice(15, 27) }, key, buf.slice(27))); } catch (e) { return; }
+    const pcm = adpcmDecode(plain); relayRx++;
+    let s = 0; for (let i = 0; i < pcm.length; i++) s += pcm[i] * pcm[i];
+    const lvl = Math.sqrt(s / pcm.length);
+    const p = peers.get(from); if (p){ p.relayLvl = Math.max(p.relayLvl || 0, lvl); p.relayAt = performance.now(); }
+    echoLvl = Math.max(echoLvl, lvl);
+    const now = actx.currentTime;
+    if (r.next < now + .04) r.next = now + .16;
+    if (r.next > now + .9) return;
+    const b = actx.createBuffer(1, pcm.length, RATE); b.getChannelData(0).set(pcm);
+    const src = actx.createBufferSource(); src.buffer = b; src.connect(r.g); src.start(r.next); r.next += b.duration;
+  }
+  setInterval(() => { echoLvl *= .7; peers.forEach(p => { if (p.relayLvl) p.relayLvl *= .6; }); }, 100);
+  // báo một lần khi phải đi đường vòng
+  setInterval(() => {
+    if (!inside) return;
+    peers.forEach(p => { if (!p.relayNoted && needRelay(p.id)){ p.relayNoted = true; toast('Không nối thẳng được với ' + p.name + ' — tiếng sẽ đi vòng qua máy chủ, có thể trễ một chút.'); } });
+  }, 2000);
+
+  // phát lại tiếng người khác: chuẩn bị sẵn loa trong lúc bấm "Vào phòng" (iPhone cần thế)
+  const pool = [];
+  function unlockAudio(){
+    if (!actx) return;
+    let silent = null; try { silent = actx.createMediaStreamDestination().stream; } catch (e) {}
+    while (pool.length < MAX_PEOPLE){ const a = document.createElement('audio'); a.autoplay = true; a.setAttribute('playsinline', ''); if (silent) a.srcObject = silent; $('#audios').appendChild(a); const pr = a.play(); if (pr && pr.catch) pr.catch(() => {}); pool.push(a); }
+  }
+  // chạm bất kỳ đâu cũng thử phát lại các tiếng đang bị trình duyệt chặn
+  document.addEventListener('pointerdown', () => {
+    if (!inside) return;
+    if (actx && actx.state !== 'running') actx.resume();
+    pcs.forEach(st => { if (st.audio && st.audio.paused) st.audio.play().catch(() => {}); });
+  }, true);
+
   $('#tapAudio').addEventListener('click', () => { $('#tapAudio').classList.remove('on'); if (actx) actx.resume(); pcs.forEach(st => st.audio && st.audio.play().catch(() => {})); });
 
   /* ================= VÀO / RỜI PHÒNG ================= */
@@ -414,14 +585,16 @@
     const name = cleanName($('#name').value);
     if (!name){ gErr.textContent = 'Nhập tên của bạn trước nhé.'; $('#name').focus(); return; }
     prof.name = name; try { localStorage.setItem('lounge-profile', JSON.stringify(prof)); } catch (e) {}
-    if (connectedCount && !stateKnown){ gErr.textContent = 'Đang đọc trạng thái phòng, thử lại sau một giây…'; return; }
+    for (let i = 0; i < 25 && connectedCount && !stateKnown; i++) await new Promise(r => setTimeout(r, 100));   // chờ đọc trạng thái khoá
     if (lockOn()){
       const pw = $('#pwIn').value;
       if (!pw || await sha(roomState.salt + ':' + pw) !== roomState.hash){ gErr.textContent = 'Sai mật khẩu. Hỏi người đã khoá phòng nhé.'; $('#gateForm').classList.remove('shake'); void $('#gateForm').offsetWidth; $('#gateForm').classList.add('shake'); $('#pwIn').select(); return; }
     }
     if (freshPeers().length >= MAX_PEOPLE){ gErr.textContent = 'Phòng đã đủ ' + MAX_PEOPLE + ' người, đợi một lát nhé.'; return; }
     goBtn.disabled = true; goBtn.textContent = 'Đang xin quyền micro…';
-    try { actx = new (window.AudioContext || window.webkitAudioContext)(); actx.resume(); } catch (e) { actx = null; }
+    try { if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)(); actx.resume(); } catch (e) { actx = null; }
+    unlockAudio();
+    await cryptoInit();
     let micOk = false;
     if (!localStream && navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
       try { localStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false }); micOk = true; }
@@ -430,10 +603,12 @@
     goBtn.disabled = false; goBtn.textContent = 'Vào phòng';
     if (!micOk) toast('Không dùng được micro — bạn vẫn nghe được mọi người và nhắn tin được.', true);
     localAn = localStream ? analyser(localStream) : null;
-    self = { id: me, name, col: prof.col, hat: prof.hat, x: SPAWN.x, y: SPAWN.y, tx: SPAWN.x, ty: SPAWN.y - 120, ph: 0, face: 1, mic: !!localStream, away: false, speaking: 0, moving: false, seat: -1 };
+    startCapture();
+    self = { id: me, name, col: prof.col, hat: prof.hat, x: SPAWN.x, y: SPAWN.y, tx: SPAWN.x + Math.round(Math.random() * 140 - 70), ty: SPAWN.y - 100 - Math.round(Math.random() * 60), ph: Math.random() * 6, face: 1, mic: !!localStream, away: false, speaking: 0, moving: false, seat: -1 };
     inside = true; leaving = false; document.body.classList.add('inside');
+    clients.forEach(c => { if (c.connected) c.subscribe(T_AUD, { qos: 0 }); });
     publishPresence(); sendMove();
-    freshPeers().forEach(p => ensurePeer(p.id));
+    freshPeers().forEach(p => { ensurePeer(p.id); sendKey(p.id); });
     micUI(); ui(); musicDuck();
     $('#room').focus({ preventScroll: true });
     toast(connectedCount ? (R.welcome || 'Đã vào phòng. Bấm xuống sàn để đi lại.') : 'Chưa kết nối được máy chủ — bạn đang ở một mình trong phòng.', !connectedCount);
@@ -443,6 +618,9 @@
     inside = false; document.body.classList.remove('inside');
     pub(T_P + me, null, true); pub(T_BYE, { id: me });
     [...pcs.keys()].forEach(closePeer);
+    clients.forEach(c => { if (c.connected) c.unsubscribe(T_AUD); });
+    stopCapture(); peerKey.clear(); sentKey.clear(); rx.clear();
+    peers.forEach(p => { p.relayNoted = false; });
     if (localStream){ localStream.getTracks().forEach(t => t.stop()); localStream = null; }
     self = null; seatPending = -1; clearTimeout(awayT); musicDuck(); ui();
     if (reason) { gErr.textContent = reason; }
@@ -662,7 +840,13 @@
     if (self && exitPending && !self.moving && self.y > BOUND.y1 - 14 && self.x > DOOR.x0 && self.x < DOOR.x1){ exitPending = false; leaveTo(R.exitHref); }
     if (self && seatPending >= 0 && !self.moving && Math.hypot(self.x - SEATS[seatPending].ax, self.y - SEATS[seatPending].ay) < 30){ const i = seatPending; seatPending = -1; sitDown(i); }
     if (self){ step(self, dt, 250); self.speaking += ((self.mic && !self.away ? clamp((level(localAn) - .02) * 14, 0, 1) : 0) - self.speaking) * .3; }
-    peers.forEach(p => { step(p, dt, 250); const st = pcs.get(p.id); p.speaking += ((st && st.an ? clamp((level(st.an) - .02) * 14, 0, 1) : 0) - p.speaking) * .3; });
+    peers.forEach(p => {
+      step(p, dt, 250);
+      const st = pcs.get(p.id); let lv = 0;
+      if (st && st.receiver && st.pc.connectionState === 'connected' && st.receiver.getSynchronizationSources){ const ss = st.receiver.getSynchronizationSources(); if (ss.length && ss[0].audioLevel != null) lv = clamp((ss[0].audioLevel - .015) * 7, 0, 1); }
+      if (p.relayLvl) lv = Math.max(lv, clamp((p.relayLvl - .012) * 12, 0, 1));
+      p.speaking += (lv - p.speaking) * .3;
+    });
 
     camera();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -723,5 +907,5 @@
   /* ================= KHỞI ĐỘNG ================= */
   ui(); connectNet();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintPicker);
-  window.__lounge = { me, peers, pcs, get inside(){ return inside; }, get state(){ return roomState; }, get self(){ return self; }, get connected(){ return connectedCount; }, get extras(){ return extras; }, lockOn, enter, leave, setMic, claimSeat, setExtras, dbg, hot: HOT, screen: (x, y) => ({ x: view.ox + x * view.s, y: view.oy + y * view.s }), test: { pubState: st => pub(T_STATE, st, true), clients } };
+  window.__lounge = { me, peers, pcs, get inside(){ return inside; }, get state(){ return roomState; }, get self(){ return self; }, get connected(){ return connectedCount; }, get extras(){ return extras; }, lockOn, enter, leave, setMic, claimSeat, setExtras, dbg, linkMode, needRelay, get relayTx(){ return relayTx; }, get relayRx(){ return relayRx; }, hot: HOT, screen: (x, y) => ({ x: view.ox + x * view.s, y: view.oy + y * view.s }), test: { pubState: st => pub(T_STATE, st, true), clients } };
 })();
