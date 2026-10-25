@@ -664,36 +664,22 @@
       </svg>
     </a>
 
-    <!-- CỬA SANG ANREVY JAZZ CLUB -->
-    <a class="o hit door" id="door" href="../jazz/" data-tag="ANREVY JAZZ CLUB →" aria-label="Cánh cửa vào phòng AnreVy Jazz Club">
-      <svg viewBox="0 0 120 270" aria-hidden="true">
-        <defs>
-          <linearGradient id="dFrame" x1="0" x2="1"><stop offset="0" stop-color="#2a1006"/><stop offset=".5" stop-color="#6b3416"/><stop offset="1" stop-color="#2a1006"/></linearGradient>
-          <linearGradient id="dLeaf" x1="0" x2="1"><stop offset="0" stop-color="#4a0b16"/><stop offset=".55" stop-color="#8e1b2e"/><stop offset="1" stop-color="#3d0812"/></linearGradient>
-          <radialGradient id="dGlow" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="#ffe2a8"/><stop offset=".6" stop-color="#ffb347"/><stop offset="1" stop-color="#8a3a00"/></radialGradient>
-          <linearGradient id="dSpill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347" stop-opacity=".55"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></linearGradient>
-          <pattern id="dTuft" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H12V12" fill="none" stroke="#2a0409" stroke-width="1.1"/><circle r="1.4" fill="#e2b84e"/></pattern>
-        </defs>
-        <rect x="4" y="2" width="112" height="42" rx="5" fill="#140608" stroke="#c9a24a" stroke-width="1.5"/>
-        <text x="60" y="14.5" text-anchor="middle" font-family="Silkscreen, monospace" font-size="6.6" fill="#ffd27a" letter-spacing="2">ANREVY</text>
-        <text class="d-neon" x="60" y="33" text-anchor="middle" font-family="Monoton, cursive" font-size="12.5" fill="#fff0cf">JAZZ CLUB</text>
-        <g fill="#ffd23f"><circle class="d-bulb" cx="12" cy="40" r="1.6"/><circle class="d-bulb b" cx="24" cy="40" r="1.6"/><circle class="d-bulb" cx="36" cy="40" r="1.6"/><circle class="d-bulb b" cx="48" cy="40" r="1.6"/><circle class="d-bulb" cx="60" cy="40" r="1.6"/><circle class="d-bulb b" cx="72" cy="40" r="1.6"/><circle class="d-bulb" cx="84" cy="40" r="1.6"/><circle class="d-bulb b" cx="96" cy="40" r="1.6"/><circle class="d-bulb" cx="108" cy="40" r="1.6"/></g>
-        <path d="M18 266h84l40 4H-22z" fill="url(#dSpill)"/>
-        <rect x="8" y="50" width="104" height="216" fill="url(#dFrame)" stroke="#1a0804"/>
-        <rect x="8" y="50" width="104" height="5" fill="#c9a24a"/>
-        <rect x="18" y="60" width="84" height="206" fill="#0a0203"/>
-        <rect class="d-inside" x="18" y="60" width="84" height="206" fill="url(#dGlow)"/>
-        <g class="d-leaf">
-          <rect x="18" y="60" width="84" height="206" fill="url(#dLeaf)" stroke="#1a0306"/>
-          <rect x="22" y="64" width="76" height="198" fill="url(#dTuft)" opacity=".9"/>
-          <circle cx="60" cy="106" r="17" fill="#2a0409"/>
-          <circle cx="60" cy="106" r="14" fill="url(#dGlow)" stroke="#c9a24a" stroke-width="3"/>
-          <path d="M56 112c-3 0-4-3-2-5l4-4v-9h2v10l-4 5c0 1 1 1 2 1s3-2 3-4h2c0 4-3 6-7 6z" fill="#3a1a04" opacity=".75"/>
-          <rect x="88" y="156" width="5" height="26" rx="2.5" fill="#e2b84e"/>
-          <rect x="22" y="246" width="76" height="14" fill="#c9a24a" opacity=".85"/>
+    <!-- BẢNG ĐIỂM CAO TRÊN TƯỜNG (chỗ cửa cũ) -->
+    <div class="o hiscore" id="hiscore" aria-hidden="true">
+      <svg viewBox="0 0 150 128">
+        <rect x="3" y="3" width="144" height="122" rx="8" fill="#07040f" stroke="#ff2a6d" stroke-width="2.4"/>
+        <rect x="8" y="8" width="134" height="112" rx="5" fill="none" stroke="#36d6c4" stroke-width="1" opacity=".7"/>
+        <text x="75" y="27" text-anchor="middle" font-family="Silkscreen, monospace" font-weight="700" font-size="11" fill="#ffd23f">HIGH SCORES</text>
+        <g font-family="Silkscreen, monospace" font-size="8.4" fill="#e8f7ff">
+          <text x="18" y="46">1. AVY</text><text x="132" y="46" text-anchor="end" fill="#ff71ce">99999</text>
+          <text x="18" y="60">2. HAMI</text><text x="132" y="60" text-anchor="end" fill="#ff71ce">88420</text>
+          <text x="18" y="74">3. JAZZ</text><text x="132" y="74" text-anchor="end" fill="#ff71ce">77310</text>
+          <text x="18" y="88">4. RED</text><text x="132" y="88" text-anchor="end" fill="#ff71ce">64200</text>
+          <text x="18" y="102">5. YOU?</text><text x="132" y="102" text-anchor="end" fill="#ff71ce">-----</text>
         </g>
+        <text class="coin" x="75" y="116" text-anchor="middle" font-family="Silkscreen, monospace" font-size="6" fill="#36d6c4">INSERT COIN TO PLAY</text>
       </svg>
-    </a>
+    </div>
 
     <!-- MÁY GẮP THÚ -->
     <div class="o hit claw" id="claw" role="button" tabindex="0" data-tag="CLAW MACHINE" aria-label="Máy gắp thú: nhấn để gắp">
@@ -840,78 +826,8 @@
       </svg>
     </div>
 
-    <!-- BÀN BOARDGAME -->
-    <div class="o hit board" id="board" role="button" tabindex="0" data-tag="BOARDGAMES" aria-label="Bàn boardgame">
-      <svg viewBox="0 0 300 212">
-        <defs>
-          <radialGradient id="bgTop" cx=".5" cy=".38" r=".7"><stop offset="0" stop-color="#a65a2c"/><stop offset="1" stop-color="#5a2a12"/></radialGradient>
-          <radialGradient id="bgFelt" cx=".5" cy=".42" r=".7"><stop offset="0" stop-color="#931f48"/><stop offset="1" stop-color="#4a0d24"/></radialGradient>
-          <pattern id="bgChk" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#f1e2bf"/><rect width="10" height="10" fill="#3a2414"/><rect x="10" y="10" width="10" height="10" fill="#3a2414"/></pattern>
-          <path id="mp" d="M0 0c1.4 0 2.4 1 2.4 2.2 0 .7-.3 1.2-.8 1.6l3.8 1.3c.8.3.8 1.5 0 1.8l-2.2.5L4.4 12H1.4L0 9.4-1.4 12h-3l1.2-4.6-2.2-.5c-.8-.3-.8-1.5 0-1.8l3.8-1.3c-.5-.4-.8-.9-.8-1.6C-2.4 1-1.4 0 0 0z"/>
-        </defs>
-        <ellipse cx="150" cy="202" rx="124" ry="9" fill="rgba(0,0,0,.55)"/>
-        <g>
-          <path d="M22 122l-4 62M54 122l4 62M30 124l-1 58M46 124l1 58" stroke="#3b1a0b" stroke-width="3"/>
-          <ellipse cx="38" cy="120" rx="22" ry="7" fill="#7a1530"/><ellipse cx="38" cy="118" rx="22" ry="7" fill="#c2185b"/>
-          <path d="M246 122l-4 62M278 122l4 62M254 124l-1 58M270 124l1 58" stroke="#3b1a0b" stroke-width="3"/>
-          <ellipse cx="262" cy="120" rx="22" ry="7" fill="#7a1530"/><ellipse cx="262" cy="118" rx="22" ry="7" fill="#c2185b"/>
-        </g>
-        <path d="M138 128h24l7 58h-38z" fill="#4e2210"/>
-        <ellipse cx="150" cy="190" rx="52" ry="9" fill="#2c1208"/>
-        <ellipse cx="150" cy="106" rx="140" ry="50" fill="#3b1a0b"/>
-        <ellipse cx="150" cy="98" rx="140" ry="50" fill="url(#bgTop)"/>
-        <ellipse cx="150" cy="98" rx="124" ry="42" fill="url(#bgFelt)"/>
-        <g>
-          <path d="M186 70h40v6h-40z" fill="#c99a1e"/><path d="M186 70l5-8h40l-5 8z" fill="#ffd166"/><path d="M226 70l5-8v6l-5 8z" fill="#9c7410"/>
-          <use href="#mp" transform="translate(207 61.6) scale(.6)" fill="#a4161a"/>
-        </g>
-        <a class="bg-link" href="https://lichess.org/" target="_blank" rel="noopener" aria-label="Chơi cờ vua online trên lichess.org (mở thẻ mới)">
-          <g class="piece"><g transform="matrix(0.925,-0.025,-0.1,0.3,64,74)"><rect width="80" height="80" fill="url(#bgChk)" stroke="#2a160a" stroke-width="3"/></g></g>
-          <g class="piece">
-            <path d="M80 88h8l-1.4-2.4h-5.2zM81.8 85.6l.8-6h2.8l.8 6zM84 79.6a2.6 2.6 0 1 0 0-.1z" fill="#fbf4e2" stroke="#6b5a40" stroke-width=".5"/>
-            <path d="M82.7 75.4h2.6M84 74v3" stroke="#6b5a40" stroke-width=".8"/>
-            <path d="M108 85h8l-1.2-2.2h-5.6zM109.6 82.8c-.4-3 1-6.4 4.6-7.4l1.4 1.2-1 1.6.8 4.6z" fill="#2a1a12"/>
-            <path d="M94 94h6l-1-2h-4zM95.4 92l.6-3.6h2l.6 3.6zM97 88.4a1.9 1.9 0 1 0 0-.1z" fill="#fbf4e2" stroke="#6b5a40" stroke-width=".4"/>
-            <path d="M120 92h6l-1-2h-4zM121.4 90l.6-3.6h2l.6 3.6zM123 86.4a1.9 1.9 0 1 0 0-.1z" fill="#2a1a12"/>
-            <path d="M70 96h7l-1.2-2.2h-4.6zM71.6 93.8l.6-5h2.4l.6 5zM73.4 88.8l-2-2.6 1.2.4.8-1.4.8 1.4 1.2-.4-2 2.6z" fill="#2a1a12"/>
-          </g>
-          <path d="M50 70h100v34H40z" fill="transparent"/>
-          <g class="tag"><rect x="58" y="141" width="50" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/>
-          <text x="83" y="149.3" text-anchor="middle" font-family="VT323, monospace" font-size="9.5" fill="#2a1006">▸ CỜ VUA</text></g>
-        </a>
-        <a class="bg-link" href="https://www.crazygames.com/game/ludo-king" target="_blank" rel="noopener" aria-label="Chơi cá ngựa online: Ludo King (mở thẻ mới)">
-          <g class="piece"><g transform="matrix(0.925,0.025,0.1,0.3,160,70)"><rect width="80" height="80" fill="#fffdf6" stroke="#2a160a" stroke-width="2.6"/><rect x="0" y="0" width="32" height="32" fill="#e63946"/><rect x="5" y="5" width="22" height="22" fill="#fff"/><circle cx="11" cy="11" r="3" fill="#e63946"/><circle cx="11" cy="21" r="3" fill="#e63946"/><circle cx="21" cy="11" r="3" fill="#e63946"/><circle cx="21" cy="21" r="3" fill="#e63946"/><rect x="48" y="0" width="32" height="32" fill="#2a9d8f"/><rect x="53" y="5" width="22" height="22" fill="#fff"/><circle cx="59" cy="11" r="3" fill="#2a9d8f"/><circle cx="59" cy="21" r="3" fill="#2a9d8f"/><circle cx="69" cy="11" r="3" fill="#2a9d8f"/><circle cx="69" cy="21" r="3" fill="#2a9d8f"/><rect x="48" y="48" width="32" height="32" fill="#f4b400"/><rect x="53" y="53" width="22" height="22" fill="#fff"/><circle cx="59" cy="59" r="3" fill="#f4b400"/><circle cx="59" cy="69" r="3" fill="#f4b400"/><circle cx="69" cy="59" r="3" fill="#f4b400"/><circle cx="69" cy="69" r="3" fill="#f4b400"/><rect x="0" y="48" width="32" height="32" fill="#1d6fd8"/><rect x="5" y="53" width="22" height="22" fill="#fff"/><circle cx="11" cy="59" r="3" fill="#1d6fd8"/><circle cx="11" cy="69" r="3" fill="#1d6fd8"/><circle cx="21" cy="59" r="3" fill="#1d6fd8"/><circle cx="21" cy="69" r="3" fill="#1d6fd8"/><rect x="5.33" y="37.33" width="26.67" height="5.33" fill="#e63946"/><rect x="37.33" y="5.33" width="5.33" height="26.67" fill="#2a9d8f"/><rect x="48" y="37.33" width="26.67" height="5.33" fill="#f4b400"/><rect x="37.33" y="48" width="5.33" height="26.67" fill="#1d6fd8"/><path d="M0.00 32V48M32 0.00H48M5.33 32V48M32 5.33H48M10.67 32V48M32 10.67H48M16.00 32V48M32 16.00H48M21.33 32V48M32 21.33H48M26.67 32V48M32 26.67H48M32.00 32V48M32 32.00H48M37.33 32V48M32 37.33H48M42.67 32V48M32 42.67H48M48.00 32V48M32 48.00H48M53.33 32V48M32 53.33H48M58.67 32V48M32 58.67H48M64.00 32V48M32 64.00H48M69.33 32V48M32 69.33H48M74.67 32V48M32 74.67H48M80.00 32V48M32 80.00H48M0 32.00H32M48 32.00H80M32.00 0V32M32.00 48V80M0 37.33H32M48 37.33H80M37.33 0V32M37.33 48V80M0 42.67H32M48 42.67H80M42.67 0V32M42.67 48V80M0 48.00H32M48 48.00H80M48.00 0V32M48.00 48V80" stroke="#b9a98a" stroke-width=".5"/><path d="M32 32L48 32L40 40Z" fill="#2a9d8f"/><path d="M48 32L48 48L40 40Z" fill="#f4b400"/><path d="M48 48L32 48L40 40Z" fill="#1d6fd8"/><path d="M32 48L32 32L40 40Z" fill="#e63946"/></g></g>
-          <g class="piece" transform="translate(176.5 76) scale(1.0)"><path d="M-4.5 0h9l-1.3-2.4h-6.4z" fill="#e63946" stroke="#2a160a" stroke-width=".5"/><path d="M-2.6-2.4c-.5-3.6 1-7.6 5.2-8.8l1.6 1.4-1.2 1.8 1 5.6z" fill="#e63946" stroke="#2a160a" stroke-width=".5"/><circle cx="1.6" cy="-8.6" r=".55" fill="#2a160a"/></g><g class="piece" transform="translate(221 77.5) scale(1.0)"><path d="M-4.5 0h9l-1.3-2.4h-6.4z" fill="#2a9d8f" stroke="#2a160a" stroke-width=".5"/><path d="M-2.6-2.4c-.5-3.6 1-7.6 5.2-8.8l1.6 1.4-1.2 1.8 1 5.6z" fill="#2a9d8f" stroke="#2a160a" stroke-width=".5"/><circle cx="1.6" cy="-8.6" r=".55" fill="#2a160a"/></g><g class="piece" transform="translate(226 92) scale(1.0)"><path d="M-4.5 0h9l-1.3-2.4h-6.4z" fill="#f4b400" stroke="#2a160a" stroke-width=".5"/><path d="M-2.6-2.4c-.5-3.6 1-7.6 5.2-8.8l1.6 1.4-1.2 1.8 1 5.6z" fill="#f4b400" stroke="#2a160a" stroke-width=".5"/><circle cx="1.6" cy="-8.6" r=".55" fill="#2a160a"/></g><g class="piece" transform="translate(181 91) scale(1.0)"><path d="M-4.5 0h9l-1.3-2.4h-6.4z" fill="#1d6fd8" stroke="#2a160a" stroke-width=".5"/><path d="M-2.6-2.4c-.5-3.6 1-7.6 5.2-8.8l1.6 1.4-1.2 1.8 1 5.6z" fill="#1d6fd8" stroke="#2a160a" stroke-width=".5"/><circle cx="1.6" cy="-8.6" r=".55" fill="#2a160a"/></g><g class="piece" transform="translate(204 88) scale(1.1)"><path d="M-4.5 0h9l-1.3-2.4h-6.4z" fill="#e63946" stroke="#2a160a" stroke-width=".5"/><path d="M-2.6-2.4c-.5-3.6 1-7.6 5.2-8.8l1.6 1.4-1.2 1.8 1 5.6z" fill="#e63946" stroke="#2a160a" stroke-width=".5"/><circle cx="1.6" cy="-8.6" r=".55" fill="#2a160a"/></g>
-          <path d="M158 66h80l8 32h-80z" fill="transparent"/>
-          <g class="tag"><rect x="180" y="141" width="56" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/>
-          <text x="208" y="149.3" text-anchor="middle" font-family="VT323, monospace" font-size="9.5" fill="#2a1006">▸ CÁ NGỰA</text></g>
-        </a>
-        <g transform="translate(32 -6)">
-          <path d="M136 110l7-3 7 3-7 3z" fill="#fff"/><path d="M136 110v8l7 3v-8z" fill="#e8e8e8"/><path d="M150 110v8l-7 3v-8z" fill="#cfcfcf"/>
-          <g fill="#111"><circle cx="143" cy="110" r=".9"/><circle cx="139" cy="114" r=".8"/><circle cx="140.6" cy="117" r=".8"/><circle cx="146.4" cy="114.6" r=".8"/><circle cx="148" cy="117.4" r=".8"/></g>
-          <path d="M154 114l7-3 7 3-7 3z" fill="#ff5a5f"/><path d="M154 114v8l7 3v-8z" fill="#d9363e"/><path d="M168 114v8l-7 3v-8z" fill="#b02a31"/>
-          <g fill="#fff"><circle cx="158.5" cy="114" r=".9"/><circle cx="163.5" cy="114" r=".9"/><circle cx="161" cy="121" r=".8"/></g>
-        </g>
-        <a class="bg-link" href="https://cardgames.io/" target="_blank" rel="noopener" aria-label="Chơi bài online trên cardgames.io (mở thẻ mới)">
-          <g class="piece" transform="translate(24 0)">
-          <g transform="rotate(-22 96 132)"><rect x="90" y="110" width="13" height="19" rx="1.5" fill="#fff" stroke="#999" stroke-width=".5"/><text x="96.5" y="123" text-anchor="middle" font-size="9" fill="#d7263d">♥</text></g>
-          <g transform="rotate(-4 100 132)"><rect x="94" y="109" width="13" height="19" rx="1.5" fill="#fff" stroke="#999" stroke-width=".5"/><text x="100.5" y="122" text-anchor="middle" font-size="9" fill="#111">♠</text></g>
-          <g transform="rotate(16 104 132)"><rect x="98" y="110" width="13" height="19" rx="1.5" fill="#fff" stroke="#999" stroke-width=".5"/><text x="104.5" y="123" text-anchor="middle" font-size="9" fill="#d7263d">♦</text></g>
-          </g>
-          <path d="M108 104h40v30h-40z" fill="transparent"/>
-          <g class="tag"><rect x="112" y="141" width="54" height="11" rx="2.5" stroke="#6b4a10" stroke-width=".8"/>
-          <text x="139" y="149.3" text-anchor="middle" font-family="VT323, monospace" font-size="9.5" fill="#2a1006">▸ ĐÁNH BÀI</text></g>
-        </a>
-        <use href="#mp" transform="translate(46 104)" fill="#2bff88"/>
-        <use href="#mp" transform="translate(57 109)" fill="#ff2a6d"/>
-        <use href="#mp" transform="translate(40 114)" fill="#05d9e8"/>
-        <g>
-          <ellipse cx="228" cy="123" rx="7" ry="2.6" fill="#7a0f12"/><rect x="221" y="115" width="14" height="8" fill="#d7263d"/><ellipse cx="228" cy="115" rx="7" ry="2.6" fill="#ff5a5f"/>
-          <path d="M222 117.5h12M222 120.5h12" stroke="#fff" stroke-width=".8" stroke-dasharray="2 2"/>
-          <ellipse cx="244" cy="127" rx="7" ry="2.6" fill="#8a6414"/><rect x="237" y="121" width="14" height="6" fill="#e2b84e"/><ellipse cx="244" cy="121" rx="7" ry="2.6" fill="#ffe58a"/>
-        </g>
-      </svg>
-    </div>
+    <!-- DÃY MÁY ARCADE MINI (tạo bằng JS từ danh sách MINIS, thêm link chỉ cần thêm một dòng) -->
+    <div id="minis"></div>
 
     <!-- ĐÈN TREO TRÊN BÀN BI-DA -->
     <div class="o lamp" id="lamp" aria-hidden="true">
@@ -1007,9 +923,8 @@
     shoot:   { X: -3.75, d: 5.8,  w: 1.0,  a: 310 / 170, glow: '#ff8a00' },
     racing:  { X: 6.6,   d: 5.8,  w: 1.7,  a: 175 / 170, glow: '#ff2a6d' },
     hoops:   { X: 7.05,  d: 4.4,  w: 1.05, a: 240 / 105, glow: '#ff8a00' },
-    door:    { X: 4.95,  d: 7.9,  w: 1.2,  a: 270 / 120, glow: '#ffb347' },
+    hiscore: { X: 4.95,  d: 7.95, w: 1.45, a: 128 / 150, y: 1.15, glow: '#ff2a6d' },
     prizes:  { X: -5.0,  d: 7.95, w: 2.6,  a: 110 / 260, y: 1.65 },
-    board:   { X: -3.0,  d: 3.0,  w: 1.55, a: 212 / 300 },
     bill:    { X: 0,     d: 3.1,  w: 2.6,  a: 232 / 400, glow: '#2bff88' },
     lamp:    { X: 0,     d: 3.1,  w: 1.3,  a: 300 / 200, top: CEIL },
     kid:     { X: 3.2,   d: 7.95, w: 1.7,  a: 90 / 170,  y: 1.08 },
@@ -1263,7 +1178,6 @@
   $('#cue').addEventListener('keydown', e => e.stopPropagation());
 
   /* ================= BÀN BOARDGAME ================= */
-  onActivate($('#board'), e => { if (!e.target.closest || !e.target.closest('a')) say('board'); });
   document.querySelectorAll('.bg-link').forEach(a => {
     a.addEventListener('click', e => e.stopPropagation());
     a.addEventListener('keydown', e => e.stopPropagation());
@@ -1274,13 +1188,6 @@
   useless.addEventListener('click', () => {
     hideHint();
     useless.classList.remove('press'); void useless.getBoundingClientRect(); useless.classList.add('press');
-  });
-  const door = $('#door');
-  door.addEventListener('click', e => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-    e.preventDefault();
-    door.classList.add('open');
-    setTimeout(() => { location.href = door.getAttribute('href'); }, reduce ? 0 : 560);
   });
 
   /* ================= MÁY GẮP THÚ ================= */
@@ -1460,6 +1367,56 @@
   $('#cabs').insertAdjacentHTML('beforebegin', cabsHTML);
   $('#cabs').remove();
   GAMES.forEach(g => { PLACE['cab-' + g[0]] = { X: g[8], d: 5.8, w: .72, a: 175 / 72, glow: g[7] === '#535353' ? '#cfcfcf' : g[7] }; });
+
+  /* ================= MÁY ARCADE MINI =================
+     Thêm game mới: thêm một dòng [mã, tên trên máy, link, màu thân, màu viền, màu bảng tên, kiểu hình].
+     Máy tự xếp thành hàng; hết chỗ thì xếp sang hàng sau. */
+  const MINIS = [
+    ['chess',  'CHESS',     'https://lichess.org/',                                '#3a2a6a', '#1a1030', '#f1e2bf', 'chess'],
+    ['ludo',   'CÁ NGỰA',   'https://www.crazygames.com/game/ludo-king',           '#a3162a', '#4a0812', '#ffd23f', 'ludo'],
+    ['cards',  'CARDS',     'https://cardgames.io/',                               '#0f6b3a', '#063018', '#fff3c4', 'cards'],
+    ['mind',   'MIND GAMES','https://www.mindgames.com/',                          '#7a3fd1', '#2e1460', '#ffb3f0', 'mind'],
+    ['math',   'MATH FUN',  'https://www.mathsisfun.com/games/index-number.html',  '#1f6fd1', '#0b2a5a', '#bfe6ff', 'math'],
+    ['line98', 'LINE 98',   'https://www.line98.vn/',                              '#2a2a3a', '#0e0e18', '#7dffb2', 'line98'],
+    ['color',  'COLOR',     'https://color.method.ac/',                            '#e8e2d6', '#8a8070', '#ff5fa2', 'color'],
+    ['numle',  'NUMBERLE',  'https://numberle.online/',                            '#3a3a3c', '#121213', '#6aaa64', 'numle'],
+  ];
+  const MINI_ART = {
+    chess: () => { let r = ''; for (let i = 0; i < 5; i++) for (let j = 0; j < 3; j++) r += `<rect x="${10 + i * 8}" y="${26 + j * 8}" width="8" height="8" fill="${(i + j) % 2 ? '#3a2414' : '#f1e2bf'}"/>`; return r + '<path d="M28 47h8l-1.2-2.4h-5.6zM29.6 44.6l.8-5h3.2l.8 5zM32 39.6a2.4 2.4 0 1 0 0-.1z" fill="#ffd23f" stroke="#2a1a12" stroke-width=".5"/>'; },
+    ludo: () => '<rect x="10" y="25" width="20" height="13" fill="#e53935"/><rect x="30" y="25" width="20" height="13" fill="#43a047"/><rect x="10" y="38" width="20" height="13" fill="#1e88e5"/><rect x="30" y="38" width="20" height="13" fill="#fdd835"/><path d="M30 31.5 36 38 30 44.5 24 38z" fill="#fff"/><circle cx="16" cy="31" r="2.2" fill="#fff"/><circle cx="44" cy="45" r="2.2" fill="#fff"/>',
+    cards: () => '<rect x="10" y="25" width="40" height="26" fill="#0b4d2a"/><g transform="rotate(-10 22 38)"><rect x="15" y="28" width="13" height="18" rx="1.5" fill="#fff"/><text x="21.5" y="40.5" text-anchor="middle" font-size="9" fill="#111">♠</text></g><g transform="rotate(9 38 38)"><rect x="31" y="28" width="13" height="18" rx="1.5" fill="#fff"/><text x="37.5" y="40.5" text-anchor="middle" font-size="9" fill="#d32f2f">♥</text></g>',
+    mind: () => '<rect x="10" y="25" width="40" height="26" fill="#1a0b33"/><path d="M24 30c-4 0-6 3-5 6-3 1-3 6 1 7 0 3 4 5 7 3 2 2 6 2 8-1 4 0 6-4 4-7 2-3 0-7-4-7-1-3-6-4-8-1-1-1-2-1-3 0z" fill="#ff71ce"/><path d="M30 31v14M26 35c2 1 4 1 4 3M34 35c-2 1-4 1-4 3" stroke="#7a1a5a" stroke-width="1" fill="none"/>',
+    math: () => '<rect x="10" y="25" width="40" height="26" fill="#0b1a33"/><text x="30" y="36" text-anchor="middle" font-family="Silkscreen, monospace" font-size="7" fill="#ffd23f">7+5=</text><text x="30" y="47" text-anchor="middle" font-family="Silkscreen, monospace" font-size="9" fill="#7dffb2">12</text>',
+    line98: () => { const c = ['#ff4d4d', '#ffd23f', '#4dabf7', '#69db7c', '#cc5de8', '#ff922b']; let r = '<rect x="10" y="25" width="40" height="26" fill="#d9d2c0"/>'; for (let i = 0; i < 5; i++) for (let j = 0; j < 3; j++){ r += `<rect x="${11 + i * 7.8}" y="${26 + j * 8.2}" width="7.4" height="7.8" fill="#bfb6a0"/>`; if ((i * 3 + j) % 2 === 0) r += `<circle cx="${14.7 + i * 7.8}" cy="${29.9 + j * 8.2}" r="2.8" fill="${c[(i + j * 2) % 6]}"/>`; } return r; },
+    color: () => { let r = '<rect x="10" y="25" width="40" height="26" fill="#fff"/>'; for (let i = 0; i < 8; i++) r += `<rect x="${11 + i * 4.75}" y="27" width="4.5" height="14" fill="hsl(${i * 45},85%,58%)"/>`; return r + '<circle cx="30" cy="46" r="3.6" fill="hsl(330,85%,58%)" stroke="#222" stroke-width=".6"/><circle cx="40" cy="46" r="3.6" fill="hsl(320,80%,55%)" stroke="#222" stroke-width=".6"/>'; },
+    numle: () => { const t = [['#6aaa64', '3'], ['#c9b458', '+'], ['#787c7e', '9'], ['#6aaa64', '='], ['#6aaa64', '12']]; let r = '<rect x="10" y="25" width="40" height="26" fill="#121213"/>'; t.forEach(([c, d], i) => { r += `<rect x="${11.5 + i * 7.6}" y="31" width="6.8" height="9" fill="${c}"/><text x="${14.9 + i * 7.6}" y="38" text-anchor="middle" font-family="Silkscreen, monospace" font-size="${d.length > 1 ? 3.6 : 5.4}" fill="#fff">${d}</text>`; }); return r + '<rect x="11.5" y="42" width="37" height="6" fill="#3a3a3c"/>'; },
+  };
+  $('#minis').insertAdjacentHTML('beforebegin', MINIS.map(([id, t, u, main, dark, marq, art]) => {
+    const fs = t.length > 8 ? 4.6 : t.length > 6 ? 5.4 : 6.4;
+    return `<a class="o hit cab mini" id="mini-${id}" href="${u}" target="_blank" rel="noopener" data-tag="${t} ↗" aria-label="Máy arcade nhỏ ${t}: chơi online (mở thẻ mới)">
+      <svg viewBox="0 0 60 104" aria-hidden="true">
+        <defs><linearGradient id="mn-${id}" x1="0" x2="1"><stop offset="0" stop-color="${dark}"/><stop offset=".5" stop-color="${main}"/><stop offset="1" stop-color="${dark}"/></linearGradient>
+          <clipPath id="mc-${id}"><rect x="10" y="25" width="40" height="26" rx="1.5"/></clipPath></defs>
+        <ellipse cx="30" cy="102" rx="28" ry="2.2" fill="rgba(0,0,0,.6)"/>
+        <path d="M6 12Q6 5 13 5H47Q54 5 54 12V58H6Z" fill="url(#mn-${id})" stroke="#05020a"/>
+        <rect x="8" y="7" width="44" height="11" rx="2" fill="${marq}"/><rect x="8" y="7" width="44" height="4" rx="2" fill="#fff" opacity=".22"/>
+        <text x="30" y="${13.6 + fs * .32}" text-anchor="middle" font-family="Silkscreen, monospace" font-weight="700" font-size="${fs}" fill="${dark}">${t}</text>
+        <rect x="8" y="22" width="44" height="32" rx="2" fill="#07070c"/>
+        <g clip-path="url(#mc-${id})">${MINI_ART[art]()}<rect class="scr-flash" x="10" y="25" width="40" height="26" fill="#fff" opacity="0"/>
+          <g class="p1"><rect x="14" y="34" width="32" height="8" fill="#000" opacity=".75"/><text x="30" y="40" text-anchor="middle" font-family="Silkscreen, monospace" font-weight="700" font-size="4" fill="#ffd23f">PLAYER 1</text></g></g>
+        <path d="M10 25h12L13 51h-3z" fill="#fff" opacity=".07"/>
+        <path d="M2 58H58L55 68H5Z" fill="${dark}" stroke="#05020a" stroke-width=".6"/>
+        <rect x="14.2" y="55" width="1.8" height="7" fill="#222"/><circle cx="15.1" cy="55" r="2.6" fill="${marq}"/>
+        <circle cx="36" cy="63" r="2.1" fill="${marq}"/><circle cx="43" cy="62" r="2.1" fill="#ffd23f"/><circle cx="50" cy="63" r="2.1" fill="#fff"/>
+        <path d="M7 68H53V94H7Z" fill="url(#mn-${id})" stroke="#05020a" stroke-width=".6"/>
+        <path d="M7 74H53V77H7Z" fill="${marq}" opacity=".8"/>
+        <rect x="24" y="80" width="12" height="10" rx="1" fill="#05020a" stroke="${marq}" stroke-width=".6"/><rect x="29" y="82" width="2" height="4" fill="${marq}"/>
+        <rect x="9" y="94" width="5" height="7" fill="#111"/><rect x="46" y="94" width="5" height="7" fill="#111"/>
+      </svg></a>`;
+  }).join(''));
+  $('#minis').remove();
+  // xếp hàng: mỗi hàng 4 máy, hàng sau lùi vào trong và so le để vẫn nhìn thấy
+  MINIS.forEach((m, i) => { const row = Math.floor(i / 4), col = i % 4; PLACE['mini-' + m[0]] = { X: -5.0 + col * .78 + (row % 2) * .39, d: 3.05 + row * .7, w: .56, a: 104 / 60, glow: m[3] }; });
 
   // bấm vào máy: màn hình loé sáng, trừ 1 xu, mở game ở thẻ mới
   document.querySelectorAll('#gtable a, #kid').forEach(a => a.addEventListener('click', () => { spend(); hideHint(); }));

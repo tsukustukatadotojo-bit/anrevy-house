@@ -113,6 +113,68 @@
     }
     return false;
   }
+  // tìm đường vòng qua đồ đạc: lưới ô 16px + A*, rồi nắn thẳng đường đi.
+  // Mọi máy đều tính giống nhau nên người khác cũng thấy mình đi vòng y như vậy.
+  const CS = 16, GW = Math.ceil(W / CS), GH = Math.ceil(H / CS);
+  let gridFree = null;
+  function grid(){
+    if (gridFree) return gridFree;
+    gridFree = new Uint8Array(GW * GH);
+    for (let j = 0; j < GH; j++) for (let i = 0; i < GW; i++) gridFree[j * GW + i] = blocked(i * CS + CS / 2, j * CS + CS / 2) ? 0 : 1;
+    return gridFree;
+  }
+  function clearLine(x0, y0, x1, y1){
+    const n = Math.ceil(Math.hypot(x1 - x0, y1 - y0) / 5);
+    for (let k = 1; k <= n; k++){ const t = k / n; if (blocked(x0 + (x1 - x0) * t, y0 + (y1 - y0) * t)) return false; }
+    return true;
+  }
+  function plan(x0, y0, x1, y1){
+    if (clearLine(x0, y0, x1, y1)) return null;
+    const G = grid(), N = GW * GH;
+    const cell = (x, y) => Math.min(GH - 1, Math.max(0, Math.floor(y / CS))) * GW + Math.min(GW - 1, Math.max(0, Math.floor(x / CS)));
+    const s = cell(x0, y0), goalFree = !blocked(x1, y1);
+    let g = cell(x1, y1);
+    if (!goalFree && !G[g]){
+      let best = -1, bd = 1e9;
+      for (let k = 0; k < N; k++) if (G[k]){ const d = Math.hypot(k % GW - g % GW, ((k / GW) | 0) - ((g / GW) | 0)); if (d < bd){ bd = d; best = k; } }
+      if (best < 0) return null; g = best;
+    }
+    const gi = g % GW, gj = (g / GW) | 0, h = k => Math.hypot(k % GW - gi, ((k / GW) | 0) - gj);
+    const cost = new Float32Array(N).fill(Infinity), from = new Int32Array(N).fill(-1), closed = new Uint8Array(N), heap = [];
+    const push = (k, f) => { heap.push([f, k]); let i = heap.length - 1; while (i){ const q = (i - 1) >> 1; if (heap[q][0] <= heap[i][0]) break; [heap[q], heap[i]] = [heap[i], heap[q]]; i = q; } };
+    const pop = () => { const top = heap[0], last = heap.pop(); if (heap.length){ heap[0] = last; let i = 0; for (;;){ const l = 2 * i + 1, r = l + 1; let m = i; if (l < heap.length && heap[l][0] < heap[m][0]) m = l; if (r < heap.length && heap[r][0] < heap[m][0]) m = r; if (m === i) break; [heap[m], heap[i]] = [heap[i], heap[m]]; i = m; } } return top[1]; };
+    const ok = k => G[k] || k === g || k === s;
+    cost[s] = 0; push(s, h(s));
+    while (heap.length){
+      const k = pop(); if (closed[k]) continue; closed[k] = 1;
+      if (k === g) break;
+      const i = k % GW, j = (k / GW) | 0;
+      for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++){
+        if (!di && !dj) continue;
+        const ni = i + di, nj = j + dj;
+        if (ni < 0 || nj < 0 || ni >= GW || nj >= GH) continue;
+        const nk = nj * GW + ni;
+        if (closed[nk] || !ok(nk)) continue;
+        if (di && dj && (!ok(j * GW + ni) || !ok(nj * GW + i))) continue;
+        const nc = cost[k] + (di && dj ? 1.414 : 1);
+        if (nc < cost[nk]){ cost[nk] = nc; from[nk] = k; push(nk, nc + h(nk)); }
+      }
+    }
+    if (g !== s && from[g] < 0) return null;
+    const cells = []; for (let k = g; k !== s && k >= 0; k = from[k]) cells.push(k);
+    cells.reverse();
+    const pts = cells.map(k => ({ x: (k % GW) * CS + CS / 2, y: ((k / GW) | 0) * CS + CS / 2 }));
+    if (goalFree){ if (pts.length) pts[pts.length - 1] = { x: x1, y: y1 }; else pts.push({ x: x1, y: y1 }); }
+    // nắn thẳng: nhảy tới điểm xa nhất còn nhìn thấy được
+    const out = []; let cx = x0, cy = y0, k = 0;
+    while (k < pts.length){
+      let far = k;
+      for (let m = Math.min(pts.length - 1, k + 40); m > k; m--) if (clearLine(cx, cy, pts[m].x, pts[m].y)){ far = m; break; }
+      out.push(pts[far]); cx = pts[far].x; cy = pts[far].y; k = far + 1;
+    }
+    out.stop = !goalFree;
+    return out;
+  }
 
   /* ----- nhân vật ----- */
   function drawHat(g, hat, x, y){
@@ -220,6 +282,10 @@
     if (topic === T_CHAT) return d && onChat(d);
     if (topic === T_BYE) return d && dropPeer(String(d.id));
     if (topic === T_SIG + me) return d && onSignal(d);
+    if (R.topics) for (const k in R.topics){
+      const base = PREFIX + '/' + k.replace(/\/\+$/, '/');
+      if (k.endsWith('/+') ? topic.startsWith(base) && !topic.slice(base.length).includes('/') : topic === PREFIX + '/' + k){ try { R.topics[k](topic.slice(base.length), d, K); } catch (e) {} return; }
+    }
   }
   function connectNet(){
     if (!window.mqtt){ netDown('không tải được thư viện kết nối'); return; }
@@ -230,7 +296,7 @@
           will: { topic: T_P + me, payload: '', qos: 0, retain: true } });
       } catch (e) { return; }
       c.on('connect', () => {
-        c.subscribe([T_STATE, T_X, T_P + '+', T_MOVE, T_CHAT, T_BYE, T_SIG + me], { qos: 0 });
+        c.subscribe([T_STATE, T_X, T_P + '+', T_MOVE, T_CHAT, T_BYE, T_SIG + me].concat(Object.keys(R.topics || {}).map(k => PREFIX + '/' + k)), { qos: 0 });
         if (inside) c.subscribe(T_AUD, { qos: 0 });
         connectedCount = clients.filter(x => x.connected).length;
         setTimeout(() => { if (!stateKnown){ stateKnown = true; ui(); } }, 1500);
@@ -780,6 +846,8 @@
   // bộ công cụ cho trang cấu hình
   const K = {
     rr, toast, lockOn, claimSeat, standUp, setExtras, openLock, goDoor, leaveTo,
+    publish: (sub, obj, retain) => pub(PREFIX + '/' + sub, obj, retain), rid,
+    get profileName(){ return prof.name; },
     get clock(){ return clock; }, get self(){ return self; }, get inside(){ return inside; }, get extras(){ return extras; },
     get soundOn(){ return soundOn; }, toggleMusic: () => toggleMusic(), peers,
     seatTaken
@@ -811,8 +879,16 @@
   addEventListener('blur', () => keys.clear());
 
   function step(p, dt, speed){
-    if (p.seat >= 0){ p.moving = false; return; }
-    const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy);
+    if (p.seat >= 0){ p.moving = false; p.path = null; p.ptx = undefined; return; }
+    if (p.ptx === undefined || Math.hypot(p.tx - p.ptx, p.ty - p.pty) > 20){ p.ptx = p.tx; p.pty = p.ty; p.path = plan(p.x, p.y, p.tx, p.ty); }
+    let gx = p.tx, gy = p.ty;
+    while (p.path && p.path.length){
+      gx = p.path[0].x; gy = p.path[0].y;
+      if (Math.hypot(gx - p.x, gy - p.y) >= 4) break;
+      p.path.shift();
+      if (!p.path.length){ if (p.path.stop){ p.tx = p.ptx = p.x; p.ty = p.pty = p.y; } gx = p.tx; gy = p.ty; p.path = null; }
+    }
+    const dx = gx - p.x, dy = gy - p.y, d = Math.hypot(dx, dy);
     if (d < 3){ p.moving = false; return; }
     p.moving = true; if (Math.abs(dx) > 2) p.face = dx > 0 ? 1 : -1;
     const m = Math.min(d, speed * dt), nx = p.x + dx / d * m, ny = p.y + dy / d * m;

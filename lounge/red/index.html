@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Patrick+Hand&amp;family=VT323&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../engine.css">
 <style>
   :root{--gold:#f2a65a;--cream:#ffe9d6;--dim:#e0b99a;--panel:rgba(44,20,14,.94)}
@@ -15,9 +15,84 @@
   .hud a{background:rgba(30,12,8,.82);box-shadow:0 0 12px rgba(242,166,90,.3)}
   .card{box-shadow:0 0 0 6px rgba(40,16,10,.8),0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(242,120,70,.18)}
   .card h1{color:#ffe2cc;text-shadow:0 0 16px rgba(255,120,80,.6)}
+
+  /* ===== SỔ GHI CHÚ trên bàn làm việc ===== */
+  [hidden]{display:none!important}
+  .nb{position:fixed;inset:0;z-index:75;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(18,8,4,.66)}
+  .nb.open{display:flex}
+  .paper{position:relative;width:min(560px,100%);max-height:min(88vh,820px);display:flex;flex-direction:column;border-radius:6px 14px 14px 6px;overflow:hidden;
+    background:#fbf3e4;color:#3a2418;box-shadow:-10px 0 0 #b5532e,-14px 0 0 #8a3a1e,0 24px 60px rgba(0,0,0,.6);font-family:'Patrick Hand','Fredoka',cursive}
+  .paper::before{content:'';position:absolute;left:42px;top:0;bottom:0;width:2px;background:rgba(220,90,80,.45);pointer-events:none}
+  .pg-head{display:flex;align-items:center;gap:10px;padding:14px 16px 10px 58px;border-bottom:2px dashed rgba(181,83,46,.35)}
+  .pg-head h2{flex:1;font:400 28px/1 'Patrick Hand',cursive;color:#8a3a1e}
+  .pg-head small{display:block;font-size:15px;color:#9a6a4a;margin-top:2px}
+  .x{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid #b5532e;background:#fff7ec;color:#b5532e;font:700 16px Fredoka,sans-serif}
+  .x:hover,.x:focus-visible{background:#b5532e;color:#fff;outline:none}
+  .pg-body{flex:1;overflow:auto;overscroll-behavior:contain;padding:8px 18px 18px 58px;
+    background:repeating-linear-gradient(180deg,transparent 0 31px,rgba(80,120,190,.18) 31px 32px)}
+  .lockv{display:flex;flex-direction:column;align-items:center;gap:12px;padding:26px 0 10px;text-align:center}
+  .lockv .pad{font-size:48px;line-height:1}
+  .lockv p{font-size:20px;color:#6a4028}
+  .dots{display:flex;gap:12px;margin:2px 0 4px}
+  .dots i{width:16px;height:16px;border-radius:50%;border:2px solid #8a3a1e}
+  .dots i.on{background:#8a3a1e}
+  .keys{display:grid;grid-template-columns:repeat(3,62px);gap:10px}
+  .keys button{height:52px;border-radius:12px;cursor:pointer;border:2px solid #d9a07a;background:#fff;color:#5a2c18;font:400 26px 'Patrick Hand',cursive}
+  .keys button:hover,.keys button:focus-visible{background:#ffe6cf;outline:none;border-color:#b5532e}
+  .pin-err{min-height:22px;color:#c0392b;font-size:18px}
+  .shake{animation:shake .4s}
+  .note-item{position:relative;padding:12px 0 14px;border-bottom:1px dashed rgba(181,83,46,.35)}
+  .note-item p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:21px;line-height:32px}
+  .note-item .sig{display:block;text-align:right;font-size:21px;color:#8a3a1e}
+  .note-item .meta{display:block;text-align:right;font:400 13px Fredoka,sans-serif;color:#a07a5a}
+  .note-item .del{position:absolute;right:0;top:10px;border:0;background:none;cursor:pointer;color:#c0392b;font:600 13px Fredoka,sans-serif}
+  .empty{padding:18px 0;font-size:21px;color:#9a6a4a}
+  .write{padding:12px 18px 14px 58px;border-top:2px dashed rgba(181,83,46,.35);background:#f6e8d2}
+  .write label{display:block;font-size:19px;color:#8a3a1e;margin-bottom:4px}
+  .write textarea{width:100%;min-height:96px;max-height:40vh;resize:vertical;padding:6px 10px;border-radius:8px;border:2px solid #d9a07a;background:#fffdf8;color:#3a2418;font:400 21px/28px 'Patrick Hand',cursive;outline:none}
+  .write input{width:100%;height:44px;padding:0 12px;border-radius:8px;border:2px solid #d9a07a;background:#fffdf8;color:#3a2418;font:400 22px 'Patrick Hand',cursive;outline:none}
+  .write textarea:focus,.write input:focus{border-color:#b5532e}
+  .wrow{display:flex;gap:8px;justify-content:flex-end;margin-top:8px;align-items:center}
+  .wrow small{flex:1;font:400 13px Fredoka,sans-serif;color:#a07a5a}
+  .wbtn{height:42px;padding:0 18px;border-radius:10px;cursor:pointer;border:0;background:#b5532e;color:#fff;font:600 16px Fredoka,sans-serif}
+  .wbtn.alt{background:#fff;color:#8a3a1e;border:2px solid #d9a07a}
+  .wbtn:hover,.wbtn:focus-visible{filter:brightness(1.08);outline:2px solid #8a3a1e;outline-offset:2px}
+  .wbtn[disabled]{opacity:.6}
+  .werr{color:#c0392b;font:500 14px Fredoka,sans-serif;min-height:18px;margin-top:4px}
+  @media (max-width:520px){ .paper::before{left:22px} .pg-head,.pg-body,.write{padding-left:34px} .keys{grid-template-columns:repeat(3,56px)} }
 </style>
 </head>
 <body>
+  <!-- SỔ GHI CHÚ -->
+  <div class="nb" id="nb" role="dialog" aria-modal="true" aria-labelledby="nbTitle">
+    <div class="paper" id="paper">
+      <div class="pg-head"><h2 id="nbTitle">Sổ ghi chú<small id="nbSub">luôn khoá · ghi chú tự xoá sau 2 ngày</small></h2><button class="x" id="nbClose" aria-label="Đóng sổ">✕</button></div>
+      <div class="pg-body" id="nbBody">
+        <div class="lockv" id="nbLock">
+          <div class="pad" aria-hidden="true">🔒</div>
+          <p>Sổ đang khoá. Nhập mật khẩu 4 số.</p>
+          <div class="dots" id="pinDots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <input id="pinIn" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Mật khẩu sổ ghi chú" style="position:absolute;opacity:0;width:1px;height:1px">
+          <div class="keys" id="pinKeys"></div>
+          <div class="pin-err" id="pinErr" role="alert"></div>
+        </div>
+        <div id="nbList" hidden></div>
+      </div>
+      <form class="write" id="nbWrite" hidden autocomplete="off">
+        <div id="wStep1">
+          <label for="nbText">Viết ghi chú mới</label>
+          <textarea id="nbText" placeholder="Viết gì cũng được, dài bao nhiêu cũng được…"></textarea>
+          <div class="wrow"><small>Ghi chú tự xoá sau 2 ngày.</small><button class="wbtn" type="button" id="wDone">Viết xong</button></div>
+        </div>
+        <div id="wStep2" hidden>
+          <label for="nbName">Để lại tên của bạn</label>
+          <input id="nbName" maxlength="40" placeholder="Tên người viết">
+          <div class="wrow"><button class="wbtn alt" type="button" id="wBack">← Sửa lại</button><button class="wbtn" type="submit" id="wSave">Ký tên &amp; lưu</button></div>
+        </div>
+        <div class="werr" id="wErr" role="alert"></div>
+      </form>
+    </div>
+  </div>
 <script>
 /* ===== PHÒNG SAU BỨC TRANH ĐỎ — phòng ngủ ấm áp (phần chung nằm ở ../engine.js) ===== */
 (() => {
@@ -175,7 +250,8 @@
     g.fillStyle = '#8e5434'; rr(g, 862, 760, 180, 92, 8); g.fill();
     g.fillStyle = '#a8683e'; rr(g, 870, 768, 164, 76, 6); g.fill();
     g.fillStyle = '#2a2a30'; rr(g, 900, 782, 70, 46, 5); g.fill(); g.fillStyle = '#ffb38a'; rr(g, 905, 786, 60, 34, 3); g.fill();
-    g.fillStyle = '#f3d27a'; g.fillRect(990, 784, 30, 8); g.fillStyle = '#c0392b'; g.fillRect(992, 794, 28, 7);
+    g.save(); g.translate(1004, 800); g.rotate(-.12); g.fillStyle = 'rgba(0,0,0,.2)'; g.fillRect(-15, -17, 34, 40); g.fillStyle = '#b5532e'; g.fillRect(-18, -20, 34, 40); g.fillStyle = '#fbf3e4'; g.fillRect(-14, -18, 28, 36); g.strokeStyle = 'rgba(80,120,190,.5)'; g.lineWidth = 1; for (let k = -10; k < 16; k += 6){ g.beginPath(); g.moveTo(-11, k); g.lineTo(11, k); g.stroke(); } g.fillStyle = '#e0a854'; g.fillRect(-2, 8, 6, 10); g.restore();
+    g.strokeStyle = '#3a2418'; g.lineWidth = 2.4; g.beginPath(); g.moveTo(1022, 786); g.lineTo(1030, 812); g.stroke();
     g.fillStyle = '#6a8a5a'; g.beginPath(); g.arc(1012, 822, 12, 0, 7); g.fill(); g.fillStyle = '#e8d2b0'; g.beginPath(); g.arc(1012, 832, 8, 0, Math.PI); g.fill();
     g.fillStyle = '#c9785a'; g.beginPath(); g.ellipse(935, 742, 26, 20, 0, 0, 7); g.fill(); g.fillStyle = '#e8a87a'; g.beginPath(); g.ellipse(935, 738, 20, 14, 0, 0, 7); g.fill();
   }
@@ -271,13 +347,138 @@
           K.toast(on ? 'Đã tắt đèn 🌙' : 'Đã bật đèn 💡');
         } },
       { r: [BED.x0, 106, BED.x1, BED.y1], act: () => K.claimSeat() },
+      { r: [858, 716, 1046, 856], act: () => openNotebook(K) },
       { r: [PLAYER.x - 30, PLAYER.y - 30, PLAYER.x + 30, PLAYER.y + 30], always: true, act: () => K.toggleMusic() }
     ],
     onExtras: (x, prev, K) => {
       if (K.inside && x.lights !== prev.lights && x.by && Date.now() - x.at < 8000 && (!K.self || x.by !== K.self.name)) K.toast(x.by + (x.lights === false ? ' đã tắt đèn 🌙' : ' đã bật đèn 💡'));
     },
-    overlay
+    overlay,
+    topics: { 'notes/+': onNote }
   };
+
+  /* ================= SỔ GHI CHÚ =================
+     Sổ luôn khoá (mật khẩu 4 số). Ghi chú được mã hoá bằng khoá suy ra từ mật khẩu rồi lưu chung
+     trên máy chủ chuyển tin, nên ai mở sổ cũng đọc được; mỗi ghi chú tự xoá sau 2 ngày. */
+  const NOTE_TTL = 2 * 24 * 3600 * 1000;
+  const PIN_HASH = '731bd7910a649ca290a025307ab8a670a161c844dca64e4abc0744804944c1eb';   // sha256('anrevy-notes:' + mật khẩu)
+  const $ = s => document.querySelector(s);
+  const b64 = u => { let s = ''; for (let i = 0; i < u.length; i += 8192) s += String.fromCharCode(...u.subarray(i, i + 8192)); return btoa(s); };
+  const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  const notes = new Map();       // mã ghi chú -> { at, exp, iv, ct, name?, text? }
+  let nbKey = null, KK = null, pin = '';
+  const mine = (() => { try { return new Set(JSON.parse(localStorage.getItem('red-notes-mine') || '[]')); } catch (e) { return new Set(); } })();
+  const saveMine = () => { try { localStorage.setItem('red-notes-mine', JSON.stringify([...mine].slice(-200))); } catch (e) {} };
+  async function sha(s){ const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return Array.from(new Uint8Array(b), x => x.toString(16).padStart(2, '0')).join(''); }
+  async function deriveKey(p){
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(p), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: new TextEncoder().encode('anrevy-red-notes-v1'), iterations: 150000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  }
+  function onNote(id, d, K){
+    KK = K;
+    if (!/^[a-z0-9-]{6,40}$/.test(id)) return;
+    if (!d){ notes.delete(id); renderList(); return; }
+    const at = +d.at || 0, exp = Math.min(+d.exp || 0, at + NOTE_TTL);
+    if (!exp || Date.now() > exp){ notes.delete(id); if (at) K.publish('notes/' + id, null, true); renderList(); return; }   // quá 2 ngày: dọn khỏi máy chủ
+    if (typeof d.iv !== 'string' || typeof d.ct !== 'string') return;
+    notes.set(id, { at, exp, iv: d.iv, ct: d.ct });
+    if (nbKey) decryptAll().then(renderList);
+  }
+  async function decryptAll(){
+    for (const n of notes.values()){
+      if (n.text != null || n.bad) continue;
+      try { const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(n.iv) }, nbKey, unb64(n.ct)); const o = JSON.parse(new TextDecoder().decode(pt)); n.name = String(o.name || '').slice(0, 40); n.text = String(o.text || ''); }
+      catch (e) { n.bad = true; }
+    }
+  }
+  // xoá ghi chú hết hạn kể cả khi không ai mở sổ
+  setInterval(() => { const now = Date.now(); for (const [id, n] of notes) if (now > n.exp){ notes.delete(id); if (KK) KK.publish('notes/' + id, null, true); } if (nbKey) renderList(); }, 60000);
+
+  const nb = $('#nb'), nbLock = $('#nbLock'), nbList = $('#nbList'), nbWrite = $('#nbWrite');
+  let returnFocus = null;
+  $('#pinKeys').innerHTML = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '⌫', '0', '✓'].map(k => `<button type="button" data-k="${k}" aria-label="${k === '⌫' ? 'xoá' : k === '✓' ? 'mở' : k}">${k}</button>`).join('');
+  function pinUI(){ $('#pinDots').querySelectorAll('i').forEach((el, i) => el.classList.toggle('on', i < pin.length)); }
+  async function tryPin(){
+    if (pin.length < 4) return;
+    if (await sha('anrevy-notes:' + pin) !== PIN_HASH){
+      $('#pinErr').textContent = 'Sai mật khẩu rồi.'; pin = ''; pinUI();
+      $('#paper').classList.remove('shake'); void $('#paper').offsetWidth; $('#paper').classList.add('shake'); return;
+    }
+    $('#pinErr').textContent = 'Đang mở sổ…';
+    nbKey = await deriveKey(pin); pin = '';
+    await decryptAll();
+    nbLock.hidden = true; nbList.hidden = false; nbWrite.hidden = false; showStep(1);
+    $('#nbSub').textContent = 'mỗi ghi chú tự xoá sau 2 ngày';
+    renderList(); setTimeout(() => $('#nbText').focus(), 30);
+  }
+  $('#pinKeys').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const k = b.dataset.k; $('#pinErr').textContent = '';
+    if (k === '⌫') pin = pin.slice(0, -1); else if (k === '✓') return tryPin(); else if (pin.length < 4) pin += k;
+    pinUI(); if (pin.length === 4) tryPin(); });
+  $('#pinIn').addEventListener('input', e => { pin = e.target.value.replace(/\D/g, '').slice(0, 4); e.target.value = pin; pinUI(); if (pin.length === 4){ e.target.value = ''; tryPin(); } });
+  nb.addEventListener('keydown', e => {
+    if (!nbLock.hidden && /^[0-9]$/.test(e.key)){ e.preventDefault(); if (pin.length < 4){ pin += e.key; pinUI(); if (pin.length === 4) tryPin(); } }
+    else if (!nbLock.hidden && e.key === 'Backspace'){ e.preventDefault(); pin = pin.slice(0, -1); pinUI(); }
+    if (e.key === 'Escape'){ e.preventDefault(); closeNotebook(); }
+  });
+  function fmtLeft(ms){ const h = Math.max(0, Math.floor(ms / 3600000)); return h >= 24 ? Math.floor(h / 24) + ' ngày ' + (h % 24) + ' giờ' : h ? h + ' giờ' : Math.max(1, Math.ceil(ms / 60000)) + ' phút'; }
+  function renderList(){
+    if (!nbKey) return;
+    const list = [...notes.entries()].filter(([, n]) => n.text != null && Date.now() < n.exp).sort((a, b) => b[1].at - a[1].at);
+    nbList.textContent = '';
+    if (!list.length){ const p = document.createElement('p'); p.className = 'empty'; p.textContent = 'Chưa có ghi chú nào. Bạn viết dòng đầu tiên nhé.'; nbList.appendChild(p); return; }
+    list.forEach(([id, n]) => {
+      const div = document.createElement('div'); div.className = 'note-item';
+      const p = document.createElement('p'); p.textContent = n.text;
+      const sig = document.createElement('span'); sig.className = 'sig'; sig.textContent = '— ' + (n.name || 'ẩn danh');
+      const d = new Date(n.at), meta = document.createElement('span'); meta.className = 'meta';
+      meta.textContent = 'viết lúc ' + d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) + ' · ' + d.toLocaleDateString('vi-VN') + ' · tự xoá sau ' + fmtLeft(n.exp - Date.now());
+      div.append(p, sig, meta);
+      if (mine.has(id)){ const x = document.createElement('button'); x.type = 'button'; x.className = 'del'; x.textContent = 'xoá ghi chú của tôi'; x.addEventListener('click', () => { notes.delete(id); mine.delete(id); saveMine(); if (KK) KK.publish('notes/' + id, null, true); renderList(); }); div.appendChild(x); }
+      nbList.appendChild(div);
+    });
+  }
+  function showStep(n){ $('#wStep1').hidden = n !== 1; $('#wStep2').hidden = n !== 2; $('#wErr').textContent = ''; }
+  $('#wDone').addEventListener('click', () => {
+    if (!$('#nbText').value.trim()){ $('#wErr').textContent = 'Viết gì đó trước đã nhé.'; $('#nbText').focus(); return; }
+    showStep(2); const nm = $('#nbName'); if (!nm.value && KK) nm.value = KK.profileName || ''; nm.focus(); nm.select();
+  });
+  $('#wBack').addEventListener('click', () => { showStep(1); $('#nbText').focus(); });
+  nbWrite.addEventListener('submit', async e => {
+    e.preventDefault();
+    const text = $('#nbText').value.replace(/\s+$/, ''), name = $('#nbName').value.replace(/[\u0000-\u001f]/g, '').trim().slice(0, 40);
+    if (!name){ $('#wErr').textContent = 'Ghi chú cần có tên người viết.'; $('#nbName').focus(); return; }
+    if (!text.trim()){ showStep(1); return; }
+    if (!KK){ $('#wErr').textContent = 'Chưa kết nối được máy chủ, thử lại sau nhé.'; return; }
+    $('#wSave').disabled = true;
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, nbKey, new TextEncoder().encode(JSON.stringify({ name, text }))));
+      const at = Date.now(), id = at.toString(36) + '-' + KK.rid(6);
+      KK.publish('notes/' + id, { at, exp: at + NOTE_TTL, iv: b64(iv), ct: b64(ct) }, true);
+      notes.set(id, { at, exp: at + NOTE_TTL, iv: b64(iv), ct: b64(ct), name, text });
+      mine.add(id); saveMine();
+      $('#nbText').value = ''; showStep(1); renderList(); nbList.parentNode.scrollTop = 0;
+      KK.toast('Đã lưu ghi chú. Nó sẽ tự xoá sau 2 ngày.');
+    } catch (err){ $('#wErr').textContent = 'Không lưu được, thử lại nhé.'; }
+    $('#wSave').disabled = false;
+  });
+  function openNotebook(K){
+    KK = K; returnFocus = document.activeElement;
+    nbKey = null; pin = ''; pinUI(); $('#pinErr').textContent = '';   // sổ luôn khoá: lần nào mở cũng hỏi mật khẩu
+    notes.forEach(n => { delete n.text; delete n.name; delete n.bad; });
+    nbLock.hidden = false; nbList.hidden = true; nbWrite.hidden = true;
+    $('#nbSub').textContent = 'luôn khoá · ghi chú tự xoá sau 2 ngày';
+    nb.classList.add('open'); setTimeout(() => $('#pinIn').focus({ preventScroll: true }), 30);
+  }
+  function closeNotebook(){
+    nb.classList.remove('open'); nbKey = null; pin = '';
+    notes.forEach(n => { delete n.text; delete n.name; });
+    const r = document.getElementById('room'); if (r) r.focus({ preventScroll: true }); else if (returnFocus) returnFocus.focus();
+  }
+  $('#nbClose').addEventListener('click', closeNotebook);
+  nb.addEventListener('click', e => { if (e.target === nb) closeNotebook(); });
+  // tờ giấy nhỏ trên bàn để gợi ý có thể bấm
+  window.__notes = { notes, openNotebook: () => openNotebook(KK) };
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js"></script>
