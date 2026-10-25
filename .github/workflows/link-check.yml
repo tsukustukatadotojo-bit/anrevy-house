@@ -9,19 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find videos
+      - name: Find media
         run: |
-          python3 tools/ytfind.py tools/q.txt
-          python3 - <<'PY'
-          t = open('out.txt', encoding='utf-8').read()
-          parts = t.split('\n## ')
-          chunks, cur = [], ''
-          for i, p in enumerate(parts):
-              p = p if i == 0 else '## ' + p
-              if len(cur) + len(p) > 3500: chunks.append(cur); cur = ''
-              cur += p + '\n'
-          chunks.append(cur)
-          for k, c in enumerate(chunks[:10]):
-              msg = c.replace('%', '%25').replace('\r', '').replace('\n', '%0A')
-              print(f'::notice title=yt{k}::{msg}')
-          PY
+          python3 tools/ytfind.py tools/q.txt || true
+          python3 tools/commons.py || true
+          echo "::notice title=yt::$(sed ':a;N;$!ba;s/%/%25/g;s/\n/%0A/g' out.txt)"
+          split -l 18 out2.txt part_ || true
+          for f in part_*; do echo "::notice title=commons::$(sed ':a;N;$!ba;s/%/%25/g;s/\n/%0A/g' $f)"; done
