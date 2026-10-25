@@ -3,14 +3,23 @@ on:
   push:
     branches: [link-check]
 permissions:
-  contents: read
+  contents: write
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find media
+      - name: Download media
         run: |
-          python3 tools/commons.py || true
-          split -l 12 out2.txt part_ || true
-          for f in part_*; do echo "::notice title=commons::$(sed ':a;N;$!ba;s/%/%25/g;s/\n/%0A/g' $f)"; done
+          mkdir -p media && cd media
+          UA='AnrevyHouseBot/1.0 (personal fan site; https://github.com/tsukustukatadotojo-bit/anrevy-house)'
+          while read -r name url; do
+            [ -z "$name" ] && continue
+            curl -sS -L -A "$UA" -o "$name" "$url" -w "$name %{http_code} %{size_download}\n" || true
+            sleep 1
+          done < ../tools/media.txt > ../dl.txt
+          cd ..
+          echo "::notice title=dl::$(sed ':a;N;$!ba;s/\n/%0A/g' dl.txt)"
+          git config user.name "Claude"; git config user.email "noreply@anthropic.com"
+          git checkout -B media
+          git add media && git commit -q -m "Media from Wikimedia Commons" && git push -q -f origin media
