@@ -23,7 +23,7 @@ def walk(o, out):
 def oembed(vid):
     s, b = get('https://www.youtube.com/oembed?format=json&url=' + urllib.parse.quote('https://www.youtube.com/watch?v=' + vid))
     if s == 200:
-        j = json.loads(b); return '200 ' + j.get('author_name', '')
+        j = json.loads(b); return '200 ' + j.get('author_name', '') + ' | ' + j.get('title', '')
     return str(s)
 lines = []
 for q in open(sys.argv[1], encoding='utf-8').read().strip().split('\n'):
