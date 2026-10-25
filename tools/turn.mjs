@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
 const CANDS = {
+  control_stun_all: [{ urls: 'stun:stun.l.google.com:19302' }],
   freestun_udp: [{ urls: 'turn:freestun.net:3478', username: 'free', credential: 'free' }],
   freestun_tcp: [{ urls: 'turn:freestun.net:3478?transport=tcp', username: 'free', credential: 'free' }],
   freestun_tls: [{ urls: 'turns:freestun.net:5349', username: 'free', credential: 'free' }],
@@ -14,10 +15,10 @@ await pg.goto('https://example.com/');
 for (const [name, ice] of Object.entries(CANDS)){
   try {
   const r = await pg.evaluate(async (ice) => {
-    const cfg = { iceServers: ice, iceTransportPolicy: 'relay' };
+    const cfg = { iceServers: ice, iceTransportPolicy: ice[0].urls.toString().startsWith('stun') ? 'all' : 'relay' };
     const a = new RTCPeerConnection(cfg), b = new RTCPeerConnection(cfg);
     const relays = [];
-    a.onicecandidate = e => { if (e.candidate){ relays.push(e.candidate.candidate.split(' ').slice(4, 8).join(' ')); b.addIceCandidate(e.candidate).catch(() => {}); } };
+    a.onicecandidate = e => { if (e.candidate){ relays.push(e.candidate.candidate.split(' ').slice(4, 8).join(' ').replace(/^[0-9a-f-]+\.local/, 'mdns')); b.addIceCandidate(e.candidate).catch(() => {}); } };
     b.onicecandidate = e => { if (e.candidate) a.addIceCandidate(e.candidate).catch(() => {}); };
     const s = await navigator.mediaDevices.getUserMedia({ audio: true });
     s.getTracks().forEach(t => a.addTrack(t, s));
