@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ＡＥＳＴＨＥＴＩＣ　ＰＬＡＺＡ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monoton&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../room.css">
+<style>
+  :root{--bg:#1a0533;--ink:#fff;--accent:#ff71ce;--accent-soft:rgba(255,113,206,.45);--hud-bg:#c0c0c0;--hud-ink:#000;--hud-ink-on:#fff;
+    --hud-font:400 20px 'VT323',monospace;--btn-r:0;--tip-r:0;--box-r:0;--box-bg:#c0c0c0;--box-ink:#000;--title-font:400 26px 'VT323',monospace;
+    --hint-font:400 20px 'VT323',monospace;--hint-ink:#fff;--enter:#ff71ce;
+    --hover-filter:drop-shadow(4px 4px 0 #01cdfe) drop-shadow(-4px -4px 0 #ff71ce)}
+  /* cửa sổ kiểu Windows 95 */
+  .hud a,.hud button,.pan,.tv,.list-x{border:2px solid!important;border-color:#fff #404040 #404040 #fff!important;box-shadow:3px 3px 0 #ff71ce!important;border-radius:0!important}
+  .hud a:hover,.hud a:focus-visible,.hud button:hover,.hud button:focus-visible{background:#000080!important;color:#fff!important}
+  .pan{background:#c0c0c0;color:#000}
+  .tip{background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:5px 5px 0 #01cdfe;padding:0 0 8px;font-family:Tahoma,Verdana,sans-serif}
+  .tip b{background:linear-gradient(90deg,#000080,#1084d0);color:#fff;padding:3px 8px;font:700 14px Tahoma,Verdana,sans-serif;letter-spacing:0}
+  .tip b::after{content:'✕';float:right;margin-left:14px;background:#c0c0c0;color:#000;font-size:10px;padding:0 4px;border:1px solid;border-color:#fff #404040 #404040 #fff}
+  .tip small,.tip i{padding:0 10px}
+  .tip i{color:#000080;opacity:1}
+  .list-head{background:linear-gradient(90deg,#000080,#1084d0);color:#fff;border:0}
+  .list-head p{color:#fff}
+  .list-x{background:#c0c0c0!important;color:#000!important;width:28px;height:24px;top:10px;font-size:13px}
+  .list li a:hover,.list li a:focus-visible{background:#000080;color:#fff}
+  .tv{background:#c0c0c0;color:#000}
+  .tv-bar{background:linear-gradient(90deg,#000080,#1084d0);color:#fff}
+  .tv-bar button{background:#c0c0c0;color:#000;border-radius:0;border:1px solid;border-color:#fff #404040 #404040 #fff}
+  .room-title{font:400 clamp(18px,2.6vw,30px) 'Monoton',cursive;letter-spacing:.12em;color:#fff;text-shadow:3px 3px 0 #ff71ce,6px 6px 0 #01cdfe}
+  .room-title span{display:block;font:400 18px 'VT323',monospace;letter-spacing:.6em;color:#fffb96;text-align:center;text-shadow:2px 2px 0 #b967ff}
+  .bob{animation:bob 4s ease-in-out infinite alternate}.bob.b{animation-delay:-2s;animation-duration:5s}.bob.c{animation-delay:-1s;animation-duration:3.2s}
+  @keyframes bob{to{transform:translateY(-14px)}}
+  .rock{transform-box:fill-box;transform-origin:50% 100%;animation:rock 3s ease-in-out infinite alternate}
+  @keyframes rock{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+  .spin{transform-box:fill-box;transform-origin:center;animation:spin 10s linear infinite}.spin.f{animation-duration:3s}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .bounce{animation:bounce .9s cubic-bezier(.3,0,.7,1) infinite alternate}
+  @keyframes bounce{to{transform:translateY(-34px)}}
+  .ghost{animation:ghost 5s ease-in-out infinite}
+  @keyframes ghost{0%,100%{opacity:.18}50%{opacity:.5}}
+  .blink{animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .steam{animation:steam 2.4s linear infinite}
+  @keyframes steam{from{transform:translateY(0);opacity:.7}to{transform:translateY(-30px);opacity:0}}
+  .thump{transform-box:fill-box;transform-origin:center;animation:thump .5s ease-in-out infinite alternate}
+  @keyframes thump{to{transform:scale(1.12)}}
+  .jump{animation:jump 6s ease-in-out infinite}
+  @keyframes jump{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(30px,-26px) rotate(-8deg)}}
+  .zoomq{transform-box:fill-box;transform-origin:center;animation:zq 3s linear infinite}
+  @keyframes zq{from{transform:scale(.4) rotate(0);opacity:0}30%{opacity:1}to{transform:scale(1.6) rotate(40deg);opacity:0}}
+  .zoomq.b{animation-delay:-1s}.zoomq.c{animation-delay:-2s}
+</style>
+</head>
+<body>
+<div class="enter"></div>
+<div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Quảng trường vaporwave: mặt trời sọc, lưới neon, tượng cẩm thạch, cửa sổ máy tính cũ"></svg></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="room-title" aria-hidden="true">AESTHETIC<span>ｐｌａｚａ　ｖａｐｏｒ</span></div>
+<nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> DANH SÁCH</span></button></nav>
+<button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
+<div class="hint" id="hint"></div>
+<div class="tip" id="tip" aria-hidden="true"></div>
+<div class="list" id="list" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="list-bg" data-close></div><div class="list-box" id="listBox"><div class="list-head"><h2 id="listTitle">ａｅｓｔｈｅｔｉｃ.exe</h2><p id="listCount"></p></div><ol></ol><button class="list-x" data-close aria-label="Đóng">✕</button></div></div>
+<div class="tv" id="tv"><div class="tv-bar"><span class="tv-t">♪ plaza.fm</span><button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt nhạc">off</button><button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Ẩn video">–</button></div><div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div></div>
+<script>
+(() => {
+  /* ======= LINK TRONG PHÒNG (thứ tự = data-i của đồ vật) ======= */
+  const LINKS = [
+    { n: 'Procatinator', d: 'Mỗi lần mở là một chú mèo kèm một bản nhạc', u: 'https://procatinator.com/' },
+    { n: 'Cat Bounce', d: 'Mèo nảy tưng tưng khắp màn hình', u: 'https://cat-bounce.com/' },
+    { n: 'Pointer Pointer', d: 'Để chuột ở đâu cũng có người chỉ vào đúng chỗ đó', u: 'https://pointerpointer.com/' },
+    { n: 'Paper Toilet', d: 'Kéo cuộn giấy vệ sinh… thế thôi', u: 'https://papertoilet.com/' },
+    { n: 'Koalas to the Max', d: 'Rê chuột tách hình tròn để lộ bức ảnh', u: 'https://koalastothemax.com/' },
+    { n: 'Find the Invisible Cow', d: 'Nghe tiếng để tìm con bò tàng hình', u: 'https://findtheinvisiblecow.com/' },
+    { n: 'Elastic Man', d: 'Kéo giãn khuôn mặt như cao su', u: 'https://www.adultswim.com/etcetera/elastic-man/' },
+    { n: 'Vectorpark Head', d: 'Bấm khắp cái đầu kỳ lạ xem chuyện gì xảy ra', u: 'https://vectorpark.com/head/' },
+    { n: 'Habbo', d: 'Khách sạn pixel online, gặp gỡ trò chuyện', u: 'https://www.habbo.com/' },
+    { n: 'Windows93', d: 'Hệ điều hành giả kiểu 90s, đầy trò lạ', u: 'https://www.windows93.net/' },
+    { n: 'Patatap', d: 'Bấm phím ra âm thanh và hình khối', u: 'https://patatap.com/' },
+    { n: 'Typatone', d: 'Gõ chữ thành giai điệu', u: 'https://typatone.com/' },
+    { n: 'Falling Falling', d: 'Rơi mãi rơi mãi trong âm thanh và màu sắc', u: 'https://fallingfalling.com/' },
+    { n: 'Poolsuite FM', d: 'Radio mùa hè giao diện máy tính cổ', u: 'https://poolsuite.net/' },
+    { n: 'Windows 96', d: 'Một hệ điều hành “Windows” chạy trên web', u: 'https://windows96.net/' },
+    { n: 'Zoomquilt', d: 'Bức tranh phóng to vô tận', u: 'https://zoomquilt.org/' },
+    { n: 'Pug in a Rug', d: 'Bé pug cuộn trong tấm thảm', u: 'https://puginarug.com/' },
+    { n: 'Eel Slap', d: 'Vỗ mặt người khác bằng… con lươn', u: 'https://eelslap.com/' },
+    { n: 'Bouncy Balls', d: 'Bóng nảy theo tiếng ồn từ micro của bạn', u: 'https://bouncyballs.org/' },
+    { n: 'Jackson Pollock', d: 'Rê chuột vẩy sơn như Jackson Pollock', u: 'https://jacksonpollock.org/' },
+    { n: 'This Is Sand', d: 'Đổ cát nhiều màu thành tranh', u: 'https://thisissand.com/' },
+    { n: 'Emoji Kitchen', d: 'Trộn hai emoji thành một emoji mới', u: 'https://emojikitchen.dev/' },
+    { n: 'lofi.cafe', d: 'Nghe lofi chill trong quán cà phê ảo', u: 'https://www.lofi.cafe/' },
+    { n: "Cameron's World", d: 'Bức ảnh ghép Internet thời GeoCities', u: 'https://www.cameronsworld.net/' },
+    { n: 'heeeeeeeey', d: 'Một trang web chỉ để nói heeeeeeeey', u: 'https://heeeeeeeey.com/' },
+    { n: 'hooooooooo', d: 'Một trang web chỉ để nói hooooooooo', u: 'https://hooooooooo.com/' },
+    { n: 'Checkbox Race', d: 'Đua tích ô nhanh nhất có thể', u: 'https://checkboxrace.com/' },
+    { n: 'Space Jam (1996)', d: 'Trang web phim Space Jam năm 1996 vẫn còn nguyên', u: 'https://www.spacejam.com/1996/' },
+  ];
+  /* ============================================================= */
+
+  let seed = 23; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const L = (i, x, y, s, inner) => `<g transform="translate(${x} ${y}) scale(${s})"><a class="lk" data-i="${i}"><g>${inner}</g></a></g>`;
+  const HZ = 520; // đường chân trời
+  // cửa sổ kiểu Windows 95
+  const win = (w, h, title, body) => `<rect x="${-w / 2 + 6}" y="${-h + 6}" width="${w}" height="${h}" fill="#ff71ce" opacity=".7"/><rect x="${-w / 2}" y="${-h}" width="${w}" height="${h}" fill="#c0c0c0"/><path d="M${-w / 2} 0V${-h}H${w / 2}" stroke="#fff" stroke-width="2" fill="none"/><path d="M${-w / 2} 0H${w / 2}V${-h}" stroke="#404040" stroke-width="2" fill="none"/><rect x="${-w / 2 + 4}" y="${-h + 4}" width="${w - 8}" height="20" fill="url(#tbar)"/><text x="${-w / 2 + 10}" y="${-h + 19}" font-family="Tahoma,Verdana,sans-serif" font-weight="700" font-size="13" fill="#fff">${title}</text>${[0, 1, 2].map(k => `<rect x="${w / 2 - 22 - k * 19}" y="${-h + 7}" width="16" height="14" fill="#c0c0c0" stroke="#404040"/>`).join('')}<path d="M${w / 2 - 18} ${-h + 11}l8 7m0 -7l-8 7" stroke="#000" stroke-width="2"/><g transform="translate(${-w / 2 + 6} ${-h + 28})">${body}</g>`;
+
+  let svg = `<defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12002e"/><stop offset=".45" stop-color="#5a1a8a"/><stop offset=".8" stop-color="#ff5fb0"/><stop offset="1" stop-color="#ffb86b"/></linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffb96"/><stop offset=".5" stop-color="#ffb347"/><stop offset="1" stop-color="#ff2bd6"/></linearGradient>
+    <linearGradient id="grd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a0050"/><stop offset="1" stop-color="#0c0018"/></linearGradient>
+    <linearGradient id="tbar" x1="0" x2="1"><stop offset="0" stop-color="#000080"/><stop offset="1" stop-color="#1084d0"/></linearGradient>
+    <linearGradient id="marble" x1="0" x2="1"><stop offset="0" stop-color="#d9c8e8"/><stop offset=".45" stop-color="#fff"/><stop offset="1" stop-color="#bba6d6"/></linearGradient>
+    <linearGradient id="dol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#01cdfe"/><stop offset="1" stop-color="#b967ff"/></linearGradient>
+    <radialGradient id="sunGlow" cx=".5" cy=".5" r=".5"><stop offset=".5" stop-color="#ff71ce" stop-opacity=".55"/><stop offset="1" stop-color="#ff71ce" stop-opacity="0"/></radialGradient>
+    <mask id="sunMask"><rect x="560" y="160" width="480" height="${HZ - 160}" fill="#fff"/>${[[400, 5], [430, 8], [456, 11], [480, 14], [502, 17]].map(([y, h]) => `<rect x="560" y="${y}" width="480" height="${h}" fill="#000"/>`).join('')}</mask>
+    <pattern id="chk" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fff"/><rect width="8" height="8" fill="#000"/><rect x="8" y="8" width="8" height="8" fill="#000"/></pattern>
+    <clipPath id="crt"><rect x="-56" y="-118" width="112" height="84" rx="12"/></clipPath>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>`;
+  for (let k = 0; k < 90; k++) svg += `<circle cx="${(rnd() * 1600).toFixed(0)}" cy="${(rnd() * 300).toFixed(0)}" r="${(.6 + rnd() * 1.2).toFixed(1)}" fill="#fff" opacity="${(.3 + rnd() * .6).toFixed(2)}"/>`;
+  // mặt trời sọc
+  svg += `<circle cx="800" cy="380" r="300" fill="url(#sunGlow)"/><circle cx="800" cy="380" r="220" fill="url(#sun)" mask="url(#sunMask)"/>`;
+  // núi lưới hai bên chân trời
+  const mtn = pts => { let d = `M${pts[0][0]} ${HZ}`; pts.forEach(([x, y]) => d += `L${x} ${y}`); d += `L${pts[pts.length - 1][0]} ${HZ}Z`; return d; };
+  [[[0, 410], [90, 360], [180, 420], [280, 330], [380, 430], [470, 390], [580, HZ]], [[1020, HZ], [1120, 400], [1220, 440], [1330, 340], [1420, 410], [1510, 370], [1600, 420]]].forEach(pts => {
+    svg += `<path d="${mtn(pts)}" fill="#2a0a5a" stroke="#ff71ce" stroke-width="2"/>`;
+    for (let k = 1; k < 4; k++) svg += `<path d="M${pts[0][0]} ${HZ - k * 22}${pts.map(([x, y]) => `L${x} ${Math.max(y, HZ - k * 22) + (HZ - Math.max(y, HZ - k * 22)) * 0}`).join('')}" stroke="#ff71ce" stroke-opacity=".0" fill="none"/>`;
+    pts.forEach(([x, y]) => { svg += `<path d="M${x} ${y}L${x + (800 - x) * .08} ${HZ}" stroke="#ff71ce" stroke-opacity=".45"/>`; });
+  });
+  // sàn lưới neon (đường dọc; đường ngang chạy trong canvas)
+  svg += `<rect x="0" y="${HZ}" width="1600" height="${900 - HZ}" fill="url(#grd)"/><path d="M0 ${HZ}H1600" stroke="#ff71ce" stroke-width="3"/>`;
+  for (let k = -14; k <= 14; k++) svg += `<path d="M${800 + k * 30} ${HZ}L${800 + k * 210} 900" stroke="#ff2bd6" stroke-width="2" stroke-opacity=".7"/>`;
+  svg += `<path d="M560 ${HZ + 2}H1040" stroke="#fffb96" stroke-width="2" opacity=".5"/><ellipse cx="800" cy="${HZ + 30}" rx="230" ry="18" fill="#ffb347" opacity=".18"/>`;
+  // cây cọ (trang trí)
+  const palm = (x, y, h, flip) => { const f = flip ? -1 : 1; let s = `<path d="M${x} ${y}Q${x + f * 30} ${y - h * .5} ${x + f * 10} ${y - h}" stroke="#14002a" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M${x} ${y}Q${x + f * 30} ${y - h * .5} ${x + f * 10} ${y - h}" stroke="#ff71ce" stroke-width="2" fill="none" stroke-dasharray="3 14" opacity=".7"/>`; const tx = x + f * 10, ty = y - h; [-160, -120, -70, -30, 10, 50].forEach(a => { const r = a * Math.PI / 180, ex = tx + Math.cos(r) * 120, ey = ty + Math.sin(r) * 60 + 40; s += `<path d="M${tx} ${ty}Q${(tx + ex) / 2 + Math.cos(r - 1) * 20} ${ty + Math.sin(r) * 60 - 26} ${ex.toFixed(0)} ${ey.toFixed(0)}" stroke="#14002a" stroke-width="12" fill="none" stroke-linecap="round"/>`; }); return s; };
+  svg += palm(230, 640, 340, false) + palm(1380, 640, 330, true);
+  // cột Hy Lạp hai bên
+  const column = x => `<g><rect x="${x - 38}" y="270" width="76" height="630" fill="url(#marble)"/>${[-24, -8, 8, 24].map(d => `<path d="M${x + d} 300V880" stroke="#bba6d6" stroke-width="3"/>`).join('')}<rect x="${x - 54}" y="248" width="108" height="24" fill="url(#marble)"/><circle cx="${x - 46}" cy="262" r="14" fill="#efe4f6" stroke="#bba6d6" stroke-width="2"/><circle cx="${x + 46}" cy="262" r="14" fill="#efe4f6" stroke="#bba6d6" stroke-width="2"/><rect x="${x - 50}" y="232" width="100" height="16" fill="#fff"/><rect x="${x - 54}" y="870" width="108" height="30" fill="#bba6d6"/></g>`;
+  svg += column(40) + column(1560);
+
+  /* ---------- ĐỒ VẬT CÓ LINK ---------- */
+  // 7 — tượng bán thân cẩm thạch đeo kính
+  svg += L(7, 40, 232, 1, `<path d="M-60 0Q-60 -46 -24 -54H24Q60 -46 60 0Z" fill="url(#marble)"/><rect x="-14" y="-74" width="28" height="24" fill="#e8dcf2"/><ellipse cy="-110" rx="34" ry="42" fill="url(#marble)"/>${[[-30, -130], [-18, -146], [0, -152], [18, -146], [30, -130], [-34, -110], [34, -110]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="11" fill="#efe4f6" stroke="#bba6d6"/>`).join('')}<rect x="-30" y="-118" width="26" height="12" fill="#000"/><rect x="4" y="-118" width="26" height="12" fill="#000"/><path d="M-4 -114H4" stroke="#000" stroke-width="3"/><rect x="-26" y="-116" width="8" height="3" fill="#01cdfe"/><rect x="8" y="-116" width="8" height="3" fill="#01cdfe"/><path d="M-8 -84Q0 -80 8 -84" stroke="#bba6d6" stroke-width="2" fill="none"/>`);
+  // 25 — cú mèo trên đỉnh cột phải
+  svg += L(25, 1560, 232, 1, `<ellipse cy="-46" rx="38" ry="46" fill="#b967ff"/><ellipse cy="-36" rx="24" ry="30" fill="#e3c6ff"/><path d="M-30 -80-36 -104-14 -88ZM30 -80 36 -104 14 -88Z" fill="#b967ff"/><circle cx="-14" cy="-66" r="13" fill="#fffb96"/><circle cx="14" cy="-66" r="13" fill="#fffb96"/><circle class="blink" cx="-14" cy="-66" r="6" fill="#000"/><circle class="blink" cx="14" cy="-66" r="6" fill="#000"/><path d="M-5 -54 0 -46 5 -54Z" fill="#ffb347"/><text x="-96" y="-84" font-family="VT323" font-size="26" fill="#fffb96" transform="rotate(-10)" text-anchor="end">hoooo</text>`);
+  // 4 — đĩa chấm tròn (koala)
+  svg += L(4, 200, 400, 1, `<g class="bob c">${(() => { let s = ''; const cols = ['#ff71ce', '#01cdfe', '#05ffa1', '#b967ff', '#fffb96']; [[-34, -34], [34, -34], [-34, 34], [34, 34]].forEach(([qx, qy], q) => { if (q === 3){ [[-17, -17], [17, -17], [-17, 17], [17, 17]].forEach(([a, b], k) => s += `<circle cx="${qx + a}" cy="${qy + b - 70}" r="16" fill="${cols[(q + k) % 5]}"/>`); } else s += `<circle cx="${qx}" cy="${qy - 70}" r="33" fill="${cols[q]}"/>`; }); return s; })()}</g>`);
+  // 9 — cửa sổ windows93
+  svg += L(9, 330, 230, 1, `<g class="bob">${win(250, 160, 'windows93.exe', `<rect width="238" height="126" fill="#008080"/>${[[16, 12], [16, 62], [76, 12], [76, 62]].map(([x, y], k) => `<rect x="${x}" y="${y}" width="28" height="24" fill="${['#fffb96', '#ff71ce', '#fff', '#05ffa1'][k]}" stroke="#000"/><rect x="${x - 6}" y="${y + 28}" width="40" height="8" fill="#000080"/>`).join('')}<circle cx="180" cy="60" r="30" fill="#ff71ce"/><path d="M168 52h6m12 0h6M166 70q14 12 28 0" stroke="#000" stroke-width="3" fill="none"/>`)}</g>`);
+  // 2 — con trỏ chuột khổng lồ
+  svg += L(2, 600, 330, 1, `<g class="bob b" transform="rotate(-12)"><path d="M0 -120V-6L28 -32 46 8 64 0 46 -40H84Z" fill="#fff" stroke="#000" stroke-width="5" stroke-linejoin="round"/></g>`);
+  // 10 — hình khối nhảy múa (patatap)
+  svg += L(10, 830, 262, 1, `<circle class="bob" cx="-50" cy="-30" r="24" fill="#ffb347"/><path class="bob b" d="M0 -78 28 -26H-28Z" fill="#01cdfe"/><rect class="bob c spin" x="34" y="-60" width="38" height="38" fill="#ff71ce"/><path d="M-80 0q20 -20 40 0t40 0 40 0 40 0" stroke="#05ffa1" stroke-width="5" fill="none"/>`);
+  // 24 — bong bóng thoại heeey
+  svg += L(24, 1010, 150, 1, `<g class="bob c"><path d="M-110 -90H110Q124 -90 124 -76V-28Q124 -14 110 -14H-40L-70 14-62 -14H-110Q-124 -14 -124 -28V-76Q-124 -90 -110 -90Z" fill="#fff" stroke="#000" stroke-width="4"/><text x="0" y="-38" font-family="VT323" font-size="40" fill="#ff2bd6" text-anchor="middle" textLength="210" lengthAdjust="spacingAndGlyphs">heeeeeeeey</text></g>`);
+  // 14 — cửa sổ windows 96
+  svg += L(14, 1280, 220, 1, `<g class="bob b">${win(240, 150, 'win96 — boot', `<rect width="228" height="116" fill="#000"/><text x="10" y="22" font-family="VT323" font-size="20" fill="#05ffa1" textLength="150" lengthAdjust="spacingAndGlyphs">C:\\&gt; welcome.exe</text><text x="10" y="44" font-family="VT323" font-size="20" fill="#05ffa1" textLength="190" lengthAdjust="spacingAndGlyphs">loading aesthetic...</text><rect x="10" y="60" width="208" height="16" fill="none" stroke="#05ffa1"/><rect x="12" y="62" width="130" height="12" fill="#05ffa1"/><rect class="blink" x="10" y="90" width="12" height="18" fill="#05ffa1"/>`)}</g>`);
+  // 26 — cửa sổ đua tích ô
+  svg += L(26, 1150, 400, 1, `<g class="bob c">${win(170, 120, 'race.exe', `<rect width="158" height="86" fill="#fff"/>${[0, 1, 2, 3, 4, 5].map(k => `<rect x="${10 + (k % 3) * 50}" y="${12 + Math.floor(k / 3) * 38}" width="22" height="22" fill="#fff" stroke="#404040" stroke-width="2"/>${k < 4 ? `<path d="M${14 + (k % 3) * 50} ${24 + Math.floor(k / 3) * 38}l6 6 10 -14" stroke="#000" stroke-width="3" fill="none"/>` : ''}`).join('')}`)}</g>`);
+  // 23 — đĩa mềm
+  svg += L(23, 1440, 420, 1, `<g class="bob" transform="rotate(10)"><rect x="-50" y="-100" width="100" height="100" rx="4" fill="#01cdfe" stroke="#00366b" stroke-width="3"/><rect x="-26" y="-100" width="52" height="34" fill="#c0c0c0"/><rect x="6" y="-94" width="12" height="22" fill="#00366b"/><rect x="-36" y="-52" width="72" height="46" fill="#fff"/><path d="M-30 -40H30M-30 -28H30M-30 -16H14" stroke="#ff71ce" stroke-width="3"/></g>`);
+  // 17 — cá heo nhảy
+  svg += L(17, 520, 480, 1, `<g class="jump"><path d="M-80 30C-70 -20 -10 -56 50 -40C70 -36 86 -26 96 -16L80 -12C60 0 30 6 0 10C-30 16 -60 30 -80 30Z" fill="url(#dol)"/><path d="M96 -16 116 -12 96 -6Z" fill="#b967ff"/><path d="M10 -50 -6 -78 30 -46Z" fill="#01cdfe"/><path d="M-80 30-108 14-96 40-118 52-82 42Z" fill="#b967ff"/><circle cx="70" cy="-26" r="3.5" fill="#12002e"/><path d="M-20 0Q0 -2 20 -14" stroke="#fff" stroke-width="2" fill="none" opacity=".6"/></g>`);
+
+  // hàng sau trên sàn lưới
+  // 19 — giá vẽ vẩy sơn
+  svg += L(19, 190, 720, 1, `<path d="M-50 0-20 -170M50 0 20 -170M0 -170V10" stroke="#8a5a3a" stroke-width="6"/><rect x="-62" y="-170" width="124" height="104" fill="#fff" stroke="#8a5a3a" stroke-width="4"/>${Array.from({ length: 22 }, () => `<circle cx="${(-54 + rnd() * 108).toFixed(0)}" cy="${(-160 + rnd() * 86).toFixed(0)}" r="${(2 + rnd() * 6).toFixed(1)}" fill="${['#ff2bd6', '#01cdfe', '#000', '#ffb347', '#05ffa1'][Math.floor(rnd() * 5)]}"/>`).join('')}<path d="M-50 -100Q-10 -160 20 -110T56 -140" stroke="#ff2bd6" stroke-width="4" fill="none"/><path d="M-56 -140Q0 -90 50 -120" stroke="#000" stroke-width="2" fill="none"/>`);
+  // 18 — đống bóng nảy
+  svg += L(18, 650, 660, 1, `${[[-40, 0, 26, '#ff71ce', ''], [0, -6, 30, '#01cdfe', ''], [40, 0, 24, '#fffb96', ''], [-20, -44, 22, '#05ffa1', ''], [20, -46, 22, '#b967ff', ''], [60, -80, 16, '#ffb347', 'bounce']].map(([x, y, r, c, cl]) => `<g class="${cl}"><circle cx="${x}" cy="${y - r}" r="${r}" fill="${c}"/><circle cx="${x - r * .35}" cy="${y - r * 1.4}" r="${r * .3}" fill="#fff" opacity=".6"/></g>`).join('')}`);
+  // 5 — con bò tàng hình mờ mờ
+  svg += L(5, 960, 580, 1, `<g class="ghost"><path d="M-60 -20Q-62 -60 -30 -62H40Q64 -60 66 -36L86 -40Q98 -30 90 -14L66 -16Q64 -6 56 -4V20H44V-4H-30V20H-42V-6Q-60 -8 -60 -20Z" fill="#fff"/><path d="M-20 -58Q-6 -40 -26 -30Q-40 -40 -20 -58ZM20 -40Q40 -30 30 -14Q14 -20 20 -40Z" fill="#000"/><circle cx="80" cy="-30" r="2.5" fill="#000"/><path d="M68 -44 62 -56M78 -44 82 -56" stroke="#fff" stroke-width="4"/></g><text x="0" y="40" font-family="VT323" font-size="20" fill="#fff" text-anchor="middle" opacity=".7">?? moo ??</text>`);
+  // 8 — khách sạn pixel isometric
+  svg += L(8, 1180, 680, 1, `<path d="M0 0-90 -46V-150L0 -104Z" fill="#b967ff"/><path d="M0 0 90 -46V-150L0 -104Z" fill="#7a3cc0"/><path d="M0 -104-90 -150 0 -196 90 -150Z" fill="#e3c6ff"/>${[0, 1, 2].map(r => [0, 1, 2].map(c => `<path d="M${-78 + c * 26} ${-120 + r * 30 + c * 13}l16 8v14l-16 -8Z" fill="${(r + c) % 2 ? '#fffb96' : '#01cdfe'}"/><path d="M${14 + c * 26} ${-104 + r * 30 - c * 13}l16 -8v14l-16 8Z" fill="${(r + c) % 2 ? '#01cdfe' : '#fffb96'}" opacity=".85"/>`).join('')).join('')}<path d="M-30 -186 0 -201 30 -186 0 -171Z" fill="#ff71ce"/><path d="M0 -201V-230" stroke="#fff" stroke-width="3"/><path d="M0 -230h22l-6 7 6 7H0" fill="#ff2bd6"/>`);
+  // 21 — nồi trộn emoji
+  svg += L(21, 1400, 720, 1, `<ellipse cy="-4" rx="70" ry="12" fill="#000" opacity=".3"/><path d="M-60 -80H60L52 -10Q50 0 40 0H-40Q-50 0 -52 -10Z" fill="#c0c0c0" stroke="#404040" stroke-width="3"/><rect x="-74" y="-90" width="148" height="14" rx="6" fill="#e0e0e0" stroke="#404040" stroke-width="3"/><path d="M-74 -70H-90M74 -70H90" stroke="#404040" stroke-width="8" stroke-linecap="round"/><g class="bob"><circle cx="-24" cy="-112" r="24" fill="#ffd23f" stroke="#000" stroke-width="2"/><circle cx="-32" cy="-116" r="3" fill="#000"/><circle cx="-16" cy="-116" r="3" fill="#000"/><path d="M-34 -104q10 8 20 0" stroke="#000" stroke-width="2.5" fill="none"/></g><g class="bob b"><circle cx="28" cy="-118" r="22" fill="#ff71ce" stroke="#000" stroke-width="2"/><path d="M18 -124l6 4m8 0 6 -4" stroke="#000" stroke-width="2.5"/><path d="M20 -108h16" stroke="#000" stroke-width="2.5"/></g>`);
+  // 12 — cầu thang rơi mãi
+  svg += L(12, 380, 790, 1, `${[0, 1, 2, 3, 4, 5].map(k => { const x = -90 + k * 30, y = -k * 22; return `<path d="M${x} ${y}l30 -15 30 15 -30 15Z" fill="${['#ff71ce', '#b967ff', '#01cdfe', '#05ffa1', '#fffb96', '#ffb347'][k]}"/><path d="M${x} ${y}v22l30 15v-22Z" fill="#5a1a8a"/><path d="M${x + 60} ${y}v22l-30 15v-22Z" fill="#3a0a6a"/>`; }).join('')}<path d="M90 -110v-50" stroke="#fff" stroke-width="2" stroke-dasharray="4 6" class="bob"/>`);
+  // 1 — mèo nảy trên bóng
+  svg += L(1, 810, 738, 1, `<ellipse rx="44" ry="8" fill="#000" opacity=".35"/><g class="bounce"><circle cy="-40" r="40" fill="#ff71ce"/><path d="M-40 -40H40M0 -80V0" stroke="#fff" stroke-width="3" opacity=".5"/><g transform="translate(0 -96)"><ellipse rx="28" ry="20" fill="#ffb347"/><path d="M-24 -10-26 -34-8 -18ZM24 -10 26 -34 8 -18Z" fill="#ffb347"/><circle cx="-10" cy="-2" r="3.5" fill="#000"/><circle cx="10" cy="-2" r="3.5" fill="#000"/><path d="M-4 6q4 4 8 0" stroke="#000" stroke-width="2" fill="none"/><path d="M-14 6h-16M14 6h16" stroke="#000" stroke-width="1.5"/></g></g>`);
+
+  // hàng trước
+  // 0 — mèo trong thùng các-tông
+  svg += L(0, 180, 890, 1, `<path d="M-64 -70H64V0H-64Z" fill="#c8945a"/><path d="M-64 -70-84 -96H-10L0 -70ZM64 -70 84 -96H10L0 -70Z" fill="#a8743a"/><g transform="translate(0 -84)"><ellipse rx="34" ry="26" fill="#3a3a3a"/><path d="M-30 -10-34 -42-10 -24ZM30 -10 34 -42 10 -24Z" fill="#3a3a3a"/><path d="M-27 -16-29 -34-14 -22ZM27 -16 29 -34 14 -22Z" fill="#ff71ce"/><ellipse cx="-12" cy="-2" rx="6" ry="8" fill="#05ffa1"/><ellipse cx="12" cy="-2" rx="6" ry="8" fill="#05ffa1"/><ellipse cx="-12" cy="-2" rx="2" ry="6" fill="#000"/><ellipse cx="12" cy="-2" rx="2" ry="6" fill="#000"/></g><path d="M-64 -70H64" stroke="#7a5426" stroke-width="3"/><text x="0" y="-26" font-family="VT323" font-size="22" fill="#7a5426" text-anchor="middle">FRAGILE</text>`);
+  // 3 — cuộn giấy vệ sinh
+  svg += L(3, 330, 890, 1, `<path d="M-30 -110H30V-6Q30 0 24 0H-24Q-30 0 -30 -6Z" fill="#fff"/><ellipse cy="-110" rx="30" ry="10" fill="#f0f0f0" stroke="#ddd"/><ellipse cy="-110" rx="10" ry="4" fill="#a8743a"/><path d="M30 -80Q60 -60 50 -10Q46 6 60 10" stroke="#fff" stroke-width="18" fill="none"/><path d="M30 -60 46 -56M44 -30 54 -28" stroke="#ddd" stroke-width="2" stroke-dasharray="3 3"/>`);
+  // 11 — máy đánh chữ
+  svg += L(11, 495, 890, 1, `<rect x="-60" y="-130" width="120" height="60" fill="#fff" stroke="#ddd"/><text x="-50" y="-108" font-family="VT323" font-size="18" fill="#000">ｖａｐｏｒ</text><text x="-50" y="-90" font-family="VT323" font-size="18" fill="#ff2bd6">la la la<tspan class="blink">_</tspan></text><rect x="-84" y="-76" width="168" height="20" rx="8" fill="#5a1a8a"/><path d="M-90 -66h-10M90 -66h10" stroke="#c0c0c0" stroke-width="6"/><path d="M-80 -56H80L90 0H-90Z" fill="#b967ff"/>${[0, 1, 2].map(r => Array.from({ length: 8 - r }, (_, k) => `<circle cx="${-66 + r * 9 + k * 19}" cy="${-42 + r * 14}" r="6" fill="${(k + r) % 3 ? '#fff' : '#fffb96'}" stroke="#3a0a6a"/>`).join('')).join('')}`);
+  // 15 — TV CRT chiếu xoáy vô tận
+  svg += L(15, 690, 880, 1, `<path d="M-30 -150-60 -190M30 -150 60 -196" stroke="#c0c0c0" stroke-width="4"/><rect x="-80" y="-150" width="160" height="140" rx="16" fill="#e0d6c6" stroke="#8a7a6a" stroke-width="3"/><g clip-path="url(#crt)"><rect x="-56" y="-118" width="112" height="84" fill="#12002e"/>${['', 'b', 'c'].map((c, k) => `<g transform="translate(0 -76)"><rect class="zoomq ${c}" x="-40" y="-30" width="80" height="60" fill="none" stroke="${['#ff71ce', '#01cdfe', '#fffb96'][k]}" stroke-width="5"/></g>`).join('')}</g><rect x="-56" y="-118" width="112" height="84" rx="12" fill="none" stroke="#3a3a3a" stroke-width="4"/><circle cx="-50" cy="-22" r="5" fill="#8a7a6a"/><circle cx="-34" cy="-22" r="5" fill="#8a7a6a"/><rect x="40" y="-26" width="24" height="8" fill="#05ffa1"/><rect x="-60" y="-10" width="20" height="10" fill="#8a7a6a"/><rect x="40" y="-10" width="20" height="10" fill="#8a7a6a"/>`);
+  // 27 — quả bóng rổ giữa các ngôi sao
+  svg += L(27, 820, 890, 1, `<ellipse rx="40" ry="7" fill="#000" opacity=".35"/><g class="bounce" style="animation-duration:.7s"><circle cy="-40" r="36" fill="#ff8c2a"/><path d="M-36 -40H36M0 -76V-4M-26 -66Q0 -40 -26 -14M26 -66Q0 -40 26 -14" stroke="#3a1a08" stroke-width="3" fill="none"/></g>${[[-56, -96], [56, -86], [-40, -130]].map(([x, y], k) => `<path class="blink" style="animation-delay:-${k * .3}s" d="M${x} ${y - 10}l3 7h8l-6 5 2 8-7 -5-7 5 2 -8-6 -5h8Z" fill="#fffb96"/>`).join('')}`);
+  // 13 — máy cát-xét boombox
+  svg += L(13, 970, 880, 1, `<path d="M-60 -150Q-60 -176 -30 -176H30Q60 -176 60 -150" stroke="#c0c0c0" stroke-width="8" fill="none"/><rect x="-100" y="-150" width="200" height="140" rx="12" fill="#ff71ce" stroke="#5a1a8a" stroke-width="4"/>${[-56, 56].map(x => `<circle cx="${x}" cy="-76" r="38" fill="#3a0a6a"/><circle class="thump" cx="${x}" cy="-76" r="24" fill="#12002e" stroke="#01cdfe" stroke-width="3"/><circle cx="${x}" cy="-76" r="6" fill="#01cdfe"/>`).join('')}<rect x="-26" y="-130" width="52" height="34" rx="3" fill="#fff"/><circle class="spin f" cx="-10" cy="-113" r="7" fill="none" stroke="#3a0a6a" stroke-width="3" stroke-dasharray="4 3"/><circle class="spin f" cx="10" cy="-113" r="7" fill="none" stroke="#3a0a6a" stroke-width="3" stroke-dasharray="4 3"/>${[0, 1, 2, 3].map(k => `<rect x="${-22 + k * 12}" y="-88" width="9" height="10" fill="#c0c0c0"/>`).join('')}<rect x="-90" y="-140" width="40" height="8" fill="#fffb96"/>`);
+  // 22 — tách cà phê bốc khói
+  svg += L(22, 1100, 890, 1, `<ellipse cy="-4" rx="54" ry="12" fill="#fff" stroke="#bba6d6" stroke-width="2"/><path d="M-36 -80H36L30 -12Q28 -4 20 -4H-20Q-28 -4 -30 -12Z" fill="#fff" stroke="#bba6d6" stroke-width="2"/><path d="M36 -66Q60 -66 56 -44Q52 -26 32 -28" stroke="#fff" stroke-width="8" fill="none"/><ellipse cy="-80" rx="36" ry="8" fill="#6a3a1a"/><path d="M-30 -50H30" stroke="#ff71ce" stroke-width="6"/>${[-14, 0, 14].map((x, k) => `<path class="steam" style="animation-delay:-${k * .8}s" d="M${x} -92q-8 -10 0 -20t0 -20" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/>`).join('')}`);
+  // 20 — đồng hồ cát nhiều màu
+  svg += L(20, 1200, 890, 1, `<rect x="-38" y="-14" width="76" height="14" rx="3" fill="#8a5a3a"/><rect x="-38" y="-170" width="76" height="14" rx="3" fill="#8a5a3a"/><path d="M-28 -156Q-28 -100 -4 -86Q-28 -70 -28 -14H28Q28 -70 4 -86Q28 -100 28 -156Z" fill="#fff" opacity=".35" stroke="#fff" stroke-width="2"/><path d="M-26 -18Q-24 -40 0 -46Q24 -40 26 -18Z" fill="#01cdfe"/><path d="M-22 -36Q0 -60 22 -36Q20 -30 0 -34Q-20 -30 -22 -36Z" fill="#ff71ce"/><path d="M-24 -130Q-24 -110 -6 -96H6Q24 -110 24 -130Z" fill="#fffb96"/><path d="M0 -96V-46" stroke="#fffb96" stroke-width="2" stroke-dasharray="3 3" class="steam" style="animation-name:none"/>`);
+  // 6 — mặt cao su bị kéo giãn
+  svg += L(6, 1300, 890, 1, `<path d="M-36 -10Q-50 -60 -30 -96Q0 -120 30 -96Q40 -84 44 -72Q90 -96 112 -84Q96 -64 46 -50Q44 -24 30 -10Q0 6 -36 -10Z" fill="#ffcf9e" stroke="#c8945a" stroke-width="3"/><circle cx="-14" cy="-70" r="6" fill="#000"/><circle cx="16" cy="-70" r="6" fill="#000"/><path d="M-16 -36Q2 -24 20 -38" stroke="#000" stroke-width="3" fill="none"/><path d="M-36 -100Q-10 -130 30 -104" stroke="#3a1a08" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="114" cy="-84" r="9" fill="#ff71ce" stroke="#000" stroke-width="2"/>`);
+  // 16 — bé pug cuộn thảm
+  svg += L(16, 1415, 884, 1, `<ellipse cy="-14" rx="76" ry="22" fill="#b967ff"/><ellipse cy="-14" rx="62" ry="16" fill="none" stroke="#fffb96" stroke-width="3" stroke-dasharray="8 6"/><path d="M-50 -24Q-20 -10 30 -24L40 -40H-40Z" fill="#c0a080"/><g transform="translate(40 -46)"><ellipse rx="26" ry="22" fill="#d8b890"/><ellipse cy="6" rx="16" ry="12" fill="#2a2018"/><circle cx="-10" cy="-6" r="4" fill="#000"/><circle cx="10" cy="-6" r="4" fill="#000"/><path d="M-24 -14-30 4-16 -6ZM24 -14 30 4 16 -6Z" fill="#2a2018"/></g><path d="M-60 -30Q-30 -56 20 -50" stroke="#ff71ce" stroke-width="12" fill="none" stroke-linecap="round"/>`);
+
+  document.getElementById('scene').innerHTML = svg;
+
+  // hiệu ứng: đường lưới ngang chạy về phía người xem + vạch quét băng VHS
+  const scan = document.createElement('canvas'); scan.width = 2; scan.height = 4; const sg = scan.getContext('2d'); sg.fillStyle = 'rgba(0,0,0,.18)'; sg.fillRect(0, 0, 2, 1); let pat = null;
+  let band = 0;
+  window.ROOM = {
+    title: 'Aesthetic Plaza', music: 'ea_UOPzuyZU', links: LINKS,
+    fx(g, t, dt, W, H, S){
+      const N = 12;
+      const [lx] = S(0, 0), [rx] = S(1600, 0);
+      g.lineWidth = 2;
+      for (let i = 0; i < N; i++){
+        const p = ((i + t * .6) % N) / N, d = Math.pow(p, 2.2), sy = HZ + (900 - HZ) * d;
+        const [, y] = S(0, sy);
+        g.strokeStyle = `rgba(255,43,214,${.25 + d * .6})`; g.beginPath(); g.moveTo(lx, y); g.lineTo(rx, y); g.stroke();
+      }
+      if (!pat) pat = g.createPattern(scan, 'repeat');
+      g.fillStyle = pat; g.fillRect(0, 0, W, H);
+      band = (band + dt * .07) % 1.3;
+      const by = (band - .15) * H;
+      const gr = g.createLinearGradient(0, by, 0, by + 40); gr.addColorStop(0, 'rgba(255,255,255,0)'); gr.addColorStop(.5, 'rgba(255,255,255,.07)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = gr; g.fillRect(0, by, W, 40);
+    }
+  };
+})();
+</script>
+<script src="../room.js"></script>
+</body>
+</html>

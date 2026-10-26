@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sky Garden · Solarpunk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&amp;family=Nunito:wght@600;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../room.css">
+<style>
+  :root{--bg:#cdeeff;--ink:#183a2c;--accent:#2f8f5b;--accent-soft:rgba(47,143,91,.35);--hud-bg:rgba(255,252,240,.88);--hud-ink:#1f4a36;--hud-ink-on:#fffdf2;
+    --hud-font:800 14px 'Nunito',system-ui,sans-serif;--btn-r:999px;--tip-bg:#fffdf2;--tip-ink:#183a2c;--tip-font:'Fraunces',Georgia,serif;--tip-size:19px;--tip-r:16px 16px 16px 4px;
+    --box-bg:linear-gradient(180deg,#fffdf2,#eef8e6);--box-ink:#183a2c;--box-r:22px;--title-font:800 26px 'Fraunces',Georgia,serif;--hint-font:800 15px 'Nunito',system-ui,sans-serif;--hint-ink:#1f4a36;--enter:#fff7d6;
+    --hover-filter:drop-shadow(0 0 10px #fff7b0) drop-shadow(0 4px 10px rgba(47,143,91,.45)) brightness(1.08)}
+  .hint{text-shadow:0 0 8px #fffdf2,0 0 2px #fffdf2}
+  .tip{box-shadow:0 8px 24px rgba(24,58,44,.25)}
+  .list-bg{background:rgba(24,58,44,.45)}
+  .tv-bar button{background:rgba(47,143,91,.12)}
+  .room-title{font:800 clamp(18px,2.4vw,28px) 'Fraunces',Georgia,serif;color:#1f4a36;letter-spacing:.04em;text-shadow:0 2px 0 #fffdf2,0 0 18px #fff7b0}
+  .room-title span{display:block;font:800 12px 'Nunito',sans-serif;letter-spacing:.42em;color:#c9862a;text-align:center;text-transform:uppercase;text-shadow:0 0 6px #fffdf2}
+  .spin{transform-box:fill-box;transform-origin:center;animation:spin 5s linear infinite}.spin.s{animation-duration:9s}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .sway{transform-box:fill-box;transform-origin:50% 0;animation:sway 5s ease-in-out infinite alternate}.sway.b{animation-delay:-2.5s;animation-duration:6.4s}
+  @keyframes sway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+  .leaf{transform-box:fill-box;transform-origin:50% 100%;animation:leaf 4s ease-in-out infinite alternate}.leaf.b{animation-delay:-2s}
+  @keyframes leaf{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+  .flap{transform-box:fill-box;transform-origin:50% 50%;animation:flap .35s ease-in-out infinite alternate}
+  @keyframes flap{to{transform:scaleX(.25)}}
+  .flyA{animation:flyA 16s ease-in-out infinite}
+  @keyframes flyA{0%,100%{transform:translate(0,0)}25%{transform:translate(70px,-40px)}50%{transform:translate(130px,10px)}75%{transform:translate(50px,30px)}}
+  .ripple{transform-box:fill-box;transform-origin:center;animation:ripple 3s ease-out infinite}.ripple.b{animation-delay:-1s}.ripple.c{animation-delay:-2s}
+  @keyframes ripple{from{transform:scale(.2);opacity:.9}to{transform:scale(1);opacity:0}}
+  .drip{animation:drip 1.2s linear infinite}.drip.b{animation-delay:-.4s}.drip.c{animation-delay:-.8s}
+  @keyframes drip{from{transform:translateY(0);opacity:1}to{transform:translateY(40px);opacity:0}}
+  .jet{animation:jet 1.6s ease-in-out infinite alternate}
+  @keyframes jet{to{transform:scaleY(.85)}}
+  .note{animation:note 3s ease-out infinite}.note.b{animation-delay:-1.5s}
+  @keyframes note{from{transform:translate(0,0);opacity:0}20%{opacity:1}to{transform:translate(26px,-40px);opacity:0}}
+  .bee{animation:bee 4s ease-in-out infinite}.bee.b{animation-delay:-1.3s;animation-duration:5s}.bee.c{animation-delay:-2.6s;animation-duration:3.4s}
+  @keyframes bee{0%,100%{transform:translate(0,0)}33%{transform:translate(-26px,-18px)}66%{transform:translate(20px,-30px)}}
+  .tick{transform-box:fill-box;transform-origin:50% 100%;animation:tick 2.2s ease-in-out infinite alternate}
+  @keyframes tick{from{transform:rotate(-14deg)}to{transform:rotate(18deg)}}
+  .blink{animation:blink 1.4s steps(1) infinite}
+  @keyframes blink{50%{opacity:.2}}
+</style>
+</head>
+<body>
+<div class="enter"></div>
+<div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Nhà kính trên cao kiểu solarpunk, nhiều cây xanh, nhìn ra thành phố xanh có tua-bin gió"></svg></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="room-title" aria-hidden="true">Sky Garden<span>solarpunk greenhouse</span></div>
+<nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> DANH SÁCH</span></button></nav>
+<button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
+<div class="hint" id="hint"></div>
+<div class="tip" id="tip" aria-hidden="true"></div>
+<div class="list" id="list" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="list-bg" data-close></div><div class="list-box" id="listBox"><div class="list-head"><h2 id="listTitle">Sky Garden</h2><p id="listCount"></p></div><ol></ol><button class="list-x" data-close aria-label="Đóng">✕</button></div></div>
+<div class="tv" id="tv"><div class="tv-bar"><span class="tv-t">♪ garden piano</span><button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt nhạc">off</button><button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Ẩn video">–</button></div><div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div></div>
+<script>
+(() => {
+  /* ======= LINK TRONG PHÒNG (thứ tự = data-i của đồ vật) ======= */
+  const LINKS = [
+    { n: 'Sandspiel', d: 'Hộp cát: nước, lửa, cây, cát tự tương tác', u: 'https://sandspiel.club/' },
+    { n: 'WebGL Water', d: 'Khuấy mặt nước 3D bằng chuột', u: 'https://madebyevan.com/webgl-water/' },
+    { n: 'Orb.Farm', d: 'Nuôi một hệ sinh thái nhỏ trong quả cầu kính', u: 'https://orb.farm/' },
+    { n: 'Townscaper', d: 'Bấm để xây thị trấn nhỏ xinh trên mặt biển', u: 'https://oskarstalberg.com/Townscaper/' },
+    { n: 'Hidden Folks', d: 'Tìm người tí hon trốn trong tranh vẽ tay', u: 'https://hiddenfolks.com/' },
+    { n: 'Supercook', d: 'Có gì trong bếp thì gợi ý món nấu được', u: 'https://supercook.com/' },
+    { n: 'Planet', d: 'Tự tạo một hành tinh nhỏ có biển, núi, rừng', u: 'https://www.oskarstalberg.com/game/planet/planet.html' },
+    { n: 'EZ-Tree', d: 'Tạo cây 3D theo ý mình', u: 'https://www.eztree.dev/' },
+    { n: 'Explore Live Cams', d: 'Camera trực tiếp ngắm thú hoang dã khắp thế giới', u: 'https://explore.org/livecams' },
+    { n: 'iNaturalist', d: 'Chụp cây, con gì cũng được nhận diện giúp', u: 'https://www.inaturalist.org/' },
+    { n: 'xeno-canto', d: 'Thư viện tiếng chim hót khắp thế giới', u: 'https://xeno-canto.org/' },
+    { n: 'Noisli', d: 'Trộn tiếng mưa, gió, lửa để tập trung', u: 'https://www.noisli.com/' },
+    { n: 'Google Earth', d: 'Bay vòng quanh Trái Đất 3D', u: 'https://earth.google.com/web/' },
+    { n: 'Electricity Maps', d: 'Điện ở mỗi nước đang sạch hay bẩn ngay lúc này', u: 'https://app.electricitymaps.com/' },
+    { n: 'En-ROADS', d: 'Thử làm chính sách để cứu khí hậu', u: 'https://en-roads.climateinteractive.org/' },
+    { n: 'Global Forest Watch', d: 'Bản đồ rừng thế giới đang mất đi', u: 'https://www.globalforestwatch.org/map/' },
+    { n: 'WindowSwap', d: 'Nhìn qua cửa sổ nhà ai đó ở một nơi khác', u: 'https://www.window-swap.com/' },
+    { n: 'OneZoom', d: 'Cây sự sống: phóng to tìm mọi loài', u: 'https://www.onezoom.org/' },
+    { n: 'Earth.fm', d: 'Âm thanh thiên nhiên thu từ khắp nơi', u: 'https://earth.fm/' },
+    { n: 'Windy', d: 'Bản đồ gió, mưa, bão chuyển động', u: 'https://www.windy.com/' },
+    { n: 'Our World in Data', d: 'Thế giới qua những biểu đồ dễ hiểu', u: 'https://ourworldindata.org/' },
+    { n: 'A Soft Murmur', d: 'Tiếng mưa rì rào giúp dễ ngủ', u: 'https://asoftmurmur.com/' },
+    { n: 'The Evolution of Trust', d: 'Trò chơi nhỏ về lòng tin và hợp tác', u: 'https://ncase.me/trust/' },
+  ];
+  /* ============================================================= */
+
+  let seed = 31; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const L = (i, x, y, s, inner) => `<g transform="translate(${x} ${y}) scale(${s})"><a class="lk" data-i="${i}"><g>${inner}</g></a></g>`;
+  const leafy = (x, y, r, c1, c2, n = 7) => { let s = ''; for (let k = 0; k < n; k++){ const a = -Math.PI * (.1 + .8 * k / (n - 1)); const ex = x + Math.cos(a) * r, ey = y + Math.sin(a) * r * .9; s += `<path class="leaf ${k % 2 ? 'b' : ''}" d="M${x} ${y}Q${(x + ex) / 2 - 12} ${(y + ey) / 2 - 10} ${ex.toFixed(0)} ${ey.toFixed(0)}Q${(x + ex) / 2 + 12} ${(y + ey) / 2 + 10} ${x} ${y}Z" fill="${k % 2 ? c1 : c2}"/>`; } return s; };
+
+  let svg = `<defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd3ff"/><stop offset=".6" stop-color="#d4f1ff"/><stop offset="1" stop-color="#fff4d6"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".5" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".2"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9c99a"/><stop offset="1" stop-color="#c9925a"/></linearGradient>
+    <linearGradient id="tower" x1="0" x2="1"><stop offset="0" stop-color="#f4f1e6"/><stop offset="1" stop-color="#cfd8d0"/></linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b4f9a"/><stop offset=".5" stop-color="#4a7fd8"/><stop offset="1" stop-color="#22407a"/></linearGradient>
+    <radialGradient id="sunG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fffbe0"/><stop offset=".3" stop-color="#fff2a8" stop-opacity=".9"/><stop offset="1" stop-color="#fff2a8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="orb" cx=".35" cy=".3" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".25" stop-color="#c8f4ff" stop-opacity=".35"/><stop offset="1" stop-color="#7ad0e8" stop-opacity=".45"/></radialGradient>
+    <radialGradient id="pond" cx=".5" cy=".4" r=".6"><stop offset="0" stop-color="#7fe0f0"/><stop offset="1" stop-color="#2a9ab8"/></radialGradient>
+    <clipPath id="orbC"><circle r="74" cy="-90"/></clipPath>
+    <clipPath id="mirC"><circle r="62"/></clipPath>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/><circle cx="1260" cy="150" r="190" fill="url(#sunG)"/>`;
+  // mây
+  [[220, 120, 1], [760, 190, .8], [1480, 230, .7], [1050, 90, .6]].forEach(([x, y, s]) => { svg += `<g transform="translate(${x} ${y}) scale(${s})" opacity=".9"><ellipse rx="90" ry="26" fill="#fff"/><ellipse cx="-30" cy="-18" rx="44" ry="30" fill="#fff"/><ellipse cx="26" cy="-24" rx="50" ry="36" fill="#fff"/></g>`; });
+  // đồi + thành phố xanh phía xa
+  svg += `<path d="M0 560Q200 470 420 530T880 500T1300 520T1600 490V640H0Z" fill="#a9d89a"/><path d="M0 600Q260 540 520 580T1060 560T1600 570V640H0Z" fill="#7fc283"/>`;
+  [[520, 300, 60], [600, 360, 46], [700, 270, 70], [820, 330, 54], [900, 250, 40], [1140, 320, 66], [1240, 380, 44], [1340, 300, 58], [1450, 360, 50]].forEach(([x, top, w], k) => {
+    svg += `<path d="M${x - w / 2} 600V${top + 30}Q${x - w / 2} ${top} ${x} ${top}Q${x + w / 2} ${top} ${x + w / 2} ${top + 30}V600Z" fill="url(#tower)" opacity=".92"/>`;
+    for (let y = top + 34; y < 590; y += 34) svg += `<path d="M${x - w / 2 - 4} ${y}H${x + w / 2 + 4}" stroke="#6ab06a" stroke-width="7" stroke-linecap="round"/><circle cx="${x - w / 2 + 6}" cy="${y - 4}" r="6" fill="#4f9a5a"/><circle cx="${x + w / 2 - 8}" cy="${y - 3}" r="5" fill="#5fae66"/>`;
+    if (k % 3 === 0) svg += `<ellipse cx="${x}" cy="${top + 2}" rx="${w * .6}" ry="12" fill="#5fae66"/>`;
+  });
+  // khinh khí cầu xa xa
+  svg += `<g opacity=".85"><ellipse cx="1000" cy="200" rx="22" ry="26" fill="#f0a35a"/><path d="M984 214 994 236H1006L1016 214" fill="#d9822a"/><rect x="994" y="236" width="12" height="9" fill="#8a5a3a"/></g>`;
+
+  /* ---------- NGOÀI KÍNH ---------- */
+  // 14 — tua-bin gió lớn
+  svg += L(14, 330, 610, 1, `<path d="M-10 0-4 -380H4L10 0Z" fill="#f4f1e6" stroke="#cfd8d0"/><g transform="translate(0 -380)"><g class="spin s">${[0, 120, 240].map(a => `<path transform="rotate(${a})" d="M0 0C10 -30 8 -90 0 -128C-6 -90 -8 -30 0 0Z" fill="#fff" stroke="#cfd8d0" stroke-width="2"/>`).join('')}<circle r="128" fill="none"/></g><circle r="9" fill="#e0dccd"/></g>`);
+  // 13 — dàn pin mặt trời trên đồi
+  svg += L(13, 1010, 625, 1, `${[-110, -40, 30, 100].map((x, k) => `<g transform="translate(${x} 0)"><path d="M0 0V-34" stroke="#8a8f99" stroke-width="5"/><path d="M-34 -36 30 -36 40 -78-24 -78Z" fill="url(#panel)" stroke="#e8eef8" stroke-width="2"/><path d="M-12 -36-2 -78M10 -36 20 -78M-29 -57H35" stroke="#e8eef8" stroke-width="1.2"/></g>`).join('')}<rect x="-140" y="-8" width="270" height="10" rx="4" fill="#6ab06a"/><circle class="blink" cx="140" cy="-14" r="5" fill="#ffd23f"/>`);
+
+  // kính + khung nhà kính kiểu art nouveau
+  const bays = [0, 400, 800, 1200];
+  svg += `<rect width="1600" height="640" fill="url(#glass)"/>`;
+  bays.forEach(x0 => {
+    svg += `<path d="M${x0} 640V190Q${x0 + 200} 30 ${x0 + 400} 190V640" fill="none" stroke="#fbf8ee" stroke-width="16"/><path d="M${x0} 640V190Q${x0 + 200} 30 ${x0 + 400} 190" fill="none" stroke="#c9a24a" stroke-width="3"/>`;
+    [100, 200, 300].forEach(dx => { const t = dx / 400, y = 190 - 4 * 160 * t * (1 - t) * .82; svg += `<path d="M${x0 + dx} 640V${y.toFixed(0)}" stroke="#fbf8ee" stroke-width="5"/>`; });
+    svg += `<path d="M${x0} 380H${x0 + 400}" stroke="#fbf8ee" stroke-width="7"/><path d="M${x0 + 150} 380q50 -40 100 0" fill="none" stroke="#c9a24a" stroke-width="3"/>`;
+  });
+  svg += `<path d="M0 22H1600" stroke="#fbf8ee" stroke-width="30"/><path d="M0 36H1600" stroke="#c9a24a" stroke-width="3"/>`;
+  bays.concat([1600]).forEach(x => { svg += `<rect x="${x - 12}" y="20" width="24" height="640" fill="#fbf8ee"/><path d="M${x - 12} 640V20" stroke="#e0dccd" stroke-width="2"/><circle cx="${x}" cy="200" r="16" fill="none" stroke="#c9a24a" stroke-width="4"/><path d="M${x - 10} 220q10 30 0 60" stroke="#c9a24a" stroke-width="3" fill="none"/>`; });
+  // bờ tường thấp + bồn cây chạy dọc
+  svg += `<rect x="0" y="600" width="1600" height="50" fill="#fbf8ee"/><rect x="0" y="600" width="1600" height="6" fill="#c9a24a"/>`;
+  for (let x = 20; x < 1600; x += 46) svg += `<g>${leafy(x, 606, 36 + (x * 7 % 20), '#4f9a5a', '#6ab06a', 5)}</g>`;
+  svg += `<path d="M0 650H1600V900H0Z" fill="url(#floor)"/>`;
+  for (let k = -10; k <= 10; k++) svg += `<path d="M${800 + k * 80} 650L${800 + k * 170} 900" stroke="#b5804a" stroke-opacity=".35" stroke-width="2"/>`;
+  [690, 740, 805, 880].forEach(y => { svg += `<path d="M0 ${y}H1600" stroke="#b5804a" stroke-opacity=".3" stroke-width="2"/>`; });
+  // dây leo treo từ trần
+  [140, 960, 1450].forEach((x, k) => { svg += `<g class="sway ${k % 2 ? 'b' : ''}"><path d="M${x} 36Q${x + 10} 120 ${x - 6} 220" stroke="#4f9a5a" stroke-width="3" fill="none"/>${[60, 100, 140, 180, 214].map((y, j) => `<ellipse cx="${x + (j % 2 ? 10 : -8)}" cy="${36 + y}" rx="10" ry="6" fill="${j % 2 ? '#6ab06a' : '#4f9a5a'}" transform="rotate(${j % 2 ? 30 : -30} ${x} ${36 + y})"/>`).join('')}</g>`; });
+
+  /* ---------- ĐỒ VẬT CÓ LINK ---------- */
+  // 19 — chong chóng chỉ hướng gió trên nóc
+  svg += L(19, 480, 604, 1, `<path d="M0 0V-126" stroke="#c9a24a" stroke-width="4"/><g transform="translate(0 -100)"><g class="tick" style="transform-origin:50% 50%"><path d="M-40 -30H40" stroke="#c9a24a" stroke-width="4"/><path d="M40 -30 26 -40V-20Z" fill="#c9a24a"/><path d="M-40 -30-54 -42-46 -30-54 -18Z" fill="#c9a24a"/><path d="M-20 -40Q-8 -48 0 -40Q8 -48 20 -40L12 -30H-12Z" fill="#c9a24a"/></g><circle cy="-30" r="6" fill="#fbf8ee" stroke="#c9a24a" stroke-width="2"/><path d="M-8 -4H8M0 -12V4" stroke="#c9a24a" stroke-width="3"/><text x="-16" y="-6" font-size="12" font-family="Nunito" font-weight="800" fill="#8a5a3a">W</text><text x="10" y="-6" font-size="12" font-family="Nunito" font-weight="800" fill="#8a5a3a">E</text></g>`);
+  // 11 — chuông gió
+  svg += L(11, 540, 36, 1, `<g class="sway"><path d="M0 0V40" stroke="#8a5a3a" stroke-width="2"/><ellipse cy="46" rx="40" ry="8" fill="#c9a24a"/>${[-30, -14, 2, 18, 32].map((x, k) => `<path d="M${x} 50V${70 + k * 10}" stroke="#8a5a3a"/><rect x="${x - 4}" y="${70 + k * 10}" width="8" height="${50 - k * 4}" rx="4" fill="${k % 2 ? '#e8eef8' : '#cfe8f8'}" stroke="#9ab8c8"/>`).join('')}<path d="M0 54V150" stroke="#8a5a3a"/><path d="M-12 150H12L0 176Z" fill="#7fc283"/></g>`);
+  // 6 — hành tinh tí hon treo
+  svg += L(6, 690, 36, 1, `<g class="sway b"><path d="M0 0V96" stroke="#8a5a3a" stroke-width="2"/><g transform="translate(0 150)"><circle r="54" fill="#4aa8e0"/><path d="M-46 -24Q-30 -40 -10 -30T20 -40 46 -20L40 0Q20 -6 6 6T-30 10-50 0Z" fill="#7fc283"/><path d="M-20 20Q0 10 14 24T40 26Q30 44 4 50-30 40-20 20Z" fill="#7fc283"/><path d="M-10 -30-2 -42 6 -30Z" fill="#fff"/><path d="M14 24 22 12 30 24Z" fill="#a98a6a"/><circle r="54" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/><ellipse cx="-20" cy="-26" rx="14" ry="7" fill="#fff" opacity=".35"/></g></g>`);
+  // 22 — tổ ong treo (ong hợp tác)
+  svg += L(22, 1180, 36, 1, `<g class="sway"><path d="M0 0V70" stroke="#8a5a3a" stroke-width="3"/><path d="M-34 80Q0 60 34 80Q50 120 30 160Q0 190 -30 160Q-50 120 -34 80Z" fill="#f0b840"/>${[96, 118, 140, 160].map(y => `<path d="M${-40 + (y - 80) * .2} ${y}Q0 ${y + 8} ${40 - (y - 80) * .2} ${y}" stroke="#c9862a" stroke-width="3" fill="none"/>`).join('')}<ellipse cy="150" rx="9" ry="7" fill="#5a3a1a"/>${['', 'b', 'c'].map((c, k) => `<g class="bee ${c}"><g transform="translate(${[-56, 50, 30][k]} ${[110, 90, 170][k]})"><ellipse rx="8" ry="6" fill="#f0c020"/><path d="M-3 -6V6M2 -6V6" stroke="#2a1a0a" stroke-width="2.5"/><ellipse class="flap" cx="-2" cy="-8" rx="6" ry="4" fill="#fff" opacity=".8"/></g></g>`).join('')}</g>`);
+  // 16 — gương tròn trên cột trái, nhìn ra một ô cửa sổ khác (núi tuyết)
+  svg += L(16, 100, 340, 1, `<circle r="76" fill="#c9a24a"/><circle r="68" fill="#fbf8ee"/><g clip-path="url(#mirC)"><rect x="-62" y="-62" width="124" height="124" fill="#ffd9b0"/><path d="M-62 20-30 -20-10 4 20 -34 62 16V62H-62Z" fill="#8a9ab8"/><path d="M-30 -20-22 -10-38 -10ZM20 -34 30 -20 8 -20Z" fill="#fff"/><path d="M-62 40Q0 24 62 40V62H-62Z" fill="#4f9a5a"/><circle cx="34" cy="-36" r="10" fill="#fff2a8"/></g><path d="M0 -62V62M-62 0H62" stroke="#fbf8ee" stroke-width="5"/><path d="M-60 -100Q0 -130 60 -100" stroke="#c9a24a" stroke-width="4" fill="none"/>`);
+  // 15 — bản đồ rừng đóng khung trên cột phải
+  svg += L(15, 1480, 410, 1, `<rect x="-90" y="-130" width="180" height="130" rx="6" fill="#8a5a3a"/><rect x="-80" y="-120" width="160" height="110" fill="#f4f1e6"/><path d="M-70 -100Q-40 -116 -10 -100T50 -106 70 -90V-30Q40 -40 10 -24T-70 -30Z" fill="#5fae66"/><path d="M-20 -80Q0 -90 20 -76T40 -50Q10 -56 -20 -60Z" fill="#e8b860"/><path d="M-60 -50Q-40 -60 -30 -44" fill="#c95a3a"/>${[[-50, -84], [-30, -94], [30, -88], [56, -66], [-56, -40]].map(([x, y]) => `<path d="M${x} ${y - 10}l7 12h-14Z" fill="#2f6f4a"/>`).join('')}<path d="M-70 -18H70" stroke="#c9a24a" stroke-width="2"/>`);
+  // 10 — nhà chim trên cột, chim đang hót
+  svg += L(10, 180, 650, 1, `<path d="M0 0V-150" stroke="#8a5a3a" stroke-width="8"/><path d="M-50 -150 0 -200 50 -150Z" fill="#c95a3a"/><rect x="-40" y="-150" width="80" height="80" fill="#f0c890"/><circle cy="-116" r="14" fill="#5a3a1a"/><path d="M-20 -82H20" stroke="#8a5a3a" stroke-width="5"/><g transform="translate(34 -66)"><ellipse rx="14" ry="11" fill="#4aa8e0"/><circle cx="10" cy="-8" r="8" fill="#4aa8e0"/><path d="M17 -9 26 -6 17 -4Z" fill="#f0a020"/><circle cx="12" cy="-10" r="1.8" fill="#000"/><path d="M-14 0-24 6-12 6Z" fill="#2a7ab8"/></g><text class="note" x="54" y="-80" font-size="20" fill="#2f8f5b">♪</text><text class="note b" x="62" y="-96" font-size="16" fill="#c9862a">♫</text>`);
+  // 9 — bướm bay (nhận diện loài)
+  svg += L(9, 880, 430, 1, `<g class="flyA"><g transform="rotate(-10)"><g class="flap"><path d="M0 0C-30 -40 -60 -20 -44 6C-56 20 -30 40 0 4Z" fill="#f08a3a"/><path d="M0 0C30 -40 60 -20 44 6C56 20 30 40 0 4Z" fill="#f08a3a"/><circle cx="-30" cy="-10" r="6" fill="#fff"/><circle cx="30" cy="-10" r="6" fill="#fff"/><path d="M-44 6C-40 0 -30 -2 0 0M44 6C40 0 30 -2 0 0" stroke="#2a1a0a" stroke-width="2" fill="none"/></g><rect x="-3" y="-14" width="6" height="30" rx="3" fill="#2a1a0a"/><path d="M0 -14-8 -28M0 -14 8 -28" stroke="#2a1a0a" stroke-width="2"/></g></g>`);
+  // 18 — radio gỗ phát âm thanh thiên nhiên trên kệ
+  svg += L(18, 1450, 600, 1, `<rect x="-110" y="-6" width="220" height="12" fill="#8a5a3a"/><path d="M-80 -6V-90Q-80 -110 -60 -110H60Q80 -110 80 -90V-6Z" fill="#b5804a"/><rect x="-66" y="-96" width="70" height="78" rx="8" fill="#f4e4c4"/>${[-84, -72, -60, -48, -36].map(y => `<path d="M-60 ${y}H-2" stroke="#b5804a" stroke-width="3"/>`).join('')}<circle cx="40" cy="-74" r="14" fill="#e9c99a" stroke="#6a4a2a" stroke-width="3"/><path d="M40 -74 48 -82" stroke="#6a4a2a" stroke-width="3"/><circle cx="40" cy="-34" r="10" fill="#e9c99a" stroke="#6a4a2a" stroke-width="3"/>${leafy(-70, -106, 34, '#4f9a5a', '#6ab06a', 4)}<text class="note" x="66" y="-112" font-size="20" fill="#2f8f5b">♪</text>`);
+
+  // 2 — quả cầu hệ sinh thái trên bệ
+  svg += L(2, 640, 660, 1, `<path d="M-40 0-30 -60H30L40 0Z" fill="#fbf8ee" stroke="#c9a24a" stroke-width="2"/><ellipse cy="-60" rx="34" ry="8" fill="#c9a24a"/><g clip-path="url(#orbC)"><rect x="-80" y="-170" width="160" height="160" fill="#bfeaf6"/><path d="M-80 -60Q-40 -80 0 -66T80 -70V-10H-80Z" fill="#2a9ab8" opacity=".7"/><path d="M-80 -30Q0 -46 80 -30V0H-80Z" fill="#e9c99a"/><path class="leaf" d="M-30 -30Q-40 -70 -26 -100M-20 -30Q-10 -66 -18 -90" stroke="#4f9a5a" stroke-width="5" fill="none"/><path class="leaf b" d="M30 -30Q40 -60 26 -80" stroke="#6ab06a" stroke-width="5" fill="none"/><ellipse cx="10" cy="-80" rx="8" ry="5" fill="#f08a3a"/><path d="M2 -80-4 -86V-74Z" fill="#f08a3a"/></g><circle cy="-90" r="74" fill="url(#orb)"/><circle cy="-90" r="74" fill="none" stroke="#fff" stroke-width="3" stroke-opacity=".7"/>`);
+  // 3 — mô hình thị trấn trên đảo nhỏ
+  svg += L(3, 1010, 770, 1, `<path d="M-90 0-80 -50H80L90 0Z" fill="#b5804a"/><ellipse cy="-52" rx="100" ry="22" fill="#5ac8e0"/><ellipse cy="-58" rx="70" ry="14" fill="#e9dcb4"/>${[[-46, '#f08a8a', 34], [-16, '#fbf8ee', 48], [16, '#f0c860', 40], [44, '#8ad0f0', 30], [-30, '#a8e0a0', 22]].map(([x, c, h], k) => `<g transform="translate(${x} ${-60 + (k === 4 ? 10 : 0)})"><rect x="-12" y="${-h}" width="24" height="${h}" fill="${c}" stroke="#6a5a4a" stroke-width="1.5"/><path d="M-15 ${-h}L0 ${-h - 14} 15 ${-h}Z" fill="#c95a3a"/><rect x="-5" y="${-h + 8}" width="10" height="9" fill="#4a6a8a"/></g>`).join('')}`);
+  // 20 — bảng phấn có biểu đồ
+  svg += L(20, 1240, 780, 1, `<path d="M-70 0-56 -200M70 0 56 -200" stroke="#8a5a3a" stroke-width="6"/><rect x="-90" y="-200" width="180" height="130" rx="4" fill="#2f4a3a" stroke="#8a5a3a" stroke-width="6"/><path d="M-70 -90V-180M-70 -90H70" stroke="#f4f1e6" stroke-width="2"/>${[[-56, 30], [-36, 48], [-16, 38], [4, 62], [24, 70], [44, 84]].map(([x, h]) => `<rect x="${x}" y="${-90 - h}" width="14" height="${h}" fill="${h > 60 ? '#7fc283' : '#f4f1e6'}" opacity=".85"/>`).join('')}<path d="M-60 -110Q-20 -130 10 -150T64 -176" stroke="#f0c860" stroke-width="3" fill="none"/><rect x="-80" y="-66" width="160" height="6" fill="#8a5a3a"/><rect x="40" y="-72" width="20" height="5" fill="#fff"/>`);
+  // 8 — camera quan sát thú hoang trên chân máy
+  svg += L(8, 1530, 790, 1, `<path d="M0 -110-40 0M0 -110 40 0M0 -110V0" stroke="#5a5a5a" stroke-width="5"/><rect x="-40" y="-160" width="80" height="54" rx="8" fill="#3a5a3a"/><path d="M-40 -150h80M-40 -126h80" stroke="#2f4a2f" stroke-width="3" stroke-dasharray="10 6"/><circle cx="-42" cy="-133" r="20" fill="#2a2a2a"/><circle cx="-42" cy="-133" r="12" fill="#4a7fd8"/><circle cx="-46" cy="-137" r="4" fill="#fff" opacity=".6"/><circle class="blink" cx="28" cy="-150" r="5" fill="#e04040"/><rect x="-10" y="-176" width="30" height="16" rx="4" fill="#3a5a3a"/>${leafy(30, -160, 30, '#4f9a5a', '#6ab06a', 4)}`);
+  // 7 — cây bonsai
+  svg += L(7, 110, 880, 1, `<path d="M-56 -40H56L46 0H-46Z" fill="#3a6a8a"/><rect x="-62" y="-48" width="124" height="10" rx="3" fill="#4a7a9a"/><path d="M0 -46Q-10 -80 10 -100T-6 -150M6 -110Q30 -120 46 -140" stroke="#6a4a2a" stroke-width="10" fill="none" stroke-linecap="round"/><g class="leaf">${[[-20, -156, 36], [26, -150, 30], [50, -146, 24], [-40, -130, 22], [0, -176, 26]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .6}" fill="#4f9a5a"/><ellipse cx="${x - r * .3}" cy="${y - r * .2}" rx="${r * .6}" ry="${r * .3}" fill="#7fc283"/>`).join('')}</g>`);
+  // 0 — khay cát nhiều màu
+  svg += L(0, 300, 890, 1, `<path d="M-90 0-80 -50H80L90 0Z" fill="#b5804a"/><path d="M-80 -50H80V-38H-80Z" fill="#8a5a3a"/><path d="M-76 -50Q-40 -70 0 -56T76 -62V-50Z" fill="#f0d090"/><path d="M-76 -54Q-30 -76 10 -62T76 -70" stroke="#f08a3a" stroke-width="6" fill="none"/><path d="M-76 -60Q-20 -84 30 -70T76 -78" stroke="#4aa8e0" stroke-width="5" fill="none"/><path d="M-50 -60Q-30 -90 -20 -60" stroke="#4f9a5a" stroke-width="4" fill="none"/><circle cx="40" cy="-74" r="6" fill="#e04040"/><path d="M40 -80V-120" stroke="#6a4a2a" stroke-width="3"/><path d="M40 -120 60 -110 40 -100Z" fill="#f0c860"/>`);
+  // 21 — bình tưới cây (mưa rì rào)
+  svg += L(21, 450, 890, 1, `<path d="M-40 -6V-80Q-40 -90 -30 -90H30Q40 -90 40 -80V-6Q40 0 34 0H-34Q-40 0 -40 -6Z" fill="#4aa8b8"/><path d="M-30 -90Q0 -130 30 -90" stroke="#3a8898" stroke-width="7" fill="none"/><path d="M40 -60 96 -110" stroke="#4aa8b8" stroke-width="12" stroke-linecap="round"/><ellipse cx="100" cy="-114" rx="12" ry="8" fill="#3a8898" transform="rotate(-40 100 -114)"/>${['', 'b', 'c'].map((c, k) => `<path class="drip ${c}" d="M${100 + k * 8} -100v8" stroke="#7fd0f0" stroke-width="3" stroke-linecap="round"/>`).join('')}<path d="M-30 -50H30" stroke="#fbf8ee" stroke-width="4" opacity=".6"/>`);
+  // 17 — chậu dương xỉ cuộn tròn (cây sự sống)
+  svg += L(17, 560, 892, 1, `<path d="M-40 -60H40L32 0H-32Z" fill="#c95a3a"/><rect x="-46" y="-68" width="92" height="12" rx="4" fill="#d96a4a"/><path d="M-10 -66Q-30 -140 10 -170Q50 -180 46 -144Q42 -120 20 -126Q4 -132 14 -146" stroke="#4f9a5a" stroke-width="7" fill="none" stroke-linecap="round"/>${[[-20, -100], [-26, -120], [-18, -140], [0, -160]].map(([x, y], k) => `<ellipse cx="${x - 12}" cy="${y}" rx="14" ry="5" fill="#6ab06a" transform="rotate(-30 ${x} ${y})"/><ellipse cx="${x + 10}" cy="${y + 6}" rx="12" ry="5" fill="#6ab06a" transform="rotate(30 ${x} ${y})"/>`).join('')}<path d="M18 -66Q30 -110 60 -120" stroke="#6ab06a" stroke-width="5" fill="none" class="leaf"/>`);
+  // 1 — đài phun nước nhỏ
+  svg += L(1, 800, 880, 1, `<ellipse cy="-20" rx="140" ry="36" fill="#fbf8ee" stroke="#c9a24a" stroke-width="3"/><ellipse cy="-24" rx="124" ry="28" fill="url(#pond)"/>${['', 'b', 'c'].map(c => `<ellipse class="ripple ${c}" cy="-24" rx="110" ry="24" fill="none" stroke="#fff" stroke-width="2"/>`).join('')}<path d="M-16 -24-10 -110H10L16 -24Z" fill="#fbf8ee" stroke="#c9a24a" stroke-width="2"/><ellipse cy="-110" rx="40" ry="10" fill="#fbf8ee" stroke="#c9a24a" stroke-width="2"/><g class="jet" style="transform-box:fill-box;transform-origin:50% 100%"><path d="M0 -116Q-30 -190 -46 -120M0 -116Q30 -190 46 -120M0 -116V-176" stroke="#9fe4f4" stroke-width="5" fill="none" stroke-linecap="round" opacity=".85"/></g><ellipse cx="-40" cy="-28" rx="14" ry="6" fill="#f08a3a"/><ellipse cx="50" cy="-20" rx="12" ry="5" fill="#fff"/><path d="M60 -20 68 -26V-14Z" fill="#fff"/>`);
+  // 4 — bụi cây có người tí hon trốn
+  svg += L(4, 1050, 892, 1, `${[[-50, -40, 46], [0, -60, 56], [50, -40, 44], [-20, -90, 36], [30, -96, 34]].map(([x, y, r], k) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${k % 2 ? '#4f9a5a' : '#5fae66'}" class="leaf ${k % 2 ? 'b' : ''}"/>`).join('')}<g transform="translate(12 -70)"><circle r="12" fill="#ffd9b0"/><path d="M-12 -4Q0 -20 12 -4" fill="#3a2a1a"/><circle cx="-4" cy="2" r="2" fill="#000"/><circle cx="5" cy="2" r="2" fill="#000"/></g>${leafy(12, -50, 30, '#4f9a5a', '#6ab06a', 4)}<circle cx="-56" cy="-44" r="5" fill="#f08a8a"/><circle cx="52" cy="-60" r="5" fill="#fff"/>`);
+  // 12 — quả địa cầu cổ trên bàn nhỏ
+  svg += L(12, 1170, 890, 1, `<path d="M-40 0V-60M40 0V-60" stroke="#8a5a3a" stroke-width="6"/><rect x="-50" y="-68" width="100" height="12" rx="3" fill="#b5804a"/><path d="M-12 -68H12L6 -80H-6Z" fill="#c9a24a"/><path d="M-50 -130A50 50 0 0 0 30 -88" stroke="#c9a24a" stroke-width="4" fill="none"/><circle cy="-124" r="42" fill="#4aa8e0"/><path d="M-34 -140Q-20 -156 0 -148T30 -140L26 -120Q10 -126 0 -112T-30 -110Z" fill="#7fc283"/><path d="M-10 -100Q10 -106 20 -94L12 -86Q0 -90 -10 -100Z" fill="#7fc283"/><ellipse cx="-14" cy="-140" rx="10" ry="6" fill="#fff" opacity=".4"/>`);
+  // 5 — giỏ rau thảo mộc để nấu ăn
+  svg += L(5, 1330, 892, 1, `<path d="M-70 -50H70L58 0H-58Z" fill="#c9925a"/>${[-60, -40, -20, 0, 20, 40, 60].map(x => `<path d="M${x} -50 ${x * .84} 0" stroke="#a8743a" stroke-width="3"/>`).join('')}<path d="M-64 -30H64" stroke="#a8743a" stroke-width="3"/><path d="M-66 -50Q0 -130 66 -50" stroke="#a8743a" stroke-width="6" fill="none"/><path d="M-44 -50-36 -90-28 -50Z" fill="#f08a3a"/><path d="M-36 -90q-10 -16 -4 -24M-36 -90q8 -16 4 -26" stroke="#4f9a5a" stroke-width="4" fill="none"/><circle cx="-6" cy="-60" r="16" fill="#e04040"/><path d="M-6 -76v-6" stroke="#4f9a5a" stroke-width="3"/><circle cx="28" cy="-60" r="14" fill="#a8d060"/><ellipse cx="50" cy="-66" rx="10" ry="16" fill="#9a5ac0"/>${leafy(10, -66, 30, '#4f9a5a', '#6ab06a', 4)}`);
+
+  document.getElementById('scene').innerHTML = svg;
+
+  // hiệu ứng: tia nắng chiếu xiên + phấn hoa lấp lánh + lá rơi
+  const pollen = Array.from({ length: 46 }, () => ({ x: Math.random(), y: Math.random(), v: .006 + Math.random() * .012, p: Math.random() * 6, r: 1 + Math.random() * 2 }));
+  const leaves = Array.from({ length: 6 }, () => ({ x: Math.random(), y: Math.random() * -1, v: .03 + Math.random() * .03, p: Math.random() * 6 }));
+  window.ROOM = {
+    title: 'Sky Garden', music: 'HGl75kurxok', links: LINKS,
+    fx(g, t, dt, W, H, S){
+      const [sx, sy, k] = S(1260, 150);
+      g.save(); g.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < 5; i++){
+        const a = 2.1 + i * .12 + Math.sin(t * .2 + i) * .02, len = 1400 * k, w = (40 + i * 18) * k;
+        const ex = sx + Math.cos(a) * len, ey = sy + Math.sin(a) * len;
+        const gr = g.createLinearGradient(sx, sy, ex, ey); const al = .05 + .025 * Math.sin(t * .6 + i * 1.7);
+        gr.addColorStop(0, `rgba(255,246,200,${al})`); gr.addColorStop(1, 'rgba(255,246,200,0)');
+        g.fillStyle = gr; g.beginPath(); g.moveTo(sx, sy);
+        g.lineTo(ex + Math.cos(a + Math.PI / 2) * w, ey + Math.sin(a + Math.PI / 2) * w); g.lineTo(ex - Math.cos(a + Math.PI / 2) * w, ey - Math.sin(a + Math.PI / 2) * w); g.closePath(); g.fill();
+      }
+      g.restore();
+      for (const p of pollen){ p.y -= p.v * dt; if (p.y < -.02){ p.y = 1.02; p.x = Math.random(); } const x = p.x * W + Math.sin(t * .4 + p.p) * 20, y = p.y * H; g.fillStyle = `rgba(255,236,150,${.45 + .35 * Math.sin(t * 2 + p.p)})`; g.beginPath(); g.arc(x, y, p.r, 0, 7); g.fill(); }
+      for (const l of leaves){
+        l.y += l.v * dt; if (l.y > 1.05){ l.y = -.05; l.x = Math.random(); }
+        const x = l.x * W + Math.sin(t + l.p) * 40, y = l.y * H;
+        g.save(); g.translate(x, y); g.rotate(Math.sin(t * 1.5 + l.p) * .8); g.fillStyle = 'rgba(95,174,102,.85)'; g.beginPath(); g.ellipse(0, 0, 9, 4, 0, 0, 7); g.fill(); g.restore();
+      }
+    }
+  };
+})();
+</script>
+<script src="../room.js"></script>
+</body>
+</html>

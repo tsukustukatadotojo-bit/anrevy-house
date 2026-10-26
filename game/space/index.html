@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORBITAL DECK · 07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Rajdhani:wght@500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../room.css">
+<style>
+  :root{--bg:#030814;--ink:#e6fbff;--accent:#18e0ff;--accent-soft:rgba(24,224,255,.4);--hud-bg:rgba(3,14,30,.78);--hud-ink-on:#021018;
+    --hud-font:700 15px 'Rajdhani',sans-serif;--btn-r:4px 14px 4px 14px;--tip-bg:linear-gradient(135deg,rgba(4,24,44,.95),rgba(2,10,22,.95));--tip-font:'Rajdhani',sans-serif;--tip-size:19px;--tip-r:4px 16px 4px 16px;
+    --box-bg:linear-gradient(160deg,#06213a,#020a16);--box-r:4px 22px 4px 22px;--title-font:400 22px 'Audiowide',sans-serif;--hint-font:500 16px 'Rajdhani',sans-serif;--enter:#bff6ff;
+    --hover-filter:drop-shadow(0 0 6px #18e0ff) drop-shadow(0 0 16px rgba(24,224,255,.7)) brightness(1.15)}
+  .room-title{font:400 clamp(14px,2vw,20px) 'Audiowide',sans-serif;letter-spacing:.32em;color:#e6fbff;text-shadow:0 0 14px #18e0ff}
+  .room-title span{display:block;font:700 12px 'Rajdhani',sans-serif;letter-spacing:.5em;color:#ffb347;text-align:center;margin-top:2px;text-shadow:none}
+  .tw{animation:tw 3s ease-in-out infinite}.tw.b{animation-delay:-1s;animation-duration:4.4s}.tw.c{animation-delay:-2.2s;animation-duration:2.3s}
+  @keyframes tw{50%{opacity:.2}}
+  .led{animation:led 1.4s steps(1) infinite}.led.b{animation-delay:-.7s}.led.c{animation-delay:-.35s;animation-duration:.9s}
+  @keyframes led{50%{opacity:.15}}
+  .spin{transform-box:fill-box;transform-origin:center;animation:spin 9s linear infinite}
+  .spin.f{animation-duration:4s}.spin.s{animation-duration:16s}.spin.r{animation-direction:reverse}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .drift{animation:drift 22s ease-in-out infinite alternate}
+  @keyframes drift{to{transform:translate(60px,-18px)}}
+  .sway{transform-box:fill-box;transform-origin:50% 0;animation:sway 7s ease-in-out infinite alternate}
+  @keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+  .bob{animation:bob 3.4s ease-in-out infinite alternate}
+  @keyframes bob{to{transform:translateY(-8px)}}
+  .pulse{animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.55}}
+  .meri{animation:meri 6s linear infinite}
+  @keyframes meri{to{stroke-dashoffset:-180}}
+  .scan{animation:scan 4s linear infinite}
+  @keyframes scan{from{transform:translateY(0)}to{transform:translateY(140px)}}
+  .fish{animation:fish 12s linear infinite}.fish.b{animation-duration:17s;animation-delay:-6s}
+  @keyframes fish{from{transform:translateX(-30px)}to{transform:translateX(250px)}}
+</style>
+</head>
+<body>
+<div class="enter"></div>
+<div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Đài quan sát trên tàu vũ trụ, cửa kính lớn nhìn ra hành tinh"></svg></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="room-title" aria-hidden="true">ORBITAL DECK<span>SECTOR 07 · OBSERVATORY</span></div>
+<nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> DANH SÁCH</span></button></nav>
+<button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
+<div class="hint" id="hint"></div>
+<div class="tip" id="tip" aria-hidden="true"></div>
+<div class="list" id="list" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="list-bg" data-close></div><div class="list-box" id="listBox"><div class="list-head"><h2 id="listTitle">ORBITAL DECK</h2><p id="listCount"></p></div><ol></ol><button class="list-x" data-close aria-label="Đóng">✕</button></div></div>
+<div class="tv" id="tv"><div class="tv-bar"><span class="tv-t">♪ deck radio</span><button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt nhạc">off</button><button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Ẩn video">–</button></div><div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div></div>
+<script>
+(() => {
+  /* ======= LINK TRONG PHÒNG (thứ tự = data-i của đồ vật) ======= */
+  const LINKS = [
+    { n: 'neal.fun', d: 'Kho trò chơi và trải nghiệm vui của Neal Agarwal', u: 'https://neal.fun/' },
+    { n: 'Optical Toys', d: 'Đồ chơi ảo ảnh thị giác', u: 'https://optical.toys/' },
+    { n: 'Chrome Music Lab', d: 'Làm nhạc bằng những thí nghiệm vui', u: 'https://musiclab.chromeexperiments.com/Experiments' },
+    { n: 'Ancient Earth', d: 'Xem nhà bạn nằm đâu trên Trái Đất thời khủng long', u: 'https://dinosaurpictures.org/ancient-earth/' },
+    { n: 'The Size of Space', d: 'Phóng to dần từ phi hành gia tới cả vũ trụ', u: 'https://neal.fun/size-of-space/' },
+    { n: 'Universal Paperclips', d: 'Làm AI sản xuất kẹp giấy… tới khi hết cả vũ trụ', u: 'https://www.decisionproblem.com/paperclips/index2.html' },
+    { n: 'Stellarium Web', d: 'Bản đồ bầu trời sao ngay lúc này', u: 'https://stellarium-web.org/' },
+    { n: '100,000 Stars', d: 'Bay qua 100.000 ngôi sao quanh Mặt Trời', u: 'https://stars.chromeexperiments.com/' },
+    { n: 'Solar System Scope', d: 'Mô hình Hệ Mặt Trời 3D', u: 'https://www.solarsystemscope.com/' },
+    { n: 'NASA Eyes', d: 'Theo dõi tàu vũ trụ NASA theo thời gian thực', u: 'https://eyes.nasa.gov/apps/solar-system/' },
+    { n: 'Scale of the Universe 2', d: 'So kích thước mọi thứ, từ hạt quark tới vũ trụ', u: 'https://htwins.net/scale2/' },
+    { n: 'If the Moon Were Only 1 Pixel', d: 'Kéo ngang qua Hệ Mặt Trời đúng tỉ lệ', u: 'https://www.joshworth.com/dev/pixelspace/pixelspace_solarsystem.html' },
+    { n: 'APOD', d: 'Mỗi ngày một ảnh thiên văn của NASA', u: 'https://science.nasa.gov/apod/' },
+    { n: 'Spot the Station', d: 'Xem khi nào trạm ISS bay qua bầu trời nơi bạn', u: 'https://www.nasa.gov/spot-the-station/' },
+    { n: 'Where the ISS at?', d: 'Trạm vũ trụ ISS đang ở đâu ngay lúc này', u: 'https://wheretheiss.at/' },
+    { n: 'Earth Nullschool', d: 'Gió, mây, sóng biển toàn cầu chuyển động', u: 'https://earth.nullschool.net/' },
+    { n: 'Radio Garden', d: 'Xoay quả địa cầu, nghe radio khắp thế giới', u: 'https://radio.garden/' },
+    { n: 'Mars Trek', d: 'Đi dạo trên bản đồ sao Hỏa của NASA', u: 'https://trek.nasa.gov/mars/' },
+    { n: 'Infinite Craft', d: 'Ghép Nước, Lửa, Đất, Gió thành mọi thứ trên đời', u: 'https://neal.fun/infinite-craft/' },
+    { n: 'The Deep Sea', d: 'Lặn xuống đáy đại dương xem sinh vật kỳ lạ', u: 'https://neal.fun/deep-sea/' },
+    { n: 'Semantris', d: 'Trò chơi chữ với AI hiểu nghĩa của từ', u: 'https://research.google.com/semantris/' },
+    { n: 'Teachable Machine', d: 'Tự dạy máy nhận ra hình ảnh, âm thanh, tư thế', u: 'https://teachablemachine.withgoogle.com/' },
+  ];
+  /* ============================================================= */
+
+  let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const L = (i, x, y, s, inner) => `<g transform="translate(${x} ${y}) scale(${s})"><a class="lk" data-i="${i}"><g>${inner}</g></a></g>`;
+  const WIN = 'M380 524V210Q380 70 520 70H1080Q1220 70 1220 210V524Z';
+
+  let svg = `<defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1a30"/><stop offset="1" stop-color="#14263f"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f2038"/><stop offset="1" stop-color="#040a16"/></linearGradient>
+    <linearGradient id="sill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3f5c"/><stop offset=".15" stop-color="#1a2b44"/><stop offset="1" stop-color="#0a1426"/></linearGradient>
+    <linearGradient id="strut" x1="0" x2="1"><stop offset="0" stop-color="#0a1426"/><stop offset=".5" stop-color="#3a5070"/><stop offset="1" stop-color="#0a1426"/></linearGradient>
+    <radialGradient id="neb1" cx=".3" cy=".4" r=".5"><stop offset="0" stop-color="#7a3cff" stop-opacity=".55"/><stop offset="1" stop-color="#7a3cff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="neb2" cx=".7" cy=".6" r=".5"><stop offset="0" stop-color="#18e0ff" stop-opacity=".3"/><stop offset="1" stop-color="#18e0ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="neb3" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff5a9a" stop-opacity=".35"/><stop offset="1" stop-color="#ff5a9a" stop-opacity="0"/></radialGradient>
+    <linearGradient id="giant" x1="0" y1="0" x2=".25" y2="1">${[['#f6d7a8', 0], ['#e3a06a', .18], ['#f3c890', .3], ['#b8683e', .42], ['#efc290', .55], ['#d4884e', .7], ['#f6d7a8', .85], ['#c27a48', 1]].map(([c, o]) => `<stop offset="${o}" stop-color="${c}"/>`).join('')}</linearGradient>
+    <radialGradient id="shade" cx=".32" cy=".3" r=".8"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></radialGradient>
+    <radialGradient id="earth" cx=".5" cy=".5" r=".5"><stop offset=".86" stop-color="#1c6fd8"/><stop offset=".97" stop-color="#7fd8ff"/><stop offset="1" stop-color="#bff6ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="core" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#9ff3ff"/><stop offset="1" stop-color="#18e0ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#18e0ff" stop-opacity=".5"/><stop offset="1" stop-color="#18e0ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="tail" x1="0" x2="1"><stop offset="0" stop-color="#e6fbff"/><stop offset="1" stop-color="#18e0ff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a3a6a"/><stop offset="1" stop-color="#020814"/></linearGradient>
+    <linearGradient id="chair" x1="0" x2="1"><stop offset="0" stop-color="#1a2a40"/><stop offset=".5" stop-color="#2e4462"/><stop offset="1" stop-color="#1a2a40"/></linearGradient>
+    <clipPath id="win"><path d="${WIN}"/></clipPath>
+    <clipPath id="tank"><rect x="-120" y="-150" width="240" height="140" rx="10"/></clipPath>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wall)"/>`;
+  // tấm ốp tường + đường ống phát sáng
+  for (let x = 0; x < 1600; x += 100) svg += `<path d="M${x} 0V610" stroke="#081224" stroke-width="3"/>`;
+  svg += `<path d="M0 40H1600M0 610H1600" stroke="#081224" stroke-width="4"/><path d="M0 46H1600" stroke="#18e0ff" stroke-width="2" opacity=".35"/>`;
+  [[30, 470], [1290, 300]].forEach(([x, y]) => { svg += `<rect x="${x}" y="${y}" width="40" height="22" rx="3" fill="#081224"/><circle class="led" cx="${x + 12}" cy="${y + 11}" r="4" fill="#ffb347"/><circle class="led b" cx="${x + 28}" cy="${y + 11}" r="4" fill="#18e0ff"/>`; });
+
+  // ===== cửa kính lớn =====
+  svg += `<g clip-path="url(#win)"><rect x="380" y="70" width="840" height="460" fill="#02040c"/>
+    <ellipse cx="640" cy="230" rx="330" ry="200" fill="url(#neb1)"/><ellipse cx="980" cy="420" rx="300" ry="170" fill="url(#neb2)"/><ellipse cx="860" cy="160" rx="200" ry="110" fill="url(#neb3)"/>`;
+  for (let k = 0; k < 230; k++){ const x = 380 + rnd() * 840, y = 70 + rnd() * 460, r = rnd() < .9 ? .6 + rnd() * .9 : 1.6 + rnd(); svg += `<circle class="${rnd() < .3 ? 'tw ' + 'abc'[k % 3] : ''}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(2)}" fill="${rnd() < .15 ? '#ffd9a8' : rnd() < .2 ? '#bff6ff' : '#fff'}"/>`; }
+  // 7 — cụm sao sáng
+  svg += L(7, 820, 210, 1, `<circle r="46" fill="url(#neb3)" opacity=".8"/>${[[0, 0, 5], [-22, 12, 2.5], [18, -14, 3], [26, 18, 2], [-14, -22, 2]].map(([x, y, r], k) => `<g transform="translate(${x} ${y})" class="tw ${'abc'[k % 3]}"><path d="M0 ${-r * 5}L${r * .5} 0 0 ${r * 5} ${-r * .5} 0Z M${-r * 5} 0 0 ${r * .5} ${r * 5} 0 0 ${-r * .5}Z" fill="#fff"/><circle r="${r}" fill="#fff"/></g>`).join('')}`);
+  // 12 — sao chổi
+  svg += L(12, 1120, 150, 1, `<path d="M0 0L120 -46 126 -34Z" fill="url(#tail)" opacity=".9"/><path d="M0 0L110 -20 112 -12Z" fill="url(#tail)" opacity=".6"/><circle r="9" fill="#18e0ff" opacity=".35"/><circle r="5" fill="#fff"/>`);
+  // 11 — mặt trăng nhỏ
+  svg += L(11, 556, 172, 1, `<circle r="30" fill="#c9ccd6"/><circle cx="-9" cy="-8" r="6" fill="#a9acb8"/><circle cx="10" cy="6" r="8" fill="#a9acb8"/><circle cx="-4" cy="14" r="4" fill="#a9acb8"/><circle r="30" fill="url(#shade)"/>`);
+  // 4 — hành tinh khí khổng lồ có vành đai
+  svg += L(4, 1010, 300, 1, `<ellipse rx="226" ry="42" transform="rotate(-16)" fill="none" stroke="#e7caa0" stroke-width="16" stroke-opacity=".35"/><ellipse rx="196" ry="34" transform="rotate(-16)" fill="none" stroke="#f3dfc0" stroke-width="6" stroke-opacity=".5"/>
+    <circle r="118" fill="url(#giant)"/><ellipse cx="40" cy="30" rx="22" ry="11" fill="#b04a2a" opacity=".65"/><circle r="118" fill="url(#shade)"/>
+    <path d="M-217 61A226 42 0 0 0 217 -61" transform="rotate(0)" fill="none" stroke="#e7caa0" stroke-width="16" stroke-opacity=".55"/>`);
+  // 15 — Trái Đất ở mép dưới cửa kính
+  svg += L(15, 560, 650, 1, `<circle r="260" fill="url(#earth)"/><path d="M-160 -150C-120 -200 -40 -210 -20 -180S40 -150 20 -120-60 -110-80 -80-150 -100-160 -150ZM60 -230C120 -240 180 -200 160 -160S90 -150 70 -180Z" fill="#3a9a5a"/><path d="M-200 -120C-100 -160 0 -130 60 -170S180 -200 220 -150" stroke="#fff" stroke-width="10" fill="none" opacity=".55" stroke-linecap="round"/><path d="M-120 -190C-40 -220 60 -230 140 -210" stroke="#fff" stroke-width="6" fill="none" opacity=".4" stroke-linecap="round"/><circle r="260" fill="url(#shade)" opacity=".5"/>`);
+  // 14 — trạm ISS trôi chậm
+  svg += L(14, 700, 410, 1, `<g class="drift"><rect x="-70" y="-3" width="140" height="6" fill="#c9ccd6"/>${[-62, -40, 40, 62].map(x => `<rect x="${x - 9}" y="-34" width="18" height="28" fill="#1d4f9a" stroke="#9ab8e8" stroke-width="1"/><rect x="${x - 9}" y="6" width="18" height="28" fill="#1d4f9a" stroke="#9ab8e8" stroke-width="1"/>`).join('')}<rect x="-18" y="-8" width="36" height="16" rx="6" fill="#e6e8ee"/><rect x="-6" y="-20" width="12" height="40" rx="5" fill="#d4d8e2"/><circle class="led" cx="20" cy="0" r="2" fill="#ff4a4a"/></g>`);
+  svg += `</g>`;
+  // khung cửa + thanh chống
+  svg += `${[590, 800, 1010].map(x => `<rect x="${x - 7}" y="70" width="14" height="460" fill="url(#strut)"/>`).join('')}<path d="M380 300H1220" stroke="#1a2b44" stroke-width="8"/><path d="M380 300H1220" stroke="#18e0ff" stroke-width="1" opacity=".4"/>
+  <path d="${WIN}" fill="none" stroke="#2a3f5c" stroke-width="22"/><path d="${WIN}" fill="none" stroke="#18e0ff" stroke-width="2" opacity=".6"/>
+  <path d="M520 70H1080" stroke="#18e0ff" stroke-width="2" opacity=".35" class="scan"/>`;
+  // bậu cửa / bàn điều khiển dài
+  svg += `<path d="M330 520H1270L1300 612H300Z" fill="url(#sill)"/><path d="M330 520H1270" stroke="#18e0ff" stroke-width="2" opacity=".7"/>`;
+  for (let x = 640; x < 1100; x += 70) svg += `<rect x="${x}" y="540" width="44" height="22" rx="3" fill="#06111f" stroke="#18e0ff" stroke-opacity=".4"/><rect class="led ${'abc'[(x / 70) % 3 | 0]}" x="${x + 6}" y="548" width="${10 + (x % 23)}" height="4" fill="#18e0ff"/><circle class="led b" cx="${x + 36}" cy="574" r="3" fill="#ffb347"/>`;
+  // sàn phối cảnh
+  svg += `<path d="M0 612H1600V900H0Z" fill="url(#floor)"/><path d="M0 612H1600" stroke="#18e0ff" stroke-width="3" opacity=".6"/>`;
+  for (let k = -8; k <= 8; k++) svg += `<path d="M${800 + k * 40} 612L${800 + k * 260} 900" stroke="#18e0ff" stroke-opacity=".12" stroke-width="2"/>`;
+  [640, 680, 735, 805, 890].forEach(y => { svg += `<path d="M0 ${y}H1600" stroke="#18e0ff" stroke-opacity=".08" stroke-width="2"/>`; });
+
+  /* ---------- ĐỒ VẬT CÓ LINK ---------- */
+  // 9 — vệ tinh treo trần
+  svg += L(9, 200, 30, 1, `<g class="sway"><path d="M0 0V64" stroke="#5a7090" stroke-width="2"/><g transform="translate(0 100)"><rect x="-26" y="-30" width="52" height="54" rx="4" fill="#d9a43a"/><path d="M-26 -10H26M-26 8H26" stroke="#a87820" stroke-width="2"/><rect x="-110" y="-12" width="76" height="22" fill="#1d4f9a" stroke="#9ab8e8"/><rect x="34" y="-12" width="76" height="22" fill="#1d4f9a" stroke="#9ab8e8"/><path d="M-72 -12V10M72 -12V10M-34 -1H-26M26 -1H34" stroke="#9ab8e8"/><path d="M-18 24Q0 52 18 24" fill="#e6e8ee"/><path d="M0 40V60" stroke="#e6e8ee" stroke-width="2"/><circle class="led" cx="0" cy="60" r="3" fill="#ff4a4a"/></g></g>`);
+  // 6 — màn hình bản đồ sao trên tường trái
+  svg += L(6, 180, 470, 1, `<rect x="-130" y="-160" width="260" height="160" rx="10" fill="#020a16" stroke="#18e0ff" stroke-width="3"/><g opacity=".35" fill="none" stroke="#18e0ff"><circle cy="-80" r="60"/><circle cy="-80" r="30"/><path d="M-120 -80H120M0 -150V-10"/></g>${(() => { const pts = [[-90, -120], [-60, -100], [-30, -126], [10, -110], [40, -70], [80, -96], [100, -40], [-70, -40], [-20, -50]]; return `<path d="M-90 -120L-60 -100-30 -126 10 -110 40 -70 80 -96M40 -70 100 -40M-70 -40-20 -50 40 -70" stroke="#bff6ff" stroke-width="1.5" fill="none" opacity=".8"/>` + pts.map(([x, y], k) => `<circle class="tw ${'abc'[k % 3]}" cx="${x}" cy="${y}" r="${k % 3 ? 3 : 4.5}" fill="#fff"/>`).join(''); })()}<text x="-118" y="-14" font-family="Rajdhani" font-weight="700" font-size="14" fill="#18e0ff" letter-spacing="2">STAR MAP</text>`);
+  // 1 — đèn kéo quân (zoetrope) trên kệ
+  svg += L(1, 72, 640, 1, `<rect x="-60" y="-4" width="120" height="10" fill="#2a3f5c"/><ellipse cy="-70" rx="44" ry="12" fill="#1a2b44"/><rect x="-44" y="-70" width="88" height="64" fill="#ffb347"/><path class="meri" d="M-44 -54H44" stroke="#3a1a08" stroke-width="22" stroke-dasharray="6 9"/><ellipse cy="-6" rx="44" ry="12" fill="#c27a20"/><ellipse cy="-70" rx="44" ry="12" fill="none" stroke="#ffd9a8" stroke-width="2"/><path d="M0 -70V-96" stroke="#9ab8e8" stroke-width="3"/><circle cy="-98" r="5" fill="#ff5a9a"/>`);
+  // 10 — kính thiên văn
+  svg += L(10, 320, 660, 1, `<path d="M0 -110L-50 0M0 -110 50 0M0 -110V0" stroke="#5a7090" stroke-width="5"/><g transform="translate(0 -116) rotate(-34)"><rect x="-70" y="-15" width="150" height="30" rx="6" fill="#e6e8ee"/><rect x="60" y="-19" width="26" height="38" rx="4" fill="#9ab8e8"/><rect x="-90" y="-8" width="24" height="16" rx="3" fill="#2a3f5c"/><path d="M-30 -15V15" stroke="#18e0ff" stroke-width="3"/></g><circle cy="-116" r="8" fill="#2a3f5c"/>`);
+  // 2 — bàn pad âm nhạc trên bậu cửa
+  svg += L(2, 480, 600, 1, `<path d="M-100 0L-90 -66H90L100 0Z" fill="#0a1426" stroke="#18e0ff" stroke-opacity=".5"/>${[0, 1, 2].map(r => [0, 1, 2, 3, 4].map(c => `<rect class="${(r * 5 + c) % 4 === 0 ? 'led ' + 'abc'[c % 3] : ''}" x="${-80 + c * 32 + (2 - r) * 2}" y="${-58 + r * 19}" width="26" height="14" rx="3" fill="${['#ff5a9a', '#18e0ff', '#ffb347', '#7a3cff', '#5af0a0'][(r + c) % 5]}"/>`).join('')).join('')}`);
+  // 13 — ống nhòm trên bậu cửa
+  svg += L(13, 1180, 590, 1, `<ellipse cy="0" rx="50" ry="6" fill="#000" opacity=".4"/><g transform="rotate(-8)"><rect x="-44" y="-40" width="40" height="36" rx="10" fill="#1a1a24"/><rect x="4" y="-40" width="40" height="36" rx="10" fill="#1a1a24"/><rect x="-10" y="-34" width="20" height="18" fill="#2a2a36"/><ellipse cx="-24" cy="-22" rx="12" ry="14" fill="#18e0ff" opacity=".35"/><ellipse cx="24" cy="-22" rx="12" ry="14" fill="#18e0ff" opacity=".35"/></g>`);
+  // 19 — bể cá biển sâu trên tường phải
+  svg += L(19, 1420, 270, 1, `<rect x="-128" y="-158" width="256" height="156" rx="14" fill="#2a3f5c"/><g clip-path="url(#tank)"><rect x="-120" y="-150" width="240" height="140" fill="url(#water)"/><g class="fish"><g transform="translate(-110 -100)"><path d="M0 0Q14 -12 28 0Q14 12 0 0ZM0 0-8 -7V7Z" fill="#5af0a0" opacity=".9"/><path d="M24 -8Q34 -26 40 -16" stroke="#5af0a0" fill="none"/><circle cx="40" cy="-16" r="3" fill="#bff6ff"/></g></g><g class="fish b"><g transform="translate(-120 -50)"><ellipse rx="20" ry="9" fill="#ff5a9a" opacity=".8"/><path d="M-20 0-30 -8V8Z" fill="#ff5a9a" opacity=".8"/><circle cx="12" cy="-2" r="2" fill="#fff"/></g></g><g class="bob"><path d="M60 -120q10 -14 20 0v20q-5 -6 -10 0q-5 -6 -10 0Z" fill="#c9a0ff" opacity=".7"/></g>${[-80, -20, 50].map(x => `<path d="M${x} -10q-6 -24 0 -40q6 -16 0 -30" stroke="#2a8a5a" stroke-width="5" fill="none"/>`).join('')}</g><rect x="-120" y="-150" width="240" height="18" fill="#bff6ff" opacity=".08"/>`);
+  // 16 — trạm liên lạc có chảo ăng-ten
+  svg += L(16, 1520, 600, 1, `<rect x="-70" y="-150" width="140" height="150" rx="8" fill="#14263f" stroke="#2a3f5c" stroke-width="4"/><rect x="-56" y="-136" width="112" height="56" rx="4" fill="#020a16"/><path d="M-50 -108q10 -20 20 0t20 0 20 0 20 0 20 0" stroke="#5af0a0" stroke-width="2" fill="none"/>${[-40, -10, 20, 48].map((x, k) => `<circle class="led ${'abc'[k % 3]}" cx="${x}" cy="-60" r="5" fill="${['#ffb347', '#18e0ff', '#ff5a9a', '#5af0a0'][k]}"/>`).join('')}<rect x="-50" y="-40" width="100" height="10" rx="4" fill="#06111f"/><path d="M0 -150V-180" stroke="#5a7090" stroke-width="5"/><g transform="translate(0 -196) rotate(-24)"><path d="M-46 0A46 22 0 0 0 46 0Z" fill="#e6e8ee"/><path d="M0 4V-26" stroke="#9ab8e8" stroke-width="2"/><circle cy="-28" r="4" fill="#ff4a4a" class="led"/></g>`);
+  // 20 — lõi AI phát sáng
+  svg += L(20, 1330, 760, 1, `<ellipse rx="80" ry="16" fill="#18e0ff" opacity=".15"/><rect x="-62" y="-30" width="124" height="30" rx="6" fill="#1a2b44"/><rect x="-62" y="-330" width="124" height="34" rx="6" fill="#1a2b44"/><rect x="-46" y="-296" width="92" height="266" fill="#18e0ff" opacity=".1"/><path d="M-46 -296V-30M46 -296V-30" stroke="#9ab8e8" stroke-width="3"/><circle class="pulse" cy="-163" r="70" fill="url(#core)"/><g class="spin"><ellipse cy="-163" rx="40" ry="12" fill="none" stroke="#bff6ff" stroke-width="2"/></g><g class="spin r"><ellipse cy="-163" rx="12" ry="40" fill="none" stroke="#bff6ff" stroke-width="2"/></g>${[-14, 0, 14].map((x, k) => `<circle class="led ${'abc'[k]}" cx="${x}" cy="-14" r="3" fill="#5af0a0"/>`).join('')}`);
+  // 3 — quả địa cầu toàn ký
+  svg += L(3, 340, 860, 1, `<ellipse rx="64" ry="14" fill="#5af0a0" opacity=".25"/><path d="M-40 0-30 -40H30L40 0Z" fill="#1a2b44"/><ellipse cy="-40" rx="30" ry="7" fill="#5af0a0" opacity=".7"/><path d="M-30 -40-60 -190H60L30 -40Z" fill="#5af0a0" opacity=".08"/><g transform="translate(0 -128)"><circle r="56" fill="#5af0a0" opacity=".12" stroke="#5af0a0" stroke-width="2"/><ellipse rx="56" ry="18" fill="none" stroke="#5af0a0" stroke-opacity=".6"/><ellipse rx="56" ry="38" fill="none" stroke="#5af0a0" stroke-opacity=".4"/><ellipse class="meri" rx="20" ry="56" fill="none" stroke="#5af0a0" stroke-dasharray="40 50"/><ellipse class="meri" rx="42" ry="56" fill="none" stroke="#5af0a0" stroke-dasharray="40 50" style="animation-delay:-2s"/><path d="M-30 -20C-10 -34 10 -10 22 -24S30 10 10 14-26 0-30 -20Z" fill="#5af0a0" opacity=".55"/></g>`);
+  // 21 — rô-bốt trợ lý
+  svg += L(21, 120, 890, 1, `<ellipse rx="60" ry="10" fill="#000" opacity=".4"/><g class="bob"><ellipse cy="-14" rx="44" ry="10" fill="#18e0ff" opacity=".3"/><path d="M-44 -30Q-48 -120 0 -124Q48 -120 44 -30Z" fill="#e6e8ee"/><path d="M-44 -30Q0 -16 44 -30" fill="#c9ccd6"/><rect x="-26" y="-100" width="52" height="32" rx="14" fill="#06111f"/><circle class="led" cx="-11" cy="-84" r="5" fill="#18e0ff"/><circle class="led" cx="11" cy="-84" r="5" fill="#18e0ff"/><path d="M-50 -70q-20 10 -16 36M50 -70q20 10 16 36" stroke="#c9ccd6" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M0 -124V-144" stroke="#9ab8e8" stroke-width="3"/><circle cy="-148" r="6" fill="#ffb347" class="led b"/></g>`);
+  // 8 — mô hình hệ mặt trời (orrery)
+  svg += L(8, 580, 860, 1, `<ellipse rx="90" ry="14" fill="#000" opacity=".35"/><path d="M-30 0-20 -60H20L30 0Z" fill="#2a3f5c"/><path d="M0 -60V-110" stroke="#9ab8e8" stroke-width="4"/><g transform="translate(0 -120) scale(1 .38)">${[[40, '#9ab8e8', 's'], [70, '#ff5a9a', ''], [100, '#ffb347', 'f'], [130, '#18e0ff', 's']].map(([r, c, sp], k) => `<g class="spin ${sp} ${k % 2 ? 'r' : ''}"><circle r="${r}" fill="none" stroke="#9ab8e8" stroke-opacity=".5" stroke-width="2"/><circle cx="${r}" r="${7 + k * 2}" fill="${c}"/></g>`).join('')}</g><circle cy="-120" r="18" fill="#ffd23f"/><circle cy="-120" r="28" fill="#ffd23f" opacity=".25"/>`);
+  // 0 — ghế chỉ huy (nhìn từ sau lưng)
+  svg += L(0, 800, 900, 1, `<ellipse cy="-6" rx="170" ry="20" fill="#000" opacity=".4"/><path d="M-30 0-20 -60H20L30 0Z" fill="#14263f"/><path d="M-150 -80Q-160 -110 -120 -114H120Q160 -110 150 -80L140 -60H-140Z" fill="#1a2b44"/><path d="M-110 -100Q-120 -290 0 -300Q120 -290 110 -100Z" fill="url(#chair)" stroke="#0a1426" stroke-width="4"/><path d="M-80 -120Q-88 -260 0 -268Q88 -260 80 -120" fill="none" stroke="#18e0ff" stroke-width="3" opacity=".75"/><rect x="-46" y="-330" width="92" height="44" rx="16" fill="#2e4462"/><path d="M-30 -312H30" stroke="#18e0ff" stroke-width="3"/><path d="M-120 -100Q-170 -110 -180 -150H-130M120 -100Q170 -110 180 -150H130" fill="#14263f" stroke="#2e4462" stroke-width="6"/><circle class="led" cx="-172" cy="-152" r="5" fill="#ffb347"/><circle class="led b" cx="172" cy="-152" r="5" fill="#18e0ff"/>`);
+  // 18 — trạm ghép nguyên tố (Nước, Lửa, Đất, Gió)
+  svg += L(18, 1010, 820, 1, `<ellipse rx="80" ry="14" fill="#000" opacity=".35"/><path d="M-40 0-30 -70H30L40 0Z" fill="#1a2b44"/><ellipse cy="-70" rx="70" ry="16" fill="#2a3f5c" stroke="#18e0ff" stroke-opacity=".6"/><path d="M0 -76V-150" stroke="#fff" stroke-width="3" opacity=".6" class="pulse"/><g transform="translate(0 -122)"><g class="spin f"><circle r="40" fill="none" stroke="#fff" stroke-opacity=".08"/><circle cx="40" r="10" fill="#3a8aff"/><circle cx="-40" r="10" fill="#ff6a2a"/><circle cy="40" r="10" fill="#5ac05a"/><circle cy="-40" r="10" fill="#e6f4ff"/></g></g><circle cy="-122" r="9" fill="#fff" class="pulse"/>`);
+  // 5 — máy làm kẹp giấy
+  svg += L(5, 1170, 880, 1, `<ellipse rx="80" ry="12" fill="#000" opacity=".35"/><rect x="-70" y="-120" width="140" height="120" rx="8" fill="#c9ccd6"/><rect x="-60" y="-110" width="120" height="44" rx="4" fill="#06111f"/><text x="0" y="-80" font-family="Rajdhani" font-weight="700" font-size="22" fill="#ffb347" text-anchor="middle">CLIPS 0042</text><rect x="-40" y="-56" width="80" height="22" rx="4" fill="#2a3f5c"/>${[-24, 0, 24].map((x, k) => `<path d="M${x - 6} -4V-24A6 6 0 0 1 ${x + 6} -24V-8A3.5 3.5 0 0 1 ${x - 1} -8V-20" stroke="#9ab8e8" stroke-width="2.5" fill="none" class="${k === 1 ? 'pulse' : ''}"/>`).join('')}<circle class="led" cx="56" cy="-44" r="4" fill="#5af0a0"/>`);
+  // 17 — xe tự hành sao Hoả
+  svg += L(17, 1450, 836, 1, `<ellipse rx="96" ry="12" fill="#000" opacity=".4"/>${[-60, 0, 60].map(x => `<circle cx="${x}" cy="-22" r="20" fill="#2a2a36" stroke="#5a5a6a" stroke-width="5"/><circle cx="${x}" cy="-22" r="5" fill="#9ab8e8"/>`).join('')}<path d="M-70 -40H70" stroke="#5a7090" stroke-width="5"/><rect x="-60" y="-80" width="120" height="36" rx="4" fill="#e6e8ee"/><rect x="-66" y="-90" width="132" height="10" fill="#1d4f9a"/><path d="M30 -80V-130" stroke="#9ab8e8" stroke-width="5"/><rect x="16" y="-148" width="34" height="20" rx="4" fill="#e6e8ee"/><circle cx="40" cy="-138" r="5" fill="#06111f"/><circle class="led" cx="24" cy="-138" r="3" fill="#ff4a4a"/><path d="M-40 -80V-110L-60 -120" stroke="#9ab8e8" stroke-width="3" fill="none"/>`);
+
+  document.getElementById('scene').innerHTML = svg;
+
+  // hiệu ứng: sao băng ngoài cửa kính + hạt bụi sáng trôi trong phòng
+  const meteors = []; let nextM = 1.5;
+  const motes = Array.from({ length: 34 }, () => ({ x: Math.random(), y: Math.random(), v: .01 + Math.random() * .02, p: Math.random() * 6 }));
+  window.ROOM = {
+    title: 'Orbital Deck', music: '8wLwxmjrZj8', links: LINKS,
+    fx(g, t, dt, W, H, S){
+      nextM -= dt;
+      if (nextM < 0){ nextM = 2.5 + Math.random() * 4; meteors.push({ x: 420 + Math.random() * 760, y: 90 + Math.random() * 160, life: 0 }); }
+      const [x0, y0, k] = S(380, 70), [x1, y1] = S(1220, 524);
+      g.save(); g.beginPath(); g.rect(x0, y0, x1 - x0, y1 - y0); g.clip();
+      for (let i = meteors.length - 1; i >= 0; i--){
+        const m = meteors[i]; m.life += dt; if (m.life > 1){ meteors.splice(i, 1); continue; }
+        const [hx, hy] = S(m.x - m.life * 300, m.y + m.life * 150); const a = Math.sin(m.life * Math.PI);
+        const gr = g.createLinearGradient(hx, hy, hx + 90 * k, hy - 45 * k); gr.addColorStop(0, `rgba(230,251,255,${a})`); gr.addColorStop(1, 'rgba(24,224,255,0)');
+        g.strokeStyle = gr; g.lineWidth = 2.2 * k; g.beginPath(); g.moveTo(hx, hy); g.lineTo(hx + 90 * k, hy - 45 * k); g.stroke();
+      }
+      g.restore();
+      for (const p of motes){ p.y -= p.v * dt; if (p.y < -.02){ p.y = 1.02; p.x = Math.random(); } const x = p.x * W + Math.sin(t * .5 + p.p) * 14, y = p.y * H; g.fillStyle = `rgba(160,240,255,${.25 + .2 * Math.sin(t * 2 + p.p)})`; g.beginPath(); g.arc(x, y, 1.5, 0, 7); g.fill(); }
+    }
+  };
+})();
+</script>
+<script src="../room.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>⌈ＮＥＯＮ　ＡＬＬＥＹ⌋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&amp;family=Share+Tech+Mono&amp;family=Noto+Sans+JP:wght@900&amp;text=%E9%9B%BB%E8%84%B3%E5%A4%9C%E5%B8%82%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E9%85%92%E7%8C%AB%E8%9B%99%E9%BE%8D%E5%96%B6%E6%A5%AD%E4%B8%AD&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../room.css">
+<style>
+  :root{--bg:#07020f;--ink:#e9f6ff;--accent:#ff2a6d;--accent-soft:rgba(255,42,109,.45);--hud-bg:rgba(10,3,20,.78);--hud-ink-on:#12031a;
+    --hud-font:400 15px 'Share Tech Mono',monospace;--btn-r:2px;--tip-bg:rgba(8,2,18,.92);--tip-font:'Orbitron',sans-serif;--tip-size:15px;--tip-r:2px;
+    --box-bg:linear-gradient(180deg,#140428,#07020f);--box-r:2px;--title-font:800 22px 'Orbitron',sans-serif;--hint-font:400 15px 'Share Tech Mono',monospace;--enter:#ff2a6d;
+    --hover-filter:drop-shadow(-3px 0 0 rgba(255,0,80,.75)) drop-shadow(3px 0 0 rgba(0,240,255,.75)) drop-shadow(0 0 10px #ff2a6d)}
+  .room-title{font:800 clamp(14px,2vw,20px) 'Orbitron',sans-serif;letter-spacing:.4em;color:#fff;text-shadow:-2px 0 #ff2a6d,2px 0 #05d9e8,0 0 18px #ff2a6d}
+  .room-title span{display:block;font:400 12px 'Share Tech Mono',monospace;letter-spacing:.5em;color:#05d9e8;text-align:center;margin-top:4px;text-shadow:none}
+  .jp{font-family:'Noto Sans JP',sans-serif;font-weight:900}
+  .flk{animation:flk 6s infinite}
+  .flk.b{animation-delay:-2.7s;animation-duration:8.5s}
+  .flk.c{animation-delay:-4.1s;animation-duration:5.2s}
+  @keyframes flk{0%,86%,100%{opacity:1}87%{opacity:.25}88%{opacity:1}90%{opacity:.4}91%{opacity:1}}
+  .led{animation:led 1.2s steps(1) infinite}.led.b{animation-delay:-.6s}.led.c{animation-delay:-.3s;animation-duration:.8s}
+  @keyframes led{50%{opacity:.15}}
+  .blink{animation:led 1.6s steps(1) infinite}
+  .koi{animation:koi 14s ease-in-out infinite alternate}
+  @keyframes koi{0%{transform:translate(-60px,10px) rotate(-6deg)}50%{transform:translate(40px,-14px) rotate(5deg)}100%{transform:translate(90px,6px) rotate(-3deg)}}
+  .holo{animation:holo 3s ease-in-out infinite}
+  @keyframes holo{0%,100%{opacity:.85}50%{opacity:.6}}
+  .hover{animation:hov 3s ease-in-out infinite alternate}
+  @keyframes hov{to{transform:translateY(-10px)}}
+  .scroll{animation:scroll 2.6s linear infinite}
+  @keyframes scroll{to{transform:translateY(-40px)}}
+  .spin{transform-box:fill-box;transform-origin:center;animation:spin 3s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .trail{stroke-dasharray:60 400;animation:trail 2.4s linear infinite}
+  @keyframes trail{to{stroke-dashoffset:-460}}
+</style>
+</head>
+<body>
+<div class="enter"></div>
+<div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Con hẻm neon trong thành phố Cyberpunk, trời mưa"></svg></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="room-title" aria-hidden="true">NEON ALLEY<span>夜市 · 電脳</span></div>
+<nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> DANH SÁCH</span></button></nav>
+<button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
+<div class="hint" id="hint"></div>
+<div class="tip" id="tip" aria-hidden="true"></div>
+<div class="list" id="list" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="list-bg" data-close></div><div class="list-box" id="listBox"><div class="list-head"><h2 id="listTitle">NEON ALLEY</h2><p id="listCount"></p></div><ol></ol><button class="list-x" data-close aria-label="Đóng">✕</button></div></div>
+<div class="tv" id="tv"><div class="tv-bar"><span class="tv-t">♪ night.fm</span><button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt nhạc">off</button><button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Ẩn video">–</button></div><div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div></div>
+<script>
+(() => {
+  /* ======= LINK TRONG PHÒNG (thứ tự = data-i của đồ vật) ======= */
+  const LINKS = [
+    { n: 'Hacker Typer', d: 'Gõ bừa phím nào cũng thành hacker như trong phim', u: 'https://hackertyper.net/' },
+    { n: 'GeekTyper', d: 'Giả lập màn hình hacker đủ kiểu', u: 'https://geektyper.com/' },
+    { n: 'Bitburner', d: 'Game lập trình: làm hacker trong thành phố cyberpunk', u: 'https://bitburner-official.github.io/' },
+    { n: 'Untrusted', d: 'Sửa code JavaScript để thoát khỏi mê cung', u: 'https://untrustedgame.com/' },
+    { n: 'Flexbox Froggy', d: 'Đưa ếch về lá sen bằng CSS', u: 'https://flexboxfroggy.com/' },
+    { n: 'CSS Diner', d: 'Gọi món bằng CSS selector', u: 'https://flukeout.github.io/' },
+    { n: 'Grid Garden', d: 'Tưới vườn cà rốt bằng CSS Grid', u: 'https://cssgridgarden.com/' },
+    { n: 'Monkeytype', d: 'Đo tốc độ gõ phím, giao diện tối giản', u: 'https://monkeytype.com/' },
+    { n: 'TypeRacer', d: 'Đua xe bằng tốc độ gõ phím với người khắp nơi', u: 'https://play.typeracer.com/' },
+    { n: 'TETR.IO', d: 'Xếp gạch online phong cách neon', u: 'https://tetr.io/' },
+    { n: 'slither.io', d: 'Rắn neon săn mồi cùng cả thế giới', u: 'https://slither.io/' },
+    { n: 'powerline.io', d: 'Rắn ánh sáng kiểu Tron, cắt đường đối thủ', u: 'https://powerline.io/' },
+    { n: 'Neonflames', d: 'Vẽ lửa neon rực rỡ bằng chuột', u: 'https://29a.ch/sandbox/2011/neonflames/' },
+    { n: 'Silk', d: 'Vẽ những dải lụa phát sáng đối xứng', u: 'http://weavesilk.com/' },
+    { n: 'Nightride FM', d: 'Radio synthwave phát 24/7', u: 'https://nightride.fm/' },
+    { n: 'Rainy Mood', d: 'Tiếng mưa đêm để thư giãn', u: 'https://rainymood.com/' },
+    { n: 'This Person Does Not Exist', d: 'Gương mặt do AI vẽ, người này không có thật', u: 'https://thispersondoesnotexist.com/' },
+    { n: 'Quick, Draw!', d: 'Vẽ thật nhanh, AI đoán xem bạn vẽ gì', u: 'https://quickdraw.withgoogle.com/' },
+    { n: 'Neural Network Playground', d: 'Nghịch một mạng nơ-ron ngay trên web', u: 'https://playground.tensorflow.org/' },
+    { n: 'Wired Sound for Wired People', d: 'Trang fan Serial Experiments Lain — The Wired', u: 'https://fauux.neocities.org/' },
+    { n: 'Neocities', d: 'Tự làm trang web cá nhân kiểu Internet ngày xưa', u: 'https://neocities.org/' },
+    { n: 'Human Benchmark', d: 'Đo phản xạ, trí nhớ, độ nhanh tay', u: 'https://humanbenchmark.com/' },
+    { n: 'Incredibox', d: 'Kéo thả biểu tượng để làm ban nhạc beatbox', u: 'https://www.incredibox.com/' },
+    { n: 'Bruno Simon', d: 'Lái chiếc xe nhỏ đi khắp thế giới 3D', u: 'https://bruno-simon.com/' },
+  ];
+  /* ============================================================= */
+
+  // số ngẫu nhiên cố định để thành phố lần nào cũng giống nhau
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const neon = (d, c, w = 4) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${w * 4}" stroke-opacity=".15" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w * 1.8}" stroke-opacity=".45" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#fff" stroke-width="${w * .7}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const ntext = (t, x, y, size, c, cls = 'jp', extra = '') => `<g class="${extra}"><text x="${x}" y="${y}" font-size="${size}" class="${cls}" fill="${c}" opacity=".35" stroke="${c}" stroke-width="${size * .16}" text-anchor="middle">${t}</text><text x="${x}" y="${y}" font-size="${size}" class="${cls}" fill="#fff" stroke="${c}" stroke-width="${size * .04}" text-anchor="middle">${t}</text></g>`;
+  const L = (i, x, y, s, inner) => `<g transform="translate(${x} ${y}) scale(${s})"><a class="lk" data-i="${i}"><g class="pv">${inner}</g></a></g>`;
+
+  let svg = `<defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05010d"/><stop offset=".55" stop-color="#1a0630"/><stop offset="1" stop-color="#4a0c4a"/></linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a0a26"/><stop offset="1" stop-color="#05020a"/></linearGradient>
+    <linearGradient id="wallL" x1="0" x2="1"><stop offset="0" stop-color="#0d0618"/><stop offset="1" stop-color="#1c0b2c"/></linearGradient>
+    <linearGradient id="wallR" x1="1" x2="0"><stop offset="0" stop-color="#0d0618"/><stop offset="1" stop-color="#1c0b2c"/></linearGradient>
+    <radialGradient id="haze" cx=".5" cy=".62" r=".5"><stop offset="0" stop-color="#ff2a6d" stop-opacity=".45"/><stop offset="1" stop-color="#ff2a6d" stop-opacity="0"/></radialGradient>
+    <linearGradient id="refl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+    <clipPath id="winClip"><rect x="-58" y="-150" width="116" height="140" rx="4"/></clipPath>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <ellipse cx="800" cy="560" rx="760" ry="300" fill="url(#haze)"/>`;
+  // nhà chọc trời phía xa (2 lớp) có cửa sổ sáng + đèn đỏ trên nóc
+  [[.55, '#140828', 300, 470], [.8, '#1d0c36', 360, 520]].forEach(([k, col, top, base]) => {
+    let x = 380;
+    while (x < 1240){
+      const w = 34 + rnd() * 70, h = (base - top) * (.45 + rnd() * .75); const y = base - h;
+      svg += `<rect x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${w.toFixed(0)}" height="${(h + 80).toFixed(0)}" fill="${col}"/>`;
+      for (let wy = y + 8; wy < base; wy += 9) for (let wx = x + 5; wx < x + w - 5; wx += 8) if (rnd() < .22 * k) svg += `<rect x="${wx.toFixed(0)}" y="${wy.toFixed(0)}" width="3" height="4" fill="${['#05d9e8', '#ff71ce', '#ffd23f', '#9b5cff'][Math.floor(rnd() * 4)]}" opacity="${(.4 + rnd() * .5).toFixed(2)}"/>`;
+      if (rnd() < .5) svg += `<path d="M${(x + w / 2).toFixed(0)} ${y.toFixed(0)}v-${(10 + rnd() * 30).toFixed(0)}" stroke="${col}" stroke-width="3"/><circle class="led ${rnd() < .5 ? 'b' : ''}" cx="${(x + w / 2).toFixed(0)}" cy="${(y - 6).toFixed(0)}" r="3" fill="#ff3040"/>`;
+      x += w + 4 + rnd() * 10;
+    }
+  });
+  // mặt đường ướt phản chiếu đèn
+  svg += `<path d="M0 900L640 520H960L1600 900Z" fill="url(#road)"/>
+  <g opacity=".5">${[[-1, 590], [1, 1010]].map(([d, x]) => `<path d="M${x} 520 ${x + d * 260} 900" stroke="#ffd23f" stroke-width="3" stroke-dasharray="26 30" opacity=".5"/>`).join('')}<path d="M800 520V900" stroke="#fff" stroke-width="4" stroke-dasharray="30 40" opacity=".35"/></g>
+  <g opacity=".55" filter="url(#soft)">${[[250, '#ff2a6d'], [430, '#05d9e8'], [690, '#ffd23f'], [1160, '#9b5cff'], [1330, '#05d9e8'], [1470, '#ff71ce']].map(([x, c]) => `<rect x="${x - 18}" y="640" width="36" height="260" fill="${c}"/>`).join('')}</g>`;
+  // 2 dãy nhà hai bên hẻm
+  svg += `<path d="M0 0H560V560L640 520V900H0Z" fill="url(#wallL)"/><path d="M1600 0H1040V560L960 520V900H1600Z" fill="url(#wallR)"/>
+  <path d="M560 0V560" stroke="#2a1440" stroke-width="6"/><path d="M1040 0V560" stroke="#2a1440" stroke-width="6"/>`;
+  for (let y = 40; y < 520; y += 70) for (let x = 30; x < 540; x += 90) if (rnd() < .55) svg += `<rect x="${x}" y="${y}" width="56" height="40" fill="#120822" stroke="#24123a"/><rect x="${x + 4}" y="${y + 4}" width="48" height="32" fill="${rnd() < .4 ? '#2a1a40' : '#0a0512'}"/>`;
+  for (let y = 40; y < 520; y += 70) for (let x = 1070; x < 1580; x += 90) if (rnd() < .55) svg += `<rect x="${x}" y="${y}" width="56" height="40" fill="#120822" stroke="#24123a"/><rect x="${x + 4}" y="${y + 4}" width="48" height="32" fill="${rnd() < .4 ? '#2a1a40' : '#0a0512'}"/>`;
+  // cục nóng điều hoà + ống + cầu thang thoát hiểm
+  [[40, 470], [470, 120], [1500, 470], [1080, 120], [1450, 120]].forEach(([x, y]) => { svg += `<rect x="${x}" y="${y}" width="58" height="40" rx="3" fill="#2a2238"/><circle class="spin" cx="${x + 20}" cy="${y + 20}" r="13" fill="none" stroke="#5a4a70" stroke-width="3" stroke-dasharray="6 5"/><rect x="${x + 40}" y="${y + 8}" width="12" height="24" fill="#1a1426"/>`; });
+  svg += `<g stroke="#3a2a50" stroke-width="3" fill="none"><path d="M1060 300H1240M1060 380H1240M1080 300V380M1220 300V380"/>${[0, 1, 2, 3, 4, 5].map(k => `<path d="M${1080 + k * 28} 300v80"/>`).join('')}</g>`;
+  // dây điện + đèn lồng giăng ngang hẻm
+  svg += `<g fill="none" stroke="#120a1c" stroke-width="2.5"><path d="M560 120Q800 200 1040 110"/><path d="M560 230Q800 300 1040 220"/><path d="M560 60Q820 130 1040 40"/></g>`;
+  [[620, 150, '#ff2a6d'], [690, 170, '#ffd23f'], [760, 181, '#ff2a6d'], [840, 180, '#ffd23f'], [910, 168, '#ff2a6d'], [980, 140, '#ffd23f'], [640, 262, '#05d9e8'], [740, 280, '#ff71ce'], [860, 280, '#05d9e8'], [960, 258, '#ff71ce']].forEach(([x, y, c], i) => {
+    svg += `<path d="M${x} ${y - 14}v8" stroke="#120a1c" stroke-width="2"/><ellipse class="flk ${'abc'[i % 3]}" cx="${x}" cy="${y + 6}" rx="13" ry="16" fill="${c}" opacity=".9"/><ellipse cx="${x}" cy="${y + 6}" rx="26" ry="28" fill="${c}" opacity=".12"/><rect x="${x - 6}" y="${y - 12}" width="12" height="4" fill="#2a1a10"/>`;
+  });
+
+  /* ---------- ĐỒ VẬT CÓ LINK ---------- */
+  // 19 — biển neon dọc "電脳"
+  svg += L(19, 110, 380, 1, `<rect x="-38" y="-250" width="76" height="250" rx="6" fill="#12051e" stroke="#ff2a6d" stroke-width="3"/>${ntext('電', 0, -170, 58, '#ff2a6d', 'jp', 'flk')}${ntext('脳', 0, -95, 58, '#ff2a6d', 'jp', 'flk b')}<circle class="led" cx="0" cy="-30" r="6" fill="#05d9e8"/>`);
+  // 15 — ô cửa sổ có mưa
+  svg += L(15, 300, 300, 1, `<rect x="-62" y="-154" width="124" height="148" rx="6" fill="#1a1028" stroke="#3a2a50" stroke-width="4"/><g clip-path="url(#winClip)"><rect x="-58" y="-150" width="116" height="140" fill="#0c1430"/><circle cx="20" cy="-110" r="26" fill="#ffd23f" opacity=".25"/>${Array.from({ length: 14 }, (_, k) => `<path class="scroll" d="M${-54 + k * 8.5} ${-150 + (k * 37) % 60}l-6 22" stroke="#9ad7ff" stroke-width="1.6" opacity=".6"/>`).join('')}<path d="M-58 -80H58M0 -150V-10" stroke="#3a2a50" stroke-width="4"/></g><rect x="-66" y="-10" width="132" height="10" fill="#2a1a3a"/>`);
+  // 4 — biển con ếch neon hồng
+  svg += L(4, 440, 250, 1, `<rect x="-70" y="-120" width="140" height="120" rx="12" fill="#0e0418" stroke="#2bff88" stroke-width="2" stroke-opacity=".5"/><g class="flk c">${neon('M-40 -40Q-40 -78 0 -80Q40 -78 40 -40Q40 -20 0 -20Q-40 -20 -40 -40Z', '#2bff88', 3)}${neon('M-22 -78a9 9 0 1 1 0 .1M22 -78a9 9 0 1 1 0 .1', '#2bff88', 2.5)}${neon('M-16 -42Q0 -32 16 -42', '#ff71ce', 2.5)}</g>${ntext('蛙', 0, -2, 26, '#2bff88')}`);
+  // 7 — bàn phím neon trên tường
+  svg += L(7, 330, 470, 1, `<rect x="-90" y="-60" width="180" height="60" rx="8" fill="#0e0418" stroke="#05d9e8" stroke-width="3"/>${[0, 1, 2].map(r => Array.from({ length: 8 - r }, (_, k) => `<rect class="${(k + r) % 3 === 0 ? 'led' : ''} ${(k * r) % 2 ? 'b' : ''}" x="${-80 + r * 7 + k * 21}" y="${-52 + r * 17}" width="17" height="13" rx="2" fill="${(k + r) % 4 === 0 ? '#ff2a6d' : '#05d9e8'}" opacity=".85"/>`).join('')).join('')}`);
+  // 5 — quầy mì ramen + bảng menu
+  svg += L(5, 175, 760, 1, `<rect x="-120" y="-200" width="240" height="20" fill="#ff2a6d"/><path d="M-130 -180H130L118 -150H-118Z" fill="#c2185b"/>${[-90, -45, 0, 45, 90].map(x => `<rect x="${x - 18}" y="-150" width="36" height="46" fill="#f3e2c8" opacity=".85"/><path d="M${x - 18} -150h36" stroke="#c2185b" stroke-width="3"/>`).join('')}${ntext('ラーメン', 0, -158, 22, '#ffd23f')}<rect x="-120" y="-104" width="240" height="104" fill="#2a1420"/><rect x="-120" y="-104" width="240" height="10" fill="#5a2a30"/><g transform="translate(0 -54)"><ellipse rx="40" ry="12" fill="#fff"/><ellipse ry="9" rx="32" fill="#e8a040"/><path d="M-20 -2q10 6 20 0t20 0" stroke="#fff3c8" stroke-width="3" fill="none"/><path d="M14 -8 34 -40M20 -8 42 -36" stroke="#c9a070" stroke-width="3"/><path class="scroll" d="M-10 -14q-6 -10 0 -20t0 -20M6 -14q-6 -10 0 -20t0 -20" stroke="#fff" stroke-width="2" fill="none" opacity=".4"/></g>`);
+  // 0 — laptop trên thùng gỗ
+  svg += L(0, 370, 820, 1, `<rect x="-70" y="-80" width="140" height="80" fill="#3a2a1a" stroke="#1a1006" stroke-width="3"/><path d="M-70 -40H70M-70 -60H70" stroke="#2a1a0a" stroke-width="2"/><path d="M-50 -80 -60 -150H60L50 -80Z" fill="#1a1a24"/><rect x="-48" y="-146" width="96" height="60" fill="#021a08"/>${[0, 1, 2, 3, 4, 5].map(k => `<rect class="${k % 2 ? 'led' : ''}" x="-42" y="${-140 + k * 9}" width="${30 + ((k * 23) % 50)}" height="4" fill="#2bff88" opacity=".85"/>`).join('')}<rect x="-62" y="-86" width="124" height="8" rx="2" fill="#2a2a36"/>`);
+  // 1 — chồng màn hình CRT chạy chữ xanh
+  svg += L(1, 525, 700, 1, `${[[-40, 0, 80], [40, 0, 70], [0, -66, 74]].map(([x, y, w], k) => `<g transform="translate(${x} ${y})"><rect x="${-w / 2}" y="-66" width="${w}" height="64" rx="6" fill="#2a2a36" stroke="#141420" stroke-width="3"/><rect x="${-w / 2 + 7}" y="-58" width="${w - 14}" height="46" rx="3" fill="#031208"/>${[0, 1, 2, 3].map(r => `<rect class="${(r + k) % 2 ? 'led b' : ''}" x="${-w / 2 + 11}" y="${-53 + r * 10}" width="${(w - 26) * (.4 + ((r * 7 + k) % 5) / 8)}" height="4" fill="${k === 2 ? '#ff71ce' : '#2bff88'}"/>`).join('')}</g>`).join('')}`);
+  // 6 — chậu cây neon (cà rốt phát sáng)
+  svg += L(6, 60, 850, 1, `<path d="M-48 -70H48L40 0H-40Z" fill="#2a1440" stroke="#9b5cff" stroke-width="3"/>${[-26, 0, 24].map((x, k) => `<path d="M${x} -70l-6 -40h12z" fill="#ff8a00"/><path d="M${x} -110q-10 -26 -4 -40M${x} -110q8 -22 12 -36M${x} -110q0 -24 -2 -44" stroke="#2bff88" stroke-width="4" fill="none" class="${k === 1 ? 'flk' : ''}"/>`).join('')}`);
+  // 8 — xe máy đỏ
+  svg += L(8, 300, 900, 1, `<ellipse cx="0" cy="-6" rx="150" ry="14" fill="#000" opacity=".5"/><circle cx="-96" cy="-46" r="40" fill="#111" stroke="#2a2a2a" stroke-width="8"/><circle cx="96" cy="-46" r="40" fill="#111" stroke="#2a2a2a" stroke-width="8"/><circle cx="-96" cy="-46" r="14" fill="#ff2a6d"/><circle cx="96" cy="-46" r="14" fill="#ff2a6d"/><path d="M-120 -70Q-110 -130 -20 -136Q70 -140 120 -96L130 -60H-60Q-100 -64 -120 -70Z" fill="#e01e37"/><path d="M-40 -130Q20 -150 70 -126L60 -110H-30Z" fill="#ff5a6a"/><path d="M-120 -70H130" stroke="#ff2a6d" stroke-width="3"/><path d="M120 -96 150 -120" stroke="#ccc" stroke-width="5"/><circle class="led" cx="148" cy="-92" r="7" fill="#fff6c8"/>`);
+  // 9 — biển khối gạch tetris
+  svg += L(9, 1180, 250, 1, `<rect x="-90" y="-130" width="180" height="130" rx="8" fill="#0e0418" stroke="#9b5cff" stroke-width="2" stroke-opacity=".6"/>${[[-60, -100, '#05d9e8'], [-36, -100, '#05d9e8'], [-12, -100, '#05d9e8'], [12, -100, '#05d9e8'], [-36, -76, '#ff2a6d'], [-12, -76, '#ff2a6d'], [-12, -52, '#ff2a6d'], [12, -52, '#ffd23f'], [36, -52, '#ffd23f'], [36, -76, '#ffd23f'], [-60, -28, '#2bff88'], [-36, -28, '#2bff88'], [12, -28, '#9b5cff'], [36, -28, '#9b5cff'], [60, -28, '#9b5cff']].map(([x, y, c], k) => `<rect class="${k % 5 === 0 ? 'flk' : ''}" x="${x - 11}" y="${y}" width="22" height="22" rx="2" fill="${c}" stroke="#fff" stroke-width="1.5"/>`).join('')}`);
+  // 10 — con rắn neon uốn lượn
+  svg += L(10, 1440, 300, 1, `<rect x="-100" y="-140" width="200" height="140" rx="70" fill="#0e0418" stroke="#ffd23f" stroke-width="2" stroke-opacity=".4"/><g class="flk b">${neon('M-70 -40C-40 -110 -10 -10 20 -70S70 -110 70 -60', '#ffd23f', 5)}<circle cx="70" cy="-62" r="8" fill="#fff"/><circle cx="73" cy="-64" r="2.5" fill="#000"/>${neon('M78 -58l12 4', '#ff2a6d', 2)}</g>`);
+  // 12 — hình vẽ lửa neon trên tường
+  svg += L(12, 1300, 470, 1, `<rect x="-80" y="-150" width="160" height="150" fill="#14081e" opacity=".6"/><g class="flk c">${neon('M0 -10C-50 -30 -40 -90 -10 -120C-10 -90 10 -86 14 -104C40 -80 50 -30 0 -10Z', '#ff8a00', 4)}${neon('M0 -24C-20 -36 -16 -66 0 -78C6 -60 22 -54 0 -24Z', '#ff2a6d', 3)}</g>`);
+  // 21 — máy bán nước tự động
+  svg += L(21, 1235, 740, 1, `<rect x="-62" y="-230" width="124" height="230" rx="6" fill="#d8dce8" stroke="#8a90a0" stroke-width="3"/><rect x="-54" y="-220" width="108" height="140" fill="#081a2a"/>${[0, 1, 2, 3].map(r => [0, 1, 2, 3].map(c => `<rect x="${-48 + c * 26}" y="${-212 + r * 33}" width="18" height="26" rx="4" fill="${['#ff2a6d', '#05d9e8', '#ffd23f', '#2bff88'][(r + c) % 4]}"/>`).join('')).join('')}<rect x="-54" y="-220" width="108" height="140" fill="#9ad7ff" opacity=".12"/><rect x="-46" y="-70" width="60" height="30" fill="#141420"/><rect class="led" x="24" y="-72" width="22" height="10" fill="#ff2a6d"/><rect x="24" y="-56" width="22" height="16" fill="#2a2a36"/><rect x="-54" y="-34" width="108" height="24" fill="#141420"/>`);
+  // 3 — cánh cửa khoá bàn phím số
+  svg += L(3, 1100, 640, 1, `<rect x="-60" y="-200" width="120" height="200" fill="#1a1428" stroke="#3a2a50" stroke-width="4"/><rect x="-48" y="-188" width="96" height="176" fill="#241a36"/><path d="M-48 -100H48" stroke="#ff2a6d" stroke-width="2" class="flk"/><rect x="62" y="-130" width="30" height="46" rx="3" fill="#0e0418" stroke="#05d9e8"/>${[0, 1, 2].map(r => [0, 1].map(c => `<rect x="${67 + c * 11}" y="${-124 + r * 12}" width="8" height="8" fill="#05d9e8" opacity=".7"/>`).join('')).join('')}<circle class="led" cx="77" cy="-90" r="3" fill="#ff2a6d"/>`);
+  // 2 — tủ máy chủ nhấp nháy
+  svg += L(2, 1440, 760, 1, `<rect x="-70" y="-250" width="140" height="250" rx="4" fill="#12121c" stroke="#2a2a3a" stroke-width="4"/>${Array.from({ length: 9 }, (_, r) => `<rect x="-60" y="${-240 + r * 26}" width="120" height="20" fill="#1c1c2a"/>${[0, 1, 2, 3, 4].map(c => `<circle class="led ${'abc'[(r + c) % 3]}" cx="${-48 + c * 10}" cy="${-230 + r * 26}" r="2.6" fill="${(r + c) % 3 ? '#2bff88' : '#05d9e8'}"/>`).join('')}<rect x="10" y="${-235 + r * 26}" width="40" height="10" fill="#0a0a12"/>`).join('')}`);
+  // 20 — buốt điện thoại / buồng lướt "NET"
+  svg += L(20, 1545, 850, 1, `<rect x="-55" y="-260" width="110" height="260" rx="8" fill="#0e3a4a" stroke="#05d9e8" stroke-width="3"/><rect x="-45" y="-222" width="90" height="150" fill="#9ad7ff" opacity=".18"/><rect x="-45" y="-252" width="90" height="24" fill="#05d9e8"/><text x="0" y="-234" text-anchor="middle" font-family="Orbitron" font-weight="800" font-size="16" fill="#03141c">NET</text><rect x="-24" y="-180" width="48" height="36" fill="#021a10"/><rect class="led" x="-18" y="-172" width="24" height="4" fill="#2bff88"/><rect x="-30" y="-130" width="60" height="16" fill="#2a2a36"/>`);
+  // 22 — loa + bàn DJ beatbox
+  svg += L(22, 1340, 880, 1, `<rect x="-120" y="-120" width="80" height="120" rx="6" fill="#1a1426"/><circle cx="-80" cy="-80" r="26" fill="#0a0812" stroke="#ff2a6d" stroke-width="3"/><circle class="led" cx="-80" cy="-80" r="10" fill="#ff2a6d"/><circle cx="-80" cy="-24" r="14" fill="#0a0812" stroke="#05d9e8" stroke-width="2"/><rect x="-30" y="-60" width="110" height="60" rx="6" fill="#2a2238"/><circle class="spin" cx="0" cy="-30" r="20" fill="#111" stroke="#9b5cff" stroke-width="2" stroke-dasharray="8 4"/><circle class="spin" cx="52" cy="-30" r="20" fill="#111" stroke="#9b5cff" stroke-width="2" stroke-dasharray="8 4"/>`);
+  // 16 — người cầm ô phát sáng giữa phố
+  svg += L(16, 660, 640, 1, `<ellipse cy="-2" rx="34" ry="6" fill="#000" opacity=".5"/><path d="M-14 0V-60H14V0" fill="#0a0612"/><path d="M-20 -60Q-22 -110 0 -112Q22 -110 20 -60Z" fill="#120a1c"/><circle cy="-120" r="13" fill="#120a1c"/><path d="M-62 -140Q0 -190 62 -140Z" fill="#05d9e8" opacity=".85" class="holo"/><path d="M-62 -140Q0 -190 62 -140" stroke="#fff" stroke-width="2" fill="none"/><path d="M0 -150V-80" stroke="#cfefff" stroke-width="2"/>`);
+  // 23 — xe taxi bay lơ lửng
+  svg += L(23, 820, 590, 1, `<g class="hover"><ellipse cy="10" rx="70" ry="8" fill="#ffd23f" opacity=".25"/><path d="M-76 -10Q-70 -34 -40 -38L-24 -62H34L54 -38Q80 -34 82 -10Z" fill="#ffd23f"/><path d="M-20 -58H30L46 -38H-34Z" fill="#0a2a3a"/><rect x="-80" y="-14" width="164" height="12" rx="6" fill="#c9a020"/><circle class="led" cx="78" cy="-24" r="5" fill="#fff6c8"/><circle class="led b" cx="-74" cy="-22" r="5" fill="#ff2a6d"/><rect x="-8" y="-72" width="22" height="10" fill="#ff2a6d"/></g>`);
+  // 11 — xe moto ánh sáng kéo vệt kiểu Tron
+  svg += L(11, 990, 700, 1, `<path class="trail" d="M-260 -10H-30" stroke="#05d9e8" stroke-width="6" fill="none"/><path d="M-260 -10H-30" stroke="#05d9e8" stroke-width="2" opacity=".35"/><ellipse cx="0" cy="-26" rx="44" ry="18" fill="#0a1a26" stroke="#05d9e8" stroke-width="4"/><circle cx="-30" cy="-12" r="14" fill="#05101a" stroke="#05d9e8" stroke-width="4"/><circle cx="30" cy="-12" r="14" fill="#05101a" stroke="#05d9e8" stroke-width="4"/><path d="M-20 -40Q0 -56 24 -40" stroke="#fff" stroke-width="3" fill="none"/>`);
+  // 13 — cá koi hologram + dải lụa sáng trên trời
+  svg += L(13, 800, 110, 1, `<g class="koi"><g class="holo"><path d="M-70 0C-40 -30 30 -30 60 -4C30 18 -40 22 -70 0Z" fill="#ff71ce" opacity=".55"/><path d="M60 -4 92 -24 86 0 92 22Z" fill="#05d9e8" opacity=".6"/><path d="M-40 -2C-20 -14 10 -14 30 -4" stroke="#fff" stroke-width="2" fill="none"/><circle cx="-52" cy="-4" r="4" fill="#fff"/>${neon('M-140 30C-80 0 -20 60 40 30S140 0 180 40', '#9b5cff', 2)}</g></g>`);
+  // 18 — bảng quảng cáo hologram bộ não
+  svg += L(18, 1265, 125, 1, `<rect x="-110" y="-110" width="220" height="110" fill="#05d9e8" opacity=".12" stroke="#05d9e8" stroke-width="2"/><g class="holo">${neon('M-30 -30C-60 -30 -60 -70 -36 -76C-36 -100 0 -100 6 -86C24 -102 56 -86 46 -66C66 -56 56 -26 30 -30Z', '#05d9e8', 2.5)}${neon('M0 -86V-34M-30 -60H40', '#ff71ce', 1.5)}</g><path d="M-110 -110H110" stroke="#fff" stroke-width="1" opacity=".5" class="scroll"/>`);
+  // 17 — tường graffiti vẽ phun sơn
+  svg += L(17, 470, 600, 1, `<rect x="-90" y="-120" width="180" height="120" fill="#1a1028"/><path d="M-70 -40C-60 -90 -20 -100 0 -70S40 -30 60 -80" stroke="#ff71ce" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M-60 -20Q0 -60 70 -30" stroke="#05d9e8" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="40" cy="-96" r="12" fill="#ffd23f"/><path d="M-80 -10l6 -4M50 -14l4 6" stroke="#ff71ce" stroke-width="3"/>`);
+  // 14 — tháp ăng-ten phát radio trên nóc
+  svg += L(14, 1510, 420, 1, `<path d="M-30 0 0 -170 30 0" fill="none" stroke="#5a4a70" stroke-width="4"/><path d="M-22 -40H22M-14 -90H14M-8 -130H8" stroke="#5a4a70" stroke-width="3"/><circle class="led" cy="-174" r="7" fill="#ff3040"/><g class="flk" fill="none" stroke="#ff71ce" stroke-width="3" opacity=".8"><path d="M18 -184a24 24 0 0 1 0 22"/><path d="M28 -194a40 40 0 0 1 0 42"/><path d="M-18 -184a24 24 0 0 0 0 22"/><path d="M-28 -194a40 40 0 0 0 0 42"/></g>`);
+  // mưa phủ + vũng nước loáng (trang trí)
+  svg += `<g opacity=".35">${[[700, 760, 90], [1000, 820, 120], [540, 870, 80]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .12}" fill="url(#refl)"/>`).join('')}</g>`;
+
+  document.getElementById('scene').innerHTML = svg;
+
+  // hiệu ứng: mưa xiên + hơi nước bốc lên từ cống
+  const drops = Array.from({ length: 260 }, () => ({ x: Math.random(), y: Math.random(), v: .7 + Math.random() * .6, l: 10 + Math.random() * 16 }));
+  const steam = Array.from({ length: 16 }, () => ({ p: Math.random(), x: Math.random() }));
+  window.ROOM = {
+    title: 'Neon Alley', music: '4xDzrJKXOOY', links: LINKS,
+    fx(g, t, dt, W, H, S){
+      g.lineCap = 'round';
+      for (const d of drops){
+        d.y += d.v * dt * 1.4; d.x -= d.v * dt * .18; if (d.y > 1.05){ d.y = -.05; d.x = Math.random() * 1.1; }
+        const x = d.x * W, y = d.y * H;
+        g.strokeStyle = `rgba(170,215,255,${.18 + d.v * .2})`; g.lineWidth = 1.2; g.beginPath(); g.moveTo(x, y); g.lineTo(x - d.l * .2, y + d.l); g.stroke();
+      }
+      const [sx, sy, k] = S(800, 760);
+      for (const s of steam){ s.p += dt * .12; if (s.p > 1){ s.p = 0; s.x = Math.random(); } const x = sx + (s.x - .5) * 260 * k + Math.sin(t + s.x * 9) * 12, y = sy - s.p * 260 * k, r = (20 + s.p * 60) * k; const a = .07 * Math.sin(s.p * Math.PI); const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(230,200,255,${a})`); gr.addColorStop(1, 'rgba(230,200,255,0)'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); }
+    }
+  };
+})();
+</script>
+<script src="../room.js"></script>
+</body>
+</html>
