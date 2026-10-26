@@ -94,27 +94,37 @@
     </div>
   </div>
 <script>
-/* ===== PHÒNG SAU BỨC TRANH ĐỎ — phòng ngủ ấm áp (phần chung nằm ở ../engine.js) ===== */
+/* ===== PHÒNG SAU BỨC TRANH ĐỎ — phòng ngủ ấm áp + phòng tắm bên phải (phần chung nằm ở ../engine.js) ===== */
 (() => {
-  const W = 1100, H = 900;
-  const FL = { x0: 40, y0: 170, x1: 1060, y1: 860 };
+  const W = 1800, H = 900;
+  const FL = { x0: 40, y0: 170, x1: 1060, y1: 860 };            // sàn phòng ngủ
+  const BF = { x0: 1110, y0: 170, x1: 1760, y1: 860 };          // sàn phòng tắm
+  const GAP = { y0: 490, y1: 610 };                             // cửa thông giữa phòng ngủ và phòng tắm
   const DOOR = { x0: 150, x1: 270 };
   const BED = { x0: 440, y0: 170, x1: 680, y1: 470 };
   const LAMP = { x: 393, y: 192 };
   const PLAYER = { x: 1020, y: 410 };
+  const WIN = { x: 110, y: 18, w: 190, h: 104 };                // cửa sổ có trăng
+  const CHAIRS = [168, 268];                                    // 2 ghế ngắm trăng dưới cửa sổ
+  const SINKS = [{ x: 1230, y: 208, ax: 1230, ay: 304 }, { x: 1330, y: 208, ax: 1330, ay: 304 }, { x: 1154, y: 352, ax: 1244, ay: 352, side: true }];
+  const STALL = { x0: 1404, x1: 1536, y1: 338, door: 210 };     // buồng vệ sinh
+  const TUB = { x0: 1556, x1: 1752, y0: 176, y1: 318 };         // bồn tắm
+  const WASH = { x0: 1664, x1: 1752, y0: 636, y1: 770 };        // máy giặt
   // dây đèn nháy trên tường
   const BULBS = Array.from({ length: 24 }, (_, i) => { const x = 60 + i * 42; return { x, y: 26 + Math.sin(i * 1.1) * 3 + (i % 2) * 14, c: ['#ffd27a', '#ff9a6a', '#ffe9b0', '#ffb3c7'][i % 4], ph: i * 1.7 }; });
+  const STARS = Array.from({ length: 30 }, (_, i) => ({ x: WIN.x + 4 + ((i * 73) % 182), y: WIN.y + 4 + ((i * 37) % 66), r: .7 + (i % 3) * .45, ph: i * 1.3 }));
 
+  /* ================= NỀN TĨNH ================= */
   function drawBG(g, K, S){
     const rr = K.rr; g.setTransform(S, 0, 0, S, 0, 0);
     g.fillStyle = '#140806'; g.fillRect(0, 0, W, H);
-    // sàn gỗ màu mật ong
-    g.save(); g.beginPath(); g.rect(FL.x0, FL.y0, FL.x1 - FL.x0, FL.y1 - FL.y0); g.clip();
+    // sàn gỗ màu mật ong (phòng ngủ + bậc cửa thông)
+    g.save(); g.beginPath(); g.rect(FL.x0, FL.y0, FL.x1 - FL.x0, FL.y1 - FL.y0); g.rect(FL.x1, GAP.y0, BF.x0 - FL.x1, GAP.y1 - GAP.y0); g.clip();
     const tones = ['#c98a54', '#bf7f4a', '#cf9560', '#c4864f'];
     for (let r = 0, y = FL.y0; y < FL.y1; r++, y += 30){
       let x = FL.x0 - (r % 3) * 70;
-      for (let k = 0; x < FL.x1; k++){ const w = 150 + ((r * 7 + k * 13) % 5) * 22; g.fillStyle = tones[(r + k) % 4]; g.fillRect(x, y, w, 30); g.fillStyle = 'rgba(90,40,14,.45)'; g.fillRect(x + w - 2, y, 2, 30); x += w; }
-      g.fillStyle = 'rgba(90,40,14,.5)'; g.fillRect(FL.x0, y + 28, FL.x1 - FL.x0, 2);
+      for (let k = 0; x < BF.x0; k++){ const w = 150 + ((r * 7 + k * 13) % 5) * 22; g.fillStyle = tones[(r + k) % 4]; g.fillRect(x, y, w, 30); g.fillStyle = 'rgba(90,40,14,.45)'; g.fillRect(x + w - 2, y, 2, 30); x += w; }
+      g.fillStyle = 'rgba(90,40,14,.5)'; g.fillRect(FL.x0, y + 28, BF.x0 - FL.x0, 2);
     }
     for (let i = 0; i < 2600; i++){ g.fillStyle = Math.random() < .5 ? 'rgba(90,40,14,.08)' : 'rgba(255,230,200,.06)'; g.fillRect(FL.x0 + Math.random() * (FL.x1 - FL.x0), FL.y0 + Math.random() * (FL.y1 - FL.y0), 3, 1.5); }
     const sh = g.createLinearGradient(0, FL.y0, 0, FL.y0 + 70); sh.addColorStop(0, 'rgba(40,10,0,.45)'); sh.addColorStop(1, 'rgba(40,10,0,0)'); g.fillStyle = sh; g.fillRect(FL.x0, FL.y0, FL.x1 - FL.x0, 70);
@@ -133,23 +143,31 @@
     g.fillStyle = '#5a2c1a'; g.fillRect(FL.x0, FL.y0 - 40, FL.x1 - FL.x0, 40);
     for (let x = FL.x0 + 10; x < FL.x1 - 40; x += 70){ g.strokeStyle = 'rgba(255,200,150,.18)'; g.lineWidth = 2; g.strokeRect(x, FL.y0 - 34, 58, 26); }
     g.fillStyle = '#7a4228'; g.fillRect(FL.x0, FL.y0 - 42, FL.x1 - FL.x0, 5);
-    // cửa sổ đêm có trăng
-    const wx = 110, wy = 18, ww = 190, wh = 104;
-    g.fillStyle = '#f3e2c8'; rr(g, wx - 8, wy - 8, ww + 16, wh + 22, 6); g.fill();
-    const sky = g.createLinearGradient(0, wy, 0, wy + wh); sky.addColorStop(0, '#141c46'); sky.addColorStop(1, '#3a2c62');
-    g.fillStyle = sky; g.fillRect(wx, wy, ww, wh);
-    for (let i = 0; i < 26; i++){ g.fillStyle = `rgba(255,255,230,${.4 + Math.random() * .6})`; g.fillRect(wx + Math.random() * ww, wy + Math.random() * wh * .8, 1.6, 1.6); }
-    g.fillStyle = '#fff3c8'; g.beginPath(); g.arc(wx + 140, wy + 34, 16, 0, 7); g.fill(); g.fillStyle = '#2a2458'; g.beginPath(); g.arc(wx + 147, wy + 29, 14, 0, 7); g.fill();
-    g.fillStyle = '#1a1030'; g.beginPath(); g.moveTo(wx, wy + wh); for (let x = 0; x <= ww; x += 10) g.lineTo(wx + x, wy + wh - 10 - Math.abs(Math.sin(x * .07)) * 14); g.lineTo(wx + ww, wy + wh); g.fill();
-    g.fillStyle = '#f3e2c8'; g.fillRect(wx + ww / 2 - 3, wy, 6, wh); g.fillRect(wx, wy + wh / 2 - 3, ww, 6);
-    g.fillStyle = '#e8d2b0'; g.fillRect(wx - 14, wy + wh + 6, ww + 28, 10);
-    [[wx - 34, 1], [wx + ww + 6, -1]].forEach(([cx, d]) => { g.fillStyle = '#a8452a'; g.beginPath(); g.moveTo(cx, wy - 12); g.lineTo(cx + 28, wy - 12); g.quadraticCurveTo(cx + 14 + d * 10, wy + 60, cx + 26, wy + wh + 14); g.lineTo(cx, wy + wh + 14); g.closePath(); g.fill(); g.fillStyle = 'rgba(0,0,0,.18)'; for (let k = 6; k < 28; k += 7) g.fillRect(cx + k, wy - 12, 2, wh + 24); });
-    g.fillStyle = '#c9963a'; g.fillRect(wx - 40, wy - 16, ww + 80, 5);
     // tranh nhỏ + cây treo bên phải
     [[790, 36, 64, 50, '#e8a87a'], [866, 24, 48, 64, '#6a8a6a'], [930, 44, 72, 44, '#f3c8a8']].forEach(([x, y, w, h, c]) => { g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(x + 3, y + 4, w, h); g.fillStyle = '#e8d2b0'; g.fillRect(x, y, w, h); g.fillStyle = c; g.fillRect(x + 5, y + 5, w - 10, h - 10); g.fillStyle = 'rgba(255,255,255,.18)'; g.beginPath(); g.arc(x + w / 2, y + h / 2, Math.min(w, h) / 4, 0, 7); g.fill(); });
-    // tường bao
-    g.fillStyle = '#0e0605'; g.fillRect(0, 0, FL.x0, H); g.fillRect(FL.x1, 0, W - FL.x1, H); g.fillRect(0, FL.y1, W, H - FL.y1);
-    g.fillStyle = '#3a1e16'; g.fillRect(FL.x0 - 8, 0, 8, H); g.fillRect(FL.x1, 0, 8, H); g.fillRect(0, FL.y1, W, 8);
+
+    drawBathBG(g, K);
+
+    // tường bao + tường ngăn giữa hai phòng (chừa cửa thông)
+    g.fillStyle = '#0e0605';
+    g.fillRect(0, 0, FL.x0, H); g.fillRect(BF.x1, 0, W - BF.x1, H); g.fillRect(0, FL.y1, W, H - FL.y1);
+    g.fillStyle = '#2a1610'; g.fillRect(FL.x1, 0, BF.x0 - FL.x1, GAP.y0); g.fillRect(FL.x1, GAP.y1, BF.x0 - FL.x1, H - GAP.y1);
+    g.fillStyle = 'rgba(255,200,150,.07)'; for (let y = 10; y < H; y += 26){ if (y > GAP.y0 - 12 && y < GAP.y1) continue; g.fillRect(FL.x1 + 10, y, BF.x0 - FL.x1 - 20, 2); }
+    g.fillStyle = '#3a1e16';
+    g.fillRect(FL.x0 - 8, 0, 8, H); g.fillRect(BF.x1, 0, 8, H); g.fillRect(0, FL.y1, W, 8);
+    g.fillRect(FL.x1, 0, 8, GAP.y0); g.fillRect(FL.x1, GAP.y1, 8, H - GAP.y1);
+    g.fillRect(BF.x0 - 8, 0, 8, GAP.y0); g.fillRect(BF.x0 - 8, GAP.y1, 8, H - GAP.y1);
+    // khung cửa thông (bậc gỗ + 2 trụ) và cánh cửa mở áp vào tường phòng tắm
+    g.fillStyle = '#7a4228'; g.fillRect(FL.x1 - 2, GAP.y0 - 10, BF.x0 - FL.x1 + 4, 10); g.fillRect(FL.x1 - 2, GAP.y1, BF.x0 - FL.x1 + 4, 10);
+    g.fillStyle = '#c98a4a'; g.fillRect(FL.x1, GAP.y0 - 3, BF.x0 - FL.x1, 3); g.fillRect(FL.x1, GAP.y1, BF.x0 - FL.x1, 3);
+    g.fillStyle = 'rgba(90,40,14,.35)'; g.fillRect(FL.x1 + 4, GAP.y0, 3, GAP.y1 - GAP.y0); g.fillRect(BF.x0 - 7, GAP.y0, 3, GAP.y1 - GAP.y0);
+    g.fillStyle = 'rgba(0,0,0,.3)'; rr(g, BF.x0 + 2, GAP.y1 + 12, 16, 122, 4); g.fill();
+    g.fillStyle = '#9a5a32'; rr(g, BF.x0, GAP.y1 + 8, 14, 122, 4); g.fill();
+    g.fillStyle = '#b8743e'; rr(g, BF.x0 + 3, GAP.y1 + 14, 8, 110, 3); g.fill();
+    g.fillStyle = '#ffd27a'; g.beginPath(); g.arc(BF.x0 + 7, GAP.y1 + 116, 3.4, 0, 7); g.fill();
+    // biển nhỏ "phòng tắm" trên trụ cửa
+    g.fillStyle = '#f3e2c8'; rr(g, FL.x1 - 6, GAP.y0 - 42, 62, 26, 6); g.fill(); g.strokeStyle = '#b5532e'; g.lineWidth = 2; rr(g, FL.x1 - 6, GAP.y0 - 42, 62, 26, 6); g.stroke();
+    g.fillStyle = '#8a3a1e'; g.font = '600 14px Fredoka, sans-serif'; g.textAlign = 'center'; g.fillText('🛁 tắm', FL.x1 + 25, GAP.y0 - 24);
     // khung cửa ra
     g.fillStyle = '#4a2a1a'; g.fillRect(DOOR.x0 - 10, FL.y1 - 4, DOOR.x1 - DOOR.x0 + 20, 48);
     g.fillStyle = '#1a0c06'; g.fillRect(DOOR.x0, FL.y1, DOOR.x1 - DOOR.x0, 40);
@@ -182,7 +200,125 @@
     [[1004, 290, '#ffb3c7'], [1016, 300, '#f3d27a'], [1006, 438, '#e8a87a']].forEach(([x, y, c]) => { g.fillStyle = c; rr(g, x, y, 10, 14, 3); g.fill(); });
   }
 
-  /* ----- đồ vật cao (vẽ theo chiều sâu) ----- */
+  /* ----- phòng tắm: sàn gạch kem có hoa văn đất nung, tường gạch đào, ống đồng ----- */
+  function drawBathBG(g, K){
+    const rr = K.rr;
+    // sàn gạch
+    g.save(); g.beginPath(); g.rect(BF.x0, BF.y0, BF.x1 - BF.x0, BF.y1 - BF.y0); g.clip();
+    const T = 46;
+    for (let y = BF.y0, r = 0; y < BF.y1; y += T, r++) for (let x = BF.x0, c = 0; x < BF.x1; x += T, c++){ g.fillStyle = (r + c) % 2 ? '#f6e6cc' : '#f1dec1'; g.fillRect(x, y, T, T); }
+    g.fillStyle = '#dcc4a2'; for (let y = BF.y0; y < BF.y1; y += T) g.fillRect(BF.x0, y, BF.x1 - BF.x0, 2); for (let x = BF.x0; x < BF.x1; x += T) g.fillRect(x, BF.y0, 2, BF.y1 - BF.y0);
+    for (let y = BF.y0 + T; y < BF.y1; y += T) for (let x = BF.x0 + T; x < BF.x1; x += T){ g.fillStyle = '#c0603a'; g.beginPath(); g.moveTo(x + 1, y - 9); g.lineTo(x + 10, y + 1); g.lineTo(x + 1, y + 10); g.lineTo(x - 8, y + 1); g.closePath(); g.fill(); g.fillStyle = 'rgba(255,220,180,.3)'; g.fillRect(x - 2, y - 3, 3, 3); }
+    for (let i = 0; i < 1600; i++){ g.fillStyle = Math.random() < .5 ? 'rgba(120,70,30,.05)' : 'rgba(255,255,255,.08)'; g.fillRect(BF.x0 + Math.random() * (BF.x1 - BF.x0), BF.y0 + Math.random() * (BF.y1 - BF.y0), 3, 1.5); }
+    const sh = g.createLinearGradient(0, BF.y0, 0, BF.y0 + 70); sh.addColorStop(0, 'rgba(80,30,10,.35)'); sh.addColorStop(1, 'rgba(80,30,10,0)'); g.fillStyle = sh; g.fillRect(BF.x0, BF.y0, BF.x1 - BF.x0, 70);
+    g.restore();
+    // tường sau: gạch thẻ màu đào
+    g.fillStyle = '#efbf98'; g.fillRect(BF.x0, 0, BF.x1 - BF.x0, BF.y0);
+    for (let y = 0, r = 0; y < BF.y0 - 40; y += 16, r++) for (let x = BF.x0 - (r % 2) * 17; x < BF.x1; x += 34){
+      g.fillStyle = (r * 3 + x / 34) % 5 < 1 ? '#f4caa6' : (r + x / 34) % 3 < 1 ? '#e9b48c' : '#efbf98'; g.fillRect(x + 1, y + 1, 32, 14);
+      g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(x + 2, y + 2, 30, 2);
+    }
+    g.fillStyle = '#d99c74'; for (let y = 0; y < BF.y0 - 40; y += 16) g.fillRect(BF.x0, y, BF.x1 - BF.x0, 1);
+    // chân tường đất nung + viền vàng
+    g.fillStyle = '#b8573a'; g.fillRect(BF.x0, BF.y0 - 40, BF.x1 - BF.x0, 40);
+    for (let x = BF.x0; x < BF.x1; x += 40){ g.fillStyle = 'rgba(255,200,160,.12)'; g.fillRect(x + 3, BF.y0 - 36, 34, 32); }
+    g.fillStyle = '#e0a854'; g.fillRect(BF.x0, BF.y0 - 43, BF.x1 - BF.x0, 4);
+    // ống đồng chạy trên tường
+    const pipe = (x0, y0, x1, y1) => { g.strokeStyle = '#8a4a20'; g.lineWidth = 8; g.lineCap = 'round'; g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke(); g.strokeStyle = '#d98a4a'; g.lineWidth = 5; g.stroke(); g.strokeStyle = 'rgba(255,230,190,.6)'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(x0 - (y0 === y1 ? 0 : 1.5), y0 - (y0 === y1 ? 1.5 : 0)); g.lineTo(x1 - (y0 === y1 ? 0 : 1.5), y1 - (y0 === y1 ? 1.5 : 0)); g.stroke(); g.lineCap = 'butt'; };
+    pipe(BF.x0 + 6, 14, BF.x1 - 6, 14); pipe(1398, 14, 1398, 118); pipe(1560, 14, 1560, 60); pipe(BF.x0 + 6, 30, 1180, 30);
+    [[1398, 14], [1560, 14], [1180, 30], [1398, 118]].forEach(([x, y]) => { g.fillStyle = '#b06a32'; g.beginPath(); g.arc(x, y, 7, 0, 7); g.fill(); g.fillStyle = '#f0b070'; g.beginPath(); g.arc(x - 2, y - 2, 2.4, 0, 7); g.fill(); });
+    g.fillStyle = '#c0392b'; g.beginPath(); g.arc(1398, 64, 8, 0, 7); g.fill(); g.fillStyle = '#ff8a6a'; g.fillRect(1392, 62, 12, 4);
+    // gương bầu dục trên 2 bồn rửa
+    SINKS.slice(0, 2).forEach(s => {
+      g.fillStyle = 'rgba(0,0,0,.25)'; g.beginPath(); g.ellipse(s.x + 3, 82, 40, 50, 0, 0, 7); g.fill();
+      g.fillStyle = '#c99a4a'; g.beginPath(); g.ellipse(s.x, 78, 40, 50, 0, 0, 7); g.fill();
+      const mg = g.createLinearGradient(s.x - 34, 34, s.x + 34, 122); mg.addColorStop(0, '#dff0f2'); mg.addColorStop(.5, '#a9cfd6'); mg.addColorStop(1, '#e8f4f2');
+      g.fillStyle = mg; g.beginPath(); g.ellipse(s.x, 78, 33, 43, 0, 0, 7); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.75)'; g.lineWidth = 3; g.beginPath(); g.moveTo(s.x - 18, 56); g.lineTo(s.x - 4, 42); g.moveTo(s.x - 14, 72); g.lineTo(s.x + 8, 50); g.stroke();
+    });
+    // cửa sổ kính mờ trên bồn tắm (ánh trăng ấm)
+    g.fillStyle = '#f3e2c8'; rr(g, 1606, 22, 104, 82, 6); g.fill();
+    const fg = g.createRadialGradient(1680, 44, 4, 1660, 62, 70); fg.addColorStop(0, '#fff6dc'); fg.addColorStop(.5, '#c9c2e8'); fg.addColorStop(1, '#8a86b8');
+    g.fillStyle = fg; g.fillRect(1612, 28, 92, 70);
+    g.fillStyle = 'rgba(255,255,255,.18)'; for (let i = 0; i < 40; i++) g.fillRect(1612 + Math.random() * 90, 28 + Math.random() * 68, 2, 2);
+    g.fillStyle = '#f3e2c8'; g.fillRect(1656, 28, 4, 70); g.fillRect(1612, 61, 92, 4);
+    g.fillStyle = '#e8d2b0'; g.fillRect(1600, 104, 116, 8);
+    // tranh nhỏ + móc khăn
+    g.fillStyle = 'rgba(0,0,0,.25)'; g.fillRect(1453, 44, 44, 52); g.fillStyle = '#e8d2b0'; g.fillRect(1450, 40, 44, 52); g.fillStyle = '#6a8a9a'; g.fillRect(1455, 45, 34, 42);
+    g.fillStyle = '#f3e2c8'; g.beginPath(); g.moveTo(1455, 87); g.lineTo(1468, 64); g.lineTo(1478, 76); g.lineTo(1484, 68); g.lineTo(1489, 87); g.fill(); g.fillStyle = '#fff3c8'; g.beginPath(); g.arc(1481, 54, 5, 0, 7); g.fill();
+    // bậu gạch
+    // tấm thảm đỏ chữ L trước quầy rửa tay (như ảnh mẫu)
+    g.fillStyle = 'rgba(60,10,10,.25)'; rr(g, 1210, 280, 176, 34, 8); g.fill(); rr(g, 1210, 280, 36, 176, 8); g.fill();
+    g.fillStyle = '#8a2a2a'; rr(g, 1206, 276, 176, 32, 8); g.fill(); rr(g, 1206, 276, 34, 174, 8); g.fill();
+    g.strokeStyle = '#c0504a'; g.lineWidth = 2; g.setLineDash([6, 5]); rr(g, 1212, 282, 164, 20, 6); g.stroke(); rr(g, 1212, 282, 22, 162, 6); g.stroke(); g.setLineDash([]);
+    // thảm tròn trước bồn tắm
+    g.fillStyle = 'rgba(80,30,10,.2)'; g.beginPath(); g.ellipse(1656, 384, 84, 26, 0, 0, 7); g.fill();
+    g.fillStyle = '#f2a88c'; g.beginPath(); g.ellipse(1652, 380, 84, 26, 0, 0, 7); g.fill();
+    g.fillStyle = '#f8c8b0'; g.beginPath(); g.ellipse(1652, 380, 68, 18, 0, 0, 7); g.fill();
+    g.strokeStyle = '#e07a5a'; g.lineWidth = 2; for (let i = 0; i < 28; i++){ const a = i / 28 * Math.PI * 2; g.beginPath(); g.moveTo(1652 + Math.cos(a) * 84, 380 + Math.sin(a) * 26); g.lineTo(1652 + Math.cos(a) * 90, 380 + Math.sin(a) * 28); g.stroke(); }
+
+    // ---- quầy rửa tay chữ L ----
+    g.fillStyle = 'rgba(40,10,0,.3)'; rr(g, 1114, 176, 276, 98, 6); g.fill(); rr(g, 1114, 250, 92, 214, 6); g.fill();
+    g.fillStyle = '#6a3a22'; g.fillRect(1110, 244, 272, 26); g.fillRect(1110, 440, 90, 24);                // mặt trước tủ gỗ
+    g.fillStyle = '#7e4a2c'; for (let x = 1206; x < 1376; x += 58){ rr(g, x, 248, 52, 18, 3); g.fill(); } rr(g, 1116, 444, 78, 16, 3); g.fill();
+    g.fillStyle = '#e0b060'; for (let x = 1230; x < 1376; x += 58) g.fillRect(x, 255, 6, 3); g.fillRect(1152, 450, 6, 3);
+    const mt = g.createLinearGradient(1110, 170, 1110, 246); mt.addColorStop(0, '#fbf2e6'); mt.addColorStop(1, '#efe0cc');
+    g.fillStyle = mt; g.fillRect(1110, 170, 272, 76); g.fillRect(1110, 244, 88, 198);                       // mặt đá
+    g.strokeStyle = 'rgba(200,160,120,.35)'; g.lineWidth = 1.2; for (let i = 0; i < 9; i++){ g.beginPath(); const x0 = 1120 + i * 30; g.moveTo(x0, 172); g.bezierCurveTo(x0 + 20, 200, x0 - 10, 220, x0 + 14, 244); g.stroke(); }
+    g.fillStyle = '#d9b48a'; g.fillRect(1110, 244, 272, 3); g.fillRect(1196, 246, 3, 196);
+    SINKS.forEach(s => {
+      const rx = s.side ? 20 : 30, ry = s.side ? 30 : 17;
+      g.fillStyle = '#c9b49a'; g.beginPath(); g.ellipse(s.x, s.y + 2, rx + 4, ry + 4, 0, 0, 7); g.fill();
+      const bg = g.createRadialGradient(s.x - 6, s.y - 4, 2, s.x, s.y, rx + 4); bg.addColorStop(0, '#ffffff'); bg.addColorStop(1, '#d8d4cc');
+      g.fillStyle = bg; g.beginPath(); g.ellipse(s.x, s.y, rx, ry, 0, 0, 7); g.fill();
+      g.fillStyle = '#9a9690'; g.beginPath(); g.arc(s.x, s.y + (s.side ? 0 : 3), 3, 0, 7); g.fill();
+      // vòi đồng
+      g.fillStyle = '#b8863a'; g.strokeStyle = '#7a5418'; g.lineWidth = 1.5;
+      if (s.side){ g.beginPath(); g.ellipse(1122, s.y, 6, 8, 0, 0, 7); g.fill(); g.fillRect(1122, s.y - 3, 18, 6); g.beginPath(); g.arc(1120, s.y - 14, 4, 0, 7); g.arc(1120, s.y + 14, 4, 0, 7); g.fill(); }
+      else { g.beginPath(); g.ellipse(s.x, 178, 8, 5, 0, 0, 7); g.fill(); g.fillRect(s.x - 3, 176, 6, 16); g.beginPath(); g.arc(s.x - 15, 180, 4, 0, 7); g.arc(s.x + 15, 180, 4, 0, 7); g.fill(); g.fillStyle = '#f0c870'; g.fillRect(s.x - 2, 178, 2, 10); }
+    });
+    // giấy vệ sinh, xà phòng, cốc bàn chải trên quầy
+    [[1130, 186], [1152, 182]].forEach(([x, y]) => { g.fillStyle = 'rgba(0,0,0,.15)'; g.beginPath(); g.ellipse(x + 2, y + 13, 11, 5, 0, 0, 7); g.fill(); g.fillStyle = '#ffffff'; rr(g, x - 10, y - 4, 20, 18, 7); g.fill(); g.fillStyle = '#e8e2d8'; g.beginPath(); g.ellipse(x, y - 3, 10, 4, 0, 0, 7); g.fill(); g.fillStyle = '#b8b0a4'; g.beginPath(); g.ellipse(x, y - 3, 3, 1.6, 0, 0, 7); g.fill(); });
+    g.fillStyle = '#ffb3c7'; rr(g, 1270, 186, 12, 20, 4); g.fill(); g.fillStyle = '#c96a8a'; g.fillRect(1273, 180, 6, 7);
+    g.fillStyle = '#7ec8d8'; rr(g, 1366, 188, 12, 16, 3); g.fill(); g.strokeStyle = '#f3d27a'; g.lineWidth = 2; g.beginPath(); g.moveTo(1369, 188); g.lineTo(1366, 176); g.moveTo(1374, 188); g.lineTo(1377, 178); g.stroke();
+    g.fillStyle = '#c4864f'; rr(g, 1130, 392, 26, 22, 6); g.fill(); g.fillStyle = '#62a85a'; for (let i = 0; i < 5; i++){ g.beginPath(); g.ellipse(1143 + Math.cos(i * 1.3) * 9, 386 + Math.sin(i * 1.3) * 5, 8, 4, i * 1.3, 0, 7); g.fill(); }
+    // khăn bông xếp ở góc dưới bên trái
+    g.fillStyle = 'rgba(0,0,0,.25)'; rr(g, 1124, 722, 84, 76, 8); g.fill();
+    g.fillStyle = '#8e5434'; rr(g, 1118, 716, 84, 76, 8); g.fill(); g.fillStyle = '#a8683e'; rr(g, 1124, 722, 72, 64, 6); g.fill();
+    [['#f3d6c2', 0], ['#e8a87a', 1], ['#fff3e6', 2], ['#c9785a', 3]].forEach(([c, i]) => { g.fillStyle = 'rgba(0,0,0,.12)'; rr(g, 1128, 770 - i * 14, 64, 14, 5); g.fill(); g.fillStyle = c; rr(g, 1128, 768 - i * 14, 64, 13, 5); g.fill(); g.fillStyle = 'rgba(255,255,255,.3)'; g.fillRect(1134, 770 - i * 14, 52, 2); });
+
+    // ---- buồng vệ sinh: vách ngăn, bồn cầu ----
+    g.fillStyle = '#e9b48c'; g.fillRect(STALL.x0, BF.y0, STALL.x1 - STALL.x0, 60);
+    g.fillStyle = 'rgba(0,0,0,.18)'; g.fillRect(STALL.x0, BF.y0, STALL.x1 - STALL.x0, STALL.y1 - BF.y0);
+    // bồn cầu
+    const tx = (STALL.x0 + STALL.x1) / 2;
+    g.fillStyle = 'rgba(0,0,0,.2)'; rr(g, tx - 25, 176, 54, 30, 6); g.fill();
+    g.fillStyle = '#fbf7f0'; rr(g, tx - 27, 172, 54, 30, 6); g.fill(); g.fillStyle = '#e8e0d4'; g.fillRect(tx - 27, 196, 54, 6);
+    g.fillStyle = '#d0c8bc'; rr(g, tx + 12, 176, 10, 5, 2); g.fill();
+    g.fillStyle = 'rgba(0,0,0,.18)'; g.beginPath(); g.ellipse(tx + 2, 236, 26, 24, 0, 0, 7); g.fill();
+    g.fillStyle = '#fbf7f0'; g.beginPath(); g.ellipse(tx, 230, 25, 24, 0, 0, 7); g.fill();
+    g.fillStyle = '#e8dcc8'; g.beginPath(); g.ellipse(tx, 228, 21, 19, 0, 0, 7); g.fill();
+    g.fillStyle = '#9ccfda'; g.beginPath(); g.ellipse(tx, 230, 13, 11, 0, 0, 7); g.fill();
+    // biển WC trên tường
+    g.fillStyle = '#f3e2c8'; rr(g, tx - 24, 136, 48, 22, 5); g.fill(); g.strokeStyle = '#8a3a1e'; g.lineWidth = 1.5; rr(g, tx - 24, 136, 48, 22, 5); g.stroke();
+    g.fillStyle = '#8a3a1e'; g.font = '700 14px Fredoka, sans-serif'; g.textAlign = 'center'; g.fillText('WC', tx, 152);
+    // hộp giấy trên vách
+    g.fillStyle = '#c9c3b8'; g.fillRect(STALL.x1 - 26, 250, 16, 10); g.fillStyle = '#fff'; g.beginPath(); g.ellipse(STALL.x1 - 18, 262, 7, 5, 0, 0, 7); g.fill();
+
+    // ---- bồn tắm chân đồng: phần sau (nước vẽ lại phía trước sau khi vẽ người) ----
+    const { x0, x1, y0, y1 } = TUB;
+    g.fillStyle = 'rgba(60,20,0,.28)'; rr(g, x0 + 4, y0 + 10, x1 - x0, y1 - y0, 40); g.fill();
+    [[x0 + 18, y1 - 6], [x1 - 22, y1 - 6]].forEach(([x, y]) => { g.fillStyle = '#b8863a'; g.beginPath(); g.ellipse(x, y + 6, 9, 6, 0, 0, 7); g.fill(); g.fillStyle = '#e0b060'; g.beginPath(); g.ellipse(x - 2, y + 4, 4, 2.4, 0, 0, 7); g.fill(); });
+    g.fillStyle = '#fff7ec'; rr(g, x0, y0, x1 - x0, y1 - y0 - 6, 40); g.fill();
+    g.fillStyle = '#efe2cf'; rr(g, x0, y0 + 60, x1 - x0, y1 - y0 - 66, 40); g.fill();
+    g.fillStyle = '#e6d8c4'; rr(g, x0 + 12, y0 + 10, x1 - x0 - 24, y1 - y0 - 42, 32); g.fill();
+    const wtr = g.createLinearGradient(0, y0 + 16, 0, y1 - 30); wtr.addColorStop(0, '#9fdde8'); wtr.addColorStop(1, '#5aaec4');
+    g.fillStyle = wtr; rr(g, x0 + 16, y0 + 16, x1 - x0 - 32, y1 - y0 - 50, 28); g.fill();
+    // vòi đồng bồn tắm
+    g.fillStyle = '#b8863a'; rr(g, x0 + 2, y0 + 30, 14, 40, 5); g.fill(); g.fillStyle = '#e0b060'; g.beginPath(); g.arc(x0 + 9, y0 + 30, 7, 0, 7); g.fill(); g.beginPath(); g.arc(x0 + 9, y0 + 72, 6, 0, 7); g.fill();
+  }
+
+  /* ================= ĐỒ VẬT VẼ THEO CHIỀU SÂU ================= */
   function drawDuvet(g, K){
     const rr = K.rr;
     g.fillStyle = '#c2562f'; rr(g, BED.x0 - 4, 236, BED.x1 - BED.x0 + 8, BED.y1 - 236 + 4, 16); g.fill();
@@ -262,7 +398,180 @@
     for (let i = 0; i < 8; i++){ const a = i / 8 * Math.PI * 2; g.fillStyle = i % 2 ? '#4a8a4a' : '#62a85a'; g.beginPath(); g.ellipse(x + Math.cos(a) * 16, y - 20 + Math.sin(a) * 12, 15, 7, a, 0, 7); g.fill(); }
   }
 
-  /* ----- ánh sáng: tắt đèn thì phòng tối, chỉ còn trăng + đèn nháy ----- */
+  /* ----- cửa sổ mở / đóng (giữ nguyên trời sao, trăng, đồi) ----- */
+  let winT = 0;
+  function drawWindow(g, t, K){
+    const rr = K.rr, open = !!K.extras.window;
+    winT += ((open ? 1 : 0) - winT) * .07;
+    const { x: wx, y: wy, w: ww, h: wh } = WIN;
+    g.fillStyle = '#f3e2c8'; rr(g, wx - 8, wy - 8, ww + 16, wh + 22, 6); g.fill();
+    g.save(); g.beginPath(); g.rect(wx, wy, ww, wh); g.clip();
+    const sky = g.createLinearGradient(0, wy, 0, wy + wh); sky.addColorStop(0, '#141c46'); sky.addColorStop(1, '#3a2c62');
+    g.fillStyle = sky; g.fillRect(wx, wy, ww, wh);
+    STARS.forEach(s => { g.fillStyle = `rgba(255,255,230,${.45 + .4 * Math.sin(t * 1.7 + s.ph)})`; g.beginPath(); g.arc(s.x, s.y, s.r, 0, 7); g.fill(); });
+    const mx = wx + 140, my = wy + 34;
+    const halo = g.createRadialGradient(mx, my, 10, mx, my, 46 + winT * 14); halo.addColorStop(0, `rgba(255,243,200,${.35 + winT * .25})`); halo.addColorStop(1, 'rgba(255,243,200,0)');
+    g.fillStyle = halo; g.beginPath(); g.arc(mx, my, 60, 0, 7); g.fill();
+    g.fillStyle = '#fff3c8'; g.beginPath(); g.arc(mx, my, 16, 0, 7); g.fill(); g.fillStyle = '#232456'; g.beginPath(); g.arc(mx + 7, my - 5, 14, 0, 7); g.fill();
+    g.fillStyle = '#1a1030'; g.beginPath(); g.moveTo(wx, wy + wh); for (let x = 0; x <= ww; x += 10) g.lineTo(wx + x, wy + wh - 10 - Math.abs(Math.sin(x * .07)) * 14); g.lineTo(wx + ww, wy + wh); g.fill();
+    // đom đóm ngoài trời khi mở cửa
+    if (winT > .05) for (let i = 0; i < 6; i++){ const fx = wx + 20 + ((i * 53 + t * 9) % (ww - 40)), fy = wy + wh - 22 + Math.sin(t * 1.3 + i * 2) * 10; g.fillStyle = `rgba(255,236,140,${winT * (.5 + .5 * Math.sin(t * 4 + i))})`; g.beginPath(); g.arc(fx, fy, 1.8, 0, 7); g.fill(); }
+    g.restore();
+    // 2 cánh kính: đóng thì khít khung, mở thì xoay vào trong phòng (bản lề hai mép)
+    const a = winT * 1.38, half = ww / 2, c = half * Math.cos(a), dy = -half * Math.sin(a) * .1;
+    [[wx, 1], [wx + ww, -1]].forEach(([hx, d]) => {
+      const fx = hx + d * c;
+      const quad = () => { g.beginPath(); g.moveTo(hx, wy); g.lineTo(fx, wy + dy); g.lineTo(fx, wy + wh + dy); g.lineTo(hx, wy + wh); g.closePath(); };
+      quad(); g.fillStyle = `rgba(180,210,255,${.16 + winT * .1})`; g.fill();
+      g.strokeStyle = '#f3e2c8'; g.lineWidth = 6; g.stroke();
+      g.strokeStyle = '#f3e2c8'; g.lineWidth = 4; g.beginPath(); g.moveTo(hx, wy + wh / 2); g.lineTo(fx, wy + wh / 2 + dy); g.stroke();
+      if (winT < .5){ g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2; g.beginPath(); g.moveTo(hx + d * 12, wy + 40); g.lineTo(hx + d * 34, wy + 12); g.stroke(); }
+      g.fillStyle = '#c9963a'; g.fillRect(fx - (d > 0 ? 6 : 0), wy + wh / 2 - 6 + dy, 6, 12);
+    });
+    g.fillStyle = '#e8d2b0'; g.fillRect(wx - 14, wy + wh + 6, ww + 28, 10);
+    // rèm hai bên, gió lùa nhẹ khi mở cửa
+    const sway = Math.sin(t * 1.4) * 7 * winT, sway2 = Math.sin(t * 1.1 + 1) * 6 * winT;
+    [[wx - 34, 1, sway], [wx + ww + 6, -1, sway2]].forEach(([cx, d, s]) => {
+      g.fillStyle = '#a8452a'; g.beginPath(); g.moveTo(cx, wy - 12); g.lineTo(cx + 28, wy - 12);
+      g.quadraticCurveTo(cx + 14 + d * 10 + s, wy + 60, cx + 26 + s * 1.6, wy + wh + 14); g.lineTo(cx + s * .8, wy + wh + 14); g.closePath(); g.fill();
+      g.fillStyle = 'rgba(0,0,0,.18)'; for (let k = 6; k < 28; k += 7){ g.beginPath(); g.moveTo(cx + k, wy - 12); g.lineTo(cx + k + s * (k / 28), wy + wh + 12); g.lineTo(cx + k + 2 + s * (k / 28), wy + wh + 12); g.lineTo(cx + k + 2, wy - 12); g.fill(); }
+    });
+    g.fillStyle = '#c9963a'; g.fillRect(wx - 40, wy - 16, ww + 80, 5);
+    // làn gió đêm lùa vào phòng
+    if (winT > .05){ g.save(); g.globalAlpha = .12 * winT; g.strokeStyle = '#cfe0ff'; g.lineWidth = 2; for (let i = 0; i < 4; i++){ const p = (t * .25 + i * .25) % 1, x0 = wx + 30 + i * 40, y0 = wy + wh + 20 + p * 120; g.beginPath(); g.moveTo(x0, y0); g.bezierCurveTo(x0 + 20, y0 + 10, x0 - 10, y0 + 22, x0 + 16, y0 + 34); g.stroke(); } g.restore(); }
+  }
+  function underlay(g, t, K){ drawWindow(g, t, K); }
+
+  /* ----- 2 ghế bành quay lưng ra ngoài, nhìn lên cửa sổ ----- */
+  function drawChairBack(g, K, x){
+    const rr = K.rr;
+    g.fillStyle = 'rgba(40,10,0,.3)'; g.beginPath(); g.ellipse(x + 3, 272, 42, 10, 0, 0, 7); g.fill();
+    g.fillStyle = '#5a2c1a'; g.fillRect(x - 32, 258, 7, 14); g.fillRect(x + 25, 258, 7, 14);
+    g.fillStyle = '#93391f'; rr(g, x - 44, 226, 16, 40, 8); g.fill(); rr(g, x + 28, 226, 16, 40, 8); g.fill();
+    const back = (inset, top, col) => { g.fillStyle = col; g.beginPath(); g.moveTo(x - 36 + inset, 266 - inset); g.lineTo(x - 36 + inset, top + 16); g.quadraticCurveTo(x - 36 + inset, top, x - 20, top - 2 + inset); g.quadraticCurveTo(x, top - 10 + inset, x + 20, top - 2 + inset); g.quadraticCurveTo(x + 36 - inset, top, x + 36 - inset, top + 16); g.lineTo(x + 36 - inset, 266 - inset); g.closePath(); g.fill(); };
+    back(0, 214, '#a8452a'); back(7, 220, '#c2562f');
+    g.fillStyle = 'rgba(255,220,180,.35)'; [[-14, 232], [0, 228], [14, 232], [-7, 246], [7, 246]].forEach(([dx, y]) => { g.beginPath(); g.arc(x + dx, y, 2.4, 0, 7); g.fill(); });
+    g.fillStyle = 'rgba(255,230,200,.2)'; g.beginPath(); g.ellipse(x, 214, 22, 4, 0, 0, 7); g.fill();
+  }
+
+  /* ----- hiệu ứng trong phòng tắm (đồng bộ cho mọi người qua máy chủ) ----- */
+  const FX = { sink: [0, 0, 0], wash: 0, flush: 0 };
+  const drops = [];
+  function drawSinkWater(g, t){
+    const now = Date.now();
+    SINKS.forEach((s, i) => {
+      const left = FX.sink[i] - now; if (left <= 0) return;
+      const k = Math.min(1, left / 600);
+      g.save(); g.globalAlpha = k;
+      if (s.side){
+        g.strokeStyle = 'rgba(160,220,240,.9)'; g.lineWidth = 4; g.beginPath(); g.moveTo(1141, s.y); g.quadraticCurveTo(1148, s.y + 2, 1150, s.y + 14); g.stroke();
+        g.strokeStyle = '#fff'; g.lineWidth = 1.2; g.setLineDash([3, 4]); g.lineDashOffset = -t * 40; g.beginPath(); g.moveTo(1141, s.y - 1); g.quadraticCurveTo(1148, s.y + 1, 1150, s.y + 13); g.stroke(); g.setLineDash([]);
+      } else {
+        g.strokeStyle = 'rgba(160,220,240,.95)'; g.lineWidth = 4; g.beginPath(); g.moveTo(s.x, 191); g.lineTo(s.x, s.y + 2); g.stroke();
+        g.strokeStyle = '#fff'; g.lineWidth = 1.2; g.setLineDash([3, 4]); g.lineDashOffset = -t * 40; g.beginPath(); g.moveTo(s.x - .5, 191); g.lineTo(s.x - .5, s.y + 2); g.stroke(); g.setLineDash([]);
+      }
+      const cx = s.side ? 1150 : s.x, cy = s.side ? s.y + 14 : s.y + 3;
+      g.fillStyle = 'rgba(140,210,230,.35)'; g.beginPath(); g.ellipse(cx, cy, s.side ? 13 : 20, s.side ? 18 : 10, 0, 0, 7); g.fill();
+      for (let r = 0; r < 3; r++){ const p = ((t * 1.6 + r / 3) % 1); g.strokeStyle = `rgba(255,255,255,${.7 * (1 - p)})`; g.lineWidth = 1.4; g.beginPath(); g.ellipse(cx, cy, 4 + p * (s.side ? 11 : 18), 2 + p * (s.side ? 14 : 8), 0, 0, 7); g.stroke(); }
+      if (Math.random() < .5) drops.push({ x: cx, y: cy, vx: (Math.random() - .5) * 60, vy: -40 - Math.random() * 40, life: .5 });
+      g.restore();
+    });
+    for (let i = drops.length - 1; i >= 0; i--){ const d = drops[i]; d.life -= 1 / 60; if (d.life <= 0){ drops.splice(i, 1); continue; } d.vy += 300 / 60; d.x += d.vx / 60; d.y += d.vy / 60; g.fillStyle = `rgba(200,235,255,${d.life * 1.6})`; g.beginPath(); g.arc(d.x, d.y, 1.6, 0, 7); g.fill(); }
+  }
+  function drawFlush(g, t){
+    const left = FX.flush - Date.now(); if (left <= 0) return;
+    const cx = (STALL.x0 + STALL.x1) / 2, k = Math.min(1, left / 500);
+    g.save(); g.globalAlpha = k; g.strokeStyle = '#ffffff'; g.lineWidth = 1.6;
+    for (let i = 0; i < 3; i++){ g.beginPath(); g.ellipse(cx, 230, 4 + i * 3.5, 3 + i * 3, 0, t * 9 + i, t * 9 + i + 3.6); g.stroke(); }
+    g.restore();
+  }
+  function drawStallDoor(g, K){
+    const rr = K.rr, busy = !!K.occupant(6), y0 = STALL.door, y1 = STALL.y1;
+    // vách ngăn hai bên (cao như tường thấp)
+    [[STALL.x0 - 6, STALL.x0 + 4], [STALL.x1 - 4, STALL.x1 + 6]].forEach(([a, b]) => { g.fillStyle = 'rgba(0,0,0,.25)'; g.fillRect(a + 3, BF.y0 + 4, b - a, y1 - BF.y0); g.fillStyle = '#8e5434'; g.fillRect(a, BF.y0, b - a, y1 - BF.y0); g.fillStyle = '#b8743e'; g.fillRect(a, BF.y0, b - a, 4); g.fillStyle = '#6a3a22'; g.fillRect(a, y1 - 6, b - a, 6); });
+    if (busy){
+      g.fillStyle = 'rgba(0,0,0,.25)'; rr(g, STALL.x0 + 6, y0 + 6, STALL.x1 - STALL.x0 - 8, y1 - y0, 6); g.fill();
+      g.fillStyle = '#a8683e'; rr(g, STALL.x0 + 4, y0, STALL.x1 - STALL.x0 - 8, y1 - y0, 6); g.fill();
+      g.fillStyle = '#b8783e'; rr(g, STALL.x0 + 14, y0 + 12, STALL.x1 - STALL.x0 - 28, 48, 4); g.fill(); rr(g, STALL.x0 + 14, y0 + 68, STALL.x1 - STALL.x0 - 28, 44, 4); g.fill();
+      g.fillStyle = '#e0b060'; g.beginPath(); g.arc(STALL.x1 - 20, y0 + 64, 4, 0, 7); g.fill();
+    } else {
+      // cửa mở, áp vào vách bên phải (nhìn nghiêng nên chỉ thấy cạnh)
+      g.fillStyle = 'rgba(0,0,0,.22)'; g.fillRect(STALL.x1 - 20, y0 + 8, 16, y1 - y0 - 6);
+      g.fillStyle = '#a8683e'; g.beginPath(); g.moveTo(STALL.x1 - 4, y0); g.lineTo(STALL.x1 - 22, y0 + 10); g.lineTo(STALL.x1 - 22, y1 - 2); g.lineTo(STALL.x1 - 4, y1); g.closePath(); g.fill();
+      g.fillStyle = '#e0b060'; g.beginPath(); g.arc(STALL.x1 - 16, y0 + 64, 3, 0, 7); g.fill();
+    }
+    // đèn báo trên cánh cửa khi có người
+    if (busy){ const sx = (STALL.x0 + STALL.x1) / 2; g.fillStyle = '#f3e2c8'; rr(g, sx - 34, y0 + 20, 68, 20, 5); g.fill(); g.fillStyle = '#c0392b'; g.beginPath(); g.arc(sx - 22, y0 + 30, 5, 0, 7); g.fill(); g.fillStyle = '#5a2c18'; g.font = '700 12px Fredoka, sans-serif'; g.textAlign = 'center'; g.fillText('có người', sx + 6, y0 + 35); }
+  }
+  function drawTubFront(g, t){
+    const { x0, x1, y1 } = TUB, wl = 238;
+    g.save();
+    g.beginPath(); g.moveTo(x0 + 16, wl); g.lineTo(x1 - 16, wl); g.lineTo(x1 - 16, y1 - 62); g.quadraticCurveTo(x1 - 16, y1 - 34, x1 - 44, y1 - 34); g.lineTo(x0 + 44, y1 - 34); g.quadraticCurveTo(x0 + 16, y1 - 34, x0 + 16, y1 - 62); g.closePath(); g.clip();
+    const wtr = g.createLinearGradient(0, wl, 0, y1 - 34); wtr.addColorStop(0, 'rgba(120,205,222,.93)'); wtr.addColorStop(1, 'rgba(80,165,190,.97)');
+    g.fillStyle = wtr; g.fillRect(x0, wl - 4, x1 - x0, y1 - wl);
+    g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2; for (let i = 0; i < 4; i++){ const y = wl + 12 + i * 12; g.beginPath(); for (let x = x0 + 20; x < x1 - 20; x += 8) g.lineTo(x, y + Math.sin(x * .08 + t * 2 + i) * 1.6); g.stroke(); }
+    g.restore();
+    // bọt xà phòng dọc mặt nước
+    for (let i = 0; i < 26; i++){ const x = x0 + 22 + (i * 6.6) % (x1 - x0 - 44), y = wl + Math.sin(i * 2.3) * 3 + Math.sin(t * 1.5 + i) * 1.2, r = 3 + (i * 7 % 5); g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); g.fillStyle = 'rgba(200,235,245,.7)'; g.beginPath(); g.arc(x + 1, y + 1, r * .5, 0, 7); g.fill(); }
+    // vịt cao su
+    const dx = x0 + 40 + Math.sin(t * .5) * 10, dyy = wl + 8 + Math.sin(t * 1.4) * 2;
+    g.fillStyle = '#ffd23f'; g.beginPath(); g.ellipse(dx, dyy, 10, 7, 0, 0, 7); g.fill(); g.beginPath(); g.arc(dx + 6, dyy - 8, 6, 0, 7); g.fill();
+    g.fillStyle = '#ff8a00'; g.beginPath(); g.moveTo(dx + 11, dyy - 9); g.lineTo(dx + 17, dyy - 7); g.lineTo(dx + 11, dyy - 5); g.fill(); g.fillStyle = '#222'; g.beginPath(); g.arc(dx + 8, dyy - 10, 1.2, 0, 7); g.fill();
+    // thành bồn phía trước
+    g.fillStyle = '#fff7ec'; g.fillRect(x0 + 10, y1 - 40, x1 - x0 - 20, 8);
+    g.fillStyle = 'rgba(200,170,130,.4)'; g.fillRect(x0 + 18, y1 - 34, x1 - x0 - 36, 3);
+    // hơi nước bốc lên
+    g.save(); g.globalAlpha = .16; g.strokeStyle = '#ffffff'; g.lineWidth = 6; g.lineCap = 'round';
+    for (let i = 0; i < 4; i++){ const p = (t * .18 + i * .25) % 1, x = x0 + 50 + i * 40 + Math.sin(t + i) * 8, y = wl - 10 - p * 90; g.globalAlpha = .18 * Math.sin(p * Math.PI); g.beginPath(); g.moveTo(x, y + 24); g.bezierCurveTo(x - 10, y + 12, x + 10, y + 6, x, y - 6); g.stroke(); }
+    g.restore();
+  }
+  function drawWasher(g, t, K){
+    const rr = K.rr, on = Date.now() < FX.wash, sh = on ? Math.sin(t * 46) * 1.2 : 0, { x0, x1, y0, y1 } = WASH, cx = (x0 + x1) / 2 + sh;
+    g.fillStyle = 'rgba(40,10,0,.3)'; rr(g, x0 + 4, y0 + 8, x1 - x0, y1 - y0, 10); g.fill();
+    g.save(); g.translate(sh, 0);
+    g.fillStyle = '#fbf6ee'; rr(g, x0, y0, x1 - x0, 30, 8); g.fill();
+    g.fillStyle = '#efe6d6'; rr(g, x0, y0 + 24, x1 - x0, y1 - y0 - 24, 8); g.fill();
+    g.fillStyle = '#d8ccb8'; g.fillRect(x0 + 6, y0 + 28, x1 - x0 - 12, 18);
+    g.fillStyle = '#c9c3b8'; g.beginPath(); g.arc(x0 + 18, y0 + 37, 6, 0, 7); g.fill(); g.fillStyle = '#8a8478'; g.fillRect(x0 + 17, y0 + 31, 2, 6);
+    [0, 1, 2].forEach(i => { g.fillStyle = on && Math.sin(t * 6 + i) > 0 ? '#5be38a' : '#9a9488'; g.beginPath(); g.arc(x1 - 16 - i * 10, y0 + 37, 2.6, 0, 7); g.fill(); });
+    const dy = y0 + 86;
+    g.fillStyle = '#c9c3b8'; g.beginPath(); g.arc((x0 + x1) / 2, dy, 30, 0, 7); g.fill();
+    g.fillStyle = '#3a4a5a'; g.beginPath(); g.arc((x0 + x1) / 2, dy, 23, 0, 7); g.fill();
+    g.save(); g.beginPath(); g.arc((x0 + x1) / 2, dy, 22, 0, 7); g.clip();
+    const rot = on ? t * 7 : 0;
+    ['#e8a87a', '#ff9cc4', '#7ec8d8', '#f3d27a', '#c9785a'].forEach((c, i) => { const a = rot + i * 1.25; g.fillStyle = c; g.beginPath(); g.ellipse((x0 + x1) / 2 + Math.cos(a) * 11, dy + 8 + Math.sin(a) * 9, 9, 6, a, 0, 7); g.fill(); });
+    if (on){ g.fillStyle = 'rgba(160,210,235,.45)'; g.fillRect(x0, dy - 4 + Math.sin(t * 5) * 2, x1 - x0, 30); for (let i = 0; i < 6; i++){ g.fillStyle = 'rgba(255,255,255,.7)'; g.beginPath(); g.arc((x0 + x1) / 2 - 16 + i * 6, dy + 4 + Math.sin(t * 8 + i) * 4, 2, 0, 7); g.fill(); } }
+    g.restore();
+    g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 3; g.beginPath(); g.arc((x0 + x1) / 2, dy, 19, 3.6, 4.6); g.stroke();
+    g.fillStyle = '#a8a294'; g.fillRect(x0 + 6, y1 - 10, 10, 8); g.fillRect(x1 - 16, y1 - 10, 10, 8);
+    g.restore();
+    if (on){ g.fillStyle = 'rgba(255,255,255,.75)'; g.font = '700 13px Fredoka, sans-serif'; g.textAlign = 'center'; g.fillText('~ đang giặt ~', cx, y0 - 8 + Math.sin(t * 3) * 2); }
+  }
+  function drawShelf(g, K){
+    const rr = K.rr, x0 = 1690, x1 = 1752, y0 = 420, y1 = 560;
+    g.fillStyle = 'rgba(40,10,0,.28)'; rr(g, x0 + 4, y0 + 8, x1 - x0, y1 - y0, 6); g.fill();
+    g.fillStyle = '#8e5434'; rr(g, x0, y0, x1 - x0, y1 - y0, 6); g.fill(); g.fillStyle = '#6a3a22'; rr(g, x0 + 5, y0 + 6, x1 - x0 - 10, y1 - y0 - 12, 4); g.fill();
+    [y0 + 44, y0 + 88].forEach(y => { g.fillStyle = '#b8743e'; g.fillRect(x0 + 5, y, x1 - x0 - 10, 5); });
+    [['#ffb3c7', 0, 0], ['#7ec8d8', 16, 0], ['#f3d27a', 32, 0]].forEach(([c, dx]) => { g.fillStyle = c; rr(g, x0 + 10 + dx, y0 + 18, 12, 26, 4); g.fill(); g.fillStyle = 'rgba(255,255,255,.4)'; g.fillRect(x0 + 13 + dx, y0 + 22, 3, 14); });
+    [['#f3d6c2', 0], ['#e8a87a', 1]].forEach(([c, i]) => { g.fillStyle = c; rr(g, x0 + 9, y0 + 74 - i * 12, x1 - x0 - 18, 12, 5); g.fill(); });
+    g.fillStyle = '#62a85a'; g.beginPath(); g.arc(x0 + 30, y0 + 116, 12, 0, 7); g.fill(); g.fillStyle = '#c4864f'; rr(g, x0 + 20, y0 + 118, 20, 12, 3); g.fill();
+  }
+  function drawScale(g, K){
+    const rr = K.rr;
+    g.fillStyle = 'rgba(40,10,0,.2)'; rr(g, 1262, 802, 52, 30, 8); g.fill();
+    g.fillStyle = '#ffd1dc'; rr(g, 1258, 798, 52, 30, 8); g.fill();
+    g.fillStyle = '#fff'; rr(g, 1270, 802, 28, 10, 3); g.fill(); g.fillStyle = '#c96a8a'; g.font = '400 9px VT323, monospace'; g.textAlign = 'center'; g.fillText('52.0', 1284, 810);
+  }
+  function drawBasket(g, K){
+    const rr = K.rr;
+    g.fillStyle = 'rgba(40,10,0,.3)'; g.beginPath(); g.ellipse(1616, 772, 34, 10, 0, 0, 7); g.fill();
+    g.fillStyle = '#c4864f'; rr(g, 1586, 712, 56, 58, 10); g.fill();
+    g.strokeStyle = '#9a5a2a'; g.lineWidth = 2; for (let y = 720; y < 768; y += 8){ g.beginPath(); g.moveTo(1588, y); g.lineTo(1640, y); g.stroke(); }
+    [['#ff9cc4', 1598, 712], ['#7ec8d8', 1614, 708], ['#f3d27a', 1628, 714]].forEach(([c, x, y]) => { g.fillStyle = c; g.beginPath(); g.ellipse(x, y, 12, 7, .3, 0, 7); g.fill(); });
+    g.fillStyle = '#d9a06a'; rr(g, 1584, 708, 60, 8, 4); g.fill();
+  }
+
+  /* ----- ánh sáng: tắt đèn thì phòng ngủ tối, chỉ còn trăng + đèn nháy; phòng tắm luôn có đèn vàng ấm ----- */
   const dark = document.createElement('canvas'); dark.width = W / 2; dark.height = H / 2;
   const dg = dark.getContext('2d');
   let lightT = 1;
@@ -273,25 +582,34 @@
     if (d > .01){
       dg.setTransform(.5, 0, 0, .5, 0, 0);
       dg.globalCompositeOperation = 'source-over'; dg.clearRect(0, 0, W, H);
-      dg.fillStyle = `rgba(10,8,30,${.82 * d})`; dg.fillRect(0, 0, W, H);
+      dg.fillStyle = `rgba(10,8,30,${.82 * d})`; dg.fillRect(0, 0, BF.x0 - 20, H);
       dg.globalCompositeOperation = 'destination-out';
       const hole = (x, y, r, a) => { const gr = dg.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(0,0,0,${a})`); gr.addColorStop(1, 'rgba(0,0,0,0)'); dg.fillStyle = gr; dg.beginPath(); dg.arc(x, y, r, 0, 7); dg.fill(); };
-      hole(205, 70, 150, .75); hole(240, 300, 220, .45);           // ánh trăng qua cửa sổ
+      hole(205, 70, 150 + winT * 40, .75); hole(240, 300, 220 + winT * 60, .45 + winT * .15);   // ánh trăng qua cửa sổ
       BULBS.forEach(b => hole(b.x, b.y + 10, 60, .35));               // đèn nháy
       hole(LAMP.x + 172, 196, 30, .6);                                // đồng hồ
       hole(PLAYER.x, PLAYER.y, 40, K.soundOn ? .4 : 0);
+      hole(BF.x0 - 30, (GAP.y0 + GAP.y1) / 2, 110, .7);               // ánh đèn phòng tắm hắt qua cửa
       g.drawImage(dark, 0, 0, W, H);
-      // ánh trăng xanh nhạt
-      g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .18 * d;
+      g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = (.18 + winT * .12) * d;
       const mg = g.createLinearGradient(160, 120, 300, 520); mg.addColorStop(0, '#8aa8ff'); mg.addColorStop(1, 'rgba(138,168,255,0)');
-      g.fillStyle = mg; g.beginPath(); g.moveTo(110, 130); g.lineTo(300, 130); g.lineTo(420, 560); g.lineTo(120, 560); g.closePath(); g.fill();
+      g.fillStyle = mg; g.beginPath(); g.moveTo(110, 130); g.lineTo(300, 130); g.lineTo(420 + winT * 40, 560); g.lineTo(120 - winT * 20, 560); g.closePath(); g.fill();
       g.restore();
     }
     if (lightT > .01){ // ánh đèn ngủ ấm
-      g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .22 * lightT;
+      g.save(); g.beginPath(); g.rect(0, 0, BF.x0, H); g.clip(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .22 * lightT;
       const lg = g.createRadialGradient(LAMP.x, LAMP.y, 10, LAMP.x, LAMP.y, 360); lg.addColorStop(0, '#ffb070'); lg.addColorStop(1, 'rgba(255,176,112,0)');
-      g.fillStyle = lg; g.fillRect(0, 0, W, H); g.restore();
+      g.fillStyle = lg; g.fillRect(0, 0, BF.x0, H); g.restore();
     }
+    if (winT > .02){ // ánh trăng xanh nhạt khi mở cửa sổ
+      g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .07 * winT;
+      const mg = g.createLinearGradient(0, 130, 0, 420); mg.addColorStop(0, '#9ab4ff'); mg.addColorStop(1, 'rgba(154,180,255,0)');
+      g.fillStyle = mg; g.beginPath(); g.moveTo(110, 130); g.lineTo(300, 130); g.lineTo(380, 420); g.lineTo(80, 420); g.closePath(); g.fill(); g.restore();
+    }
+    // đèn trần phòng tắm vàng ấm
+    g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .13;
+    const bl = g.createRadialGradient(1440, 430, 30, 1440, 430, 460); bl.addColorStop(0, '#ffd09a'); bl.addColorStop(1, 'rgba(255,208,154,0)');
+    g.fillStyle = bl; g.fillRect(BF.x0, 0, BF.x1 - BF.x0, H); g.restore();
     // dây đèn nháy luôn sáng
     g.save();
     g.strokeStyle = '#3a2418'; g.lineWidth = 1.5; g.beginPath(); BULBS.forEach((b, i) => i ? g.lineTo(b.x, b.y) : g.moveTo(b.x, b.y)); g.stroke();
@@ -303,10 +621,27 @@
     g.restore();
   }
 
+  // các chỗ nằm / ngồi (giữ nguyên số thứ tự 0, 1 của giường để máy cũ vẫn hiểu)
   const SEATS = [
-    { x: 505, y: 212, ax: 400, ay: 318 },   // nửa giường bên trái
-    { x: 615, y: 212, ax: 722, ay: 318 }    // nửa giường bên phải
+    { x: 505, y: 212, ax: 400, ay: 318, g: 'bed' },                                       // nửa giường bên trái
+    { x: 615, y: 212, ax: 722, ay: 318, g: 'bed' },                                       // nửa giường bên phải
+    { x: CHAIRS[0], y: 238, ax: CHAIRS[0], ay: 308, g: 'chair1', pose: 'back', z: 241 },  // ghế ngắm trăng 1
+    { x: CHAIRS[1], y: 238, ax: CHAIRS[1], ay: 308, g: 'chair2', pose: 'back', z: 241 },  // ghế ngắm trăng 2
+    { x: 1626, y: 262, ax: 1612, ay: 364, g: 'tub', pose: 'tub', z: 300, face: 1 },       // bồn tắm, nằm sát nhau
+    { x: 1684, y: 262, ax: 1700, ay: 364, g: 'tub', pose: 'tub', z: 300, face: -1 },
+    { x: (STALL.x0 + STALL.x1) / 2, y: 236, ax: (STALL.x0 + STALL.x1) / 2, ay: 380, g: 'wc', pose: 'sit', z: 300 }   // bồn cầu
   ];
+  function sink(i, K){
+    FX.sink[i] = Date.now() + 4500;
+    K.publish('fx', { from: K.me, a: 'sink', i, at: Date.now() });
+  }
+  function onFx(sub, d, K){
+    if (!d || d.from === K.me || Math.abs(Date.now() - (+d.at || 0)) > 15000) return;
+    const at = +d.at;
+    if (d.a === 'sink' && d.i >= 0 && d.i < SINKS.length) FX.sink[d.i] = at + 4500;
+    else if (d.a === 'wash') FX.wash = d.on ? at + 15000 : 0;
+    else if (d.a === 'flush') FX.flush = at + 2200;
+  }
 
   window.ROOM = {
     key: 'red',
@@ -316,29 +651,49 @@
     exitHref: '../',
     music: 'mM1dIwGO00w', volIn: 28,
     outside: '#120806',
-    welcome: 'Đã vào phòng. Bấm vào giường để nằm, bấm đèn ngủ để tắt hoặc bật đèn.',
+    welcome: 'Đã vào phòng. Bấm giường để nằm, bấm cửa sổ để mở, ngồi ghế ngắm trăng. Cửa bên phải dẫn sang phòng tắm.',
     seatFull: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.',
+    seatFullBy: { bed: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.', chair1: 'Ghế này có người ngồi rồi.', chair2: 'Ghế này có người ngồi rồi.', tub: 'Bồn tắm chỉ đủ chỗ cho 2 người thôi.', wc: 'Nhà vệ sinh đang có người.' },
     W, H, FL, DOOR,
-    BOUND: { x0: 72, y0: 206, x1: 1028, y1: 844 },
+    BOUND: { x0: 72, y0: 206, x1: 1728, y1: 844 },
     PANEL: { x: 300, y: 840 },
     SPAWN: { x: 210, y: 806 },
     seats: SEATS,
-    extras: { lights: true },
+    extras: { lights: true, window: false },
     OB: [
       { r: [430, 110, 690, 474] }, { r: [356, 170, 430, 236] }, { r: [690, 170, 764, 236] },
       { r: [40, 250, 132, 494] }, { r: [40, 560, 114, 766] }, { r: [980, 250, 1060, 462] },
       { r: [860, 724, 1060, 860] }, { c: [822, 560, 50] }, { c: [320, 612, 40] },
-      { c: [80, 812, 26] }, { c: [1030, 650, 26] }
+      { c: [80, 812, 26] }, { c: [1028, 700, 26] },
+      { r: [CHAIRS[0] - 36, 200, CHAIRS[0] + 36, 272] }, { r: [CHAIRS[1] - 36, 200, CHAIRS[1] + 36, 272] },
+      // tường ngăn (chừa cửa thông)
+      { r: [1046, 0, 1124, GAP.y0 - 8] }, { r: [1046, GAP.y1 + 8, 1124, H] },
+      // phòng tắm
+      { r: [1105, 160, 1385, 266] }, { r: [1105, 260, 1200, 452] },
+      { r: [STALL.x0 - 6, 160, STALL.x1 + 6, STALL.y1] },
+      { r: [TUB.x0 - 8, 160, TUB.x1 + 4, TUB.y1 + 4] },
+      { r: [WASH.x0 - 4, WASH.y0 - 8, WASH.x1 + 4, WASH.y1 + 2] },
+      { c: [1614, 742, 30] }, { r: [1116, 712, 1206, 796] }, { c: [1548, 826, 24] }, { r: [1686, 414, 1756, 562] }, { r: [1256, 796, 1312, 830] }
     ],
-    drawBG,
+    drawBG, underlay,
     props: K => [
       { y: 212.9, d: g => drawDuvet(g, K) },
       { y: 236, d: g => drawNightstand(g, K, 360, true) }, { y: 236, d: g => drawNightstand(g, K, 694, false) },
       { y: 237, d: g => drawLamp(g, K) },
+      { y: 270, d: g => drawChairBack(g, K, CHAIRS[0]) }, { y: 270, d: g => drawChairBack(g, K, CHAIRS[1]) },
       { y: 434, d: (g, t) => drawPlayer(g, t, K) },
       { y: 600, d: g => drawBeanBag(g) }, { y: 640, d: (g, t) => drawCat(g, t) },
       { y: 860, d: g => drawDesk(g, K) },
-      { y: 826, d: g => drawPlant(g, 80, 812) }, { y: 664, d: g => drawPlant(g, 1030, 650) }
+      { y: 826, d: g => drawPlant(g, 80, 812) }, { y: 714, d: g => drawPlant(g, 1028, 700) },
+      // phòng tắm
+      { y: 271, d: (g, t) => drawSinkWater(g, t) },
+      { y: 262, d: (g, t) => drawFlush(g, t) },
+      { y: 338, d: g => drawStallDoor(g, K) },
+      { y: 330, d: (g, t) => drawTubFront(g, t) },
+      { y: 772, d: (g, t) => drawWasher(g, t, K) },
+      { y: 770, d: g => drawBasket(g, K) },
+      { y: 562, d: g => drawShelf(g, K) }, { y: 830, d: g => drawScale(g, K) },
+      { y: 840, d: g => drawPlant(g, 1548, 826) }
     ],
     hotspots: K => [
       { r: [LAMP.x - 30, LAMP.y - 36, LAMP.x + 30, LAMP.y + 24], act: () => {
@@ -346,17 +701,45 @@
           K.setExtras({ lights: !on });
           K.toast(on ? 'Đã tắt đèn 🌙' : 'Đã bật đèn 💡');
         } },
-      { r: [BED.x0, 106, BED.x1, BED.y1], act: () => K.claimSeat() },
+      { r: [WIN.x - 40, 0, WIN.x + WIN.w + 40, 150], act: () => {
+          const open = !!K.extras.window;
+          K.setExtras({ window: !open });
+          K.toast(open ? 'Đã đóng cửa sổ' : 'Đã mở cửa sổ 🌙 gió đêm mát quá');
+        } },
+      { r: [CHAIRS[0] - 40, 196, CHAIRS[0] + 40, 278], act: () => K.claimSeat('chair1') },
+      { r: [CHAIRS[1] - 40, 196, CHAIRS[1] + 40, 278], act: () => K.claimSeat('chair2') },
+      { r: [BED.x0, 106, BED.x1, BED.y1], act: () => K.claimSeat('bed') },
       { r: [858, 716, 1046, 856], act: () => openNotebook(K) },
-      { r: [PLAYER.x - 30, PLAYER.y - 30, PLAYER.x + 30, PLAYER.y + 30], always: true, act: () => K.toggleMusic() }
+      { r: [PLAYER.x - 30, PLAYER.y - 30, PLAYER.x + 30, PLAYER.y + 30], always: true, act: () => K.toggleMusic() },
+      // phòng tắm: bồn rửa tay phải đứng gần mới mở được vòi
+      { r: [SINKS[0].x - 48, 166, SINKS[0].x + 50, 264], act: () => K.approach(SINKS[0].ax, SINKS[0].ay, () => sink(0, K)) },
+      { r: [SINKS[1].x - 50, 166, SINKS[1].x + 52, 264], act: () => K.approach(SINKS[1].ax, SINKS[1].ay, () => sink(1, K)) },
+      { r: [1108, 300, 1200, 410], act: () => K.approach(SINKS[2].ax, SINKS[2].ay, () => sink(2, K)) },
+      { r: [STALL.x0 - 6, 166, STALL.x1 + 6, STALL.y1], act: () => K.claimSeat('wc') },
+      { r: [TUB.x0 - 6, 166, TUB.x1, TUB.y1 + 4], act: () => K.claimSeat('tub') },
+      { r: [WASH.x0 - 6, WASH.y0 - 10, WASH.x1 + 6, WASH.y1 + 4], act: () => K.approach((WASH.x0 + WASH.x1) / 2, WASH.y1 + 38, () => {
+          const on = Date.now() < FX.wash;
+          FX.wash = on ? 0 : Date.now() + 15000;
+          K.publish('fx', { from: K.me, a: 'wash', on: !on, at: Date.now() });
+          K.toast(on ? 'Đã tắt máy giặt' : 'Máy giặt bắt đầu quay 🫧');
+        }, 60) }
     ],
+    onSeat: (i, K) => {
+      const g = SEATS[i].g;
+      if (g === 'chair1' || g === 'chair2') K.toast(K.extras.window ? 'Ngắm trăng thôi 🌙' : 'Ngắm trăng thôi 🌙 (bấm cửa sổ để mở ra cho gió vào)');
+      else if (g === 'tub') K.toast('Ngâm mình trong bồn nước ấm 🛁');
+    },
+    onStand: (i, K) => {
+      if (SEATS[i].g === 'wc'){ FX.flush = Date.now() + 2200; K.publish('fx', { from: K.me, a: 'flush', at: Date.now() }); }
+    },
     onExtras: (x, prev, K) => {
-      if (K.inside && x.lights !== prev.lights && x.by && Date.now() - x.at < 8000 && (!K.self || x.by !== K.self.name)) K.toast(x.by + (x.lights === false ? ' đã tắt đèn 🌙' : ' đã bật đèn 💡'));
+      if (!K.inside || !x.by || Date.now() - x.at > 8000 || (K.self && x.by === K.self.name)) return;
+      if (x.lights !== prev.lights) K.toast(x.by + (x.lights === false ? ' đã tắt đèn 🌙' : ' đã bật đèn 💡'));
+      if (!!x.window !== !!prev.window) K.toast(x.by + (x.window ? ' đã mở cửa sổ 🌙' : ' đã đóng cửa sổ'));
     },
     overlay,
-    topics: { 'notes/+': onNote }
+    topics: { 'notes/+': onNote, 'fx': onFx }
   };
-
   /* ================= SỔ GHI CHÚ =================
      Sổ luôn khoá (mật khẩu 4 số). Ghi chú được mã hoá bằng khoá suy ra từ mật khẩu rồi lưu chung
      trên máy chủ chuyển tin, nên ai mở sổ cũng đọc được; mỗi ghi chú tự xoá sau 2 ngày. */

@@ -190,12 +190,20 @@
     }
   }
   // vị trí vẽ: người nằm giường thì đặt đầu lên gối
-  const pose = p => { const s = p.seat >= 0 ? SEATS[p.seat] : null; return s ? { x: s.x, y: s.y + 34, lying: true } : { x: p.x, y: p.y, lying: false }; };
+  // kiểu chỗ: 'lie' nằm (x, y = chỗ gối đầu), 'sit' ngồi quay ra, 'back' ngồi quay lưng (ngắm trăng), 'tub' ngâm bồn tắm
+  const pose = p => {
+    const s = p.seat >= 0 ? SEATS[p.seat] : null;
+    if (!s) return { x: p.x, y: p.y, lying: false, mode: 'stand' };
+    const mode = s.pose || 'lie';
+    return { x: s.x, y: mode === 'lie' ? s.y + 34 : s.y, lying: true, mode, face: s.face };
+  };
+  const seatZ = i => { const s = SEATS[i]; return s.z != null ? s.z : (s.pose || 'lie') === 'lie' ? s.y + .5 : s.y; };
   function drawBody(g, p, t){
-    const P = pose(p), x = P.x, y = P.y, walking = p.moving && !P.lying, f = p.face || 1;
+    const P = pose(p), x = P.x, y = P.y, walking = p.moving && !P.lying, f = P.face || p.face || 1, back = P.mode === 'back';
     const bob = walking ? Math.abs(Math.sin(t * 13 + p.ph)) * -4 : Math.sin(t * (P.lying ? 1.2 : 2) + p.ph) * 1.2;
     g.save(); g.globalAlpha = p.away ? .45 : 1;
     if (p.speaking > .05 && !p.away){ const r = 30 + p.speaking * 14; g.strokeStyle = `rgba(91,227,138,${.35 + p.speaking * .5})`; g.lineWidth = 4; g.beginPath(); g.ellipse(x, P.lying ? y - 34 : y, r, r * (P.lying ? .8 : .38), 0, 0, 7); g.stroke(); }
+    if (P.mode === 'sit'){ g.fillStyle = '#e8902a'; g.beginPath(); g.ellipse(x - 11, y + 2, 9, 5, 0, 0, 7); g.fill(); g.beginPath(); g.ellipse(x + 11, y + 2, 9, 5, 0, 0, 7); g.fill(); }
     if (!P.lying){
       g.fillStyle = 'rgba(0,0,0,.28)'; g.beginPath(); g.ellipse(x, y, 26, 9, 0, 0, 7); g.fill();
       const st = walking ? Math.sin(t * 13 + p.ph) * 5 : 0;
@@ -204,9 +212,19 @@
     const by = y - 34 + bob;
     g.fillStyle = p.col; g.beginPath(); g.ellipse(x, by, 25, 30, 0, 0, 7); g.fill();
     g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 3; g.stroke();
+    if (back){
+      // nhìn từ phía sau: không thấy mặt, chỉ có lưng tròn
+      g.fillStyle = 'rgba(0,0,0,.12)'; g.beginPath(); g.ellipse(x, by + 6, 17, 20, 0, 0, 7); g.fill();
+      g.fillStyle = 'rgba(255,255,255,.22)'; g.beginPath(); g.ellipse(x + 10, by - 14, 6, 9, .4, 0, 7); g.fill();
+      g.fillStyle = p.col; g.strokeStyle = 'rgba(0,0,0,.3)'; g.lineWidth = 2;
+      g.save(); g.translate(x - 22, by + 4); g.rotate(-.25); g.beginPath(); g.ellipse(0, 6, 6, 11, 0, 0, 7); g.fill(); g.stroke(); g.restore();
+      g.save(); g.translate(x + 22, by + 4); g.rotate(.25); g.beginPath(); g.ellipse(0, 6, 6, 11, 0, 0, 7); g.fill(); g.stroke(); g.restore();
+      drawHat(g, p.hat, x, by - 28);
+      g.restore(); return;
+    }
     g.fillStyle = 'rgba(255,255,255,.32)'; g.beginPath(); g.ellipse(x + f * 3, by + 8, 15, 16, 0, 0, 7); g.fill();
     g.fillStyle = 'rgba(255,255,255,.35)'; g.beginPath(); g.ellipse(x - f * 10, by - 16, 6, 9, -.4 * f, 0, 7); g.fill();
-    const sleepy = P.lying && Math.sin(t * .35 + p.ph) > .55;
+    const sleepy = (P.mode === 'lie' && Math.sin(t * .35 + p.ph) > .55) || (P.mode === 'tub' && Math.sin(t * .5 + p.ph) > .2);
     const blink = sleepy || Math.sin(t * .9 + p.ph * 3) > .985;
     const ex = x + f * 6;
     [-9, 9].forEach(dx => { g.fillStyle = '#fff'; g.beginPath(); g.ellipse(ex + dx, by - 6, 6, blink ? 1.2 : 7.5, 0, 0, 7); g.fill(); if (!blink){ g.fillStyle = '#1a1416'; g.beginPath(); g.arc(ex + dx + f * 2, by - 5, 3.4, 0, 7); g.fill(); } });
@@ -370,26 +388,42 @@
   setInterval(() => { const now = Date.now(); for (const [id, p] of peers) if (p.seen < now - 45000 || (p.lwt && now - p.lwt > 15000)) dropPeer(id); }, 3000);
 
   /* ================= CHỖ NẰM / CHỖ NGỒI ================= */
+  // mỗi chỗ có thể thuộc một nhóm (giường, ghế, bồn tắm…): bấm vào đồ nào thì chỉ tìm chỗ trong nhóm đó
   const seatTaken = i => [...peers.values()].some(p => p.seat === i && Date.now() - p.seen < 45000);
-  function claimSeat(){
+  const sameGroup = (i, k) => (SEATS[i].g || '') === (SEATS[k].g || '');
+  const fullMsg = g => (R.seatFullBy && R.seatFullBy[g]) || R.seatFull || 'Hết chỗ rồi.';
+  function claimSeat(group){
     if (!self || !SEATS.length) return;
-    if (self.seat >= 0) return;
-    const free = SEATS.map((s, i) => i).filter(i => !seatTaken(i));
-    if (!free.length){ toast(R.seatFull || 'Hết chỗ rồi.', true); return; }
+    const inG = i => !group || SEATS[i].g === group;
+    if (self.seat >= 0){ if (inG(self.seat)) return; standUp(); }
+    const free = SEATS.map((s, i) => i).filter(i => inG(i) && !seatTaken(i));
+    if (!free.length){ toast(fullMsg(group), true); return; }
     // chọn chỗ gần mình hơn
     free.sort((a, b) => Math.hypot(SEATS[a].ax - self.x, SEATS[a].ay - self.y) - Math.hypot(SEATS[b].ax - self.x, SEATS[b].ay - self.y));
-    seatPending = free[0]; exitPending = false;
+    seatPending = free[0]; exitPending = false; actPending = null;
     self.tx = SEATS[seatPending].ax; self.ty = SEATS[seatPending].ay; marker = { x: self.tx, y: self.ty, t: clock };
     sendMove();
   }
   function sitDown(i){
-    if (seatTaken(i)){ const other = SEATS.map((s, k) => k).find(k => k !== i && !seatTaken(k)); if (other === undefined){ toast(R.seatFull || 'Hết chỗ rồi.', true); return; } i = other; }
+    if (seatTaken(i)){ const other = SEATS.map((s, k) => k).find(k => k !== i && sameGroup(i, k) && !seatTaken(k)); if (other === undefined){ toast(fullMsg(SEATS[i].g), true); return; } i = other; }
     self.seat = i; self.x = SEATS[i].ax; self.y = SEATS[i].ay; self.tx = self.x; self.ty = self.y; self.moving = false;
     publishPresence(); sendMove();
     if (R.onSeat) R.onSeat(i, K);
   }
-  function standUp(){ if (!self || self.seat < 0) return; const s = SEATS[self.seat]; self.seat = -1; self.x = s.ax; self.y = s.ay; publishPresence(); }
-  function bumpSeat(){ const i = self.seat; standUp(); const other = SEATS.map((s, k) => k).find(k => k !== i && !seatTaken(k)); if (other !== undefined) sitDown(other); else toast(R.seatFull || 'Hết chỗ rồi.', true); }
+  function standUp(){ if (!self || self.seat < 0) return; const i = self.seat, s = SEATS[i]; self.seat = -1; self.x = s.ax; self.y = s.ay; publishPresence(); if (R.onStand) R.onStand(i, K); }
+  function bumpSeat(){ const i = self.seat; standUp(); const other = SEATS.map((s, k) => k).find(k => k !== i && sameGroup(i, k) && !seatTaken(k)); if (other !== undefined) sitDown(other); else toast(fullMsg(SEATS[i].g), true); }
+  // ai đang ở chỗ i (kể cả mình)
+  const occupant = i => (self && self.seat === i) ? self : [...peers.values()].find(p => p.seat === i && Date.now() - p.seen < 45000) || null;
+  // đi tới gần (x, y) rồi mới làm việc fn — vd. đứng cạnh bồn rửa mới mở được vòi
+  let actPending = null;
+  function approach(x, y, fn, r = 46){
+    if (!self) return;
+    if (self.seat >= 0) standUp();
+    seatPending = -1; exitPending = false;
+    if (Math.hypot(self.x - x, self.y - y) <= r){ actPending = null; fn(); return; }
+    actPending = { x, y, fn, r, until: clock + 9 };
+    self.tx = x; self.ty = y; marker = { x, y, t: clock }; sendMove();
+  }
 
   /* ================= GỌI THOẠI (WebRTC) ================= */
   let localStream = null, actx = null, localAn = null;
@@ -688,7 +722,7 @@
     stopCapture(); peerKey.clear(); sentKey.clear(); rx.clear();
     peers.forEach(p => { p.relayNoted = false; });
     if (localStream){ localStream.getTracks().forEach(t => t.stop()); localStream = null; }
-    self = null; seatPending = -1; clearTimeout(awayT); musicDuck(); ui();
+    self = null; seatPending = -1; actPending = null; clearTimeout(awayT); musicDuck(); ui();
     if (reason) { gErr.textContent = reason; }
   }
   function leaveTo(href, fade){
@@ -831,7 +865,7 @@
     const vw = innerWidth, vh = innerHeight, small = vw < 760;
     const padT = small ? 92 : 64, padB = small ? 72 : 78;
     const fit = Math.min(vw / W, (vh - padT - padB) / H);
-    const s = Math.max(fit, small ? .52 : .4);
+    const s = Math.max(fit, small ? Math.max(.52, Math.min(.68, (vh - padT - padB) / H)) : .4);   // điện thoại: phóng to vừa chiều cao, camera đi theo mình
     let cx, cy;
     const focus = self ? pose(self) : { x: W / 2, y: H / 2 + 60 };
     if (W * s <= vw) cx = (vw - W * s) / 2; else cx = clamp(vw / 2 - focus.x * s, vw - W * s, 0);
@@ -841,7 +875,7 @@
   }
   const toWorld = (sx, sy) => ({ x: (sx - view.ox) / view.s, y: (sy - view.oy) / view.s });
   function sendMove(){ if (!self) return; pub(T_MOVE, { id: me, x: Math.round(self.x), y: Math.round(self.y), tx: Math.round(self.tx), ty: Math.round(self.ty) }); clearTimeout(sendMove._t); sendMove._t = setTimeout(publishPresence, 1200); }
-  function goDoor(){ if (!self) return; standUp(); seatPending = -1; self.tx = (DOOR.x0 + DOOR.x1) / 2; self.ty = BOUND.y1; exitPending = true; marker = { x: self.tx, y: self.ty, t: clock }; sendMove(); toast('Đi ra cửa… (bấm chỗ khác để ở lại)'); }
+  function goDoor(){ if (!self) return; standUp(); seatPending = -1; actPending = null; self.tx = (DOOR.x0 + DOOR.x1) / 2; self.ty = BOUND.y1; exitPending = true; marker = { x: self.tx, y: self.ty, t: clock }; sendMove(); toast('Đi ra cửa… (bấm chỗ khác để ở lại)'); }
 
   // bộ công cụ cho trang cấu hình
   const K = {
@@ -850,7 +884,8 @@
     get profileName(){ return prof.name; },
     get clock(){ return clock; }, get self(){ return self; }, get inside(){ return inside; }, get extras(){ return extras; },
     get soundOn(){ return soundOn; }, toggleMusic: () => toggleMusic(), peers,
-    seatTaken
+    seatTaken, occupant, approach, me, seats: SEATS,
+    near: (x, y, r = 60) => !!self && Math.hypot(self.x - x, self.y - y) <= r
   };
   const HOT = (R.hotspots ? R.hotspots(K) : []).concat([
     { r: [DOOR.x0, FL.y1 - 30, DOOR.x1, FL.y1 + 40], act: goDoor },
@@ -863,7 +898,7 @@
     const w = toWorld(e.clientX, e.clientY);
     for (const h of HOT){ const [a, b, c, d] = h.r; if (w.x >= a && w.x <= c && w.y >= b && w.y <= d){ if (inside || h.always) h.act(w); return; } }
     if (!inside || !self) return;
-    exitPending = false; seatPending = -1;
+    exitPending = false; seatPending = -1; actPending = null;
     if (self.seat >= 0) standUp();
     self.tx = clamp(w.x, BOUND.x0, BOUND.x1); self.ty = clamp(w.y, BOUND.y0, BOUND.y1);
     marker = { x: self.tx, y: self.ty, t: clock };
@@ -911,10 +946,11 @@
     if (self && keys.size){
       const vx = (keys.has('arrowright') || keys.has('d') ? 1 : 0) - (keys.has('arrowleft') || keys.has('a') ? 1 : 0);
       const vy = (keys.has('arrowdown') || keys.has('s') ? 1 : 0) - (keys.has('arrowup') || keys.has('w') ? 1 : 0);
-      if (vx || vy){ if (self.seat >= 0) standUp(); seatPending = -1; self.tx = clamp(self.x + vx * 60, BOUND.x0, BOUND.x1); self.ty = clamp(self.y + vy * 60, BOUND.y0, BOUND.y1); if (now - lastKeySend > 250){ lastKeySend = now; sendMove(); } }
+      if (vx || vy){ if (self.seat >= 0) standUp(); seatPending = -1; actPending = null; self.tx = clamp(self.x + vx * 60, BOUND.x0, BOUND.x1); self.ty = clamp(self.y + vy * 60, BOUND.y0, BOUND.y1); if (now - lastKeySend > 250){ lastKeySend = now; sendMove(); } }
     }
     if (self && exitPending && !self.moving && self.y > BOUND.y1 - 14 && self.x > DOOR.x0 && self.x < DOOR.x1){ exitPending = false; leaveTo(R.exitHref); }
     if (self && seatPending >= 0 && !self.moving && Math.hypot(self.x - SEATS[seatPending].ax, self.y - SEATS[seatPending].ay) < 30){ const i = seatPending; seatPending = -1; sitDown(i); }
+    if (self && actPending){ const a = actPending; if (!self.moving && Math.hypot(self.x - a.x, self.y - a.y) <= a.r){ actPending = null; a.fn(); } else if (clock > a.until) actPending = null; }
     if (self){ step(self, dt, 250); self.speaking += ((self.mic && !self.away ? clamp((level(localAn) - .02) * 14, 0, 1) : 0) - self.speaking) * .3; }
     peers.forEach(p => {
       step(p, dt, 250);
@@ -933,7 +969,7 @@
     if (marker){ const a = clock - marker.t; if (a > .7) marker = null; else { ctx.globalAlpha = 1 - a / .7; ctx.fillStyle = '#e8902a'; ctx.beginPath(); ctx.ellipse(marker.x, marker.y, 34 + a * 20, 14 + a * 8, 0, 0, 7); ctx.fill(); ctx.globalAlpha = 1; } }
     const list = PROPS.map(p => ({ y: p.y, d: p.d }));
     const people = [...peers.values()]; if (self) people.push(self);
-    people.forEach(p => { const P = pose(p); list.push({ y: P.lying ? SEATS[p.seat].y + .5 : p.y + (p === self ? .1 : 0), d: g => drawBody(g, p, clock) }); });
+    people.forEach(p => { const P = pose(p); list.push({ y: P.lying ? seatZ(p.seat) : p.y + (p === self ? .1 : 0), d: g => drawBody(g, p, clock) }); });
     list.sort((a, b) => a.y - b.y).forEach(o => o.d(ctx, clock));
     if (R.overlay) R.overlay(ctx, clock, K, view, DPR);
     people.forEach(p => drawLabel(ctx, p, clock, p === self));
