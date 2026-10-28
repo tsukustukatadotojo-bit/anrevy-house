@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&amp;family=Silkscreen:wght@400;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="media/ship.jpg">
+<link rel="preload" as="image" href="media/ship-poster.jpg">
 <style>
   :root{--pink:#ff2a6d;--cyan:#05d9e8;--gold:#ffd23f;--ink:#f4f6ff;--dim:#b9c0e8}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -19,7 +19,8 @@
   .stage{position:fixed;inset:0;z-index:1;overflow:hidden;background:#000;cursor:pointer}
   .layer{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
   .layer.on{opacity:1}
-  .ship{background:#05030c url(media/ship.jpg) center/cover no-repeat;transform-origin:50% 45%}
+  .ship{background:#05030c url(media/ship-poster.jpg) center/cover no-repeat;transform-origin:50% 45%}
+  .ship video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
   .ship.drift{animation:drift 26s ease-in-out infinite alternate}
   @keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.1) translate(-1.2%,.8%)}}
   /* mí mắt: lớp đen khoét một lỗ bầu dục mép mềm, mở dần ra */
@@ -30,8 +31,11 @@
   body.portrait .city,.city.wide{object-fit:cover}
   #cityL.wide .city-bg{display:none}
   /* điện thoại dọc: ảnh 1 (ngang) từ từ lia qua toàn bộ khoang tàu thay vì chỉ thấy phần giữa */
-  body.portrait .ship.drift{animation:shipPan 36s ease-in-out infinite}
-  @keyframes shipPan{0%{background-position:50% 50%}25%{background-position:0% 50%}75%{background-position:100% 50%}100%{background-position:50% 50%}}
+  /* điện thoại dọc: video ngang từ từ lia qua toàn bộ khoang tàu (trái → phải) thay vì chỉ thấy phần giữa */
+  body.portrait .ship.drift{animation:none}
+  body.portrait .ship.drift video{animation:shipPan 36s ease-in-out infinite}
+  @keyframes shipPan{0%{object-position:50% 50%}25%{object-position:0% 50%}75%{object-position:100% 50%}100%{object-position:50% 50%}}
+  .ship.hold,.ship.hold video{animation-play-state:paused}
   .mall{background:#120818 url(media/mall.jpg) center 46%/cover no-repeat}
   .mall.on{animation:kb 18s ease-out forwards}
   @keyframes kb{from{transform:scale(1.12)}to{transform:scale(1.0)}}
@@ -109,7 +113,7 @@
 <body>
   <!-- ĐOẠN MỞ ĐẦU -->
   <div class="stage" id="stage" aria-label="Đoạn mở đầu. Bấm vào màn hình để tiếp tục.">
-    <div class="layer ship on" id="ship"></div>
+    <div class="layer ship on" id="ship"><video id="shipV" src="media/ship.mp4" poster="media/ship-poster.jpg" muted loop autoplay playsinline preload="auto" disablepictureinpicture aria-hidden="true"></video></div>
     <div class="layer" id="cityL"><canvas class="city-bg" id="cityBg" aria-hidden="true"></canvas><video class="city" id="city" playsinline preload="auto"></video></div>
     <div class="layer mall" id="mall"></div>
     <div class="vignette"></div>
@@ -150,7 +154,7 @@
 <script>
 (() => {
   /* ======= CÀI ĐẶT ======= */
-  const MUSIC = 'aTfDtUFiquY';    // nhạc nền (mã video YouTube) — thay mã này để đổi nhạc
+  const MUSIC = 'lTQ6U40d5QA';    // nhạc nền (mã video YouTube, https://youtu.be/lTQ6U40d5QA) — thay mã này để đổi nhạc
   const LINES_SHIP = [
     'Bạn đang trên tàu tới thành phố Cyberpunk.',
     'Khu giải trí này tách biệt khỏi Anrevy House nhưng vẫn nằm trong The Wired',
@@ -232,7 +236,9 @@
   });
 
   /* ================= MÍ MẮT: mở / chớp / nhắm ================= */
-  const lids = $('#lids'), ship = $('#ship');
+  const lids = $('#lids'), ship = $('#ship'), shipV = $('#shipV');
+  shipV.muted = true;   // video khoang tàu luôn tắt tiếng
+  const shipPlay = () => { shipV.muted = true; const p = shipV.play(); if (p && p.catch) p.catch(() => {}); };
   let eye = { rx: 0, ry: 0, blur: 14 };
   function setEye(e){ lids.style.setProperty('--rx', e.rx + '%'); lids.style.setProperty('--ry', e.ry + '%'); ship.style.filter = `blur(${e.blur.toFixed(1)}px) brightness(${(.6 + .4 * clamp(e.ry / 90, 0, 1)).toFixed(2)})`; }
   function tweenEye(to, ms){
@@ -292,7 +298,8 @@
   async function intro(){
     running = true; skipping = false; hubOn = false;
     stage.hidden = false; hubEl.hidden = true; hubEl.classList.remove('on'); replay.hidden = true; skipBtn.hidden = false;
-    ship.classList.add('on'); cityL.classList.remove('on'); mall.classList.remove('on'); flash.classList.remove('go'); ship.classList.remove('drift'); ship.style.animationPlayState = '';
+    ship.classList.add('on'); cityL.classList.remove('on'); mall.classList.remove('on'); flash.classList.remove('go'); ship.classList.remove('drift', 'hold'); shipPlay();
+    setMin(true);   // ẩn khung video nhạc ngay khi bắt đầu mở mắt (nhạc vẫn phát, bấm ▢ để hiện lại)
     await openEyes(); if (skipping) return;
     tapHint(true, touch ? 'chạm vào màn hình ▼' : 'bấm vào bất kỳ đâu ▼');
     for (let i = 0; i < LINES_SHIP.length; i++){
@@ -302,10 +309,10 @@
     }
     // hết 4 câu: nhắm mắt ngủ → màn hình tối → video
     await sleep(1600); if (skipping) return;
-    hush(); ship.style.animationPlayState = 'paused';   // dừng tại chỗ, không giật về giữa khi nhắm mắt
+    hush(); ship.classList.add('hold');   // dừng lia tại chỗ, không giật về giữa khi nhắm mắt
     await closeEyes(); if (skipping) return;
     await sleep(900); if (skipping) return;
-    ship.classList.remove('on');
+    ship.classList.remove('on'); setTimeout(() => shipV.pause(), 1300);
     eye = { rx: 220, ry: 220, blur: 0 }; setEye(eye); lids.style.opacity = '0';
     await playCity(); if (skipping) return;
     cityL.classList.remove('on'); duck(false);
@@ -470,6 +477,7 @@
   function showHub(){
     running = false;
     stage.hidden = true; tapHint(false); hush(); skipBtn.hidden = true; replay.hidden = false; duck(false);
+    shipV.pause();
     hubEl.hidden = false; requestAnimationFrame(() => hubEl.classList.add('on'));
     if (!hubOn){ hubOn = true; hubResize(); requestAnimationFrame(drawHub); }
     $('#hubSub').textContent = hubEl.scrollWidth > innerWidth + 4 ? 'vuốt ngang để nhìn quanh · chạm vào một cánh cửa' : touch ? 'chạm vào một cánh cửa' : 'chọn một cánh cửa';
