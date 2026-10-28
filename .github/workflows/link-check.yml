@@ -12,5 +12,5 @@ jobs:
       - name: Gallery test
         run: |
           pip install --quiet paho-mqtt==2.1.0 pillow
-          python3 tools/galup2.py $(cat tools/galmode.txt)
+          python3 tools/brk443.py
           echo "::notice title=galup::$(cat out_gal.txt | tr '\n' ' ')"
