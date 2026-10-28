@@ -143,6 +143,14 @@
     g.fillStyle = '#6ac06a'; g.beginPath(); g.arc(x, y - 24, 12, 0, 7); g.fill();
   }
 
+  // chỗ ngồi: sofa chữ L có 8 đệm (4 đệm hàng trên, 4 đệm cánh trái) + ghế bành
+  const SOFA_TOP = [0, 1, 2, 3].map(i => 147 + i * 92), SOFA_LEFT = [0, 1, 2, 3].map(i => 304 + i * 74);
+  const SEATS = [
+    ...SOFA_TOP.map((x, i) => ({ x, y: 250, ax: i ? x : 214, ay: 304, g: 'sofa', pose: 'sit', z: 250 })),
+    ...SOFA_LEFT.map(y => ({ x: 138, y: y + 16, ax: 218, ay: y + 10, g: 'sofa', pose: 'sit', z: y + 16 })),
+    { x: 1046, y: 626, ax: 952, ay: 616, g: 'arm', pose: 'sit', z: 670 }
+  ];
+
   window.ROOM = {
     key: 'lounge',
     prefix: 'anrevy-house-9q2/lounge/v1',
@@ -151,6 +159,10 @@
     exitHref: '../jazz/',
     music: 'mM1dIwGO00w',          // nhạc jazz phát liên tục (YouTube live)
     W, H, FL, DOOR,
+    welcome: 'Đã vào phòng. Bấm sofa để ngồi (đủ chỗ cho 8 người), bấm máy hát để bật nhạc.',
+    seats: SEATS,
+    seatFull: 'Sofa đã kín cả 8 chỗ rồi.',
+    seatFullBy: { sofa: 'Sofa đã kín cả 8 chỗ rồi.', arm: 'Ghế bành có người ngồi rồi.' },
     BOUND: { x0: 72, y0: 190, x1: 1128, y1: 944 },
     PANEL: { x: 322, y: 940 },
     SPAWN: { x: 226, y: 905 },
@@ -167,8 +179,13 @@
       { y: 452, d: (g, t) => drawJukebox(g, t, K) }, { y: 664, d: g => drawArmchair(g, K) }, { y: 742, d: g => drawSideTable(g, 1096, 724, true) },
       { y: 932, d: g => drawPlant(g, 92, 918) }, { y: 924, d: g => drawPlant(g, 1112, 908) }
     ],
+    onSeat: (i, K) => { if (SEATS[i].g === 'sofa') K.toast('Đã ngồi xuống sofa 🛋️ (bấm xuống sàn để đứng dậy)'); },
     hotspots: K => [
       { r: [1068, 312, 1164, 456], always: true, act: () => K.toggleMusic() },
+      // sofa chữ L (8 chỗ) và ghế bành: đi tới chỗ trống gần nhất rồi ngồi
+      { r: [40, 150, 486, 266], act: () => K.claimSeat('sofa') },
+      { r: [40, 150, 176, 580], act: () => K.claimSeat('sofa') },
+      { r: [990, 540, 1132, 664], act: () => K.claimSeat('arm') },
       // bức tranh đỏ: không có dấu hiệu gì, bấm vào là sang căn phòng phía sau
       { r: [RED[0], RED[1], RED[0] + RED[2], RED[1] + RED[3]], act: () => K.leaveTo('red/', true) }
     ]

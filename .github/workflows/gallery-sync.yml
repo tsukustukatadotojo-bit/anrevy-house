@@ -1,0 +1,23 @@
+# Lưu tranh khách gửi (nút "Update" trong An Vy's Gallery) vào gallery/uploads — chạy 15 phút một lần.
+name: gallery-sync
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gallery-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cài thư viện
+        run: pip install --quiet paho-mqtt==2.1.0 pillow
+      - name: Lưu tranh khách gửi
+        run: python3 .github/scripts/gallery_sync.py

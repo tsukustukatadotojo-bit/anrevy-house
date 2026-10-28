@@ -440,7 +440,20 @@
     // làn gió đêm lùa vào phòng
     if (winT > .05){ g.save(); g.globalAlpha = .12 * winT; g.strokeStyle = '#cfe0ff'; g.lineWidth = 2; for (let i = 0; i < 4; i++){ const p = (t * .25 + i * .25) % 1, x0 = wx + 30 + i * 40, y0 = wy + wh + 20 + p * 120; g.beginPath(); g.moveTo(x0, y0); g.bezierCurveTo(x0 + 20, y0 + 10, x0 - 10, y0 + 22, x0 + 16, y0 + 34); g.stroke(); } g.restore(); }
   }
-  function underlay(g, t, K){ drawWindow(g, t, K); }
+  // công tắc đèn phòng tắm trên tường, cạnh gương
+  const BSW = { x: 1158, y: 80 };
+  function drawBathSwitch(g, t, K){
+    const rr = K.rr, on = K.extras.bath !== false;
+    g.fillStyle = 'rgba(80,30,10,.28)'; rr(g, BSW.x - 13, BSW.y - 19, 30, 42, 5); g.fill();
+    g.fillStyle = '#fbf3e4'; rr(g, BSW.x - 15, BSW.y - 22, 30, 42, 5); g.fill();
+    g.strokeStyle = '#d9b48a'; g.lineWidth = 1.5; rr(g, BSW.x - 15, BSW.y - 22, 30, 42, 5); g.stroke();
+    g.fillStyle = '#e8dcc8'; rr(g, BSW.x - 7, BSW.y - 13, 14, 24, 3); g.fill();
+    g.fillStyle = on ? '#ffffff' : '#cbbfa8'; rr(g, BSW.x - 6, on ? BSW.y - 12 : BSW.y - 1, 12, 11, 3); g.fill();
+    g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 1; rr(g, BSW.x - 6, on ? BSW.y - 12 : BSW.y - 1, 12, 11, 3); g.stroke();
+    // đèn báo nhỏ: tắt đèn thì phát sáng xanh để tìm thấy trong tối
+    g.fillStyle = on ? '#f0a050' : `rgba(120,255,170,${.65 + .3 * Math.sin(t * 3)})`; g.beginPath(); g.arc(BSW.x, BSW.y + 15, 2.4, 0, 7); g.fill();
+  }
+  function underlay(g, t, K){ drawWindow(g, t, K); drawBathSwitch(g, t, K); }
 
   /* ----- 2 ghế bành quay lưng ra ngoài, nhìn lên cửa sổ ----- */
   function drawChairBack(g, K, x){
@@ -574,23 +587,31 @@
   /* ----- ánh sáng: tắt đèn thì phòng ngủ tối, chỉ còn trăng + đèn nháy; phòng tắm luôn có đèn vàng ấm ----- */
   const dark = document.createElement('canvas'); dark.width = W / 2; dark.height = H / 2;
   const dg = dark.getContext('2d');
-  let lightT = 1;
+  let lightT = 1, bathT = 1;
   function overlay(g, t, K){
-    const target = K.extras.lights === false ? 0 : 1;
-    lightT += (target - lightT) * .08;
-    const d = 1 - lightT;
-    if (d > .01){
+    const target = K.extras.lights === false ? 0 : 1, bTarget = K.extras.bath === false ? 0 : 1;
+    lightT += (target - lightT) * .08; bathT += (bTarget - bathT) * .08;
+    const d = 1 - lightT, db = 1 - bathT;
+    if (d > .01 || db > .01){
       dg.setTransform(.5, 0, 0, .5, 0, 0);
       dg.globalCompositeOperation = 'source-over'; dg.clearRect(0, 0, W, H);
-      dg.fillStyle = `rgba(10,8,30,${.82 * d})`; dg.fillRect(0, 0, BF.x0 - 20, H);
+      if (d > .01){ dg.fillStyle = `rgba(10,8,30,${.82 * d})`; dg.fillRect(0, 0, BF.x0 - 20, H); }
+      if (db > .01){ dg.fillStyle = `rgba(10,8,30,${.84 * db})`; dg.fillRect(BF.x0 - 20, 0, W - BF.x0 + 20, H); }
       dg.globalCompositeOperation = 'destination-out';
-      const hole = (x, y, r, a) => { const gr = dg.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(0,0,0,${a})`); gr.addColorStop(1, 'rgba(0,0,0,0)'); dg.fillStyle = gr; dg.beginPath(); dg.arc(x, y, r, 0, 7); dg.fill(); };
+      const hole = (x, y, r, a) => { if (a <= .01) return; const gr = dg.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(0,0,0,${a})`); gr.addColorStop(1, 'rgba(0,0,0,0)'); dg.fillStyle = gr; dg.beginPath(); dg.arc(x, y, r, 0, 7); dg.fill(); };
       hole(205, 70, 150 + winT * 40, .75); hole(240, 300, 220 + winT * 60, .45 + winT * .15);   // ánh trăng qua cửa sổ
       BULBS.forEach(b => hole(b.x, b.y + 10, 60, .35));               // đèn nháy
       hole(LAMP.x + 172, 196, 30, .6);                                // đồng hồ
       hole(PLAYER.x, PLAYER.y, 40, K.soundOn ? .4 : 0);
-      hole(BF.x0 - 30, (GAP.y0 + GAP.y1) / 2, 110, .7);               // ánh đèn phòng tắm hắt qua cửa
+      hole(BF.x0 - 30, (GAP.y0 + GAP.y1) / 2, 110, .7 * bathT);       // ánh đèn phòng tắm hắt qua cửa
+      // phòng tắm khi tắt đèn: ánh trăng qua ô kính mờ, đèn báo công tắc, đèn máy giặt, ánh đèn phòng ngủ hắt sang
+      hole(1658, 66, 110, .7); hole(1650, 280, 230, .38);
+      hole(BSW.x, BSW.y + 10, 34, .55);
+      hole((WASH.x0 + WASH.x1) / 2, WASH.y0 + 40, 70, Date.now() < FX.wash ? .5 : .15);
+      hole(BF.x0 + 10, (GAP.y0 + GAP.y1) / 2, 150, .6 * lightT);
       g.drawImage(dark, 0, 0, W, H);
+    }
+    if (d > .01){
       g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = (.18 + winT * .12) * d;
       const mg = g.createLinearGradient(160, 120, 300, 520); mg.addColorStop(0, '#8aa8ff'); mg.addColorStop(1, 'rgba(138,168,255,0)');
       g.fillStyle = mg; g.beginPath(); g.moveTo(110, 130); g.lineTo(300, 130); g.lineTo(420 + winT * 40, 560); g.lineTo(120 - winT * 20, 560); g.closePath(); g.fill();
@@ -606,8 +627,13 @@
       const mg = g.createLinearGradient(0, 130, 0, 420); mg.addColorStop(0, '#9ab4ff'); mg.addColorStop(1, 'rgba(154,180,255,0)');
       g.fillStyle = mg; g.beginPath(); g.moveTo(110, 130); g.lineTo(300, 130); g.lineTo(380, 420); g.lineTo(80, 420); g.closePath(); g.fill(); g.restore();
     }
-    // đèn trần phòng tắm vàng ấm
-    g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .13;
+    if (db > .01){ // ánh trăng tím nhạt qua ô kính mờ khi phòng tắm tắt đèn
+      g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .12 * db;
+      const mg = g.createLinearGradient(0, 100, 0, 440); mg.addColorStop(0, '#b8b0ff'); mg.addColorStop(1, 'rgba(184,176,255,0)');
+      g.fillStyle = mg; g.beginPath(); g.moveTo(1606, 104); g.lineTo(1710, 104); g.lineTo(1760, 440); g.lineTo(1540, 440); g.closePath(); g.fill(); g.restore();
+    }
+    // đèn trần phòng tắm vàng ấm (tắt được bằng công tắc)
+    g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .13 * bathT;
     const bl = g.createRadialGradient(1440, 430, 30, 1440, 430, 460); bl.addColorStop(0, '#ffd09a'); bl.addColorStop(1, 'rgba(255,208,154,0)');
     g.fillStyle = bl; g.fillRect(BF.x0, 0, BF.x1 - BF.x0, H); g.restore();
     // dây đèn nháy luôn sáng
@@ -651,7 +677,7 @@
     exitHref: '../',
     music: 'mM1dIwGO00w', volIn: 28,
     outside: '#120806',
-    welcome: 'Đã vào phòng. Bấm giường để nằm, bấm cửa sổ để mở, ngồi ghế ngắm trăng. Cửa bên phải dẫn sang phòng tắm.',
+    welcome: 'Đã vào phòng. Bấm giường để nằm, bấm cửa sổ để mở, ngồi ghế ngắm trăng. Cửa bên phải dẫn sang phòng tắm (công tắc đèn trên tường cạnh gương).',
     seatFull: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.',
     seatFullBy: { bed: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.', chair1: 'Ghế này có người ngồi rồi.', chair2: 'Ghế này có người ngồi rồi.', tub: 'Bồn tắm chỉ đủ chỗ cho 2 người thôi.', wc: 'Nhà vệ sinh đang có người.' },
     W, H, FL, DOOR,
@@ -659,7 +685,7 @@
     PANEL: { x: 300, y: 840 },
     SPAWN: { x: 210, y: 806 },
     seats: SEATS,
-    extras: { lights: true, window: false },
+    extras: { lights: true, window: false, bath: true },
     OB: [
       { r: [430, 110, 690, 474] }, { r: [356, 170, 430, 236] }, { r: [690, 170, 764, 236] },
       { r: [40, 250, 132, 494] }, { r: [40, 560, 114, 766] }, { r: [980, 250, 1060, 462] },
@@ -701,6 +727,11 @@
           K.setExtras({ lights: !on });
           K.toast(on ? 'Đã tắt đèn 🌙' : 'Đã bật đèn 💡');
         } },
+      { r: [BSW.x - 30, BSW.y - 40, BSW.x + 26, BSW.y + 40], act: () => {
+          const on = K.extras.bath !== false;
+          K.setExtras({ bath: !on });
+          K.toast(on ? 'Đã tắt đèn phòng tắm 🌙' : 'Đã bật đèn phòng tắm 💡');
+        } },
       { r: [WIN.x - 40, 0, WIN.x + WIN.w + 40, 150], act: () => {
           const open = !!K.extras.window;
           K.setExtras({ window: !open });
@@ -736,6 +767,7 @@
       if (!K.inside || !x.by || Date.now() - x.at > 8000 || (K.self && x.by === K.self.name)) return;
       if (x.lights !== prev.lights) K.toast(x.by + (x.lights === false ? ' đã tắt đèn 🌙' : ' đã bật đèn 💡'));
       if (!!x.window !== !!prev.window) K.toast(x.by + (x.window ? ' đã mở cửa sổ 🌙' : ' đã đóng cửa sổ'));
+      if ((x.bath !== false) !== (prev.bath !== false)) K.toast(x.by + (x.bath === false ? ' đã tắt đèn phòng tắm 🌙' : ' đã bật đèn phòng tắm 💡'));
     },
     overlay,
     topics: { 'notes/+': onNote, 'fx': onFx }
