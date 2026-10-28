@@ -1280,6 +1280,8 @@ function pubMany(c,msgs,win,tick){
 function initGuests(){ loadArchived(); loadMqtt(guestConnect); }
 
 /* ================= Kiểm định & chuẩn bị ảnh (giữ bản gốc) ================= */
+// tên tác giả không hợp lệ (để trống tên)
+var NO_NAME=/^(none|null|nil|n\/?a|na|unknown|anonymous|no ?name|khong( ro| co| biet| ten)?|chua ro.*|an danh|vo danh|[-_.?x ]+)$/;
 var MAX_FILES=20, MAX_ORIG=20*1024*1024, MAX_PIX=100e6, MIN_SIDE=300, LOW_SIDE=1000, PREV_SIDE=1600;
 var FMT_LABEL={jpg:"JPEG",png:"PNG",webp:"WebP",gif:"GIF",bmp:"BMP",tiff:"TIFF",avif:"AVIF",heic:"HEIC"};
 function fmtBytes(n){ return n>=1048576 ? (n/1048576).toLocaleString("vi-VN",{maximumFractionDigits:1})+" MB" : Math.max(1,Math.round(n/1024))+" KB"; }
@@ -1596,15 +1598,16 @@ upForm.addEventListener("submit",function(e){
   var todo=upItems.filter(function(it){ return !it.done && it.status!=="bad"; });
   if(!todo.length){ upErr.textContent = upItems.length ? "Không có ảnh nào đạt kiểm định để treo. Hãy bỏ ảnh lỗi và chọn ảnh khác." : "Hãy chọn ít nhất một tranh hoặc ảnh."; return; }
   if(todo.some(function(it){ return it.status==="checking"; })){ upErr.textContent="Đang kiểm định ảnh, đợi vài giây rồi bấm lại nhé."; return; }
-  var maxY=new Date().getFullYear()+1, firstBad=null, nBad=0, vals=new Map();
+  var maxY=new Date().getFullYear()+1, firstBad=null, nBad=0, vals=new Map(), noName=false;
   todo.forEach(function(it){
     var v=fields(it), g=it.card, yr=Number(v.yRaw), yOk=/^[0-9]{1,4}$/.test(v.yRaw) && (yr===0 || (yr>=1 && yr<=maxY));
-    invalidEl(g.querySelector(".f-year"),!yOk); invalidEl(g.querySelector(".f-artist"),!v.artist); invalidEl(g.querySelector(".f-kind"),!v.kind); invalidEl(g.querySelector(".f-note"),!v.note);
-    if(!yOk || !v.artist || !v.kind || !v.note){ nBad++; if(!firstBad) firstBad=g; }
+    var aOk=!!v.artist && !NO_NAME.test(fold(v.artist)); if(v.artist && !aOk) noName=true;
+    invalidEl(g.querySelector(".f-year"),!yOk); invalidEl(g.querySelector(".f-artist"),!aOk); invalidEl(g.querySelector(".f-kind"),!v.kind); invalidEl(g.querySelector(".f-note"),!v.note);
+    if(!yOk || !aOk || !v.kind || !v.note){ nBad++; if(!firstBad) firstBad=g; }
     vals.set(it,v);
   });
   if(nBad){
-    upErr.textContent = (todo.length>1 ? "Còn thiếu thông tin ở "+nBad+" ảnh (ô viền đỏ). " : "Còn thiếu thông tin (ô viền đỏ). ")+"Cần năm (không rõ thì ghi 0000), tác giả, loại và ghi chú mặt sau.";
+    upErr.textContent = (todo.length>1 ? "Còn thiếu thông tin ở "+nBad+" ảnh (ô viền đỏ). " : "Còn thiếu thông tin (ô viền đỏ). ")+"Cần năm (không rõ thì ghi 0000), tác giả, loại và ghi chú mặt sau."+(noName?" Tác giả phải là tên thật, không ghi “none”, “không rõ”…":"");
     firstBad.scrollIntoView({block:"center",behavior:"smooth"}); return;
   }
   var recent=[]; try{ recent=(JSON.parse(lsGet("gal-recent")||"[]")||[]).filter(function(t){ return Date.now()-t<3600000; }); }catch(x){ recent=[]; }

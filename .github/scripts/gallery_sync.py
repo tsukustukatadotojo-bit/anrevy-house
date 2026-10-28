@@ -38,6 +38,9 @@ DRY = '--dry' in sys.argv
 Image.MAX_IMAGE_PIXELS = MAX_PIX
 warnings.simplefilter('error', Image.DecompressionBombWarning)
 
+import unicodedata
+NO_NAME = re.compile(r'^(none|null|nil|n/?a|na|unknown|anonymous|no ?name|khong( ro| co| biet| ten)?|chua ro.*|an danh|vo danh|[-_.?x ]+)$')
+def fold(t): return ''.join(c for c in unicodedata.normalize('NFD', t.lower()) if unicodedata.category(c) != 'Mn').replace('đ', 'd')
 def rid(n=8): return ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(n))
 def sha(s): return hashlib.sha256(s.encode() if isinstance(s, str) else s).hexdigest()
 def clean(s, n):
@@ -247,7 +250,7 @@ def main():
             artist = re.sub(r'[\s.,;:]+$', '', re.sub(r'\s+', ' ', clean(meta.get('artist'), 80)))
             note = clean(meta.get('note'), 4000)
             # năm 0 (hiện là 0000) = không rõ năm
-            if not (0 <= year <= datetime.now(timezone.utc).year + 1) or not artist or not note:
+            if not (0 <= year <= datetime.now(timezone.utc).year + 1) or not artist or NO_NAME.match(fold(artist)) or not note:
                 raise ValueError('thiếu năm / tác giả / ghi chú')
             raw = base64.b64decode(orig, validate=True)
             data, fmt, disp, icc = inspect(raw)
