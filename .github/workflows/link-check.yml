@@ -9,28 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check links
+      - name: MQTT big retained test
         run: |
-          python3 tools/check2.py tools/urls2.txt > /dev/null || true
+          pip install paho-mqtt==2.1.0 > /dev/null
+          python3 tools/bigmsg.py > /dev/null || true
           python3 - <<'PY'
-          t = open('out3.txt', encoding='utf-8').read().split('\n')
-          for k in range(0, len(t), 12):
-              msg = '\n'.join(t[k:k+12]).replace('%', '%25').replace('\r', '').replace('\n', '%0A')
-              print(f'::notice title=links{k//12}::{msg}')
-          PY
-      - name: Find videos
-        run: |
-          python3 tools/ytfind.py tools/q.txt > /dev/null || true
-          python3 - <<'PY'
-          t = open('out.txt', encoding='utf-8').read()
-          parts = t.split('\n## ')
-          chunks, cur = [], ''
-          for i, p in enumerate(parts):
-              p = p if i == 0 else '## ' + p
-              if len(cur) + len(p) > 3500: chunks.append(cur); cur = ''
-              cur += p + '\n'
-          chunks.append(cur)
-          for k, c in enumerate(chunks[:10]):
-              msg = c.replace('%', '%25').replace('\r', '').replace('\n', '%0A')
-              print(f'::notice title=yt{k}::{msg}')
+          t = open('out_mq.txt', encoding='utf-8').read().split('\n')
+          for k in range(0, len(t), 14):
+              msg = '\n'.join(t[k:k+14]).replace('%', '%25').replace('\r', '').replace('\n', '%0A')
+              print(f'::notice title=mq{k//14}::{msg}')
           PY
