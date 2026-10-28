@@ -14,7 +14,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - name: Cài thư viện
