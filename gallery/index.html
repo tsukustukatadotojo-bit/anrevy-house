@@ -752,7 +752,9 @@ SAMPLE_DATA.forEach(function(s,i){
 });
 
 function yearText(y){ return y ? String(y) : "0000"; }
-function artistKey(a){ return fold(a).replace(/\s+/g," ").trim(); }
+// tên tác giả: bỏ khoảng trắng thừa, dấu câu cuối; khoá nhóm bỏ cả năm sinh-mất trong ngoặc, vd "Rob Gonsalves (1959-2017)." = "Rob Gonsalves"
+function cleanArtist(a){ return String(a||"").replace(/\s+/g," ").replace(/[\s.,;:\-–]+$/,"").trim(); }
+function artistKey(a){ return fold(cleanArtist(a).replace(/\s*\([^)]*\)/g," ")).replace(/\s+/g," ").trim(); }
 function hasArtist(w){ var a=artistKey(w.artist); return !!a && !/^chua ro/.test(a); }
 function kind(w){ var m=(w.medium||"").toLowerCase(); if(/^ảnh/.test(m)) return "photo"; if(/điêu khắc|tượng|gốm|phù điêu/.test(m)) return "sculpture"; return "painting"; }
 function guestList(){ var a=[]; state.guests.forEach(function(w){ if(!state.gone.has(w.id)) a.push(w); }); return a; }
@@ -854,7 +856,7 @@ function renderGallery(){
   var list=visibleWorks(); state.viewList=list;
   var groupsEl=$("groups"); groupsEl.textContent=""; groupsModel=[];
   var byArtist=new Map();
-  list.forEach(function(w){ var k=artistKey(w.artist); if(!byArtist.has(k)) byArtist.set(k,{name:w.artist.replace(/\s+/g," ").trim(),items:[]}); byArtist.get(k).items.push(w); });
+  list.forEach(function(w){ var k=artistKey(w.artist); if(!byArtist.has(k)) byArtist.set(k,{name:"",items:[]}); var g=byArtist.get(k), nm=cleanArtist(w.artist).replace(/\s*\([^)]*\)/g,"").trim(); if(!g.name || nm.length<g.name.length) g.name=nm; g.items.push(w); });
   byArtist.forEach(function(g){
     var items=g.items, sec=el("section","group"), head=el("h2","group-head");
     head.appendChild(el("span","y", g.name));
@@ -1023,7 +1025,7 @@ function showWork(){
   vImg.alt=w.title;
   $("vTitle").textContent=w.title; $("vCat").textContent=w.catalog||"";
   $("vlTitle").textContent=w.title; $("vlYear").textContent=", "+yearText(w.year);
-  $("vlMeta").textContent=[w.artist,w.medium,w.size].filter(Boolean).join(" · ");
+  $("vlMeta").textContent=[cleanArtist(w.artist),w.medium,w.size].filter(Boolean).join(" · ");
   $("vPrev").disabled=state.v.i<=0; $("vNext").disabled=state.v.i>=state.v.list.length-1;
   $("vFull").hidden=!(document.fullscreenEnabled && viewer.requestFullscreen);
   applyFlip();
@@ -1048,7 +1050,7 @@ function renderBack(){
   var head=el("div","sheet-head"), left=el("div");
   left.appendChild(el("div","eyebrow","Mặt sau"+(w.catalog?" · "+w.catalog:"")));
   left.appendChild(el("h3",null,w.title));
-  left.appendChild(el("p","meta",[w.artist,yearText(w.year),w.medium,w.size].filter(Boolean).join(" · ")));
+  left.appendChild(el("p","meta",[cleanArtist(w.artist),yearText(w.year),w.medium,w.size].filter(Boolean).join(" · ")));
   head.appendChild(left);
   var stamp=el("div","stamp"); stamp.appendChild(document.createTextNode("An Vy’s Gallery")); stamp.appendChild(document.createElement("br")); stamp.appendChild(document.createTextNode(yearText(w.year)));
   head.appendChild(stamp); sheet.appendChild(head); sheet.appendChild(document.createElement("hr"));

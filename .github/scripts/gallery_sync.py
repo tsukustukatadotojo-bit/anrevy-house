@@ -119,7 +119,7 @@ def main():
         if len(added) >= MAX_NEW or count >= MAX_TOTAL: print('đủ giới hạn, để lần sau', gid); continue
         try:
             year = int(meta.get('year'))
-            artist, note = re.sub(r'\s+', ' ', clean(meta.get('artist'), 80)), clean(meta.get('note'), 4000)
+            artist, note = re.sub(r'[\s.,;:]+$', '', re.sub(r'\s+', ' ', clean(meta.get('artist'), 80))), clean(meta.get('note'), 4000)
             # năm 0 (hiện là 0000) = không rõ năm
             if not (0 <= year <= datetime.now(timezone.utc).year + 1) or not artist or not note:
                 raise ValueError('thiếu năm / tác giả / ghi chú')
