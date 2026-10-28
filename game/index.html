@@ -27,7 +27,11 @@
     background:radial-gradient(ellipse var(--rx,0%) var(--ry,0%) at 50% 50%, transparent 0, transparent calc(var(--ry,0%) * .55), rgba(40,6,18,.75) calc(var(--ry,0%) * .86), #000 var(--ry,0%), #000 100%)}
   .city-bg{position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);filter:blur(26px) brightness(.55) saturate(1.3)}
   .city{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:transparent}
-  body.portrait .city{object-fit:cover}
+  body.portrait .city,.city.wide{object-fit:cover}
+  #cityL.wide .city-bg{display:none}
+  /* điện thoại dọc: ảnh 1 (ngang) từ từ lia qua toàn bộ khoang tàu thay vì chỉ thấy phần giữa */
+  body.portrait .ship.drift{animation:shipPan 36s ease-in-out infinite}
+  @keyframes shipPan{0%{background-position:50% 50%}25%{background-position:0% 50%}75%{background-position:100% 50%}100%{background-position:50% 50%}}
   .mall{background:#120818 url(media/mall.jpg) center 46%/cover no-repeat}
   .mall.on{animation:kb 18s ease-out forwards}
   @keyframes kb{from{transform:scale(1.12)}to{transform:scale(1.0)}}
@@ -106,7 +110,7 @@
   <!-- ĐOẠN MỞ ĐẦU -->
   <div class="stage" id="stage" aria-label="Đoạn mở đầu. Bấm vào màn hình để tiếp tục.">
     <div class="layer ship on" id="ship"></div>
-    <div class="layer" id="cityL"><canvas class="city-bg" id="cityBg" aria-hidden="true"></canvas><video class="city" id="city" src="media/city.mp4" poster="media/city-poster.jpg" playsinline preload="auto"></video></div>
+    <div class="layer" id="cityL"><canvas class="city-bg" id="cityBg" aria-hidden="true"></canvas><video class="city" id="city" playsinline preload="auto"></video></div>
     <div class="layer mall" id="mall"></div>
     <div class="vignette"></div>
     <div class="lids" id="lids"></div>
@@ -258,6 +262,11 @@
 
   /* ================= VIDEO THÀNH PHỐ ================= */
   const cityL = $('#cityL'), city = $('#city'), cityBg = $('#cityBg'), bgx = cityBg.getContext('2d'), soundBtn = $('#soundBtn');
+  // video 2: màn hình ngang (laptop) dùng bản ngang 16:9 dựng lại từ video gốc (khung hình đi theo cảnh), điện thoại dọc dùng bản gốc
+  const WIDE = innerWidth / innerHeight >= 1;
+  city.classList.toggle('wide', WIDE); cityL.classList.toggle('wide', WIDE);
+  city.poster = WIDE ? 'media/city-wide-poster.jpg' : 'media/city-poster.jpg';
+  city.src = WIDE ? 'media/city-wide.mp4' : 'media/city.mp4';
   cityBg.width = 72; cityBg.height = 128;
   let bgLoop = 0;
   function drawBg(){ if (!city.paused && !city.ended){ try { bgx.drawImage(city, 0, 0, 72, 128); } catch (e) {} } bgLoop = requestAnimationFrame(drawBg); }
@@ -268,7 +277,7 @@
       const done = () => { cancelAnimationFrame(bgLoop); city.removeEventListener('ended', done); soundBtn.classList.remove('on'); document.body.classList.remove('in-video'); res(); };
       city.addEventListener('ended', done);
       city.addEventListener('error', done, { once: true });
-      drawBg();
+      if (!WIDE) drawBg();
       city.play().catch(() => { city.muted = true; soundBtn.classList.add('on'); city.play().catch(done); });
       skipVideo = done;
     });
@@ -283,7 +292,7 @@
   async function intro(){
     running = true; skipping = false; hubOn = false;
     stage.hidden = false; hubEl.hidden = true; hubEl.classList.remove('on'); replay.hidden = true; skipBtn.hidden = false;
-    ship.classList.add('on'); cityL.classList.remove('on'); mall.classList.remove('on'); flash.classList.remove('go'); ship.classList.remove('drift');
+    ship.classList.add('on'); cityL.classList.remove('on'); mall.classList.remove('on'); flash.classList.remove('go'); ship.classList.remove('drift'); ship.style.animationPlayState = '';
     await openEyes(); if (skipping) return;
     tapHint(true, touch ? 'chạm vào màn hình ▼' : 'bấm vào bất kỳ đâu ▼');
     for (let i = 0; i < LINES_SHIP.length; i++){
@@ -293,7 +302,7 @@
     }
     // hết 4 câu: nhắm mắt ngủ → màn hình tối → video
     await sleep(1600); if (skipping) return;
-    hush(); ship.classList.remove('drift');
+    hush(); ship.style.animationPlayState = 'paused';   // dừng tại chỗ, không giật về giữa khi nhắm mắt
     await closeEyes(); if (skipping) return;
     await sleep(900); if (skipping) return;
     ship.classList.remove('on');
