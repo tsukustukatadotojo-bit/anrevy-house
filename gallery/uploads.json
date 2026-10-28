@@ -1,4 +1,19 @@
 {
  "about": "Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động).",
- "items": []
+ "items": [
+  {
+   "id": "mvree5yi-4bckr7",
+   "image": "uploads/mvree5yi-4bckr7.jpg",
+   "title": "The House by the Railroad",
+   "artist": "Rob Gonsalves (1959-2017).",
+   "year": 1998,
+   "medium": "Tranh vẽ",
+   "catalog": "Khách gửi",
+   "note": "A surreal painting showing a young boy playing with a model railway as a full sized train approaches through a dark hallway. The toy tracks seem to become part of the real railway, creating a strange and dreamlike scene",
+   "w": 1440,
+   "h": 1440,
+   "ph": "#352A28",
+   "at": 1793148624905
+  }
+ ]
 }
