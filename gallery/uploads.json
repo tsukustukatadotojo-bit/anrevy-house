@@ -1,1 +1,20 @@
-{"about":"Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động).","items":[]}
+{
+ "about": "Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động).",
+ "items": [
+  {
+   "id": "mvtest01-claude",
+   "image": "uploads/mvtest01-claude.jpg",
+   "title": "Tranh thử hệ thống",
+   "artist": "Claude",
+   "year": 2026,
+   "medium": "Tranh vẽ",
+   "catalog": "Khách gửi",
+   "note": "Tranh thử để kiểm tra việc lưu tự động. Sẽ được gỡ ngay.",
+   "w": 1200,
+   "h": 900,
+   "ph": "#CFC1AF",
+   "at": 1793147746613,
+   "dh": "ef8d241b3b5d17381ae82d518e7d49dbd468297e7b48091f6d411f717ac70b70"
+  }
+ ]
+}
