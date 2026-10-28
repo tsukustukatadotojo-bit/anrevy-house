@@ -188,6 +188,8 @@ def main():
         return len(rest) >= 2 and rest[0] in ('m', 'c') and rest[1] in keep_ids
     clear = {t for t in clear if not mine(t)}
     print('xoá', len(clear), 'tin giữ lại')
+    if os.environ.get('GITHUB_ACTIONS'):
+        print(f'::notice title=gallery-sync::{len(per)} mã trên máy chủ · đã lưu {len(items)} · thêm {len(added)} · gỡ {len(removed)} · dọn {len(clear)} tin')
     for u, c, s in links:
         for t in clear: c.publish(t, b'', qos=1, retain=True)
     time.sleep(4)
