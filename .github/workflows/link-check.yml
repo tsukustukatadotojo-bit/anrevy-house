@@ -9,13 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: MQTT big retained test
+      - name: Gallery test
         run: |
-          pip install paho-mqtt==2.1.0 > /dev/null
-          python3 tools/bigmsg.py > /dev/null || true
-          python3 - <<'PY'
-          t = open('out_mq.txt', encoding='utf-8').read().split('\n')
-          for k in range(0, len(t), 14):
-              msg = '\n'.join(t[k:k+14]).replace('%', '%25').replace('\r', '').replace('\n', '%0A')
-              print(f'::notice title=mq{k//14}::{msg}')
-          PY
+          pip install --quiet paho-mqtt==2.1.0 pillow
+          python3 tools/galup.py $(cat tools/galmode.txt)
+          echo "::notice title=galup::$(cat out_gal.txt | tr '\n' ' ')"
