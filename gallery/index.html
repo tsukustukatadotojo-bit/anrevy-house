@@ -1254,10 +1254,19 @@ function guestConnect(){
     }catch(e){}
   });
 }
+// thư viện kết nối: thử jsDelivr, lỗi thì lấy bản dự phòng từ unpkg
+var mqttLoading=false, mqttFailed=false;
 function loadMqtt(cb){
   if(window.mqtt){ cb(); return; }
-  var sc=document.createElement("script"); sc.src=G_LIB; sc.async=true; sc.onload=cb; sc.onerror=function(){ upStatusLine(); };
-  document.head.appendChild(sc);
+  if(mqttLoading) return; mqttLoading=true;
+  var srcs=[G_LIB, G_LIB.replace("https://cdn.jsdelivr.net/npm/","https://unpkg.com/")];
+  (function next(i){
+    if(i>=srcs.length){ mqttLoading=false; mqttFailed=true; upStatusLine(); return; }
+    var sc=document.createElement("script"); sc.src=srcs[i]; sc.async=true;
+    sc.onload=function(){ mqttLoading=false; if(window.mqtt) cb(); else next(i+1); };
+    sc.onerror=function(){ sc.remove(); next(i+1); };
+    document.head.appendChild(sc);
+  })(0);
 }
 function liveClients(){ return guest.clients.filter(function(c){ return c.connected; }); }
 // gửi nhiều tin giữ lại, tối đa `win` tin cùng lúc; báo lỗi nếu 45 giây không tiến triển
@@ -1370,6 +1379,34 @@ function stripWebp(u){
   out.set(u.subarray(0,12)); new DataView(out.buffer).setUint32(4,4+body.length,true); out.set(body,12);
   return out;
 }
+function readBuf(blob){
+  if(blob.arrayBuffer) return blob.arrayBuffer();
+  return new Promise(function(res,rej){ var fr=new FileReader(); fr.onload=function(){ res(fr.result); }; fr.onerror=function(){ rej(new Error("Không đọc được tệp.")); }; fr.readAsArrayBuffer(blob); });
+}
+// kích thước ghi trong phần đầu tệp (không cần giải mã cả ảnh)
+function headDims(u,fmt){
+  try{
+    if(fmt==="png") return [((u[16]<<24)|(u[17]<<16)|(u[18]<<8)|u[19])>>>0, ((u[20]<<24)|(u[21]<<16)|(u[22]<<8)|u[23])>>>0];
+    if(fmt==="jpg"){
+      var off=2;
+      while(off+9<u.length){
+        if(u[off]!==0xFF){ off++; continue; }
+        var mk=u[off+1]; if(mk===0xFF){ off++; continue; }
+        if(mk>=0xC0 && mk<=0xCF && mk!==0xC4 && mk!==0xC8 && mk!==0xCC) return [(u[off+7]<<8)|u[off+8], (u[off+5]<<8)|u[off+6]];
+        if(mk===0xDA || mk===0xD9) return null;
+        off+=2+((u[off+2]<<8)|u[off+3]);
+      }
+    }
+  }catch(e){}
+  return null;
+}
+function thumbOf(img){
+  var w=img.naturalWidth, h=img.naturalHeight, s=Math.min(1,216/Math.max(w,h)), cv=document.createElement("canvas"), g;
+  cv.width=Math.max(1,Math.round(w*s)); cv.height=Math.max(1,Math.round(h*s)); g=cv.getContext("2d");
+  g.fillStyle="#fff"; g.fillRect(0,0,cv.width,cv.height); g.imageSmoothingQuality="high"; g.drawImage(img,0,0,cv.width,cv.height);
+  return cv.toDataURL("image/jpeg",0.82);
+}
+function freeImg(d){ if(!d) return; try{ URL.revokeObjectURL(d.url); d.img.removeAttribute("src"); }catch(e){} }
 function decodeBlob(blob){
   return new Promise(function(res,rej){
     var url=URL.createObjectURL(blob), img=new Image();
@@ -1381,7 +1418,7 @@ function decodeBlob(blob){
 function toBlob(cv,type,q){ return new Promise(function(res){ try{ cv.toBlob(function(b){ res(b); },type,q); }catch(e){ res(null); } }); }
 // vẽ lại ở chất lượng cao (chỉ dùng khi bắt buộc: định dạng trình duyệt khác khó xem, hoặc tệp quá lớn)
 function reencode(img,type,q,maxPix){
-  var w=img.naturalWidth, h=img.naturalHeight, tries=[Math.min(1,Math.sqrt(maxPix/(w*h))), Math.min(1,Math.sqrt(16e6/(w*h)))];
+  var w=img.naturalWidth, h=img.naturalHeight, tries=[Math.min(1,Math.sqrt(Math.min(maxPix,40e6)/(w*h))), Math.min(1,Math.sqrt(16e6/(w*h)))];
   var go=function(k){
     if(k>=tries.length) return Promise.resolve(null);
     var s=tries[k], cv=document.createElement("canvas"), g;
@@ -1403,15 +1440,18 @@ function previewOf(img){
   return { b64:url.slice(url.indexOf(",")+1), ph:ph };
 }
 function b64of(u){ var s="", CH=0x8000; for(var i=0;i<u.length;i+=CH) s+=String.fromCharCode.apply(null,u.subarray(i,i+CH)); return btoa(s); }
-// Kiểm định một tệp: mở được không, độ phân giải, bỏ siêu dữ liệu không nén lại, kiểm tra lại bản đã làm sạch
+// Kiểm định một tệp: mở được không, độ phân giải, bỏ siêu dữ liệu không nén lại, kiểm tra lại bản đã làm sạch.
+// Chỉ giải mã ảnh đầy đủ MỘT lần rồi giải phóng ngay (điện thoại ít bộ nhớ).
 function inspect(it){
-  var f=it.file, src=null, dec=null;
-  return f.arrayBuffer().then(function(buf){
-    var u=new Uint8Array(buf); it.fmt=sniff(u); it.bytes=u.length;
-    return decodeBlob(f).then(function(d){ dec=d; return u; }, function(){ throw new Error("Không mở được tệp này: "+(it.fmt==="heic"?"trình duyệt chưa đọc được ảnh HEIC, hãy chọn bản JPG.":"định dạng không hỗ trợ hoặc tệp bị hỏng.")); });
-  }).then(function(u){
-    it.w=dec.w; it.h=dec.h; it.thumb=dec.url;
+  var f=it.file, dec=null, u=null;
+  return readBuf(f).then(function(buf){
+    u=new Uint8Array(buf); it.fmt=sniff(u); it.bytes=u.length;
+    return decodeBlob(f).then(function(d){ dec=d; }, function(){ throw new Error("Không mở được tệp này: "+(it.fmt==="heic"?"trình duyệt chưa đọc được ảnh HEIC, hãy chọn bản JPG (hoặc đặt máy ảnh lưu kiểu “Tương thích nhất”).":"định dạng không hỗ trợ hoặc tệp bị hỏng.")); });
+  }).then(function(){
+    it.w=dec.w; it.h=dec.h;
+    it.thumb=thumbOf(dec.img);
     if(Math.max(it.w,it.h)<MIN_SIDE) throw new Error("Ảnh quá nhỏ ("+it.w+"×"+it.h+" px). Hãy chọn bản lớn hơn, cạnh dài từ "+MIN_SIDE+" px.");
+    var pv=previewOf(dec.img); it.pb64=pv.b64; it.ph=pv.ph;
     var ex=it.fmt==="jpg" ? parseExif(u) : null;
     it.cam=!!(ex && (ex.make||ex.model||ex.exposure||ex.fnum)); it.dev=ex?[ex.make,ex.model].filter(Boolean).join(" ").replace(/^(\w+)\s+\1\b/i,"$1"):"";
     var clean=null;
@@ -1420,34 +1460,31 @@ function inspect(it){
     else if(it.fmt==="webp") clean=stripWebp(u);
     if(!clean && (it.fmt==="jpg"||it.fmt==="png"||it.fmt==="webp")) throw new Error("Tệp ảnh bị hỏng hoặc chưa tải trọn vẹn (thiếu phần cuối tệp). Hãy chọn lại tệp gốc.");
     if(clean && clean.length<=MAX_ORIG && it.w*it.h<=MAX_PIX){
-      it.ofmt=it.fmt; it.oq="goc"; return new Blob([clean],{type:"image/"+(it.fmt==="jpg"?"jpeg":it.fmt)});
+      // kiểm tra lại bản đã làm sạch: kích thước ghi trong tệp phải khớp với ảnh đã mở
+      var hd=headDims(clean,it.fmt), o=(ex && ex.orient)||1;
+      if(hd && o>=5 && o<=8) hd=[hd[1],hd[0]];
+      if(hd && (hd[0]!==it.w || hd[1]!==it.h)) throw new Error("Kiểm tra lại bản đã làm sạch không khớp kích thước, hãy chọn lại tệp gốc.");
+      it.ofmt=it.fmt; it.oq="goc"; it.fw=it.w; it.fh=it.h; u=null;
+      return new Blob([clean],{type:"image/"+(it.fmt==="jpg"?"jpeg":it.fmt)});
     }
-    // phải vẽ lại: định dạng khác, tệp hỏng cấu trúc, hoặc quá lớn → giữ chất lượng cao nhất có thể
+    u=null;
+    // phải vẽ lại: định dạng khác hoặc quá lớn → giữ chất lượng cao nhất có thể
     var lossless=(it.fmt==="png"||it.fmt==="bmp"||it.fmt==="gif"||it.fmt==="tiff") && it.w*it.h<=MAX_PIX;
     it.oq = clean ? "lon" : "doi";
     var tryPng = lossless ? reencode(dec.img,"image/png",1,MAX_PIX) : Promise.resolve(null);
     return tryPng.then(function(r){
-      if(r && r.blob.size<=MAX_ORIG){ it.ofmt="png"; it.ow=r.w; it.oh=r.h; return r.blob; }
-      return reencode(dec.img,"image/jpeg",0.95,MAX_PIX).then(function(r2){
-        var scale=1, step=function(r3){
-          if(!r3) throw new Error("Không xử lý được ảnh này trên thiết bị của bạn.");
-          if(r3.blob.size<=MAX_ORIG){ it.ofmt="jpg"; it.ow=r3.w; it.oh=r3.h; return r3.blob; }
-          scale*=0.85; return reencode(dec.img,"image/jpeg",0.95,r3.w*r3.h*0.72).then(step);
-        };
-        return step(r2);
+      if(r && r.blob.size<=MAX_ORIG){ it.ofmt="png"; it.fw=r.w; it.fh=r.h; return r.blob; }
+      return reencode(dec.img,"image/jpeg",0.95,MAX_PIX).then(function step(r3){
+        if(!r3) throw new Error("Không xử lý được ảnh này trên thiết bị của bạn.");
+        if(r3.blob.size<=MAX_ORIG){ it.ofmt="jpg"; it.fw=r3.w; it.fh=r3.h; return r3.blob; }
+        return reencode(dec.img,"image/jpeg",0.95,r3.w*r3.h*0.72).then(step);
       });
     });
   }).then(function(blob){
     it.blob=blob; it.obytes=blob.size;
-    // kiểm tra lại: bản sẽ lưu phải mở được và đúng kích thước
-    return decodeBlob(blob).then(function(d2){
-      URL.revokeObjectURL(d2.url);
-      if(it.oq==="goc" && (d2.w!==it.w || d2.h!==it.h)) throw new Error("Kiểm tra lại bản đã làm sạch không khớp kích thước.");
-      it.fw=d2.w; it.fh=d2.h;
-      var pv=previewOf(dec.img); it.pb64=pv.b64; it.ph=pv.ph;
-      it.status = Math.max(it.fw,it.fh)<LOW_SIDE ? "warn" : "ok";
-    });
-  }).catch(function(e){ it.status="bad"; it.msg=(e && e.message && e.message!=="decode") ? e.message : "Không mở được tệp này."; });
+    it.status = Math.max(it.fw,it.fh)<LOW_SIDE ? "warn" : "ok";
+  }).catch(function(e){ it.status="bad"; it.msg=(e && e.message && e.message!=="decode") ? e.message : "Không mở được tệp này."; })
+  .then(function(){ freeImg(dec); dec=null; u=null; });
 }
 function qualityLine(it){
   if(it.status==="checking") return { cls:"", html:"Đang kiểm định…" };
@@ -1466,17 +1503,23 @@ function esc(t){ return String(t).replace(/[&<>"]/g,function(c){ return {"&":"&a
 var up=$("up"), upForm=$("upForm"), upFile=$("upFile"), upList=$("upList"), upErr=$("upErr"), upGo=$("upGo"), upDrop=$("upDrop"), upLast=null, upBusy=false, upItems=[], upSeq=0, upQueue=Promise.resolve();
 function upStatusLine(){
   if(up.hidden || upBusy) return;
-  var n=liveClients().length, checking=upItems.some(function(it){ return it.status==="checking"; });
-  $("upStatus").textContent = checking ? "Đang kiểm định ảnh…" : !window.mqtt && !guest.clients.length ? "Đang kết nối…" : n ? "● Đã kết nối máy chủ" : "○ Đang kết nối máy chủ…";
+  var n=liveClients().length, all=G_BROKERS.length, checking=upItems.some(function(it){ return it.status==="checking"; });
+  var slow=upOpenedAt && Date.now()-upOpenedAt>15000;
+  $("upStatus").textContent = checking ? "Đang kiểm định ảnh…"
+    : mqttFailed ? "✕ Không tải được thư viện kết nối"
+    : n ? "● Đã kết nối "+n+"/"+all+" máy chủ"
+    : slow ? "✕ Chưa kết nối được máy chủ" : "○ Đang kết nối máy chủ…";
   goLabel();
 }
 function goLabel(){
   var n=upItems.filter(function(it){ return it.status!=="bad" && !it.done; }).length;
   upGo.textContent = n>1 ? "Treo "+n+" tác phẩm" : "Treo lên tường";
 }
+var upOpenedAt=0, upTimer=0;
 function openUpload(){
   upLast=document.activeElement; up.hidden=false; document.documentElement.style.overflow="hidden";
-  upErr.textContent=""; upStatusLine();
+  upErr.textContent=""; upOpenedAt=Date.now(); upStatusLine();
+  clearInterval(upTimer); upTimer=setInterval(function(){ if(up.hidden){ clearInterval(upTimer); return; } upStatusLine(); },2000);
   if(!window.mqtt) loadMqtt(guestConnect);
   setTimeout(function(){ upFile.focus(); },30);
 }
@@ -1567,24 +1610,33 @@ upFile.addEventListener("change",function(){ addFiles(upFile.files); upFile.valu
 ["dragleave","drop"].forEach(function(ev){ upForm.addEventListener(ev,function(){ upDrop.classList.remove("drag"); }); });
 upForm.addEventListener("drop",function(e){ if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length){ e.preventDefault(); if(!upBusy) addFiles(e.dataTransfer.files); } });
 
-// gửi một tác phẩm: thông tin + ảnh xem nhanh (mọi người thấy ngay) + bản gốc (để lưu lâu dài)
+// gửi một tác phẩm: thông tin + ảnh xem nhanh tới mọi máy chủ (mọi người thấy ngay),
+// bản gốc chỉ gửi tới MỘT máy chủ (đỡ tốn mạng điện thoại), hỏng thì chuyển sang máy chủ khác
 function sendItem(it,v,cl){
   var id=Date.now().toString(36)+"-"+rnd(6), bar=it.card.querySelector(".up-bar"), bi=bar.firstChild;
   bar.hidden=false; bi.style.width="2%";
-  return it.blob.arrayBuffer().then(function(buf){
+  return readBuf(it.blob).then(function(buf){
     var ob64=b64of(new Uint8Array(buf)); buf=null;
     return Promise.all([shaHex(it.pb64), shaHex(ob64)]).then(function(hs){
       var base={ v:2, id:id, at:Date.now(), title:v.title||"Không tên", artist:v.artist.slice(0,80), year:Number(v.yRaw), medium:v.kind, note:v.note.slice(0,4000),
         w:it.fw, h:it.fh, ph:it.ph, len:it.pb64.length, sha:hs[0], olen:ob64.length, osha:hs[1], ofmt:it.ofmt, obytes:it.obytes, oq:it.oq };
-      var total=0, done=0, lists=cl.map(function(c){
-        var cs=c.chunk||G_CHUNK, meta=Object.assign({},base,{ cs:cs, n:Math.ceil(it.pb64.length/cs), on:Math.ceil(ob64.length/cs) }), msgs=[[G_PFX+"m/"+id, JSON.stringify(meta)]], k;
-        for(k=0;k<meta.n;k++) msgs.push([G_PFX+"c/"+id+"/"+k, it.pb64.slice(k*cs,(k+1)*cs)]);
-        for(k=0;k<meta.on;k++) msgs.push([G_PFX+"o/"+id+"/"+k, ob64.slice(k*cs,(k+1)*cs)]);
-        total+=msgs.length; return msgs;
-      });
-      var tick=function(){ done++; bi.style.width=Math.max(2,Math.round(done/total*100))+"%"; };
-      return Promise.all(cl.map(function(c,i){ return pubMany(c,lists[i],6,tick).then(function(){ return true; },function(){ return false; }); })).then(function(oks){
-        if(oks.indexOf(true)<0) throw new Error("Gửi không thành công, thử lại sau ít phút nhé.");
+      var order=cl.slice().sort(function(a,b){ return (b.chunk||G_CHUNK)-(a.chunk||G_CHUNK); });   // máy chủ nhận mảnh lớn trước
+      var head=function(c){ var cs=c.chunk||G_CHUNK, meta=Object.assign({},base,{ cs:cs, n:Math.ceil(it.pb64.length/cs), on:Math.ceil(ob64.length/cs) }), msgs=[[G_PFX+"m/"+id, JSON.stringify(meta)]];
+        for(var k=0;k<meta.n;k++) msgs.push([G_PFX+"c/"+id+"/"+k, it.pb64.slice(k*cs,(k+1)*cs)]); return msgs; };
+      var origMsgs=function(c){ var cs=c.chunk||G_CHUNK, on=Math.ceil(ob64.length/cs), msgs=[]; for(var k=0;k<on;k++) msgs.push([G_PFX+"o/"+id+"/"+k, ob64.slice(k*cs,(k+1)*cs)]); return msgs; };
+      var heads=order.map(head), total=heads.reduce(function(n,m){ return n+m.length; },0)+Math.ceil(ob64.length/(order[0].chunk||G_CHUNK)), done=0;
+      var tick=function(){ done++; bi.style.width=Math.max(2,Math.min(99,Math.round(done/total*100)))+"%"; };
+      return Promise.all(order.map(function(c,i){ return pubMany(c,heads[i],6,tick).then(function(){ return true; },function(){ return false; }); })).then(function(oks){
+        if(oks.indexOf(true)<0) throw new Error("Không gửi được thông tin tác phẩm tới máy chủ.");
+        var tryOrig=function(i){
+          if(i>=order.length) return Promise.reject(new Error("Không gửi được bản gốc tới máy chủ nào."));
+          if(!oks[i] || !order[i].connected) return tryOrig(i+1);
+          var msgs=origMsgs(order[i]);
+          if(i>0){ total=done+msgs.length; }
+          return pubMany(order[i],msgs,6,tick).catch(function(){ return tryOrig(i+1); });
+        };
+        return tryOrig(0);
+      }).then(function(){
         bi.style.width="100%";
         var bin=atob(it.pb64), u8=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i);
         addGuest(base, URL.createObjectURL(new Blob([u8],{type:"image/jpeg"})), false);
@@ -1613,12 +1665,16 @@ upForm.addEventListener("submit",function(e){
   var recent=[]; try{ recent=(JSON.parse(lsGet("gal-recent")||"[]")||[]).filter(function(t){ return Date.now()-t<3600000; }); }catch(x){ recent=[]; }
   if(recent.length+todo.length>40){ upErr.textContent="Mỗi giờ treo tối đa 40 tác phẩm. Bạn còn treo được "+Math.max(0,40-recent.length)+" tác phẩm trong giờ này."; return; }
   var cl=liveClients();
-  if(!cl.length){ upErr.textContent="Chưa kết nối được máy chủ. Kiểm tra mạng rồi thử lại sau ít giây."; return; }
+  if(!cl.length){
+    upErr.textContent = mqttFailed ? "Không tải được thư viện kết nối (cdn.jsdelivr.net / unpkg.com). Kiểm tra mạng rồi tải lại trang."
+      : "Chưa kết nối được máy chủ chuyển ảnh (broker.emqx.io:8084, broker.hivemq.com:8884). Nếu đang dùng 4G/5G, hãy thử Wi-Fi (một số mạng chặn các cổng này), rồi thử lại.";
+    return;
+  }
   upBusy=true; upGo.disabled=true; upErr.textContent=""; upForm.classList.add("busy");
   var okN=0, failN=0, lastId=null, idx=0;
   var run=todo.reduce(function(chain,it){
     return chain.then(function(){
-      idx++; $("upStatus").textContent="Đang treo "+idx+"/"+todo.length+"…";
+      idx++; $("upStatus").textContent="Đang treo "+idx+"/"+todo.length+"… giữ màn hình mở nhé";
       return sendItem(it,vals.get(it),liveClients().length?liveClients():cl).then(function(id){
         it.done=true; okN++; lastId=id; recent.push(Date.now()); lsSet("gal-recent",JSON.stringify(recent)); renderItem(it);
       },function(err){
