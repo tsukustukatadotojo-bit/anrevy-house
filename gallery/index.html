@@ -84,8 +84,8 @@ main{min-width:0;padding-block:10px 240px}
 .intro p{margin:0;max-width:62ch;color:var(--ink-2)}
 .notice{margin-top:14px;padding:12px 16px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;color:var(--ink-2)}
 .group{padding-top:24px}
-.group-head{display:flex;align-items:baseline;gap:12px;margin:0 0 12px}
-.group-head .y{font-family:var(--font-display);font-size:30px;font-weight:500;line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.group-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 12px}
+.group-head .y{font-family:var(--font-display);font-size:30px;font-weight:500;line-height:1.1;letter-spacing:-.01em;font-variant-numeric:lining-nums;overflow-wrap:anywhere}
 .group-head .n{font-size:13px;color:var(--ink-3)}
 .row{display:flex;gap:4px;margin-bottom:4px}
 .tile{position:relative;flex:none;display:block;padding:0;border:0;overflow:hidden;background:var(--ph);cursor:pointer}
@@ -207,12 +207,23 @@ mark{background:#FFF0B8;color:inherit;padding:0 1px;border-radius:2px}
 .f textarea{min-height:120px;resize:vertical;font-family:var(--font-read);line-height:1.6}
 .f[aria-invalid="true"] input,.f[aria-invalid="true"] textarea{border-color:var(--stamp)}
 .up-err{min-height:1.25em;margin:8px 0 0;font-size:13px;color:var(--stamp)}
+.up-grid .wide{grid-column:1/-1}
+fieldset.f{border:0;margin:0;padding:0;min-width:0}
+.f legend{padding:0;margin:0 0 5px}
+.f small{font-weight:400;color:var(--ink-3)}
+.kinds{display:flex;flex-wrap:wrap;gap:8px}
+.kinds label{position:relative;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:999px;border:1px solid var(--hair);background:var(--wall);font-size:14.5px;font-weight:500;color:var(--ink);cursor:pointer}
+.kinds input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.kinds label:has(input:checked){background:var(--accent);border-color:var(--accent);color:#fff}
+.kinds label:has(input:focus-visible){box-shadow:0 0 0 3px var(--accent-soft)}
+.kinds label.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.f[aria-invalid="true"] .kinds label{border-color:var(--stamp)}
+.up-hint{margin:6px 0 0;padding:8px 11px;border-radius:8px;background:var(--field);font-size:12.5px;font-weight:400;line-height:1.5;color:var(--ink-2)}
 .up-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;margin-top:8px}
 .up-status{margin-right:auto;font-size:12.5px;color:var(--ink-3)}
 .pill-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .pill-btn.primary:hover{background:var(--accent-hover)}
 .pill-btn:disabled{opacity:.55;cursor:default}
-.unhang{margin-top:22px}
 .tile .guest-dot{position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px rgba(255,255,255,.85)}
 
 /* ---------- Màn hình hẹp ---------- */
@@ -274,7 +285,7 @@ mark{background:#FFF0B8;color:inherit;padding:0 1px;border-radius:2px}
     <section id="galleryView" aria-labelledby="gTitle">
       <div class="intro">
         <h1 id="gTitle">Phòng tranh</h1>
-        <p>Tranh và ảnh An Vy lưu giữ, xếp theo năm. Bấm một tác phẩm để xem toàn màn hình, bấm thêm lần nữa để lật ra mặt sau đọc ghi chú.</p>
+        <p>Tranh và ảnh An Vy lưu giữ, xếp theo tên tác giả. Bấm một tác phẩm để xem toàn màn hình, bấm thêm lần nữa để lật ra mặt sau đọc ghi chú.</p>
       </div>
       <div class="notice" id="notice" hidden></div>
       <div id="groups"></div>
@@ -354,7 +365,7 @@ mark{background:#FFF0B8;color:inherit;padding:0 1px;border-radius:2px}
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
       </button>
     </div>
-    <p class="up-lead">Tranh hoặc ảnh bạn thêm sẽ được treo trong phòng cho mọi người cùng xem. Mỗi tác phẩm cần có năm, tác giả và ghi chú ở mặt sau.</p>
+    <p class="up-lead">Tranh hoặc ảnh bạn thêm sẽ được treo trong phòng cho mọi người cùng xem, xếp theo tên tác giả. Mỗi tác phẩm cần có năm, tác giả, loại (tranh vẽ hay ảnh chụp) và ghi chú ở mặt sau. Tác phẩm đã treo thì không tự gỡ được, hãy kiểm tra kỹ trước khi treo nhé.</p>
     <label class="up-drop" id="upDrop">
       <input type="file" id="upFile" accept="image/*" aria-describedby="upDropTxt">
       <span id="upDropTxt">Chọn tranh hoặc ảnh<small>JPG, PNG, WebP · ảnh lớn sẽ được thu nhỏ tự động</small></span>
@@ -362,9 +373,9 @@ mark{background:#FFF0B8;color:inherit;padding:0 1px;border-radius:2px}
     </label>
     <div class="up-grid">
       <label class="f" id="fTitle"><span>Tên tác phẩm</span><input id="upName" maxlength="120" placeholder="Không tên" autocomplete="off"></label>
-      <label class="f" id="fYear"><span>Năm <b aria-hidden="true">*</b></span><input id="upYear" type="number" inputmode="numeric" min="1" step="1" required placeholder="2026"></label>
-      <label class="f" id="fArtist"><span>Tác giả <b aria-hidden="true">*</b></span><input id="upArtist" maxlength="80" required autocomplete="off"></label>
-      <label class="f"><span>Loại</span><select id="upKind"><option>Tranh vẽ</option><option>Ảnh chụp</option><option>Điêu khắc</option></select></label>
+      <label class="f" id="fYear"><span>Năm <b aria-hidden="true">*</b> <small>không rõ: 0000</small></span><input id="upYear" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{1,4}" required placeholder="2026" autocomplete="off"></label>
+      <label class="f wide" id="fArtist"><span>Tác giả <b aria-hidden="true">*</b></span><input id="upArtist" maxlength="80" required autocomplete="off"></label>
+      <fieldset class="f wide" id="fKind"><legend>Loại <b aria-hidden="true">*</b></legend><div class="kinds"><label><input type="radio" name="upKind" value="Tranh vẽ" required>Tranh vẽ</label><label><input type="radio" name="upKind" value="Ảnh chụp">Ảnh chụp</label></div><p class="up-hint" id="upHint" hidden></p></fieldset>
     </div>
     <label class="f" id="fNote"><span>Ghi chú ở mặt sau <b aria-hidden="true">*</b></span><textarea id="upNote" maxlength="4000" required placeholder="Câu chuyện, cảm xúc hay điều bạn muốn người xem biết khi lật mặt sau…"></textarea></label>
     <p class="up-err" id="upErr" role="alert"></p>
@@ -740,15 +751,19 @@ SAMPLE_DATA.forEach(function(s,i){
   });
 });
 
+function yearText(y){ return y ? String(y) : "0000"; }
+function artistKey(a){ return fold(a).replace(/\s+/g," ").trim(); }
+function hasArtist(w){ var a=artistKey(w.artist); return !!a && !/^chua ro/.test(a); }
 function kind(w){ var m=(w.medium||"").toLowerCase(); if(/^ảnh/.test(m)) return "photo"; if(/điêu khắc|tượng|gốm|phù điêu/.test(m)) return "sculpture"; return "painting"; }
 function guestList(){ var a=[]; state.guests.forEach(function(w){ if(!state.gone.has(w.id)) a.push(w); }); return a; }
 function allWorks(){ return state.usingSamples ? state.samples : state.works.concat(guestList()); }
 function matchFilter(w,f){ return f==="all" || kind(w)===f; }
 function visibleWorks(){
   var q=fold(state.q.trim());
-  var list=allWorks().filter(function(w){ return matchFilter(w,state.filter); });
-  if(q) list=list.filter(function(w){ return fold([w.title,w.artist,w.medium,w.year,w.size,w.catalog,w.note].join(" ")).indexOf(q)!==-1; });
-  list.sort(function(a,b){ var ya=a.year||0, yb=b.year||0; if(ya!==yb) return yb-ya; return (a.order||0)-(b.order||0); });
+  var list=allWorks().filter(function(w){ return hasArtist(w) && matchFilter(w,state.filter); });
+  if(q) list=list.filter(function(w){ return fold([w.title,w.artist,w.medium,yearText(w.year),w.size,w.catalog,w.note].join(" ")).indexOf(q)!==-1; });
+  // xếp theo tên tác giả (A→Z), cùng tác giả thì theo năm (0000 = không rõ năm), rồi thứ tự treo
+  list.sort(function(a,b){ var c=artistKey(a.artist).localeCompare(artistKey(b.artist),"vi"); if(c) return c; var ya=a.year||0, yb=b.year||0; if(ya!==yb) return ya-yb; return (a.order||0)-(b.order||0); });
   return list;
 }
 
@@ -774,7 +789,7 @@ function railItem(icon,label,count,current,onClick){
   return b;
 }
 function renderRail(){
-  var rail=$("rail"), works=allWorks();
+  var rail=$("rail"), works=allWorks().filter(hasArtist);
   rail.textContent="";
   rail.appendChild(el("div","rail-label","Phòng tranh"));
   FILTERS.forEach(function(f){
@@ -805,7 +820,7 @@ function setView(v){
   state.view=v;
   $("galleryView").hidden = v!=="gallery";
   $("linksView").hidden = v!=="links";
-  $("q").placeholder = v==="links" ? "Tìm trong "+LINK_TOTAL+" liên kết nghệ thuật…" : "Tìm tác phẩm theo tên, chất liệu, năm…";
+  $("q").placeholder = v==="links" ? "Tìm trong "+LINK_TOTAL+" liên kết nghệ thuật…" : "Tìm theo tác giả, tên tác phẩm, năm…";
   try{ history.replaceState(null,"", v==="links" ? "#kham-pha" : location.pathname+location.search); }catch(e){}
   render();
   window.scrollTo(0,0);
@@ -831,18 +846,18 @@ function tileFor(w){
   var im=t.firstChild; if(w.url && im.getAttribute("src")!==w.url) im.src=w.url;
   if(w.src==="guest" && !t.querySelector(".guest-dot")){ var dot=el("span","guest-dot"); dot.title="Khách gửi"; t.appendChild(dot); }
   var cap=t.querySelector(".tile-cap"); cap.textContent=w.title;
-  cap.appendChild(el("small",null,[w.year||"",w.medium||""].filter(Boolean).join(" · ")));
-  t.setAttribute("aria-label", w.title+(w.year?", "+w.year:"")+". Mở xem toàn màn hình");
+  cap.appendChild(el("small",null,[yearText(w.year),w.medium||""].filter(Boolean).join(" · ")));
+  t.setAttribute("aria-label", w.title+", "+w.artist+", "+yearText(w.year)+". Mở xem toàn màn hình");
   return t;
 }
 function renderGallery(){
   var list=visibleWorks(); state.viewList=list;
   var groupsEl=$("groups"); groupsEl.textContent=""; groupsModel=[];
-  var byYear=new Map();
-  list.forEach(function(w){ var y=w.year||0; if(!byYear.has(y)) byYear.set(y,[]); byYear.get(y).push(w); });
-  byYear.forEach(function(items,y){
-    var sec=el("section","group"), head=el("h2","group-head");
-    head.appendChild(el("span","y", y ? String(y) : "Không rõ năm"));
+  var byArtist=new Map();
+  list.forEach(function(w){ var k=artistKey(w.artist); if(!byArtist.has(k)) byArtist.set(k,{name:w.artist.replace(/\s+/g," ").trim(),items:[]}); byArtist.get(k).items.push(w); });
+  byArtist.forEach(function(g){
+    var items=g.items, sec=el("section","group"), head=el("h2","group-head");
+    head.appendChild(el("span","y", g.name));
     head.appendChild(el("span","n", items.length+" tác phẩm"));
     var rows=el("div","rows"); sec.appendChild(head); sec.appendChild(rows); groupsEl.appendChild(sec);
     groupsModel.push({items:items,rowsEl:rows});
@@ -1007,7 +1022,7 @@ function showWork(){
   if(w.url) vImg.src=w.url; else vImg.removeAttribute("src");
   vImg.alt=w.title;
   $("vTitle").textContent=w.title; $("vCat").textContent=w.catalog||"";
-  $("vlTitle").textContent=w.title; $("vlYear").textContent=w.year?", "+w.year:"";
+  $("vlTitle").textContent=w.title; $("vlYear").textContent=", "+yearText(w.year);
   $("vlMeta").textContent=[w.artist,w.medium,w.size].filter(Boolean).join(" · ");
   $("vPrev").disabled=state.v.i<=0; $("vNext").disabled=state.v.i>=state.v.list.length-1;
   $("vFull").hidden=!(document.fullscreenEnabled && viewer.requestFullscreen);
@@ -1033,9 +1048,9 @@ function renderBack(){
   var head=el("div","sheet-head"), left=el("div");
   left.appendChild(el("div","eyebrow","Mặt sau"+(w.catalog?" · "+w.catalog:"")));
   left.appendChild(el("h3",null,w.title));
-  left.appendChild(el("p","meta",[w.artist,w.year,w.medium,w.size].filter(Boolean).join(" · ")));
+  left.appendChild(el("p","meta",[w.artist,yearText(w.year),w.medium,w.size].filter(Boolean).join(" · ")));
   head.appendChild(left);
-  var stamp=el("div","stamp"); stamp.appendChild(document.createTextNode("An Vy’s Gallery")); stamp.appendChild(document.createElement("br")); stamp.appendChild(document.createTextNode(w.year?String(w.year):"—"));
+  var stamp=el("div","stamp"); stamp.appendChild(document.createTextNode("An Vy’s Gallery")); stamp.appendChild(document.createElement("br")); stamp.appendChild(document.createTextNode(yearText(w.year)));
   head.appendChild(stamp); sheet.appendChild(head); sheet.appendChild(document.createElement("hr"));
   var nh=el("div","note-head eyebrow"); nh.appendChild(el("b",null,"Ghi chú"));
   var wc=wordCount(w.note); if(wc) nh.appendChild(document.createTextNode(" · "+wc.toLocaleString("vi-VN")+" chữ"));
@@ -1044,11 +1059,6 @@ function renderBack(){
   if(w.src==="sample") sheet.appendChild(el("p","sheet-foot","Tranh mẫu được vẽ tự động để minh hoạ. Ghi chú cũng là ghi chú mẫu."));
   if(w.src==="guest"){
     sheet.appendChild(el("p","sheet-foot","Tác phẩm do khách gửi qua mục Update"+(w.at?" ngày "+new Date(w.at).toLocaleDateString("vi-VN"):"")+"."));
-    if(guestMine(w.id)){
-      var ub=el("button","pill-btn unhang"); ub.type="button"; ub.textContent="Gỡ tác phẩm của tôi khỏi tường";
-      ub.addEventListener("click",function(){ unhang(w); });
-      sheet.appendChild(ub);
-    }
   }
   vBack.appendChild(sheet);
 }
@@ -1118,39 +1128,29 @@ var G_BROKERS = ["wss://broker.emqx.io:8084/mqtt", "wss://broker.hivemq.com:8884
 var G_LIB = "https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js";
 var G_CHUNK = 60000;
 (function(){ var b=new URLSearchParams(location.search).get("broker"); if(b) G_BROKERS=b.split(","); })();
-var guest = { clients: [], pend: new Map(), dels: new Map(), archived: new Set(), dh: new Map() };
+var guest = { clients: [], pend: new Map(), archived: new Set() };
 var renderQ=0;
 function scheduleRender(){ cancelAnimationFrame(renderQ); renderQ=requestAnimationFrame(function(){ if(state.loaded){ if(state.usingSamples && state.guests.size){ state.usingSamples=false; } render(); } }); }
-function mineMap(){ try{ return JSON.parse(lsGet("gal-mine")||"{}")||{}; }catch(e){ return {}; } }
-function guestMine(id){ return !!mineMap()[id]; }
 function shaHex(text){
   return crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(function(b){ return Array.from(new Uint8Array(b),function(x){ return x.toString(16).padStart(2,"0"); }).join(""); });
 }
 function rnd(n){ var a=new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a,function(x){ return "abcdefghijklmnopqrstuvwxyz0123456789"[x%36]; }).join(""); }
-var KINDS=["Tranh vẽ","Ảnh chụp","Điêu khắc"];
+var KINDS=["Tranh vẽ","Ảnh chụp"];
 function guestWork(d, url){
   var y=Number(d.year); y=(y>0&&y<3000)?Math.floor(y):null;
   var w=Number(d.w)||0, h=Number(d.h)||0;
   return { key:"g:"+d.id, id:d.id, src:"guest", title:str(d.title,120)||"Không tên", artist:str(d.artist,80), year:y,
-    medium:KINDS.indexOf(d.medium)>=0?d.medium:"Tranh vẽ", size:"", catalog:"Khách gửi", note:str(d.note,4000),
+    medium:KINDS.indexOf(d.medium)>=0?d.medium:(d.medium==="Điêu khắc"?"Ảnh chụp":"Tranh vẽ"), size:"", catalog:"Khách gửi", note:str(d.note,4000),
     aspect:(w&&h)?w/h:1, ph:/^#[0-9a-fA-F]{6}$/.test(d.ph||"")?d.ph:"#DCDCD6", order:Number(d.at)||0, at:Number(d.at)||0, url:url };
 }
 function addGuest(d, url, archived){
-  if(!d || !d.id || state.gone.has(d.id)) return;
+  if(!d || !d.id || state.gone.has(d.id) || !str(d.artist,80).trim()) return;
   var cur=state.guests.get(d.id);
   if(cur && cur.archived && !archived) return;          // đã có bản lâu dài
   var w=guestWork(d,url); w.archived=!!archived;
   if(cur && cur.url && cur.url.indexOf("blob:")===0 && cur.url!==url) setTimeout(function(){ URL.revokeObjectURL(cur.url); },60000);
   state.guests.set(d.id,w);
-  if(d.dh) guest.dh.set(d.id,String(d.dh));
-  checkDel(d.id);
   scheduleRender();
-}
-function hideGuest(id){ if(state.gone.has(id)) return; state.gone.add(id); if(currentWork() && currentWork().id===id) closeViewer(); scheduleRender(); }
-function checkDel(id){
-  var tok=guest.dels.get(id), dh=guest.dh.get(id);
-  if(!tok || !dh) return;
-  shaHex(tok).then(function(h){ if(h===dh) hideGuest(id); });
 }
 // tranh đã lưu lâu dài
 function loadArchived(){
@@ -1160,13 +1160,12 @@ function loadArchived(){
     arr.forEach(function(d){ if(!d || !d.id || typeof d.image!=="string" || !/^uploads\/[a-z0-9-]+\.jpg$/.test(d.image)) return; guest.archived.add(d.id); addGuest(d, d.image, true); });
   }).catch(function(){});
 }
-// tin nhắn từ máy chủ: m/<id> thông tin, c/<id>/<n> mảnh ảnh, d/<id> yêu cầu gỡ
+// tin nhắn từ máy chủ: m/<id> thông tin, c/<id>/<n> mảnh ảnh (khách không gỡ được tranh đã treo)
 function onGuestMsg(topic, payload){
   if(topic.indexOf(G_PFX)!==0) return;
   var parts=topic.slice(G_PFX.length).split("/"), kind=parts[0], id=parts[1];
   if(!/^[a-z0-9-]{6,40}$/.test(id||"")) return;
   var text=payload && payload.length ? new TextDecoder().decode(payload) : "";
-  if(kind==="d"){ if(!text) return; try{ var dd=JSON.parse(text); if(dd && dd.tok){ guest.dels.set(id,String(dd.tok)); checkDel(id); } }catch(e){} return; }
   if(guest.archived.has(id)) return;
   var p=guest.pend.get(id); if(!p){ p={ meta:null, c:{} }; guest.pend.set(id,p); }
   if(kind==="m"){ if(!text) return; try{ p.meta=JSON.parse(text); }catch(e){ return; } }
@@ -1242,7 +1241,6 @@ function compress(img){
 
 /* --- hộp thoại Update --- */
 var up=$("up"), upForm=$("upForm"), upFile=$("upFile"), upPrev=$("upPrev"), upErr=$("upErr"), upGo=$("upGo"), upLast=null, upPicked=null, upBusy=false;
-$("upYear").max=String(new Date().getFullYear()+1);
 function upStatusLine(){
   if(up.hidden || upBusy) return;
   var n=liveClients().length;
@@ -1264,21 +1262,74 @@ up.addEventListener("click",function(e){ if(e.target.closest("[data-close]")) cl
 upFile.addEventListener("change",function(){
   var f=upFile.files && upFile.files[0]; upErr.textContent="";
   if(upPicked){ URL.revokeObjectURL(upPicked.url); upPicked=null; }
+  upHint.hidden=true; upHint.textContent="";
   if(!f){ upPrev.hidden=true; $("upDrop").classList.remove("has"); $("upDropTxt").hidden=false; return; }
+  camInfo(f).then(function(cam){ if(upFile.files[0]!==f) return; showKindHint(cam); });
   readImage(f).then(function(r){
     upPicked=r; upPrev.src=r.url; upPrev.hidden=false; $("upDropTxt").hidden=true; $("upDrop").classList.add("has");
   }).catch(function(e){ upErr.textContent=e.message; upFile.value=""; });
 });
 function invalid(id,on){ $(id).setAttribute("aria-invalid",on?"true":"false"); }
 [["upYear","fYear"],["upArtist","fArtist"],["upNote","fNote"]].forEach(function(p){ $(p[0]).addEventListener("input",function(){ invalid(p[1],false); }); });
+var upHint=$("upHint");
+function kindVal(){ var r=upForm.querySelector('input[name="upKind"]:checked'); return r ? r.value : ""; }
+function kindUI(){ upForm.querySelectorAll(".kinds label").forEach(function(l){ l.classList.toggle("on", l.firstChild.checked); }); }
+upForm.querySelectorAll('input[name="upKind"]').forEach(function(r){ r.addEventListener("change",function(){ invalid("fKind",false); kindUI(); }); });
+$("upYear").addEventListener("input",function(){ var v=this.value.replace(/[^0-9]/g,"").slice(0,4); if(v!==this.value) this.value=v; });
+/* soát loại: đọc dữ liệu EXIF của tệp gốc (trước khi nén) xem có phải được chụp bằng máy ảnh/điện thoại không */
+function camInfo(file){
+  if(!file || !file.slice || !/jpe?g$/i.test(file.type||file.name||"")) return Promise.resolve(null);
+  return new Promise(function(res){
+    var fr=new FileReader();
+    fr.onload=function(){ try{ res(parseExif(new DataView(fr.result))); }catch(e){ res(null); } };
+    fr.onerror=function(){ res(null); };
+    fr.readAsArrayBuffer(file.slice(0,262144));
+  });
+}
+function parseExif(dv){
+  if(dv.getUint16(0)!==0xFFD8) return null;
+  var off=2;
+  while(off+4<dv.byteLength){
+    var mk=dv.getUint16(off), len=dv.getUint16(off+2);
+    if(mk===0xFFE1 && dv.getUint32(off+4)===0x45786966){
+      var t=off+10, le=dv.getUint16(t)===0x4949, u16=function(o){ return dv.getUint16(t+o,le); }, u32=function(o){ return dv.getUint32(t+o,le); };
+      var out={};
+      var readIfd=function(o,want){
+        var n=u16(o);
+        for(var i=0;i<n;i++){
+          var e=o+2+i*12, tag=u16(e), type=u16(e+2), cnt=u32(e+4);
+          if(!(tag in want)) continue;
+          if(type===2){ var p=cnt>4?u32(e+8):e+8, sTxt=""; for(var k=0;k<cnt-1 && k<64;k++) sTxt+=String.fromCharCode(dv.getUint8(t+p+k)); out[want[tag]]=sTxt.trim(); }
+          else if(type===4||type===3){ out[want[tag]]= type===4 ? u32(e+8) : u16(e+8); }
+          else if(type===5){ out[want[tag]]=true; }
+        }
+      };
+      readIfd(u32(4),{0x010F:"make",0x0110:"model",0x0131:"soft",0x8769:"exif"});
+      if(out.exif) readIfd(out.exif,{0x829A:"exposure",0x829D:"fnum",0x9003:"taken"});
+      return out;
+    }
+    if((mk&0xFF00)!==0xFF00) break;
+    off+=2+len;
+  }
+  return null;
+}
+function showKindHint(cam){
+  var camera=cam && (cam.make || cam.model || cam.exposure || cam.fnum);
+  if(!camera){ upHint.hidden=true; return; }
+  var dev=[cam.make,cam.model].filter(Boolean).join(" ").replace(/^(\w+)\s+\1\b/i,"$1");
+  upHint.textContent="Tệp này được chụp bằng máy ảnh hoặc điện thoại"+(dev?" ("+dev+")":"")+". Nếu đây là ảnh chụp người, cảnh hay đồ vật thì chọn “Ảnh chụp”; nếu là ảnh chụp lại một bức tranh thì chọn “Tranh vẽ”.";
+  upHint.hidden=false;
+}
 upForm.addEventListener("submit",function(e){
   e.preventDefault(); if(upBusy) return;
-  var yr=Number($("upYear").value), maxY=new Date().getFullYear()+1;
-  var artist=$("upArtist").value.trim(), note=$("upNote").value.trim(), title=$("upName").value.trim();
+  var yRaw=$("upYear").value.trim(), yr=Number(yRaw), maxY=new Date().getFullYear()+1, kv=kindVal();
+  var yOk=/^[0-9]{1,4}$/.test(yRaw) && (yr===0 || (yr>=1 && yr<=maxY));
+  var artist=$("upArtist").value.replace(/\s+/g," ").trim(), note=$("upNote").value.trim(), title=$("upName").value.trim();
   var bad=[];
   if(!upPicked) bad.push("chọn tranh/ảnh");
-  invalid("fYear", !(yr>=1 && yr<=maxY && Math.floor(yr)===yr)); if(!(yr>=1 && yr<=maxY && Math.floor(yr)===yr)) bad.push("năm");
+  invalid("fYear", !yOk); if(!yOk) bad.push("năm (không rõ năm thì ghi 0000)");
   invalid("fArtist", !artist); if(!artist) bad.push("tác giả");
+  invalid("fKind", !kv); if(!kv) bad.push("loại (tranh vẽ hay ảnh chụp)");
   invalid("fNote", !note); if(!note) bad.push("ghi chú mặt sau");
   if(bad.length){ upErr.textContent="Còn thiếu: "+bad.join(", ")+"."; return; }
   var recent=[]; try{ recent=(JSON.parse(lsGet("gal-recent")||"[]")||[]).filter(function(t){ return Date.now()-t<3600000; }); }catch(x){ recent=[]; }
@@ -1286,13 +1337,13 @@ upForm.addEventListener("submit",function(e){
   var cl=liveClients();
   if(!cl.length){ upErr.textContent="Chưa kết nối được máy chủ. Kiểm tra mạng rồi thử lại sau ít giây."; return; }
   upBusy=true; upGo.disabled=true; upErr.textContent=""; $("upStatus").textContent="Đang nén ảnh…";
-  var pack, id=Date.now().toString(36)+"-"+rnd(6), tok=rnd(28), meta;
+  var pack, id=Date.now().toString(36)+"-"+rnd(6), meta;
   Promise.resolve().then(function(){
     pack=compress(upPicked.img);
-    return Promise.all([shaHex(pack.b64), shaHex(tok)]);
+    return Promise.all([shaHex(pack.b64)]);
   }).then(function(hs){
     var n=Math.ceil(pack.b64.length/G_CHUNK);
-    meta={ v:1, id:id, at:Date.now(), title:title||"Không tên", artist:artist.slice(0,80), year:yr, medium:$("upKind").value, note:note.slice(0,4000), w:pack.w, h:pack.h, ph:pack.ph, n:n, len:pack.b64.length, sha:hs[0], dh:hs[1] };
+    meta={ v:1, id:id, at:Date.now(), title:title||"Không tên", artist:artist.slice(0,80), year:yr, medium:kv, note:note.slice(0,4000), w:pack.w, h:pack.h, ph:pack.ph, n:n, len:pack.b64.length, sha:hs[0] };
     var done=0, total=(n+1)*cl.length;
     var tick=function(){ done++; $("upStatus").textContent="Đang treo tranh… "+Math.min(100,Math.round(done/total*100))+"%"; };
     return Promise.all(cl.map(function(c){
@@ -1302,14 +1353,13 @@ upForm.addEventListener("submit",function(e){
     }));
   }).then(function(oks){
     if(oks.indexOf(true)<0) throw new Error("Gửi không thành công. Thử lại sau ít phút nhé.");
-    var mm=mineMap(); mm[id]=tok; lsSet("gal-mine",JSON.stringify(mm));
     recent.push(Date.now()); lsSet("gal-recent",JSON.stringify(recent));
     var bin=atob(pack.b64), u8=new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i);
     addGuest(meta, URL.createObjectURL(new Blob([u8],{type:"image/jpeg"})), false);
     var p=guest.pend.get(id); if(p){ p.done=true; p.c={}; } else guest.pend.set(id,{meta:meta,c:{},done:true});
     upBusy=false; upGo.disabled=false;
-    upForm.reset(); upFile.dispatchEvent(new Event("change"));
-    ["fYear","fArtist","fNote"].forEach(function(x){ invalid(x,false); });
+    upForm.reset(); upFile.dispatchEvent(new Event("change")); kindUI();
+    ["fYear","fArtist","fKind","fNote"].forEach(function(x){ invalid(x,false); });
     closeUpload();
     state.filter="all"; state.q=""; $("q").value=""; if(state.view!=="gallery") setView("gallery"); else render();
     setTimeout(function(){ var t=tiles.get("g:"+id); if(t){ t.scrollIntoView({block:"center",behavior:"smooth"}); } },120);
@@ -1317,21 +1367,6 @@ upForm.addEventListener("submit",function(e){
     upBusy=false; upGo.disabled=false; upErr.textContent=(err && err.message) || "Có lỗi, thử lại nhé."; upStatusLine();
   });
 });
-function unhang(w){
-  var tok=mineMap()[w.id]; if(!tok) return;
-  if(!confirmUnhang()) return;
-  var cl=liveClients();
-  if(!cl.length){ alertUnhang(); return; }
-  var p=guest.pend.get(w.id), n=(p && p.meta && Number(p.meta.n)) || 0;
-  cl.forEach(function(c){
-    c.publish(G_PFX+"d/"+w.id, JSON.stringify({ id:w.id, tok:tok, at:Date.now() }), {qos:1,retain:true});
-    if(!w.archived){ c.publish(G_PFX+"m/"+w.id, "", {qos:1,retain:true}); for(var k=0;k<n;k++) c.publish(G_PFX+"c/"+w.id+"/"+k, "", {qos:1,retain:true}); }
-  });
-  var mm=mineMap(); delete mm[w.id]; lsSet("gal-mine",JSON.stringify(mm));
-  hideGuest(w.id);
-}
-function confirmUnhang(){ return window.confirm("Gỡ tác phẩm này khỏi phòng tranh? Mọi người sẽ không thấy nó nữa."); }
-function alertUnhang(){ window.alert("Chưa kết nối được máy chủ, thử lại sau ít giây nhé."); }
 
 /* ================= Khởi động ================= */
 setView(state.view);

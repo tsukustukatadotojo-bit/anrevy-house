@@ -1,32 +1,6 @@
 {
  "works": [
   {
-   "id": "av01",
-   "image": "works/01-khoi-va-bi-ngan.jpg",
-   "title": "Khói và hoa bỉ ngạn",
-   "artist": "Chưa rõ tác giả",
-   "medium": "Bút chì màu trên giấy",
-   "catalog": "AV-01",
-   "note": "Một gương mặt chỉ còn là nét chì mờ, bị che bởi cột khói xám bốc lên. Giữa khói, những chùm sợi đỏ nổ bung như hoa bỉ ngạn, kéo theo mảnh đá văng ra. Phần lớn tờ giấy để trống, nên mảng đỏ càng chói hơn.",
-   "w": 1190,
-   "h": 1598,
-   "ph": "#DED0D0",
-   "order": 1
-  },
-  {
-   "id": "av02",
-   "image": "works/02-ngay-mua-sao-bang.jpg",
-   "title": "Ngày mưa sao băng",
-   "artist": "Chưa rõ tác giả",
-   "medium": "Bút chì màu trên giấy",
-   "catalog": "AV-02",
-   "note": "Cô gái ngồi lọt thỏm trong chiếc ghế bành đen, ôm con khủng long gai bằng bông. Giấy dán tường in kín những vệt sao băng, ngoài cửa sổ mây cháy đỏ, còn tách trà trên bàn vẫn bốc khói. Mọi thứ bên ngoài như đang đổ lửa, riêng góc phòng thì yên.",
-   "w": 1196,
-   "h": 1600,
-   "ph": "#857C71",
-   "order": 2
-  },
-  {
    "id": "av03",
    "image": "works/03-bedtime-aviation.jpg",
    "title": "Bedtime Aviation",
@@ -123,71 +97,6 @@
    "order": 9,
    "year": 1928,
    "size": "54 × 80,9 cm"
-  },
-  {
-   "id": "av10",
-   "image": "works/10-tho-canh-chuon.jpg",
-   "title": "Thỏ cánh chuồn",
-   "artist": "Chưa rõ tác giả",
-   "medium": "Tranh kỹ thuật số",
-   "catalog": "AV-10",
-   "note": "Một chú thỏ xanh lam hiện ra giữa nền đen, đôi tai là hai cánh chuồn chuồn trong suốt. Phía trên là một ngôi sao bốn cánh, bên dưới thắt một dải nơ tím, phần thân tan dần vào bóng tối.",
-   "w": 720,
-   "h": 1600,
-   "ph": "#090E21",
-   "order": 10
-  },
-  {
-   "id": "av11",
-   "image": "works/11-de-trang-trong-co.jpg",
-   "title": "Con dê trắng trong cỏ",
-   "artist": "Chưa rõ tác giả",
-   "medium": "Tranh kỹ thuật số",
-   "catalog": "AV-11",
-   "note": "Con dê trắng sừng cong nằm ngửa giữa đám cỏ xanh sẫm lẫn quả mọng đỏ, mắt đỏ mở to. Không rõ nó đang ngủ, đang nhảy hay đang rơi.",
-   "w": 923,
-   "h": 1600,
-   "ph": "#45493B",
-   "order": 11
-  },
-  {
-   "id": "av12",
-   "image": "works/12-mat-trong-mieng.jpg",
-   "title": "Con mắt trong miệng",
-   "artist": "Chưa rõ tác giả",
-   "medium": "Tranh kỹ thuật số",
-   "catalog": "AV-12",
-   "note": "Gương mặt trắng như sứ, tai nhọn, hai sừng nhỏ, mí mắt viền đỏ. Ở chỗ lẽ ra là cái miệng lại có thêm một con mắt nhìn thẳng ra ngoài.",
-   "w": 913,
-   "h": 1600,
-   "ph": "#6E656F",
-   "order": 12
-  },
-  {
-   "id": "av13",
-   "image": "works/13-suyt.jpg",
-   "title": "Suỵt",
-   "artist": "Chưa rõ tác giả",
-   "medium": "Tranh kỹ thuật số",
-   "catalog": "AV-13",
-   "note": "Cô gái tóc trắng nhắm mắt, đặt ngón tay lên môi. Cả hình gần như chỉ có trắng và đen, như một bóng ma đang xin người xem giữ im lặng.",
-   "w": 911,
-   "h": 1600,
-   "ph": "#8E8AA4",
-   "order": 13
-  },
-  {
-   "id": "av14",
-   "image": "works/14-tho-sau-nep-vai.jpg",
-   "title": "Thỏ trắng sau nếp vải",
-   "artist": "Chưa rõ tác giả",
-   "medium": "Tranh kỹ thuật số",
-   "catalog": "AV-14",
-   "note": "Chú thỏ trắng mắt đỏ ló ra từ khe giữa những nếp gấp xanh lục và trắng, bên dưới là một lối đi đỏ thẫm. Giống khoảnh khắc ngay trước khi cô bé Alice đi theo.",
-   "w": 918,
-   "h": 1600,
-   "ph": "#505650",
-   "order": 14
   },
   {
    "id": "av15",

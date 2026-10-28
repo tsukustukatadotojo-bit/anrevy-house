@@ -5,8 +5,9 @@ tin nhắn giữ lại (retained), nên mọi người thấy ngay. Kịch bản
   1. đọc mọi tin giữ lại dưới anrevy-house-9q2/gallery/v1/ trên các máy chủ,
   2. ghép ảnh, kiểm tra, nén lại (bỏ EXIF/vị trí), lưu vào gallery/uploads/<id>.jpg và gallery/uploads.json,
   3. commit + push lên main và gh-pages,
-  4. xoá tin giữ lại của những tranh đã được lưu từ lần chạy trước (lúc đó trang web đã có bản lâu dài),
-  5. xử lý yêu cầu gỡ tranh (đúng mã gỡ của người đã gửi).
+  4. xoá tin giữ lại của những tranh đã được lưu từ lần chạy trước (lúc đó trang web đã có bản lâu dài).
+Khách không tự gỡ được tranh đã treo: mọi yêu cầu gỡ (d/<id>) đều bị bỏ qua và dọn đi.
+Chỉ chủ trang gỡ tranh bằng cách sửa gallery/uploads.json (và xoá ảnh trong gallery/uploads).
 Chạy thử không đụng tới git:  python3 gallery_sync.py --dry   (BROKERS=ws://localhost:8883 để dùng máy chủ thử)
 """
 import base64, hashlib, io, json, os, random, re, string, subprocess, sys, time, warnings
@@ -19,7 +20,7 @@ PFX = 'anrevy-house-9q2/gallery/v1/'
 DEFAULT_BROKERS = 'tcp://broker.emqx.io:1883,tcp://broker.hivemq.com:1883'
 DB = 'gallery/uploads.json'
 DIR = 'gallery/uploads'
-MEDIUMS = ('Tranh vẽ', 'Ảnh chụp', 'Điêu khắc')
+MEDIUMS = ('Tranh vẽ', 'Ảnh chụp')       # hai mục của phòng tranh
 MAX_NEW, MAX_TOTAL = 30, 800
 STALE_MS = 6 * 3600 * 1000           # tranh gửi dở dang quá 6 giờ thì dọn
 DRY = '--dry' in sys.argv
@@ -89,29 +90,10 @@ def main():
         for k in ks: clear.add(f'{PFX}c/{gid}/{k}')
     changed, added, removed = False, [], []
 
-    # 1) yêu cầu gỡ tranh
+    # 1) khách không được tự gỡ tranh: bỏ qua và dọn mọi yêu cầu gỡ
     gone = set()
     for gid, slots in per.items():
-        req = next((s['d'] for s in slots.values() if s['d']), None)
-        if not req: continue
-        try: tok = str(json.loads(req.decode()).get('tok', ''))
-        except Exception: tok = ''
-        h = sha(tok) if tok else ''
-        if gid in existing:
-            if h and existing[gid].get('dh') == h:
-                items = [it for it in items if it['id'] != gid]
-                f = os.path.join('gallery', existing[gid].get('image', ''))
-                if os.path.isfile(f) and os.path.dirname(os.path.abspath(f)) == os.path.abspath(DIR): os.remove(f)
-                removed.append(gid); changed = True; gone.add(gid); clear_all(gid)
-            else:
-                clear.add(PFX + 'd/' + gid)          # mã gỡ sai
-        else:
-            # chưa lưu hoặc đã gỡ ở lần chạy trước: dọn luôn
-            meta = next((s['m'] for s in slots.values() if s['m']), None)
-            try: mdh = json.loads(meta.decode()).get('dh') if meta else None
-            except Exception: mdh = None
-            if meta is None or (h and mdh == h): clear_all(gid); gone.add(gid)
-            clear.add(PFX + 'd/' + gid)
+        if any(s['d'] for s in slots.values()): clear.add(PFX + 'd/' + gid)
 
     # 2) tranh mới
     count = len(items)
@@ -137,9 +119,9 @@ def main():
         if len(added) >= MAX_NEW or count >= MAX_TOTAL: print('đủ giới hạn, để lần sau', gid); continue
         try:
             year = int(meta.get('year'))
-            artist, note = clean(meta.get('artist'), 80), clean(meta.get('note'), 4000)
-            dh = str(meta.get('dh', ''))
-            if not (1 <= year <= datetime.now(timezone.utc).year + 1) or not artist or not note or not re.fullmatch(r'[0-9a-f]{64}', dh):
+            artist, note = re.sub(r'\s+', ' ', clean(meta.get('artist'), 80)), clean(meta.get('note'), 4000)
+            # năm 0 (hiện là 0000) = không rõ năm
+            if not (0 <= year <= datetime.now(timezone.utc).year + 1) or not artist or not note:
                 raise ValueError('thiếu năm / tác giả / ghi chú')
             raw = base64.b64decode(b64, validate=True)
             if len(raw) > 2_500_000: raise ValueError('ảnh quá lớn')
@@ -152,10 +134,11 @@ def main():
             path = f'{DIR}/{gid}.jpg'
             im.save(path, 'JPEG', quality=85, optimize=True, progressive=True)
             r, g, b = im.resize((1, 1), Image.LANCZOS).getpixel((0, 0))
-            medium = meta.get('medium') if meta.get('medium') in MEDIUMS else 'Tranh vẽ'
+            # soát loại: chỉ hai mục Tranh vẽ / Ảnh chụp (điêu khắc là ảnh chụp tượng)
+            medium = meta.get('medium') if meta.get('medium') in MEDIUMS else ('Ảnh chụp' if meta.get('medium') == 'Điêu khắc' else 'Tranh vẽ')
             items.append({'id': gid, 'image': f'uploads/{gid}.jpg', 'title': clean(meta.get('title'), 120) or 'Không tên',
                           'artist': artist, 'year': year, 'medium': medium, 'catalog': 'Khách gửi', 'note': note,
-                          'w': im.width, 'h': im.height, 'ph': '#%02X%02X%02X' % (r, g, b), 'at': int(float(meta.get('at') or now)), 'dh': dh})
+                          'w': im.width, 'h': im.height, 'ph': '#%02X%02X%02X' % (r, g, b), 'at': int(float(meta.get('at') or now))})
             added.append(gid); count += 1; changed = True
         except Exception as e:
             print('bỏ tranh không hợp lệ', gid, repr(e)); clear_all(gid, n)
@@ -173,7 +156,7 @@ def main():
         db = {'about': 'Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động).', 'items': items}
         if keep: db['checked'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
         with open(DB, 'w', encoding='utf-8') as f: json.dump(db, f, ensure_ascii=False, indent=1)
-        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', f'gỡ {len(removed)} tranh' if removed else '', 'giữ lịch chạy' if keep and not changed else '']))
+        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '']))
         print(msg, added, removed)
         if not DRY and not push(msg):
             print('push thất bại — không xoá tin giữ lại, lần sau thử lại')
@@ -189,7 +172,7 @@ def main():
     clear = {t for t in clear if not mine(t)}
     print('xoá', len(clear), 'tin giữ lại')
     if os.environ.get('GITHUB_ACTIONS'):
-        print(f'::notice title=gallery-sync::{len(per)} mã trên máy chủ · đã lưu {len(items)} · thêm {len(added)} · gỡ {len(removed)} · dọn {len(clear)} tin')
+        print(f'::notice title=gallery-sync::{len(per)} mã trên máy chủ · đã lưu {len(items)} · thêm {len(added)} · dọn {len(clear)} tin')
     for u, c, s in links:
         for t in clear: c.publish(t, b'', qos=1, retain=True)
     time.sleep(4)
