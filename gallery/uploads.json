@@ -116,6 +116,23 @@
    "fsize": 144077,
    "ffmt": "jpg",
    "at": 1793150551779
+  },
+  {
+   "id": "mvtest02-claude",
+   "image": "uploads/mvtest02-claude.jpg",
+   "full": "uploads/full/mvtest02-claude.jpg",
+   "title": "Thử hệ thống (bản gốc)",
+   "artist": "Claude",
+   "year": 0,
+   "medium": "Tranh vẽ",
+   "catalog": "Khách gửi",
+   "note": "Tác phẩm thử để kiểm tra việc lưu bản gốc. Sẽ được gỡ ngay.",
+   "w": 2400,
+   "h": 1800,
+   "ph": "#948584",
+   "fsize": 588889,
+   "ffmt": "jpg",
+   "at": 1793151594011
   }
  ]
 }
