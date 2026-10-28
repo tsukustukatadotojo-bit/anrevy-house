@@ -1586,8 +1586,10 @@ function renderItem(it){
 }
 function renderAll(){ upItems.forEach(renderItem); upDrop.classList.toggle("has",upItems.length>0); goLabel(); upStatusLine(); }
 function addFiles(list){
-  var files=Array.prototype.slice.call(list||[]).filter(function(f){ return f && (/^image\//.test(f.type) || /\.(jpe?g|png|webp|gif|bmp|tiff?|heic|heif|avif)$/i.test(f.name)); });
-  if(!files.length) return;
+  // nhận mọi tệp đã chọn: trình chọn ảnh của Android có thể trả về tệp không có đuôi và không ghi loại;
+  // bước kiểm định sẽ đọc nội dung thật của tệp để biết có phải ảnh không
+  var files=Array.prototype.slice.call(list||[]).filter(function(f){ return f && typeof f.size==="number" && !/^(video|audio|text)\//.test(f.type||""); });
+  if(!files.length){ if(list && list.length) upErr.textContent="Tệp đã chọn không phải tranh/ảnh."; return; }
   var room=MAX_FILES-upItems.filter(function(it){ return !it.done; }).length;
   if(files.length>room){ upErr.textContent="Mỗi lần treo tối đa "+MAX_FILES+" tệp, đã bỏ bớt "+(files.length-Math.max(0,room))+" tệp."; files=files.slice(0,Math.max(0,room)); }
   else upErr.textContent="";
@@ -1605,7 +1607,11 @@ function removeItem(it){
   if(it.thumb) URL.revokeObjectURL(it.thumb);
   renderAll();
 }
-upFile.addEventListener("change",function(){ addFiles(upFile.files); upFile.value=""; });
+upFile.addEventListener("change",function(){
+  var picked=Array.prototype.slice.call(upFile.files||[]);
+  try{ addFiles(picked); }catch(err){ upErr.textContent="Không thêm được ảnh: "+((err&&err.message)||err); }
+  setTimeout(function(){ try{ upFile.value=""; }catch(e){} },0);
+});
 ["dragenter","dragover"].forEach(function(ev){ upForm.addEventListener(ev,function(e){ if(e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types||[],"Files")>=0){ e.preventDefault(); upDrop.classList.add("drag"); } }); });
 ["dragleave","drop"].forEach(function(ev){ upForm.addEventListener(ev,function(){ upDrop.classList.remove("drag"); }); });
 upForm.addEventListener("drop",function(e){ if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length){ e.preventDefault(); if(!upBusy) addFiles(e.dataTransfer.files); } });
