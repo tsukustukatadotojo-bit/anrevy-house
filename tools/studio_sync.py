@@ -242,12 +242,21 @@ def rss_items(raw):
         ch = ET.fromstring(raw).find('channel')
         return [it for it in ch.findall('item')]
     except Exception as e:
-        print('RSS lỗi', repr(e)[:120]); return []
+        # một số trang dùng tiền tố XML chưa khai báo (vd. DIY): bỏ tiền tố rồi đọc lại
+        try:
+            t = raw.decode('utf-8', 'ignore')
+            t = re.sub(r'<(/?)([A-Za-z][\w.-]*):', r'<\1\2_', t)
+            t = re.sub(r'\s([A-Za-z][\w.-]*):([A-Za-z][\w.-]*)=', r' \1_\2=', t)
+            ch = ET.fromstring(t.encode('utf-8')).find('channel')
+            return [it for it in ch.findall('item')]
+        except Exception as e2:
+            print('RSS lỗi', repr(e)[:120], repr(e2)[:80]); return []
 
 def fields(it):
     f, cats, img = {}, [], ''
     for c in it:
         t = local(c.tag)
+        if '_' in t and t.split('_', 1)[0] in ('media', 'content', 'dc', 'atom', 'slash', 'wfw', 'sy'): t = t.split('_', 1)[1]
         if t == 'category': cats.append((c.text or '').strip())
         elif t in ('thumbnail', 'content') and c.get('url') and not img: img = c.get('url')
         elif t == 'encoded': f['encoded'] = c.text or ''
@@ -305,7 +314,7 @@ def music():
             k, artist, work, sc = kind or 'news', '', '', None
             desc = plain(f.get('description') or f.get('encoded') or '', 400)
             desc = re.sub(r'\s*(The post .* appeared first on .*|Read full story on the Bandcamp Daily\.?)$', '', desc).strip()
-            if src == 'pitchfork':
+            if src == 'pitchfork' and k in ('album', 'song'):
                 work = title.strip(Q + ' ')
                 c = cache.get(link)
                 bnm = False
@@ -386,10 +395,10 @@ def releases():
             m = re.search(r'!\s*scope="row"[^|]*\|\s*(' + '|'.join(MONTHS) + r')\s*<br\s*/?>\s*(\d{1,2})', row)
             if m: cur = date(year, MONTHS.index(m.group(1)) + 1, int(m.group(2)))
             if not cur or not (lo <= cur <= hi): continue
-            cells = [c[1:].strip() for c in row.split('\n') if c.startswith('|') and not c.startswith('|-') and not c.startswith('|}')]
+            cells = [re.sub(r'^\s*(?:[\w-]+\s*=\s*"[^"]*"\s*)+\|', '', c[1:]).strip() for c in row.split('\n') if c.startswith('|') and not c.startswith('|-') and not c.startswith('|}') and not c.startswith('|+')]
             if len(cells) < 2: continue
             artist, album = wiki_clean(cells[0]), wiki_clean(cells[1])
-            if not artist or not album or len(artist) > 120: continue
+            if not artist or not album or len(artist) > 120 or artist.startswith('+') or '=' in album or 'colspan' in artist: continue
             it = {'d': cur.isoformat(), 'a': artist, 'w': album}
             g = wiki_clean(cells[2]) if len(cells) > 2 else ''
             l = wiki_clean(cells[3]) if len(cells) > 3 else ''
