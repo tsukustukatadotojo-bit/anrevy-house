@@ -1,15 +1,633 @@
 {
  "items": [
   {
+   "s": "consequence",
+   "k": "news",
+   "t": "Rosalía Celebrates First Anniversary of LUX with Deluxe Vinyl Box Set",
+   "u": "https://consequence.net/2026/11/rosalia-lux-anniversay-deluxe-vinyl-box-set/",
+   "d": "2026-11-06T14:45:51Z",
+   "x": "The announcement follows the release of an official sheet music book, as speculation grows about a possible film documenting her world tour. \n Rosalía Celebrates First Anniversary of LUX with Deluxe Vinyl Box Set \n\n Pedro Camacho",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/Rosalia-LUX-Vinyl-Box.jpg?quality=80"
+  },
+  {
+   "s": "clash",
+   "k": "news",
+   "t": "Live Report: Stevie Wonder – The O2 Arena, London",
+   "u": "https://www.clashmusic.com/live/live-report-stevie-wonder-the-o2-arena-london/",
+   "d": "2026-11-06T14:38:41Z",
+   "x": "There are concerts that leave you exhilarated, others that leave you emotionally uplifted, and occasionally one comes along that makes you feel as though you’ve been temporarily transported into a rather better version of the world than the crappy one we currently find ourselves mired in. At London’s O2 Arena…",
+   "f": "https://www.clashmusic.com/feed/"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "10 New Albums You Should Listen to Now: Twisted Teens, Bassvictim, and More",
+   "u": "https://pitchfork.com/story/10-new-albums-you-should-listen-to-now-twisted-teens-bassvictim-and-more/",
+   "d": "2026-11-06T14:37:49Z",
+   "x": "Stream new releases from Twisted Teens, Bassvictim, Oso Oso, and Lil Baby",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aeb9e29a66e1f90616234f2/master/w_200,c_limit/TwistedTeens_2026_promo_04_MartinCrudo_2250x1500_300%20(2).jpg",
+   "v": 3
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Kings of Leon Announce 2027 Tour In Support of New Album",
+   "u": "https://consequence.net/2026/11/kings-of-leon-2027-tour-new-album/",
+   "d": "2026-11-06T14:27:57Z",
+   "x": "The 30-date outing sees the band on the road with Band of Horses and Dexter and the Moonrocks. \n Kings of Leon Announce 2027 Tour In Support of New Album \n\n Alex Young",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/Kings-of-Leon-2027-tour-scaled.jpg?quality=80"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Superchunk Cover Wham!, The Magnetic Fields, & Galaxie 500 On Surprise New Wintry Mix EP",
+   "u": "https://stereogum.com/2516729/superchunk-cover-wham-the-magnetic-fields-galaxie-500-on-surprise-new-wintry-mix-ep/music/",
+   "d": "2026-11-06T14:21:01Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Superchunk.jpg?w=200"
+  },
+  {
+   "s": "bandcamp",
+   "k": "news",
+   "t": "PISS, “you made me / skin on linen”",
+   "u": "https://daily.bandcamp.com/album-of-the-day/piss-you-made-me-skin-on-linen-review",
+   "d": "2026-11-06T14:20:15Z",
+   "x": "The Vancouver band channel their scholarly smarts and hardcore fury into an explosive treatise on patriarchy and rape culture. \n Read full story on the Bandcamp Daily .",
+   "f": "https://daily.bandcamp.com/feed",
+   "i": "https://f4.bcbits.com/img/0048396366_10.jpg"
+  },
+  {
+   "s": "bandcamp",
+   "k": "news",
+   "t": "Essential Releases, November 6, 2026",
+   "u": "https://daily.bandcamp.com/essential-releases/essential-releases-november-6-2026",
+   "d": "2026-11-06T14:19:59Z",
+   "x": "Experimental metal, experimental folk, holiday music, and more. \n Read full story on the Bandcamp Daily .",
+   "f": "https://daily.bandcamp.com/feed",
+   "i": "https://f4.bcbits.com/img/0048389614_10.jpg"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "Alan Pierson Takes Steve Reich’s ’18 Musicians’ On A Journey Through Time",
+   "u": "https://www.spinmagazine.com/2026/11/steve-reich-music-for-18-musicians-at-50/",
+   "d": "2026-11-06T14:03:25Z",
+   "x": "For half a century, Steve Reich’s Music for 18 Musicians has been a kind of perpetual motion machine: an intricately interlocking, endlessly renewable composition whose patterns shimmer and shift even as they circle back to where they began. For its 50th anniversary — and Reich’s 90th birthday — conductor/director Alan Pierson took that cyclical logic […]",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/11/Music-for-18-Musicians_20-1-scaled.jpg"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "Following the Family Ties",
+   "u": "https://www.spinmagazine.com/2026/11/following-the-family-ties/",
+   "d": "2026-11-06T14:00:00Z",
+   "x": "The roots of the new Kings of Leon album can be traced to a gnarly X-ray of singer Caleb Followill’s injured foot. The band has seen the evidence: an almost incomprehensible injury that grounded its frontman and sent him into a period of deep contemplation. Kings of Leon had already begun writing what would ultimately […]",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/11/KOL-OMB-Lead-Press-Photo-Photo-Credit-Josh-Goleman.jpeg"
+  },
+  {
+   "s": "clash",
+   "k": "album",
+   "t": "Cam Cole Unveils New Album ‘Lost In Creation’",
+   "u": "https://www.clashmusic.com/news/cam-cole-unveils-new-album-lost-in-creation/",
+   "d": "2026-11-06T13:59:03Z",
+   "x": "Cam Cole has dropped his latest album ‘Lost In Creation,’ released via New Age Records UK. Locked into the creative process, the one-man-band unpacks his journey over ten tracks, surrendering to self-expression and utilising his craft as a means to escapism. The result is a weighty, revelatory body of work…",
+   "f": "https://www.clashmusic.com/feed/",
+   "a": "Cam Cole",
+   "w": "Lost In Creation"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Angine de Poitrine Debut Third Member On Triangle",
+   "u": "https://stereogum.com/2516720/angine-de-poitrine-debut-third-member-on-triangle/news/",
+   "d": "2026-11-06T13:54:28Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Angine.jpg?w=200"
+  },
+  {
+   "s": "guardian",
+   "k": "news",
+   "t": "Post your questions for folk music legend Judy Collins",
+   "u": "https://www.theguardian.com/music/2026/nov/06/post-your-questions-for-folk-music-legend-judy-collins",
+   "d": "2026-11-06T13:48:38Z",
+   "x": "Ahead of her farewell UK concert next year, the 87-year-old singer-songwriter will join us to answer your questions She has lived an extraordinary life at the forefront of US folk music, but at the age of 87, Judy Collins is getting ready to retire from touring. Her farewell UK concert at the London Palladium is approaching, and ahead of that she’ll join us to answer your questions. Born in Seattl",
+   "f": "https://www.theguardian.com/music/rss",
+   "i": "https://i.guim.co.uk/img/media/fb200bf2dfbec9921d0b158676b1f8b40dfb2914/1173_289_2516_2013/master/2516.jpg?width=140&quality=85&auto=format&fit=max&s=d23a3adec76209b72521ae57e1cb1a54"
+  },
+  {
+   "s": "clash",
+   "k": "album",
+   "t": "Materazi Future Club Unveil New Album ‘THE ITALIAN JOB’",
+   "u": "https://www.clashmusic.com/news/materazi-future-club-unveil-new-album-the-italian-job/",
+   "d": "2026-11-06T13:31:00Z",
+   "x": "Materazi Future Club have shared their latest full-length LP, ’THE ITALIAN JOB’, out today via Woodworm Publishing SRL/ Universal Music Italia. Leaping over the sophomore slump, the Milan-based trio bounce back with a punchy, rough-round-the-edges grit that speaks to football mania. Across nine tracks, the outfit merges post-punk with forward-thinking… \n The post Materazi Future Club Unveil New Al",
+   "f": "https://www.clashmusic.com/feed/",
+   "a": "Materazi Future Club",
+   "w": "THE ITALIAN JOB"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "Deep Cut Friday: “I Must Not Think Bad Thoughts” by X",
+   "u": "https://www.spinmagazine.com/2026/11/deep-cut-friday-i-must-not-think-bad-thoughts-by-x/",
+   "d": "2026-11-06T13:30:00Z",
+   "x": "Each week, SPIN digs into the catalogs of great artists and highlights songs you might not know for our Deep Cut Friday series. X’s fourth album More Fun in the New World featured some of the band’s most overtly political songs, and the Los Angeles punk quartet placed themselves explicitly in the lineage of Woody […]",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/08/GettyImages-1388817213.jpg"
+  },
+  {
+   "s": "nme",
+   "k": "news",
+   "t": "Geese’s Emily Green and Sunflower Bean’s Olive Faber return as Star’s Revenge with new album and breezy single ‘Don’t Worry Dynamite’",
+   "u": "https://www.nme.com/news/music/geeses-emily-green-and-sunflower-beans-olive-faber-return-as-stars-revenge-new-single-announce-album-listen-3975261",
+   "d": "2026-11-06T13:04:21Z",
+   "x": "'Star's Revenge II', an \"intensely loud record for quiet people\", arrives later this month",
+   "f": "https://www.nme.com/news/music/feed",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/StarsRevengenewalbumsingle-news-400x254.jpg"
+  },
+  {
+   "s": "guardian",
+   "k": "news",
+   "t": "‘I went into a deep, deep hole’: Wynonna Judd on overcoming family tragedy and putting a lifetime of love and pain into her new album",
+   "u": "https://www.theguardian.com/music/2026/nov/06/wynonna-judd-country-music-interview-naomi-hard-truth-new-album",
+   "d": "2026-11-06T13:00:43Z",
+   "x": "The country star has abandoned Nashville slickness for a set of raw, pared-back songs that reckon with the death of her mother and decades of personal struggles. ‘This is a labour of love,’ she says When Wynonna Judd appears on my laptop screen – hair a deep shade of crimson, makeup perfect and sporting a huge black baseball cap with Kentucky Queen spelt out across its brim – she looks both fabulo",
+   "f": "https://www.theguardian.com/music/rss",
+   "i": "https://i.guim.co.uk/img/media/bf2282b2f9dd44e11e836e0f1ba7bf50d1869d0f/1619_1323_6266_5013/master/6266.jpg?width=140&quality=85&auto=format&fit=max&s=e35c745010bca50b844a6bb74e886ab2"
+  },
+  {
+   "s": "diy",
+   "k": "news",
+   "t": "walt disco: Brave New World",
+   "u": "https://diymag.com/interview/walt-disco-brave-new-world",
+   "d": "2026-11-06T13:00:00Z",
+   "x": "With their self-titled third LP, Glasgow’s walt disco have found their true form. After years of uncertainty and doubt, they open up about transition, reinvention and transforming vulnerability into agency.",
+   "f": "https://diymag.com/feed",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/W/Walt-Disco/_1500x1000_crop_center-center_100_line/Walt-Disco-May2026-pc-Celia-Croft.jpg"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "5 Albums I Can’t Live Without: John Andrew Fredrick of the Black Watch",
+   "u": "https://www.spinmagazine.com/2026/11/5-albums-i-cant-live-without-john-andrew-fredrick-of-the-black-watch/",
+   "d": "2026-11-06T13:00:00Z",
+   "x": "Name  John Andrew Fredrick Best known for  No musical hiatus—best-kept indie secret since 1988. Current City  Los Angeles, California. Really want to be in  London, UK—Hampstead, to be more specific—reading in one of the few quiet pubs left after scoring some new vintage Penguin Classics in the used book shops where the clerks start salivating seeing me come through. […]",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/11/BLACK-WATCH-BY-BREN-HOLMES.jpg"
+  },
+  {
+   "s": "clash",
+   "k": "news",
+   "t": "Next Wave #1216: Bathing Suits",
+   "u": "https://www.clashmusic.com/next-wave/next-wave-1216-bathing-suits/",
+   "d": "2026-11-06T12:57:54Z",
+   "x": "Bathing Suits are potentially the fastest-rising band in the U.K., which is no surprise to anyone who has seen them live. Having formed in Leeds in 2024, Bathing Suits have been on an incredible rise, from being one of the most talked-about bands in Leeds’ DIY scene, to becoming a…",
+   "f": "https://www.clashmusic.com/feed/"
+  },
+  {
+   "s": "quietus",
+   "k": "news",
+   "t": "English Folk Dance and Song Society Changes Name",
+   "u": "https://thequietus.com/news/english-folk-dance-and-song-society-name-change-folk-england/",
+   "d": "2026-11-06T12:46:45Z",
+   "x": "It marks a major shift as the organisation approaches its centenary \n Cecil Sharp House \n The English Folk Dance and Song Society has formally changed its trading name to Folk England, a decision it says aligns with a mission to \"make folk music, song, and dance inclusive for all.\" \n Founded in 1932 following the merger of the Folk-Song Society and the English Folk Dance Society, the decision repr",
+   "f": "https://thequietus.com/feed",
+   "i": "https://thequietus.com/app/uploads/2026/11/Cecil-Sharp-House-featuring-old-EFDSS-sign-700x466.jpg"
+  },
+  {
+   "s": "clash",
+   "k": "album",
+   "t": "Katie Gregson-MacLeod Shares Debut Album ‘Albatross’",
+   "u": "https://www.clashmusic.com/news/katie-gregson-macleod-shares-debut-album-albatross/",
+   "d": "2026-11-06T12:46:18Z",
+   "x": "Scottish singer-songwriter Katie Gregson-MacLeod has released her debut album ‘Albatross’. The 25-year-old Scottish singer-songwriter gained traction on TikTok in 2021 with her song ‘Complex’. She is now working independently releasing the album via Matt Maltese’s Last Recordings on Earth. The album takes influence from Samuel Taylor Coleridge’s The Rime of… \n The post Katie Gregson-MacLeod Shares",
+   "f": "https://www.clashmusic.com/feed/",
+   "a": "Katie Gregson-MacLeod",
+   "w": "Albatross"
+  },
+  {
+   "s": "clash",
+   "k": "news",
+   "t": "Emma-Jean Thackray Reinterprets Miles Davis’ ‘Tutu’",
+   "u": "https://www.clashmusic.com/news/emma-jean-thackray-reinterprets-miles-davis-tutu/",
+   "d": "2026-11-06T12:36:44Z",
+   "x": "Emma-Jean Thackray has shared her interpretation of Miles Davis’ ‘Tutu’. The Mercury Prize-nominated musician has long sought inspiration in the work of the mercurial trumpeter, with Emma-Jean Thackray deciding to go deep on a new project. Out now as a limited edition vinyl release, ‘Dear Miles: A Love Letter’ will…",
+   "f": "https://www.clashmusic.com/feed/"
+  },
+  {
+   "s": "clash",
+   "k": "news",
+   "t": "Getting Muddy With Remi Wolf",
+   "u": "https://www.clashmusic.com/features/getting-muddy-with-remi-wolf/",
+   "d": "2026-11-06T12:34:05Z",
+   "x": "Two things are clearly of vital importance to Remi Wolf: her family and making the perfect chilli. One’s secret ingredient is a healthy dose of Coca-Cola, the other is composed of blood relations and bonds formed throughout her career. Wolf spent the previous evening in an unusually rainy LA, trick-or-treating…",
+   "f": "https://www.clashmusic.com/feed/"
+  },
+  {
+   "s": "nme",
+   "k": "news",
+   "t": "Pete Doherty announces 2027 UK tour",
+   "u": "https://www.nme.com/news/music/pete-doherty-announces-2027-uk-tour-buy-tickets-3975233",
+   "d": "2026-11-06T12:23:01Z",
+   "x": "The new line-up for his solo band features The Smiths' Mike Joyce",
+   "f": "https://www.nme.com/news/music/feed",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/PeteDohertyUKtourannounced-news-400x254.jpg"
+  },
+  {
+   "s": "diy",
+   "k": "news",
+   "t": "The Neu Bulletin (Silver Gore, 1000 Rabbits, Dermot Henry)",
+   "u": "https://diymag.com/feature/the-neu-bulletin-silver-gore-1000-rabbits-dermot-henry",
+   "d": "2026-11-06T12:22:00Z",
+   "x": "DIY’s essential guide to the best new music.",
+   "f": "https://diymag.com/feed",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/S/Silver-Gore/_1500x1000_crop_center-center_100_line/Silver-Gore-Nov26-PC-Charlie-Drinkwater.jpg"
+  },
+  {
+   "s": "guardian",
+   "k": "news",
+   "t": "The week’s best new tracks and the act you need to know: crowd-pleasing anticapitalist rockers Sans Froid",
+   "u": "https://www.theguardian.com/music/2026/nov/06/the-weeks-best-new-tracks-and-the-act-you-need-to-know-crowd-pleasing-anticapitalist-rockers-sans-froid",
+   "d": "2026-11-06T12:20:41Z",
+   "x": "Inspired by everything from Radiohead to Deerhoof and Linda Perhacs, the west country band merge disparate styles into solid anthems From Bristol, UK\n \n\n Recommended if you like Puscifer, Julie Christmas, the Mars Volta\n \n\n Up next Supporting Every Hell at Bristol’s Exchange, 4 December; playing UK festivals Strangeforms, Noizzefest and Arctangent in 2027 Even a cursory scroll through Sans Froid’s",
+   "f": "https://www.theguardian.com/music/rss",
+   "i": "https://i.guim.co.uk/img/media/417fa536a93fdbd8ee3fb7f53e5ba30169579a5c/985_220_3925_3140/master/3925.jpg?width=140&quality=85&auto=format&fit=max&s=2b73df7841c0c9ae041da63d19c735ea"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Joy And Kim Hyun Jin Talk About Their Roles And Heart-Fluttering Romance In “One Of A Kind Romance”",
+   "u": "https://www.soompi.com/article/1884753wpp/joy-and-kim-hyun-jin-talk-about-their-roles-and-heart-fluttering-romance-in-one-of-a-kind-romance",
+   "d": "2026-11-06T12:04:44Z",
+   "x": "Joy and Kim Hyun Jin have shared their thoughts on working together in the upcoming romance drama “One of a Kind Romance”! Based on a webtoon, “One of a Kind Romance” follows Gong Yu Il (Red Velvet’s Joy), an ordinary woman on the job hunt who unexpectedly becomes the manager of Tak Mu I (Kim… Continue reading Joy And Kim Hyun Jin Talk About Their Roles And Heart-Fluttering Romance In “One Of A Ki",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "clash",
+   "k": "news",
+   "t": "Live Report: My Chemical Romance’s Halloween Show At The Hollywood Bowl",
+   "u": "https://www.clashmusic.com/live/live-report-my-chemical-romances-halloween-show-at-the-hollywood-bowl/",
+   "d": "2026-11-06T11:54:22Z",
+   "x": "Following three sold-out nights at Wembley Stadium and a huge stadium tour of the United States, My Chemical Romance continued their 20th anniversary celebrations of The Black Parade with a historic run at the Hollywood Bowl. The legendary band became the first band to headline a five-night residency at the… \n The post Live Report: My Chemical Romance’s Halloween Show At The Hollywood Bowl appeare",
+   "f": "https://www.clashmusic.com/feed/"
+  },
+  {
+   "s": "nme",
+   "k": "news",
+   "t": "Grimes making film debut in entirely AI-generated ‘Gods Don’t Give Gifts’",
+   "u": "https://www.nme.com/news/film/grimes-acting-film-debut-ai-generated-gods-dont-give-gifts-3975235",
+   "d": "2026-11-06T11:38:25Z",
+   "x": "The singer will play a futuristic aristocrat in the sci-fi anthology",
+   "f": "https://www.nme.com/news/music/feed",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/Grimes-Coachella-2026-400x254.jpg"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Watch: ILLIT Takes 1st Win For “You’re Under Arrest” On “Music Bank”; Performances By RESCENE, TWS, And More",
+   "u": "https://www.soompi.com/article/1884749wpp/watch-nmixx-takes-1st-win-for-birthday-wish-on-music-bank-performances-by-ateez-illit-and-more-2",
+   "d": "2026-11-06T11:33:42Z",
+   "x": "ILLIT has won their first music show trophy for “You’re Under Arrest”! On the November 6 episode of “Music Bank,” the candidates for first place were IVE’s “Looks Can Kill” and ILLIT’s “You’re Under Arrest.” ILLIT ultimately took the prize with a total of 9,803 points. Congratulations to ILLIT! Watch the winner announcement below: Performers… Continue reading Watch: ILLIT Takes 1st Win For “You’re",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "clash",
+   "k": "news",
+   "t": "Slayyyter’s ‘hey boyyy’ Is Deeply Infectious",
+   "u": "https://www.clashmusic.com/news/slayyyters-hey-boyyy-is-deeply-infectious/",
+   "d": "2026-11-06T11:24:53Z",
+   "x": "Slayyyter has shared her new single ‘hey boyyy’. It’s been a mammoth year for the pop star, whose chaotic energy turned her album ‘WOR$T GIRL IN AMERICA’ into a phenomenon. Selling out New York’s iconic Madison Square Garden in a matter of hours, Slayyyter completes her year with upcoming project…",
+   "f": "https://www.clashmusic.com/feed/"
+  },
+  {
+   "s": "nme",
+   "k": "news",
+   "t": "Billie Eilish dressed as Noodle from Gorillaz for Halloween",
+   "u": "https://www.nme.com/news/music/billie-eilish-dressed-as-noodle-from-gorillaz-for-halloween-3975210",
+   "d": "2026-11-06T11:22:59Z",
+   "x": "The singer has previously praised the band and performed 'Feel Good Inc.' with Damon Albarn",
+   "f": "https://www.nme.com/news/music/feed",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/GorillazNoodleBillieEilishcostume-news-story-400x254.jpg"
+  },
+  {
+   "s": "clash",
+   "k": "album",
+   "t": "Ojerime Unveils New EP ‘Don’t Stare At The Flame’",
+   "u": "https://www.clashmusic.com/news/ojerime-unveils-new-ep-dont-stare-at-the-flame/",
+   "d": "2026-11-06T11:06:42Z",
+   "x": "UK R&B artist Ojerime today shares her brand new EP, ‘Don’t Stare At The Flame’. Since emerging pre-pandemic, Ojerime has reconfigured classic R&B tropes into a grittier, homegrown brew. The 8-track EP ‘Don’t Stare At The Flame’ – her first project since 2023 project ‘Interludes’ – more faithfully leans into ’90s soul…",
+   "f": "https://www.clashmusic.com/feed/",
+   "a": "Ojerime",
+   "w": "Don"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Yoon Kyun Sang Is A Fierce Commander And Claudia Kim’s First Love In “Sacred Jewel”",
+   "u": "https://www.soompi.com/article/1884742wpp/yoon-kyun-sang-is-a-fierce-commander-and-claudia-kims-first-love-in-sacred-jewel",
+   "d": "2026-11-06T10:29:11Z",
+   "x": "Actor Yoon Kyun Sang is making his return to the small screen after four years in the upcoming JTBC drama “Sacred Jewel”! “Sacred Jewel” is set in the year 1258 during the Goryeo Dynasty, when the kingdom is on the brink of defeat after 30 years of war with Mongolia. The story follows the heroic… Continue reading Yoon Kyun Sang Is A Fierce Commander And Claudia Kim’s First Love In “Sacred Jewel”",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "nme",
+   "k": "news",
+   "t": "Jamiroquai announce 2027 European arena tour including three nights at The O2",
+   "u": "https://www.nme.com/news/music/jamiroquai-announce-2027-uk-european-arena-tour-london-o2-buy-tickets-3975198",
+   "d": "2026-11-06T10:24:39Z",
+   "x": "Jay Kay and co's first album in 10 years is incoming",
+   "f": "https://www.nme.com/news/music/feed",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/JamiroquaiUKEuropeantourannounced-news-400x254.jpg"
+  },
+  {
+   "s": "nme",
+   "k": "song",
+   "t": "Olivia Rodrigo shares festive single ‘Take Me Home (4 Christmas)’ with video starring ‘Sex And The City’s Cynthia Nixon and Ben Marshall from ‘SNL’",
+   "u": "https://www.nme.com/news/music/olivia-rodrigo-releases-new-festive-single-take-me-home-4-christmas-video-starring-cynthia-nixon-watch-3975188",
+   "d": "2026-11-06T09:50:11Z",
+   "x": "The clip finds the singer loved up and hungover after a big holiday party",
+   "f": "https://www.nme.com/news/music/feed",
+   "a": "Olivia Rodrigo",
+   "w": "Take Me Home (4 Christmas)",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/OliviaRodrigoChristmassongrelease-news-400x254.jpg"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Kim You Jung And Park Jinyoung Finally Embrace Their Feelings As Kim Hyun Joo And Lee Moo Saeng Keep Theirs Hidden In “100 Days Of Deception”",
+   "u": "https://www.soompi.com/article/1884732wpp/kim-you-jung-and-park-jinyoung-finally-embrace-their-feelings-as-kim-hyun-joo-and-lee-moo-saeng-keep-theirs-hidden-in-100-days-of-deception",
+   "d": "2026-11-06T09:45:34Z",
+   "x": "“100 Days of Deception” has unveiled two new special posters! Set during the Japanese occupation of Korea, tvN’s “100 Days of Deception” is a period spy romance starring Kim You Jung as Lee Ga Kyeong, a pickpocket who becomes an undercover spy for the independence movement and infiltrates the Japanese Government-General of Korea. There, she… Continue reading Kim You Jung And Park Jinyoung Finally",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "quietus",
+   "k": "news",
+   "t": "Into The Risk Area: Factory Floor Interviewed",
+   "u": "https://thequietus.com/interviews/factory-floor-interview-2/",
+   "d": "2026-11-06T09:38:01Z",
+   "x": "Jim Osman talks to a newly revitalised Factory Floor on the eve of the release of their first album in ten years, One Trip. All portraits: Harry Ward \n One Trip by Factory Floor \n What catches Nik Colk Void’s eye is not the dramatic landscape itself but evidence that somebody has been there before her: tape torn from a wall, scratches in a surface, cables worn through years of use. She finds a sim",
+   "f": "https://thequietus.com/feed",
+   "i": "https://thequietus.com/app/uploads/2026/11/Screenshot-2026-11-04-at-10.55.41-2-700x466.jpg"
+  },
+  {
+   "s": "guardian",
+   "k": "news",
+   "t": "Enrico Rava Fearless Five with Joe Lovano: Corners review | John Fordham's jazz album of the month",
+   "u": "https://www.theguardian.com/music/2026/nov/06/enrico-rava-fearless-five-with-joe-lovano-corners-review-miles-davis",
+   "d": "2026-11-06T09:30:48Z",
+   "x": "(ECM)\n The Italian trumpeter’s group – featuring an old friend – rip through originals and free improvisation while balancing late-Miles funk with excellent vocals and horn ballads Miles Davis was the gamechanger behind at least three landmark transformations in jazz-making methods between the late 1940s and the 1960s – yet he was perhaps too instinctively lyrical, and too worldly, to take the fre",
+   "f": "https://www.theguardian.com/music/rss",
+   "i": "https://i.guim.co.uk/img/media/2420f40eefd1adb04b1dae0b7cc0d8e764db4645/488_5_6417_5133/master/6417.jpg?width=140&quality=85&auto=format&fit=max&s=d496ec7ef0d31f15be3a07154bda036d"
+  },
+  {
+   "s": "nme",
+   "k": "album",
+   "t": "Shygirl – Swallow!",
+   "u": "https://www.nme.com/reviews/album/shygirl-swallow-review-3975181",
+   "d": "2026-11-06T09:30:41Z",
+   "x": "A dreamy, guitar-heavy return from the pop experimentalist",
+   "f": "https://www.nme.com/reviews/album/feed",
+   "a": "Shygirl",
+   "w": "Swallow!",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/Shygirl-Credit-Jessica-Madavo-400x254.jpeg"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "7 K-Dramas With Electrifying Romantic Chemistry",
+   "u": "https://www.soompi.com/article/1884060wpp/7-k-dramas-with-electrifying-romantic-chemistry",
+   "d": "2026-11-06T09:20:23Z",
+   "x": "Some K-drama couples have a way of making your heart race with every glance, touch, and interaction. Whether it’s the undeniable attraction, intense tension, or the way they look at each other, these couples bring a whole new level of excitement to their romances. Here are some K-dramas with romantic chemistry between leads that will… Continue reading 7 K-Dramas With Electrifying Romantic Chemistr",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Watch: Park Min Young And Yook Sungjae Preview Their Chemistry On Set Of “Nine To Six”",
+   "u": "https://www.soompi.com/article/1884715wpp/watch-park-min-young-and-yook-sungjae-preview-their-chemistry-on-set-of-nine-to-six",
+   "d": "2026-11-06T09:06:16Z",
+   "x": "“Nine to Six” has released a new teaser previewing lively behind-the-scenes moments! “Nine to Six” is a romance drama starring Park Min Young as Kang Ji Yi, a workaholic who has long put her love life on the back burner due to her intense focus on work. After meeting the thoughtful and warm-hearted Han Seon… Continue reading Watch: Park Min Young And Yook Sungjae Preview Their Chemistry On Set Of",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "THE BOYZ’s Younghoon And WJSN’s Luda Bring Modern Tech To The Joseon Era In “Wi-Fi Love In The Palace”",
+   "u": "https://www.soompi.com/article/1884722wpp/the-boyzs-younghoon-and-wjsns-luda-bring-modern-tech-to-the-joseon-era-in-wi-fi-love-in-the-palace",
+   "d": "2026-11-06T08:55:00Z",
+   "x": "The upcoming romantic comedy film “Wi-Fi Love in the Palace” has unveiled its main poster! Based on a webtoon, “Wi-Fi Love in the Palace” is a time-crossing romantic comedy about Tae Pung (THE BOYZ’s Younghoon), a webtoon artist who finds himself giving romance advice to So Hyang (WJSN’s Luda), a court lady from the Joseon… Continue reading THE BOYZ’s Younghoon And WJSN’s Luda Bring Modern Tech To",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "quietus",
+   "k": "news",
+   "t": "45 Years On: OMD’s Architecture & Morality Remembered",
+   "u": "https://thequietus.com/opinion-and-essays/anniversary/omd-architecture-morality-review/",
+   "d": "2026-11-06T08:36:03Z",
+   "x": "Orchestral Manoeuvres In The Dark released one of the Quietus' favourite albums in 1981. John Doran reflects on the warmth of Architecture & Morality and talks to Andy McCluskey \n A lazy but widespread criticism of the English synth pop scene of the early 80s was that it was soulless or lacking in human warmth. While there certainly were acts who came across as detached or alienated (Cabaret Volta",
+   "f": "https://thequietus.com/feed",
+   "i": "https://thequietus.com/app/uploads/2026/11/OMD-Architecture-and-Morality-album-cover-820.jpg-300x300.webp"
+  },
+  {
+   "s": "rollingstone",
+   "k": "song",
+   "t": "Jennie Celebrates Sisterhood on Anthemic Pop Single ‘Someone to Hold’",
+   "u": "https://www.rollingstone.com/music/music-news/jennie-someone-to-hold-single-steps-netflix-1235653812/",
+   "d": "2026-11-06T08:32:27Z",
+   "x": "The rousing track will appear in forthcoming Netflix animated film Steps",
+   "f": "https://www.rollingstone.com/music/music-news/feed/",
+   "a": "Jennie",
+   "w": "Someone to Hold"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Seo Hyun Jin Confronts Yoo Yeon Seok As Their Battle Over The Truth Intensifies In “The Perfect Lie”",
+   "u": "https://www.soompi.com/article/1884716wpp/seo-hyun-jin-confronts-yoo-yeon-seok-as-their-battle-over-the-truth-intensifies-in-the-perfect-lie",
+   "d": "2026-11-06T08:31:41Z",
+   "x": "MBC’s “The Perfect Lie” has unveiled new stills ahead of tonight’s new episode! Helmed by “You and Everything Else” director Jo Young Min, “The Perfect Lie” is a psychological thriller in which a man and a woman offer completely opposite accounts of the same memory, clashing fiercely in their search for the truth. Spoilers Previously,… Continue reading Seo Hyun Jin Confronts Yoo Yeon Seok As Their",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "guardian",
+   "k": "news",
+   "t": "La Roux: Old Flames review – a breezy, hook-packed twist on a breakup album",
+   "u": "https://www.theguardian.com/music/2026/nov/06/la-roux-old-flames-review",
+   "d": "2026-11-06T08:30:47Z",
+   "x": "(Vertigo)\n Devastating moments are dressed up with warm production and kinetic 00s R&B in the now quiff-less singer’s grownup fourth album Over the six years that La Roux, AKA Elly Jackson, was making her fourth album, the singer ended a 17-year relationship, confronted her weed dependency, received autism and ADHD diagnoses and lopped off her signature Johnny Bravo-esque quiff. One might expect t",
+   "f": "https://www.theguardian.com/music/rss",
+   "i": "https://i.guim.co.uk/img/media/2145e975fe4f3978627a84de10a41e60aca5d6be/841_384_6185_4948/master/6185.jpg?width=140&quality=85&auto=format&fit=max&s=d1e13984de14a187987d69105055fa41"
+  },
+  {
+   "s": "quietus",
+   "k": "news",
+   "t": "Reissue of the Week: Henning Christiansen’s Symphony Natura",
+   "u": "https://thequietus.com/quietus-reviews/reissue-of-the-week/henning-christiansen-symphony-natura-review/",
+   "d": "2026-11-06T08:30:00Z",
+   "x": "Why Listen to Animals? asks Francis Gooding after immersing himself in some questionable musique concrète \n Symphony Natura by Henning Christiansen and Lorenzo Mammi \n \"The zoo\", wrote John Berger in a 1977 essay called 'Why Look At Animals?', \"cannot but disappoint\". The purpose of the visit is to see the animals, to look at them, but the animals always avoid being seen: they are bunched up at th",
+   "f": "https://thequietus.com/feed",
+   "i": "https://thequietus.com/app/uploads/2026/11/a4259900867_10-700x466.jpg"
+  },
+  {
+   "s": "nme",
+   "k": "news",
+   "t": "Why are veteran acts turning their backs on touring – and what hope is there for new artists?",
+   "u": "https://www.nme.com/news/music/why-veteran-established-artists-quit-touring-new-artist-help-3975004",
+   "d": "2026-11-06T08:00:51Z",
+   "x": "With the likes of Frank Turner and Enter Shikari calling hiatuses, and Garbage winding down how they tour, NME talks to gigging veterans, industry bosses and rising acts about the “clusterfuck” of obstacles stopping artists getting on stage, and what can be done",
+   "f": "https://www.nme.com/news/music/feed",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/touring_crisis_piece-400x254.jpg"
+  },
+  {
    "s": "nme",
    "k": "album",
    "t": "Royal Blood – Dead Company",
    "u": "https://www.nme.com/reviews/album/royal-blood-dead-company-review-3975176",
    "d": "2026-11-06T08:00:10Z",
    "x": "Brighton riff lords flex their massive muscles",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "Royal Blood",
    "w": "Dead Company",
    "i": "https://www.nme.com/wp-content/uploads/2026/11/royal-blood-credit-Edward-Cooke-400x254.jpeg"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Gong Seung Yeon Unveils Stunning New Profile Photos",
+   "u": "https://www.soompi.com/article/1884702wpp/gong-seung-yeon-unveils-stunning-new-profile-photos",
+   "d": "2026-11-06T07:53:35Z",
+   "x": "Gong Seung Yeon has unveiled new profile photos! On November 6, VARO Entertainment shared five new profile photos of Gong Seung Yeon. The stunning profile photos highlight simplicity, conveying the actress’s elegance through simple styling and various hairstyles. Check out the profile photos below! Watch Gong Seung Yeon in “Flower Crew: Joseon Marriage Agency” below:… Continue reading Gong Seung Y",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Choi Woo Shik’s Agency Warns Legal Action Against Malicious Posts",
+   "u": "https://www.soompi.com/article/1884685wpp/choi-woo-shiks-agency-warns-legal-action-against-malicious-posts",
+   "d": "2026-11-06T07:40:24Z",
+   "x": "Actor Choi Woo Shik’s agency has warned strong legal action against malicious rumors. On November 6, his agency FABLE COMPANY announced through their official social media that they will take legal action against those who spread malicious posts. Hello, this is FABLE COMPANY. We are writing to address the recent spread of false information regarding… Continue reading Choi Woo Shik’s Agency Warns L",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Slayyyter Goes Looking for Love in ‘Hey Boyyy’ Music Video",
+   "u": "https://www.rollingstone.com/music/music-news/slayyyter-hey-boyyy-single-music-video-1235653808/",
+   "d": "2026-11-06T07:39:25Z",
+   "x": "The track will appear on the singer's forthcoming album, Wor$t Man in America",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Son Hyun Joo Presses Lee Jung Eun About Kim Ji Won’s True Identity In “Doctor X”",
+   "u": "https://www.soompi.com/article/1884684wpp/son-hyun-joo-presses-lee-jung-eun-about-kim-ji-wons-true-identity-in-doctor-x",
+   "d": "2026-11-06T07:36:51Z",
+   "x": "“Doctor X” has unveiled a glimpse of Son Hyun Joo’s confrontation with Lee Jung Eun! Based on the hit Japanese series of the same name, SBS’s “Doctor X” is a medical noir drama starring Kim Ji Won as Gye Soo Jung, a genius surgeon who proves what it truly means to be a doctor through… Continue reading Son Hyun Joo Presses Lee Jung Eun About Kim Ji Won’s True Identity In “Doctor X” \n The post Son H",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Watch: Yim Si Wan, Seol In Ah, And More Show Playful And Close Chemistry On Set Of “Love In Disguise”",
+   "u": "https://www.soompi.com/article/1884613wpp/watch-yim-si-wan-seol-in-ah-and-more-show-playful-and-close-chemistry-on-set-of-love-in-disguise",
+   "d": "2026-11-06T07:34:56Z",
+   "x": "tvN’s “Love in Disguise” has shared a new making-of video for episodes 5 and 6! The making-of video highlights the bright atmosphere on set. Seol In Ah explains the concept of how to film a making-of video to Yim Si Wan, encouraging him to greet his fans. Yim Si Wan and Seol In Ah also… Continue reading Watch: Yim Si Wan, Seol In Ah, And More Show Playful And Close Chemistry On Set Of “Love In Dis",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Lee Min Ki And His T.C.I. Team Take On A New Case With Newest Member Jisung In “Crash 2”",
+   "u": "https://www.soompi.com/article/1884663wpp/lee-min-ki-and-his-t-c-i-team-take-on-a-new-case-with-newest-member-jisung-in-crash-2",
+   "d": "2026-11-06T07:07:19Z",
+   "x": "“Crash 2” has unveiled new stills featuring the members of its T.C.I. team! “Crash 2” is the second installment of the hit 2024 drama “Crash,” which made history as the first Korean drama to focus on traffic crime investigations. In “Crash 2,” the Traffic Crime Investigation (T.C.I.) team from Namgang Police Station evolves into a… Continue reading Lee Min Ki And His T.C.I. Team Take On A New Case",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Seo Hyun Jin Sneaks Into Yoo Yeon Seok’s House To Look For Evidence In “The Perfect Lie”",
+   "u": "https://www.soompi.com/article/1884618wpp/seo-hyun-jin-sneaks-into-yoo-yeon-seoks-house-to-look-for-evidence-in-the-perfect-lie",
+   "d": "2026-11-06T07:02:29Z",
+   "x": "MBC’s “The Perfect Lie” has unveiled new stills ahead of tonight’s new episode! Helmed by “You and Everything Else” director Jo Young Min, “The Perfect Lie” is a psychological thriller in which a man and a woman offer completely opposite accounts of the same memory, clashing fiercely in their search for the truth. Spoilers While… Continue reading Seo Hyun Jin Sneaks Into Yoo Yeon Seok’s House To L",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "7 K-Pop Tracks With Harmonies So Beautiful They’ll Give You Goosebumps",
+   "u": "https://www.soompi.com/article/1884517wpp/7-k-pop-tracks-with-harmonies-so-beautiful-theyll-give-you-goosebumps",
+   "d": "2026-11-06T06:52:43Z",
+   "x": "Vocal harmonies might not be something typically associated with the K-pop genre, but that doesn’t mean that these groups don’t know how to get it right! The perfect harmony is something that will give you goosebumps every time you hear them—and these songs prove it. Get ready to hear the most angelic playlist you’ve ever… Continue reading 7 K-Pop Tracks With Harmonies So Beautiful They’ll Give Yo",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "Kim Ji Won Risks It All With An Impossible Surgery In Desperate Bid To Save Child Patient In “Doctor X”",
+   "u": "https://www.soompi.com/article/1884622wpp/kim-ji-won-risks-it-all-with-an-impossible-surgery-in-desperate-bid-to-save-child-patient-in-doctor-x",
+   "d": "2026-11-06T06:33:51Z",
+   "x": "“Doctor X” has unveiled new stills ahead of its upcoming episode. Based on the hit Japanese series of the same name, SBS’s “Doctor X” is a medical noir drama starring Kim Ji Won as Gye Soo Jung, a genius surgeon who proves what it truly means to be a doctor through pure skill alone as… Continue reading Kim Ji Won Risks It All With An Impossible Surgery In Desperate Bid To Save Child Patient In “Do",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Lil Baby, JENNIE, Dove Cameron, XG, Boys Noize & More: New Music Friday Guide",
+   "u": "https://www.billboard.com/music/music-news/lil-baby-jennie-dove-cameron-new-music-friday-guide-1236374328/",
+   "d": "2026-11-06T06:16:41Z",
+   "x": "Check out the must-hear releases of the week.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/"
+  },
+  {
+   "s": "quietus",
+   "k": "news",
+   "t": "Rizan Said – Ma Waraa Al-Shaabi (ما وراء الشعبي) / Beyond Shaabi",
+   "u": "https://thequietus.com/quietus-reviews/rizan-said/",
+   "d": "2026-11-06T06:00:00Z",
+   "x": "Rizan Said \n Ma Waraa Al-Shaabi (ما وراء الشعبي) / Beyond Shaabi \n On his third solo outing, Syrian keyboard king Rizan Said preserves regional musical traditions by driving them forward \n Ma Waraa Al-Shaabi (ما وراء الشعبي) – Beyond Shaabi by Rizan Said \n Despite the fact that I have only been to two weddings in my entire life, I have actually been to a Syrian one. Meridian Water, 2024, sometime",
+   "f": "https://thequietus.com/feed",
+   "i": "https://thequietus.com/app/uploads/2026/11/riza-said-beyond-shaabi.avif"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "tvN Announces December Premiere Date For “Signal” Season 2",
+   "u": "https://www.soompi.com/article/1884583wpp/tvn-announces-december-premiere-date-for-signal-season-2",
+   "d": "2026-11-06T05:57:04Z",
+   "x": "tvN has issued an official statement regarding the release date of Season 2 of “Signal.” “The Second Signal,” the long-awaited second season of the hit 2016 drama “Signal,” was originally scheduled to premiere in June for tvN’s 20th anniversary, but the show was put on hold due to star Cho Jin Woong’s controversy. In December… Continue reading tvN Announces December Premiere Date For “Signal” Seas",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Watch Slayyyter Date a Skeleton in New “Hey Boyyy” Video",
+   "u": "https://pitchfork.com/story/watch-slayyyter-date-a-skeleton-in-new-hey-boyyy-video/",
+   "d": "2026-11-06T05:20:22Z",
+   "x": "Including a romantic excursion on the Seine",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aecf5f9b0fa15a54106afd1/master/w_200,c_limit/img-f35e77d9-559b-43a4-84bf-d27635e2afa2.jpeg",
+   "v": 3
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Go Fishing With Twisted Teens in Video for “I Spend My Time Crying”",
+   "u": "https://pitchfork.com/story/go-fishing-with-twisted-teens-in-new-video-for-i-spend-my-time-crying/",
+   "d": "2026-11-06T05:18:01Z",
+   "x": "Their new album, The Holy Cross Tigers, is out today",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aecf3e7b0fa15a54106afbe/master/w_200,c_limit/TwistedTeens_2026_promo_18_MartinCrudo_2250x1500_300%20(4).jpg",
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -18,6 +636,7 @@
    "u": "https://pitchfork.com/reviews/albums/untitled-halo-untitled-halo/",
    "d": "2026-11-06T05:03:00Z",
    "x": "The Los Angeles band’s debut puts an appealing studio gloss on the sullen, ambiguous sound of cloud rock, and the mystery doesn’t go much deeper than that.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "untitled (halo)",
    "w": "untitled (halo)",
    "i": "https://media.pitchfork.com/photos/6aecc0946de58f9ada4bfd2a/master/w_200,c_limit/untitled%20(halo)%20-%20untitled%20(halo)%20album%20art.jpg",
@@ -31,6 +650,7 @@
    "u": "https://pitchfork.com/reviews/albums/laila-well-never-be-this-young-again/",
    "d": "2026-11-06T05:02:00Z",
    "x": "The New York songwriter and producer’s second album meditates on the passage of time, with immersive, lush songs that balance the optimism and anxiety of young adulthood.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Laila!",
    "w": "We’ll Never Be This Young Again",
    "i": "https://media.pitchfork.com/photos/6aecd91478d0dfa19820dd27/master/w_200,c_limit/Laila-We%E2%80%99ll%20Never%20Be%20This%20Young%20Again.jpg",
@@ -44,11 +664,22 @@
    "u": "https://pitchfork.com/reviews/albums/nomi-this-wolf-may-cry/",
    "d": "2026-11-06T05:01:00Z",
    "x": "The upcoming R&B singer’s debut is a showcase for unique beats with bedroom-pop intimacy, but her restrained vocal style keeps the feelings in reserve.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "nomi.",
    "w": "this wolf may cry",
    "i": "https://media.pitchfork.com/photos/6aecc416d1ad83d11d55727e/master/w_200,c_limit/nomi.%20-%20this%20wolf%20may%20cry%20album%20art.jpg",
    "sc": 6.2,
    "v": 3
+  },
+  {
+   "s": "guardian",
+   "k": "news",
+   "t": "‘It’s a new world. It’s a little fascistic. And it needs a different response’: U2 on 50 years together – and why Bono can’t work with Trump",
+   "u": "https://www.theguardian.com/music/2026/nov/06/its-a-new-world-its-a-little-fascistic-and-it-needs-a-different-response-u2-on-50-years-together-and-their-undimmed-faith-in-humanity",
+   "d": "2026-11-06T05:00:44Z",
+   "x": "After some so-so albums, can U2’s new one, Carnaval de Luz, restore them to glory? They discuss male egos, working with Dolly Parton, and explain why, despite Trump, they still believe in democracy – at least in their band La Petite Maison, in Nice, has a certain reputation as a five-star celebrity haunt. Beyoncé eats here. So do Elton John, Tom Cruise, Harry Styles and Leonardo DiCaprio, their me",
+   "f": "https://www.theguardian.com/music/rss",
+   "i": "https://i.guim.co.uk/img/media/d461f59fb9214d97e5aaa4575eb283294777e9c9/541_0_6830_5464/master/6830.jpg?width=140&quality=85&auto=format&fit=max&s=023af475c7d85b44ea2d708f35bb2c26"
   },
   {
    "s": "pitchfork",
@@ -57,11 +688,30 @@
    "u": "https://pitchfork.com/reviews/albums/gyrofield-great-jobs/",
    "d": "2026-11-06T05:00:00Z",
    "x": "The Hong Kong-born producer moves far beyond their drum’n’bass and club-music roots, twisting dubby pulses and psychedelic sound design into shapes both introspective and exploratory.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "gyrofield",
    "w": "Great Jobs",
    "i": "https://media.pitchfork.com/photos/6aeca9b677ca41c6e0456d40/master/w_200,c_limit/gyrofield%20-%20Great%20Jobs.jpg",
    "sc": 7.4,
    "v": 3
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "3 Points To Look Forward To In “What A Boss Wants”",
+   "u": "https://www.soompi.com/article/1884542wpp/3-points-to-look-forward-to-in-what-a-boss-wants",
+   "d": "2026-11-06T04:50:10Z",
+   "x": "The upcoming drama “What a Boss Wants” has shared three key points to look forward to! Based on a web novel, “What a Boss Wants” is a romance drama starring Sung Hoon as Kwon Do Hyuk, a chaebol boss with zero sense of taste who sets out to find a mysterious woman whose voice he… Continue reading 3 Points To Look Forward To In “What A Boss Wants” \n The post 3 Points To Look Forward To In “What A Bo",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "KATSEYE Postpones Chicago And Minneapolis Concerts",
+   "u": "https://www.soompi.com/article/1884547wpp/katseye-postpones-chicago-and-minneapolis-concerts",
+   "d": "2026-11-06T04:22:24Z",
+   "x": "Global girl group KATSEYE has postponed a series of their North American tour dates following a concussion diagnosis for member Megan. On November 5 (local time), KATSEYE’s agency announced the postponement of the Chicago and Minneapolis shows via the group’s official Instagram account. Read the full announcement below: Megan took to her Instagram to share… Continue reading KATSEYE Postpones Chica",
+   "f": "https://www.soompi.com/feed"
   },
   {
    "s": "consequence",
@@ -70,16 +720,58 @@
    "u": "https://consequence.net/2026/11/hyukoh-announce-new-album-tour-dates/",
    "d": "2026-11-06T03:32:12Z",
    "x": "The new release marks the South Korean indie band's first solo release since 2020, while the U.S. tour dates mark their first stateside shows since 2019. \n HYUKOH Announce New Album, 33, First US Tour Dates Since 2019 \n\n Travis Bland",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/HYUKOH.jpg?quality=80"
   },
   {
-   "s": "consequence",
+   "s": "soompi",
    "k": "news",
+   "t": "Actor Do Sang Woo And Model Park Ji Hye To Tie The Knot",
+   "u": "https://www.soompi.com/article/1884527wpp/actor-do-sang-woo-and-model-park-ji-hye-to-tie-the-knot",
+   "d": "2026-11-06T01:39:20Z",
+   "x": "Actor Do Sang Woo and model Park Ji Hye are getting married! On November 6, industry insiders reported that the two will tie the knot in February of next year. In response to the report, Do Sang Woo’s agency J-Wide Company stated through an official announcement, “Do Sang Woo has met a precious partner to… Continue reading Actor Do Sang Woo And Model Park Ji Hye To Tie The Knot \n The post Actor Do",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Nile Rodgers Defends AI Use in Music Video: ‘We Created Everything … The AI Did What We Told It to Do’",
+   "u": "https://www.rollingstone.com/music/music-news/nile-rodgers-defends-ai-use-new-music-video-christmas-song-1235653717/",
+   "d": "2026-11-06T01:30:10Z",
+   "x": "The musician called it “hypocritical” to be “anti AI” when people are “using it all the time because it makes your life convenient”",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "consequence",
+   "k": "song",
    "t": "Olivia Rodrigo Unveils New Holiday Song “Take me home (4 christmas)”",
    "u": "https://consequence.net/2026/11/olivia-rodrigo-take-me-home-4-christmas-holiday-song-stream/",
    "d": "2026-11-06T01:28:00Z",
    "x": "Watch the song's official music video now, which stars Cynthia Nixon and Ben Marshall. \n Olivia Rodrigo Unveils New Holiday Song “Take me home (4 christmas)” \n\n Paolo Ragusa",
+   "f": "https://consequence.net/feed/",
+   "a": "Olivia Rodrigo",
+   "w": "Take me home (4 christmas)",
    "i": "https://consequence.net/wp-content/uploads/2026/11/Olivia-Rodrigo.jpeg?quality=80"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Listen to Olivia Rodrigo’s New Song “Take Me Home (4 Christmas)”",
+   "u": "https://pitchfork.com/story/listen-to-olivia-rodrigos-new-song-take-me-home-4-christmas/",
+   "d": "2026-11-06T01:15:37Z",
+   "x": "She just wants to enjoy a hungover brunch with your mom",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aebd73d891075d9a7f6873c/master/w_200,c_limit/orod.jpg",
+   "v": 3
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Olivia Rodrigo, Noted ‘Sex and the City’ Fan, Recruits Cynthia Nixon For Christmas Video",
+   "u": "https://www.rollingstone.com/music/music-news/olivia-rodrigo-cynthia-nixon-christmas-song-1235651368/",
+   "d": "2026-11-06T01:09:06Z",
+   "x": "“Take Me Home (4 Christmas)\" marks Rodrigo's first holiday song",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
   },
   {
    "s": "stereogum",
@@ -88,9 +780,31 @@
    "u": "https://stereogum.com/2516456/olivia-rodrigo-take-me-home-4-christmas/music/",
    "d": "2026-11-06T01:04:10Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Olivia Rodrigo",
    "w": "take me home (4 christmas)",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/HWJU5UQaQAAOQbv.jpeg?w=200"
+  },
+  {
+   "s": "billboard",
+   "k": "song",
+   "t": "Olivia Rodrigo Unwraps Holiday Single ‘Take Me Home (4 Christmas)’: Stream It Now",
+   "u": "https://www.billboard.com/music/music-news/olivia-rodrigo-new-song-take-me-home-4-christmas-video-1236375403/",
+   "d": "2026-11-06T01:00:25Z",
+   "x": "The pop star also dropped a fun visual co-starring Ben Marshall & Cynthia Nixon.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "a": "Olivia Rodrigo",
+   "w": "Take Me Home (4 Christmas)",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/11/olivia-rodrigo-Lizzie-Klein-pr-billboard-1800.jpg?w=237&h=147&crop=1"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Katseye Postpone Chicago and Minneapolis Shows Due to ‘Megan Recovering From a Concussion’",
+   "u": "https://www.rollingstone.com/music/music-news/katseye-postpone-chicago-minneapolis-shows-megan-concussion-1235653710/",
+   "d": "2026-11-06T00:33:17Z",
+   "x": "The group was supposed to perform tonight at United Center in Chicago and in Minneapolis on Nov. 7",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
   },
   {
    "s": "consequence",
@@ -99,6 +813,7 @@
    "u": "https://consequence.net/2026/11/letterboxd-new-york-times-acquisition/",
    "d": "2026-11-06T00:24:45Z",
    "x": "The popular movie-focused platform might be acquired for as much as $330 million. \n The New York Times in “Advanced Talks” to Buy Letterboxd \n\n Liz Shannon Miller",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/letterboxd-logo.jpg?quality=80"
   },
   {
@@ -108,7 +823,47 @@
    "u": "https://stereogum.com/2516696/vaticans-culture-minister-details-bob-dylans-audience-with-pope/news/",
    "d": "2026-11-05T22:37:00Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Bob-Dylan-Pope.jpeg?w=200"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Travis Kelce ‘Can’t Wait’ to Make New Traditions With Taylor Swift on His First Christmas ‘As a Married Man’",
+   "u": "https://www.billboard.com/music/music-news/travis-kelce-first-christmas-married-taylor-swift-1236375353/",
+   "d": "2026-11-05T22:11:53Z",
+   "x": "The athlete also shouted out his favorite holiday treat mom Donna Kelce makes.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/04/P1055G9J-e1775141858666.jpg?w=237&h=147&crop=1"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Stevie Nicks Knew a Blue Tsunami Was Coming",
+   "u": "https://www.rollingstone.com/music/music-news/stevie-nicks-2026-midterm-elections-1235653478/",
+   "d": "2026-11-05T21:55:03Z",
+   "x": "\"I really believed that what has happened was going to happen,\" she wrote of Democrats crushing the midterm elections. \"It just had to\"",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Get the First Look Into Newly Remodeled Las Vegas Clubbing Institution XS",
+   "u": "https://www.billboard.com/music/music-news/las-vegas-nightclub-xs-remodel-photos-1236375149/",
+   "d": "2026-11-05T21:34:25Z",
+   "x": "The grand reopening of the club at Wynn Las Vegas happens Nov. 5-8 with Rüfüs du Sol, The Chainsmokers, Calvin Harris and Diplo b2b Hugel.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/11/Billboard_XS-Main-Room.jpg?w=300"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "KATSEYE Postpones Two More Shows Due to Illness Days After Delaying Detroit Concert",
+   "u": "https://www.billboard.com/music/music-news/katseye-postpones-shows-illness-1236375208/",
+   "d": "2026-11-05T21:26:31Z",
+   "x": "It's been a rocky week for the global girl group.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/10/P108QSNG-e1792420817723.jpg?w=237&h=147&crop=1"
   },
   {
    "s": "stereogum",
@@ -117,6 +872,7 @@
    "u": "https://stereogum.com/2516686/katseye-cancel-another-show-at-the-last-minute/news/",
    "d": "2026-11-05T21:18:45Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/GettyImages-2300867644.jpg?w=200"
   },
   {
@@ -126,6 +882,7 @@
    "u": "https://stereogum.com/2516634/soup-activists-the-castle/music/",
    "d": "2026-11-05T20:50:05Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Soup Activists",
    "w": "The Castle",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/SoupActivists.jpg?w=200"
@@ -137,6 +894,7 @@
    "u": "https://stereogum.com/2516633/zelooperz-black-noise-masons-dispatch-pin-breakers/music/",
    "d": "2026-11-05T20:27:05Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Zelooperz",
    "w": "Masons Dispatch",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/zelooperz.jpg?w=200"
@@ -148,7 +906,19 @@
    "u": "https://consequence.net/2026/11/nile-rodgers-ai-music-video-defensds/",
    "d": "2026-11-05T19:45:15Z",
    "x": "The artistic legend has clapped back at fans criticizing the upcoming video: \"The AI did what we told it to do and we painstakingly created every second you’ll see on the screen.\" \n Nile Rodgers Defends His Use of AI in New Music Video: “You’re Being Hypocritical” \n\n Ben Kaye",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/Nile-Rodgers-AI-Music-video-the-christmas-song-instagram-comments-backlash-defense5.jpeg?quality=80"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Toro y Moi Reveals New Album Unusua",
+   "u": "https://pitchfork.com/story/toro-y-moi-reveals-new-album-unusua/",
+   "d": "2026-11-05T19:38:07Z",
+   "x": "The project, which quietly appeared on Chaz Bear’s Bandcamp page, drops this month",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aed12f5d1ad83d11d5579fb/master/w_200,c_limit/Y1Yaz3yM.jpg",
+   "v": 3
   },
   {
    "s": "stereogum",
@@ -157,6 +927,7 @@
    "u": "https://stereogum.com/2516631/eev-frances-shake/music/",
    "d": "2026-11-05T19:37:35Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Eev Frances",
    "w": "Shake",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/eevfrances.jpg?w=200"
@@ -168,7 +939,18 @@
    "u": "https://stereogum.com/2516453/jess-kerber-the-world-is-dark-but-i-want-it-to-be-funny-feat-emily-hines/music/",
    "d": "2026-11-05T19:36:32Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Jess-Kerber-_The-World-Is-Dark._-press-photo-by-Will-Orchard.jpg?w=200"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "After KCRW, Travis Holcombe Is Still Championing Music Discovery Beyond the Algorithm",
+   "u": "https://www.billboard.com/music/music-news/travis-holcombe-freaks-only-radio-kcrw-dj-music-discovery-1236373511/",
+   "d": "2026-11-05T19:28:38Z",
+   "x": "The former KCRW DJ has brought his beloved \"Freaks Only\" show to an internet radio format dedicated to the belief that music sounds better when a human is choosing what you hear.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/11/Billboard_Travis-Holcombe-2.jpeg?w=300"
   },
   {
    "s": "consequence",
@@ -177,6 +959,7 @@
    "u": "https://consequence.net/2026/11/billie-eilish-went-as-noodle-from-gorillaz-for-halloween/",
    "d": "2026-11-05T19:26:12Z",
    "x": "The pop star paid tribute to the Gorillaz guitarist with a picture-perfect recreation of her Fortnite look. \n Billie Eilish Went as Noodle from Gorillaz for Halloween \n\n Alex Young",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/Billie-Eilish-as-Noodle.jpeg?quality=80"
   },
   {
@@ -186,7 +969,19 @@
    "u": "https://consequence.net/2026/11/rush-anika-nilles-evans-promark-limited-artist-collection/",
    "d": "2026-11-05T19:12:39Z",
    "x": "The collection includes items featuring Anika Nilles' own artwork. \n RUSH’s Anika Nilles Teams With EVANS and ProMark for Signature Drumheads and Drumsticks \n\n Langdon Hickman",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/anika-nilles-sticks-2.png"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "GloRilla and Sexyy Red Wreak Havoc on a Nursing Home in “Jiggly Bow Bow” Video",
+   "u": "https://pitchfork.com/story/watch-glorilla-and-sexyy-red-wreak-havoc-on-a-nursing-home/",
+   "d": "2026-11-05T19:12:14Z",
+   "x": "The two rappers have teamed up again for a high-energy single",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aecd17906e89e006e0fa25f/master/w_200,c_limit/Sexyy%20Red%20&%20GloRilla%20Jiggly%20Bow%20Bow%20Photo_Photo%20Alex%20Free%20&%20Joy%20Hubbard%20(1).jpg",
+   "v": 3
   },
   {
    "s": "stereogum",
@@ -195,6 +990,7 @@
    "u": "https://stereogum.com/2516630/1tbsp-big-soaps-album-announce-carottes-miki/music/",
    "d": "2026-11-05T19:08:14Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Carottes.jpg?w=200"
   },
   {
@@ -204,6 +1000,7 @@
    "u": "https://daily.bandcamp.com/best-metal/the-best-metal-on-bandcamp-october-2026",
    "d": "2026-11-05T19:05:30Z",
    "x": "Our guide to the month’s crucial heavy LPs. \n Read full story on the Bandcamp Daily .",
+   "f": "https://daily.bandcamp.com/feed",
    "i": "https://f4.bcbits.com/img/0048213478_10.jpg"
   },
   {
@@ -213,7 +1010,19 @@
    "u": "https://consequence.net/2026/11/haywire-flex-your-head-music-video-times-square/",
    "d": "2026-11-05T18:53:51Z",
    "x": "The video captures the sole full song Haywire was able to play before being shut down by the NYPD. \n Haywire Unleash “Flex Your Head” Music Video Filmed During Chaotic Times Square Performance: Watch \n\n Langdon Hickman",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/Haywire-Times-Square-James-Hartley.jpg?quality=80"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Lady Gaga, Jack White, Blondie Lead 2027 Songwriters Hall of Fame Nominees",
+   "u": "https://pitchfork.com/story/lady-gaga-jack-white-blondie-lead-2027-songwriters-hall-of-fame-nominees/",
+   "d": "2026-11-05T18:47:57Z",
+   "x": "Additional finalists include P!nk, Shakira, and ZZ Top",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aecb6f106e89e006e0fa18e/master/w_200,c_limit/MixCollage-05-Nov-2026-12-03-PM-764.jpg",
+   "v": 3
   },
   {
    "s": "stereogum",
@@ -222,6 +1031,7 @@
    "u": "https://stereogum.com/2516638/spencer-peppet-power/music/",
    "d": "2026-11-05T18:37:32Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Spencer Peppet",
    "w": "Power",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/52e8653e-aa41-e935-7eb0-26379b085fdb.png?w=200"
@@ -233,15 +1043,19 @@
    "u": "https://stereogum.com/2516626/troubling-details-about-newjeans-exploitative-contracts-come-to-light/news/",
    "d": "2026-11-05T18:35:18Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/NewJeans.jpg?w=200"
   },
   {
    "s": "consequence",
-   "k": "news",
+   "k": "song",
    "t": "Death Angel Unleash New Single “The Never Was”: Stream",
    "u": "https://consequence.net/2026/11/death-angel-the-never-was/",
    "d": "2026-11-05T18:28:23Z",
    "x": "The legendary thrash-metal act is set to play shows in the US, Europe/UK, and Australia. \n Death Angel Unleash New Single “The Never Was”: Stream \n\n Langdon Hickman",
+   "f": "https://consequence.net/feed/",
+   "a": "Death Angel",
+   "w": "The Never Was",
    "i": "https://consequence.net/wp-content/uploads/2026/11/death-angel-tour-poster-4.jpg?quality=80"
   },
   {
@@ -251,6 +1065,7 @@
    "u": "https://stereogum.com/2516628/lex-walton-is-a-facebook-marketplace-addict/original-videos/",
    "d": "2026-11-05T18:23:42Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/lex-walton-pedal.jpeg?w=200"
   },
   {
@@ -260,7 +1075,18 @@
    "u": "https://consequence.net/2026/11/hudson-freeman-2027-north-american-tour/",
    "d": "2026-11-05T18:03:15Z",
    "x": "Freeman, who is Consequence's latest CoSign, will embark on a 29-date tour of the US and Canada in spring 2027. \n Hudson Freeman Maps Out 2027 North American Tour \n\n Paolo Ragusa",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/Hudson-Freeman-2027-North-American-Tour.jpg?quality=80"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Hilary Duff Opens Up About What It Was Like to Bring Her 4 Kids — and Husband — on Tour",
+   "u": "https://www.billboard.com/music/music-news/hilary-duff-talks-bringing-kids-husband-on-tour-1236374933/",
+   "d": "2026-11-05T18:02:43Z",
+   "x": "The star had to weigh the difficulties of bringing her family on the road against the emotions of leaving them behind.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/11/cover-hilary-duff-billboard-2026-bb12-gleeson-paulino-6-1800.jpg?crop=0px%2C84px%2C1800px%2C1117px&resize=237%2C147"
   },
   {
    "s": "consequence",
@@ -269,6 +1095,7 @@
    "u": "https://consequence.net/2026/11/taliban-burn-immoral-musical-instruments/",
    "d": "2026-11-05T17:57:41Z",
    "x": "The Taliban also burned amplifiers, subwoofers, CDs, and DVDs to \"prevent vices, strengthen Islamic values, and reform society.\" \n Taliban Burn over 600 “Immoral” Musical Instruments \n\n Wren Graves",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/taliban-burns-musical-instruments.png"
   },
   {
@@ -278,6 +1105,7 @@
    "u": "https://stereogum.com/2516622/toro-y-moi-announces-new-album-unusua-hear-motive/music/",
    "d": "2026-11-05T17:38:32Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Toro-Y-Moi-1.jpg?w=200"
   },
   {
@@ -287,61 +1115,20 @@
    "u": "https://consequence.net/2026/11/robin-finck-reverb-guns-n-roses-nine-inch-nails/",
    "d": "2026-11-05T17:38:01Z",
    "x": "The sale is set to begin November 11th and features a wide range of guitars from his long career. \n Robin Finck Selling Over 200 Items from Time with Guns N’ Roses and Nine Inch Nails \n\n Langdon Hickman",
+   "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/Robin-Finck.jpg?quality=80"
   },
   {
-   "s": "consequence",
-   "k": "news",
-   "t": "John Malkovich Will Blow Your Mind and Break Your Heart in Wild Horse Nine: Review",
-   "u": "https://consequence.net/2026/11/wild-horse-nine-review-john-malkovich/",
-   "d": "2026-11-05T17:15:56Z",
-   "x": "Sam Rockwell and Steve Buscemi co-star in the new Martin McDonagh film about spies, secrets, and power. \n John Malkovich Will Blow Your Mind and Break Your Heart in Wild Horse Nine: Review \n\n Liz Shannon Miller",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/wild-horse-nine-sam-rockwell-john-malkovich.jpg?quality=80"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "Of Course Grimes Is In The First AI Film To Screen In US Theaters",
-   "u": "https://stereogum.com/2516616/of-course-grimes-is-in-the-first-ai-film-to-screen-in-us-theaters/news/",
-   "d": "2026-11-05T17:12:36Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Grimes_fcabee.jpg?w=200"
-  },
-  {
-   "s": "consequence",
-   "k": "news",
-   "t": "Coheed and Cambria Announce 2027 Cruise with Glassjaw, Joyce Manor, and More",
-   "u": "https://consequence.net/2026/11/coheed-and-cambria-2027-cruise/",
-   "d": "2026-11-05T17:01:04Z",
-   "x": "The S.S. Neverender: Beyond the Black Rainbow cruise is set for November 2027. \n Coheed and Cambria Announce 2027 Cruise with Glassjaw, Joyce Manor, and More \n\n Spencer Kaufman",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Coheed-and-Cambria-2027-cruise-poster.jpeg?quality=80"
-  },
-  {
-   "s": "consequence",
-   "k": "news",
-   "t": "Grimes Joins AI-Generated Sci-Fi Film Gods Don’t Give Gifts",
-   "u": "https://consequence.net/2026/11/grimes-gods-dont-give-gifts-ai-film/",
-   "d": "2026-11-05T17:00:55Z",
-   "x": "The musician voices Zayinth Alda, a character created around her voice and likeness for Zack London’s transhumanist animated feature. \n Grimes Joins AI-Generated Sci-Fi Film Gods Don’t Give Gifts \n\n Alex Krinsky",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Grimes-AI-sci-fi-movie.jpg?quality=80"
-  },
-  {
-   "s": "npr",
-   "k": "news",
-   "t": "Tiny Desk Radio: Joan Shelley, Melissa Aldana with Gonzalo Rubalcaba, Ganavya",
-   "u": "https://www.npr.org/2026/11/05/g-s1-151990/tiny-desk-radio-joan-shelley-melissa-aldana-with-gonzalo-rubalcaba-ganavya",
-   "d": "2026-11-05T17:00:00Z",
-   "x": "Reflection, renewal. On this episode, we provide a musical reset for the mind. Look for Tiny Desk Radio on your local NPR station.",
-   "i": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/7347x4133+0+0/resize/7347x4133!/quality/85/format/webp/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fbe%2F28%2Fc4a13ae44f9f95c30ae91419b1dc%2F20260211-ganavya-tiny-desk-photos-as04.jpg"
-  },
-  {
-   "s": "consequence",
-   "k": "news",
-   "t": "2027 Songwriters Hall of Fame Nominees Include Lady Gaga, Jack White, and Blondie",
-   "u": "https://consequence.net/2026/11/songwriters-hall-of-fame-2027-nominees-lady-gaga-jack-white-blondie/",
-   "d": "2026-11-05T16:41:21Z",
-   "x": "P!NK, Shakira, Sia, and ZZ Top's Frank Beard, Billy Gibbons, and Dusty Hill are among the other notable finalists. \n 2027 Songwriters Hall of Fame Nominees Include Lady Gaga, Jack White, and Blondie \n\n Alex Young",
-   "i": "https://consequence.net/wp-content/uploads/2025/10/Songwriters-Hall-of-Fame-2027.jpeg?quality=80"
+   "s": "nme",
+   "k": "album",
+   "t": "Cage The Elephant announce new album ‘Dying In Reverse’ with guitar heavy single ‘Make It Easy’",
+   "u": "https://www.nme.com/news/music/cage-the-elephant-announce-new-album-dying-in-reverse-with-guitar-heavy-single-make-it-easy-3975154",
+   "d": "2026-11-05T17:08:55Z",
+   "x": "It is due to drop in February 2027",
+   "f": "https://www.nme.com/news/music/feed",
+   "a": "Cage The Elephant",
+   "w": "Dying In Reverse",
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/2026_cagetheelephant_lewisevans_2000x1270-400x254.jpg"
   },
   {
    "s": "stereogum",
@@ -350,54 +1137,10 @@
    "u": "https://stereogum.com/2516609/liquid-mike-inanimate-object/music/",
    "d": "2026-11-05T16:31:43Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Liquid Mike",
    "w": "Inanimate Object",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Liquid-Mike.jpg?w=200"
-  },
-  {
-   "s": "npr",
-   "k": "news",
-   "t": "Discursive Verses: Is 'Spend Dat' the best financial indicator of America's grift economy?",
-   "u": "https://www.npr.org/2026/11/05/nx-s1-6029747/the-week-in-hip-hop-yung-miami-spend-dat",
-   "d": "2026-11-05T16:30:00Z",
-   "x": "NPR Music culture critic and reporter Rodney Carmichael ruminates on the latest in rap culture. This week: How Yung Miami's summer bop became a sweeping indictment.",
-   "i": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/2500x1786+0+0/resize/2500x1786!/quality/85/format/webp/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F4b%2F9b%2Fef6727ad49f7b2325d4bf8ac7117%2Fgettyimages-2283657231.jpg"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "Star’s Revenge Announce New Album Star’s Revenge II: Hear “Don’t Worry Dynamite”",
-   "u": "https://stereogum.com/2516599/stars-revenge-announce-new-album-stars-revenge-ii-hear-dont-worry-dynamite/music/",
-   "d": "2026-11-05T16:15:45Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/unnamed-2026-11-05T105633.153-1.png?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "Rush Announce Sphere Residency",
-   "u": "https://stereogum.com/2516602/rush-announce-sphere-residency/news/",
-   "d": "2026-11-05T16:11:02Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Rush.jpg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "Cynthia Erivo Cast As 2Pac’s Mother In Snoop Dogg Biopic",
-   "u": "https://stereogum.com/2516595/cynthia-erivo-cast-as-2pacs-mother-in-snoop-dogg-biopic/news/",
-   "d": "2026-11-05T15:51:30Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Cynthia-Erivo.jpeg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "CMAT Joins Elton John On “Step Into Christmas” Remake",
-   "u": "https://stereogum.com/2516591/cmat-joins-elton-john-on-step-into-christmas-remake/news/",
-   "d": "2026-11-05T15:37:08Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/ATT000676.png?w=200"
   },
   {
    "s": "stereogum",
@@ -406,81 +1149,10 @@
    "u": "https://stereogum.com/2516589/morphine-spaceman-charm/music/",
    "d": "2026-11-05T15:14:58Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Morphine",
    "w": "Spaceman Charm",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Morphine.jpeg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "Pearl Jam Still Looking For Drummer",
-   "u": "https://stereogum.com/2516585/pearl-jam-still-looking-for-drummer/news/",
-   "d": "2026-11-05T14:45:28Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Pearl-Jam.jpeg?w=200"
-  },
-  {
-   "s": "bandcamp",
-   "k": "news",
-   "t": "The Best Contemporary Classical Music on Bandcamp, October 2026",
-   "u": "https://daily.bandcamp.com/best-contemporary-classical/the-best-contemporary-classical-music-on-bandcamp-october-2026",
-   "d": "2026-11-05T14:29:18Z",
-   "x": "Our guide to the month’s crucial contemporary classical LPs \n Read full story on the Bandcamp Daily .",
-   "i": "https://f4.bcbits.com/img/0048327870_10.jpg"
-  },
-  {
-   "s": "bandcamp",
-   "k": "news",
-   "t": "The Best Country Music on Bandcamp, October 2026",
-   "u": "https://daily.bandcamp.com/best-country/the-best-country-music-on-bandcamp-october-2026",
-   "d": "2026-11-05T14:29:16Z",
-   "x": "Our guide to the month’s crucial country LPs. \n Read full story on the Bandcamp Daily .",
-   "i": "https://f4.bcbits.com/img/0048212639_10.jpg"
-  },
-  {
-   "s": "bandcamp",
-   "k": "news",
-   "t": "Shygirl, “SWALLOW!”",
-   "u": "https://daily.bandcamp.com/album-of-the-day/shygirl-swallow-review",
-   "d": "2026-11-05T14:29:05Z",
-   "x": "Channeling trip-hop, breakbeat, and more, the British pop auteur pushes nostalgic sounds into shiny new places. \n Read full story on the Bandcamp Daily .",
-   "i": "https://f4.bcbits.com/img/0048334615_10.jpg"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "Pink Floyd Announce Animals 50th Anniversary Box Set With Previously Unreleased Tracks",
-   "u": "https://stereogum.com/2516093/pink-floyd-announce-animals-50th-anniversary-box-set-with-previously-unreleased-tracks/music/",
-   "d": "2026-11-05T14:16:49Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/10/Pink-Floyd.jpg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "news",
-   "t": "Nile Rodgers Defends New AI Music Video",
-   "u": "https://stereogum.com/2516578/nile-rodgers-defends-new-ai-music-video/news/",
-   "d": "2026-11-05T14:13:32Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Nile-Rodgers.jpeg?w=200"
-  },
-  {
-   "s": "npr",
-   "k": "news",
-   "t": "Fat Joe: Tiny Desk Concert",
-   "u": "https://www.npr.org/2026/11/05/g-s1-148947/fat-joe-tiny-desk-concert",
-   "d": "2026-11-05T10:00:00Z",
-   "x": "The Bronx emcee's unpredictable set features a laundry list of guest appearances and hits from across three decades.",
-   "i": "undefined"
-  },
-  {
-   "s": "npr",
-   "k": "news",
-   "t": "Bob Dylan comes knockin' on pope's door as Leo welcomes legend to Vatican",
-   "u": "https://www.npr.org/2026/11/05/g-s1-152035/vatican-pope-bob-dylan",
-   "d": "2026-11-05T07:02:12Z",
-   "x": "The American singer-songwriter and poet visited with the American pope at the Vatican during a break between concert dates in Italy. The Vatican said the encounter was brief.",
-   "i": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/7087x4725+0+0/resize/7087x4725!/quality/85/format/webp/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F2e%2F8e%2Feb78e83745ad833d90b6ed5feaa1%2Fap26308606767348.jpg"
   },
   {
    "s": "pitchfork",
@@ -489,6 +1161,7 @@
    "u": "https://pitchfork.com/reviews/albums/twisted-teens-the-holy-cross-tigers/",
    "d": "2026-11-05T05:03:00Z",
    "x": "On their third album this year, the New Orleans garage rockers embrace conflicting emotions and clashing sounds, balancing hard-charging rave-ups with exploratory tape experiments.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Twisted Teens",
    "w": "The Holy Cross Tigers",
    "i": "https://media.pitchfork.com/photos/6aeb5fe71d58dfb46e474b86/master/w_200,c_limit/Twisted%20Teens%20-%20The%20Holy%20Cross%20Tigers.jpg",
@@ -502,6 +1175,7 @@
    "u": "https://pitchfork.com/reviews/albums/yeah-yeah-yeahs-hidden-in-pieces-live-at-the-royal-albert-hall/",
    "d": "2026-11-05T05:02:00Z",
    "x": "On its first live album, the New York trio recasts a quarter-century of rock songs for strings, piano, and acoustic guitar, highlighting the ache and vulnerability at the heart of its music.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Yeah Yeah Yeahs",
    "w": "Hidden in Pieces: Live at the Royal Albert Hall",
    "i": "https://media.pitchfork.com/photos/6aeb86b471a068f3a6c90517/master/w_200,c_limit/Yeah%20Yeah%20Yeahs-Hidden%20in%20Pieces%20Live%20at%20the%20Royal%20Albert%20Hall.jpg",
@@ -515,6 +1189,7 @@
    "u": "https://pitchfork.com/reviews/albums/brat-star-southern-ontario-gothic/",
    "d": "2026-11-05T05:01:00Z",
    "x": "So post-ironic it’s deadass, the Toronto songwriter’s debut renders a thoroughly modern affect with rare authenticity.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Brat Star",
    "w": "Southern Ontario Gothic",
    "i": "https://media.pitchfork.com/photos/6aeb6043ffd893c2f7b9bf8c/master/w_200,c_limit/Brat%20Star%20-%20Southern%20Ontario%20Gothic%20album%20art.jpg",
@@ -528,6 +1203,7 @@
    "u": "https://pitchfork.com/reviews/albums/john-errol-damage/",
    "d": "2026-11-05T05:00:00Z",
    "x": "Too challenging to qualify as radio rock, the Los Angeles songwriter’s cloudy, lo-fi grunge is stuffed with ’90s references and opaque secrets.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "John Errol",
    "w": "Damage",
    "i": "https://media.pitchfork.com/photos/6aeb5ef792285c714cb83d91/master/w_200,c_limit/John%20Errol%20-%20Damage%20album%20art.jpg",
@@ -536,29 +1212,12 @@
   },
   {
    "s": "stereogum",
-   "k": "news",
-   "t": "Sam And Louise Sullivan – “Trying Your Luck (4-track)” (The Strokes Cover)",
-   "u": "https://stereogum.com/2516537/sam-and-louise-sullivan-trying-your-luck-the-strokes-cover/music/",
-   "d": "2026-11-04T20:38:04Z",
-   "x": "",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/unnamed-2026-11-04T151944.428.png?w=200"
-  },
-  {
-   "s": "npr",
-   "k": "news",
-   "t": "Herbert Blomstedt, conductor of great orchestras for seven decades, dies at 99",
-   "u": "https://www.npr.org/2026/11/04/nx-s1-5740271/herbert-blomstedt-conductor-dead",
-   "d": "2026-11-04T20:11:14Z",
-   "x": "Modest in his demeanor but remarkably enduring, the American-born, Swedish conductor continually fell in love with music, leading orchestras with no-nonsense insight and integrity well into his 90s.",
-   "i": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/5665x3777+0+0/resize/5665x3777!/quality/85/format/webp/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F93%2F9e%2F09794ac64e89be654dcc04e29121%2Fgettyimages-2271235516.jpg"
-  },
-  {
-   "s": "stereogum",
    "k": "song",
    "t": "GIFT – “Every Step”",
    "u": "https://stereogum.com/2516370/gift-every-step-frenzy-for-the-thrill-song-video/music/",
    "d": "2026-11-04T19:36:50Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "GIFT",
    "w": "Every Step",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/GIFT.jpg?w=200"
@@ -570,6 +1229,7 @@
    "u": "https://stereogum.com/2516516/christine-and-the-queens-rendez-vous-avec-toi/music/",
    "d": "2026-11-04T18:31:40Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Christine And The Queens",
    "w": "Rendez-vous Avec Toi",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Christine-and-the-Queens_Rendez-vous-avec-toi-_-Rendez-vous-in-your-arms_Digital-Single_5056556187974_artwork.jpg?w=200"
@@ -581,6 +1241,7 @@
    "u": "https://stereogum.com/2516506/love-remain-shadow-swim/music/",
    "d": "2026-11-04T16:48:56Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Love Remain",
    "w": "Shadow Swim",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Love-Remain.jpg?w=200"
@@ -592,6 +1253,7 @@
    "u": "https://stereogum.com/2516446/kiwi-jr-something-wicked-blowin-up/music/",
    "d": "2026-11-04T16:43:19Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Kiwi Jr.",
    "w": "Something Wicked",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/KiwiJr.jpg?w=200"
@@ -603,31 +1265,10 @@
    "u": "https://stereogum.com/2516500/quivers-bottle-the-nervous/music/",
    "d": "2026-11-04T16:38:22Z",
    "x": "",
+   "f": "https://www.stereogum.com/feed/",
    "a": "Quivers",
    "w": "Bottle The Nervous",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/unnamed-2026-11-04T112938.082.jpg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "song",
-   "t": "Crate – “Crushed To Nothing”",
-   "u": "https://stereogum.com/2516498/crate-crushed-to-nothing/music/",
-   "d": "2026-11-04T16:03:43Z",
-   "x": "",
-   "a": "Crate",
-   "w": "Crushed To Nothing",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Crate.jpg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "song",
-   "t": "Hannah Jadagu – “Curse”",
-   "u": "https://stereogum.com/2516488/hannah-jadagu-curse/music/",
-   "d": "2026-11-04T15:51:02Z",
-   "x": "",
-   "a": "Hannah Jadagu",
-   "w": "Curse",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/hannahjadagu-curse-cover-1500x1500-1.jpg?w=200"
   },
   {
    "s": "pitchfork",
@@ -636,6 +1277,7 @@
    "u": "https://pitchfork.com/reviews/albums/baby-osamaa-on-tha-run/",
    "d": "2026-11-04T05:03:00Z",
    "x": "With delirious melodic instincts, the Bronx rapper’s new tape evokes Young Money-era swag on a SoundCloud budget.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Baby Osamaa",
    "w": "On Tha Run",
    "i": "https://media.pitchfork.com/photos/6aea06e6b2a4ae06c18ac614/master/w_200,c_limit/Baby%20Osamaa%20-%20On%20Tha%20Run%20album%20art.jpg",
@@ -650,6 +1292,7 @@
    "u": "https://pitchfork.com/reviews/albums/niagara-catedral-gotica/",
    "d": "2026-11-04T05:02:00Z",
    "x": "The Lisbon trio trades the laid-back feel of its earlier, more disco-indebted work for skeletal machine minimalism, twisted sequencer fugues, and lo-fi ambient that conceals more than it reveals.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Niagara",
    "w": "Catedral Gótica",
    "i": "https://media.pitchfork.com/photos/6ae9fa49a678072465a4a4ae/master/w_200,c_limit/Niagara%20-%20Catedral%20Go%CC%81tica.jpg",
@@ -663,6 +1306,7 @@
    "u": "https://pitchfork.com/reviews/albums/june-mcdoom-follow-the-light/",
    "d": "2026-11-04T05:01:00Z",
    "x": "On her debut album, the musician combines her family’s Jamaican mento legacy with her personal love of folk for a set of graceful, winningly direct songs.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "June McDoom",
    "w": "Follow the Light",
    "i": "https://media.pitchfork.com/photos/6aea1ce888ed135c4885e5cd/master/w_200,c_limit/June%20McDoom-Follow%20the%20Light.jpg",
@@ -676,11 +1320,24 @@
    "u": "https://pitchfork.com/reviews/albums/dis-fig-what-to-make-of-these-mortal-hands/",
    "d": "2026-11-04T05:00:00Z",
    "x": "Experimental artist Felicia Chen’s high-contrast compositions unite whispers and shrieks, intimate acoustics and inhuman distortion.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Dis Fig",
    "w": "What to Make of These Mortal Hands",
    "i": "https://media.pitchfork.com/photos/6ae3b8af13936ee9eac88b6a/master/w_200,c_limit/Dis%20Fig%20-%20What%20to%20Make%20of%20These%20Mortal%20Hands.jpg",
    "sc": 7.8,
    "v": 3
+  },
+  {
+   "s": "diy",
+   "k": "song",
+   "t": "1000 Rabbits return with new single ‘Stupid Boy’",
+   "u": "https://diymag.com/news/1000-rabbits-return-with-new-single-stupid-boy",
+   "d": "2026-11-03T17:04:00Z",
+   "x": "Accompanying their latest release comes a surrealist and fishy video directed by Cuan Roche.",
+   "f": "https://diymag.com/feed",
+   "a": "1000 Rabbits",
+   "w": "Stupid Boy",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/123/1000-Rabbits/_1500x1000_crop_center-center_100_line/1000-Rabbits-Nov-26.jpg"
   },
   {
    "s": "pitchfork",
@@ -689,6 +1346,7 @@
    "u": "https://pitchfork.com/reviews/albums/kali-malone-burning-song/",
    "d": "2026-11-03T05:03:00Z",
    "x": "Unlike the composer’s typically massive, sprawling drones, these pieces for pipe organ—accompanied by guitarist Stephen O’Malley and cellist Lucy Railton—are finely filigreed miniatures.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Kali Malone",
    "w": "Burning Song",
    "i": "https://media.pitchfork.com/photos/6ae8b6b76f5468feebccc392/master/w_200,c_limit/Kali%20Malone%20-%20Burning%20Song.jpg",
@@ -702,6 +1360,7 @@
    "u": "https://pitchfork.com/reviews/albums/lydia-loveless-accolades-ep/",
    "d": "2026-11-03T05:02:00Z",
    "x": "On a new EP, the Ohio singer-songwriter writes with focus and immediacy, their lyrics blending a love of chaos with an eye toward long-term stability.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Lydia Loveless",
    "w": "Accolades EP",
    "i": "https://media.pitchfork.com/photos/6ae49e061534acc465ada843/master/w_200,c_limit/Lydia%20Loveless-Accolades.jpg",
@@ -715,6 +1374,7 @@
    "u": "https://pitchfork.com/reviews/albums/two-shell-infinite-now/",
    "d": "2026-11-03T05:01:00Z",
    "x": "The perennially unserious duo’s embrace of AI is the least of the problems weighing down its latest album (and 55-track bonus compendium) of post-ironic club pop.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Two Shell",
    "w": "Infinite Now",
    "i": "https://media.pitchfork.com/photos/6ae8add83ad14b0f5282eace/master/w_200,c_limit/Two%20Shell%20-%20Infinite%20Now.jpg",
@@ -728,11 +1388,24 @@
    "u": "https://pitchfork.com/reviews/albums/cecil-taylor-unit-live-at-the-kimo-theater-albuquerque-1979/",
    "d": "2026-11-03T05:00:00Z",
    "x": "A newly unearthed live performance, originally intended for broadcast on NPR, showcases a unique and transitional moment for the free-jazz pianist's ensemble.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Cecil Taylor Unit",
    "w": "Live at the KiMo Theater Albuquerque 1979",
    "i": "https://media.pitchfork.com/photos/6ae4de958cc155b23b3f707a/master/w_200,c_limit/Cecil%20Taylor%20Unit%20Live%20at%20the%20KiMo%20Theater%20Albuquerque%201979.jpg",
    "sc": 8.1,
    "v": 3
+  },
+  {
+   "s": "diy",
+   "k": "song",
+   "t": "CHVRCHES drop soaring new single ‘Overthinker’",
+   "u": "https://diymag.com/news/chvrches-overthinker-new-album-all-the-kings-men",
+   "d": "2026-11-02T12:21:00Z",
+   "x": "The Scottish synth-pop titans are making a mighty return with forthcoming comeback album ‘All The King’s Men’.",
+   "f": "https://diymag.com/feed",
+   "a": "CHVRCHES",
+   "w": "Overthinker",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/C/Chvrches/_1500x1000_crop_center-center_100_line/CHVRCHES-2026-03-photo-credit-Jody-Evans-2.jpg"
   },
   {
    "s": "nme",
@@ -741,6 +1414,7 @@
    "u": "https://www.nme.com/reviews/album/daine-in-endless-awe-agony-review-3974405",
    "d": "2026-11-02T08:00:56Z",
    "x": "A modern emo gothic painted in sugary pop pastels",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "Daine",
    "w": "In Endless Awe & Agony",
    "i": "https://www.nme.com/wp-content/uploads/2026/09/NMEAR_NME-DAINE-THE-COVER-2026-3-CREDIT-DEAN-PODMORE@2000x1270-400x254.jpg"
@@ -752,6 +1426,7 @@
    "u": "https://pitchfork.com/reviews/albums/andy-stott-late-loop/",
    "d": "2026-11-02T05:03:00Z",
    "x": "Featuring heartbroken vocal performances and stripped of frills like basslines or reverb, the Manchester producer’s latest album of bruised electronica is his starkest and most forlorn yet.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Andy Stott",
    "w": "Late Loop",
    "i": "https://media.pitchfork.com/photos/6ab17549f99f7bf88c241c73/master/w_200,c_limit/5060165488810.jpg",
@@ -765,6 +1440,7 @@
    "u": "https://pitchfork.com/reviews/albums/ashe-the-girl-of-your-dreams/",
    "d": "2026-11-02T05:02:00Z",
    "x": "The “Stop the Wedding!” singer’s vintage-styled new album combines stately pop classicism and exuberant ’70s pastiche.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Ashe",
    "w": "The Girl of Your Dreams",
    "i": "https://media.pitchfork.com/photos/6ae3b9afdd353d3745bb9abf/master/w_200,c_limit/Ashe%20-%20The%20Girl%20of%20Your%20Dreams%20album%20art.jpg",
@@ -778,6 +1454,7 @@
    "u": "https://pitchfork.com/reviews/albums/william-basinski-passing-the-cup-of-sorrows/",
    "d": "2026-11-02T05:01:00Z",
    "x": "The Disintegration Loops made the composer’s name synonymous with weighty meditations on memory and loss, but his latest album—calm, focused, tender—is a reminder of his fondness for beauty.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "William Basinski",
    "w": "Passing the Cup of Sorrows",
    "i": "https://media.pitchfork.com/photos/6ae4bc8c00019c3ef93fb729/master/w_200,c_limit/William%20Basinski%20-%20Passing%20the%20Cup%20of%20Sorrows.jpg",
@@ -791,6 +1468,7 @@
    "u": "https://pitchfork.com/reviews/albums/shovel-dance-collective-everything-in-readiness/",
    "d": "2026-11-02T05:00:00Z",
    "x": "Marrying lush arrangements and field-recording experiments, the English revivalists honor folk music’s radical tradition by reinforcing its contemporary significance.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Shovel Dance Collective",
    "w": "Everything in Readiness",
    "i": "https://media.pitchfork.com/photos/6ae36bbdd83a22061522fc42/master/w_200,c_limit/Shovel%20Dance%20Collective%20-%20Everything%20in%20Readiness%20album%20art.jpg",
@@ -804,6 +1482,7 @@
    "u": "https://pitchfork.com/reviews/albums/various-artists-katamari-fortissimo-damacy/",
    "d": "2026-11-01T04:00:00Z",
    "x": "Each Sunday, Pitchfork takes an in-depth look at a significant album from the past, and any record not in our archives is eligible. Today, we reconnect with a 2004 cult-classic game whose postmodernist soundtrack doubles as a treatise on the meaning of life.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Various Artists",
    "w": "Katamari Fortissimo Damacy",
    "i": "https://media.pitchfork.com/photos/6ae36f01c138238a931e34e7/master/w_200,c_limit/Various%20-%20Katamari%20Fortissimo%20Damacy%20(original).jpg",
@@ -817,6 +1496,7 @@
    "u": "https://pitchfork.com/reviews/albums/aphex-twin-drukqs-25th-anniversary-edition/",
    "d": "2026-10-31T04:00:00Z",
    "x": "Richard D. James’ once divisive 2001 album today looks, with 25 years of hindsight, like the keystone of his career, joining rave mischief and academic rigor in a sprawling, 100-minute package.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Aphex Twin",
    "w": "Drukqs (25th Anniversary Edition)",
    "i": "https://media.pitchfork.com/photos/6ae377d7efb3062cf478c6cd/master/w_200,c_limit/Aphex%20Twin%20-%20Drukqs%202026.jpg",
@@ -825,12 +1505,37 @@
    "bnm": true
   },
   {
+   "s": "diy",
+   "k": "album",
+   "t": "Prima Queen announce second album ‘A Touch Of Divine’ and share new single ‘Alanis Morissette’",
+   "u": "https://diymag.com/news/prima-queen-announce-second-album-a-touch-of-divine-and-share-new-single-alanis-morissette",
+   "d": "2026-10-30T17:23:00Z",
+   "x": "The duo’s new LP, ‘A Touch Of Divine’ is set for release on 26th February 2027.",
+   "f": "https://diymag.com/feed",
+   "a": "Prima Queen",
+   "w": "A Touch Of Divine",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/P/Prima-Queens/_1500x1000_crop_center-center_100_line/Prima-Queen-Oct26-PC-Meadow-Florence.jpg"
+  },
+  {
+   "s": "diy",
+   "k": "album",
+   "t": "KEG announce sophomore LP ‘Relaxin’ Next To The Hospital’ and share new single ‘Call Me Satan’",
+   "u": "https://diymag.com/news/keg-announce-sophomore-lp-relaxin-next-to-the-hospital-and-share-new-single-call-me-satan",
+   "d": "2026-10-30T16:35:00Z",
+   "x": "The South London post-punkers are also embarking on an extensive UK and Ireland tour.",
+   "f": "https://diymag.com/feed",
+   "a": "KEG",
+   "w": "Relaxin",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/K/KEG/_1500x1000_crop_center-center_100_line/KEG-Oct26-PC-Maisy-Banks.jpg"
+  },
+  {
    "s": "pitchfork",
    "k": "album",
    "t": "DIIV – ZIRP!",
    "u": "https://pitchfork.com/reviews/albums/diiv-zirp/",
    "d": "2026-10-30T04:03:00Z",
    "x": "The shoegaze band teams with producer A. G. Cook for its most pop-leaning record yet. Despite some welcome shifts in tone, the best moments sound like no one but DIIV.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "DIIV",
    "w": "ZIRP!",
    "i": "https://media.pitchfork.com/photos/6a73e45ad12418ea88fa0f4d/master/w_200,c_limit/diiv-zirp!-cover-3k-rgb.jpg",
@@ -844,6 +1549,7 @@
    "u": "https://pitchfork.com/reviews/albums/heathers-awesome/",
    "d": "2026-10-30T04:02:00Z",
    "x": "Upstart guitarist Heath Michael Thomas’ shaggy, groove-heavy garage rock captures the raucous interplay of a much more practiced band.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Heathers",
    "w": "Awesome",
    "i": "https://media.pitchfork.com/photos/6ae368415ab3de1a43c5f859/master/w_200,c_limit/Heathers%20-%20Awesome%20album%20art.jpg",
@@ -857,6 +1563,7 @@
    "u": "https://pitchfork.com/reviews/albums/satanic-planet-dead-deities/",
    "d": "2026-10-30T04:01:00Z",
    "x": "The metal supergroup led by the co-founder and spokesperson of the Satanic Temple returns with a provocative, maximalist, and pretty solid second album.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Satanic Planet",
    "w": "Dead Deities",
    "i": "https://media.pitchfork.com/photos/6ae36a8ea7a049e9e3b0e7e9/master/w_200,c_limit/Satanic%20Planet%20Dead%20Deities.jpg",
@@ -870,6 +1577,7 @@
    "u": "https://pitchfork.com/reviews/albums/more-eaze-valley-and-structure/",
    "d": "2026-10-30T04:00:00Z",
    "x": "The experimental musician refines her approach to structured repetition on her second solo album of the year, finding melancholic beauty by subtly transforming Americana-inflected loops and patterns.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "more eaze",
    "w": "valley and structure",
    "i": "https://media.pitchfork.com/photos/6ae36eae95988ef7e2e81f6c/master/w_200,c_limit/More%20Eaze-valley%20and%20structure.jpg",
@@ -883,6 +1591,7 @@
    "u": "https://www.nme.com/reviews/album/chloe-qisha-fantasize-review-3973927",
    "d": "2026-10-30T00:01:15Z",
    "x": "Horny, theatrical and irresistibly catchy",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "Chloe Qisha",
    "w": "Fantasize",
    "i": "https://www.nme.com/wp-content/uploads/2026/10/Chloe-Qisha-Credit-Blacksocks-400x254.jpg"
@@ -894,6 +1603,7 @@
    "u": "https://www.nme.com/reviews/album/queens-of-the-stone-age-perfecth-album-review-3974374",
    "d": "2026-10-29T08:00:49Z",
    "x": "The desert rock dons adventure into love for their third act",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "Queens Of The Stone Age",
    "w": "Perfecth",
    "i": "https://www.nme.com/wp-content/uploads/2026/10/queens_of_the_stone_age_perfecth_review-400x254.jpg"
@@ -905,6 +1615,7 @@
    "u": "https://pitchfork.com/reviews/albums/the-olivia-tremor-control-the-same-place/",
    "d": "2026-10-29T04:03:00Z",
    "x": "Following the deaths of two founding members, the long-in-the-works final album from the Elephant 6 group is a dark, psychedelic epic that unfolds with eerie clairvoyance and intensity.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "The Olivia Tremor Control",
    "w": "The Same Place",
    "i": "https://media.pitchfork.com/photos/6ae22497903c0fd4dcfc1d19/master/w_200,c_limit/The%20Olivia%20Tremor%20Control%20The%20Same%20Place.jpg",
@@ -918,6 +1629,7 @@
    "u": "https://pitchfork.com/reviews/albums/brakence-marrow/",
    "d": "2026-10-29T04:02:00Z",
    "x": "The Ohio artist’s first album in four years is paranoid, indulgent, and theatrical, unfolding like a dark romantasy novel.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "brakence",
    "w": "marroW",
    "i": "https://media.pitchfork.com/photos/6ad913bf0c92ad66cf11be07/master/w_200,c_limit/3000x3000bb-100%20(2).jpg",
@@ -931,6 +1643,7 @@
    "u": "https://pitchfork.com/reviews/albums/anderson-paak-cordae-heavy-is-the-crown/",
    "d": "2026-10-29T04:01:00Z",
    "x": "Anderson .Paak and Cordae kick back over a suite of boom-bap and trap-adjacent slappers on their lopsided but entertaining collaborative album.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Anderson .Paak / Cordae",
    "w": "Heavy Is the Crown",
    "i": "https://media.pitchfork.com/photos/6a85bffccf56144a2fd11199/master/w_200,c_limit/Anderson-Paak-Heavy-Is-the-Crown.jpeg",
@@ -944,6 +1657,7 @@
    "u": "https://pitchfork.com/reviews/albums/water-damage-repair/",
    "d": "2026-10-29T04:00:00Z",
    "x": "The Austin ensemble makes minimalism feel enveloping and unruly on its latest record, where new melodic details are always emerging from a swarming mass of sound.",
+   "f": "https://pitchfork.com/feed/feed-album-reviews/rss",
    "a": "Water Damage",
    "w": "Repair",
    "i": "https://media.pitchfork.com/photos/6ae21b827b487fd17701118a/master/w_200,c_limit/Water%20Damage-Repair.jpg",
@@ -957,9 +1671,22 @@
    "u": "https://www.nme.com/reviews/album/diiv-zirp-review-3974219",
    "d": "2026-10-28T08:00:41Z",
    "x": "Pop meets politics on their most adventurous record yet",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "DIIV",
    "w": "ZIRP!",
    "i": "https://www.nme.com/wp-content/uploads/2026/10/DIIV-ZIRP-Credit-Jaxon-Whittington-400x254.jpg"
+  },
+  {
+   "s": "diy",
+   "k": "song",
+   "t": "Heartworms unveil new single ‘Guess I’m Stuck In The Dark’",
+   "u": "https://diymag.com/news/heartworms-unveil-new-single-guess-im-stuck-in-the-dark",
+   "d": "2026-10-28T00:00:00Z",
+   "x": "Jojo Orme will also be commencing a supporting tour with Interpol and Bloc Party.",
+   "f": "https://diymag.com/feed",
+   "a": "Heartworms",
+   "w": "Guess I",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/H/Heartworms/_1500x1000_crop_center-center_100_line/Heartworms-Nov26-PC-Oliver-Day.jpg"
   },
   {
    "s": "nme",
@@ -968,6 +1695,7 @@
    "u": "https://www.nme.com/reviews/album/young-eman-bine-review-3973934",
    "d": "2026-10-23T08:00:59Z",
    "x": "A wild ride with a dark side",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "Young Eman",
    "w": "BINE",
    "i": "https://www.nme.com/wp-content/uploads/2026/10/Young-Eman-Credit-Press-Retry-400x254.jpg"
@@ -979,6 +1707,7 @@
    "u": "https://pitchfork.com/reviews/jay-morrg-grab-her-nuh/",
    "d": "2026-10-22T15:30:36Z",
    "x": "Time for some East Coast zess as soca and dancehall meet NYC litefeet and Jersey club.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Jay Morrg",
    "w": "Grab Her Nuh (Zess)",
    "i": "https://media.pitchfork.com/photos/6ada28beb8bcacc81dc91f0b/master/w_200,c_limit/jay.jpg",
@@ -991,6 +1720,7 @@
    "u": "https://www.nme.com/reviews/album/michael-kiwanuka-fudge-review-3973478",
    "d": "2026-10-19T08:00:26Z",
    "x": "A powerful portrait of a man on the precipice of tragedy",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "Michael Kiwanuka",
    "w": "Fudge",
    "i": "https://www.nme.com/wp-content/uploads/2026/10/Michael-Kiwanuka-Credit-Jodie-Canwell-400x254.jpg"
@@ -1002,6 +1732,7 @@
    "u": "https://pitchfork.com/reviews/track/zach-bryan-lana-del-rey-lies/",
    "d": "2026-10-16T21:21:38Z",
    "x": "Star-crossed lovers sing right past each other on the duet from Bryan’s new Young Manhood and Other Donatable Organs EP.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Zach Bryan",
    "w": "Lies” [ft. Lana Del Rey]",
    "i": "https://media.pitchfork.com/photos/6ad28eea0dd1470351a8a266/master/w_200,c_limit/Zach%20Bryan%20-%20Young%20Manhood%20and%20Other%20Donatable%20Organs%20EP%20art.jpg",
@@ -1014,6 +1745,7 @@
    "u": "https://pitchfork.com/reviews/olivia-rodrigo-chappell-roan-expectations/",
    "d": "2026-10-16T13:44:55Z",
    "x": "If there were ever a song Chappie was born to add some sauce to, it’s “expectations.”",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Olivia Rodrigo / Chappell Roan",
    "w": "expectations",
    "i": "https://media.pitchfork.com/photos/6ad2248b47a15edc78459c81/master/w_200,c_limit/3000x3000bb-100.jpg",
@@ -1026,6 +1758,7 @@
    "u": "https://www.nme.com/reviews/album/chrissi-i-hate-you-dont-leave-me-review-3973169",
    "d": "2026-10-16T07:00:14Z",
    "x": "A layered look at love, loss and self-doubt",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "Chrissi",
    "w": "I Hate You Don’t Leave Me !",
    "i": "https://www.nme.com/wp-content/uploads/2026/10/Chrissi-Credit-Lily-West-Squish-400x254.jpg"
@@ -1037,6 +1770,7 @@
    "u": "https://www.nme.com/reviews/album/the-avalanches-no-bad-memories-review-3973070",
    "d": "2026-10-14T08:00:31Z",
    "x": "Excessive and overstimulating by design",
+   "f": "https://www.nme.com/reviews/album/feed",
    "a": "The Avalanches",
    "w": "No Bad Memories",
    "i": "https://www.nme.com/wp-content/uploads/2026/10/The-Avalanches-Credit-Dean-Podmore-400x254.jpg"
@@ -1048,6 +1782,7 @@
    "u": "https://pitchfork.com/reviews/tracks/zsela-kinda-guy/",
    "d": "2026-10-13T18:52:14Z",
    "x": "The Los Angeles singer’s gossamer new single is a road song with an air of mystery.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Zsela",
    "w": "Kinda Guy",
    "i": "https://media.pitchfork.com/photos/6ace6666ffe3bdf2af9c1e7b/master/w_200,c_limit/Zsela%20-%20Kinda%20Guy%20single%20art.jpg",
@@ -1060,21 +1795,11 @@
    "u": "https://pitchfork.com/reviews/gz-up-fix-up-ya-ya-ya/",
    "d": "2026-10-13T15:49:47Z",
    "x": "A standout cypher verse is this week’s breakout record from Dominica’s fast-moving bouyon scene.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "G’z Up",
    "w": "Fix Up (Ya Ya Ya)",
    "i": "https://media.pitchfork.com/photos/6ace4ddda4c00f88367a5fea/master/w_200,c_limit/gz.jpg",
    "v": 3
-  },
-  {
-   "s": "nme",
-   "k": "album",
-   "t": "Nieve Ella – How Long Will It Take?",
-   "u": "https://www.nme.com/reviews/album/nieve-ella-how-long-will-it-take-review-3972997",
-   "d": "2026-10-13T08:00:11Z",
-   "x": "Coming to terms with the messiness of growing up",
-   "a": "Nieve Ella",
-   "w": "How Long Will It Take?",
-   "i": "https://www.nme.com/wp-content/uploads/2026/07/nieve-ella-press@2000x1270-400x254.jpg"
   },
   {
    "s": "pitchfork",
@@ -1083,6 +1808,7 @@
    "u": "https://pitchfork.com/reviews/tracks/grimes-vadakin-accelerando/",
    "d": "2026-10-09T18:45:48Z",
    "x": "The pop artist teases her long-awaited AI-inspired album with a new single that doesn’t quite live up to its presentation.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Grimes / VADAKIN",
    "w": "Accelerando",
    "i": "https://media.pitchfork.com/photos/6ac9329b1fe87c7c8b1d40bd/master/w_200,c_limit/Grimes%20Accelerando.jpg",
@@ -1095,6 +1821,7 @@
    "u": "https://pitchfork.com/reviews/tracks/star-moles-born-again/",
    "d": "2026-10-07T21:04:46Z",
    "x": "Following her 2026 breakthrough, Highway to Hell, Philly songwriter Emily Moales marks her signing to Dead Oceans with a chugging, conversational new single.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Star Moles",
    "w": "Born Again",
    "i": "https://media.pitchfork.com/photos/69d5207163f35afaaacffe54/master/w_200,c_limit/Star%20Moles-%20Highway%20to%20Hell.jpg",
@@ -1107,6 +1834,7 @@
    "u": "https://pitchfork.com/reviews/tracks/drake-don-toliver-solar-eclipse/",
    "d": "2026-10-02T19:53:32Z",
    "x": "With Texas-born crooner Don Toliver at his side, Drake reworks Ella Langley’s country hit “Choosin’ Texas” into a lounge-trap slow burn.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Drake / Don Toliver",
    "w": "Solar Eclipse",
    "i": "https://media.pitchfork.com/photos/6a07181da0d561cda5e9f900/master/w_200,c_limit/26UMGIM63616.rgb.jpg",
@@ -1119,6 +1847,7 @@
    "u": "https://pitchfork.com/reviews/tracks/ki-tissue/",
    "d": "2026-09-29T20:19:53Z",
    "x": "Built from fragmented, pitch-shifted gurgles, the elusive artist’s latest transmission has a disarming earnestness.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "ki",
    "w": "tissue",
    "i": "https://media.pitchfork.com/photos/6abc1c4a5d1654f4a04faf92/master/w_200,c_limit/ki%20tissue.jpg",
@@ -1131,6 +1860,7 @@
    "u": "https://pitchfork.com/reviews/tracks/tinashe-popstar/",
    "d": "2026-09-28T21:11:22Z",
    "x": "The title track of the artist’s first major label album in eight years is its lighters-up climax.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Tinashe",
    "w": "Popstar",
    "i": "https://media.pitchfork.com/photos/6ab4131ef7ef2378a6776d41/master/w_200,c_limit/Tinashe-%20Popstar%20.jpg",
@@ -1143,6 +1873,7 @@
    "u": "https://pitchfork.com/reviews/tracks/taylor-swift-cleveland/",
    "d": "2026-09-25T17:25:07Z",
    "x": "A would-be sweet love song set in Travis Kelce’s home state is a nadir of the new The Life of a Showgirl: The Encore edition.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Taylor Swift",
    "w": "Cleveland!",
    "i": "https://media.pitchfork.com/photos/6ab3d199bacac9b4a37a9489/master/w_200,c_limit/HS52gb3WkAEW07Y.jpeg",
@@ -1155,6 +1886,7 @@
    "u": "https://pitchfork.com/reviews/tracks/dbee-syllables/",
    "d": "2026-09-24T20:39:51Z",
    "x": "Three producers from the British rap collective step to the mic for a thunderous, brute-force blast.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "dBee",
    "w": "syllables",
    "i": "https://media.pitchfork.com/photos/6ab5848fc36a5938f66e12a4/master/w_200,c_limit/DBee%20Syllables.jpg",
@@ -1167,6 +1899,7 @@
    "u": "https://pitchfork.com/reviews/tracks/lily-konigsberg-free-byrd/",
    "d": "2026-09-24T19:47:35Z",
    "x": "The Palberta and My Idea songwriter returns with a bittersweet, feel-good solo anthem.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Lily Konigsberg",
    "w": "Free Byrd",
    "i": "https://media.pitchfork.com/photos/6ab2ba5c53bdeef50ce5947d/master/w_200,c_limit/Lily%20Konigsberg%20-%20Free%20Byrd%20single%20art.jpg",
@@ -1179,6 +1912,7 @@
    "u": "https://pitchfork.com/reviews/tracks/ella-langley-choosin-texas/",
    "d": "2026-09-19T04:00:00Z",
    "x": "Ella Langley’s timeless, traditionalist country hit is set to become the longest-running No. 1 in U.S. history this week. Like everything else in America, it’s polarizing.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Ella Langley",
    "w": "Choosin’ Texas",
    "i": "https://media.pitchfork.com/photos/6aad683d07d034f32c7298d5/master/w_200,c_limit/P4K26_SatTracks_Choosin%20Texas_2x1.png",
@@ -1191,6 +1925,7 @@
    "u": "https://pitchfork.com/reviews/tracks/yung-lean-metro-boomin-thats-it-ft-future/",
    "d": "2026-09-17T20:03:51Z",
    "x": "Three icons of 2010s hip-hop combine on the most purely Florida single from the upcoming Grand Theft Auto VI soundtrack album.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Yung Lean / Metro Boomin",
    "w": "That’s It” [ft. Future]",
    "i": "https://media.pitchfork.com/photos/6aac379b171dd454749a699b/master/w_200,c_limit/Yung%20Lean%20Metro%20Boomin%20-%20That's%20It%20GTA%20single%20art.jpg",
@@ -1203,6 +1938,7 @@
    "u": "https://pitchfork.com/reviews/lovnee-anonymat/",
    "d": "2026-09-14T16:45:32Z",
    "x": "The Martinician rapper-singer’s new single has a little something for everyone.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Lov’nee",
    "w": "Anonymat",
    "i": "https://media.pitchfork.com/photos/6aa8162cfc9433b4f792b65a/master/w_200,c_limit/lov.jpg",
@@ -1215,6 +1951,7 @@
    "u": "https://pitchfork.com/reviews/kllhhr-skin/",
    "d": "2026-09-11T16:49:20Z",
    "x": "The ambient rapper’s surprise breakout single is a barren transmission from the other side of grief.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "kllhhr",
    "w": "skin",
    "i": "https://media.pitchfork.com/photos/6aa42da6b2fc3a5873c487ba/master/w_200,c_limit/kllhhr:%20%E2%80%9Cskin%E2%80%9D.png",
@@ -1227,6 +1964,7 @@
    "u": "https://pitchfork.com/reviews/tracks/mhaol-scam-manifesto/",
    "d": "2026-09-10T19:25:25Z",
    "x": "The punk band’s sardonic new single holds a mirror to social media’s insecurity influence op.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "M(h)aol",
    "w": "Scam Manifesto",
    "i": "https://media.pitchfork.com/photos/6aa30205764ded8b306dfb16/master/w_200,c_limit/M(h)aol%20-%20%E2%80%9CScam%20Manifesto%E2%80%9D%20single%20art.jpg",
@@ -1239,6 +1977,7 @@
    "u": "https://pitchfork.com/reviews/tracks/the-war-on-drugs-whos-that/",
    "d": "2026-09-09T15:46:32Z",
    "x": "The one-off single, produced by Adam Granduciel, is a refined and revealing entry in the band’s catalog.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "The War on Drugs",
    "w": "Who’s That",
    "i": "https://media.pitchfork.com/photos/6aa16dac63d8993481ad8921/master/w_200,c_limit/the%20war%20on%20drugs%20who's%20that.jpg",
@@ -1251,6 +1990,7 @@
    "u": "https://pitchfork.com/reviews/tracks/fine-everything-in-the-shade/",
    "d": "2026-09-03T18:51:23Z",
    "x": "The Danish songwriter’s dreamy piano ballad is a love letter composed en plein air.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Fine",
    "w": "Everything in the shade",
    "i": "https://media.pitchfork.com/photos/6a99b832bb02c23e47bc3ca5/master/w_200,c_limit/Fine%20%E2%80%9CEverything%20in%20the%20shade%E2%80%9D%20single%20art.jpg",
@@ -1263,6 +2003,7 @@
    "u": "https://pitchfork.com/reviews/xaviersobased-struggle-gang/",
    "d": "2026-08-31T21:03:37Z",
    "x": "The controlled chaos of the underground star’s newest single includes a little of everything he does best.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "xaviersobased",
    "w": "Struggle Gang",
    "i": "https://media.pitchfork.com/photos/6a95e017c557076ca110e9c4/master/w_200,c_limit/xaviersobased%20-%20Struggle%20Gang%20single%20art.jpg",
@@ -1275,6 +2016,7 @@
    "u": "https://pitchfork.com/reviews/tracks/dolly-parton-i-will-always-love-you/",
    "d": "2026-08-29T04:00:00Z",
    "x": "This Saturday, we’re remembering Dolly Parton and her indelible original version of “I Will Always Love You,” a timeless declaration of loyalty and independence.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Dolly Parton",
    "w": "I Will Always Love You",
    "i": "https://media.pitchfork.com/photos/6a91b3c04c109b25d000b3c1/master/w_200,c_limit/P4K26_SatTracks_2x1.png",
@@ -1287,6 +2029,7 @@
    "u": "https://pitchfork.com/reviews/tracks/venus-ex-machina-jericho/",
    "d": "2026-08-28T19:01:50Z",
    "x": "The London musician’s forlorn and otherworldly new industrial track passes a sleepless night.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Venus Ex Machina",
    "w": "Jericho",
    "i": "https://media.pitchfork.com/photos/6a91cbf9ae998b6a6f84238d/master/w_200,c_limit/Venus%20Ex%20Machina%20-%20Jericho%20single%20art.jpg",
@@ -1299,6 +2042,7 @@
    "u": "https://pitchfork.com/reviews/belly-gang-kushington-no-jewelry/",
    "d": "2026-08-21T15:04:13Z",
    "x": "The Atlanta rapper keeps the hits coming.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Belly Gang Kushington",
    "w": "No Jewelry",
    "i": "https://media.pitchfork.com/photos/6a8844b3abfecdef0b9b237c/master/w_200,c_limit/belly%20gang.jpg",
@@ -1311,6 +2055,7 @@
    "u": "https://pitchfork.com/reviews/tracks/tyga-rack-city/",
    "d": "2026-08-15T04:00:00Z",
    "x": "On Saturdays, we go deep on one song we’ve never reviewed before. This week, we journey back to an inescapable 2011 party anthem, a canonical track that made stars out of Tyga and DJ Mustard.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Tyga",
    "w": "Rack City",
    "i": "https://media.pitchfork.com/photos/6a7f68d1e84b50e10eb997d8/master/w_200,c_limit/12UMGIM07325.rgb.jpg",
@@ -1323,11 +2068,64 @@
    "u": "https://pitchfork.com/reviews/phoebe-bridgers-i-cant-wait/",
    "d": "2026-08-14T17:36:44Z",
    "x": "Cameron Winter sidles up to the mic to duet with Phoebe on a standout track from her new record, Lost Weekend.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
    "a": "Phoebe Bridgers",
    "w": "I Can’t Wait",
    "i": "https://media.pitchfork.com/photos/6a3bde6801a6ab17fa387818/master/w_200,c_limit/unnamed%20(48).jpg",
    "v": 3
+  },
+  {
+   "s": "pitchfork",
+   "k": "song",
+   "t": "Troye Sivan – “She’s the Best”",
+   "u": "https://pitchfork.com/reviews/tracks/troye-sivan-shes-the-best/",
+   "d": "2026-08-14T14:40:27Z",
+   "x": "The Australian pop singer makes his downtempo comeback with a new song and video starring Nicole Kidman.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
+   "a": "Troye Sivan",
+   "w": "She’s the Best",
+   "i": "https://media.pitchfork.com/photos/6a7f252f84348e8cbb2b41ac/master/w_200,c_limit/Troye%20Sivan%20She's%20the%20Best.jpg",
+   "v": 3
+  },
+  {
+   "s": "pitchfork",
+   "k": "song",
+   "t": "Stella Lefty – “Boston”",
+   "u": "https://pitchfork.com/reviews/tracks/stella-lefty-boston/",
+   "d": "2026-08-06T18:06:18Z",
+   "x": "Why is this cliched song that blatantly cribs Noah Kahan’s “Stick Season” everywhere right now?",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
+   "a": "Stella Lefty",
+   "w": "Boston",
+   "i": "https://media.pitchfork.com/photos/6a74c5205971675faa101ab8/master/w_200,c_limit/Stella%20Lefty%20-%20Boston%20single%20art.jpg",
+   "v": 3
+  },
+  {
+   "s": "pitchfork",
+   "k": "song",
+   "t": "Slayyyter – “Brand New Chanel$”",
+   "u": "https://pitchfork.com/reviews/tracks/slayyyter-brand-new-chanels/",
+   "d": "2026-08-03T19:11:04Z",
+   "x": "The sequel to “Beat Up Chanel$” is tuned to the pop radio of the early 2010s.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
+   "a": "Slayyyter",
+   "w": "Brand New Chanel$",
+   "i": "https://media.pitchfork.com/photos/6a70e55d1334bd9d9739b6d7/master/w_200,c_limit/Slayyyter%20-%20Brand%20New%20Chanel$%20single%20art.jpg",
+   "v": 3
+  },
+  {
+   "s": "pitchfork",
+   "k": "song",
+   "t": "Kade Young – “Leswerk”",
+   "u": "https://pitchfork.com/reviews/tracks/kade-young-leswerk/",
+   "d": "2026-07-31T16:13:47Z",
+   "x": "A standout from the producer’s new Gravity EP shows off the streamlined sound of contemporary Baltimore club.",
+   "f": "https://pitchfork.com/feed/feed-track-reviews/rss",
+   "a": "Kade Young",
+   "w": "Leswerk",
+   "i": "https://media.pitchfork.com/photos/6a6cb3b47c8966e28ed9a191/master/w_200,c_limit/Kade%20Young%20-%20Gravity%20EP%20album%20art.jpg",
+   "v": 3
   }
  ],
- "updated": "2026-11-06T08:37:11Z"
+ "updated": "2026-11-06T14:50:18Z"
 }
