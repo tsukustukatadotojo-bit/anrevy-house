@@ -8,7 +8,7 @@
 <title>vy@studio:~$</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Monoton&amp;display=swap" rel="stylesheet">
 <style>
   /* Studio: tĩnh hoàn toàn (không hiệu ứng chuyển động), chữ xanh trên nền đen kiểu terminal.
      Màn hình chia khung: Letterboxd | nhạc mới | Spotify + Last.fm — mọi thứ chạy ngay trong trang. */
@@ -36,29 +36,24 @@
   /* ---- màn hình Studio: lưới khung ---- */
   #desk{position:fixed;inset:0;overflow:hidden;display:grid;
     grid-template-columns:clamp(290px,25vw,380px) minmax(0,1fr) clamp(320px,28vw,430px) 96px;
-    grid-template-rows:auto minmax(0,1fr) var(--bar);column-gap:14px;padding:14px 0 0 18px;
+    grid-template-rows:minmax(0,1fr) var(--bar);column-gap:14px;padding:14px 0 0 18px;
     background:#000 repeating-linear-gradient(0deg,rgba(57,255,106,.03) 0 1px,transparent 1px 3px)}
-  .sys{grid-column:1;grid-row:1;min-width:0;padding-bottom:12px;color:var(--g)}
-  .banner{font:clamp(9px,.82vw,12px)/1.1 var(--mono);color:var(--g);white-space:pre;overflow:hidden}
-  .sysline{margin-top:7px;font:12px/1.45 var(--mono);color:var(--g-mid)}
-  .sysline b{font-weight:400;color:var(--g)}
-  .sysline .ok{color:var(--g-hi)}
-  .sysline .amb{color:var(--amber)}
-  #w-letterboxd{grid-column:1;grid-row:2;margin-bottom:12px}
-  #w-music{grid-column:2;grid-row:1/3;margin-bottom:12px}
-  .rcol{grid-column:3;grid-row:1/3;min-height:0;display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+  .lcol{grid-column:1;grid-row:1;min-height:0;display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+  #w-plaza{flex:none;height:clamp(200px,30vh,270px)}
+  #w-letterboxd{flex:1;min-height:0}
+  #w-music{grid-column:2;grid-row:1;margin-bottom:12px}
+  .rcol{grid-column:3;grid-row:1;min-height:0;display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
   #w-spotify{flex:1;min-height:0}
   #w-lastfm{flex:none;height:230px}
 
   /* hình nền: chữ AN VY + logo ở giữa màn hình đen (hiện khi ẩn bớt khung) */
-  .wall{position:fixed;left:0;right:0;top:0;bottom:var(--bar);z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;pointer-events:none;color:var(--g);text-align:center}
+  .wall{position:fixed;left:0;right:0;top:0;bottom:var(--bar);z-index:-1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;pointer-events:none;color:var(--g);text-align:center}
   .wall svg{width:clamp(110px,12vw,168px);height:auto}
-  .wall pre{font:clamp(17px,2.4vw,34px)/1.05 var(--mono);white-space:pre;color:var(--g);letter-spacing:0}
+  .wall h2{font:400 clamp(58px,8.4vw,128px)/1 'Monoton',var(--vt);color:var(--g);letter-spacing:.04em;white-space:nowrap}
   .wall p{font:12.5px/1.4 var(--mono);color:var(--g-mid);letter-spacing:.24em}
-  .sys,.icons,.win,.rcol{z-index:1}
 
   /* cột biểu tượng ứng dụng bên phải */
-  .icons{grid-column:4;grid-row:1/3;margin-top:-14px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border-left:1px solid var(--g-line);background:#000;overflow-y:auto;scrollbar-width:none}
+  .icons{grid-column:4;grid-row:1;margin-top:-14px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border-left:1px solid var(--g-line);background:#000;overflow-y:auto;scrollbar-width:none}
   .icon{display:flex;flex-direction:column;align-items:center;gap:3px;width:84px;padding:7px 4px;color:var(--g);text-decoration:none;font:15px/1 var(--vt);letter-spacing:.04em;text-align:center}
   .icon svg{width:32px;height:32px}
   .icon:hover,.icon:focus-visible,.icon.on{background:var(--g-bg);outline:1px solid var(--g-dim)}
@@ -158,6 +153,12 @@
   .nm-more{margin-top:6px}
   .nm-act{flex:none;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
   .nm-frame{flex:1;min-height:0;display:flex;flex-direction:column}
+  .nm-day{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;padding:6px 12px;background:#031a0a;border-bottom:1px solid var(--g-line);font:12px/1.3 var(--mono);color:var(--g)}
+  .nm-day.today{background:var(--g);color:#000}
+  .nm-day span{color:var(--g-mid)}
+  .nm-day.today span{color:#000}
+  .tabs .cnt{color:var(--amber);font-size:11.5px}
+  .tabs [aria-selected="true"] .cnt{color:#000}
   .ch-bar{position:sticky;top:0;z-index:1;display:flex;gap:6px;padding:8px 12px;background:#000;border-bottom:1px dashed var(--g-line)}
   .ch-note{padding:7px 12px;font:12px/1.45 var(--mono);color:var(--g-mid);border-bottom:1px solid #0b2a14}
   .ch-note b{font-weight:400;color:var(--g)}
@@ -174,10 +175,14 @@
   .ch-row .ib{flex:none;width:30px;height:26px;border:1px solid var(--g-dim);color:var(--g);font:13px/1 var(--mono)}
   .ch-row .ib:hover{background:var(--g);color:#000}
   .nm-fbar{flex:none;display:flex;align-items:center;gap:10px;padding:5px 8px;border-bottom:1px dashed var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
-  .nm-fbar span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nm-fbar #nmFrameUrl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nm-sites{display:flex;gap:6px;flex:none}
+  .nm-sites:empty{display:none}
   .nm-frame iframe{flex:1;min-height:0;width:100%;border:0;background:#fff}
 
   /* ---- Spotify (phải, trên) ---- */
+  .win.full{position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:var(--bar)!important;width:auto!important;height:auto!important;z-index:980!important;margin:0!important}
+  #w-plaza .wb{overflow:hidden;background:#000}
   #w-spotify.big{position:fixed;left:50vw;top:14px;right:108px;bottom:calc(var(--bar) + 12px);z-index:900;margin:0}
   #spBar{cursor:pointer}
   .sp-ctl{flex:none;border-bottom:1px solid var(--g-line)}
@@ -254,7 +259,7 @@
   .ig .frame iframe{display:block;width:100%;height:100%;border:0}
 
   /* thanh tác vụ */
-  .taskbar{grid-column:1/-1;grid-row:3;margin-left:-18px;display:flex;align-items:center;gap:6px;padding:0 8px;border-top:1px solid var(--g-dim);background:#000;font:17px/1 var(--vt);z-index:950}
+  .taskbar{grid-column:1/-1;grid-row:2;margin-left:-18px;display:flex;align-items:center;gap:6px;padding:0 8px;border-top:1px solid var(--g-dim);background:#000;font:17px/1 var(--vt);z-index:950}
   .start{height:28px;padding:0 12px;border:1px solid var(--g);color:#000;background:var(--g)}
   .start[aria-expanded="true"]{background:#000;color:var(--g)}
   .tasks{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
@@ -264,6 +269,8 @@
   .clock{flex:none;color:var(--g-mid);padding:0 6px;font:12.5px/1 var(--mono)}
   .menu{position:fixed;left:8px;bottom:calc(var(--bar) + 4px);z-index:999;min-width:240px;border:1px solid var(--g);background:#000}
   .menu p{padding:8px 12px;border-bottom:1px dashed var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
+  .menu p:not(:first-child){border-top:1px dashed var(--g-line);padding:6px 12px}
+  .menu{max-height:calc(100vh - var(--bar) - 12px);overflow-y:auto}
   .menu button,.menu a{display:block;width:100%;padding:8px 14px;text-align:left;font:13.5px/1.2 var(--mono);color:var(--g);text-decoration:none}
   .menu button:hover,.menu a:hover,.menu button:focus-visible,.menu a:focus-visible{background:var(--g);color:#000;outline:none}
   .toast{position:fixed;left:50%;bottom:calc(var(--bar) + 18px);transform:translateX(-50%);z-index:1000;max-width:min(92vw,520px);padding:8px 14px;border:1px solid var(--g);background:#000;color:var(--g);font:13px/1.45 var(--mono);box-shadow:4px 4px 0 rgba(57,255,106,.15)}
@@ -275,17 +282,16 @@
   @media (max-width: 899px){
     :root{--bar:44px;--spmini:106px}
     #desk{display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;padding:0 0 calc(var(--bar) + var(--spmini) + 16px)}
-    .rcol{display:contents}
-    .sys{order:1;padding:12px 14px 0}
-    .banner{font-size:7.4px}
-    .sysline{font-size:11.5px}
-    .icons{order:2;margin:10px 0 0;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:2px;padding:8px 6px;border-left:0;border-top:1px solid var(--g-line);border-bottom:1px solid var(--g-line);overflow:visible}
+    .rcol,.lcol{display:contents}
+    #w-plaza{order:3;flex:none;height:300px;margin:12px 12px 0}
+    .icons{order:2;margin:0;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:2px;padding:8px 6px;border-left:0;border-top:1px solid var(--g-line);border-bottom:1px solid var(--g-line);overflow:visible}
     .icon{width:auto;min-width:54px;padding:6px 6px;font-size:14px}
     .icon svg{width:26px;height:26px}
-    #w-lastfm{order:3;flex:none;height:auto;margin:12px 12px 0}
+    #w-lastfm{order:4;flex:none;height:auto;margin:12px 12px 0}
     #w-lastfm .wb{max-height:260px}
-    #w-music{order:4;flex:none;height:76vh;margin:12px 12px 0}
-    #w-letterboxd{order:5;flex:none;height:70vh;margin:12px}
+    #w-music{order:5;flex:none;height:76vh;margin:12px 12px 0}
+    #w-letterboxd{order:6;flex:none;height:70vh;margin:12px}
+    .win.full{bottom:var(--bar)!important;z-index:980!important}
     #w-spotify{position:fixed;left:0;right:0;bottom:var(--bar);height:var(--spmini);z-index:60;flex:none}
     #w-spotify:not(.big) .sp-ctl,#w-spotify:not(.big) .sp-foot,#w-spotify:not(.big) .sp-res{display:none!important}
     #w-spotify.big{left:0;right:0;top:auto;bottom:var(--bar);height:84vh;height:84dvh}
@@ -297,7 +303,7 @@
     .toast{bottom:calc(var(--bar) + var(--spmini) + 12px)}
     .wall{display:none;bottom:calc(var(--bar) + var(--spmini))}
     #desk.bare .wall{display:flex;position:static;order:3;padding:48px 0 24px}
-    .wall pre{font-size:clamp(14px,4.6vw,22px)}
+    .wall h2{font-size:clamp(46px,15vw,72px)}
   }
 </style>
 </head>
@@ -319,18 +325,16 @@
       <path d="M72 66v28l23-14z" fill="currentColor" stroke="none"/>
       <rect x="4" y="74" width="8" height="12" fill="#000" stroke-width="2"/><rect x="148" y="74" width="8" height="12" fill="#000" stroke-width="2"/>
     </svg>
-<pre>░█▀█░█▀█░░░█░█░█░█░
-░█▀█░█░█░░░▀▄▀░░█░░
-░▀░▀░▀░▀░░░░▀░░░▀░░</pre>
-    <p>vy@studio · music &amp; films</p>
+    <h2>AN VY</h2>
+    <p>HaMi@studio · music &amp; films</p>
   </div>
-  <header class="sys">
-<pre class="banner" aria-hidden="true">░█▀▀░▀█▀░█░█░█▀▄░▀█▀░█▀█
-░▀▀█░░█░░█░█░█░█░░█░░█░█
-░▀▀▀░░▀░░▀▀▀░▀▀░░▀▀▀░▀▀▀  ▓▒░ anrevy house ░▒▓</pre>
-    <p class="sysline"><b>vy@studio:~$</b> whoami → anrevy · music &amp; films</p>
-    <p class="sysline"><b>vy@studio:~$</b> uptime → since 12.08.2001 · STATUS: <span class="ok">◉ ONLINE</span></p>
-  </header>
+
+  <div class="lcol">
+  <!-- Nightwave Plaza: radio vaporwave, mở rộng toàn màn hình được -->
+  <section class="win" id="w-plaza" data-app="plaza" aria-label="Nightwave Plaza">
+    <div class="tb"><span class="t">plaza.one <i>— nightwave plaza · vaporwave radio</i></span><button type="button" data-act="hide" aria-label="Ẩn khung Plaza (radio vẫn phát)">_</button><button type="button" id="plFull" aria-label="Mở rộng toàn màn hình" aria-pressed="false">⛶</button></div>
+    <div class="wb"><iframe id="plFrame" title="Nightwave Plaza — radio vaporwave" allow="autoplay; encrypted-media; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+  </section>
 
   <!-- Letterboxd: cố định bên trái -->
   <section class="win" id="w-letterboxd" data-app="letterboxd" aria-label="Letterboxd">
@@ -339,23 +343,23 @@
     <div class="tabs" role="tablist" aria-label="Letterboxd"><button type="button" role="tab" data-lb="watched" aria-selected="true">▣ đã xem</button><button type="button" role="tab" data-lb="watchlist" aria-selected="false">☆ watchlist <span id="wlN"></span></button></div>
     <div class="wb" id="lbBody"><p class="note">◌ đang tải phim…</p></div>
   </section>
+  </div>
 
   <!-- Nhạc mới: giữa -->
   <section class="win" id="w-music" data-app="music" aria-label="Nhạc mới">
-    <div class="tb"><span class="t">newmusic.feed <i>— pitchfork · stereogum · nme · npr · consequence · bandcamp</i></span><span class="r" id="nmUpd"></span><button type="button" data-act="hide" aria-label="Ẩn khung nhạc mới">_</button></div>
+    <div class="tb"><span class="t">newmusic.feed <i>— 16 nguồn tin nhạc · cập nhật mỗi ngày</i></span><span class="r" id="nmUpd"></span><button type="button" data-act="hide" aria-label="Ẩn khung nhạc mới">_</button></div>
     <div class="tabs" role="tablist" aria-label="Nhạc mới">
       <button type="button" role="tab" data-tab="song" aria-selected="true">♪ bài mới</button>
       <button type="button" role="tab" data-tab="album" aria-selected="false">◎ album mới</button>
+      <button type="button" role="tab" data-tab="rel" aria-selected="false">▦ phát hành</button>
       <button type="button" role="tab" data-tab="news" aria-selected="false">✎ tin nhạc</button>
       <button type="button" role="tab" data-tab="charts" aria-selected="false">♫ top charts</button>
       <span class="sep" aria-hidden="true"></span>
-      <button type="button" role="tab" data-site="npr" aria-selected="false">npr</button>
-      <button type="button" role="tab" data-site="stereogum" aria-selected="false">stereogum</button>
-      <button type="button" role="tab" data-site="consequence" aria-selected="false">consequence</button>
+      <button type="button" role="tab" data-site="npr" aria-selected="false">báo nhạc</button>
     </div>
     <div class="wb" id="nmBody"><p class="note">◌ đang tải nhạc mới…</p></div>
     <div class="nm-frame" id="nmFrameWrap" hidden>
-      <div class="nm-fbar"><button class="btn sm" type="button" id="nmBack">← danh sách</button><span id="nmFrameUrl"></span></div>
+      <div class="nm-fbar"><button class="btn sm" type="button" id="nmBack">← danh sách</button><span class="nm-sites" id="nmSites"></span><span id="nmFrameUrl"></span></div>
       <iframe id="nmFrame" title="Trang nhạc" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox allow-presentation" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   </section>
@@ -387,6 +391,7 @@
     <button class="icon" data-app="letterboxd" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="17" r="4.5" fill="currentColor"/><circle cx="17" cy="17" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="17" r="4.5" fill="currentColor"/></svg>letterboxd</button>
     <button class="icon" data-app="music" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="3" fill="currentColor"/><path d="M17 7v4" stroke="currentColor" stroke-width="2"/></svg>new music</button>
     <button class="icon" data-app="lastfm" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 20v-6h3v6zM12 24V10h3v14zM17 22v-9h3v9zM22 26V8h3v18z" fill="currentColor"/></svg>last.fm</button>
+    <button class="icon" data-app="plaza" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="9" width="32" height="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 9 24 2" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 15h9M20 20h9M20 25h9" stroke="currentColor" stroke-width="2"/></svg>plaza</button>
     <button class="icon" data-app="instagram" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="5" y="5" width="24" height="24" rx="7" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17" cy="17" r="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="24" cy="10" r="1.6" fill="currentColor"/></svg>instagram</button>
     <a class="icon" id="imdbIcon" href="https://streamimdb.ru/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="7" width="32" height="20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 12v10M10 22V12l2.5 6 2.5-6v10M19 12v10h2q3 0 3-5t-3-5zM27 11v11m0-5q3-1 3 2.5T27 22" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>imdb <small>↗</small></a>
     <a class="icon" href="../home.html"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 16 17 6l12 10v12H5z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14 28v-7h6v7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>home</a>
@@ -412,8 +417,14 @@
     <button type="button" role="menuitem" data-app="music">◎ new music</button>
     <button type="button" role="menuitem" data-app="letterboxd">▣ letterboxd</button>
     <button type="button" role="menuitem" data-app="lastfm">▮ last.fm</button>
+    <button type="button" role="menuitem" data-app="plaza">▤ plaza.one · radio</button>
     <button type="button" role="menuitem" data-app="instagram">◫ instagram</button>
     <a role="menuitem" href="https://streamimdb.ru/" target="_blank" rel="noopener noreferrer">▶ imdb ↗</a>
+    <p>✦ ai</p>
+    <a role="menuitem" href="https://claude.ai/new" target="_blank" rel="noopener">✦ claude ↗</a>
+    <a role="menuitem" href="https://chatgpt.com" target="_blank" rel="noopener">✦ chatgpt ↗</a>
+    <a role="menuitem" href="https://gemini.google.com" target="_blank" rel="noopener">✦ gemini ↗</a>
+    <p>⌂ trang</p>
     <a role="menuitem" href="../home.html">⌂ anrevy house</a>
     <button type="button" role="menuitem" id="lockBtn">⏻ khoá studio</button>
   </div>
@@ -444,8 +455,9 @@
     stereogum: ['stereogum', 'https://www.stereogum.com/'],
     consequence: ['consequence', 'https://consequence.net/category/music/'],
   };
-  const SRC = { pitchfork: 'pitchfork', stereogum: 'stereogum', nme: 'nme', consequence: 'consequence', npr: 'npr music', bandcamp: 'bandcamp daily' };
-  const FRAMEABLE = ['stereogum', 'nme', 'consequence', 'npr'];   // các trang cho phép mở trong khung (pitchfork, bandcamp thì không)
+  const SRC = { pitchfork: 'pitchfork', stereogum: 'stereogum', nme: 'nme', consequence: 'consequence', npr: 'npr music', bandcamp: 'bandcamp daily',
+    guardian: 'the guardian', rollingstone: 'rolling stone', billboard: 'billboard', clash: 'clash', quietus: 'the quietus', diy: 'diy', spin: 'spin', soompi: 'soompi · k-pop' };
+  const FRAMEABLE = ['stereogum', 'nme', 'consequence', 'npr', 'rollingstone', 'quietus', 'diy', 'soompi'];   // các trang cho phép mở trong khung (pitchfork, bandcamp, guardian, billboard, clash, spin thì không)
   /* ==================================================== */
   const $ = s => document.querySelector(s);
   const esc = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -503,8 +515,8 @@
   /* ---------- 3. cửa sổ, thanh tác vụ, menu ---------- */
   let z = 10;
   const wins = {}, tasks = $('#tasks');
-  ['letterboxd', 'music', 'spotify', 'lastfm', 'instagram'].forEach(a => { wins[a] = $('#w-' + a); });
-  const NAMES = { spotify: 'spotify', music: 'new music', letterboxd: 'letterboxd', lastfm: 'last.fm', instagram: 'instagram' };
+  ['plaza', 'letterboxd', 'music', 'spotify', 'lastfm', 'instagram'].forEach(a => { wins[a] = $('#w-' + a); });
+  const NAMES = { plaza: 'plaza', spotify: 'spotify', music: 'new music', letterboxd: 'letterboxd', lastfm: 'last.fm', instagram: 'instagram' };
   function front(w){
     Object.values(wins).forEach(x => x.classList.remove('front'));
     w.classList.add('front'); w.style.zIndex = ++z;
@@ -518,10 +530,11 @@
   // ẩn / hiện khung (nhớ trên máy này); khung ẩn hiện nét đứt ở thanh tác vụ, bấm để mở lại
   const HID = new Set(ls.get('st-hidden') || []);
   const saveHid = () => ls.set('st-hidden', [...HID]);
-  function updBare(){ $('#desk').classList.toggle('bare', ['letterboxd', 'music', 'lastfm'].every(a => wins[a].hidden)); }
+  function updBare(){ $('#desk').classList.toggle('bare', ['plaza', 'letterboxd', 'music', 'lastfm'].every(a => wins[a].hidden)); }
   function hideApp(app){
     const w = wins[app]; if (!w) return;
     if (app === 'spotify' && spW.classList.contains('big')) setBig(false);
+    if (w.classList.contains('full')) setFull(w, false);
     w.hidden = true; taskBtn(app).classList.add('min'); HID.add(app); saveHid(); updBare();
   }
   function openApp(app){
@@ -566,6 +579,17 @@
   $('#lockBtn').addEventListener('click', () => { try { sessionStorage.removeItem('studio-open'); } catch (e) {} location.reload(); });
   const clock = $('#clock');
   const tickClock = () => { const d = new Date(); clock.textContent = d.toLocaleDateString('vi-VN') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+
+  /* ================= KHUNG MỞ RỘNG TOÀN MÀN HÌNH (plaza.one) ================= */
+  function setFull(w, on){
+    w.classList.toggle('full', on);
+    const b = w.querySelector('#plFull');
+    if (b){ b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Thu nhỏ' : 'Mở rộng toàn màn hình'); b.textContent = on ? '▭' : '⛶'; }
+    if (on) front(w);
+  }
+  $('#plFull').addEventListener('click', e => { e.stopPropagation(); setFull(wins.plaza, !wins.plaza.classList.contains('full')); });
+  wins.plaza.querySelector('.tb').addEventListener('dblclick', e => { if (!e.target.closest('button')) setFull(wins.plaza, !wins.plaza.classList.contains('full')); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && wins.plaza.classList.contains('full')) setFull(wins.plaza, false); });
 
   /* ================= SPOTIFY ================= */
   // open.spotify.com không cho đặt trong trang khác; khung này dùng trình phát nhúng chính thức của Spotify,
@@ -946,17 +970,40 @@
   /* ================= NHẠC MỚI ================= */
   const nmBody = $('#nmBody'), nmWrap = $('#nmFrameWrap'), nmFrame = $('#nmFrame');
   let nmData = null, nmTab = ls.get('nm-tab') || 'song';
-  if (!['song', 'album', 'news', 'charts'].includes(nmTab)) nmTab = 'song';
+  if (!['song', 'album', 'rel', 'news', 'charts'].includes(nmTab)) nmTab = 'song';
+  const WD = ['chủ nhật', 'thứ 2', 'thứ 3', 'thứ 4', 'thứ 5', 'thứ 6', 'thứ 7'];
+  const dkey = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  function dayLabel(k){
+    const now = new Date(), t = dkey(now), y = dkey(new Date(now - 864e5)), tm = dkey(new Date(+now + 864e5));
+    const [Y, M, D] = k.split('-').map(Number), d = new Date(Y, M - 1, D), dm = String(D).padStart(2, '0') + '/' + String(M).padStart(2, '0');
+    return (k === t ? 'hôm nay' : k === y ? 'hôm qua' : k === tm ? 'ngày mai' : WD[d.getDay()]) + ' · ' + dm;
+  }
+  // số mục mới trong 24 giờ, hiện cạnh tên tab
+  function nmCounts(){
+    if (!nmData || !nmData.items) return;
+    const since = Date.now() - 864e5;
+    document.querySelectorAll('#w-music [data-tab]').forEach(b => {
+      const k = b.dataset.tab; let n = 0;
+      if (k === 'rel') n = relData && relData.items ? relData.items.filter(r => r.d === dkey(new Date())).length : 0;
+      else if (k !== 'charts') n = nmData.items.filter(it => it.k === k && Date.parse(it.d) > since).length;
+      let sp = b.querySelector('.cnt'); if (!sp){ sp = document.createElement('span'); sp.className = 'cnt'; b.appendChild(sp); }
+      sp.textContent = n ? ' +' + n : '';
+    });
+  }
   function nmTabs(sel){ document.querySelectorAll('#w-music [role="tab"]').forEach(b => b.setAttribute('aria-selected', (b.dataset.tab || b.dataset.site) === sel)); }
   function nmRender(){
     nmWrap.hidden = true; nmBody.hidden = false; nmTabs(nmTab);
     if (nmTab === 'charts'){ chRender(); return; }
+    if (nmTab === 'rel'){ relRender(); return; }
     if (!nmData || !nmData.items){ nmBody.innerHTML = '<p class="note">◌ chưa có dữ liệu nhạc mới, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
     const list = nmData.items.filter(it => it.k === nmTab);
+    let lastDay = '';
     nmBody.innerHTML = '<ul class="nm-list">' + list.map((it, i) => {
+      const dk = it.d ? dkey(new Date(it.d)) : '', head = dk && dk !== lastDay ? `<li class="nm-day">${esc(dayLabel(dk))}</li>` : '';
+      lastDay = dk || lastDay;
       const sub = [SRC[it.s] || it.s, ago(it.d)].filter(Boolean).join(' · ') + (it.sc != null ? ` · <span class="sc">${esc(it.sc.toFixed(1))}</span>` : '') + (it.bnm ? ' · <span class="sc">★ best new music</span>' : '');
       const can = it.k !== 'news';
-      return `<li class="nm-item" data-i="${i}">${img(it.i)}<div class="nm-meta"><button class="nm-open" type="button">${esc(it.t)}</button><span class="nm-sub">${sub}</span>${it.x ? `<p class="nm-x">${esc(it.x)}</p>` : ''}</div>
+      return head + `<li class="nm-item" data-i="${i}">${img(it.i)}<div class="nm-meta"><button class="nm-open" type="button">${esc(it.t)}</button><span class="nm-sub">${sub}</span>${it.x ? `<p class="nm-x">${esc(it.x)}</p>` : ''}</div>
         <div class="nm-act">${can ? `<button class="btn sm solid" type="button" data-act="sp" aria-label="Tìm và phát ${esc(it.t)} trên Spotify">▶ spotify</button>` : ''}<button class="btn sm" type="button" data-act="read">${FRAMEABLE.includes(it.s) ? 'đọc' : 'xem'}</button></div></li>`;
     }).join('') + '</ul>' || '<p class="note">◌ chưa có mục nào.</p>';
     nmBody.querySelectorAll('.nm-item').forEach(li => {
@@ -976,11 +1023,14 @@
     if (open && !more){ more = document.createElement('p'); more.className = 'nm-more'; more.innerHTML = `<a class="btn sm" href="${esc(it.u)}" target="_blank" rel="noopener">đọc toàn bài trên ${esc(SRC[it.s] || it.s)} ↗</a>`; li.querySelector('.nm-meta').appendChild(more); }
     if (more) more.hidden = !open;
   }
-  function nmFrameOpen(url, label, tab){
+  function nmFrameOpen(url, label, site){
     nmBody.hidden = true; nmWrap.hidden = false;
-    $('#nmFrameUrl').textContent = label || url;
+    $('#nmFrameUrl').textContent = site ? '' : (label || url);
+    const box = $('#nmSites');
+    box.innerHTML = site ? Object.keys(SITES).map(k => `<button type="button" class="chip" data-s="${k}" aria-pressed="${k === site}">${esc(SITES[k][0])}</button>`).join('') : '';
+    box.querySelectorAll('[data-s]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.s; nmFrameOpen(SITES[k][1], SITES[k][0], k); }));
     if (nmFrame.getAttribute('src') !== url) nmFrame.src = url;
-    nmTabs(tab || '');
+    nmTabs(site ? 'npr' : '');
   }
   $('#nmBack').addEventListener('click', () => { nmFrame.removeAttribute('src'); nmRender(); });
   document.querySelectorAll('#w-music [data-tab]').forEach(b => b.addEventListener('click', () => { nmTab = b.dataset.tab; ls.set('nm-tab', nmTab); nmRender(); nmBody.scrollTop = 0; }));
@@ -1004,6 +1054,28 @@
       else spFind(r.a + ' ' + r.t, 'track', true);
     }));
   }
+  // ---- album phát hành quanh hôm nay (Wikipedia) ----
+  let relData = null;
+  function relRender(){
+    const items = (relData && relData.items) || [];
+    if (!items.length){ nmBody.innerHTML = '<p class="note">◌ chưa có lịch phát hành, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
+    const today = dkey(new Date());
+    const groups = {};
+    items.forEach((r, i) => { (groups[r.d] = groups[r.d] || []).push(i); });
+    const days = Object.keys(groups);
+    const order = [...days.filter(d => d === today), ...days.filter(d => d > today).sort(), ...days.filter(d => d < today).sort().reverse()];
+    nmBody.innerHTML = '<p class="ch-note">album phát hành 7 ngày qua và sắp tới · nguồn: Wikipedia “List of albums” · ▶ tìm album trên Spotify</p><ul class="nm-list">' +
+      order.map(d => `<li class="nm-day${d === today ? ' today' : ''}">${esc(dayLabel(d))}${d > today ? ' · sắp ra' : ''} <span>${groups[d].length} album</span></li>` +
+        groups[d].map(i => { const r = items[i];
+          return `<li class="ch-row"><div><b>${esc(r.w)}</b><span>${esc(r.a)}${r.g ? ' · ' + esc(r.g) : ''}${r.l ? ' · ' + esc(r.l) : ''}</span></div><button class="ib" type="button" data-r="${i}" aria-label="Tìm ${esc(r.w)} trên Spotify">▶</button></li>`; }).join('')).join('') + '</ul>';
+    nmBody.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => { const r = items[+b.dataset.r]; spFind(r.a + ' ' + r.w, 'album', true); }));
+  }
+  function loadReleases(){
+    fetch('data/releases.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d || (relData && d.updated === relData.updated)) return;
+      relData = d; nmCounts(); if (nmTab === 'rel' && nmWrap.hidden) relRender();
+    }).catch(() => {});
+  }
   function loadCharts(){
     fetch('data/charts.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
       if (!d || (chData && d.updated === chData.updated)) return;
@@ -1016,6 +1088,7 @@
       const fresh = !nmData || d.updated !== nmData.updated;
       nmData = d;
       $('#nmUpd').textContent = d.updated ? 'cập nhật ' + ago(d.updated) : '';
+      nmCounts();
       if (fresh && nmWrap.hidden) nmRender();
     }).catch(() => { if (!nmData) nmRender(); });
   }
@@ -1098,7 +1171,8 @@
   async function openDesk(){
     if (opened) return; opened = true;
     $('#desk').hidden = false; document.body.classList.remove('locked');
-    ['spotify', 'music', 'letterboxd', 'lastfm'].forEach(taskBtn);
+    ['plaza', 'spotify', 'music', 'letterboxd', 'lastfm'].forEach(taskBtn);
+    $('#plFrame').src = 'https://plaza.one/';
     front(wins.music);
     HID.forEach(app => { if (wins[app] && app !== 'instagram'){ wins[app].hidden = true; taskBtn(app).classList.add('min'); } });
     updBare();
@@ -1106,9 +1180,9 @@
     await spReturn();
     spInitPlayer();
     spLoadAccount();
-    loadLetterboxd(); loadMusic(); loadCharts(); lfPoll();
+    loadLetterboxd(); loadMusic(); loadCharts(); loadReleases(); lfPoll();
     setInterval(lfPoll, LASTFM_POLL);
-    setInterval(() => { if (!document.hidden){ loadLetterboxd(); loadMusic(); loadCharts(); } }, 10 * 60 * 1000);
+    setInterval(() => { if (!document.hidden){ loadLetterboxd(); loadMusic(); loadCharts(); loadReleases(); } }, 10 * 60 * 1000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden){ lfPoll(); loadMusic(); } });
     tickClock(); setInterval(tickClock, 20000);
   }

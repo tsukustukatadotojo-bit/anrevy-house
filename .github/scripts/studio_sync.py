@@ -6,6 +6,7 @@
 2. Nhạc mới: RSS của Pitchfork, Stereogum, NME, Consequence, NPR Music, Bandcamp Daily → studio/data/music.json
    (AOTY, Rate Your Music, Paste chặn cả khung lẫn máy đọc tự động.)
 3. Bảng xếp hạng: Spotify US/UK hằng ngày, Apple Music Nga/Trung Quốc (kworb.net) → studio/data/charts.json
+4. Album phát hành quanh hôm nay (Wikipedia "List of 2026 albums") → studio/data/releases.json
 
 Lịch chạy 30 phút một lần: Letterboxd (RSS + phim đã xem) mỗi lần; Watchlist, nhạc mới, bảng xếp hạng 2 giờ một lần.
 
@@ -218,7 +219,22 @@ FEEDS = [
     ('consequence', 'news', 'https://consequence.net/feed/'),
     ('npr', 'news', 'https://feeds.npr.org/1039/rss.xml'),
     ('bandcamp', 'news', 'https://daily.bandcamp.com/feed'),
+    ('pitchfork', 'news', 'https://pitchfork.com/feed/feed-news/rss'),
+    ('nme', 'news', 'https://www.nme.com/news/music/feed'),
+    ('guardian', 'news', 'https://www.theguardian.com/music/rss'),
+    ('rollingstone', 'news', 'https://www.rollingstone.com/music/music-news/feed/'),
+    ('billboard', 'news', 'https://www.billboard.com/c/music/music-news/feed/'),
+    ('clash', 'news', 'https://www.clashmusic.com/feed/'),
+    ('quietus', 'news', 'https://thequietus.com/feed'),
+    ('diy', 'news', 'https://diymag.com/feed'),
+    ('spin', 'news', 'https://www.spin.com/feed/'),
+    ('soompi', 'news', 'https://www.soompi.com/feed'),
 ]
+RELEASE_DAYS = (-7, 10)          # album phát hành: 7 ngày trước → 10 ngày tới
+RELEASES_OUT = 'studio/data/releases.json'
+# tiêu đề kiểu "Artist Shares New Single ‘Song’" → bài / album mới
+VERB = r'(?:(?:Unveil|Share|Drop|Release|Surprise-Release|Debut|Premiere|Unleash|Deliver|Announce|Tease|Unwrap|Preview)(?:s|es)?|Returns? With|(?:Is|Are) Back With|Celebrates? .{1,40}? on)'
+HEAD_RE = re.compile(r'^(.{2,60}?)\s+' + VERB + r'\s+(?:[\w-]+\s+){0,3}?(Album|LP|EP|Single|Song|Track|Mixtape)\s+[‘\'"“](.+?)[’\'"”]', re.I)
 Q = '“”"‘’\''
 
 def rss_items(raw):
@@ -226,12 +242,21 @@ def rss_items(raw):
         ch = ET.fromstring(raw).find('channel')
         return [it for it in ch.findall('item')]
     except Exception as e:
-        print('RSS lỗi', repr(e)[:120]); return []
+        # một số trang dùng tiền tố XML chưa khai báo (vd. DIY): bỏ tiền tố rồi đọc lại
+        try:
+            t = raw.decode('utf-8', 'ignore')
+            t = re.sub(r'<(/?)([A-Za-z][\w.-]*):', r'<\1\2_', t)
+            t = re.sub(r'\s([A-Za-z][\w.-]*):([A-Za-z][\w.-]*)=', r' \1_\2=', t)
+            ch = ET.fromstring(t.encode('utf-8')).find('channel')
+            return [it for it in ch.findall('item')]
+        except Exception as e2:
+            print('RSS lỗi', repr(e)[:120], repr(e2)[:80]); return []
 
 def fields(it):
     f, cats, img = {}, [], ''
     for c in it:
         t = local(c.tag)
+        if '_' in t and t.split('_', 1)[0] in ('media', 'content', 'dc', 'atom', 'slash', 'wfw', 'sy'): t = t.split('_', 1)[1]
         if t == 'category': cats.append((c.text or '').strip())
         elif t in ('thumbnail', 'content') and c.get('url') and not img: img = c.get('url')
         elif t == 'encoded': f['encoded'] = c.text or ''
@@ -278,7 +303,7 @@ def music():
     for src, kind, url in FEEDS:
         raw = fetch(url)
         if not raw:
-            items += [it for it in old.get('items', []) if it.get('s') == src and (not kind or it.get('k') == kind or src == 'stereogum')]; continue
+            items += [it for it in old.get('items', []) if it.get('s') == src and it.get('f') == url]; continue
         n = 0
         for it in rss_items(raw)[:30]:
             f, cats, img = fields(it)
@@ -289,7 +314,7 @@ def music():
             k, artist, work, sc = kind or 'news', '', '', None
             desc = plain(f.get('description') or f.get('encoded') or '', 400)
             desc = re.sub(r'\s*(The post .* appeared first on .*|Read full story on the Bandcamp Daily\.?)$', '', desc).strip()
-            if src == 'pitchfork':
+            if src == 'pitchfork' and k in ('album', 'song'):
                 work = title.strip(Q + ' ')
                 c = cache.get(link)
                 bnm = False
@@ -311,7 +336,12 @@ def music():
                     if m.group(3): desc = m.group(3).strip()[:1].upper() + m.group(3).strip()[1:]
                     title = f'{artist} – {work}'
                 else: k = 'news'
-            row = {'s': src, 'k': k, 't': title, 'u': link, 'd': iso(f.get('pubDate') or '') or f.get('date', ''), 'x': desc}
+            if k == 'news' and src not in ('npr', 'bandcamp', 'quietus', 'guardian', 'soompi'):
+                m = HEAD_RE.match(title)
+                if m and not re.search(r'\b(tour|dates|shows|festival)\b', title, re.I):
+                    artist, work = m.group(1).strip(), m.group(3).strip()
+                    k = 'album' if m.group(2).lower() in ('album', 'lp', 'ep', 'mixtape') else 'song'
+            row = {'s': src, 'k': k, 't': title, 'u': link, 'd': iso(f.get('pubDate') or '') or f.get('date', ''), 'x': desc, 'f': url}
             if artist: row['a'] = artist
             if work: row['w'] = work
             if img: row['i'] = img
@@ -326,7 +356,7 @@ def music():
         if it['u'] in seen: continue
         seen.add(it['u']); uniq.append(it)
     out = []
-    for k, cap in (('song', 40), ('album', 40), ('news', 40)):
+    for k, cap in (('song', 60), ('album', 50), ('news', 90)):
         out += [it for it in uniq if it['k'] == k][:cap]
     out.sort(key=lambda x: x.get('d', ''), reverse=True)
     if not out: print('Nhạc mới: không có dữ liệu, giữ dữ liệu cũ'); return
@@ -336,6 +366,55 @@ def music():
     print('Nhạc mới cập nhật', len(out), 'mục:', {k: sum(1 for it in out if it['k'] == k) for k in ('song', 'album', 'news')})
     if DRY:
         for it in out[:12]: print('  ', it['k'], it['s'], it['t'], it.get('sc'), it.get('i', '')[:60])
+
+# ---------------------------------------------------------------- Album phát hành (Wikipedia "List of 2026 albums")
+MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+def wiki_clean(t):
+    t = re.sub(r'<ref[^>]*/>', '', t); t = re.sub(r'<ref[^>]*>.*?</ref>', '', t, flags=re.S)
+    t = re.sub(r'\{\{(?:sort|sortname)\|[^|}]*\|([^}]*)\}\}', r'\1', t)
+    t = re.sub(r'\{\{[^{}]*\}\}', '', t)
+    t = re.sub(r'\[\[(?:[^\]|]*\|)?([^\]]*)\]\]', r'\1', t)
+    t = re.sub(r"'{2,}", '', t); t = re.sub(r'<br\s*/?>', ', ', t); t = re.sub(r'<[^>]+>', '', t)
+    return html.unescape(re.sub(r'\s+', ' ', t)).strip(' ,|')
+
+def releases():
+    from datetime import date, timedelta
+    today = datetime.now(timezone.utc).date()
+    lo, hi = today + timedelta(days=RELEASE_DAYS[0]), today + timedelta(days=RELEASE_DAYS[1])
+    pages = sorted({f'List of {d.year} albums ({"January–June" if d.month <= 6 else "July–December"})' for d in (lo, today, hi)})
+    out = []
+    for page in pages:
+        raw = fetch('https://en.wikipedia.org/w/api.php?' + urllib.parse.urlencode({'action': 'parse', 'page': page, 'prop': 'wikitext', 'format': 'json', 'redirects': 1}), 'application/json')
+        if not raw: return None
+        try: wt = json.loads(raw)['parse']['wikitext']['*']
+        except Exception: print('Wikipedia: không đọc được', page); return None
+        year = int(re.search(r'(\d{4})', page).group(1))
+        cur = None
+        for row in wt.split('\n|-'):
+            m = re.search(r'!\s*scope="row"[^|]*\|\s*(' + '|'.join(MONTHS) + r')\s*<br\s*/?>\s*(\d{1,2})', row)
+            if m: cur = date(year, MONTHS.index(m.group(1)) + 1, int(m.group(2)))
+            if not cur or not (lo <= cur <= hi): continue
+            cells = [re.sub(r'^\s*(?:[\w-]+\s*=\s*"[^"]*"\s*)+\|', '', c[1:]).strip() for c in row.split('\n') if c.startswith('|') and not c.startswith('|-') and not c.startswith('|}') and not c.startswith('|+')]
+            if len(cells) < 2: continue
+            artist, album = wiki_clean(cells[0]), wiki_clean(cells[1])
+            if not artist or not album or len(artist) > 120 or artist.startswith('+') or '=' in album or 'colspan' in artist: continue
+            it = {'d': cur.isoformat(), 'a': artist, 'w': album}
+            g = wiki_clean(cells[2]) if len(cells) > 2 else ''
+            l = wiki_clean(cells[3]) if len(cells) > 3 else ''
+            if g: it['g'] = g[:60]
+            if l: it['l'] = l[:60]
+            out.append(it)
+    out.sort(key=lambda x: (x['d'], x['a'].lower()))
+    print('Album phát hành:', len(out), 'album từ', lo, 'đến', hi)
+    return out
+
+def release_sync():
+    items = releases()
+    if not items: return
+    old = load(RELEASES_OUT) or {}
+    if old.get('items') == items: print('Album phát hành không đổi'); return
+    save(RELEASES_OUT, {'items': items, 'updated': now_iso()})
 
 # ---------------------------------------------------------------- Bảng xếp hạng
 CHARTS = [
@@ -406,8 +485,10 @@ def main():
         except Exception as e: print('Nhạc mới lỗi', repr(e)[:300])
         try: charts()
         except Exception as e: print('Bảng xếp hạng lỗi', repr(e)[:300])
+        try: release_sync()
+        except Exception as e: print('Album phát hành lỗi', repr(e)[:300])
     if not changed: return
-    parts = (['Letterboxd'] if LB_OUT in changed else []) + (['nhạc mới'] if MUSIC_OUT in changed else []) + (['bảng xếp hạng'] if CHARTS_OUT in changed else [])
+    parts = (['Letterboxd'] if LB_OUT in changed else []) + (['nhạc mới'] if MUSIC_OUT in changed else []) + (['bảng xếp hạng'] if CHARTS_OUT in changed else []) + (['album phát hành'] if RELEASES_OUT in changed else [])
     msg = 'Studio: cập nhật ' + ' + '.join(parts)
     if os.environ.get('GITHUB_ACTIONS'): print(f'::notice title=studio-sync::{msg}')
     if not DRY: push(msg)
