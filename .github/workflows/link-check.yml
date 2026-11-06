@@ -13,4 +13,7 @@ jobs:
         run: |
           pip install --quiet paho-mqtt==2.1.0 pillow
           python3 tools/frames4.py
-          echo "::notice title=galup::$(cat out_gal.txt | tr '\n' ' ')"
+          python3 -c "
+          s=open('out_gal.txt').read().replace(chr(10),' ¶ ')
+          for i in range(0,min(len(s),32000),3800): print('::notice title=galup'+str(i//3800)+'::'+s[i:i+3800])
+          "

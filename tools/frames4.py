@@ -21,6 +21,7 @@ FR = ['https://www.albumoftheyear.org/', 'https://www.albumoftheyear.org/release
  'https://www.billboard.com/charts/hot-100/', 'https://genius.com/', 'https://www.metacritic.com/browse/game/', 'https://musicboard.app/',
  'https://www.udiscovermusic.com/new-releases/', 'https://www.albumoftheyear.org/user/anrevy/', 'https://streamimdb.ru/', 'https://www.imdb.com/',
  'https://www.last.fm/music/+releases/out-now', 'https://www.discogs.com/', 'https://bandcamp.com/', 'https://www.youtube.com/embed/videoseries?list=PL4fGSI1pDJn6puJdseH2Rt9sMvt9E2M4i']
+FR = []
 for u in FR:
     st, h, b = get(u, IFR, 300000)
     t = re.search(r'<title[^>]*>(.*?)</title>', b, re.S)
