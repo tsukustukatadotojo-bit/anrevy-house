@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<title>vy@studio:~$</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+  /* Studio: tĩnh hoàn toàn (không hiệu ứng chuyển động), chữ xanh trên nền đen kiểu terminal.
+     Màn hình chia khung: Letterboxd | nhạc mới | Spotify + Last.fm — mọi thứ chạy ngay trong trang. */
+  :root{--bg:#000;--g:#39ff6a;--g-hi:#b6ffc8;--g-mid:#22b04a;--g-dim:#1a7a34;--g-line:#145c27;--g-bg:#031a0a;--amber:#ffb000;--red:#ff4d4d;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--vt:'VT323',ui-monospace,monospace;--bar:40px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html,body{height:100%;background:#000;color:var(--g);font-family:var(--mono);font-size:14px;-webkit-tap-highlight-color:transparent}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  input{font:inherit;color:inherit}
+  a{color:var(--g-hi)}
+  :focus-visible{outline:1px dashed var(--g-hi);outline-offset:2px}
+  [hidden]{display:none!important}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  ::selection{background:var(--g);color:#000}
+
+  /* ---- màn hình khoá: đen tuyệt đối, không hiện gì ---- */
+  body.locked{overflow:hidden;cursor:default}
+  #key{position:fixed;left:0;top:0;width:100%;height:100%;opacity:0;border:0;background:transparent;color:transparent;caret-color:transparent;font-size:16px;z-index:1}
+  body:not(.locked) #key{display:none}
+
+  /* ---- dòng code chạy 3 giây ---- */
+  #stream{position:fixed;inset:0;z-index:5;overflow:hidden;padding:14px 18px;background:#000;color:var(--g);font:13px/1.35 var(--mono);white-space:pre-wrap;word-break:break-all}
+
+  /* ---- màn hình Studio: lưới khung ---- */
+  #desk{position:fixed;inset:0;overflow:hidden;display:grid;
+    grid-template-columns:clamp(290px,25vw,380px) minmax(0,1fr) clamp(320px,28vw,430px) 96px;
+    grid-template-rows:auto minmax(0,1fr) var(--bar);column-gap:14px;padding:14px 0 0 18px;
+    background:#000 repeating-linear-gradient(0deg,rgba(57,255,106,.03) 0 1px,transparent 1px 3px)}
+  .sys{grid-column:1;grid-row:1;min-width:0;padding-bottom:12px;color:var(--g)}
+  .banner{font:clamp(9px,.82vw,12px)/1.1 var(--mono);color:var(--g);white-space:pre;overflow:hidden}
+  .sysline{margin-top:7px;font:12px/1.45 var(--mono);color:var(--g-mid)}
+  .sysline b{font-weight:400;color:var(--g)}
+  .sysline .ok{color:var(--g-hi)}
+  .sysline .amb{color:var(--amber)}
+  #w-letterboxd{grid-column:1;grid-row:2;margin-bottom:12px}
+  #w-music{grid-column:2;grid-row:1/3;margin-bottom:12px}
+  .rcol{grid-column:3;grid-row:1/3;min-height:0;display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+  #w-spotify{flex:1;min-height:0}
+  #w-lastfm{flex:none;height:230px}
+
+  /* cột biểu tượng ứng dụng bên phải */
+  .icons{grid-column:4;grid-row:1/3;margin-top:-14px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border-left:1px solid var(--g-line);background:#000;overflow-y:auto;scrollbar-width:none}
+  .icon{display:flex;flex-direction:column;align-items:center;gap:3px;width:84px;padding:7px 4px;color:var(--g);text-decoration:none;font:15px/1 var(--vt);letter-spacing:.04em;text-align:center}
+  .icon svg{width:32px;height:32px}
+  .icon:hover,.icon:focus-visible,.icon.on{background:var(--g-bg);outline:1px solid var(--g-dim)}
+  .icon small{font:11px/1 var(--mono);color:var(--g-mid)}
+
+  /* cửa sổ / khung */
+  .win{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0;background:#000;border:1px solid var(--g-dim);box-shadow:0 0 0 1px #000,6px 6px 0 rgba(57,255,106,.08)}
+  .win.front{border-color:var(--g)}
+  .tb{flex:none;display:flex;align-items:center;gap:8px;height:26px;padding:0 4px 0 10px;background:var(--g-bg);border-bottom:1px solid var(--g-dim);font:16px/1 var(--vt);color:var(--g);user-select:none;-webkit-user-select:none}
+  .win.front .tb{background:#063015}
+  .tb .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tb .t i{font-style:normal;color:var(--g-mid);font:12px/1 var(--mono)}
+  .tb .r{flex:none;font:12px/1 var(--mono);color:var(--g-mid);padding-right:4px;white-space:nowrap}
+  .tb .r.on{color:var(--g)}
+  .tb .r.bad{color:var(--amber)}
+  .tb button{flex:none;width:22px;height:20px;border:1px solid var(--g-dim);font:15px/1 var(--vt);color:var(--g)}
+  .tb button:hover,.tb button:focus-visible{background:var(--g);color:#000}
+  .drag .tb{cursor:move}
+  .wb{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-color:var(--g-dim) #000;scrollbar-width:thin}
+  .wb iframe{display:block;width:100%;height:100%;border:0;background:#000}
+  .note{padding:14px 16px;font:13px/1.6 var(--mono);color:var(--g-mid)}
+  .note b{font-weight:400;color:var(--g)}
+  .note code{color:var(--g-hi);word-break:break-all}
+  .btn{display:inline-block;padding:4px 10px;border:1px solid var(--g);color:var(--g);font:12.5px/1.3 var(--mono);text-decoration:none;white-space:nowrap}
+  .btn:hover,.btn:focus-visible{background:var(--g);color:#000}
+  .btn.sm{padding:2px 8px;font-size:12px}
+  .btn.solid{background:var(--g);color:#000}
+  .btn.solid:hover{background:#000;color:var(--g)}
+  .ph{display:block;background:#0b2a14;border:1px solid var(--g-line)}
+  .lb-item img,.nm-item img,.sr-row img,.lf-now img,.lf-list img,.lb-top img{background:#0b2a14;color:transparent}
+
+  /* tab */
+  .tabs{flex:none;display:flex;border-bottom:1px solid var(--g-dim);background:#000;overflow-x:auto;scrollbar-width:none}
+  .tabs button{flex:none;padding:6px 12px;font:12.5px/1.2 var(--mono);color:var(--g-mid);border-right:1px solid var(--g-line);white-space:nowrap}
+  .tabs button:hover{color:var(--g)}
+  .tabs button[aria-selected="true"]{background:var(--g);color:#000}
+  .tabs .sep{flex:none;width:10px;border-right:1px solid var(--g-line)}
+
+  /* ---- Letterboxd (cố định bên trái) ---- */
+  .lb-head{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;gap:8px;padding:7px 12px;background:#000;border-bottom:1px dashed var(--g-line);font:12px/1.4 var(--mono);color:var(--g-mid)}
+  .lb-head .live{color:var(--g)}
+  .lb-head span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lb-head .live{flex:1}
+  .lb-list{list-style:none}
+  .lb-item{display:flex;gap:12px;width:100%;padding:10px 12px;text-align:left;border-bottom:1px solid #0b2a14}
+  .lb-item:hover,.lb-item:focus-visible{background:var(--g-bg);outline:none}
+  .lb-item img,.lb-item .ph{flex:none;width:46px;height:69px;object-fit:cover}
+  .lb-meta{min-width:0;display:flex;flex-direction:column;gap:3px}
+  .lb-meta b{font-weight:600;font-size:14px;color:var(--g-hi);line-height:1.25}
+  .lb-meta b span{font-weight:400;color:var(--g-mid)}
+  .lb-row{font:12.5px/1.3 var(--mono);color:var(--g)}
+  .lb-row .d,.lb-row.d{color:var(--g-mid)}
+  .lk{color:var(--red)}
+  .lb-rev{font-size:12.5px;line-height:1.45;color:var(--g-mid);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .lb-detail{padding:14px}
+  .lb-back{margin-bottom:12px;padding:4px 10px;border:1px solid var(--g-dim);font:12.5px/1.3 var(--mono);color:var(--g)}
+  .lb-back:hover{background:var(--g);color:#000}
+  .lb-top{display:flex;gap:14px}
+  .lb-top img{flex:none;width:120px;height:180px;object-fit:cover;border:1px solid var(--g-dim)}
+  .lb-top h2{font-size:17px;line-height:1.3;color:var(--g-hi);font-weight:600}
+  .lb-top h2 span{font-weight:400;color:var(--g-mid)}
+  .lb-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .lb-full{margin-top:14px;font-size:13.5px;line-height:1.65;color:var(--g);white-space:pre-wrap}
+  .lb-full.empty{color:var(--g-mid);font-style:italic}
+
+  /* ---- nhạc mới (giữa) ---- */
+  #w-music .tb .r{max-width:45%;overflow:hidden;text-overflow:ellipsis}
+  #w-music .tabs{flex-wrap:wrap}
+  #w-music .tabs button{border-bottom:1px solid var(--g-line);margin-bottom:-1px}
+  #w-music .tabs .sep{display:none}
+  #w-music .tabs [data-site]{color:var(--g-dim)}
+  #w-music .tabs [data-site]::before{content:'▤ '}
+  #w-music .tabs [data-site]:hover{color:var(--g)}
+  #w-music .tabs [data-site][aria-selected="true"]{color:#000}
+  .nm-list{list-style:none}
+  .nm-item{display:flex;gap:12px;padding:10px 12px;border-bottom:1px solid #0b2a14}
+  .nm-item:hover{background:#010d05}
+  .nm-item img,.nm-item .ph{flex:none;width:58px;height:58px;object-fit:cover}
+  .nm-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .nm-open{display:block;text-align:left;font-weight:600;font-size:14px;line-height:1.3;color:var(--g-hi)}
+  .nm-open:hover{text-decoration:underline}
+  .nm-sub{font:12px/1.3 var(--mono);color:var(--g-mid)}
+  .nm-sub .sc{color:var(--amber)}
+  .nm-x{font-size:12.5px;line-height:1.45;color:var(--g-mid);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .nm-item.open .nm-x{display:block;-webkit-line-clamp:unset;color:var(--g)}
+  .nm-more{margin-top:6px}
+  .nm-act{flex:none;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+  .nm-frame{flex:1;min-height:0;display:flex;flex-direction:column}
+  .nm-fbar{flex:none;display:flex;align-items:center;gap:10px;padding:5px 8px;border-bottom:1px dashed var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
+  .nm-fbar span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nm-frame iframe{flex:1;min-height:0;width:100%;border:0;background:#fff}
+
+  /* ---- Spotify (phải, trên) ---- */
+  #w-spotify.big{position:fixed;left:50vw;top:14px;right:108px;bottom:calc(var(--bar) + 12px);z-index:900;margin:0}
+  #spBar{cursor:pointer}
+  .sp-ctl{flex:none;border-bottom:1px solid var(--g-line)}
+  .sp-search{display:flex;align-items:center;gap:6px;padding:6px 8px}
+  .sp-search span{color:var(--g-mid);font:15px/1 var(--mono)}
+  .sp-search input{flex:1;min-width:0;height:28px;padding:0 8px;background:#000;border:1px solid var(--g-dim);color:var(--g-hi);font:13px/1 var(--mono);border-radius:0;-webkit-appearance:none;appearance:none}
+  .sp-search input::placeholder{color:var(--g-dim)}
+  .sp-search input:focus{outline:none;border-color:var(--g)}
+  .chips{display:flex;gap:6px;padding:0 8px 7px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--g-line) #000}
+  .chip{flex:none;max-width:190px;height:24px;padding:0 9px;border:1px solid var(--g-dim);color:var(--g-mid);font:12px/22px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .chip:hover{color:var(--g)}
+  .chip[aria-pressed="true"]{background:var(--g);color:#000;border-color:var(--g)}
+  .chip.mine::before{content:'♪ '}
+  .sp-main{flex:1;min-height:0;position:relative}
+  #spHost{position:absolute;inset:0;background:#000}
+  #spHost iframe{position:absolute;inset:0;width:100%!important;height:100%!important;border:0;background:#000}
+  .sp-res{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;background:#000}
+  .sp-res .hd{flex:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px dashed var(--g-line);font:12.5px/1.3 var(--mono);color:var(--g-mid)}
+  .sp-res .hd b{flex:1;min-width:0;font-weight:400;color:var(--g);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sp-res .bd{flex:1;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--g-dim) #000}
+  .sr-note{padding:8px 10px;font:12px/1.5 var(--mono);color:var(--amber);border-bottom:1px solid #0b2a14}
+  .sr-note button{color:var(--g-hi);text-decoration:underline}
+  .sr-h{padding:8px 10px 2px;font:12px/1 var(--mono);color:var(--g-mid)}
+  .sr-list{list-style:none}
+  .sr-row{position:relative;display:flex;align-items:center;gap:9px;padding:6px 10px;border-bottom:1px solid #0b2a14}
+  .sr-row:hover{background:#010d05}
+  .sr-row img,.sr-row .ph{flex:none;width:40px;height:40px;object-fit:cover}
+  .sr-row div{flex:1;min-width:0}
+  .sr-row b{display:block;font-weight:600;font-size:13px;line-height:1.3;color:var(--g-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sr-row span{display:block;font-size:12px;line-height:1.3;color:var(--g-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sr-row .ib{flex:none;width:30px;height:28px;border:1px solid var(--g-dim);color:var(--g);font:14px/1 var(--mono)}
+  .sr-row .ib:hover,.sr-row .ib[aria-pressed="true"]{background:var(--g);color:#000}
+  .pick{margin:0 10px 8px 59px;border:1px solid var(--g);background:#000}
+  .pick p{padding:6px 10px;font:12px/1.3 var(--mono);color:var(--g-mid);border-bottom:1px dashed var(--g-line)}
+  .pick button{display:block;width:100%;padding:6px 10px;text-align:left;font:12.5px/1.3 var(--mono);color:var(--g)}
+  .pick button:hover{background:var(--g);color:#000}
+  .setup{padding:12px 14px;font:12.5px/1.6 var(--mono);color:var(--g-mid)}
+  .setup h3{font:600 13.5px/1.4 var(--mono);color:var(--g-hi);margin-bottom:6px}
+  .setup ol{margin:8px 0 10px 18px}
+  .setup li{margin-bottom:6px}
+  .setup b{font-weight:400;color:var(--g)}
+  .setup code{color:var(--g-hi);word-break:break-all}
+  .setup .row{display:flex;gap:6px;margin-top:4px}
+  .setup input{flex:1;min-width:0;height:28px;padding:0 8px;background:#000;border:1px solid var(--g-dim);color:var(--g-hi);font:12.5px/1 var(--mono);border-radius:0}
+  .sp-foot{flex:none;display:flex;align-items:center;gap:8px;min-height:26px;padding:3px 8px;border-top:1px solid var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
+  .sp-foot span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sp-foot .on{color:var(--g)}
+  .sp-foot button{color:var(--g-hi);text-decoration:underline;white-space:nowrap}
+
+  /* ---- Last.fm (phải, dưới): bài đang nghe, tự cập nhật ---- */
+  .lf-now{display:flex;gap:12px;padding:10px 12px;border-bottom:1px dashed var(--g-line)}
+  .lf-now img,.lf-now .ph{flex:none;width:74px;height:74px;object-fit:cover}
+  .lf-now div{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+  .lf-st{font:12px/1.3 var(--mono);color:var(--g-mid)}
+  .lf-st.now{color:var(--amber)}
+  .lf-now b{font-weight:600;font-size:14.5px;line-height:1.3;color:var(--g-hi);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .lf-now span{font-size:12.5px;line-height:1.35;color:var(--g);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lf-now .btn{align-self:flex-start;margin-top:4px}
+  .lf-list{list-style:none}
+  .lf-list li{display:flex;align-items:center;gap:9px;padding:5px 12px;border-bottom:1px solid #0b2a14}
+  .lf-list img,.lf-list .ph{flex:none;width:30px;height:30px;object-fit:cover}
+  .lf-list div{flex:1;min-width:0}
+  .lf-list b{display:block;font-weight:600;font-size:12.5px;color:var(--g-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lf-list span{display:block;color:var(--g-mid);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lf-list .ib{flex:none;width:26px;height:24px;border:1px solid var(--g-dim);color:var(--g);font:12px/1 var(--mono)}
+  .lf-list .ib:hover{background:var(--g);color:#000}
+
+  /* ---- Instagram: cửa sổ mở từ biểu tượng ---- */
+  .app{position:absolute;left:calc(clamp(290px,25vw,380px) + 32px);top:14px;right:calc(clamp(320px,28vw,430px) + 124px);bottom:calc(var(--bar) + 12px);min-width:300px;min-height:220px;z-index:20}
+  .ig{display:flex;flex-direction:column;height:100%}
+  .ig .frame{flex:1;min-height:0;background:#fff}
+  .ig .frame iframe{display:block;width:100%;height:100%;border:0}
+
+  /* thanh tác vụ */
+  .taskbar{grid-column:1/-1;grid-row:3;margin-left:-18px;display:flex;align-items:center;gap:6px;padding:0 8px;border-top:1px solid var(--g-dim);background:#000;font:17px/1 var(--vt);z-index:950}
+  .start{height:28px;padding:0 12px;border:1px solid var(--g);color:#000;background:var(--g)}
+  .start[aria-expanded="true"]{background:#000;color:var(--g)}
+  .tasks{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .tasks button{flex:none;height:28px;padding:0 10px;border:1px solid var(--g-dim);color:var(--g-mid);white-space:nowrap;font:12.5px/1 var(--mono)}
+  .tasks button.front{border-color:var(--g);color:var(--g)}
+  .clock{flex:none;color:var(--g-mid);padding:0 6px;font:12.5px/1 var(--mono)}
+  .menu{position:fixed;left:8px;bottom:calc(var(--bar) + 4px);z-index:999;min-width:240px;border:1px solid var(--g);background:#000}
+  .menu p{padding:8px 12px;border-bottom:1px dashed var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
+  .menu button,.menu a{display:block;width:100%;padding:8px 14px;text-align:left;font:13.5px/1.2 var(--mono);color:var(--g);text-decoration:none}
+  .menu button:hover,.menu a:hover,.menu button:focus-visible,.menu a:focus-visible{background:var(--g);color:#000;outline:none}
+  .toast{position:fixed;left:50%;bottom:calc(var(--bar) + 18px);transform:translateX(-50%);z-index:1000;max-width:min(92vw,520px);padding:8px 14px;border:1px solid var(--g);background:#000;color:var(--g);font:13px/1.45 var(--mono);box-shadow:4px 4px 0 rgba(57,255,106,.15)}
+
+  /* màn hình laptop thấp */
+  @media (min-width:900px) and (max-height:760px){ #w-lastfm{height:196px} .lf-now img,.lf-now .ph{width:60px;height:60px} }
+
+  /* ---- điện thoại / màn hình hẹp ---- */
+  @media (max-width: 899px){
+    :root{--bar:44px;--spmini:106px}
+    #desk{display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;padding:0 0 calc(var(--bar) + var(--spmini) + 16px)}
+    .rcol{display:contents}
+    .sys{order:1;padding:12px 14px 0}
+    .banner{font-size:7.4px}
+    .sysline{font-size:11.5px}
+    .icons{order:2;margin:10px 0 0;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:2px;padding:8px 6px;border-left:0;border-top:1px solid var(--g-line);border-bottom:1px solid var(--g-line);overflow:visible}
+    .icon{width:auto;min-width:54px;padding:6px 6px;font-size:14px}
+    .icon svg{width:26px;height:26px}
+    #w-lastfm{order:3;flex:none;height:auto;margin:12px 12px 0}
+    #w-lastfm .wb{max-height:260px}
+    #w-music{order:4;flex:none;height:76vh;margin:12px 12px 0}
+    #w-letterboxd{order:5;flex:none;height:70vh;margin:12px}
+    #w-spotify{position:fixed;left:0;right:0;bottom:var(--bar);height:var(--spmini);z-index:60;flex:none}
+    #w-spotify:not(.big) .sp-ctl,#w-spotify:not(.big) .sp-foot,#w-spotify:not(.big) .sp-res{display:none!important}
+    #w-spotify.big{left:0;right:0;top:auto;bottom:var(--bar);height:84vh;height:84dvh}
+    .app{position:fixed;left:0;right:0;top:0;bottom:calc(var(--bar) + var(--spmini));min-width:0;z-index:50}
+    .taskbar{position:fixed;left:0;right:0;bottom:0;height:var(--bar);margin:0}
+    .clock{display:none}
+    .lb-top img{width:96px;height:144px}
+    .nm-item img,.nm-item .ph{width:48px;height:48px}
+    .toast{bottom:calc(var(--bar) + var(--spmini) + 12px)}
+  }
+</style>
+</head>
+<body class="locked">
+<h1 class="sr">Studio của An Vy</h1>
+<label class="sr" for="key">Nhập mã để vào Studio</label>
+<input id="key" type="password" inputmode="numeric" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Nhập mã để vào Studio">
+<pre id="stream" hidden aria-hidden="true"></pre>
+
+<div id="desk" hidden>
+  <header class="sys">
+<pre class="banner" aria-hidden="true">░█▀▀░▀█▀░█░█░█▀▄░▀█▀░█▀█
+░▀▀█░░█░░█░█░█░█░░█░░█░█
+░▀▀▀░░▀░░▀▀▀░▀▀░░▀▀▀░▀▀▀  ▓▒░ anrevy house ░▒▓</pre>
+    <p class="sysline"><b>vy@studio:~$</b> whoami → anrevy · music &amp; films</p>
+    <p class="sysline"><b>vy@studio:~$</b> uptime → since 12.08.2001 · STATUS: <span class="ok">◉ ONLINE</span></p>
+  </header>
+
+  <!-- Letterboxd: cố định bên trái -->
+  <section class="win" id="w-letterboxd" data-app="letterboxd" aria-label="Letterboxd">
+    <div class="tb"><span class="t">letterboxd.app <i>— haanvie</i></span></div>
+    <div class="wb" id="lbBody"><p class="note">◌ đang tải nhật ký phim…</p></div>
+  </section>
+
+  <!-- Nhạc mới: giữa -->
+  <section class="win" id="w-music" data-app="music" aria-label="Nhạc mới">
+    <div class="tb"><span class="t">newmusic.feed <i>— pitchfork · stereogum · nme · npr · bandcamp · consequence</i></span><span class="r" id="nmUpd"></span></div>
+    <div class="tabs" role="tablist" aria-label="Nhạc mới">
+      <button type="button" role="tab" data-tab="song" aria-selected="true">♪ bài mới</button>
+      <button type="button" role="tab" data-tab="album" aria-selected="false">◎ album mới</button>
+      <button type="button" role="tab" data-tab="news" aria-selected="false">✎ tin nhạc</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" role="tab" data-site="npr" aria-selected="false">npr music</button>
+      <button type="button" role="tab" data-site="stereogum" aria-selected="false">stereogum</button>
+      <button type="button" role="tab" data-site="bandcamp" aria-selected="false">bandcamp daily</button>
+      <button type="button" role="tab" data-site="consequence" aria-selected="false">consequence</button>
+      <button type="button" role="tab" data-site="kworb" aria-selected="false">top VN · spotify</button>
+    </div>
+    <div class="wb" id="nmBody"><p class="note">◌ đang tải nhạc mới…</p></div>
+    <div class="nm-frame" id="nmFrameWrap" hidden>
+      <div class="nm-fbar"><button class="btn sm" type="button" id="nmBack">← danh sách</button><span id="nmFrameUrl"></span></div>
+      <iframe id="nmFrame" title="Trang nhạc" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox allow-presentation" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </section>
+
+  <div class="rcol">
+    <!-- Spotify -->
+    <section class="win" id="w-spotify" data-app="spotify" aria-label="Spotify">
+      <div class="tb" id="spBar"><span class="t">spotify <i id="spHint">— bấm để mở rộng</i></span><button type="button" id="spBig" aria-label="Mở rộng nửa màn hình" aria-pressed="false">□</button></div>
+      <div class="sp-ctl">
+        <form class="sp-search" id="spForm" role="search"><span aria-hidden="true">⌕</span><label class="sr" for="spQ">Tìm trên Spotify</label><input id="spQ" type="search" placeholder="tìm bài hát, nghệ sĩ, album…" autocomplete="off" enterkeyhint="search"></form>
+        <div class="chips" id="spLib" aria-label="Thư viện Spotify"></div>
+      </div>
+      <div class="sp-main">
+        <div id="spHost"></div>
+        <div class="sp-res" id="spRes" hidden><div class="hd"><b id="spResT"></b><button class="btn sm" type="button" id="spResX">✕ đóng</button></div><div class="bd" id="spResB"></div></div>
+      </div>
+      <div class="sp-foot" id="spFoot"></div>
+    </section>
+
+    <!-- Last.fm -->
+    <section class="win" id="w-lastfm" data-app="lastfm" aria-label="Last.fm">
+      <div class="tb"><span class="t">last.fm <i>— Anrevy</i></span><span class="r" id="lfLive">◌</span></div>
+      <div class="wb" id="lfBody" aria-live="polite"><p class="note">◌ đang kết nối last.fm…</p></div>
+    </section>
+  </div>
+
+  <nav class="icons" aria-label="Ứng dụng">
+    <button class="icon" data-app="spotify" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12q9-3 18 1M9 17q7-2 15 1M10 22q6-2 12 1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>spotify</button>
+    <button class="icon" data-app="letterboxd" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="17" r="4.5" fill="currentColor"/><circle cx="17" cy="17" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="17" r="4.5" fill="currentColor"/></svg>letterboxd</button>
+    <button class="icon" data-app="music" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="3" fill="currentColor"/><path d="M17 7v4" stroke="currentColor" stroke-width="2"/></svg>new music</button>
+    <button class="icon" data-app="lastfm" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 20v-6h3v6zM12 24V10h3v14zM17 22v-9h3v9zM22 26V8h3v18z" fill="currentColor"/></svg>last.fm</button>
+    <button class="icon" data-app="instagram" type="button"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="5" y="5" width="24" height="24" rx="7" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17" cy="17" r="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="24" cy="10" r="1.6" fill="currentColor"/></svg>instagram</button>
+    <a class="icon" id="imdbIcon" href="https://streamimdb.ru/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="7" width="32" height="20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 12v10M10 22V12l2.5 6 2.5-6v10M19 12v10h2q3 0 3-5t-3-5zM27 11v11m0-5q3-1 3 2.5T27 22" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>imdb <small>↗</small></a>
+    <a class="icon" href="../home.html"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 16 17 6l12 10v12H5z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14 28v-7h6v7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>home</a>
+  </nav>
+
+  <!-- Instagram -->
+  <section class="win app drag" id="w-instagram" data-app="instagram" aria-label="Instagram" hidden>
+    <div class="tb"><span class="t">instagram</span><button type="button" data-act="close" aria-label="Đóng">✕</button></div>
+    <div class="wb ig">
+      <div class="tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-ig="_haanvie_">@_haanvie_</button><button type="button" role="tab" aria-selected="false" data-ig="anrevy_">@anrevy_</button></div>
+      <div class="frame"><iframe id="igFrame" title="Instagram" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    </div>
+  </section>
+
+  <footer class="taskbar">
+    <button class="start" id="start" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="menu">≡ START</button>
+    <div class="tasks" id="tasks"></div>
+    <span class="clock" id="clock"></span>
+  </footer>
+  <div class="menu" id="menu" role="menu" hidden>
+    <p>vy@studio · anrevy house</p>
+    <button type="button" role="menuitem" data-app="spotify">♪ spotify</button>
+    <button type="button" role="menuitem" data-app="music">◎ new music</button>
+    <button type="button" role="menuitem" data-app="letterboxd">▣ letterboxd</button>
+    <button type="button" role="menuitem" data-app="lastfm">▮ last.fm</button>
+    <button type="button" role="menuitem" data-app="instagram">◫ instagram</button>
+    <a role="menuitem" href="https://streamimdb.ru/" target="_blank" rel="noopener noreferrer">▶ imdb ↗</a>
+    <a role="menuitem" href="../home.html">⌂ anrevy house</a>
+    <button type="button" role="menuitem" id="lockBtn">⏻ khoá studio</button>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</div>
+
+<script>
+(() => {
+  /* ===================== CẤU HÌNH ===================== */
+  const CODE = '111213';                                   // mã mở Studio (gõ trên màn hình đen)
+  const STREAM_MS = 3000;                                  // dòng code chạy trong 3 giây
+  // Spotify — Client ID của app trên developer.spotify.com (Redirect URI: địa chỉ trang studio/).
+  // Để trống thì có thể dán Client ID ngay trong khung Spotify (nút "kết nối spotify").
+  const SPOTIFY_CLIENT_ID = '';
+  // Danh sách phát hiện sẵn trong khung Spotify (dán link playlist / album của bạn lên đầu danh sách)
+  const SPOTIFY_LINKS = [
+    ['New Music Friday', 'https://open.spotify.com/playlist/37i9dQZF1DX4JAvHpjipBk'],
+    ["Today's Top Hits", 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M'],
+    ['lofi beats', 'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'],
+  ];
+  const LASTFM_USER = 'Anrevy';
+  const LASTFM_KEY = '';                                   // API key Last.fm (không bắt buộc — có key thì hiện thêm danh sách bài vừa nghe)
+  const LASTFM_POLL = 15000;                               // cập nhật bài đang nghe mỗi 15 giây
+  const IG_USERS = ['_haanvie_', 'anrevy_'];
+  const IMDB = 'https://streamimdb.ru/';
+  const SITES = {
+    npr: ['npr music', 'https://www.npr.org/music/'],
+    stereogum: ['stereogum', 'https://www.stereogum.com/'],
+    bandcamp: ['bandcamp daily', 'https://daily.bandcamp.com/'],
+    consequence: ['consequence', 'https://consequence.net/category/music/'],
+    kworb: ['spotify daily chart · việt nam', 'https://kworb.net/spotify/country/vn_daily.html'],
+  };
+  const SRC = { pitchfork: 'pitchfork', stereogum: 'stereogum', nme: 'nme', consequence: 'consequence', npr: 'npr music', bandcamp: 'bandcamp daily' };
+  const FRAMEABLE = ['stereogum', 'nme', 'consequence', 'npr', 'bandcamp'];   // các trang cho phép mở trong khung (pitchfork thì không)
+  /* ==================================================== */
+  const $ = s => document.querySelector(s);
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const narrow = () => innerWidth < 900;
+  const ls = {
+    get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+    set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+    del(k){ try { localStorage.removeItem(k); } catch (e) {} },
+  };
+  const ph = cls => `<span class="ph ${cls || ''}" aria-hidden="true"></span>`;
+  function ago(iso){
+    const t = typeof iso === 'number' ? iso : Date.parse(iso); if (!t) return '';
+    const m = Math.round((Date.now() - t) / 60000);
+    if (m < 1) return 'vừa xong'; if (m < 60) return m + ' phút trước';
+    const h = Math.round(m / 60); if (h < 24) return h + ' giờ trước';
+    const d = Math.round(h / 24); if (d < 30) return d + ' ngày trước';
+    return new Date(t).toLocaleDateString('vi-VN');
+  }
+  let toastT = 0;
+  function toast(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 3200); }
+  let unlocked = false;
+  try { unlocked = sessionStorage.getItem('studio-open') === '1'; } catch (e) {}
+
+  /* ---------- 1. màn hình đen: gõ 111213 (không hiện gì) ---------- */
+  const key = $('#key');
+  let buf = '';
+  function feed(d){
+    if (unlocked) return;
+    buf = (buf + d).slice(-CODE.length);
+    if (buf === CODE){ unlocked = true; try { sessionStorage.setItem('studio-open', '1'); } catch (e) {} key.blur(); key.value = ''; runStream(); }
+  }
+  document.addEventListener('keydown', e => {
+    if (unlocked || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (/^[0-9]$/.test(e.key)){ e.preventDefault(); feed(e.key); key.value = ''; }
+  });
+  key.addEventListener('input', () => { const v = key.value.replace(/[^0-9]/g, ''); key.value = ''; for (const d of v) feed(d); });
+
+  /* ---------- 2. dòng code xanh chạy liên tục 3 giây ---------- */
+  function runStream(){
+    document.body.classList.remove('locked');
+    const pre = $('#stream'); pre.hidden = false;
+    const fallback = document.documentElement.outerHTML;
+    const src = fetch('../home.html', { cache: 'force-cache' }).then(r => r.ok ? r.text() : fallback).catch(() => fallback);
+    src.then(code => {
+      code = code.replace(/\r/g, '');
+      const t0 = performance.now(); let pos = 0, out = '';
+      (function tick(now){
+        const target = Math.floor((now - t0) / STREAM_MS * Math.min(code.length, 42000));
+        if (target > pos){ out += code.slice(pos, target); pos = target; if (out.length > 9000) out = out.slice(-7000); pre.textContent = out; pre.scrollTop = pre.scrollHeight; }
+        if (now - t0 < STREAM_MS) requestAnimationFrame(tick); else { pre.hidden = true; pre.textContent = ''; openDesk(); }
+      })(t0);
+    });
+  }
+
+  /* ---------- 3. cửa sổ, thanh tác vụ, menu ---------- */
+  let z = 10;
+  const wins = {}, tasks = $('#tasks');
+  ['letterboxd', 'music', 'spotify', 'lastfm', 'instagram'].forEach(a => { wins[a] = $('#w-' + a); });
+  const NAMES = { spotify: 'spotify', music: 'new music', letterboxd: 'letterboxd', lastfm: 'last.fm', instagram: 'instagram' };
+  function front(w){
+    Object.values(wins).forEach(x => x.classList.remove('front'));
+    w.classList.add('front'); w.style.zIndex = ++z;
+    tasks.querySelectorAll('button').forEach(b => b.classList.toggle('front', b.dataset.app === w.dataset.app));
+  }
+  function taskBtn(app){
+    let b = tasks.querySelector(`[data-app="${app}"]`);
+    if (!b){ b = document.createElement('button'); b.type = 'button'; b.dataset.app = app; b.textContent = NAMES[app]; b.addEventListener('click', () => openApp(app)); tasks.appendChild(b); }
+    return b;
+  }
+  function openApp(app){
+    const w = wins[app]; if (!w) return;
+    w.hidden = false; taskBtn(app); front(w);
+    if (app === 'instagram'){ igShow(igCur); document.querySelectorAll('.icon[data-app="instagram"]').forEach(i => i.classList.add('on')); }
+    else if (app === 'spotify'){ if (narrow()) setBig(true); else $('#spQ').focus({ preventScroll: true }); }
+    else if (narrow()) w.scrollIntoView({ block: 'start' });
+    if (app === 'lastfm') lfPoll();
+    $('#menu').hidden = true; $('#start').setAttribute('aria-expanded', 'false');
+  }
+  function closeApp(app){
+    const w = wins[app]; w.hidden = true;
+    const b = tasks.querySelector(`[data-app="${app}"]`); if (b) b.remove();
+    if (app === 'instagram') $('#igFrame').removeAttribute('src');
+    document.querySelectorAll(`.icon[data-app="${app}"]`).forEach(i => i.classList.remove('on'));
+  }
+  document.querySelectorAll('.icon[data-app], .menu [data-app]').forEach(el => el.addEventListener('click', () => openApp(el.dataset.app)));
+  Object.entries(wins).forEach(([app, w]) => {
+    w.addEventListener('pointerdown', () => { if (!w.classList.contains('front')) front(w); });
+    w.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); closeApp(app); }));
+  });
+  // kéo cửa sổ Instagram (máy tính)
+  document.querySelectorAll('.win.drag').forEach(w => {
+    const bar = w.querySelector('.tb');
+    bar.addEventListener('pointerdown', e => {
+      if (narrow() || e.target.closest('button')) return;
+      const r = w.getBoundingClientRect(), dx = e.clientX - r.left, dy = e.clientY - r.top;
+      w.style.width = r.width + 'px'; w.style.height = r.height + 'px'; w.style.right = 'auto'; w.style.bottom = 'auto';
+      bar.setPointerCapture(e.pointerId);
+      const move = ev => { w.style.left = Math.max(0, Math.min(innerWidth - 120, ev.clientX - dx)) + 'px'; w.style.top = Math.max(0, Math.min(innerHeight - 80, ev.clientY - dy)) + 'px'; };
+      const up = () => { bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up); };
+      bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up);
+    });
+  });
+  const menu = $('#menu'), start = $('#start');
+  start.addEventListener('click', () => { const open = menu.hidden; menu.hidden = !open; start.setAttribute('aria-expanded', open); if (open){ const f = menu.querySelector('button,a'); if (f) f.focus(); } });
+  document.addEventListener('pointerdown', e => { if (!menu.hidden && !e.target.closest('#menu, #start')){ menu.hidden = true; start.setAttribute('aria-expanded', 'false'); } });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden){ menu.hidden = true; start.setAttribute('aria-expanded', 'false'); start.focus(); } });
+  $('#lockBtn').addEventListener('click', () => { try { sessionStorage.removeItem('studio-open'); } catch (e) {} location.reload(); });
+  const clock = $('#clock');
+  const tickClock = () => { const d = new Date(); clock.textContent = d.toLocaleDateString('vi-VN') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+
+  /* ================= SPOTIFY ================= */
+  // open.spotify.com không cho đặt trong trang khác; khung này dùng trình phát nhúng chính thức của Spotify,
+  // còn tìm kiếm / thư viện / thêm vào playlist dùng cổng kết nối chính thức (Web API, đăng nhập một lần).
+  const spW = wins.spotify, spBigBtn = $('#spBig'), spHost = $('#spHost');
+  const REDIRECT = new URL('./', location.href).href.split(/[?#]/)[0];
+  const SCOPES = 'playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private user-library-read user-library-modify user-read-currently-playing user-read-recently-played';
+  const SP = { cid: SPOTIFY_CLIENT_ID || ls.get('sp-cid') || '', tok: ls.get('sp-tok'), me: null, pls: [], ctl: null, cur: ls.get('sp-cur') || '', q: '' };
+  const toUri = u => { const m = String(u).match(/open\.spotify\.com\/(?:intl-[a-z]+\/)?(playlist|album|track|artist|episode|show)\/([A-Za-z0-9]{22})/); return m ? `spotify:${m[1]}:${m[2]}` : (/^spotify:(playlist|album|track|artist|episode|show):[A-Za-z0-9]{22}$/.test(u) ? u : ''); };
+  const embedUrl = uri => { const [, t, id] = uri.split(':'); return `https://open.spotify.com/embed/${t}/${id}?utm_source=generator&theme=0`; };
+  const openUrl = uri => { const [, t, id] = uri.split(':'); return `https://open.spotify.com/${t}/${id}?theme=0`; };
+
+  function setBig(on){
+    spW.classList.toggle('big', on); spBigBtn.textContent = on ? '▭' : '□'; spBigBtn.setAttribute('aria-pressed', on);
+    spBigBtn.setAttribute('aria-label', on ? 'Thu nhỏ Spotify' : 'Mở rộng nửa màn hình');
+    $('#spHint').textContent = on ? '— bấm ▭ để thu nhỏ' : '— bấm để mở rộng';
+    front(spW);
+  }
+  $('#spBar').addEventListener('click', e => { if (e.target.closest('button') && e.target !== spBigBtn) return; setBig(!spW.classList.contains('big')); });
+  // bấm vào trong trình phát (khung của Spotify) → trang mất tiêu điểm → mở rộng nửa màn hình
+  addEventListener('blur', () => setTimeout(() => { const a = document.activeElement; if (a && a.tagName === 'IFRAME' && spHost.contains(a) && !spW.classList.contains('big')) setBig(true); }, 0));
+
+  // trình phát nhúng: dùng iFrame API của Spotify (để bấm ▶ là phát ngay), nếu không tải được thì dùng khung nhúng thường
+  let apiState = 'wait';
+  function spMount(uri){
+    if (apiState === 'ready' && window.__spIFrameAPI && !SP.ctl){
+      const el = document.createElement('div'); spHost.innerHTML = ''; spHost.appendChild(el);
+      try {
+        window.__spIFrameAPI.createController(el, { url: openUrl(uri), uri, width: '100%', height: '100%' }, c => {
+          SP.ctl = c;
+          c.addListener('ready', () => { if (SP.wantPlay){ SP.wantPlay = false; try { c.play(); } catch (e) {} } });
+        });
+        return;
+      } catch (e) { SP.ctl = null; }
+    }
+    let f = spHost.querySelector('iframe');
+    if (!f){
+      spHost.innerHTML = '';
+      f = document.createElement('iframe'); f.title = 'Trình phát Spotify'; f.loading = 'eager';
+      f.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+      spHost.appendChild(f);
+    }
+    if (f.getAttribute('src') !== embedUrl(uri)) f.src = embedUrl(uri);
+  }
+  function spLoad(uri, play){
+    uri = toUri(uri); if (!uri) return;
+    SP.cur = uri; ls.set('sp-cur', uri); markChips();
+    if (SP.ctl){
+      try {
+        SP.wantPlay = !!play;
+        if (SP.ctl.loadEntity) SP.ctl.loadEntity(openUrl(uri)); else SP.ctl.loadUri(uri, false, 0, 'dark');
+        if (play) setTimeout(() => { if (SP.wantPlay){ SP.wantPlay = false; try { SP.ctl.play(); } catch (e) {} } }, 1500);
+        return;
+      } catch (e) { SP.ctl = null; spHost.innerHTML = ''; }
+    }
+    spMount(uri);
+  }
+  function spInitPlayer(){
+    const first = SP.cur || defaultUri();
+    window.onSpotifyIframeApiReady = api => { window.__spIFrameAPI = api; if (apiState === 'wait'){ apiState = 'ready'; spMount(first); } };
+    const s = document.createElement('script'); s.src = 'https://open.spotify.com/embed/iframe-api/v1'; s.async = true;
+    s.onerror = () => { if (apiState === 'wait'){ apiState = 'off'; spMount(first); } };
+    document.head.appendChild(s);
+    setTimeout(() => { if (apiState === 'wait'){ apiState = 'off'; spMount(first); } }, 3000);
+    SP.cur = first; markChips();
+  }
+
+  // thư viện: playlist của bạn (khi đã kết nối) + danh sách cấu hình sẵn
+  function library(){
+    const mine = SP.pls.map(p => ({ name: p.name, uri: p.uri, mine: SP.me && p.owner && p.owner.id === SP.me.id }));
+    const extra = SPOTIFY_LINKS.map(([name, u]) => ({ name, uri: toUri(u) })).filter(x => x.uri && !mine.some(m => m.uri === x.uri));
+    return [...mine.filter(m => m.mine), ...mine.filter(m => !m.mine), ...extra];
+  }
+  const defaultUri = () => { const l = library(); return l.length ? l[0].uri : ''; };
+  function renderChips(){
+    const el = $('#spLib');
+    el.innerHTML = library().map(x => `<button type="button" class="chip${x.mine ? ' mine' : ''}" data-uri="${esc(x.uri)}" aria-pressed="false" title="${esc(x.name)}">${esc(x.name)}</button>`).join('');
+    el.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { spCloseRes(); spLoad(b.dataset.uri, false); }));
+    markChips();
+  }
+  function markChips(){ document.querySelectorAll('#spLib .chip').forEach(b => b.setAttribute('aria-pressed', b.dataset.uri === SP.cur)); }
+
+  // ---- kết nối tài khoản (PKCE: không cần mật khẩu ứng dụng; đăng nhập một lần, Studio tự gia hạn) ----
+  const rand = n => { const a = crypto.getRandomValues(new Uint8Array(n)), c = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~'; return Array.from(a, x => c[x % c.length]).join(''); };
+  const b64url = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  async function spConnect(){
+    if (!SP.cid){ spSetup(); return; }
+    const v = rand(64), st = rand(16);
+    const ch = b64url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)));
+    ls.set('sp-pkce', { v, st, cid: SP.cid });
+    location.href = 'https://accounts.spotify.com/authorize?' + new URLSearchParams({ response_type: 'code', client_id: SP.cid, scope: SCOPES, code_challenge_method: 'S256', code_challenge: ch, redirect_uri: REDIRECT, state: st });
+  }
+  async function spToken(params){
+    const r = await fetch('https://accounts.spotify.com/api/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(params) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.access_token) throw new Error(j.error_description || j.error || ('HTTP ' + r.status));
+    SP.tok = { a: j.access_token, r: j.refresh_token || (SP.tok && SP.tok.r), e: Date.now() + (j.expires_in - 60) * 1000 };
+    ls.set('sp-tok', SP.tok);
+  }
+  async function spRefresh(){ await spToken({ grant_type: 'refresh_token', refresh_token: SP.tok.r, client_id: SP.cid }); }
+  async function spApi(path, opt = {}, retry = true){
+    if (!SP.tok) throw new Error('chưa kết nối');
+    if (Date.now() > SP.tok.e) await spRefresh();
+    const r = await fetch('https://api.spotify.com/v1' + path, { method: opt.method || 'GET', headers: Object.assign({ Authorization: 'Bearer ' + SP.tok.a }, opt.body ? { 'Content-Type': 'application/json' } : {}), body: opt.body ? JSON.stringify(opt.body) : undefined });
+    if (r.status === 401 && retry){ await spRefresh(); return spApi(path, opt, false); }
+    if (r.status === 204) return null;
+    const j = await r.json().catch(() => null);
+    if (!r.ok) throw new Error((j && j.error && (j.error.message || j.error)) || ('HTTP ' + r.status));
+    return j;
+  }
+  async function spReturn(){
+    const q = new URLSearchParams(location.search);
+    if (!q.has('code') && !q.has('error')) return;
+    const p = ls.get('sp-pkce'); history.replaceState(null, '', REDIRECT);
+    if (q.get('error')){ toast('Spotify: không kết nối được (' + q.get('error') + ')'); return; }
+    if (!p || p.st !== q.get('state')){ toast('Phiên kết nối Spotify đã hết hạn, bấm “kết nối spotify” lần nữa.'); return; }
+    try { SP.cid = p.cid || SP.cid; await spToken({ grant_type: 'authorization_code', code: q.get('code'), redirect_uri: REDIRECT, client_id: SP.cid, code_verifier: p.v }); ls.del('sp-pkce'); toast('◉ Đã kết nối Spotify'); }
+    catch (e) { toast('Spotify: ' + e.message); }
+  }
+  async function spLoadAccount(){
+    if (!SP.tok || !SP.cid){ spFoot(); return; }
+    try {
+      SP.me = await spApi('/me');
+      const pl = await spApi('/me/playlists?limit=50');
+      SP.pls = ((pl && pl.items) || []).filter(Boolean);
+    } catch (e) {
+      if (/revoked|invalid_grant|refresh/i.test(e.message)){ SP.tok = null; ls.del('sp-tok'); }
+      toast('Spotify: ' + e.message);
+    }
+    renderChips(); spFoot();
+    if (SP.me && !ls.get('sp-cur')){ const d = defaultUri(); if (d) spLoad(d, false); }
+  }
+  function spFoot(){
+    const el = $('#spFoot');
+    if (SP.me){
+      const own = SP.pls.filter(p => p.owner && p.owner.id === SP.me.id).length;
+      el.innerHTML = `<span class="on">◉ ${esc(SP.me.display_name || SP.me.id)} · ${own} playlist của bạn</span><button type="button" id="spOut">thoát</button>`;
+      $('#spOut').addEventListener('click', () => { SP.tok = null; SP.me = null; SP.pls = []; ls.del('sp-tok'); renderChips(); spFoot(); toast('Đã thoát tài khoản Spotify khỏi Studio'); });
+    } else {
+      el.innerHTML = `<span>◌ chưa kết nối tài khoản</span><button type="button" id="spConn">⏻ kết nối spotify</button>`;
+      $('#spConn').addEventListener('click', spConnect);
+    }
+  }
+  function spSetup(){
+    spOpenRes('kết nối spotify — làm một lần');
+    $('#spResB').innerHTML = `<div class="setup">
+      <h3>⏻ kết nối tài khoản Spotify của bạn</h3>
+      <p>Spotify không cho đặt trang open.spotify.com vào trang khác, nên Studio dùng cổng kết nối chính thức của Spotify để tìm bài, hiện playlist của bạn và thêm bài vào playlist ngay trong khung này. Spotify yêu cầu tài khoản <b>Premium</b> cho cổng này.</p>
+      <ol>
+        <li>Mở <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a> → đăng nhập → <b>Create app</b> (tên: anrevy studio).</li>
+        <li>Ô <b>Redirect URI</b> dán: <code>${esc(REDIRECT)}</code> <button type="button" class="btn sm" id="cpRedir">chép</button><br>chọn <b>Web API</b> → <b>Save</b>.</li>
+        <li>Vào <b>Settings</b> của app, chép <b>Client ID</b> và dán vào đây:</li>
+      </ol>
+      <form class="row" id="cidForm"><label class="sr" for="cidIn">Client ID</label><input id="cidIn" placeholder="Client ID (32 ký tự)" autocomplete="off" spellcheck="false" value="${esc(SP.cid)}"><button class="btn solid" type="submit">kết nối</button></form>
+    </div>`;
+    $('#cpRedir').addEventListener('click', () => { navigator.clipboard && navigator.clipboard.writeText(REDIRECT).then(() => toast('Đã chép Redirect URI'), () => {}); });
+    $('#cidForm').addEventListener('submit', e => {
+      e.preventDefault(); const v = $('#cidIn').value.trim();
+      if (!/^[0-9a-f]{32}$/i.test(v)){ toast('Client ID gồm 32 ký tự chữ và số, kiểm tra lại nhé.'); return; }
+      SP.cid = v; ls.set('sp-cid', v); spConnect();
+    });
+  }
+
+  // ---- tìm kiếm ----
+  function spOpenRes(title){ $('#spResT').textContent = title; $('#spRes').hidden = false; if (narrow() && !spW.classList.contains('big')) setBig(true); }
+  function spCloseRes(){ $('#spRes').hidden = true; stopPreview(); }
+  $('#spResX').addEventListener('click', spCloseRes);
+  $('#spForm').addEventListener('submit', e => { e.preventDefault(); const q = $('#spQ').value.trim(); if (q) spFind(q, 'track', false); });
+  let audio = null, audioBtn = null;
+  function stopPreview(){ if (audio){ audio.pause(); audio = null; } if (audioBtn){ audioBtn.setAttribute('aria-pressed', 'false'); audioBtn.textContent = '▶'; audioBtn = null; } }
+  function preview(url, btn){
+    if (audioBtn === btn){ stopPreview(); return; }
+    stopPreview(); if (!url) return;
+    audio = new Audio(url); audioBtn = btn; btn.setAttribute('aria-pressed', 'true'); btn.textContent = '❚❚';
+    audio.addEventListener('ended', stopPreview); audio.play().catch(() => stopPreview());
+  }
+  const img = (u, cls) => u ? `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer"${cls ? ` class="${cls}"` : ''}>` : ph(cls);
+  async function spFind(q, kind, autoplay){
+    SP.q = q; $('#spQ').value = q;
+    spOpenRes('kết quả: “' + q + '”');
+    const body = $('#spResB'); body.innerHTML = '<p class="note">◌ đang tìm…</p>';
+    front(spW);
+    if (SP.me){
+      try {
+        const d = await spApi('/search?' + new URLSearchParams({ q, type: 'track,album', limit: '10' }));
+        if (SP.q !== q) return;
+        const tr = ((d.tracks && d.tracks.items) || []).filter(Boolean), al = ((d.albums && d.albums.items) || []).filter(Boolean);
+        const pic = o => { const im = (o.album ? o.album.images : o.images) || []; return (im[im.length - 1] || im[0] || {}).url; };
+        const row = (o, t) => `<li class="sr-row" data-uri="${esc(o.uri)}">${img(pic(o))}<div><b>${esc(o.name)}</b><span>${esc((o.artists || []).map(a => a.name).join(', '))}${t === 'track' && o.album ? ' · ' + esc(o.album.name) : (o.release_date ? ' · ' + esc(o.release_date.slice(0, 4)) : '')}</span></div>
+          <button class="ib" type="button" data-act="play" aria-label="Phát ${esc(o.name)}">▶</button>${t === 'track' ? `<button class="ib" type="button" data-act="add" aria-label="Thêm ${esc(o.name)} vào playlist">＋</button>` : ''}</li>`;
+        body.innerHTML = (tr.length ? '<p class="sr-h">bài hát</p><ul class="sr-list">' + tr.map(o => row(o, 'track')).join('') + '</ul>' : '') +
+          (al.length ? '<p class="sr-h">album</p><ul class="sr-list">' + al.slice(0, 6).map(o => row(o, 'album')).join('') + '</ul>' : '') ||
+          '<p class="note">✕ không tìm thấy kết quả.</p>';
+        body.querySelectorAll('[data-act="play"]').forEach(b => b.addEventListener('click', () => { spLoad(b.closest('li').dataset.uri, true); spCloseRes(); }));
+        body.querySelectorAll('[data-act="add"]').forEach(b => b.addEventListener('click', () => pickPlaylist(b.closest('li'))));
+        if (autoplay){ const first = (kind === 'album' ? al[0] : tr[0]) || tr[0] || al[0]; if (first){ spLoad(first.uri, true); toast('▶ ' + first.name + ' — ' + (first.artists || []).map(a => a.name).join(', ')); } }
+        return;
+      } catch (e) { body.innerHTML = `<p class="note">✕ Spotify: ${esc(e.message)}</p>`; return; }
+    }
+    // chưa kết nối: tìm qua kho nhạc Apple (cho phép nghe thử 30 giây ngay trong trang)
+    try {
+      let res = [];
+      for (const c of ['VN', 'US']){
+        const r = await fetch('https://itunes.apple.com/search?' + new URLSearchParams({ term: q, entity: 'song', limit: '15', country: c }));
+        const j = await r.json(); res = (j.results || []).filter(x => x.previewUrl);
+        if (res.length) break;
+      }
+      if (SP.q !== q) return;
+      body.innerHTML = `<p class="sr-note">◌ chưa kết nối tài khoản Spotify — đang nghe thử 30 giây. <button type="button" id="srConn">Kết nối Spotify</button> để phát trọn bài và thêm vào playlist ngay tại đây.</p>` +
+        (res.length ? '<ul class="sr-list">' + res.map((x, i) => `<li class="sr-row">${img(x.artworkUrl100)}<div><b>${esc(x.trackName)}</b><span>${esc(x.artistName)} · ${esc(x.collectionName || '')}</span></div><button class="ib" type="button" data-pv="${i}" aria-label="Nghe thử ${esc(x.trackName)}" aria-pressed="false">▶</button><a class="ib" style="display:grid;place-items:center;text-decoration:none" href="spotify:search:${encodeURIComponent(x.artistName + ' ' + x.trackName)}" title="Mở trong ứng dụng Spotify trên máy" aria-label="Mở ${esc(x.trackName)} trong ứng dụng Spotify">♫</a></li>`).join('') + '</ul>' : '<p class="note">✕ không tìm thấy kết quả.</p>');
+      $('#srConn').addEventListener('click', spConnect);
+      body.querySelectorAll('[data-pv]').forEach(b => b.addEventListener('click', () => preview(res[+b.dataset.pv].previewUrl, b)));
+      if (autoplay && res[0]){ const b = body.querySelector('[data-pv="0"]'); preview(res[0].previewUrl, b); }
+    } catch (e) { body.innerHTML = '<p class="note">✕ không tìm được lúc này, thử lại sau.</p>'; }
+  }
+  function pickPlaylist(li){
+    const old = li.nextElementSibling && li.nextElementSibling.classList.contains('pick') ? li.nextElementSibling : null;
+    document.querySelectorAll('.pick').forEach(p => p.remove()); if (old) return;
+    const own = SP.pls.filter(p => SP.me && p.owner && (p.owner.id === SP.me.id || p.collaborative));
+    const box = document.createElement('li'); box.className = 'pick';
+    box.innerHTML = '<p>thêm vào playlist:</p>' + (own.length ? own.map(p => `<button type="button" data-id="${esc(p.id)}">♪ ${esc(p.name)}</button>`).join('') : '<p>bạn chưa có playlist nào để thêm.</p>');
+    li.after(box);
+    box.querySelectorAll('button').forEach(b => b.addEventListener('click', async () => {
+      try { await spApi(`/playlists/${b.dataset.id}/items`, { method: 'POST', body: { uris: [li.dataset.uri] } }); toast('＋ đã thêm “' + li.querySelector('b').textContent + '” vào ' + b.textContent.replace(/^♪ /, '')); box.remove(); }
+      catch (e) { toast('Spotify: ' + e.message); }
+    }));
+  }
+
+  /* ================= LETTERBOXD ================= */
+  const lb = $('#lbBody'); let lbData = null, lbView = -1;
+  const stars = r => r == null ? '' : '★'.repeat(Math.floor(r)) + (r % 1 ? '½' : '');
+  const vnDate = s => { if (!s) return ''; const d = new Date(s.length === 10 ? s + 'T12:00:00' : s); return isNaN(d) ? '' : d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }); };
+  function lbList(){
+    lbView = -1;
+    if (!lbData || !lbData.items || !lbData.items.length){ lb.innerHTML = '<p class="note">◌ chưa có dữ liệu Letterboxd, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
+    const up = lbData.updated ? new Date(lbData.updated) : null;
+    lb.innerHTML = `<div class="lb-head"><span class="live">◉ LIVE_FEED · ${esc(lbData.name || lbData.user)}</span><span>${up ? 'cập nhật ' + up.toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' }) : ''}</span></div>` +
+      '<ul class="lb-list">' + lbData.items.map((it, i) => `<li><button class="lb-item" type="button" data-i="${i}">
+        ${it.poster ? `<img src="${esc(it.poster)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ph()}
+        <span class="lb-meta"><b>${esc(it.title)} <span>${esc(it.year)}</span></b>
+        <span class="lb-row">${esc(stars(it.rating))}${it.liked ? ' <span class="lk">♥</span>' : ''}${it.rewatch ? ' ↻' : ''} <span class="d">· ${esc(vnDate(it.watched || it.published))}</span></span>
+        ${it.review ? `<span class="lb-rev">${esc(it.review)}</span>` : ''}</span></button></li>`).join('') + '</ul>';
+    lb.querySelectorAll('.lb-item').forEach(b => b.addEventListener('click', () => lbDetail(+b.dataset.i)));
+  }
+  function lbDetail(i){
+    const it = lbData.items[i]; if (!it) return; lbView = i;
+    lb.innerHTML = `<div class="lb-detail"><button class="lb-back" type="button">← nhật ký</button>
+      <div class="lb-top">${it.poster ? `<img src="${esc(it.poster)}" alt="Poster ${esc(it.title)}" referrerpolicy="no-referrer">` : ''}
+      <div><h2>${esc(it.title)} <span>${esc(it.year)}</span></h2><p class="lb-row" style="margin-top:8px">${esc(stars(it.rating)) || 'chưa chấm'}${it.liked ? ' <span class="lk">♥</span>' : ''}${it.rewatch ? ' ↻ xem lại' : ''}</p>
+      <p class="lb-row d" style="margin-top:4px">xem ngày ${esc(vnDate(it.watched || it.published))}</p>
+      <div class="lb-acts"><a class="btn solid" id="lbImdb" href="${esc(IMDB)}" target="_blank" rel="noopener noreferrer">▶ xem trên IMDB ↗</a></div></div></div>
+      <p class="lb-full${it.review ? '' : ' empty'}">${it.review ? esc(it.review) : 'không có bài review cho lần xem này.'}</p></div>`;
+    lb.scrollTop = 0;
+    const back = lb.querySelector('.lb-back'); back.addEventListener('click', lbList); back.focus();
+    $('#lbImdb').addEventListener('click', () => {
+      const name = it.title + (it.year ? ' ' + it.year : '');
+      if (navigator.clipboard) navigator.clipboard.writeText(it.title).then(() => toast('Đã chép tên phim “' + name + '” — dán vào ô tìm kiếm của IMDB'), () => {});
+    });
+  }
+  function loadLetterboxd(){
+    fetch('data/letterboxd.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
+      if (d && lbData && d.updated === lbData.updated) return;
+      lbData = d; if (lbView < 0) lbList();
+    }).catch(() => { if (!lbData) lbList(); });
+  }
+
+  /* ================= NHẠC MỚI ================= */
+  const nmBody = $('#nmBody'), nmWrap = $('#nmFrameWrap'), nmFrame = $('#nmFrame');
+  let nmData = null, nmTab = ls.get('nm-tab') || 'song';
+  if (!['song', 'album', 'news'].includes(nmTab)) nmTab = 'song';
+  function nmTabs(sel){ document.querySelectorAll('#w-music [role="tab"]').forEach(b => b.setAttribute('aria-selected', (b.dataset.tab || b.dataset.site) === sel)); }
+  function nmRender(){
+    nmWrap.hidden = true; nmBody.hidden = false; nmTabs(nmTab);
+    if (!nmData || !nmData.items){ nmBody.innerHTML = '<p class="note">◌ chưa có dữ liệu nhạc mới, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
+    const list = nmData.items.filter(it => it.k === nmTab);
+    nmBody.innerHTML = '<ul class="nm-list">' + list.map((it, i) => {
+      const sub = [SRC[it.s] || it.s, ago(it.d)].filter(Boolean).join(' · ') + (it.sc != null ? ` · <span class="sc">${esc(it.sc.toFixed(1))}</span>` : '');
+      const can = it.k !== 'news';
+      return `<li class="nm-item" data-i="${i}">${img(it.i)}<div class="nm-meta"><button class="nm-open" type="button">${esc(it.t)}</button><span class="nm-sub">${sub}</span>${it.x ? `<p class="nm-x">${esc(it.x)}</p>` : ''}</div>
+        <div class="nm-act">${can ? `<button class="btn sm solid" type="button" data-act="sp" aria-label="Tìm và phát ${esc(it.t)} trên Spotify">▶ spotify</button>` : ''}<button class="btn sm" type="button" data-act="read">${FRAMEABLE.includes(it.s) ? 'đọc' : 'xem'}</button></div></li>`;
+    }).join('') + '</ul>' || '<p class="note">◌ chưa có mục nào.</p>';
+    nmBody.querySelectorAll('.nm-item').forEach(li => {
+      const it = list[+li.dataset.i];
+      const read = () => nmRead(it, li);
+      li.querySelector('.nm-open').addEventListener('click', read);
+      li.querySelector('[data-act="read"]').addEventListener('click', read);
+      const sp = li.querySelector('[data-act="sp"]');
+      if (sp) sp.addEventListener('click', () => spFind(it.a && it.w ? it.a + ' ' + it.w : it.t, it.k === 'album' ? 'album' : 'track', true));
+    });
+  }
+  function nmRead(it, li){
+    if (FRAMEABLE.includes(it.s)){ nmFrameOpen(it.u, SRC[it.s] + ' · ' + it.t); return; }
+    // pitchfork không cho mở trong khung: hiện phần tóm tắt ngay tại chỗ
+    const open = li.classList.toggle('open');
+    let more = li.querySelector('.nm-more');
+    if (open && !more){ more = document.createElement('p'); more.className = 'nm-more'; more.innerHTML = `<a class="btn sm" href="${esc(it.u)}" target="_blank" rel="noopener">đọc toàn bài trên ${esc(SRC[it.s] || it.s)} ↗</a>`; li.querySelector('.nm-meta').appendChild(more); }
+    if (more) more.hidden = !open;
+  }
+  function nmFrameOpen(url, label, tab){
+    nmBody.hidden = true; nmWrap.hidden = false;
+    $('#nmFrameUrl').textContent = label || url;
+    if (nmFrame.getAttribute('src') !== url) nmFrame.src = url;
+    nmTabs(tab || '');
+  }
+  $('#nmBack').addEventListener('click', () => { nmFrame.removeAttribute('src'); nmRender(); });
+  document.querySelectorAll('#w-music [data-tab]').forEach(b => b.addEventListener('click', () => { nmTab = b.dataset.tab; ls.set('nm-tab', nmTab); nmRender(); nmBody.scrollTop = 0; }));
+  document.querySelectorAll('#w-music [data-site]').forEach(b => b.addEventListener('click', () => { const s = SITES[b.dataset.site]; nmFrameOpen(s[1], s[0], b.dataset.site); }));
+  function loadMusic(){
+    fetch('data/music.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d) { if (!nmData) nmRender(); return; }
+      const fresh = !nmData || d.updated !== nmData.updated;
+      nmData = d;
+      $('#nmUpd').textContent = d.updated ? 'cập nhật ' + ago(d.updated) : '';
+      if (fresh && nmWrap.hidden) nmRender();
+    }).catch(() => { if (!nmData) nmRender(); });
+  }
+
+  /* ================= LAST.FM: bài đang nghe, tự cập nhật ================= */
+  const lfBody = $('#lfBody'), lfLive = $('#lfLive');
+  const LF = { hist: ls.get('lf-hist') || [], busy: false, ok: false };
+  const lfNorm = t => {
+    const im = (t.image || []).find(i => i.size === 'extralarge' && i['#text']) || (t.image || []).find(i => i.size === 'large' && i['#text']) || {};
+    const art = t.artist || {};
+    return { name: t.name || '', artist: art['#text'] || art.name || '', album: (t.album && t.album['#text']) || '', img: im['#text'] || '',
+      now: !!(t['@attr'] && (t['@attr'].nowplaying === 'true' || t['@attr'].nowplaying === true)), uts: t.date && t.date.uts ? +t.date.uts * 1000 : 0 };
+  };
+  const same = (a, b) => a && b && a.name === b.name && a.artist === b.artist;
+  async function lfFetch(){
+    if (LASTFM_KEY){
+      const r = await fetch('https://ws.audioscrobbler.com/2.0/?' + new URLSearchParams({ method: 'user.getrecenttracks', user: LASTFM_USER, api_key: LASTFM_KEY, format: 'json', limit: '12', extended: '0' }), { cache: 'no-store' });
+      const d = await r.json();
+      if (d.error) throw { code: d.error, msg: d.message };
+      return ((d.recenttracks && d.recenttracks.track) || []).map(lfNorm);
+    }
+    const r = await fetch(`https://lastfm-last-played.biancarosa.com.br/${encodeURIComponent(LASTFM_USER)}/latest-song`, { cache: 'no-store' });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || !d.track) throw { code: r.status === 404 ? 17 : r.status, msg: d.message || '' };
+    return [lfNorm(d.track)];
+  }
+  async function lfPoll(){
+    if (LF.busy || document.hidden || $('#desk').hidden) return;
+    LF.busy = true;
+    try {
+      const list = await lfFetch();
+      let tracks = list;
+      if (!LASTFM_KEY && list[0]){
+        const t = list[0];
+        if (!same(LF.hist[0], t)) LF.hist.unshift(t); else LF.hist[0] = t;
+        LF.hist = LF.hist.slice(0, 12); ls.set('lf-hist', LF.hist); tracks = LF.hist;
+      }
+      LF.ok = true; lfRender(tracks);
+    } catch (e) {
+      LF.ok = false; lfError(e);
+    } finally { LF.busy = false; }
+  }
+  function lfRender(tracks){
+    lfLive.className = 'r on'; lfLive.textContent = '◉ live · 15s';
+    if (!tracks.length){ lfBody.innerHTML = '<p class="note">◌ chưa có bài nào được ghi lại.</p>'; return; }
+    const [t, ...rest] = tracks;
+    const st = t.now ? '<p class="lf-st now">◉ ĐANG NGHE</p>' : `<p class="lf-st">◌ vừa nghe${t.uts ? ' · ' + ago(t.uts) : ''}</p>`;
+    lfBody.innerHTML = `<div class="lf-now">${img(t.img)}<div>${st}<b>${esc(t.name)}</b><span>${esc(t.artist)}${t.album ? ' — ' + esc(t.album) : ''}</span>
+      <button class="btn sm" type="button" data-q="0">▶ nghe trên spotify</button></div></div>` +
+      (rest.length ? '<ul class="lf-list">' + rest.map((x, i) => `<li>${img(x.img)}<div><b>${esc(x.name)}</b><span>${esc(x.artist)}${x.uts ? ' · ' + esc(ago(x.uts)) : ''}</span></div><button class="ib" type="button" data-q="${i + 1}" aria-label="Nghe ${esc(x.name)} trên Spotify">▶</button></li>`).join('') + '</ul>' : '');
+    lfBody.querySelectorAll('[data-q]').forEach(b => b.addEventListener('click', () => { const x = tracks[+b.dataset.q]; spFind(x.artist + ' ' + x.name, 'track', true); }));
+  }
+  function lfError(e){
+    lfLive.className = 'r bad';
+    if (e && (e.code === 17 || /USER_LIKELY_DOESNT_EXIST|login/i.test(e.msg || ''))){
+      lfLive.textContent = '✕ đang ẩn';
+      lfBody.innerHTML = `<div class="note"><p><b>vy@studio:~$</b> connect last.fm/user/${esc(LASTFM_USER)}</p>
+        <p>✕ Last.fm đang <b>ẩn lịch sử nghe</b> của ${esc(LASTFM_USER)}, nên chưa đọc được bài đang nghe.</p>
+        <p style="margin-top:6px">Vào last.fm → <b>Settings</b> → <b>Privacy</b> → bỏ chọn <b>“Hide recent listening information”</b> → <b>Save</b>. Khung này tự hiện bài bạn đang nghe trong vòng 15 giây.</p></div>`;
+    } else {
+      lfLive.textContent = '◌ thử lại…';
+      if (!LF.ok && !lfBody.querySelector('.lf-now')) lfBody.innerHTML = '<p class="note">◌ chưa kết nối được last.fm, đang thử lại…</p>';
+    }
+  }
+
+  /* ================= INSTAGRAM ================= */
+  let igCur = IG_USERS[0];
+  function igShow(u){
+    igCur = u;
+    document.querySelectorAll('[data-ig]').forEach(b => b.setAttribute('aria-selected', b.dataset.ig === u));
+    const f = $('#igFrame'), src = `https://www.instagram.com/${u}/embed/`;
+    if (f.getAttribute('src') !== src) f.src = src;
+    f.title = 'Instagram @' + u;
+  }
+  document.querySelectorAll('[data-ig]').forEach(b => b.addEventListener('click', () => igShow(b.dataset.ig)));
+
+  /* ================= MỞ STUDIO ================= */
+  let opened = false;
+  async function openDesk(){
+    if (opened) return; opened = true;
+    $('#desk').hidden = false; document.body.classList.remove('locked');
+    ['spotify', 'music', 'letterboxd', 'lastfm'].forEach(taskBtn);
+    front(wins.music);
+    renderChips(); spFoot();
+    await spReturn();
+    spInitPlayer();
+    spLoadAccount();
+    loadLetterboxd(); loadMusic(); lfPoll();
+    setInterval(lfPoll, LASTFM_POLL);
+    setInterval(() => { if (!document.hidden){ loadLetterboxd(); loadMusic(); } }, 10 * 60 * 1000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden){ lfPoll(); loadMusic(); } });
+    tickClock(); setInterval(tickClock, 20000);
+  }
+
+  if (unlocked){ document.body.classList.remove('locked'); openDesk(); }
+  else key.focus({ preventScroll: true });
+  window.__studio = { feed, openApp, setBig, spFind, spLoad, SP, LF };
+})();
+</script>
+</body>
+</html>
