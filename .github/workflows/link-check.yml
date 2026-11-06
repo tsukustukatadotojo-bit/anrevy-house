@@ -3,7 +3,7 @@ on:
   push:
     branches: [link-check]
 permissions:
-  contents: read
+  contents: write
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
           s=open('out_gal.txt').read().replace(chr(10),' ¶ ')
           for i in range(0,min(len(s),32000),3800): print('::notice title=galup'+str(i//3800)+'::'+s[i:i+3800])
           "
-      - uses: actions/upload-artifact@v4
-        with:
-          name: studio-data
-          path: studio/data/
+      - name: Save data to branch
+        run: |
+          git config user.name bot; git config user.email bot@users.noreply.github.com
+          mkdir -p out && cp studio/data/*.json out/ && git add out && git commit -qm "studio data [skip ci]" && git push -q origin HEAD:link-check-out --force
