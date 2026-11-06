@@ -50,6 +50,13 @@
   #w-spotify{flex:1;min-height:0}
   #w-lastfm{flex:none;height:230px}
 
+  /* hình nền: chữ AN VY + logo ở giữa màn hình đen (hiện khi ẩn bớt khung) */
+  .wall{position:fixed;left:0;right:0;top:0;bottom:var(--bar);z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;pointer-events:none;color:var(--g);text-align:center}
+  .wall svg{width:clamp(110px,12vw,168px);height:auto}
+  .wall pre{font:clamp(17px,2.4vw,34px)/1.05 var(--mono);white-space:pre;color:var(--g);letter-spacing:0}
+  .wall p{font:12.5px/1.4 var(--mono);color:var(--g-mid);letter-spacing:.24em}
+  .sys,.icons,.win,.rcol{z-index:1}
+
   /* cột biểu tượng ứng dụng bên phải */
   .icons{grid-column:4;grid-row:1/3;margin-top:-14px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;border-left:1px solid var(--g-line);background:#000;overflow-y:auto;scrollbar-width:none}
   .icon{display:flex;flex-direction:column;align-items:center;gap:3px;width:84px;padding:7px 4px;color:var(--g);text-decoration:none;font:15px/1 var(--vt);letter-spacing:.04em;text-align:center}
@@ -107,6 +114,17 @@
   .lk{color:var(--red)}
   .lb-rev{font-size:12.5px;line-height:1.45;color:var(--g-mid);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .lb-detail{padding:14px}
+  .lb-sec{display:flex;justify-content:space-between;gap:8px;padding:9px 12px 5px;font:12px/1.3 var(--mono);color:var(--g-mid);border-bottom:1px dashed var(--g-line)}
+  .lb-sec b{font-weight:400;color:var(--g)}
+  .lb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:10px 8px;padding:10px 12px 14px}
+  .pg{display:flex;flex-direction:column;gap:4px;min-width:0;text-align:left}
+  .pg img,.pg .ph{width:100%;aspect-ratio:2/3;height:auto;object-fit:cover;border:1px solid var(--g-line)}
+  .pg:hover img,.pg:focus-visible img{border-color:var(--g)}
+  .pg b{font-weight:400;font-size:11.5px;line-height:1.25;color:var(--g);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pg i{font-style:normal;font-size:11px;line-height:1;color:var(--g-mid)}
+  .badge{display:inline-block;padding:1px 6px;border:1px solid var(--g-dim);font:11.5px/1.4 var(--mono);color:var(--g)}
+  .badge.wl{border-color:var(--amber);color:var(--amber)}
+  .lb-cast{margin-top:6px;font-size:12.5px;line-height:1.45;color:var(--g-mid)}
   .lb-back{margin-bottom:12px;padding:4px 10px;border:1px solid var(--g-dim);font:12.5px/1.3 var(--mono);color:var(--g)}
   .lb-back:hover{background:var(--g);color:#000}
   .lb-top{display:flex;gap:14px}
@@ -140,6 +158,21 @@
   .nm-more{margin-top:6px}
   .nm-act{flex:none;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
   .nm-frame{flex:1;min-height:0;display:flex;flex-direction:column}
+  .ch-bar{position:sticky;top:0;z-index:1;display:flex;gap:6px;padding:8px 12px;background:#000;border-bottom:1px dashed var(--g-line)}
+  .ch-note{padding:7px 12px;font:12px/1.45 var(--mono);color:var(--g-mid);border-bottom:1px solid #0b2a14}
+  .ch-note b{font-weight:400;color:var(--g)}
+  .ch-list{list-style:none}
+  .ch-row{display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid #0b2a14}
+  .ch-row:hover{background:#010d05}
+  .ch-row .pos{flex:none;width:30px;text-align:right;font:600 13px/1 var(--mono);color:var(--g-hi)}
+  .ch-row .mv{flex:none;width:34px;font:11.5px/1 var(--mono);color:var(--g-dim)}
+  .ch-row .mv.up{color:var(--g)}
+  .ch-row .mv.dn{color:var(--amber)}
+  .ch-row div{flex:1;min-width:0}
+  .ch-row b{display:block;font-weight:600;font-size:13px;line-height:1.3;color:var(--g-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ch-row div span{display:block;font-size:12px;line-height:1.3;color:var(--g-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ch-row .ib{flex:none;width:30px;height:26px;border:1px solid var(--g-dim);color:var(--g);font:13px/1 var(--mono)}
+  .ch-row .ib:hover{background:var(--g);color:#000}
   .nm-fbar{flex:none;display:flex;align-items:center;gap:10px;padding:5px 8px;border-bottom:1px dashed var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
   .nm-fbar span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .nm-frame iframe{flex:1;min-height:0;width:100%;border:0;background:#fff}
@@ -148,11 +181,12 @@
   #w-spotify.big{position:fixed;left:50vw;top:14px;right:108px;bottom:calc(var(--bar) + 12px);z-index:900;margin:0}
   #spBar{cursor:pointer}
   .sp-ctl{flex:none;border-bottom:1px solid var(--g-line)}
-  .sp-search{display:flex;align-items:center;gap:6px;padding:6px 8px}
-  .sp-search span{color:var(--g-mid);font:15px/1 var(--mono)}
-  .sp-search input{flex:1;min-width:0;height:28px;padding:0 8px;background:#000;border:1px solid var(--g-dim);color:var(--g-hi);font:13px/1 var(--mono);border-radius:0;-webkit-appearance:none;appearance:none}
-  .sp-search input::placeholder{color:var(--g-dim)}
-  .sp-search input:focus{outline:none;border-color:var(--g)}
+  .sp-search,.lb-search{display:flex;align-items:center;gap:6px;padding:6px 8px}
+  .sp-search span,.lb-search span{color:var(--g-mid);font:15px/1 var(--mono)}
+  .sp-search input,.lb-search input{flex:1;min-width:0;height:28px;padding:0 8px;background:#000;border:1px solid var(--g-dim);color:var(--g-hi);font:13px/1 var(--mono);border-radius:0;-webkit-appearance:none;appearance:none}
+  .sp-search input::placeholder,.lb-search input::placeholder{color:var(--g-dim)}
+  .sp-search input:focus,.lb-search input:focus{outline:none;border-color:var(--g)}
+  .lb-search{flex:none;border-bottom:1px solid var(--g-line)}
   .chips{display:flex;gap:6px;padding:0 8px 7px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--g-line) #000}
   .chip{flex:none;max-width:190px;height:24px;padding:0 9px;border:1px solid var(--g-dim);color:var(--g-mid);font:12px/22px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .chip:hover{color:var(--g)}
@@ -216,6 +250,7 @@
   .app{position:absolute;left:calc(clamp(290px,25vw,380px) + 32px);top:14px;right:calc(clamp(320px,28vw,430px) + 124px);bottom:calc(var(--bar) + 12px);min-width:300px;min-height:220px;z-index:20}
   .ig{display:flex;flex-direction:column;height:100%}
   .ig .frame{flex:1;min-height:0;background:#fff}
+  .ig-out{margin-left:auto;align-self:center;padding:0 10px;font:12px/1 var(--mono);color:var(--g-mid);white-space:nowrap}
   .ig .frame iframe{display:block;width:100%;height:100%;border:0}
 
   /* thanh tác vụ */
@@ -225,6 +260,7 @@
   .tasks{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
   .tasks button{flex:none;height:28px;padding:0 10px;border:1px solid var(--g-dim);color:var(--g-mid);white-space:nowrap;font:12.5px/1 var(--mono)}
   .tasks button.front{border-color:var(--g);color:var(--g)}
+  .tasks button.min{border-style:dashed;color:var(--g-dim)}
   .clock{flex:none;color:var(--g-mid);padding:0 6px;font:12.5px/1 var(--mono)}
   .menu{position:fixed;left:8px;bottom:calc(var(--bar) + 4px);z-index:999;min-width:240px;border:1px solid var(--g);background:#000}
   .menu p{padding:8px 12px;border-bottom:1px dashed var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
@@ -259,6 +295,9 @@
     .lb-top img{width:96px;height:144px}
     .nm-item img,.nm-item .ph{width:48px;height:48px}
     .toast{bottom:calc(var(--bar) + var(--spmini) + 12px)}
+    .wall{display:none;bottom:calc(var(--bar) + var(--spmini))}
+    #desk.bare .wall{display:flex;position:static;order:3;padding:48px 0 24px}
+    .wall pre{font-size:clamp(14px,4.6vw,22px)}
   }
 </style>
 </head>
@@ -269,6 +308,22 @@
 <pre id="stream" hidden aria-hidden="true"></pre>
 
 <div id="desk" hidden>
+  <div class="wall" aria-hidden="true">
+    <svg viewBox="0 0 160 160" fill="none" stroke="currentColor">
+      <circle cx="80" cy="80" r="74" stroke-width="3"/>
+      <circle cx="80" cy="80" r="63" stroke-width="1.2" opacity=".55"/>
+      <circle cx="80" cy="80" r="53" stroke-width="1.2" opacity=".42"/>
+      <circle cx="80" cy="80" r="43" stroke-width="1.2" opacity=".3"/>
+      <path d="M27 47A60 60 0 0 1 47 27M133 113a60 60 0 0 1-20 20" stroke-width="3" stroke-linecap="square"/>
+      <circle cx="80" cy="80" r="27" stroke-width="2.5" fill="#031a0a"/>
+      <path d="M72 66v28l23-14z" fill="currentColor" stroke="none"/>
+      <rect x="4" y="74" width="8" height="12" fill="#000" stroke-width="2"/><rect x="148" y="74" width="8" height="12" fill="#000" stroke-width="2"/>
+    </svg>
+<pre>░█▀█░█▀█░░░█░█░█░█░
+░█▀█░█░█░░░▀▄▀░░█░░
+░▀░▀░▀░▀░░░░▀░░░▀░░</pre>
+    <p>vy@studio · music &amp; films</p>
+  </div>
   <header class="sys">
 <pre class="banner" aria-hidden="true">░█▀▀░▀█▀░█░█░█▀▄░▀█▀░█▀█
 ░▀▀█░░█░░█░█░█░█░░█░░█░█
@@ -279,23 +334,24 @@
 
   <!-- Letterboxd: cố định bên trái -->
   <section class="win" id="w-letterboxd" data-app="letterboxd" aria-label="Letterboxd">
-    <div class="tb"><span class="t">letterboxd.app <i>— haanvie</i></span></div>
-    <div class="wb" id="lbBody"><p class="note">◌ đang tải nhật ký phim…</p></div>
+    <div class="tb"><span class="t">letterboxd.app <i>— haanvie</i></span><span class="r" id="lbUpd"></span><button type="button" data-act="hide" aria-label="Ẩn khung Letterboxd">_</button></div>
+    <form class="lb-search" id="lbForm" role="search"><span aria-hidden="true">⌕</span><label class="sr" for="lbQ">Tìm phim</label><input id="lbQ" type="search" placeholder="tìm phim…" autocomplete="off" enterkeyhint="search"></form>
+    <div class="tabs" role="tablist" aria-label="Letterboxd"><button type="button" role="tab" data-lb="watched" aria-selected="true">▣ đã xem</button><button type="button" role="tab" data-lb="watchlist" aria-selected="false">☆ watchlist <span id="wlN"></span></button></div>
+    <div class="wb" id="lbBody"><p class="note">◌ đang tải phim…</p></div>
   </section>
 
   <!-- Nhạc mới: giữa -->
   <section class="win" id="w-music" data-app="music" aria-label="Nhạc mới">
-    <div class="tb"><span class="t">newmusic.feed <i>— pitchfork · stereogum · nme · npr · bandcamp · consequence</i></span><span class="r" id="nmUpd"></span></div>
+    <div class="tb"><span class="t">newmusic.feed <i>— pitchfork · stereogum · nme · npr · consequence · bandcamp</i></span><span class="r" id="nmUpd"></span><button type="button" data-act="hide" aria-label="Ẩn khung nhạc mới">_</button></div>
     <div class="tabs" role="tablist" aria-label="Nhạc mới">
       <button type="button" role="tab" data-tab="song" aria-selected="true">♪ bài mới</button>
       <button type="button" role="tab" data-tab="album" aria-selected="false">◎ album mới</button>
       <button type="button" role="tab" data-tab="news" aria-selected="false">✎ tin nhạc</button>
+      <button type="button" role="tab" data-tab="charts" aria-selected="false">♫ top charts</button>
       <span class="sep" aria-hidden="true"></span>
-      <button type="button" role="tab" data-site="npr" aria-selected="false">npr music</button>
+      <button type="button" role="tab" data-site="npr" aria-selected="false">npr</button>
       <button type="button" role="tab" data-site="stereogum" aria-selected="false">stereogum</button>
-      <button type="button" role="tab" data-site="bandcamp" aria-selected="false">bandcamp daily</button>
       <button type="button" role="tab" data-site="consequence" aria-selected="false">consequence</button>
-      <button type="button" role="tab" data-site="kworb" aria-selected="false">top VN · spotify</button>
     </div>
     <div class="wb" id="nmBody"><p class="note">◌ đang tải nhạc mới…</p></div>
     <div class="nm-frame" id="nmFrameWrap" hidden>
@@ -307,7 +363,7 @@
   <div class="rcol">
     <!-- Spotify -->
     <section class="win" id="w-spotify" data-app="spotify" aria-label="Spotify">
-      <div class="tb" id="spBar"><span class="t">spotify <i id="spHint">— bấm để mở rộng</i></span><button type="button" id="spBig" aria-label="Mở rộng nửa màn hình" aria-pressed="false">□</button></div>
+      <div class="tb" id="spBar"><span class="t">spotify <i id="spHint">— bấm để mở rộng</i></span><button type="button" data-act="hide" aria-label="Ẩn khung Spotify (nhạc vẫn phát)">_</button><button type="button" id="spBig" aria-label="Mở rộng nửa màn hình" aria-pressed="false">□</button></div>
       <div class="sp-ctl">
         <form class="sp-search" id="spForm" role="search"><span aria-hidden="true">⌕</span><label class="sr" for="spQ">Tìm trên Spotify</label><input id="spQ" type="search" placeholder="tìm bài hát, nghệ sĩ, album…" autocomplete="off" enterkeyhint="search"></form>
         <div class="chips" id="spLib" aria-label="Thư viện Spotify"></div>
@@ -321,7 +377,7 @@
 
     <!-- Last.fm -->
     <section class="win" id="w-lastfm" data-app="lastfm" aria-label="Last.fm">
-      <div class="tb"><span class="t">last.fm <i>— Anrevy</i></span><span class="r" id="lfLive">◌</span></div>
+      <div class="tb"><span class="t">last.fm <i>— Anrevy</i></span><span class="r" id="lfLive">◌</span><button type="button" data-act="hide" aria-label="Ẩn khung Last.fm">_</button></div>
       <div class="wb" id="lfBody" aria-live="polite"><p class="note">◌ đang kết nối last.fm…</p></div>
     </section>
   </div>
@@ -338,9 +394,9 @@
 
   <!-- Instagram -->
   <section class="win app drag" id="w-instagram" data-app="instagram" aria-label="Instagram" hidden>
-    <div class="tb"><span class="t">instagram</span><button type="button" data-act="close" aria-label="Đóng">✕</button></div>
+    <div class="tb"><span class="t">instagram</span><button type="button" data-act="close" aria-label="Ẩn Instagram">_</button></div>
     <div class="wb ig">
-      <div class="tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-ig="_haanvie_">@_haanvie_</button><button type="button" role="tab" aria-selected="false" data-ig="anrevy_">@anrevy_</button></div>
+      <div class="tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-ig="_haanvie_">@_haanvie_</button><button type="button" role="tab" aria-selected="false" data-ig="anrevy_">@anrevy_</button><a class="ig-out" id="igOut" href="https://www.instagram.com/_haanvie_/" target="_blank" rel="noopener" title="Nếu khung không hiện, mở Instagram ở thẻ mới">mở instagram ↗</a></div>
       <div class="frame"><iframe id="igFrame" title="Instagram" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     </div>
   </section>
@@ -386,12 +442,10 @@
   const SITES = {
     npr: ['npr music', 'https://www.npr.org/music/'],
     stereogum: ['stereogum', 'https://www.stereogum.com/'],
-    bandcamp: ['bandcamp daily', 'https://daily.bandcamp.com/'],
     consequence: ['consequence', 'https://consequence.net/category/music/'],
-    kworb: ['spotify daily chart · việt nam', 'https://kworb.net/spotify/country/vn_daily.html'],
   };
   const SRC = { pitchfork: 'pitchfork', stereogum: 'stereogum', nme: 'nme', consequence: 'consequence', npr: 'npr music', bandcamp: 'bandcamp daily' };
-  const FRAMEABLE = ['stereogum', 'nme', 'consequence', 'npr', 'bandcamp'];   // các trang cho phép mở trong khung (pitchfork thì không)
+  const FRAMEABLE = ['stereogum', 'nme', 'consequence', 'npr'];   // các trang cho phép mở trong khung (pitchfork, bandcamp thì không)
   /* ==================================================== */
   const $ = s => document.querySelector(s);
   const esc = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -461,9 +515,20 @@
     if (!b){ b = document.createElement('button'); b.type = 'button'; b.dataset.app = app; b.textContent = NAMES[app]; b.addEventListener('click', () => openApp(app)); tasks.appendChild(b); }
     return b;
   }
+  // ẩn / hiện khung (nhớ trên máy này); khung ẩn hiện nét đứt ở thanh tác vụ, bấm để mở lại
+  const HID = new Set(ls.get('st-hidden') || []);
+  const saveHid = () => ls.set('st-hidden', [...HID]);
+  function updBare(){ $('#desk').classList.toggle('bare', ['letterboxd', 'music', 'lastfm'].every(a => wins[a].hidden)); }
+  function hideApp(app){
+    const w = wins[app]; if (!w) return;
+    if (app === 'spotify' && spW.classList.contains('big')) setBig(false);
+    w.hidden = true; taskBtn(app).classList.add('min'); HID.add(app); saveHid(); updBare();
+  }
   function openApp(app){
     const w = wins[app]; if (!w) return;
-    w.hidden = false; taskBtn(app); front(w);
+    w.hidden = false; taskBtn(app).classList.remove('min'); front(w);
+    if (HID.delete(app)) saveHid();
+    updBare();
     if (app === 'instagram'){ igShow(igCur); document.querySelectorAll('.icon[data-app="instagram"]').forEach(i => i.classList.add('on')); }
     else if (app === 'spotify'){ if (narrow()) setBig(true); else $('#spQ').focus({ preventScroll: true }); }
     else if (narrow()) w.scrollIntoView({ block: 'start' });
@@ -479,7 +544,7 @@
   document.querySelectorAll('.icon[data-app], .menu [data-app]').forEach(el => el.addEventListener('click', () => openApp(el.dataset.app)));
   Object.entries(wins).forEach(([app, w]) => {
     w.addEventListener('pointerdown', () => { if (!w.classList.contains('front')) front(w); });
-    w.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); closeApp(app); }));
+    w.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); if (b.dataset.act === 'hide') hideApp(app); else closeApp(app); }));
   });
   // kéo cửa sổ Instagram (máy tính)
   document.querySelectorAll('.win.drag').forEach(w => {
@@ -547,6 +612,7 @@
   }
   function spLoad(uri, play){
     uri = toUri(uri); if (!uri) return;
+    if (play && spW.hidden) openApp('spotify');
     SP.cur = uri; ls.set('sp-cur', uri); markChips();
     if (SP.ctl){
       try {
@@ -665,7 +731,7 @@
   }
 
   // ---- tìm kiếm ----
-  function spOpenRes(title){ $('#spResT').textContent = title; $('#spRes').hidden = false; if (narrow() && !spW.classList.contains('big')) setBig(true); }
+  function spOpenRes(title){ if (spW.hidden) openApp('spotify'); $('#spResT').textContent = title; $('#spRes').hidden = false; if (narrow() && !spW.classList.contains('big')) setBig(true); }
   function spCloseRes(){ $('#spRes').hidden = true; stopPreview(); }
   $('#spResX').addEventListener('click', spCloseRes);
   $('#spForm').addEventListener('submit', e => { e.preventDefault(); const q = $('#spQ').value.trim(); if (q) spFind(q, 'track', false); });
@@ -729,55 +795,166 @@
     }));
   }
 
-  /* ================= LETTERBOXD ================= */
-  const lb = $('#lbBody'); let lbData = null, lbView = -1;
+  /* ================= LETTERBOXD: đã xem · watchlist · tìm phim ================= */
+  const lb = $('#lbBody'); let lbData = null, lbTab = ls.get('lb-tab') === 'watchlist' ? 'watchlist' : 'watched', lbBackFn = null, lbQ = '';
   const stars = r => r == null ? '' : '★'.repeat(Math.floor(r)) + (r % 1 ? '½' : '');
   const vnDate = s => { if (!s) return ''; const d = new Date(s.length === 10 ? s + 'T12:00:00' : s); return isNaN(d) ? '' : d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }); };
-  function lbList(){
-    lbView = -1;
-    if (!lbData || !lbData.items || !lbData.items.length){ lb.innerHTML = '<p class="note">◌ chưa có dữ liệu Letterboxd, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
-    const up = lbData.updated ? new Date(lbData.updated) : null;
-    lb.innerHTML = `<div class="lb-head"><span class="live">◉ LIVE_FEED · ${esc(lbData.name || lbData.user)}</span><span>${up ? 'cập nhật ' + up.toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' }) : ''}</span></div>` +
-      '<ul class="lb-list">' + lbData.items.map((it, i) => `<li><button class="lb-item" type="button" data-i="${i}">
-        ${it.poster ? `<img src="${esc(it.poster)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ph()}
-        <span class="lb-meta"><b>${esc(it.title)} <span>${esc(it.year)}</span></b>
-        <span class="lb-row">${esc(stars(it.rating))}${it.liked ? ' <span class="lk">♥</span>' : ''}${it.rewatch ? ' ↻' : ''} <span class="d">· ${esc(vnDate(it.watched || it.published))}</span></span>
-        ${it.review ? `<span class="lb-rev">${esc(it.review)}</span>` : ''}</span></button></li>`).join('') + '</ul>';
-    lb.querySelectorAll('.lb-item').forEach(b => b.addEventListener('click', () => lbDetail(+b.dataset.i)));
+  const fold = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[đĐ]/g, 'd').toLowerCase();
+  const fkey = (t, y) => fold(t).replace(/[^a-z0-9]+/g, '') + '|' + (y || '');
+  const lbPoster = (it, w = 150, h = 225) => it.poster || (it.f && it.s ? `https://a.ltrbxd.com/resized/film-poster/${it.f.split('').join('/')}/${it.f}-${it.s}-0-${w}-0-${h}-crop.jpg${it.k ? '?v=' + it.k : ''}` : '');
+  const pimg = (u, alt) => u ? `<img src="${esc(u)}" alt="${esc(alt || '')}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph'}))">` : ph();
+  const diaryList = () => (lbData && lbData.items) || [];
+  const filmsList = () => (lbData && lbData.films && lbData.films.items) || [];
+  const wlList = () => (lbData && lbData.watchlist && lbData.watchlist.items) || [];
+  function lbIndex(){
+    const watched = new Map(), wl = new Set();
+    filmsList().forEach(f => watched.set(fkey(f.t, f.y), f));
+    diaryList().forEach(d => { const k = fkey(d.title, d.year); if (!watched.has(k)) watched.set(k, { t: d.title, y: d.year, r: d.rating, l: d.liked ? 1 : 0 }); });
+    wlList().forEach(f => wl.add(fkey(f.t, f.y)));
+    return { watched, wl };
   }
-  function lbDetail(i){
-    const it = lbData.items[i]; if (!it) return; lbView = i;
-    lb.innerHTML = `<div class="lb-detail"><button class="lb-back" type="button">← nhật ký</button>
-      <div class="lb-top">${it.poster ? `<img src="${esc(it.poster)}" alt="Poster ${esc(it.title)}" referrerpolicy="no-referrer">` : ''}
+  function lbTabs(sel){ document.querySelectorAll('#w-letterboxd [data-lb]').forEach(b => b.setAttribute('aria-selected', b.dataset.lb === sel)); }
+  function lbRender(){ lbQ = ''; lbBackFn = null; lbTabs(lbTab); if (lbTab === 'watchlist') lbWatchlist(); else lbWatched(); }
+  document.querySelectorAll('#w-letterboxd [data-lb]').forEach(b => b.addEventListener('click', () => { lbTab = b.dataset.lb; ls.set('lb-tab', lbTab); $('#lbQ').value = ''; lbRender(); lb.scrollTop = 0; }));
+
+  // ---- đã xem: phim mới đánh dấu đã xem → lưới phim đã xem (mới nhất trước) → nhật ký & review ----
+  function lbWatched(){
+    if (!lbData){ lb.innerHTML = '<p class="note">◌ chưa có dữ liệu Letterboxd, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
+    const films = filmsList(), diary = diaryList(), total = (lbData.films && lbData.films.total) || films.length;
+    const fresh = films.filter(f => f.seen).sort((x, y) => String(y.seen).localeCompare(String(x.seen)));
+    const row = (it, attr) => `<li><button class="lb-item" type="button" ${attr}>${pimg(it.poster)}
+        <span class="lb-meta"><b>${esc(it.t)} <span>${esc(it.y)}</span></b>
+        <span class="lb-row">${esc(stars(it.r))}${it.l ? ' <span class="lk">♥</span>' : ''}${it.rewatch ? ' ↻' : ''} <span class="d">· ${esc(vnDate(it.date))}</span></span>
+        ${it.rev ? `<span class="lb-rev">${esc(it.rev)}</span>` : ''}</span></button></li>`;
+    lb.innerHTML =
+      (fresh.length ? `<div class="lb-sec"><b>◉ vừa xem</b><span>mới đánh dấu</span></div><ul class="lb-list">` +
+        fresh.map((f, n) => row({ t: f.t, y: f.y, r: f.r, l: f.l, poster: lbPoster(f), date: f.seen }, `data-fr="${n}"`)).join('') + '</ul>' : '') +
+      (films.length ? `<div class="lb-sec"><b>▦ đã xem · phim mới nhất</b><span>${total} phim</span></div><div class="lb-grid">` +
+        films.map((f, n) => `<button class="pg" type="button" data-g="${n}" title="${esc(f.t)} (${esc(f.y)})">${pimg(lbPoster(f), f.t)}<b>${esc(f.t)}</b><i>${esc(stars(f.r))}${f.l ? ' <span class="lk">♥</span>' : ''}${f.r == null && !f.l ? esc(f.y) : ''}</i></button>`).join('') + '</div>' : '') +
+      (diary.length ? `<div class="lb-sec"><b>✎ nhật ký &amp; review</b><span>${esc(lbData.name || lbData.user || '')}</span></div><ul class="lb-list">` +
+        diary.map((d, i) => row({ t: d.title, y: d.year, r: d.rating, l: d.liked, poster: d.poster, rev: d.review, rewatch: d.rewatch, date: d.watched || d.published }, `data-di="${i}"`)).join('') + '</ul>' : '');
+    lb.querySelectorAll('[data-fr]').forEach(b => b.addEventListener('click', () => { const f = fresh[+b.dataset.fr]; filmDetail({ t: f.t, y: f.y, r: f.r, l: f.l, poster: lbPoster(f, 230, 345), slug: f.s, seen: f.seen }, lbRender); }));
+    lb.querySelectorAll('.pg[data-g]').forEach(b => b.addEventListener('click', () => { const f = films[+b.dataset.g]; filmDetail({ t: f.t, y: f.y, r: f.r, l: f.l, poster: lbPoster(f, 230, 345), slug: f.s, seen: f.seen }, lbRender); }));
+    lb.querySelectorAll('[data-di]').forEach(b => b.addEventListener('click', () => lbDiary(+b.dataset.di, lbRender)));
+  }
+  // ---- watchlist ----
+  function lbWatchlist(){
+    const wl = wlList();
+    if (!wl.length){ lb.innerHTML = '<p class="note">◌ chưa có dữ liệu watchlist, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
+    lb.innerHTML = `<div class="lb-sec"><b>☆ phim muốn xem</b><span>${wl.length} phim · mới thêm trước</span></div><div class="lb-grid">` +
+      wl.map((f, n) => `<button class="pg" type="button" data-w="${n}" title="${esc(f.t)} (${esc(f.y)})">${pimg(lbPoster(f), f.t)}<b>${esc(f.t)}</b><i>${esc(f.y)}</i></button>`).join('') + '</div>';
+    lb.querySelectorAll('.pg[data-w]').forEach(b => b.addEventListener('click', () => { const f = wl[+b.dataset.w]; filmDetail({ t: f.t, y: f.y, poster: lbPoster(f, 230, 345), slug: f.s }, lbRender); }));
+  }
+  // ---- chi tiết một phim (từ lưới, watchlist hoặc kết quả tìm) ----
+  function imdbBtn(title){ return `<a class="btn solid" data-imdb="${esc(title)}" href="${esc(IMDB)}" target="_blank" rel="noopener noreferrer">▶ xem trên IMDB ↗</a>`; }
+  function bindImdb(){
+    lb.querySelectorAll('[data-imdb]').forEach(a => a.addEventListener('click', () => {
+      const t = a.dataset.imdb;
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => toast('Đã chép tên phim “' + t + '” — dán vào ô tìm kiếm của IMDB'), () => {});
+    }));
+  }
+  function filmDetail(f, back){
+    lbBackFn = back;
+    const ix = lbIndex(), k = fkey(f.t, f.y), w = ix.watched.get(k), inWl = ix.wl.has(k);
+    const r = f.r != null ? f.r : (w && w.r), liked = f.l || (w && w.l);
+    const lbUrl = f.slug ? `https://letterboxd.com/film/${f.slug}/` : (f.tt ? `https://letterboxd.com/imdb/${f.tt}/` : `https://letterboxd.com/search/films/${encodeURIComponent(f.t)}/`);
+    lb.innerHTML = `<div class="lb-detail"><button class="lb-back" type="button">← quay lại</button>
+      <div class="lb-top">${f.poster ? pimg(f.poster, 'Poster ' + f.t) : ''}
+      <div><h2>${esc(f.t)} <span>${esc(f.y)}</span></h2>
+      <p class="lb-row" style="margin-top:8px">${w ? `<span class="badge">✓ đã xem</span> ${esc(stars(r))}${liked ? ' <span class="lk">♥</span>' : ''}` : ''}${inWl ? ' <span class="badge wl">☆ trong watchlist</span>' : ''}${!w && !inWl ? '<span class="d">chưa xem</span>' : ''}</p>
+      ${f.seen ? `<p class="lb-row d" style="margin-top:4px">đánh dấu đã xem ${esc(vnDate(f.seen))}</p>` : ''}
+      ${f.kind ? `<p class="lb-row d" style="margin-top:4px">${esc(f.kind)}</p>` : ''}
+      ${f.cast ? `<p class="lb-cast">${esc(f.cast)}</p>` : ''}
+      <div class="lb-acts">${imdbBtn(f.t)}<a class="btn" href="${esc(lbUrl)}" target="_blank" rel="noopener">letterboxd ↗</a></div></div></div></div>`;
+    lb.scrollTop = 0;
+    const bk = lb.querySelector('.lb-back'); bk.addEventListener('click', () => (lbBackFn || lbRender)()); bk.focus();
+    lb.querySelector('.lb-top img') && lb.querySelector('.lb-top img').removeAttribute('loading');
+    bindImdb();
+  }
+  function lbDiary(i, back){
+    const it = diaryList()[i]; if (!it) return; lbBackFn = back;
+    lb.innerHTML = `<div class="lb-detail"><button class="lb-back" type="button">← quay lại</button>
+      <div class="lb-top">${it.poster ? pimg(it.poster, 'Poster ' + it.title) : ''}
       <div><h2>${esc(it.title)} <span>${esc(it.year)}</span></h2><p class="lb-row" style="margin-top:8px">${esc(stars(it.rating)) || 'chưa chấm'}${it.liked ? ' <span class="lk">♥</span>' : ''}${it.rewatch ? ' ↻ xem lại' : ''}</p>
       <p class="lb-row d" style="margin-top:4px">xem ngày ${esc(vnDate(it.watched || it.published))}</p>
-      <div class="lb-acts"><a class="btn solid" id="lbImdb" href="${esc(IMDB)}" target="_blank" rel="noopener noreferrer">▶ xem trên IMDB ↗</a></div></div></div>
+      <div class="lb-acts">${imdbBtn(it.title)}</div></div></div>
       <p class="lb-full${it.review ? '' : ' empty'}">${it.review ? esc(it.review) : 'không có bài review cho lần xem này.'}</p></div>`;
     lb.scrollTop = 0;
-    const back = lb.querySelector('.lb-back'); back.addEventListener('click', lbList); back.focus();
-    $('#lbImdb').addEventListener('click', () => {
-      const name = it.title + (it.year ? ' ' + it.year : '');
-      if (navigator.clipboard) navigator.clipboard.writeText(it.title).then(() => toast('Đã chép tên phim “' + name + '” — dán vào ô tìm kiếm của IMDB'), () => {});
+    const bk = lb.querySelector('.lb-back'); bk.addEventListener('click', () => (lbBackFn || lbRender)()); bk.focus();
+    bindImdb();
+  }
+  // ---- tìm phim: trong thư viện của bạn + IMDb (chạy trong khung cách ly) ----
+  let imdbSeq = 0;
+  function imdbSearch(q){
+    const key = fold(q).replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60);
+    if (!key) return Promise.resolve([]);
+    return new Promise(res => {
+      const id = 'q' + (++imdbSeq), cb = 'imdb$' + key;
+      const f = document.createElement('iframe'); f.hidden = true; f.setAttribute('sandbox', 'allow-scripts'); f.title = 'imdb';
+      f.srcdoc = `<script>window[${JSON.stringify(cb)}]=function(d){parent.postMessage({imdb:${JSON.stringify(id)},d:d},'*')};<\/script>` +
+        `<script src="https://sg.media-imdb.com/suggests/${key[0]}/${key}.json" onerror="parent.postMessage({imdb:'${id}',d:null},'*')"><\/script>`;
+      let t = 0;
+      const on = e => { if (e.source === f.contentWindow && e.data && e.data.imdb === id) done(e.data.d); };
+      function done(d){ removeEventListener('message', on); clearTimeout(t); f.remove(); res(((d && d.d) || []).filter(x => x && /^tt/.test(x.id))); }
+      addEventListener('message', on); t = setTimeout(() => done(null), 9000);
+      document.body.appendChild(f);
     });
   }
+  async function lbSearch(q){
+    lbQ = q; lbTabs(''); lbBackFn = null;
+    const fq = fold(q).trim(); if (!fq) { lbRender(); return; }
+    const seen = new Set(), local = [];
+    const add = (o) => { const k = fkey(o.t, o.y); if (seen.has(k)) return; seen.add(k); local.push(o); };
+    diaryList().forEach(d => { if (fold(d.title).includes(fq)) add({ t: d.title, y: d.year, r: d.rating, l: d.liked, poster: d.poster }); });
+    filmsList().forEach(f => { if (fold(f.t).includes(fq)) add({ t: f.t, y: f.y, r: f.r, l: f.l, poster: lbPoster(f), slug: f.s }); });
+    wlList().forEach(f => { if (fold(f.t).includes(fq)) add({ t: f.t, y: f.y, poster: lbPoster(f), slug: f.s }); });
+    const ix = lbIndex();
+    const row = (o, n, src) => { const k = fkey(o.t, o.y), w = ix.watched.get(k), inWl = ix.wl.has(k);
+      return `<li><button class="lb-item" type="button" data-${src}="${n}">${pimg(o.poster)}<span class="lb-meta"><b>${esc(o.t)} <span>${esc(o.y)}</span></b>
+        <span class="lb-row">${w ? '<span class="badge">✓ đã xem</span> ' + esc(stars(w.r)) : ''}${inWl ? ' <span class="badge wl">☆ watchlist</span>' : ''}${o.kind ? ' <span class="d">' + esc(o.kind) + '</span>' : ''}</span>
+        ${o.cast ? `<span class="lb-rev">${esc(o.cast)}</span>` : ''}</span></button></li>`; };
+    const paint = (web, state) => {
+      if (lbQ !== q) return;
+      lb.innerHTML = (local.length ? `<div class="lb-sec"><b>▣ trong thư viện của bạn</b><span>${local.length}</span></div><ul class="lb-list">${local.slice(0, 12).map((o, n) => row(o, n, 'l')).join('')}</ul>` : '') +
+        `<div class="lb-sec"><b>⌕ imdb · “${esc(q)}”</b><span>${state || ''}</span></div>` +
+        (web.length ? `<ul class="lb-list">${web.map((o, n) => row(o, n, 'i')).join('')}</ul>` : (state ? '' : '<p class="note">✕ không tìm thấy phim.</p>'));
+      const again = () => paint(web, state);
+      lb.querySelectorAll('[data-l]').forEach(b => b.addEventListener('click', () => filmDetail(local[+b.dataset.l], again)));
+      lb.querySelectorAll('[data-i]').forEach(b => b.addEventListener('click', () => filmDetail(web[+b.dataset.i], again)));
+    };
+    paint([], '◌ đang tìm…');
+    const raw = await imdbSearch(q);
+    const web = raw.slice(0, 10).map(x => {
+      const im = Array.isArray(x.i) ? x.i[0] : (x.i && x.i.imageUrl);
+      return { t: x.l, y: x.y ? String(x.y) : '', kind: x.q || '', cast: x.s || '', tt: x.id, poster: im ? im.replace(/\._V1_.*?\.jpg$/, '._V1_QL75_UX230_.jpg') : '' };
+    });
+    paint(web, '');
+  }
+  let lbTimer = 0;
+  $('#lbForm').addEventListener('submit', e => { e.preventDefault(); clearTimeout(lbTimer); const q = $('#lbQ').value.trim(); if (q) lbSearch(q); else lbRender(); $('#lbQ').blur(); });
+  $('#lbQ').addEventListener('input', () => { clearTimeout(lbTimer); const q = $('#lbQ').value.trim(); lbTimer = setTimeout(() => { if (q.length >= 2) lbSearch(q); else if (!q) lbRender(); }, 450); });
   function loadLetterboxd(){
     fetch('data/letterboxd.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
-      if (d && lbData && d.updated === lbData.updated) return;
-      lbData = d; if (lbView < 0) lbList();
-    }).catch(() => { if (!lbData) lbList(); });
+      if (!d || (lbData && d.updated === lbData.updated)) { if (!lbData) lbRender(); return; }
+      lbData = d;
+      $('#wlN').textContent = wlList().length ? '· ' + wlList().length : '';
+      $('#lbUpd').textContent = d.updated ? 'cập nhật ' + ago(d.updated) : '';
+      if (!lbQ && !lbBackFn) lbRender();
+    }).catch(() => { if (!lbData) lbRender(); });
   }
 
   /* ================= NHẠC MỚI ================= */
   const nmBody = $('#nmBody'), nmWrap = $('#nmFrameWrap'), nmFrame = $('#nmFrame');
   let nmData = null, nmTab = ls.get('nm-tab') || 'song';
-  if (!['song', 'album', 'news'].includes(nmTab)) nmTab = 'song';
+  if (!['song', 'album', 'news', 'charts'].includes(nmTab)) nmTab = 'song';
   function nmTabs(sel){ document.querySelectorAll('#w-music [role="tab"]').forEach(b => b.setAttribute('aria-selected', (b.dataset.tab || b.dataset.site) === sel)); }
   function nmRender(){
     nmWrap.hidden = true; nmBody.hidden = false; nmTabs(nmTab);
+    if (nmTab === 'charts'){ chRender(); return; }
     if (!nmData || !nmData.items){ nmBody.innerHTML = '<p class="note">◌ chưa có dữ liệu nhạc mới, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
     const list = nmData.items.filter(it => it.k === nmTab);
     nmBody.innerHTML = '<ul class="nm-list">' + list.map((it, i) => {
-      const sub = [SRC[it.s] || it.s, ago(it.d)].filter(Boolean).join(' · ') + (it.sc != null ? ` · <span class="sc">${esc(it.sc.toFixed(1))}</span>` : '');
+      const sub = [SRC[it.s] || it.s, ago(it.d)].filter(Boolean).join(' · ') + (it.sc != null ? ` · <span class="sc">${esc(it.sc.toFixed(1))}</span>` : '') + (it.bnm ? ' · <span class="sc">★ best new music</span>' : '');
       const can = it.k !== 'news';
       return `<li class="nm-item" data-i="${i}">${img(it.i)}<div class="nm-meta"><button class="nm-open" type="button">${esc(it.t)}</button><span class="nm-sub">${sub}</span>${it.x ? `<p class="nm-x">${esc(it.x)}</p>` : ''}</div>
         <div class="nm-act">${can ? `<button class="btn sm solid" type="button" data-act="sp" aria-label="Tìm và phát ${esc(it.t)} trên Spotify">▶ spotify</button>` : ''}<button class="btn sm" type="button" data-act="read">${FRAMEABLE.includes(it.s) ? 'đọc' : 'xem'}</button></div></li>`;
@@ -808,6 +985,31 @@
   $('#nmBack').addEventListener('click', () => { nmFrame.removeAttribute('src'); nmRender(); });
   document.querySelectorAll('#w-music [data-tab]').forEach(b => b.addEventListener('click', () => { nmTab = b.dataset.tab; ls.set('nm-tab', nmTab); nmRender(); nmBody.scrollTop = 0; }));
   document.querySelectorAll('#w-music [data-site]').forEach(b => b.addEventListener('click', () => { const s = SITES[b.dataset.site]; nmFrameOpen(s[1], s[0], b.dataset.site); }));
+  // ---- bảng xếp hạng: US / UK (Spotify) · Nga / Trung Quốc (Apple Music) ----
+  let chData = null, chKey = ls.get('ch-key') || 'us';
+  const CH_LABEL = { us: 'US', gb: 'UK', ru: 'Nga', cn: 'Trung' };
+  function chRender(){
+    const all = chData && chData.charts;
+    if (!all || !Object.keys(all).length){ nmBody.innerHTML = '<p class="note">◌ chưa có bảng xếp hạng, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
+    if (!all[chKey]) chKey = Object.keys(all)[0];
+    const c = all[chKey], apple = chKey === 'ru' || chKey === 'cn';
+    nmBody.innerHTML = `<div class="ch-bar">${Object.keys(all).map(k => `<button type="button" class="chip" data-ch="${k}" aria-pressed="${k === chKey}">${esc(CH_LABEL[k] || k)}</button>`).join('')}</div>
+      <p class="ch-note"><b>${esc(c.name)}</b>${c.date ? ' · ' + esc(c.date) : ''}${apple ? ` · Spotify không có ở ${chKey === 'ru' ? 'Nga' : 'Trung Quốc'} nên đây là bảng Apple Music; ▶ sẽ tìm bài trên Spotify` : ' · ▶ phát thẳng trên Spotify'}</p>
+      <ol class="ch-list">${c.items.map((r, i) => { const up = /^\+/.test(r.c), dn = /^-/.test(r.c);
+        return `<li class="ch-row"><span class="pos">${r.p}</span><span class="mv${up ? ' up' : dn ? ' dn' : ''}">${esc(r.c === '=' ? '·' : r.c)}</span><div><b>${esc(r.t)}</b><span>${esc(r.a)}</span></div><button class="ib" type="button" data-i="${i}" aria-label="Phát ${esc(r.t)}">▶</button></li>`; }).join('')}</ol>`;
+    nmBody.querySelectorAll('[data-ch]').forEach(b => b.addEventListener('click', () => { chKey = b.dataset.ch; ls.set('ch-key', chKey); chRender(); nmBody.scrollTop = 0; }));
+    nmBody.querySelectorAll('.ch-row [data-i]').forEach(b => b.addEventListener('click', () => {
+      const r = c.items[+b.dataset.i];
+      if (r.sp){ spLoad('spotify:track:' + r.sp, true); toast('▶ ' + r.t + ' — ' + r.a); }
+      else spFind(r.a + ' ' + r.t, 'track', true);
+    }));
+  }
+  function loadCharts(){
+    fetch('data/charts.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d || (chData && d.updated === chData.updated)) return;
+      chData = d; if (nmTab === 'charts' && nmWrap.hidden) chRender();
+    }).catch(() => {});
+  }
   function loadMusic(){
     fetch('data/music.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
       if (!d) { if (!nmData) nmRender(); return; }
@@ -887,6 +1089,7 @@
     const f = $('#igFrame'), src = `https://www.instagram.com/${u}/embed/`;
     if (f.getAttribute('src') !== src) f.src = src;
     f.title = 'Instagram @' + u;
+    $('#igOut').href = `https://www.instagram.com/${u}/`;
   }
   document.querySelectorAll('[data-ig]').forEach(b => b.addEventListener('click', () => igShow(b.dataset.ig)));
 
@@ -897,13 +1100,15 @@
     $('#desk').hidden = false; document.body.classList.remove('locked');
     ['spotify', 'music', 'letterboxd', 'lastfm'].forEach(taskBtn);
     front(wins.music);
+    HID.forEach(app => { if (wins[app] && app !== 'instagram'){ wins[app].hidden = true; taskBtn(app).classList.add('min'); } });
+    updBare();
     renderChips(); spFoot();
     await spReturn();
     spInitPlayer();
     spLoadAccount();
-    loadLetterboxd(); loadMusic(); lfPoll();
+    loadLetterboxd(); loadMusic(); loadCharts(); lfPoll();
     setInterval(lfPoll, LASTFM_POLL);
-    setInterval(() => { if (!document.hidden){ loadLetterboxd(); loadMusic(); } }, 10 * 60 * 1000);
+    setInterval(() => { if (!document.hidden){ loadLetterboxd(); loadMusic(); loadCharts(); } }, 10 * 60 * 1000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden){ lfPoll(); loadMusic(); } });
     tickClock(); setInterval(tickClock, 20000);
   }
