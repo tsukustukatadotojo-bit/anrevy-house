@@ -21,7 +21,8 @@
    "a": "untitled (halo)",
    "w": "untitled (halo)",
    "i": "https://media.pitchfork.com/photos/6aecc0946de58f9ada4bfd2a/master/w_200,c_limit/untitled%20(halo)%20-%20untitled%20(halo)%20album%20art.jpg",
-   "v": 2
+   "sc": 5.8,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -33,7 +34,8 @@
    "a": "Laila!",
    "w": "We’ll Never Be This Young Again",
    "i": "https://media.pitchfork.com/photos/6aecd91478d0dfa19820dd27/master/w_200,c_limit/Laila-We%E2%80%99ll%20Never%20Be%20This%20Young%20Again.jpg",
-   "v": 2
+   "sc": 7.4,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -45,7 +47,8 @@
    "a": "nomi.",
    "w": "this wolf may cry",
    "i": "https://media.pitchfork.com/photos/6aecc416d1ad83d11d55727e/master/w_200,c_limit/nomi.%20-%20this%20wolf%20may%20cry%20album%20art.jpg",
-   "v": 2
+   "sc": 6.2,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -57,7 +60,8 @@
    "a": "gyrofield",
    "w": "Great Jobs",
    "i": "https://media.pitchfork.com/photos/6aeca9b677ca41c6e0456d40/master/w_200,c_limit/gyrofield%20-%20Great%20Jobs.jpg",
-   "v": 2
+   "sc": 7.4,
+   "v": 3
   },
   {
    "s": "consequence",
@@ -488,7 +492,8 @@
    "a": "Twisted Teens",
    "w": "The Holy Cross Tigers",
    "i": "https://media.pitchfork.com/photos/6aeb5fe71d58dfb46e474b86/master/w_200,c_limit/Twisted%20Teens%20-%20The%20Holy%20Cross%20Tigers.jpg",
-   "v": 2
+   "sc": 8.0,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -500,7 +505,8 @@
    "a": "Yeah Yeah Yeahs",
    "w": "Hidden in Pieces: Live at the Royal Albert Hall",
    "i": "https://media.pitchfork.com/photos/6aeb86b471a068f3a6c90517/master/w_200,c_limit/Yeah%20Yeah%20Yeahs-Hidden%20in%20Pieces%20Live%20at%20the%20Royal%20Albert%20Hall.jpg",
-   "v": 2
+   "sc": 7.4,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -512,7 +518,8 @@
    "a": "Brat Star",
    "w": "Southern Ontario Gothic",
    "i": "https://media.pitchfork.com/photos/6aeb6043ffd893c2f7b9bf8c/master/w_200,c_limit/Brat%20Star%20-%20Southern%20Ontario%20Gothic%20album%20art.jpg",
-   "v": 2
+   "sc": 7.2,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -524,7 +531,8 @@
    "a": "John Errol",
    "w": "Damage",
    "i": "https://media.pitchfork.com/photos/6aeb5ef792285c714cb83d91/master/w_200,c_limit/John%20Errol%20-%20Damage%20album%20art.jpg",
-   "v": 2
+   "sc": 7.1,
+   "v": 3
   },
   {
    "s": "stereogum",
@@ -631,7 +639,9 @@
    "a": "Baby Osamaa",
    "w": "On Tha Run",
    "i": "https://media.pitchfork.com/photos/6aea06e6b2a4ae06c18ac614/master/w_200,c_limit/Baby%20Osamaa%20-%20On%20Tha%20Run%20album%20art.jpg",
-   "v": 2
+   "sc": 8.2,
+   "v": 3,
+   "bnm": true
   },
   {
    "s": "pitchfork",
@@ -643,7 +653,8 @@
    "a": "Niagara",
    "w": "Catedral Gótica",
    "i": "https://media.pitchfork.com/photos/6ae9fa49a678072465a4a4ae/master/w_200,c_limit/Niagara%20-%20Catedral%20Go%CC%81tica.jpg",
-   "v": 2
+   "sc": 7.4,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -655,7 +666,8 @@
    "a": "June McDoom",
    "w": "Follow the Light",
    "i": "https://media.pitchfork.com/photos/6aea1ce888ed135c4885e5cd/master/w_200,c_limit/June%20McDoom-Follow%20the%20Light.jpg",
-   "v": 2
+   "sc": 8.0,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -667,7 +679,8 @@
    "a": "Dis Fig",
    "w": "What to Make of These Mortal Hands",
    "i": "https://media.pitchfork.com/photos/6ae3b8af13936ee9eac88b6a/master/w_200,c_limit/Dis%20Fig%20-%20What%20to%20Make%20of%20These%20Mortal%20Hands.jpg",
-   "v": 2
+   "sc": 7.8,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -679,7 +692,8 @@
    "a": "Kali Malone",
    "w": "Burning Song",
    "i": "https://media.pitchfork.com/photos/6ae8b6b76f5468feebccc392/master/w_200,c_limit/Kali%20Malone%20-%20Burning%20Song.jpg",
-   "v": 2
+   "sc": 8.1,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -691,7 +705,8 @@
    "a": "Lydia Loveless",
    "w": "Accolades EP",
    "i": "https://media.pitchfork.com/photos/6ae49e061534acc465ada843/master/w_200,c_limit/Lydia%20Loveless-Accolades.jpg",
-   "v": 2
+   "sc": 7.4,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -703,7 +718,8 @@
    "a": "Two Shell",
    "w": "Infinite Now",
    "i": "https://media.pitchfork.com/photos/6ae8add83ad14b0f5282eace/master/w_200,c_limit/Two%20Shell%20-%20Infinite%20Now.jpg",
-   "v": 2
+   "sc": 3.4,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -715,7 +731,8 @@
    "a": "Cecil Taylor Unit",
    "w": "Live at the KiMo Theater Albuquerque 1979",
    "i": "https://media.pitchfork.com/photos/6ae4de958cc155b23b3f707a/master/w_200,c_limit/Cecil%20Taylor%20Unit%20Live%20at%20the%20KiMo%20Theater%20Albuquerque%201979.jpg",
-   "v": 2
+   "sc": 8.1,
+   "v": 3
   },
   {
    "s": "nme",
@@ -738,7 +755,8 @@
    "a": "Andy Stott",
    "w": "Late Loop",
    "i": "https://media.pitchfork.com/photos/6ab17549f99f7bf88c241c73/master/w_200,c_limit/5060165488810.jpg",
-   "v": 2
+   "sc": 7.2,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -750,7 +768,8 @@
    "a": "Ashe",
    "w": "The Girl of Your Dreams",
    "i": "https://media.pitchfork.com/photos/6ae3b9afdd353d3745bb9abf/master/w_200,c_limit/Ashe%20-%20The%20Girl%20of%20Your%20Dreams%20album%20art.jpg",
-   "v": 2
+   "sc": 6.8,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -762,7 +781,8 @@
    "a": "William Basinski",
    "w": "Passing the Cup of Sorrows",
    "i": "https://media.pitchfork.com/photos/6ae4bc8c00019c3ef93fb729/master/w_200,c_limit/William%20Basinski%20-%20Passing%20the%20Cup%20of%20Sorrows.jpg",
-   "v": 2
+   "sc": 7.6,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -774,7 +794,8 @@
    "a": "Shovel Dance Collective",
    "w": "Everything in Readiness",
    "i": "https://media.pitchfork.com/photos/6ae36bbdd83a22061522fc42/master/w_200,c_limit/Shovel%20Dance%20Collective%20-%20Everything%20in%20Readiness%20album%20art.jpg",
-   "v": 2
+   "sc": 7.8,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -786,7 +807,8 @@
    "a": "Various Artists",
    "w": "Katamari Fortissimo Damacy",
    "i": "https://media.pitchfork.com/photos/6ae36f01c138238a931e34e7/master/w_200,c_limit/Various%20-%20Katamari%20Fortissimo%20Damacy%20(original).jpg",
-   "v": 2
+   "sc": 9.4,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -798,7 +820,9 @@
    "a": "Aphex Twin",
    "w": "Drukqs (25th Anniversary Edition)",
    "i": "https://media.pitchfork.com/photos/6ae377d7efb3062cf478c6cd/master/w_200,c_limit/Aphex%20Twin%20-%20Drukqs%202026.jpg",
-   "v": 2
+   "sc": 9.5,
+   "v": 3,
+   "bnm": true
   },
   {
    "s": "pitchfork",
@@ -810,7 +834,8 @@
    "a": "DIIV",
    "w": "ZIRP!",
    "i": "https://media.pitchfork.com/photos/6a73e45ad12418ea88fa0f4d/master/w_200,c_limit/diiv-zirp!-cover-3k-rgb.jpg",
-   "v": 2
+   "sc": 7.0,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -822,7 +847,8 @@
    "a": "Heathers",
    "w": "Awesome",
    "i": "https://media.pitchfork.com/photos/6ae368415ab3de1a43c5f859/master/w_200,c_limit/Heathers%20-%20Awesome%20album%20art.jpg",
-   "v": 2
+   "sc": 7.1,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -834,7 +860,8 @@
    "a": "Satanic Planet",
    "w": "Dead Deities",
    "i": "https://media.pitchfork.com/photos/6ae36a8ea7a049e9e3b0e7e9/master/w_200,c_limit/Satanic%20Planet%20Dead%20Deities.jpg",
-   "v": 2
+   "sc": 6.8,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -846,7 +873,8 @@
    "a": "more eaze",
    "w": "valley and structure",
    "i": "https://media.pitchfork.com/photos/6ae36eae95988ef7e2e81f6c/master/w_200,c_limit/More%20Eaze-valley%20and%20structure.jpg",
-   "v": 2
+   "sc": 7.4,
+   "v": 3
   },
   {
    "s": "nme",
@@ -880,7 +908,8 @@
    "a": "The Olivia Tremor Control",
    "w": "The Same Place",
    "i": "https://media.pitchfork.com/photos/6ae22497903c0fd4dcfc1d19/master/w_200,c_limit/The%20Olivia%20Tremor%20Control%20The%20Same%20Place.jpg",
-   "v": 2
+   "sc": 8.0,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -892,7 +921,8 @@
    "a": "brakence",
    "w": "marroW",
    "i": "https://media.pitchfork.com/photos/6ad913bf0c92ad66cf11be07/master/w_200,c_limit/3000x3000bb-100%20(2).jpg",
-   "v": 2
+   "sc": 6.4,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -904,7 +934,8 @@
    "a": "Anderson .Paak / Cordae",
    "w": "Heavy Is the Crown",
    "i": "https://media.pitchfork.com/photos/6a85bffccf56144a2fd11199/master/w_200,c_limit/Anderson-Paak-Heavy-Is-the-Crown.jpeg",
-   "v": 2
+   "sc": 6.0,
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -916,7 +947,8 @@
    "a": "Water Damage",
    "w": "Repair",
    "i": "https://media.pitchfork.com/photos/6ae21b827b487fd17701118a/master/w_200,c_limit/Water%20Damage-Repair.jpg",
-   "v": 2
+   "sc": 7.6,
+   "v": 3
   },
   {
    "s": "nme",
@@ -950,7 +982,7 @@
    "a": "Jay Morrg",
    "w": "Grab Her Nuh (Zess)",
    "i": "https://media.pitchfork.com/photos/6ada28beb8bcacc81dc91f0b/master/w_200,c_limit/jay.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "nme",
@@ -973,7 +1005,7 @@
    "a": "Zach Bryan",
    "w": "Lies” [ft. Lana Del Rey]",
    "i": "https://media.pitchfork.com/photos/6ad28eea0dd1470351a8a266/master/w_200,c_limit/Zach%20Bryan%20-%20Young%20Manhood%20and%20Other%20Donatable%20Organs%20EP%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -985,7 +1017,7 @@
    "a": "Olivia Rodrigo / Chappell Roan",
    "w": "expectations",
    "i": "https://media.pitchfork.com/photos/6ad2248b47a15edc78459c81/master/w_200,c_limit/3000x3000bb-100.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "nme",
@@ -1019,7 +1051,7 @@
    "a": "Zsela",
    "w": "Kinda Guy",
    "i": "https://media.pitchfork.com/photos/6ace6666ffe3bdf2af9c1e7b/master/w_200,c_limit/Zsela%20-%20Kinda%20Guy%20single%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1031,7 +1063,7 @@
    "a": "G’z Up",
    "w": "Fix Up (Ya Ya Ya)",
    "i": "https://media.pitchfork.com/photos/6ace4ddda4c00f88367a5fea/master/w_200,c_limit/gz.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "nme",
@@ -1054,7 +1086,7 @@
    "a": "Grimes / VADAKIN",
    "w": "Accelerando",
    "i": "https://media.pitchfork.com/photos/6ac9329b1fe87c7c8b1d40bd/master/w_200,c_limit/Grimes%20Accelerando.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1066,7 +1098,7 @@
    "a": "Star Moles",
    "w": "Born Again",
    "i": "https://media.pitchfork.com/photos/69d5207163f35afaaacffe54/master/w_200,c_limit/Star%20Moles-%20Highway%20to%20Hell.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1078,7 +1110,7 @@
    "a": "Drake / Don Toliver",
    "w": "Solar Eclipse",
    "i": "https://media.pitchfork.com/photos/6a07181da0d561cda5e9f900/master/w_200,c_limit/26UMGIM63616.rgb.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1090,7 +1122,7 @@
    "a": "ki",
    "w": "tissue",
    "i": "https://media.pitchfork.com/photos/6abc1c4a5d1654f4a04faf92/master/w_200,c_limit/ki%20tissue.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1102,7 +1134,7 @@
    "a": "Tinashe",
    "w": "Popstar",
    "i": "https://media.pitchfork.com/photos/6ab4131ef7ef2378a6776d41/master/w_200,c_limit/Tinashe-%20Popstar%20.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1114,7 +1146,7 @@
    "a": "Taylor Swift",
    "w": "Cleveland!",
    "i": "https://media.pitchfork.com/photos/6ab3d199bacac9b4a37a9489/master/w_200,c_limit/HS52gb3WkAEW07Y.jpeg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1126,7 +1158,7 @@
    "a": "dBee",
    "w": "syllables",
    "i": "https://media.pitchfork.com/photos/6ab5848fc36a5938f66e12a4/master/w_200,c_limit/DBee%20Syllables.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1138,7 +1170,7 @@
    "a": "Lily Konigsberg",
    "w": "Free Byrd",
    "i": "https://media.pitchfork.com/photos/6ab2ba5c53bdeef50ce5947d/master/w_200,c_limit/Lily%20Konigsberg%20-%20Free%20Byrd%20single%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1150,7 +1182,7 @@
    "a": "Ella Langley",
    "w": "Choosin’ Texas",
    "i": "https://media.pitchfork.com/photos/6aad683d07d034f32c7298d5/master/w_200,c_limit/P4K26_SatTracks_Choosin%20Texas_2x1.png",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1162,7 +1194,7 @@
    "a": "Yung Lean / Metro Boomin",
    "w": "That’s It” [ft. Future]",
    "i": "https://media.pitchfork.com/photos/6aac379b171dd454749a699b/master/w_200,c_limit/Yung%20Lean%20Metro%20Boomin%20-%20That's%20It%20GTA%20single%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1174,7 +1206,7 @@
    "a": "Lov’nee",
    "w": "Anonymat",
    "i": "https://media.pitchfork.com/photos/6aa8162cfc9433b4f792b65a/master/w_200,c_limit/lov.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1186,7 +1218,7 @@
    "a": "kllhhr",
    "w": "skin",
    "i": "https://media.pitchfork.com/photos/6aa42da6b2fc3a5873c487ba/master/w_200,c_limit/kllhhr:%20%E2%80%9Cskin%E2%80%9D.png",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1198,7 +1230,7 @@
    "a": "M(h)aol",
    "w": "Scam Manifesto",
    "i": "https://media.pitchfork.com/photos/6aa30205764ded8b306dfb16/master/w_200,c_limit/M(h)aol%20-%20%E2%80%9CScam%20Manifesto%E2%80%9D%20single%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1210,7 +1242,7 @@
    "a": "The War on Drugs",
    "w": "Who’s That",
    "i": "https://media.pitchfork.com/photos/6aa16dac63d8993481ad8921/master/w_200,c_limit/the%20war%20on%20drugs%20who's%20that.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1222,7 +1254,7 @@
    "a": "Fine",
    "w": "Everything in the shade",
    "i": "https://media.pitchfork.com/photos/6a99b832bb02c23e47bc3ca5/master/w_200,c_limit/Fine%20%E2%80%9CEverything%20in%20the%20shade%E2%80%9D%20single%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1234,7 +1266,7 @@
    "a": "xaviersobased",
    "w": "Struggle Gang",
    "i": "https://media.pitchfork.com/photos/6a95e017c557076ca110e9c4/master/w_200,c_limit/xaviersobased%20-%20Struggle%20Gang%20single%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1246,7 +1278,7 @@
    "a": "Dolly Parton",
    "w": "I Will Always Love You",
    "i": "https://media.pitchfork.com/photos/6a91b3c04c109b25d000b3c1/master/w_200,c_limit/P4K26_SatTracks_2x1.png",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1258,7 +1290,7 @@
    "a": "Venus Ex Machina",
    "w": "Jericho",
    "i": "https://media.pitchfork.com/photos/6a91cbf9ae998b6a6f84238d/master/w_200,c_limit/Venus%20Ex%20Machina%20-%20Jericho%20single%20art.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1270,7 +1302,7 @@
    "a": "Belly Gang Kushington",
    "w": "No Jewelry",
    "i": "https://media.pitchfork.com/photos/6a8844b3abfecdef0b9b237c/master/w_200,c_limit/belly%20gang.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1282,7 +1314,7 @@
    "a": "Tyga",
    "w": "Rack City",
    "i": "https://media.pitchfork.com/photos/6a7f68d1e84b50e10eb997d8/master/w_200,c_limit/12UMGIM07325.rgb.jpg",
-   "v": 2
+   "v": 3
   },
   {
    "s": "pitchfork",
@@ -1294,8 +1326,8 @@
    "a": "Phoebe Bridgers",
    "w": "I Can’t Wait",
    "i": "https://media.pitchfork.com/photos/6a3bde6801a6ab17fa387818/master/w_200,c_limit/unnamed%20(48).jpg",
-   "v": 2
+   "v": 3
   }
  ],
- "updated": "2026-11-06T08:35:04Z"
+ "updated": "2026-11-06T08:37:11Z"
 }
