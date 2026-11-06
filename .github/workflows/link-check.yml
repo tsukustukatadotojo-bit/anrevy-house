@@ -13,7 +13,7 @@ jobs:
         run: |
           true
           true
-          python3 tools/lbprobe2.py || true
+          python3 tools/lbprobe3.py || true
           python3 -c "
           s=open('out_gal.txt').read().replace(chr(10),' ¶ ')
           for i in range(0,min(len(s),32000),3800): print('::notice title=galup'+str(i//3800)+'::'+s[i:i+3800])
