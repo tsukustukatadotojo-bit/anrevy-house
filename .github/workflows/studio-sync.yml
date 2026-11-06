@@ -1,8 +1,8 @@
-# Studio: cập nhật nhật ký phim Letterboxd (haanvie) và tin nhạc mới cho trang studio/ — 2 giờ một lần.
+# Studio: Letterboxd (haanvie) mỗi 30 phút; Watchlist, tin nhạc mới, bảng xếp hạng 2 giờ một lần.
 name: studio-sync
 on:
   schedule:
-    - cron: '41 */2 * * *'
+    - cron: '11,41 * * * *'
   push:
     branches: [main]
     paths:
@@ -17,10 +17,10 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 50
-      - name: Cập nhật Letterboxd + nhạc mới
+      - name: Cập nhật Letterboxd, nhạc mới, bảng xếp hạng
         run: python3 .github/scripts/studio_sync.py

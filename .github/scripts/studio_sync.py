@@ -2,12 +2,16 @@
 
 1. Letterboxd: nhật ký phim (RSS công khai) của haanvie → studio/data/letterboxd.json
    (Letterboxd không cho hiển thị trang của họ trong khung, nên trang Studio đọc file này.)
+   + phim đã xem (trang /films/, xếp theo phim mới) và Watchlist (mọi trang) — phát hiện phim mới đánh dấu đã xem.
 2. Nhạc mới: RSS của Pitchfork, Stereogum, NME, Consequence, NPR Music, Bandcamp Daily → studio/data/music.json
    (AOTY, Rate Your Music, Paste chặn cả khung lẫn máy đọc tự động.)
+3. Bảng xếp hạng: Spotify US/UK hằng ngày, Apple Music Nga/Trung Quốc (kworb.net) → studio/data/charts.json
+
+Lịch chạy 30 phút một lần: Letterboxd (RSS + phim đã xem) mỗi lần; Watchlist, nhạc mới, bảng xếp hạng 2 giờ một lần.
 
 Chạy thử: python3 studio_sync.py --dry
 """
-import html, json, os, re, subprocess, sys, time, urllib.request
+import html, json, os, re, subprocess, sys, time, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
@@ -15,6 +19,8 @@ from email.utils import parsedate_to_datetime
 LB_USER = 'haanvie'
 LB_OUT = 'studio/data/letterboxd.json'
 MUSIC_OUT = 'studio/data/music.json'
+CHARTS_OUT = 'studio/data/charts.json'
+HEAVY = '--all' in sys.argv or os.environ.get('GITHUB_EVENT_NAME', 'schedule') != 'schedule' or (datetime.now(timezone.utc).hour % 2 == 0 and datetime.now(timezone.utc).minute < 30)
 MAX_ITEMS = 40
 DRY = '--dry' in sys.argv
 UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
@@ -86,11 +92,122 @@ def letterboxd():
             'poster': poster, 'review': review[:6000], 'link': f.get('link', ''), 'tmdb': f.get('movieId', ''),
         })
         if len(items) >= MAX_ITEMS: break
-    old = load(LB_OUT)
-    if old and old.get('items') == items and old.get('name') == name:
-        print('Letterboxd không đổi', len(items), 'phim'); return
-    save(LB_OUT, {'user': LB_USER, 'name': name, 'profile': f'https://letterboxd.com/{LB_USER}/', 'items': items, 'updated': now_iso()})
-    print('Letterboxd cập nhật', len(items), 'phim')
+    old = load(LB_OUT) or {}
+    data = {'user': LB_USER, 'name': name, 'profile': f'https://letterboxd.com/{LB_USER}/', 'items': items}
+    # phim đã xem: trang /films/ (Letterboxd chỉ cho máy đọc trang đầu, xếp theo phim mới phát hành)
+    seen = dict(old.get('seen') or {})
+    films = old.get('films')
+    page = lb_page(f'https://letterboxd.com/{LB_USER}/films/')
+    if page:
+        grid, total = page[0], page[1]
+        if grid:
+            base = not seen
+            stamp = now_iso()
+            for it in grid:
+                if it['s'] not in seen: seen[it['s']] = '' if base else stamp     # lần đầu: chưa biết ngày xem
+                if seen.get(it['s']): it['seen'] = seen[it['s']]
+            fix_posters(grid, (films or {}).get('items'))
+            films = {'total': total or (films or {}).get('total') or len(grid), 'items': grid}
+            new = [it['t'] for it in grid if it.get('seen') == stamp]
+            if new: print('Phim mới đánh dấu đã xem:', new)
+    if films: data['films'] = films
+    data['seen'] = seen
+    # Watchlist: đọc đủ mọi trang, nếu một trang lỗi thì giữ dữ liệu cũ
+    wl = old.get('watchlist')
+    if HEAVY or not wl:
+        got = lb_watchlist()
+        if got is not None: wl = got
+    if wl: data['watchlist'] = wl
+    cmp = lambda d: {k: v for k, v in (d or {}).items() if k != 'updated'}
+    if cmp(old) == cmp(data):
+        print('Letterboxd không đổi', len(items), 'nhật ký,', len((films or {}).get('items', [])), 'phim đã xem,', len((wl or {}).get('items', [])), 'watchlist'); return
+    data['updated'] = now_iso()
+    save(LB_OUT, data)
+    print('Letterboxd cập nhật', len(items), 'nhật ký,', len((films or {}).get('items', [])), 'phim đã xem,', len((wl or {}).get('items', [])), 'watchlist')
+
+def lb_html(url):
+    raw = fetch(url, 'text/html,application/xhtml+xml', tries=2)
+    return raw.decode('utf-8', 'ignore') if raw else None
+
+def lb_page(url):
+    """Đọc lưới poster của một trang Letterboxd → ([phim], tổng số phim)."""
+    b = lb_html(url)
+    if not b or 'data-item-slug' not in b: return None
+    out = []
+    for m in re.finditer(r'<li class="griditem[^"]*">(.*?)</li>', b, re.S):
+        blk = m.group(1)
+        nm, sl = re.search(r'data-item-name="([^"]+)"', blk), re.search(r'data-item-slug="([^"]+)"', blk)
+        if not nm or not sl: continue
+        n = html.unescape(nm.group(1)); my = re.match(r'(.*) \((\d{4})\)$', n)
+        it = {'t': my.group(1) if my else n, 'y': my.group(2) if my else '', 's': sl.group(1)}
+        try:
+            pid = json.loads(html.unescape(re.search(r"data-postered-identifier='([^']+)'", blk).group(1)))
+            it['f'] = pid['uid'].split(':')[1]
+            rp = json.loads(html.unescape(re.search(r"data-resolvable-poster-path='([^']+)'", blk).group(1)))
+            it['k'] = rp.get('cacheBustingKey', '')
+        except Exception: pass
+        r = re.search(r'rated-(\d+)', blk)
+        if r: it['r'] = int(r.group(1)) / 2
+        if 'icon-liked' in blk: it['l'] = 1
+        out.append(it)
+    tot = re.search(r'([\d,]+)&nbsp;films', b)
+    pages = [int(x) for x in re.findall(r'/page/(\d+)/', b)]
+    return out, (int(tot.group(1).replace(',', '')) if tot else 0), (max(pages) if pages else 1)
+
+def lb_poster_url(it):
+    f = it.get('f', '')
+    return f"https://a.ltrbxd.com/resized/film-poster/{'/'.join(f)}/{f}-{it['s']}-0-150-0-225-crop.jpg?v={it.get('k', '')}" if f else ''
+
+def head_ok(url):
+    try:
+        r = urllib.request.urlopen(urllib.request.Request(url, method='HEAD', headers={'User-Agent': UA, 'Referer': 'https://letterboxd.com/'}), timeout=15)
+        return r.status == 200 and 'image' in (r.headers.get('Content-Type') or '')
+    except Exception: return False
+
+def imdb_poster(title, year):
+    q = re.sub(r'[^a-z0-9 ]+', ' ', title.lower()).strip()
+    raw = fetch('https://v3.sg.media-imdb.com/suggestion/x/' + urllib.parse.quote(q or title) + '.json', 'application/json', tries=1)
+    if not raw: return ''
+    try: d = [x for x in json.loads(raw).get('d', []) if str(x.get('id', '')).startswith('tt') and x.get('i')]
+    except ValueError: return ''
+    pick = next((x for x in d if str(x.get('y', '')) == str(year)), None) or (d[0] if d and not year else None)
+    u = pick and pick['i'].get('imageUrl')
+    return re.sub(r'\._V1_.*?\.jpg$', '._V1_QL75_UX150_.jpg', u) if u else ''
+
+def fix_posters(items, old_items, budget=650):
+    """Kiểm tra poster dựng từ mã phim (một lần, nhớ lại); poster hỏng thì lấy poster IMDb."""
+    cache = {o['s']: o for o in (old_items or []) if o.get('pc')}
+    for it in items:
+        o = cache.get(it['s'])
+        if o and o.get('k') == it.get('k'):
+            it['pc'] = 1
+            if o.get('p'): it['p'] = o['p']
+            continue
+        if budget <= 0: continue
+        budget -= 1
+        if not head_ok(lb_poster_url(it)):
+            alt = imdb_poster(it['t'], it['y'])
+            if alt: it['p'] = alt
+            print('poster thay thế:', it['t'], it['y'], '→', 'IMDb' if alt else 'không có')
+        it['pc'] = 1
+    return budget
+
+def lb_watchlist():
+    first = lb_page(f'https://letterboxd.com/{LB_USER}/watchlist/')
+    if not first: print('Watchlist: không đọc được, giữ dữ liệu cũ'); return None
+    items, _, last = first[0], first[1], first[2]
+    for p in range(2, min(last, 60) + 1):
+        time.sleep(.6)
+        pg = lb_page(f'https://letterboxd.com/{LB_USER}/watchlist/page/{p}/')
+        if not pg: print('Watchlist: trang', p, 'lỗi, giữ dữ liệu cũ'); return None
+        items += pg[0]
+    seen, uniq = set(), []
+    for it in items:
+        if it['s'] in seen: continue
+        seen.add(it['s']); uniq.append(it)
+    fix_posters(uniq, ((load(LB_OUT) or {}).get('watchlist') or {}).get('items'))
+    print('Watchlist', len(uniq), 'phim')
+    return {'total': len(uniq), 'items': uniq}
 
 # ---------------------------------------------------------------- Nhạc mới
 FEEDS = [
@@ -220,6 +337,45 @@ def music():
     if DRY:
         for it in out[:12]: print('  ', it['k'], it['s'], it['t'], it.get('sc'), it.get('i', '')[:60])
 
+# ---------------------------------------------------------------- Bảng xếp hạng
+CHARTS = [
+    ('us', 'US · Spotify top 200', 'https://kworb.net/spotify/country/us_daily.html'),
+    ('gb', 'UK · Spotify top 200', 'https://kworb.net/spotify/country/gb_daily.html'),
+    ('ru', 'Nga · Apple Music top 200', 'https://kworb.net/charts/apple_s/ru.html'),
+    ('cn', 'Trung Quốc · Apple Music top 200', 'https://kworb.net/charts/apple_s/cn.html'),
+]
+
+def charts():
+    old = load(CHARTS_OUT) or {}
+    out = {}
+    for key, name, url in CHARTS:
+        raw = fetch(url, 'text/html')
+        if not raw:
+            if (old.get('charts') or {}).get(key): out[key] = old['charts'][key]
+            continue
+        b = raw.decode('utf-8', 'ignore')
+        d = re.search(r'(\d{4}/\d{2}/\d{2})', b) or re.search(r'(\d{4}-\d{2}-\d{2})', b)
+        rows = []
+        for tr in re.findall(r'<tr[^>]*>(.*?)</tr>', b, re.S):
+            tds = re.findall(r'<td[^>]*>(.*?)</td>', tr, re.S)
+            if len(tds) < 3 or not re.fullmatch(r'\s*\d+\s*', re.sub(r'<[^>]+>', '', tds[0])): continue
+            cell = next((c for c in tds if ' - ' in re.sub(r'<[^>]+>', '', c)), '')
+            text = html.unescape(re.sub(r'<[^>]+>', '', cell)).strip()
+            if ' - ' not in text: continue
+            artist, title = text.split(' - ', 1)
+            row = {'p': int(re.sub(r'<[^>]+>', '', tds[0])), 'a': artist.strip(), 't': title.strip(), 'c': html.unescape(re.sub(r'<[^>]+>', '', tds[1])).strip()}
+            sp = re.search(r'track/([A-Za-z0-9]{22})\.html', cell)
+            if sp: row['sp'] = sp.group(1)
+            rows.append(row)
+        rows.sort(key=lambda r: r['p'])
+        if rows: out[key] = {'name': name, 'date': d.group(1) if d else '', 'src': url, 'items': rows[:200]}
+        elif (old.get('charts') or {}).get(key): out[key] = old['charts'][key]
+        print(f'chart {key}: {len(rows)} bài, ngày {d.group(1) if d else "?"}')
+        time.sleep(.5)
+    if not out: return
+    if old.get('charts') == out: print('Bảng xếp hạng không đổi'); return
+    save(CHARTS_OUT, {'charts': out, 'updated': now_iso()})
+
 # ---------------------------------------------------------------- git
 def git(*a): return subprocess.run(['git', *a], capture_output=True, text=True)
 
@@ -245,10 +401,13 @@ def push(msg):
 def main():
     try: letterboxd()
     except Exception as e: print('Letterboxd lỗi', repr(e)[:300])
-    try: music()
-    except Exception as e: print('Nhạc mới lỗi', repr(e)[:300])
+    if HEAVY:
+        try: music()
+        except Exception as e: print('Nhạc mới lỗi', repr(e)[:300])
+        try: charts()
+        except Exception as e: print('Bảng xếp hạng lỗi', repr(e)[:300])
     if not changed: return
-    parts = (['Letterboxd'] if LB_OUT in changed else []) + (['nhạc mới'] if MUSIC_OUT in changed else [])
+    parts = (['Letterboxd'] if LB_OUT in changed else []) + (['nhạc mới'] if MUSIC_OUT in changed else []) + (['bảng xếp hạng'] if CHARTS_OUT in changed else [])
     msg = 'Studio: cập nhật ' + ' + '.join(parts)
     if os.environ.get('GITHUB_ACTIONS'): print(f'::notice title=studio-sync::{msg}')
     if not DRY: push(msg)
