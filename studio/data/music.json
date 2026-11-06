@@ -9,7 +9,7 @@
    "x": "Brighton riff lords flex their massive muscles",
    "a": "Royal Blood",
    "w": "Dead Company",
-   "i": "https://www.nme.com/wp-content/uploads/2026/11/royal-blood-credit-Edward-Cooke.jpeg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/11/royal-blood-credit-Edward-Cooke-400x254.jpeg"
   },
   {
    "s": "pitchfork",
@@ -21,7 +21,7 @@
    "a": "untitled (halo)",
    "w": "untitled (halo)",
    "i": "https://media.pitchfork.com/photos/6aecc0946de58f9ada4bfd2a/master/w_200,c_limit/untitled%20(halo)%20-%20untitled%20(halo)%20album%20art.jpg",
-   "sc": 5.8
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -33,7 +33,7 @@
    "a": "Laila!",
    "w": "We’ll Never Be This Young Again",
    "i": "https://media.pitchfork.com/photos/6aecd91478d0dfa19820dd27/master/w_200,c_limit/Laila-We%E2%80%99ll%20Never%20Be%20This%20Young%20Again.jpg",
-   "sc": 7.4
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -45,7 +45,7 @@
    "a": "nomi.",
    "w": "this wolf may cry",
    "i": "https://media.pitchfork.com/photos/6aecc416d1ad83d11d55727e/master/w_200,c_limit/nomi.%20-%20this%20wolf%20may%20cry%20album%20art.jpg",
-   "sc": 6.2
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -57,7 +57,7 @@
    "a": "gyrofield",
    "w": "Great Jobs",
    "i": "https://media.pitchfork.com/photos/6aeca9b677ca41c6e0456d40/master/w_200,c_limit/gyrofield%20-%20Great%20Jobs.jpg",
-   "sc": 7.4
+   "v": 2
   },
   {
    "s": "consequence",
@@ -487,7 +487,8 @@
    "x": "On their third album this year, the New Orleans garage rockers embrace conflicting emotions and clashing sounds, balancing hard-charging rave-ups with exploratory tape experiments.",
    "a": "Twisted Teens",
    "w": "The Holy Cross Tigers",
-   "i": "https://media.pitchfork.com/photos/6aeb5fe71d58dfb46e474b86/master/w_200,c_limit/Twisted%20Teens%20-%20The%20Holy%20Cross%20Tigers.jpg"
+   "i": "https://media.pitchfork.com/photos/6aeb5fe71d58dfb46e474b86/master/w_200,c_limit/Twisted%20Teens%20-%20The%20Holy%20Cross%20Tigers.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -498,7 +499,8 @@
    "x": "On its first live album, the New York trio recasts a quarter-century of rock songs for strings, piano, and acoustic guitar, highlighting the ache and vulnerability at the heart of its music.",
    "a": "Yeah Yeah Yeahs",
    "w": "Hidden in Pieces: Live at the Royal Albert Hall",
-   "i": "https://media.pitchfork.com/photos/6aeb86b471a068f3a6c90517/master/w_200,c_limit/Yeah%20Yeah%20Yeahs-Hidden%20in%20Pieces%20Live%20at%20the%20Royal%20Albert%20Hall.jpg"
+   "i": "https://media.pitchfork.com/photos/6aeb86b471a068f3a6c90517/master/w_200,c_limit/Yeah%20Yeah%20Yeahs-Hidden%20in%20Pieces%20Live%20at%20the%20Royal%20Albert%20Hall.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -509,7 +511,8 @@
    "x": "So post-ironic it’s deadass, the Toronto songwriter’s debut renders a thoroughly modern affect with rare authenticity.",
    "a": "Brat Star",
    "w": "Southern Ontario Gothic",
-   "i": "https://media.pitchfork.com/photos/6aeb6043ffd893c2f7b9bf8c/master/w_200,c_limit/Brat%20Star%20-%20Southern%20Ontario%20Gothic%20album%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6aeb6043ffd893c2f7b9bf8c/master/w_200,c_limit/Brat%20Star%20-%20Southern%20Ontario%20Gothic%20album%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -520,7 +523,8 @@
    "x": "Too challenging to qualify as radio rock, the Los Angeles songwriter’s cloudy, lo-fi grunge is stuffed with ’90s references and opaque secrets.",
    "a": "John Errol",
    "w": "Damage",
-   "i": "https://media.pitchfork.com/photos/6aeb5ef792285c714cb83d91/master/w_200,c_limit/John%20Errol%20-%20Damage%20album%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6aeb5ef792285c714cb83d91/master/w_200,c_limit/John%20Errol%20-%20Damage%20album%20art.jpg",
+   "v": 2
   },
   {
    "s": "stereogum",
@@ -626,7 +630,8 @@
    "x": "With delirious melodic instincts, the Bronx rapper’s new tape evokes Young Money-era swag on a SoundCloud budget.",
    "a": "Baby Osamaa",
    "w": "On Tha Run",
-   "i": "https://media.pitchfork.com/photos/6aea06e6b2a4ae06c18ac614/master/w_200,c_limit/Baby%20Osamaa%20-%20On%20Tha%20Run%20album%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6aea06e6b2a4ae06c18ac614/master/w_200,c_limit/Baby%20Osamaa%20-%20On%20Tha%20Run%20album%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -637,7 +642,8 @@
    "x": "The Lisbon trio trades the laid-back feel of its earlier, more disco-indebted work for skeletal machine minimalism, twisted sequencer fugues, and lo-fi ambient that conceals more than it reveals.",
    "a": "Niagara",
    "w": "Catedral Gótica",
-   "i": "https://media.pitchfork.com/photos/6ae9fa49a678072465a4a4ae/master/w_200,c_limit/Niagara%20-%20Catedral%20Go%CC%81tica.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae9fa49a678072465a4a4ae/master/w_200,c_limit/Niagara%20-%20Catedral%20Go%CC%81tica.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -648,7 +654,8 @@
    "x": "On her debut album, the musician combines her family’s Jamaican mento legacy with her personal love of folk for a set of graceful, winningly direct songs.",
    "a": "June McDoom",
    "w": "Follow the Light",
-   "i": "https://media.pitchfork.com/photos/6aea1ce888ed135c4885e5cd/master/w_200,c_limit/June%20McDoom-Follow%20the%20Light.jpg"
+   "i": "https://media.pitchfork.com/photos/6aea1ce888ed135c4885e5cd/master/w_200,c_limit/June%20McDoom-Follow%20the%20Light.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -659,7 +666,8 @@
    "x": "Experimental artist Felicia Chen’s high-contrast compositions unite whispers and shrieks, intimate acoustics and inhuman distortion.",
    "a": "Dis Fig",
    "w": "What to Make of These Mortal Hands",
-   "i": "https://media.pitchfork.com/photos/6ae3b8af13936ee9eac88b6a/master/w_200,c_limit/Dis%20Fig%20-%20What%20to%20Make%20of%20These%20Mortal%20Hands.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae3b8af13936ee9eac88b6a/master/w_200,c_limit/Dis%20Fig%20-%20What%20to%20Make%20of%20These%20Mortal%20Hands.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -670,7 +678,8 @@
    "x": "Unlike the composer’s typically massive, sprawling drones, these pieces for pipe organ—accompanied by guitarist Stephen O’Malley and cellist Lucy Railton—are finely filigreed miniatures.",
    "a": "Kali Malone",
    "w": "Burning Song",
-   "i": "https://media.pitchfork.com/photos/6ae8b6b76f5468feebccc392/master/w_200,c_limit/Kali%20Malone%20-%20Burning%20Song.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae8b6b76f5468feebccc392/master/w_200,c_limit/Kali%20Malone%20-%20Burning%20Song.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -681,7 +690,8 @@
    "x": "On a new EP, the Ohio singer-songwriter writes with focus and immediacy, their lyrics blending a love of chaos with an eye toward long-term stability.",
    "a": "Lydia Loveless",
    "w": "Accolades EP",
-   "i": "https://media.pitchfork.com/photos/6ae49e061534acc465ada843/master/w_200,c_limit/Lydia%20Loveless-Accolades.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae49e061534acc465ada843/master/w_200,c_limit/Lydia%20Loveless-Accolades.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -692,7 +702,8 @@
    "x": "The perennially unserious duo’s embrace of AI is the least of the problems weighing down its latest album (and 55-track bonus compendium) of post-ironic club pop.",
    "a": "Two Shell",
    "w": "Infinite Now",
-   "i": "https://media.pitchfork.com/photos/6ae8add83ad14b0f5282eace/master/w_200,c_limit/Two%20Shell%20-%20Infinite%20Now.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae8add83ad14b0f5282eace/master/w_200,c_limit/Two%20Shell%20-%20Infinite%20Now.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -703,7 +714,8 @@
    "x": "A newly unearthed live performance, originally intended for broadcast on NPR, showcases a unique and transitional moment for the free-jazz pianist's ensemble.",
    "a": "Cecil Taylor Unit",
    "w": "Live at the KiMo Theater Albuquerque 1979",
-   "i": "https://media.pitchfork.com/photos/6ae4de958cc155b23b3f707a/master/w_200,c_limit/Cecil%20Taylor%20Unit%20Live%20at%20the%20KiMo%20Theater%20Albuquerque%201979.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae4de958cc155b23b3f707a/master/w_200,c_limit/Cecil%20Taylor%20Unit%20Live%20at%20the%20KiMo%20Theater%20Albuquerque%201979.jpg",
+   "v": 2
   },
   {
    "s": "nme",
@@ -714,7 +726,7 @@
    "x": "A modern emo gothic painted in sugary pop pastels",
    "a": "Daine",
    "w": "In Endless Awe & Agony",
-   "i": "https://www.nme.com/wp-content/uploads/2026/09/NMEAR_NME-DAINE-THE-COVER-2026-3-CREDIT-DEAN-PODMORE@2000x1270.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/09/NMEAR_NME-DAINE-THE-COVER-2026-3-CREDIT-DEAN-PODMORE@2000x1270-400x254.jpg"
   },
   {
    "s": "pitchfork",
@@ -725,7 +737,8 @@
    "x": "Featuring heartbroken vocal performances and stripped of frills like basslines or reverb, the Manchester producer’s latest album of bruised electronica is his starkest and most forlorn yet.",
    "a": "Andy Stott",
    "w": "Late Loop",
-   "i": "https://media.pitchfork.com/photos/6ab17549f99f7bf88c241c73/master/w_200,c_limit/5060165488810.jpg"
+   "i": "https://media.pitchfork.com/photos/6ab17549f99f7bf88c241c73/master/w_200,c_limit/5060165488810.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -736,7 +749,8 @@
    "x": "The “Stop the Wedding!” singer’s vintage-styled new album combines stately pop classicism and exuberant ’70s pastiche.",
    "a": "Ashe",
    "w": "The Girl of Your Dreams",
-   "i": "https://media.pitchfork.com/photos/6ae3b9afdd353d3745bb9abf/master/w_200,c_limit/Ashe%20-%20The%20Girl%20of%20Your%20Dreams%20album%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae3b9afdd353d3745bb9abf/master/w_200,c_limit/Ashe%20-%20The%20Girl%20of%20Your%20Dreams%20album%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -747,7 +761,8 @@
    "x": "The Disintegration Loops made the composer’s name synonymous with weighty meditations on memory and loss, but his latest album—calm, focused, tender—is a reminder of his fondness for beauty.",
    "a": "William Basinski",
    "w": "Passing the Cup of Sorrows",
-   "i": "https://media.pitchfork.com/photos/6ae4bc8c00019c3ef93fb729/master/w_200,c_limit/William%20Basinski%20-%20Passing%20the%20Cup%20of%20Sorrows.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae4bc8c00019c3ef93fb729/master/w_200,c_limit/William%20Basinski%20-%20Passing%20the%20Cup%20of%20Sorrows.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -758,7 +773,8 @@
    "x": "Marrying lush arrangements and field-recording experiments, the English revivalists honor folk music’s radical tradition by reinforcing its contemporary significance.",
    "a": "Shovel Dance Collective",
    "w": "Everything in Readiness",
-   "i": "https://media.pitchfork.com/photos/6ae36bbdd83a22061522fc42/master/w_200,c_limit/Shovel%20Dance%20Collective%20-%20Everything%20in%20Readiness%20album%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae36bbdd83a22061522fc42/master/w_200,c_limit/Shovel%20Dance%20Collective%20-%20Everything%20in%20Readiness%20album%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -769,7 +785,8 @@
    "x": "Each Sunday, Pitchfork takes an in-depth look at a significant album from the past, and any record not in our archives is eligible. Today, we reconnect with a 2004 cult-classic game whose postmodernist soundtrack doubles as a treatise on the meaning of life.",
    "a": "Various Artists",
    "w": "Katamari Fortissimo Damacy",
-   "i": "https://media.pitchfork.com/photos/6ae36f01c138238a931e34e7/master/w_200,c_limit/Various%20-%20Katamari%20Fortissimo%20Damacy%20(original).jpg"
+   "i": "https://media.pitchfork.com/photos/6ae36f01c138238a931e34e7/master/w_200,c_limit/Various%20-%20Katamari%20Fortissimo%20Damacy%20(original).jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -780,7 +797,8 @@
    "x": "Richard D. James’ once divisive 2001 album today looks, with 25 years of hindsight, like the keystone of his career, joining rave mischief and academic rigor in a sprawling, 100-minute package.",
    "a": "Aphex Twin",
    "w": "Drukqs (25th Anniversary Edition)",
-   "i": "https://media.pitchfork.com/photos/6ae377d7efb3062cf478c6cd/master/w_200,c_limit/Aphex%20Twin%20-%20Drukqs%202026.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae377d7efb3062cf478c6cd/master/w_200,c_limit/Aphex%20Twin%20-%20Drukqs%202026.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -791,7 +809,8 @@
    "x": "The shoegaze band teams with producer A. G. Cook for its most pop-leaning record yet. Despite some welcome shifts in tone, the best moments sound like no one but DIIV.",
    "a": "DIIV",
    "w": "ZIRP!",
-   "i": "https://media.pitchfork.com/photos/6a73e45ad12418ea88fa0f4d/master/w_200,c_limit/diiv-zirp!-cover-3k-rgb.jpg"
+   "i": "https://media.pitchfork.com/photos/6a73e45ad12418ea88fa0f4d/master/w_200,c_limit/diiv-zirp!-cover-3k-rgb.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -802,7 +821,8 @@
    "x": "Upstart guitarist Heath Michael Thomas’ shaggy, groove-heavy garage rock captures the raucous interplay of a much more practiced band.",
    "a": "Heathers",
    "w": "Awesome",
-   "i": "https://media.pitchfork.com/photos/6ae368415ab3de1a43c5f859/master/w_200,c_limit/Heathers%20-%20Awesome%20album%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae368415ab3de1a43c5f859/master/w_200,c_limit/Heathers%20-%20Awesome%20album%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -813,7 +833,8 @@
    "x": "The metal supergroup led by the co-founder and spokesperson of the Satanic Temple returns with a provocative, maximalist, and pretty solid second album.",
    "a": "Satanic Planet",
    "w": "Dead Deities",
-   "i": "https://media.pitchfork.com/photos/6ae36a8ea7a049e9e3b0e7e9/master/w_200,c_limit/Satanic%20Planet%20Dead%20Deities.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae36a8ea7a049e9e3b0e7e9/master/w_200,c_limit/Satanic%20Planet%20Dead%20Deities.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -824,7 +845,8 @@
    "x": "The experimental musician refines her approach to structured repetition on her second solo album of the year, finding melancholic beauty by subtly transforming Americana-inflected loops and patterns.",
    "a": "more eaze",
    "w": "valley and structure",
-   "i": "https://media.pitchfork.com/photos/6ae36eae95988ef7e2e81f6c/master/w_200,c_limit/More%20Eaze-valley%20and%20structure.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae36eae95988ef7e2e81f6c/master/w_200,c_limit/More%20Eaze-valley%20and%20structure.jpg",
+   "v": 2
   },
   {
    "s": "nme",
@@ -835,7 +857,7 @@
    "x": "Horny, theatrical and irresistibly catchy",
    "a": "Chloe Qisha",
    "w": "Fantasize",
-   "i": "https://www.nme.com/wp-content/uploads/2026/10/Chloe-Qisha-Credit-Blacksocks.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/10/Chloe-Qisha-Credit-Blacksocks-400x254.jpg"
   },
   {
    "s": "nme",
@@ -846,7 +868,7 @@
    "x": "The desert rock dons adventure into love for their third act",
    "a": "Queens Of The Stone Age",
    "w": "Perfecth",
-   "i": "https://www.nme.com/wp-content/uploads/2026/10/queens_of_the_stone_age_perfecth_review.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/10/queens_of_the_stone_age_perfecth_review-400x254.jpg"
   },
   {
    "s": "pitchfork",
@@ -857,7 +879,8 @@
    "x": "Following the deaths of two founding members, the long-in-the-works final album from the Elephant 6 group is a dark, psychedelic epic that unfolds with eerie clairvoyance and intensity.",
    "a": "The Olivia Tremor Control",
    "w": "The Same Place",
-   "i": "https://media.pitchfork.com/photos/6ae22497903c0fd4dcfc1d19/master/w_200,c_limit/The%20Olivia%20Tremor%20Control%20The%20Same%20Place.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae22497903c0fd4dcfc1d19/master/w_200,c_limit/The%20Olivia%20Tremor%20Control%20The%20Same%20Place.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -868,7 +891,8 @@
    "x": "The Ohio artist’s first album in four years is paranoid, indulgent, and theatrical, unfolding like a dark romantasy novel.",
    "a": "brakence",
    "w": "marroW",
-   "i": "https://media.pitchfork.com/photos/6ad913bf0c92ad66cf11be07/master/w_200,c_limit/3000x3000bb-100%20(2).jpg"
+   "i": "https://media.pitchfork.com/photos/6ad913bf0c92ad66cf11be07/master/w_200,c_limit/3000x3000bb-100%20(2).jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -879,7 +903,8 @@
    "x": "Anderson .Paak and Cordae kick back over a suite of boom-bap and trap-adjacent slappers on their lopsided but entertaining collaborative album.",
    "a": "Anderson .Paak / Cordae",
    "w": "Heavy Is the Crown",
-   "i": "https://media.pitchfork.com/photos/6a85bffccf56144a2fd11199/master/w_200,c_limit/Anderson-Paak-Heavy-Is-the-Crown.jpeg"
+   "i": "https://media.pitchfork.com/photos/6a85bffccf56144a2fd11199/master/w_200,c_limit/Anderson-Paak-Heavy-Is-the-Crown.jpeg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -890,7 +915,8 @@
    "x": "The Austin ensemble makes minimalism feel enveloping and unruly on its latest record, where new melodic details are always emerging from a swarming mass of sound.",
    "a": "Water Damage",
    "w": "Repair",
-   "i": "https://media.pitchfork.com/photos/6ae21b827b487fd17701118a/master/w_200,c_limit/Water%20Damage-Repair.jpg"
+   "i": "https://media.pitchfork.com/photos/6ae21b827b487fd17701118a/master/w_200,c_limit/Water%20Damage-Repair.jpg",
+   "v": 2
   },
   {
    "s": "nme",
@@ -901,7 +927,7 @@
    "x": "Pop meets politics on their most adventurous record yet",
    "a": "DIIV",
    "w": "ZIRP!",
-   "i": "https://www.nme.com/wp-content/uploads/2026/10/DIIV-ZIRP-Credit-Jaxon-Whittington.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/10/DIIV-ZIRP-Credit-Jaxon-Whittington-400x254.jpg"
   },
   {
    "s": "nme",
@@ -912,7 +938,7 @@
    "x": "A wild ride with a dark side",
    "a": "Young Eman",
    "w": "BINE",
-   "i": "https://www.nme.com/wp-content/uploads/2026/10/Young-Eman-Credit-Press-Retry.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/10/Young-Eman-Credit-Press-Retry-400x254.jpg"
   },
   {
    "s": "pitchfork",
@@ -923,7 +949,8 @@
    "x": "Time for some East Coast zess as soca and dancehall meet NYC litefeet and Jersey club.",
    "a": "Jay Morrg",
    "w": "Grab Her Nuh (Zess)",
-   "i": "https://media.pitchfork.com/photos/6ada28beb8bcacc81dc91f0b/master/w_200,c_limit/jay.jpg"
+   "i": "https://media.pitchfork.com/photos/6ada28beb8bcacc81dc91f0b/master/w_200,c_limit/jay.jpg",
+   "v": 2
   },
   {
    "s": "nme",
@@ -934,7 +961,7 @@
    "x": "A powerful portrait of a man on the precipice of tragedy",
    "a": "Michael Kiwanuka",
    "w": "Fudge",
-   "i": "https://www.nme.com/wp-content/uploads/2026/10/Michael-Kiwanuka-Credit-Jodie-Canwell.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/10/Michael-Kiwanuka-Credit-Jodie-Canwell-400x254.jpg"
   },
   {
    "s": "pitchfork",
@@ -945,7 +972,8 @@
    "x": "Star-crossed lovers sing right past each other on the duet from Bryan’s new Young Manhood and Other Donatable Organs EP.",
    "a": "Zach Bryan",
    "w": "Lies” [ft. Lana Del Rey]",
-   "i": "https://media.pitchfork.com/photos/6ad28eea0dd1470351a8a266/master/w_200,c_limit/Zach%20Bryan%20-%20Young%20Manhood%20and%20Other%20Donatable%20Organs%20EP%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6ad28eea0dd1470351a8a266/master/w_200,c_limit/Zach%20Bryan%20-%20Young%20Manhood%20and%20Other%20Donatable%20Organs%20EP%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -956,7 +984,8 @@
    "x": "If there were ever a song Chappie was born to add some sauce to, it’s “expectations.”",
    "a": "Olivia Rodrigo / Chappell Roan",
    "w": "expectations",
-   "i": "https://media.pitchfork.com/photos/6ad2248b47a15edc78459c81/master/w_200,c_limit/3000x3000bb-100.jpg"
+   "i": "https://media.pitchfork.com/photos/6ad2248b47a15edc78459c81/master/w_200,c_limit/3000x3000bb-100.jpg",
+   "v": 2
   },
   {
    "s": "nme",
@@ -967,7 +996,7 @@
    "x": "A layered look at love, loss and self-doubt",
    "a": "Chrissi",
    "w": "I Hate You Don’t Leave Me !",
-   "i": "https://www.nme.com/wp-content/uploads/2026/10/Chrissi-Credit-Lily-West-Squish.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/10/Chrissi-Credit-Lily-West-Squish-400x254.jpg"
   },
   {
    "s": "nme",
@@ -978,7 +1007,7 @@
    "x": "Excessive and overstimulating by design",
    "a": "The Avalanches",
    "w": "No Bad Memories",
-   "i": "https://www.nme.com/wp-content/uploads/2026/10/The-Avalanches-Credit-Dean-Podmore.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/10/The-Avalanches-Credit-Dean-Podmore-400x254.jpg"
   },
   {
    "s": "pitchfork",
@@ -989,7 +1018,8 @@
    "x": "The Los Angeles singer’s gossamer new single is a road song with an air of mystery.",
    "a": "Zsela",
    "w": "Kinda Guy",
-   "i": "https://media.pitchfork.com/photos/6ace6666ffe3bdf2af9c1e7b/master/w_200,c_limit/Zsela%20-%20Kinda%20Guy%20single%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6ace6666ffe3bdf2af9c1e7b/master/w_200,c_limit/Zsela%20-%20Kinda%20Guy%20single%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1000,7 +1030,8 @@
    "x": "A standout cypher verse is this week’s breakout record from Dominica’s fast-moving bouyon scene.",
    "a": "G’z Up",
    "w": "Fix Up (Ya Ya Ya)",
-   "i": "https://media.pitchfork.com/photos/6ace4ddda4c00f88367a5fea/master/w_200,c_limit/gz.jpg"
+   "i": "https://media.pitchfork.com/photos/6ace4ddda4c00f88367a5fea/master/w_200,c_limit/gz.jpg",
+   "v": 2
   },
   {
    "s": "nme",
@@ -1011,7 +1042,7 @@
    "x": "Coming to terms with the messiness of growing up",
    "a": "Nieve Ella",
    "w": "How Long Will It Take?",
-   "i": "https://www.nme.com/wp-content/uploads/2026/07/nieve-ella-press@2000x1270.jpg"
+   "i": "https://www.nme.com/wp-content/uploads/2026/07/nieve-ella-press@2000x1270-400x254.jpg"
   },
   {
    "s": "pitchfork",
@@ -1022,7 +1053,8 @@
    "x": "The pop artist teases her long-awaited AI-inspired album with a new single that doesn’t quite live up to its presentation.",
    "a": "Grimes / VADAKIN",
    "w": "Accelerando",
-   "i": "https://media.pitchfork.com/photos/6ac9329b1fe87c7c8b1d40bd/master/w_200,c_limit/Grimes%20Accelerando.jpg"
+   "i": "https://media.pitchfork.com/photos/6ac9329b1fe87c7c8b1d40bd/master/w_200,c_limit/Grimes%20Accelerando.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1033,7 +1065,8 @@
    "x": "Following her 2026 breakthrough, Highway to Hell, Philly songwriter Emily Moales marks her signing to Dead Oceans with a chugging, conversational new single.",
    "a": "Star Moles",
    "w": "Born Again",
-   "i": "https://media.pitchfork.com/photos/69d5207163f35afaaacffe54/master/w_200,c_limit/Star%20Moles-%20Highway%20to%20Hell.jpg"
+   "i": "https://media.pitchfork.com/photos/69d5207163f35afaaacffe54/master/w_200,c_limit/Star%20Moles-%20Highway%20to%20Hell.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1044,7 +1077,8 @@
    "x": "With Texas-born crooner Don Toliver at his side, Drake reworks Ella Langley’s country hit “Choosin’ Texas” into a lounge-trap slow burn.",
    "a": "Drake / Don Toliver",
    "w": "Solar Eclipse",
-   "i": "https://media.pitchfork.com/photos/6a07181da0d561cda5e9f900/master/w_200,c_limit/26UMGIM63616.rgb.jpg"
+   "i": "https://media.pitchfork.com/photos/6a07181da0d561cda5e9f900/master/w_200,c_limit/26UMGIM63616.rgb.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1055,7 +1089,8 @@
    "x": "Built from fragmented, pitch-shifted gurgles, the elusive artist’s latest transmission has a disarming earnestness.",
    "a": "ki",
    "w": "tissue",
-   "i": "https://media.pitchfork.com/photos/6abc1c4a5d1654f4a04faf92/master/w_200,c_limit/ki%20tissue.jpg"
+   "i": "https://media.pitchfork.com/photos/6abc1c4a5d1654f4a04faf92/master/w_200,c_limit/ki%20tissue.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1066,7 +1101,8 @@
    "x": "The title track of the artist’s first major label album in eight years is its lighters-up climax.",
    "a": "Tinashe",
    "w": "Popstar",
-   "i": "https://media.pitchfork.com/photos/6ab4131ef7ef2378a6776d41/master/w_200,c_limit/Tinashe-%20Popstar%20.jpg"
+   "i": "https://media.pitchfork.com/photos/6ab4131ef7ef2378a6776d41/master/w_200,c_limit/Tinashe-%20Popstar%20.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1077,7 +1113,8 @@
    "x": "A would-be sweet love song set in Travis Kelce’s home state is a nadir of the new The Life of a Showgirl: The Encore edition.",
    "a": "Taylor Swift",
    "w": "Cleveland!",
-   "i": "https://media.pitchfork.com/photos/6ab3d199bacac9b4a37a9489/master/w_200,c_limit/HS52gb3WkAEW07Y.jpeg"
+   "i": "https://media.pitchfork.com/photos/6ab3d199bacac9b4a37a9489/master/w_200,c_limit/HS52gb3WkAEW07Y.jpeg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1088,7 +1125,8 @@
    "x": "Three producers from the British rap collective step to the mic for a thunderous, brute-force blast.",
    "a": "dBee",
    "w": "syllables",
-   "i": "https://media.pitchfork.com/photos/6ab5848fc36a5938f66e12a4/master/w_200,c_limit/DBee%20Syllables.jpg"
+   "i": "https://media.pitchfork.com/photos/6ab5848fc36a5938f66e12a4/master/w_200,c_limit/DBee%20Syllables.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1099,7 +1137,8 @@
    "x": "The Palberta and My Idea songwriter returns with a bittersweet, feel-good solo anthem.",
    "a": "Lily Konigsberg",
    "w": "Free Byrd",
-   "i": "https://media.pitchfork.com/photos/6ab2ba5c53bdeef50ce5947d/master/w_200,c_limit/Lily%20Konigsberg%20-%20Free%20Byrd%20single%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6ab2ba5c53bdeef50ce5947d/master/w_200,c_limit/Lily%20Konigsberg%20-%20Free%20Byrd%20single%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1110,7 +1149,8 @@
    "x": "Ella Langley’s timeless, traditionalist country hit is set to become the longest-running No. 1 in U.S. history this week. Like everything else in America, it’s polarizing.",
    "a": "Ella Langley",
    "w": "Choosin’ Texas",
-   "i": "https://media.pitchfork.com/photos/6aad683d07d034f32c7298d5/master/w_200,c_limit/P4K26_SatTracks_Choosin%20Texas_2x1.png"
+   "i": "https://media.pitchfork.com/photos/6aad683d07d034f32c7298d5/master/w_200,c_limit/P4K26_SatTracks_Choosin%20Texas_2x1.png",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1121,7 +1161,8 @@
    "x": "Three icons of 2010s hip-hop combine on the most purely Florida single from the upcoming Grand Theft Auto VI soundtrack album.",
    "a": "Yung Lean / Metro Boomin",
    "w": "That’s It” [ft. Future]",
-   "i": "https://media.pitchfork.com/photos/6aac379b171dd454749a699b/master/w_200,c_limit/Yung%20Lean%20Metro%20Boomin%20-%20That's%20It%20GTA%20single%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6aac379b171dd454749a699b/master/w_200,c_limit/Yung%20Lean%20Metro%20Boomin%20-%20That's%20It%20GTA%20single%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1132,7 +1173,8 @@
    "x": "The Martinician rapper-singer’s new single has a little something for everyone.",
    "a": "Lov’nee",
    "w": "Anonymat",
-   "i": "https://media.pitchfork.com/photos/6aa8162cfc9433b4f792b65a/master/w_200,c_limit/lov.jpg"
+   "i": "https://media.pitchfork.com/photos/6aa8162cfc9433b4f792b65a/master/w_200,c_limit/lov.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1143,7 +1185,8 @@
    "x": "The ambient rapper’s surprise breakout single is a barren transmission from the other side of grief.",
    "a": "kllhhr",
    "w": "skin",
-   "i": "https://media.pitchfork.com/photos/6aa42da6b2fc3a5873c487ba/master/w_200,c_limit/kllhhr:%20%E2%80%9Cskin%E2%80%9D.png"
+   "i": "https://media.pitchfork.com/photos/6aa42da6b2fc3a5873c487ba/master/w_200,c_limit/kllhhr:%20%E2%80%9Cskin%E2%80%9D.png",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1154,7 +1197,8 @@
    "x": "The punk band’s sardonic new single holds a mirror to social media’s insecurity influence op.",
    "a": "M(h)aol",
    "w": "Scam Manifesto",
-   "i": "https://media.pitchfork.com/photos/6aa30205764ded8b306dfb16/master/w_200,c_limit/M(h)aol%20-%20%E2%80%9CScam%20Manifesto%E2%80%9D%20single%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6aa30205764ded8b306dfb16/master/w_200,c_limit/M(h)aol%20-%20%E2%80%9CScam%20Manifesto%E2%80%9D%20single%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1165,7 +1209,8 @@
    "x": "The one-off single, produced by Adam Granduciel, is a refined and revealing entry in the band’s catalog.",
    "a": "The War on Drugs",
    "w": "Who’s That",
-   "i": "https://media.pitchfork.com/photos/6aa16dac63d8993481ad8921/master/w_200,c_limit/the%20war%20on%20drugs%20who's%20that.jpg"
+   "i": "https://media.pitchfork.com/photos/6aa16dac63d8993481ad8921/master/w_200,c_limit/the%20war%20on%20drugs%20who's%20that.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1176,7 +1221,8 @@
    "x": "The Danish songwriter’s dreamy piano ballad is a love letter composed en plein air.",
    "a": "Fine",
    "w": "Everything in the shade",
-   "i": "https://media.pitchfork.com/photos/6a99b832bb02c23e47bc3ca5/master/w_200,c_limit/Fine%20%E2%80%9CEverything%20in%20the%20shade%E2%80%9D%20single%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6a99b832bb02c23e47bc3ca5/master/w_200,c_limit/Fine%20%E2%80%9CEverything%20in%20the%20shade%E2%80%9D%20single%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1187,7 +1233,8 @@
    "x": "The controlled chaos of the underground star’s newest single includes a little of everything he does best.",
    "a": "xaviersobased",
    "w": "Struggle Gang",
-   "i": "https://media.pitchfork.com/photos/6a95e017c557076ca110e9c4/master/w_200,c_limit/xaviersobased%20-%20Struggle%20Gang%20single%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6a95e017c557076ca110e9c4/master/w_200,c_limit/xaviersobased%20-%20Struggle%20Gang%20single%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1198,7 +1245,8 @@
    "x": "This Saturday, we’re remembering Dolly Parton and her indelible original version of “I Will Always Love You,” a timeless declaration of loyalty and independence.",
    "a": "Dolly Parton",
    "w": "I Will Always Love You",
-   "i": "https://media.pitchfork.com/photos/6a91b3c04c109b25d000b3c1/master/w_200,c_limit/P4K26_SatTracks_2x1.png"
+   "i": "https://media.pitchfork.com/photos/6a91b3c04c109b25d000b3c1/master/w_200,c_limit/P4K26_SatTracks_2x1.png",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1209,7 +1257,8 @@
    "x": "The London musician’s forlorn and otherworldly new industrial track passes a sleepless night.",
    "a": "Venus Ex Machina",
    "w": "Jericho",
-   "i": "https://media.pitchfork.com/photos/6a91cbf9ae998b6a6f84238d/master/w_200,c_limit/Venus%20Ex%20Machina%20-%20Jericho%20single%20art.jpg"
+   "i": "https://media.pitchfork.com/photos/6a91cbf9ae998b6a6f84238d/master/w_200,c_limit/Venus%20Ex%20Machina%20-%20Jericho%20single%20art.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1220,7 +1269,8 @@
    "x": "The Atlanta rapper keeps the hits coming.",
    "a": "Belly Gang Kushington",
    "w": "No Jewelry",
-   "i": "https://media.pitchfork.com/photos/6a8844b3abfecdef0b9b237c/master/w_200,c_limit/belly%20gang.jpg"
+   "i": "https://media.pitchfork.com/photos/6a8844b3abfecdef0b9b237c/master/w_200,c_limit/belly%20gang.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1231,7 +1281,8 @@
    "x": "On Saturdays, we go deep on one song we’ve never reviewed before. This week, we journey back to an inescapable 2011 party anthem, a canonical track that made stars out of Tyga and DJ Mustard.",
    "a": "Tyga",
    "w": "Rack City",
-   "i": "https://media.pitchfork.com/photos/6a7f68d1e84b50e10eb997d8/master/w_200,c_limit/12UMGIM07325.rgb.jpg"
+   "i": "https://media.pitchfork.com/photos/6a7f68d1e84b50e10eb997d8/master/w_200,c_limit/12UMGIM07325.rgb.jpg",
+   "v": 2
   },
   {
    "s": "pitchfork",
@@ -1242,8 +1293,9 @@
    "x": "Cameron Winter sidles up to the mic to duet with Phoebe on a standout track from her new record, Lost Weekend.",
    "a": "Phoebe Bridgers",
    "w": "I Can’t Wait",
-   "i": "https://media.pitchfork.com/photos/6a3bde6801a6ab17fa387818/master/w_200,c_limit/unnamed%20(48).jpg"
+   "i": "https://media.pitchfork.com/photos/6a3bde6801a6ab17fa387818/master/w_200,c_limit/unnamed%20(48).jpg",
+   "v": 2
   }
  ],
- "updated": "2026-11-06T08:23:20Z"
+ "updated": "2026-11-06T08:35:04Z"
 }
