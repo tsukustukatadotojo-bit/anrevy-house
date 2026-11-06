@@ -145,8 +145,8 @@ def pitchfork_page(link):
         m = re.match(r'(.+?):\s', tt)
         if m: artist = m.group(1).strip()
     sc, bnm = None, False
-    # điểm nằm trong "ratingValue":{..."score":7.4,"isBestNewMusic":...}; bài bị khoá thì không có điểm
-    for m in re.finditer(r'"ratingValue"\s*:\s*(\{[^{}]*\})', b):
+    # điểm của bài nằm ở "musicRating":{"isBestNewMusic":false,...,"score":7.4} (mục đầu tiên trong trang)
+    for m in re.finditer(r'"musicRating"\s*:\s*(\{[^{}]*\})', b):
         try: rv = json.loads(m.group(1))
         except ValueError: continue
         v = rv.get('score')
@@ -176,7 +176,7 @@ def music():
                 work = title.strip(Q + ' ')
                 c = cache.get(link)
                 bnm = False
-                if c and c.get('a') and c.get('v') == 2: artist, sc, bnm = c['a'], c.get('sc'), c.get('bnm', False)
+                if c and c.get('a') and c.get('v') == 3: artist, sc, bnm = c['a'], c.get('sc'), c.get('bnm', False)
                 elif fetched < 70:
                     artist, sc, bnm = pitchfork_page(link); fetched += 1; time.sleep(.4)
                 if k == 'song': title = f'{artist} – “{work}”' if artist else title
@@ -200,7 +200,7 @@ def music():
             if img: row['i'] = img
             if sc is not None: row['sc'] = sc
             if src == 'pitchfork':
-                row['v'] = 2
+                row['v'] = 3
                 if bnm: row['bnm'] = True
             items.append(row); n += 1
         print(f'{src}/{kind or "*"}: {n} mục')
