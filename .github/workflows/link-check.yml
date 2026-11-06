@@ -19,4 +19,4 @@ jobs:
       - name: Save data to branch
         run: |
           git config user.name bot; git config user.email bot@users.noreply.github.com
-          mkdir -p out && cp studio/data/*.json out/ && git checkout --orphan data-out && git rm -rq --cached . && git add out && git commit -qm "studio data [skip ci]" && git push -q origin HEAD:link-check-out --force
+          mkdir -p out && cp studio/data/*.json out/ && git checkout --orphan data-out && git rm -rqf --cached . && git add out && git commit -qm "studio data [skip ci]" && git push -q origin HEAD:link-check-out --force
