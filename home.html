@@ -323,18 +323,17 @@
   .c-arcade .tb{background:linear-gradient(90deg,#ff2a6d,#9b5cff 55%,#05d9e8)}
   .c-gallery .tb{background:linear-gradient(90deg,#8a5f1e,#f3d488 45%,#2a1d0a);color:#1a1206;text-shadow:none}
   .c-pool{--a:#7fd8e0;--bd:#dff3f3;--glow:rgba(127,216,224,.5)}
-  .c-studio{--a:#33ff66;--bd:#000;--glow:rgba(51,255,102,.35)}
-  .c-studio .tb{background:linear-gradient(90deg,#001a08,#0d6b26 55%,#000);color:#33ff66;text-shadow:none}
-  .studio-door{display:flex;flex-direction:column;gap:14px;width:100%;text-decoration:none;color:#33ff66}
-  .sd-term{display:flex;flex-direction:column;gap:2px;padding:14px 16px;background:#000;border:1px solid #1f8a3a;font-family:'VT323',monospace;font-size:19px;line-height:1.15;color:#33ff66;text-align:left;overflow:hidden;white-space:nowrap}
-  .sd-term span:nth-child(2){color:#9dffb5}
-  .sd-cur{color:#33ff66}
-  .sd-txt{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
-  .sd-txt b{font-family:'Silkscreen',monospace;font-weight:700;font-size:15px;letter-spacing:.08em;color:#33ff66}
-  .sd-txt small{font-family:'VT323',monospace;font-size:17px;color:#7fbf8f}
-  .sd-go{font-family:'VT323',monospace;font-size:19px;color:#000;background:#33ff66;padding:1px 10px;margin-top:6px}
-  .studio-door:hover .sd-term,.studio-door:focus-visible .sd-term{border-color:#33ff66;box-shadow:0 0 0 1px #33ff66 inset}
-  .studio-door:focus-visible{outline:2px dashed #33ff66;outline-offset:3px}
+  .c-studio{--a:#1f8a3a;--bd:#000;--glow:rgba(0,0,0,.6);background:#000}
+  .c-studio .tb{background:#000;color:#1f8a3a;text-shadow:none;border-bottom:1px solid #0c2a14}
+  .c-studio .tb-btns i{background:#000;border-color:#1f8a3a;color:#1f8a3a}
+  .room.c-studio .wb{background:#000;padding:0;gap:0;align-items:stretch;justify-content:stretch}
+  .studio-door{position:relative;flex:1;display:block;min-height:250px;overflow:hidden;background:#000;text-decoration:none}
+  .sd-code{position:absolute;inset:0;margin:0;padding:12px 14px;overflow:hidden;font:12px/1.42 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#16692c;white-space:pre;text-align:left;background:#000}
+  .sd-code i{font-style:normal;color:#2fd65a}
+  .sd-code u{text-decoration:none;color:#0f4a20}
+  .sd-go{position:absolute;left:14px;bottom:12px;font-family:'VT323',monospace;font-size:19px;line-height:1;color:#33ff66;background:#000;padding:4px 8px;border:1px solid #1f8a3a}
+  .studio-door:hover .sd-go,.studio-door:focus-visible .sd-go{background:#33ff66;color:#000;border-color:#33ff66}
+  .studio-door:focus-visible{outline:2px dashed #33ff66;outline-offset:-3px}
   .c-pool .tb{background:linear-gradient(90deg,#7fd8e0,#eef6f5);color:#0e3a40;text-shadow:none}
   .c-pool .wb{background:radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.8), transparent 60%), #dff3f3}
   .room.c-pool .pool-door{flex:1;max-width:none;min-height:190px}
@@ -795,9 +794,42 @@
     <section class="win reveal s5 c-studio room wide" id="studio">
       <div class="tb"><span>studio.exe</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
       <div class="wb">
-      <a class="studio-door" href="studio/">
-        <span class="sd-term" aria-hidden="true"><span>vy@studio:~$ ls ./apps</span><span>spotify  letterboxd  last.fm  aoty  instagram</span><span>vy@studio:~$ ./enter --code ******</span><span class="sd-cur">█</span></span>
-        <span class="sd-txt"><b>▣ the studio</b><small>a quiet black room where my music &amp; films live</small><span class="sd-go">▶ enter the studio</span></span>
+      <a class="studio-door" href="studio/" aria-label="Vào Studio">
+<pre class="sd-code" aria-hidden="true"><i>&lt;!DOCTYPE html&gt;</i>
+<i>&lt;html</i> lang="vi"<i>&gt;</i>
+<i>&lt;head&gt;</i>
+  <i>&lt;meta</i> charset="UTF-8"<i>&gt;</i>
+  <i>&lt;title&gt;</i>vy@studio:~$<i>&lt;/title&gt;</i>
+  <i>&lt;style&gt;</i>
+    :root{--bg:#000;--g:#39ff6a;--g-dim:#1a7a34}
+    html,body{height:100%;background:#000;color:var(--g)}
+    #desk{display:grid;grid-template-columns:380px 1fr 420px}
+    .win{border:1px solid var(--g-dim);background:#000}
+  <i>&lt;/style&gt;</i>
+<i>&lt;/head&gt;</i>
+<i>&lt;body</i> class="locked"<i>&gt;</i>
+  <i>&lt;input</i> id="key" type="password" inputmode="numeric"<i>&gt;</i>
+  <i>&lt;pre</i> id="stream" hidden<i>&gt;&lt;/pre&gt;</i>
+  <i>&lt;div</i> id="desk" hidden<i>&gt;</i>
+    <i>&lt;section</i> class="win" id="w-letterboxd"<i>&gt;</i> <u>&lt;!-- films --&gt;</u>
+    <i>&lt;section</i> class="win" id="w-music"<i>&gt;</i> <u>&lt;!-- new music --&gt;</u>
+    <i>&lt;section</i> class="win" id="w-spotify"<i>&gt;</i>
+      <i>&lt;iframe</i> src="https://open.spotify.com/embed/…"<i>&gt;&lt;/iframe&gt;</i>
+    <i>&lt;/section&gt;</i>
+    <i>&lt;section</i> class="win" id="w-lastfm"<i>&gt;</i> <u>&lt;!-- now playing --&gt;</u>
+  <i>&lt;/div&gt;</i>
+<i>&lt;script&gt;</i>
+  const CODE = '******';
+  document.addEventListener('keydown', e =&gt; {
+    if (/^[0-9]$/.test(e.key)) feed(e.key);
+  });
+  function feed(d){ buf = (buf + d).slice(-CODE.length); }
+  function runStream(){ /* 3s */ }
+  function openDesk(){ $('#desk').hidden = false; }
+<i>&lt;/script&gt;</i>
+<i>&lt;/body&gt;</i>
+<i>&lt;/html&gt;</i></pre>
+        <span class="sd-go">▶ enter the studio</span>
       </a>
       </div>
     </section>
