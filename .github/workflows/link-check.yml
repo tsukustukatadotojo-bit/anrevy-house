@@ -9,14 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Studio sync dry run
+      - name: Real browser test
         run: |
-          python3 tools/studio_sync.py --dry --all 2>&1 | tee out_gal.txt
+          pip install --quiet playwright==1.48.0
+          python -m playwright install --with-deps chromium > /dev/null 2>&1
+          (cd site && python3 -m http.server 8000 > /dev/null 2>&1 &)
+          sleep 2
+          python3 tools/realtest4.py || true
           python3 -c "
           s=open('out_gal.txt').read().replace(chr(10),' ¶ ')
           for i in range(0,min(len(s),32000),3800): print('::notice title=galup'+str(i//3800)+'::'+s[i:i+3800])
           "
-      - name: Save data to branch
+      - name: Save shots to branch
         run: |
           git config user.name bot; git config user.email bot@users.noreply.github.com
-          mkdir -p out && cp studio/data/*.json out/ && git checkout --orphan data-out && git rm -rqf --cached . && git add out && git commit -qm "studio data [skip ci]" && git push -q origin HEAD:link-check-out --force
+          git checkout --orphan shots-out && git rm -rqf --cached . && git add shots out_gal.txt && git commit -qm "shots [skip ci]" && git push -q origin HEAD:link-check-out --force
