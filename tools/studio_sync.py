@@ -402,6 +402,11 @@ def bandcamp():
         it = {'id': x['id'], 'k': kind, 't': html.unescape(x.get('primary_text') or ''), 'a': html.unescape(x.get('secondary_text') or ''),
               'g': x.get('genre_text') or '', 'u': f"https://{base}/{h.get('item_type') == 't' and 'track' or 'album'}/{h.get('slug', '')}",
               'i': f"https://f4.bcbits.com/img/a{x['art_id']}_7.jpg" if x.get('art_id') else ''}
+        ft = x.get('featured_track') or {}
+        mp3 = (ft.get('file') or {}).get('mp3-128')
+        if mp3:                      # link nghe thử của Bandcamp (hết hạn sau khoảng 1 ngày, máy chủ làm mới 2 giờ/lần)
+            it['s'] = mp3; it['ft'] = html.unescape(ft.get('title') or '')
+            if ft.get('duration'): it['dur'] = round(float(ft['duration']))
         try: it['d'] = datetime.strptime(x.get('publish_date', ''), '%d %b %Y %H:%M:%S %Z').strftime('%Y-%m-%dT%H:%M:%SZ')
         except ValueError: pass
         out.append(it)

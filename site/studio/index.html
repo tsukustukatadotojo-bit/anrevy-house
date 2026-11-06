@@ -160,9 +160,15 @@
   .ch-row{display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid #0b2a14}
   .ch-row:hover{background:#010d05}
   .ch-row img,.ch-row .ph{flex:none;width:40px;height:40px;object-fit:cover}
-  .bc-player{flex:none;display:flex;align-items:stretch;gap:6px;padding:6px 8px;border-bottom:1px solid var(--g-dim);background:#000}
-  .bc-player iframe{flex:1;min-width:0;height:120px;border:0;background:#000}
-  .bc-player .btn{align-self:flex-start}
+  .bc-player{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:7px 10px;border-bottom:1px solid var(--g-dim);background:#031a0a}
+  .bc-art img,.bc-art .ph{display:block;width:44px;height:44px;object-fit:cover}
+  .bc-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+  .bc-info b{font-weight:600;font-size:13px;color:var(--g-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bc-info span{font-size:12px;color:var(--g-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bc-info .bc-time{color:var(--g)}
+  .bc-player .ib{flex:none;width:32px;height:30px;border:1px solid var(--g-dim);color:var(--g);font:13px/1 var(--mono)}
+  .bc-player .ib:hover{background:var(--g);color:#000}
+  .bc-player iframe{flex:1 1 100%;height:120px;border:0;background:#000}
   .ch-row .pos{flex:none;width:30px;text-align:right;font:600 13px/1 var(--mono);color:var(--g-hi)}
   .ch-row .mv{flex:none;width:34px;font:11.5px/1 var(--mono);color:var(--g-dim)}
   .ch-row .mv.up{color:var(--g)}
@@ -357,7 +363,13 @@
       <button type="button" role="tab" data-tab="bandcamp" aria-selected="false">▣ bandcamp</button>
       <button type="button" role="tab" data-site="npr" aria-selected="false">báo nhạc</button>
     </div>
-    <div class="bc-player" id="bcPlayer" hidden><iframe id="bcFrame" title="Trình phát Bandcamp" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe><button class="btn sm" type="button" id="bcX" aria-label="Tắt trình phát Bandcamp">✕</button></div>
+    <div class="bc-player" id="bcPlayer" hidden>
+      <span class="bc-art" id="bcArt"></span>
+      <div class="bc-info"><b id="bcT"></b><span id="bcA"></span><span class="bc-time" id="bcTime">0:00</span></div>
+      <button class="ib" type="button" id="bcPP" aria-label="Tạm dừng">❚❚</button>
+      <button class="ib" type="button" id="bcX" aria-label="Tắt trình phát Bandcamp">✕</button>
+      <iframe id="bcFrame" title="Trình phát Bandcamp" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+    </div>
     <div class="wb" id="nmBody"><p class="note">◌ đang tải nhạc mới…</p></div>
     <div class="nm-frame" id="nmFrameWrap" hidden>
       <div class="nm-fbar"><button class="btn sm" type="button" id="nmBack">← danh sách</button><span class="nm-sites" id="nmSites"></span><span id="nmFrameUrl"></span></div>
@@ -1086,19 +1098,40 @@
       L.map((r, i) => `<li class="ch-row"><span class="pos">${r.p}</span>${img(r.i)}<div><b>${esc(r.t)}</b><span>${esc(r.a)} · ♥ ${esc(r.lv)}${r.s ? ' · ' + esc(r.s) : ''}</span></div><button class="ib" type="button" data-i="${i}" aria-label="Phát ${esc(r.t)} trên Spotify">▶</button></li>`).join('') + '</ol>';
     nmBody.querySelectorAll('[data-i]').forEach(b => b.addEventListener('click', () => { const r = L[+b.dataset.i]; spFind(r.a + ' ' + r.t, 'track', true); }));
   }
-  // ---- Bandcamp: nhạc mới phát hành, nghe ngay bằng trình phát Bandcamp trong khung ----
+  // ---- Bandcamp: nhạc mới phát hành, nghe ngay trong khung (bài nổi bật của album) ----
+  let bcAudio = null;
+  const mmss = t => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+  function bcStop(){ if (bcAudio){ bcAudio.pause(); bcAudio.removeAttribute('src'); bcAudio = null; } $('#bcFrame').removeAttribute('src'); $('#bcFrame').hidden = true; }
   function bcPlay(r){
-    const box = $('#bcPlayer'), f = $('#bcFrame');
-    const src = `https://bandcamp.com/EmbeddedPlayer/${r.k === 'track' ? 'track' : 'album'}=${r.id}/size=large/bgcol=000000/linkcol=39ff6a/tracklist=false/artwork=small/transparent=true/`;
-    if (f.getAttribute('src') !== src) f.src = src;
+    const box = $('#bcPlayer'); bcStop(); stopPreview();
+    $('#bcArt').innerHTML = img(r.i); $('#bcT').textContent = r.ft || r.t; $('#bcA').textContent = r.a + (r.ft && r.ft !== r.t ? ' — ' + r.t : '');
     box.hidden = false;
+    if (r.s){
+      bcAudio = new Audio(r.s); const pp = $('#bcPP'), tm = $('#bcTime');
+      pp.hidden = false; pp.textContent = '❚❚'; pp.setAttribute('aria-label', 'Tạm dừng');
+      bcAudio.addEventListener('timeupdate', () => { tm.textContent = mmss(bcAudio.currentTime) + ' / ' + mmss(bcAudio.duration || r.dur); });
+      bcAudio.addEventListener('ended', () => { pp.textContent = '▶'; pp.setAttribute('aria-label', 'Phát'); });
+      bcAudio.addEventListener('error', () => bcEmbed(r));
+      bcAudio.play().catch(() => { pp.textContent = '▶'; pp.setAttribute('aria-label', 'Phát'); });
+    } else bcEmbed(r);
   }
-  $('#bcX').addEventListener('click', () => { $('#bcFrame').removeAttribute('src'); $('#bcPlayer').hidden = true; });
+  function bcEmbed(r){   // dự phòng: trình phát nhúng của Bandcamp
+    if (bcAudio){ bcAudio.pause(); bcAudio = null; }
+    $('#bcPP').hidden = true; $('#bcTime').textContent = '';
+    const f = $('#bcFrame'); f.hidden = false;
+    f.src = `https://bandcamp.com/EmbeddedPlayer/${r.k === 'track' ? 'track' : 'album'}=${r.id}/size=large/bgcol=000000/linkcol=39ff6a/tracklist=false/artwork=none/transparent=true/`;
+  }
+  $('#bcPP').addEventListener('click', () => {
+    if (!bcAudio) return;
+    if (bcAudio.paused){ bcAudio.play().catch(() => {}); $('#bcPP').textContent = '❚❚'; $('#bcPP').setAttribute('aria-label', 'Tạm dừng'); }
+    else { bcAudio.pause(); $('#bcPP').textContent = '▶'; $('#bcPP').setAttribute('aria-label', 'Phát'); }
+  });
+  $('#bcX').addEventListener('click', () => { bcStop(); $('#bcPlayer').hidden = true; });
   function bcRender(){
     const L = (nmData && nmData.bandcamp) || [];
     if (!L.length){ nmBody.innerHTML = '<p class="note">◌ chưa có dữ liệu Bandcamp, máy chủ sẽ tự cập nhật trong ít phút.</p>'; return; }
     let lastDay = '';
-    nmBody.innerHTML = '<p class="ch-note"><b>Bandcamp · new arrivals</b> · ▶ bandcamp: nghe ngay trong khung · ♪ spotify: tìm trên Spotify</p><ul class="nm-list">' +
+    nmBody.innerHTML = '<p class="ch-note"><b>Bandcamp · new arrivals</b> · ▶ bandcamp: nghe bài nổi bật ngay trong khung · ♪ spotify: tìm trên Spotify</p><ul class="nm-list">' +
       L.map((r, i) => {
         const dk = r.d ? dkey(new Date(r.d)) : '', head = dk && dk !== lastDay ? `<li class="nm-day">${esc(dayLabel(dk))}</li>` : '';
         lastDay = dk || lastDay;
