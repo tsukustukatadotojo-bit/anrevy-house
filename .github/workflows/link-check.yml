@@ -9,10 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Real browser test
+      - name: Studio sync dry run
         run: |
-          python3 tools/probe7.py || true
+          python3 tools/studio_sync.py --dry --all 2>&1 | tee out_gal.txt
           python3 -c "
           s=open('out_gal.txt').read().replace(chr(10),' ¶ ')
           for i in range(0,min(len(s),32000),3800): print('::notice title=galup'+str(i//3800)+'::'+s[i:i+3800])
           "
+      - name: Save data to branch
+        run: |
+          git config user.name bot; git config user.email bot@users.noreply.github.com
+          mkdir -p out && cp studio/data/*.json out/ && git checkout --orphan data-out && git rm -rqf --cached . && git add out && git commit -qm "studio data [skip ci]" && git push -q origin HEAD:link-check-out --force

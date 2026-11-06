@@ -1,0 +1,912 @@
+{
+ "items": [
+  {
+   "d": "2026-10-30",
+   "a": "2nd Grade",
+   "w": "Girls and Boys",
+   "l": "Lame-O"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Against the Current",
+   "w": "Till Death & Back"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Andy Stott",
+   "w": "Late Loop",
+   "l": "Modern Love"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Bad Waitress",
+   "w": "In the Hollow",
+   "l": "Stomp"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Ben Vaughn and Deer Tick",
+   "w": "Magnetic East: The Deer Tick Sessions",
+   "l": "Yep Roc"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Blind Channel",
+   "w": "Painstream",
+   "l": "Century Media"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Chloe Qisha",
+   "w": "Fantasize"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Clinic",
+   "w": "Wild in the Streets",
+   "l": "Domino"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Daddy Yankee",
+   "w": "La Postal",
+   "l": "DY Music"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Darkest Hour",
+   "w": "Suffer Divine",
+   "l": "MNRK Heavy"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Dave Hill",
+   "w": "Dirty Foot Lane"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "David Archuleta",
+   "w": "Warm Me Up"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "DIIV",
+   "w": "Zirp!",
+   "l": "Fantasy"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Dominic Fike",
+   "w": "How to Quit Smoking",
+   "l": "Columbia"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Dustin Lynch",
+   "w": "Clean Slate",
+   "l": "BBR, BMG Nashville"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Editors",
+   "w": "Surface, Echo & Sound",
+   "l": "Play It Again Sam"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Enslaved",
+   "w": "Mið",
+   "g": "Black metal, progressive metal",
+   "l": "Nuclear Blast"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Ex:Re",
+   "w": "Save As",
+   "l": "4AD"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Fuel",
+   "w": "Pendulum"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Fujiya & Miyagi",
+   "w": "New Shiny Object",
+   "l": "Impossible Objects of Desire"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Gretta Ray",
+   "w": "Heartsong",
+   "l": "EMI Music Australia"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Haiden Henderson",
+   "w": "Bleach",
+   "l": "Lava, Republic"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "HorsegiirL",
+   "w": "Hardcore Healing",
+   "l": "HorsegiirL, RCA"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Jonah Kagen",
+   "w": "Eternity of Anything",
+   "l": "Arista"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Jordan Rakei",
+   "w": "A Safe Place to Be Wild",
+   "l": "Fontana"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Kaitlin Butts",
+   "w": "Hello, Honky Tonk",
+   "l": "Republic"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Kali Malone",
+   "w": "Burning Song",
+   "l": "Ideologic Organ"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Lydia Loveless",
+   "w": "Accolades",
+   "l": "Bloodshot"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Ministry",
+   "w": "Hate to Go – Take Out or Delivery",
+   "l": "Cleopatra"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Mollie Elizabeth",
+   "w": "People Pleaser",
+   "l": "Capitol"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Moses Boyd",
+   "w": "Songs for Sinners",
+   "l": "Exodus"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Mylène Farmer",
+   "w": "Égrégore",
+   "l": "Stuffed Monkey"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Nickelback",
+   "w": "Everything Under the Sun",
+   "l": "VMG"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "OR",
+   "w": "Music for Empty Stadiums",
+   "l": "AD 93"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Queens of the Stone Age",
+   "w": "Perfecth",
+   "l": "Matador"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "RIP Magic",
+   "w": "1,2,3",
+   "l": "Section1"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Rocketship",
+   "w": "Hurt Feelings",
+   "l": "Darla"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Sampa the Great",
+   "w": "Nu Zamrock"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Sennen",
+   "w": "New Quiet",
+   "l": "Sonic Cathedral"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Thao",
+   "w": "Show Me",
+   "l": "Kill Rock Stars"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "The Big Moon",
+   "w": "Forever"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "The Church",
+   "w": "Lacuna",
+   "l": "Cooking Vinyl"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Why?",
+   "w": "Oh Golly / Yes Lord",
+   "l": "Waterlines Records"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Yello",
+   "w": "Time Lab",
+   "l": "Universal"
+  },
+  {
+   "d": "2026-11-01",
+   "a": "Liffey Light Orchestra",
+   "w": "Ana Livia",
+   "l": "Legal Records"
+  },
+  {
+   "d": "2026-11-03",
+   "a": "BOM (Miranda! and Lali)",
+   "w": "Bailar o Morir",
+   "g": "Italo disco, dance-pop, house",
+   "l": "Sony Argentina"
+  },
+  {
+   "d": "2026-11-04",
+   "a": "Yoasobi",
+   "w": "Yoasobi 5th Anniversary Dome Live 2024 \"Chō-genjitsu\" at Tokyo Dome",
+   "l": "Echoes, Sony Japan"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Alanis Morissette",
+   "w": "Good Weather for Immaculate Conception",
+   "l": "Epiphany Records, VMG"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Asia",
+   "w": "Indigo",
+   "l": "Frontiers"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Bad Brains",
+   "w": "Are You Ready: The First Studio Recording (Inner Ear – March 1979)",
+   "l": "Trust Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Bassvictim",
+   "w": "Peace + War",
+   "l": "VOTB"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Blu DeTiger",
+   "w": "N.Y. Baby"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Bob Dylan",
+   "w": "The Rolling Thunder Revue: The 1976 Live Recordings",
+   "l": "Columbia, Legacy"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Boys Noize",
+   "w": "7llvsion",
+   "l": "Ones and Zeros"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Bryan Adams",
+   "w": "How's It Goin",
+   "l": "Bad Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Carnifex",
+   "w": "More Than Misery",
+   "l": "Sumerian"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Chastity Belt",
+   "w": "All My Friends",
+   "l": "Suicide Squeeze"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Comeback Kid",
+   "w": "Chosen Hell",
+   "l": "SharpTone, Dine Alone"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Computerwife",
+   "w": "Born from a Wish",
+   "l": "Danger Collective Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Cult of Luna",
+   "w": "In the Shadow of Your Shadow",
+   "l": "Red Crk Recordings"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Current Joys",
+   "w": "Rosebud",
+   "l": "They Are Evil"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Distant",
+   "w": "Into Despair"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Django Django",
+   "w": "Doveland"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Do Nothing",
+   "w": "Friend World"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Dove Cameron",
+   "w": "Final Girl",
+   "l": "Columbia, Disruptor"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Déyyess",
+   "w": "Well I Might Just Die",
+   "l": "Boys Boys Boys Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Extol",
+   "w": "Aura of Decay",
+   "l": "Solid State"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Florence and the Machine",
+   "w": "Everybody Scream Tour Live"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Gilbert O'Sullivan",
+   "w": "On the Record",
+   "l": "BMG"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Hatebreed",
+   "w": "Fatal Paradox",
+   "l": "BlkIIBlk"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Hypno5e",
+   "w": "Trame Noire",
+   "l": "Pelagic Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Jack Harlow",
+   "w": "Sweet Action II"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "James Blunt",
+   "w": "Airplane Mode",
+   "l": "Atlantic"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Jesse Jo Stark",
+   "w": "Muse",
+   "l": "Deadly Doll"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Jim Jarmusch and Jozef van Wissem",
+   "w": "Bocca di Lupo",
+   "l": "Sacred Bones"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Jim Jarmusch and Jozef van Wissem",
+   "w": "Mouth of the Wolf",
+   "l": "Sacred Bones"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Katie Gregson-MacLeod",
+   "w": "Albatross",
+   "l": "Last Recordings On Earth"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Kings of Leon",
+   "w": "O My Beloved",
+   "l": "Love Tap Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "La Roux",
+   "w": "Old Flames",
+   "l": "Vertigo"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Lil Baby",
+   "w": "Fresh"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Little Angels",
+   "w": "Big Bad & Back EP"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Midnight",
+   "w": "Satanic Attack Live!",
+   "l": "Metal Blade"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Naked Raygun",
+   "w": "Live at Riot Fest",
+   "l": "Loud Pizza Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Natalie Bergman",
+   "w": "I Killed a North American Songbird",
+   "l": "Third Man"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Odette",
+   "w": "Blink",
+   "l": "Beloved Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Oso Oso",
+   "w": "An Exchange of Information",
+   "l": "Feral Twin Records"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Party Dozen",
+   "w": "21 Bum Salute",
+   "l": "City Slang"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Passenger",
+   "w": "Wild Love"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Prong",
+   "w": "Prong",
+   "l": "Napalm"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Resa Saffa Park",
+   "w": "Kendra",
+   "l": "Ja. Group"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Rex Orange County",
+   "w": "Dream Fatigue"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Robert Grace",
+   "w": "My Fathers Son"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Sam Barber",
+   "w": "The Outlier",
+   "l": "Atlantic Outpost"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "SATCHVAI Band",
+   "w": "The Sea of Emotion",
+   "l": "earMUSIC"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Shygirl",
+   "w": "Swallow!"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Skepta",
+   "w": "The Fork and Knife"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Spanish Love Songs",
+   "w": "Future Nausea",
+   "l": "Pure Noise"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Steven Wilson",
+   "w": "Requiem for a Village",
+   "g": "Progressive rock",
+   "l": "Fiction"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Straw Man Army",
+   "w": "True North",
+   "l": "La Vida Es Un Mus Discos"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Sufjan Stevens",
+   "w": "Worst Christmas Ever!",
+   "l": "Asthmatic Kitty"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Thrown",
+   "w": "Unwanted",
+   "l": "Arising Empire"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Tove Styrke",
+   "w": "I Thought This Story Wasn't About Me",
+   "l": "Sony Music Sweden"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Trollfest",
+   "w": "Trollywood",
+   "l": "Reaper Entertainment"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "TV Priest",
+   "w": "Cartoons"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Twisted Teens",
+   "w": "The Holy Cross Tigers",
+   "l": "Sub Pop"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Willi Carlisle",
+   "w": "The Universal Bubba"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Yoo Doo Right",
+   "w": "Build and Rest by the Shepherd's Light",
+   "l": "Mothland"
+  },
+  {
+   "d": "2026-11-09",
+   "a": "Ice Nine Kills",
+   "w": "A Very Vicious Christmas"
+  },
+  {
+   "d": "2026-11-11",
+   "a": "2hollis",
+   "w": "Pirouette",
+   "l": "Interscope"
+  },
+  {
+   "d": "2026-11-11",
+   "a": "Anberlin",
+   "w": "Currency",
+   "l": "Equal Vision"
+  },
+  {
+   "d": "2026-11-11",
+   "a": "Chanmina",
+   "w": "Legend",
+   "l": "No Label"
+  },
+  {
+   "d": "2026-11-11",
+   "a": "Eliza Rose",
+   "w": "Arcadia: Pleasuredome"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Aesop Rock and Blockhead",
+   "w": "Trouble Mountain",
+   "l": "Rhymesayers"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Amira Elfeky",
+   "w": "It Was Only a Dream",
+   "l": "Atlantic"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Ateez",
+   "w": "Golden Hour: Part.6",
+   "l": "Sony Music Korea, RCA"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Becky Hill",
+   "w": "Rebecca",
+   "l": "Polydor, Astralwerks"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Bell X1",
+   "w": "Good Bones"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Blackhaine",
+   "w": "Saints in the Wethouse",
+   "l": "XL"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "David Kushner",
+   "w": "Devotion"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Diamond Rio",
+   "w": "America Works",
+   "l": "Rio Records 2.0, One Riot Records"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "DJ Heartstring",
+   "w": "Sentimental Ultra",
+   "l": "Steel City Dance Discs"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Dropkick Murphys",
+   "w": "20th Century Paddy – The Songs of Shane MacGowan"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Ed Palermo Big Band",
+   "w": "It's an Ed Palermo Christmas! God Bless Us, Everyone!",
+   "l": "Sky Cat Records"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Esme Emerson",
+   "w": "It's All Just Noise",
+   "l": "Communion"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Font",
+   "w": "American Bully XL",
+   "l": "Acrophase"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Fucked Up",
+   "w": "Year of the Rooster",
+   "l": "Tankcrimes"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Gwar and John Brennan and the Bigfeet",
+   "w": "Gwar and the Last Drive-In-Stein"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Heaven in Her Arms",
+   "w": "The End of Purification",
+   "l": "Banshies"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Heavens Edge",
+   "w": "Philadelphia",
+   "l": "Frontiers"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Iron Savior",
+   "w": "Deathbringer",
+   "l": "Frontiers"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Jake Bugg",
+   "w": "Alamo",
+   "l": "Thirty Tigers"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Kalia Vandever and Dave Harrington",
+   "w": "Evergreen",
+   "l": "Sudden Quarterly"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Kim Deal",
+   "w": "Live at the Barbican",
+   "l": "4AD"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Krill",
+   "w": "Secret Language",
+   "l": "Exploding in Sound"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Land of Talk",
+   "w": "Lasts",
+   "l": "Saddle Creek"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Live Skull",
+   "w": "What Could Go Wrong?",
+   "l": "Bronson Recordings"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Los Bitchos",
+   "w": "Los Bitchos & Friends Vol. 1",
+   "l": "GREAT! Records, !K7"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Randy Travis",
+   "w": "Same Old Way",
+   "l": "Warner Records Nashville"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Royal Blood",
+   "w": "Dead Company",
+   "l": "Warner"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Rwake",
+   "w": "Built from Stardust - 'The Return of Magik' Live in Little Rock, AR",
+   "l": "Relapse"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Say Now",
+   "w": "Say What You See"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Sharon Shannon",
+   "w": "Home"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Silvertomb",
+   "w": "The Interpretation of Nightmares",
+   "l": "Steamhammer/SPV"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Snoh Aalegra",
+   "w": "Legendary Love",
+   "l": "Stem"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Swansea Sound",
+   "w": "Pre-Post-Truth"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "The Body and Cel Genesis",
+   "w": "Whole Wide World",
+   "l": "Thrill Jockey"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "The Datsuns",
+   "w": "Moonstruck Man",
+   "l": "Hellsquad Records"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Trentemøller",
+   "w": "Trentemøller",
+   "l": "In My Room"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "U2",
+   "w": "Carnaval de Luz",
+   "l": "Island"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Walls of Jericho",
+   "w": "System Error: Humanity",
+   "l": "Napalm"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Wavves",
+   "w": "Cherry Soda",
+   "l": "I Surrender Records, Bose Records"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Waylon Jennings",
+   "w": "Diamonds",
+   "l": "Son of Jessi, Thirty Tigers"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Westside Gunn",
+   "w": "Heelmatic",
+   "l": "Griselda, Mass Appeal"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Yngwie Malmsteen",
+   "w": "Hell or High Water",
+   "l": "Music Theories Recordings, Artone Label Group"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Zebra",
+   "w": "Zebra V"
+  },
+  {
+   "d": "2026-11-16",
+   "a": "Tomorrow X Together",
+   "w": "Perfect Storm",
+   "l": "Big Hit Music"
+  }
+ ],
+ "updated": "2026-11-06T14:50:23Z"
+}
