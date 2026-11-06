@@ -3,7 +3,7 @@
 1. Letterboxd: nhật ký phim (RSS công khai) của haanvie → studio/data/letterboxd.json
    (Letterboxd không cho hiển thị trang của họ trong khung, nên trang Studio đọc file này.)
    + phim đã xem (trang /films/, xếp theo phim mới) và Watchlist (mọi trang) — phát hiện phim mới đánh dấu đã xem.
-2. Nhạc mới: RSS của Pitchfork, Stereogum, NME, Consequence, NPR Music, Bandcamp Daily → studio/data/music.json
+2. Nhạc mới: RSS của 16 trang tin nhạc + Hype Machine (bài hot) + Bandcamp (nhạc mới) → studio/data/music.json
    (AOTY, Rate Your Music, Paste chặn cả khung lẫn máy đọc tự động.)
 3. Bảng xếp hạng: Spotify US/UK hằng ngày, Apple Music Nga/Trung Quốc (kworb.net) → studio/data/charts.json
 4. Album phát hành quanh hôm nay (Wikipedia "List of 2026 albums") → studio/data/releases.json
@@ -360,12 +360,58 @@ def music():
         out += [it for it in uniq if it['k'] == k][:cap]
     out.sort(key=lambda x: x.get('d', ''), reverse=True)
     if not out: print('Nhạc mới: không có dữ liệu, giữ dữ liệu cũ'); return
-    if old.get('items') == out:
+    data = {'items': out}
+    try: data['hypem'] = hypem() or old.get('hypem') or []
+    except Exception as e: print('Hypem lỗi', repr(e)[:200]); data['hypem'] = old.get('hypem') or []
+    try: data['bandcamp'] = bandcamp() or old.get('bandcamp') or []
+    except Exception as e: print('Bandcamp lỗi', repr(e)[:200]); data['bandcamp'] = old.get('bandcamp') or []
+    if all(old.get(k) == data[k] for k in data):
         print('Nhạc mới không đổi', len(out), 'mục'); return
-    save(MUSIC_OUT, {'items': out, 'updated': now_iso()})
+    data['updated'] = now_iso()
+    save(MUSIC_OUT, data)
     print('Nhạc mới cập nhật', len(out), 'mục:', {k: sum(1 for it in out if it['k'] == k) for k in ('song', 'album', 'news')})
     if DRY:
         for it in out[:12]: print('  ', it['k'], it['s'], it['t'], it.get('sc'), it.get('i', '')[:60])
+
+# ---------------------------------------------------------------- Hype Machine (bài hot trên blog) + Bandcamp (nhạc mới)
+def hypem():
+    raw = fetch('https://api.hypem.com/v2/popular?mode=now&count=50', 'application/json')
+    if not raw: return None
+    try: d = json.loads(raw)
+    except ValueError: return None
+    out = []
+    for i, x in enumerate(d if isinstance(d, list) else [], 1):
+        if not x.get('artist') or not x.get('title'): continue
+        out.append({'p': i, 'a': html.unescape(x['artist']).strip(), 't': html.unescape(x['title']).strip(), 's': x.get('sitename', ''),
+                    'lv': x.get('loved_count', 0), 'i': x.get('thumb_url_medium') or x.get('thumb_url') or '', 'u': f"https://hypem.com/track/{x.get('itemid', '')}",
+                    'd': datetime.fromtimestamp(int(x.get('dateposted') or 0), timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ') if x.get('dateposted') else ''})
+    print('Hypem:', len(out), 'bài')
+    return out or None
+
+def bandcamp():
+    raw = fetch('https://bandcamp.com/api/discover/3/get_web?g=all&s=new&p=0&gn=0&f=all&w=0', 'application/json')
+    if not raw: return None
+    try: d = json.loads(raw)
+    except ValueError: return None
+    out = []
+    for x in d.get('items', [])[:48]:
+        h = x.get('url_hints') or {}
+        kind = 'track' if x.get('type') == 't' else 'album'
+        if not x.get('id') or not h.get('subdomain'): continue
+        base = h.get('custom_domain') if h.get('custom_domain') and h.get('custom_domain_verified') else f"{h['subdomain']}.bandcamp.com"
+        it = {'id': x['id'], 'k': kind, 't': html.unescape(x.get('primary_text') or ''), 'a': html.unescape(x.get('secondary_text') or ''),
+              'g': x.get('genre_text') or '', 'u': f"https://{base}/{h.get('item_type') == 't' and 'track' or 'album'}/{h.get('slug', '')}",
+              'i': f"https://f4.bcbits.com/img/a{x['art_id']}_7.jpg" if x.get('art_id') else ''}
+        ft = x.get('featured_track') or {}
+        mp3 = (ft.get('file') or {}).get('mp3-128')
+        if mp3:                      # link nghe thử của Bandcamp (hết hạn sau khoảng 1 ngày, máy chủ làm mới 2 giờ/lần)
+            it['s'] = mp3; it['ft'] = html.unescape(ft.get('title') or '')
+            if ft.get('duration'): it['dur'] = round(float(ft['duration']))
+        try: it['d'] = datetime.strptime(x.get('publish_date', ''), '%d %b %Y %H:%M:%S %Z').strftime('%Y-%m-%dT%H:%M:%SZ')
+        except ValueError: pass
+        out.append(it)
+    print('Bandcamp:', len(out), 'album/bài mới')
+    return out or None
 
 # ---------------------------------------------------------------- Album phát hành (Wikipedia "List of 2026 albums")
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
