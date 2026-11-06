@@ -444,6 +444,7 @@
   const BSW = { x: 1158, y: 80 };
   function drawBathSwitch(g, t, K){
     const rr = K.rr, on = K.extras.bath !== false;
+    g.save(); g.translate(BSW.x, BSW.y); g.scale(1.35, 1.35); g.translate(-BSW.x, -BSW.y);
     g.fillStyle = 'rgba(80,30,10,.28)'; rr(g, BSW.x - 13, BSW.y - 19, 30, 42, 5); g.fill();
     g.fillStyle = '#fbf3e4'; rr(g, BSW.x - 15, BSW.y - 22, 30, 42, 5); g.fill();
     g.strokeStyle = '#d9b48a'; g.lineWidth = 1.5; rr(g, BSW.x - 15, BSW.y - 22, 30, 42, 5); g.stroke();
@@ -452,8 +453,31 @@
     g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 1; rr(g, BSW.x - 6, on ? BSW.y - 12 : BSW.y - 1, 12, 11, 3); g.stroke();
     // đèn báo nhỏ: tắt đèn thì phát sáng xanh để tìm thấy trong tối
     g.fillStyle = on ? '#f0a050' : `rgba(120,255,170,${.65 + .3 * Math.sin(t * 3)})`; g.beginPath(); g.arc(BSW.x, BSW.y + 15, 2.4, 0, 7); g.fill();
+    g.restore();
+    g.font = '700 11px system-ui, sans-serif'; g.textAlign = 'center'; g.fillStyle = on ? '#8a4a1a' : 'rgba(170,255,200,.85)'; g.fillText('ĐÈN', BSW.x, BSW.y + 46);
   }
-  function underlay(g, t, K){ drawWindow(g, t, K); drawBathSwitch(g, t, K); }
+  // đèn gương phòng tắm: bấm vào đèn (hoặc công tắc) để tắt/bật, giống bấm đèn ngủ bên phòng ngủ
+  function drawVanity(g, t, K){
+    const rr = K.rr, on = bathT;
+    SINKS.slice(0, 2).forEach(s => {
+      g.fillStyle = 'rgba(80,30,10,.25)'; rr(g, s.x - 34, 14, 70, 8, 4); g.fill();
+      g.fillStyle = '#b8862f'; rr(g, s.x - 36, 10, 72, 8, 4); g.fill();
+      g.fillStyle = '#f3d488'; g.fillRect(s.x - 32, 11, 64, 2);
+      [-24, 0, 24].forEach(dx => {
+        const x = s.x + dx, y = 24;
+        if (on > .02){ const gr = g.createRadialGradient(x, y, 1, x, y, 26); gr.addColorStop(0, `rgba(255,214,140,${.55 * on})`); gr.addColorStop(1, 'rgba(255,214,140,0)'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, 26, 0, 7); g.fill(); }
+        g.fillStyle = '#9a6a22'; g.fillRect(x - 2, 16, 4, 4);
+        g.fillStyle = on > .5 ? '#fff4d6' : '#d8d2c4'; g.beginPath(); g.arc(x, y, 6.5, 0, 7); g.fill();
+        g.strokeStyle = on > .5 ? 'rgba(255,190,90,.9)' : 'rgba(0,0,0,.2)'; g.lineWidth = 1.2; g.beginPath(); g.arc(x, y, 6.5, 0, 7); g.stroke();
+      });
+    });
+  }
+  function toggleBath(K){
+    const on = K.extras.bath !== false;
+    K.setExtras({ bath: !on });
+    K.toast(on ? 'Đã tắt đèn phòng tắm 🌙' : 'Đã bật đèn phòng tắm 💡');
+  }
+  function underlay(g, t, K){ drawWindow(g, t, K); drawVanity(g, t, K); drawBathSwitch(g, t, K); }
 
   /* ----- 2 ghế bành quay lưng ra ngoài, nhìn lên cửa sổ ----- */
   function drawChairBack(g, K, x){
@@ -617,6 +641,11 @@
       g.fillStyle = mg; g.beginPath(); g.moveTo(110, 130); g.lineTo(300, 130); g.lineTo(420 + winT * 40, 560); g.lineTo(120 - winT * 20, 560); g.closePath(); g.fill();
       g.restore();
     }
+    if (bathT > .01){ // ánh đèn gương phòng tắm
+      g.save(); g.beginPath(); g.rect(BF.x0, 0, W - BF.x0, H); g.clip(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .16 * bathT;
+      const vg = g.createRadialGradient(1280, 60, 10, 1280, 140, 340); vg.addColorStop(0, '#ffd9a0'); vg.addColorStop(1, 'rgba(255,217,160,0)');
+      g.fillStyle = vg; g.fillRect(BF.x0, 0, W - BF.x0, H); g.restore();
+    }
     if (lightT > .01){ // ánh đèn ngủ ấm
       g.save(); g.beginPath(); g.rect(0, 0, BF.x0, H); g.clip(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = .22 * lightT;
       const lg = g.createRadialGradient(LAMP.x, LAMP.y, 10, LAMP.x, LAMP.y, 360); lg.addColorStop(0, '#ffb070'); lg.addColorStop(1, 'rgba(255,176,112,0)');
@@ -677,7 +706,7 @@
     exitHref: '../',
     music: 'mM1dIwGO00w', volIn: 28,
     outside: '#120806',
-    welcome: 'Đã vào phòng. Bấm giường để nằm, bấm cửa sổ để mở, ngồi ghế ngắm trăng. Cửa bên phải dẫn sang phòng tắm (công tắc đèn trên tường cạnh gương).',
+    welcome: 'Đã vào phòng. Bấm giường để nằm, bấm cửa sổ để mở, ngồi ghế ngắm trăng. Cửa bên phải dẫn sang phòng tắm (bấm đèn trên gương hoặc công tắc ĐÈN để tắt/bật đèn phòng tắm).',
     seatFull: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.',
     seatFullBy: { bed: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.', chair1: 'Ghế này có người ngồi rồi.', chair2: 'Ghế này có người ngồi rồi.', tub: 'Bồn tắm chỉ đủ chỗ cho 2 người thôi.', wc: 'Nhà vệ sinh đang có người.' },
     W, H, FL, DOOR,
@@ -727,11 +756,8 @@
           K.setExtras({ lights: !on });
           K.toast(on ? 'Đã tắt đèn 🌙' : 'Đã bật đèn 💡');
         } },
-      { r: [BSW.x - 30, BSW.y - 40, BSW.x + 26, BSW.y + 40], act: () => {
-          const on = K.extras.bath !== false;
-          K.setExtras({ bath: !on });
-          K.toast(on ? 'Đã tắt đèn phòng tắm 🌙' : 'Đã bật đèn phòng tắm 💡');
-        } },
+      { r: [BSW.x - 30, BSW.y - 40, BSW.x + 30, BSW.y + 56], act: () => toggleBath(K) },
+      { r: [SINKS[0].x - 44, 0, SINKS[1].x + 44, 130], act: () => toggleBath(K) },
       { r: [WIN.x - 40, 0, WIN.x + WIN.w + 40, 150], act: () => {
           const open = !!K.extras.window;
           K.setExtras({ window: !open });
