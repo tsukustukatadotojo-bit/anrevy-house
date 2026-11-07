@@ -8,6 +8,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Anrevy House">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script>if('serviceWorker' in navigator)addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=Monoton&amp;family=Silkscreen:wght@400;700&amp;family=VT323&amp;family=Yellowtail&amp;display=swap" rel="stylesheet">
@@ -251,6 +256,8 @@
   }
   .portal button:active{border-style:inset}
   .portal span{font-family:'VT323',monospace;font-size:18px;color:var(--vp-yellow)}
+  .portal button[hidden]{display:none}
+  .inst-hint{margin:-6px 0 14px;font-family:'VT323',monospace;font-size:18px;color:var(--vp-yellow)}
 
   /* cửa vào gallery */
   .gal-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;padding-top:20px}
@@ -968,7 +975,8 @@
   </main>
 
   <footer>
-    <p class="portal"><button id="portal">▶ take me somewhere random</button> <span id="linkCount"></span></p>
+    <p class="portal"><button id="portal">▶ take me somewhere random</button> <span id="linkCount"></span> <button id="installApp" type="button" hidden>⤓ cài anrevy house thành app</button></p>
+    <p class="inst-hint" id="instHint" role="status" hidden></p>
     <a class="back" href="index.html">← back to the wired</a><br>
     © 2026 ANREVY HOUSE · Trang web thiết kế độc quyền từ Nguyễn Hà Mi
   </footer>
@@ -1290,6 +1298,26 @@
   const ROOMS = ['gallery/', 'pool/', 'game/', 'jazz/', 'studio/'];
   $('#linkCount').textContent = `${ROOMS.length} rooms to wander`;
   $('#portal').addEventListener('click', () => { location.href = pick(ROOMS); });
+
+  /* ================= CÀI ANREVY HOUSE THÀNH APP ================= */
+  {
+    let installEvt = null;
+    const isApp = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    const iOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const btn = $('#installApp'), hint = $('#instHint');
+    const say = t => { hint.textContent = t; hint.hidden = false; };
+    addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; btn.hidden = false; });
+    addEventListener('appinstalled', () => { btn.hidden = true; installEvt = null; say('✓ đã cài — mở Anrevy House từ màn hình chính / danh sách ứng dụng'); });
+    if (iOS && !isApp()) btn.hidden = false;
+    btn.addEventListener('click', async () => {
+      if (installEvt){
+        installEvt.prompt();
+        try { const r = await installEvt.userChoice; if (r.outcome === 'accepted') btn.hidden = true; } catch (e) {}
+        installEvt = null;
+      } else if (iOS) say('Trên iPhone/iPad: mở bằng Safari → bấm nút Chia sẻ → “Thêm vào MH chính”.');
+      else say('Mở menu ⋮ của trình duyệt → “Cài đặt ứng dụng” / “Thêm vào màn hình chính”.');
+    });
+  }
 
   /* icon dự phòng cho danh sách gọn: chữ cái đầu */
   document.querySelectorAll('.mi img').forEach(img => img.addEventListener('error', () => {

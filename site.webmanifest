@@ -1,11 +1,15 @@
 {
+ "id": "./",
  "name": "ANREVY HOUSE",
  "short_name": "Anrevy House",
+ "description": "Ngôi nhà của An Vy: gallery, game room, jazz club, pool, studio.",
  "start_url": "./",
  "scope": "./",
- "display": "browser",
+ "display": "standalone",
+ "orientation": "any",
  "background_color": "#000000",
  "theme_color": "#000000",
+ "lang": "vi",
  "icons": [
   {
    "src": "icons/icon-192.png",
