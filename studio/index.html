@@ -264,24 +264,29 @@
   #w-note{left:auto;right:18px;width:min(460px,42vw);min-width:320px}
   #w-note .tb{background:#101010;border-bottom-color:#2a2a2a}
   .nt-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 12px 6px;background:#0b0b0b;font:13.5px/1.5 var(--mono);color:#f2f2f2;scrollbar-width:thin;scrollbar-color:#333 #0b0b0b}
-  .nt-msg{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed #222}
-  .nt-msg:last-child{border-bottom:0}
-  .nt-av{flex:none;width:34px;height:34px}
-  .nt-av svg{display:block;width:34px;height:34px;image-rendering:pixelated}
-  .nt-body{min-width:0;flex:1}
-  .nt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}
-  .nt-head b{font-weight:600;font-size:14px}
-  .nt-head span{font-size:12px;color:#ff9ad5;text-decoration:underline;text-underline-offset:2px}
-  .nt-del{margin-left:auto;padding:0 6px;border:1px solid #333;color:#888;font:11.5px/18px var(--mono)}
-  .nt-del:hover,.nt-del:focus-visible{border-color:#ff5c5c;color:#ff5c5c}
-  .nt-del.sure{border-color:#ff5c5c;background:#ff5c5c;color:#000}
-  .nt-text{margin-top:2px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
-  .nt-form{flex:none;display:flex;gap:6px;padding:8px;border-top:1px solid #2a2a2a;background:#101010}
+  /* mỗi tin: [năm-tháng-ngày giờ] Tên: tin nhắn — vạch xanh bên trái như log terminal */
+  .nt-msg{padding:6px 0 6px 12px;margin:0 0 10px;border-left:3px solid #1f8a3a}
+  .nt-line{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+  .nt-ts{color:#7a7a7a}
+  .nt-who{font-weight:600}
+  .nt-rw{color:#7a7a7a}
+  .nt-text{color:#39ff6a}
+  .nt-acts{display:flex;gap:10px;margin-top:3px}
+  .nt-acts button{padding:0;color:#666;font:12px/1.4 var(--mono)}
+  .nt-acts button:hover,.nt-acts button:focus-visible{color:#39ff6a}
+  .nt-acts .nt-del:hover,.nt-acts .nt-del:focus-visible{color:#ff5c5c}
+  .nt-acts .nt-del.sure{color:#ff5c5c;font-weight:600}
+  .nt-replies{margin:6px 0 0 4px;padding-left:12px;border-left:1px dashed #2f5c38}
+  .nt-replies .nt-msg{margin:0;padding:4px 0 4px 10px;border-left:2px solid #145c27}
+  .nt-replyto{flex:0 0 100%;display:flex;align-items:center;gap:8px;font:12.5px/1.4 var(--mono);color:#7a7a7a}
+  .nt-replyto b{font-weight:600}
+  .nt-replyto button{height:auto!important;padding:0 6px!important;background:none!important;border:1px solid #333;color:#888!important;font:12px/18px var(--mono)!important}
+  .nt-form{flex:none;display:flex;flex-wrap:wrap;gap:6px;padding:8px;border-top:1px solid #2a2a2a;background:#101010}
   .nt-form input{min-width:0;height:32px;padding:0 9px;background:#000;border:1px solid #333;border-radius:0;color:#f2f2f2;font:13.5px/1 var(--mono)}
   .nt-form input:focus{outline:none;border-color:#b6ff6a}
   .nt-form input::placeholder{color:#666}
   #ntName{flex:0 0 100px;color:#b6ff6a}
-  #ntText{flex:1}
+  #ntText{flex:1 1 140px}
   .nt-form button{flex:none;height:32px;padding:0 12px;background:#b6ff6a;color:#000;font:13.5px/1 var(--mono)}
   .nt-form button:hover{background:#ff9ad5}
   .ig-out{margin-left:auto;align-self:center;padding:0 10px;font:12px/1 var(--mono);color:var(--g-mid);white-space:nowrap}
@@ -436,6 +441,7 @@
     <div class="tb"><span class="t">note.chat</span><span class="r" id="ntLive">◌</span><button type="button" data-act="hide" aria-label="Ẩn khung note">_</button><button type="button" data-full aria-label="Mở rộng toàn màn hình" aria-pressed="false">⛶</button></div>
     <div class="nt-list" id="ntList" role="log" aria-live="polite" aria-label="Tin nhắn"></div>
     <form class="nt-form" id="ntForm" autocomplete="off">
+      <div class="nt-replyto" id="ntReplyTo" hidden>↳ reply <b id="ntReplyName"></b><button type="button" id="ntReplyX" aria-label="Huỷ trả lời">✕</button></div>
       <label class="sr" for="ntName">Tên</label><input id="ntName" maxlength="24" placeholder="tên" autocomplete="nickname" spellcheck="false">
       <label class="sr" for="ntText">Tin nhắn</label><input id="ntText" maxlength="600" placeholder="tin nhắn" enterkeyhint="send">
       <button type="submit">gửi</button>
@@ -1296,14 +1302,6 @@
   const NT_COL = ['#ff5c5c', '#7dff6a', '#5cb8ff', '#ffd23f'];
   function ntHash(name){ let h = 2166136261 >>> 0; for (const ch of name.toLowerCase()){ h ^= ch.codePointAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
   const ntColor = name => NT_COL[ntHash(name) % NT_COL.length];
-  function ntAvatar(name){
-    let h = ntHash(name); const col = ntColor(name); let cells = '';
-    for (let y = 0; y < 5; y++) for (let x = 0; x < 3; x++){
-      h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0;
-      if (h % 5 < 3){ cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`; if (x < 2) cells += `<rect x="${4 - x}" y="${y}" width="1" height="1"/>`; }
-    }
-    return `<svg viewBox="-1 -1 7 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="-1" y="-1" width="7" height="7" fill="#161616"/><g fill="${col}">${cells}</g></svg>`;
-  }
   // tin của mình: giữ khoá bí mật trên máy này; tin chỉ mang mã băm của khoá → chỉ người gửi xoá được
   const ntOwn = () => ls.get('note-own') || {};
   const ntHex = async t => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)))].map(x => x.toString(16).padStart(2, '0')).join('').slice(0, 32);
@@ -1313,14 +1311,16 @@
     const m = NT.msgs.get(id);
     if (m && m.h && await ntHex(k) === m.h){ NT.msgs.delete(id); NT.gone.add(id); ntPaint(); }
   }
-  const ntTime = at => { const d = new Date(at); return String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+  const p2 = x => String(x).padStart(2, '0');
+  const ntTime = at => { const d = new Date(at); return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())} ${p2(d.getHours())}:${p2(d.getMinutes())}:${p2(d.getSeconds())}`; };
   function ntValid(m){
     return m && typeof m === 'object' && /^[a-z0-9]{6,32}$/.test(m.id || '') && typeof m.n === 'string' && m.n.trim() && typeof m.t === 'string' && m.t.trim() &&
-      typeof m.at === 'number' && Date.now() - m.at <= WEEK && m.at < Date.now() + 6e5 && (m.h == null || /^[0-9a-f]{32}$/.test(m.h));
+      typeof m.at === 'number' && Date.now() - m.at <= WEEK && m.at < Date.now() + 6e5 && (m.h == null || /^[0-9a-f]{32}$/.test(m.h)) &&
+      (m.r == null || (/^[a-z0-9]{6,32}$/.test(m.r) && typeof m.rn === 'string'));
   }
   function ntAdd(m){
     if (!ntValid(m) || NT.msgs.has(m.id) || NT.gone.has(m.id)) return false;
-    NT.msgs.set(m.id, { id: m.id, n: m.n.trim().slice(0, 24), t: m.t.trim().slice(0, 600), at: m.at, h: m.h || '' });
+    NT.msgs.set(m.id, { id: m.id, n: m.n.trim().slice(0, 24), t: m.t.trim().slice(0, 600), at: m.at, h: m.h || '', r: m.r || '', rn: m.r ? String(m.rn || '').trim().slice(0, 24) : '' });
     if (NT.tomb.has(m.id)) ntTomb(m.id, NT.tomb.get(m.id));
     return true;
   }
@@ -1330,8 +1330,14 @@
     ntPaintT = setTimeout(() => {
       const atBottom = ntList.scrollHeight - ntList.scrollTop - ntList.clientHeight < 60;
       const list = [...NT.msgs.values()].filter(m => Date.now() - m.at <= WEEK).sort((a, b) => a.at - b.at);
-      const own = ntOwn();
-      ntList.innerHTML = list.map(m => `<div class="nt-msg"><span class="nt-av">${ntAvatar(m.n)}</span><div class="nt-body"><p class="nt-head"><b style="color:${ntColor(m.n)}">${esc(m.n)}</b><span>@${esc(ntTime(m.at))}</span>${own[m.id] ? `<button class="nt-del" type="button" data-del="${esc(m.id)}" aria-label="Xoá tin nhắn này">xoá</button>` : ''}</p><p class="nt-text">${esc(m.t)}</p></div></div>`).join('');
+      const own = ntOwn(), byId = new Map(list.map(m => [m.id, m]));
+      // tin trả lời nằm dưới tin gốc (gốc của cả chuỗi); tin gốc đã xoá thì tin trả lời hiện như tin thường
+      const rootOf = m => { let x = m, k = 0; while (x.r && byId.has(x.r) && k++ < 20) x = byId.get(x.r); return x; };
+      const kids = new Map(), tops = [];
+      list.forEach(m => { const root = m.r ? rootOf(m) : m; if (root === m) tops.push(m); else (kids.get(root.id) || kids.set(root.id, []).get(root.id)).push(m); });
+      const one = m => `<div class="nt-msg" data-id="${esc(m.id)}"><p class="nt-line"><span class="nt-ts">[${esc(ntTime(m.at))}]</span> <b class="nt-who" style="color:${ntColor(m.n)}">${esc(m.n)}</b>${m.r ? ` <span class="nt-rw">replies</span> <b class="nt-who" style="color:${ntColor(m.rn || '?')}">${esc(m.rn || '?')}</b>` : ''}<span class="nt-rw">:</span> <span class="nt-text">${esc(m.t)}</span></p>
+        <div class="nt-acts"><button type="button" data-reply="${esc(m.id)}" aria-label="Trả lời ${esc(m.n)}">↳ reply</button>${own[m.id] ? `<button class="nt-del" type="button" data-del="${esc(m.id)}" aria-label="Xoá tin nhắn này">xoá</button>` : ''}</div></div>`;
+      ntList.innerHTML = tops.map(m => { const ks = kids.get(m.id); return ks ? one(m).replace(/<\/div>$/, `<div class="nt-replies">${ks.map(one).join('')}</div></div>`) : one(m); }).join('');
       if (atBottom || NT.first){ ntList.scrollTop = ntList.scrollHeight; NT.first = false; }
     }, 30);
   }
@@ -1380,6 +1386,13 @@
     } else ntPaint();
     setTimeout(() => (ntName.value ? ntText : ntName).focus({ preventScroll: true }), 0);
   }
+  let ntRe = null;
+  function ntSetReply(m){
+    ntRe = m ? { id: m.id, n: m.n } : null;
+    $('#ntReplyTo').hidden = !m;
+    if (m){ $('#ntReplyName').textContent = m.n; $('#ntReplyName').style.color = ntColor(m.n); (ntName.value ? ntText : ntName).focus(); }
+  }
+  $('#ntReplyX').addEventListener('click', () => { ntSetReply(null); ntText.focus(); });
   $('#ntForm').addEventListener('submit', async e => {
     e.preventDefault();
     const n = ntName.value.trim().replace(/\s+/g, ' ').slice(0, 24), t = ntText.value.trim().slice(0, 600);
@@ -1390,16 +1403,19 @@
     NT.last = Date.now();
     const k = Array.from(crypto.getRandomValues(new Uint8Array(18)), x => x.toString(16).padStart(2, '0')).join('');
     const m = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8), n, t, at: Date.now(), h: await ntHex(k) };
+    if (ntRe && NT.msgs.has(ntRe.id)){ m.r = ntRe.id; m.rn = ntRe.n; }
     const own = ntOwn(); own[m.id] = k;
     Object.keys(own).forEach(id => { if (+parseInt(id.slice(0, 8), 36) < Date.now() - WEEK - 864e5) delete own[id]; });
     ls.set('note-own', own);
     live.forEach(c => c.publish(NOTE_PFX + 'm/' + m.id, JSON.stringify(m), Object.assign({ qos: 1, retain: true }, c.options.protocolVersion === 5 ? { properties: { messageExpiryInterval: 7 * 86400 } } : {})));
     ls.set('note-name', n); NT.last = Date.now();
-    ntAdd(m); NT.first = true; ntPaint(); ntText.value = ''; ntText.focus();
+    ntAdd(m); ntSetReply(null); if (!m.r) NT.first = true; ntPaint(); ntText.value = ''; ntText.focus();
   });
 
   // xoá tin của chính mình: bấm "xoá" rồi bấm lần nữa để chắc chắn
   ntList.addEventListener('click', e => {
+    const rb = e.target.closest('[data-reply]');
+    if (rb){ const m = NT.msgs.get(rb.dataset.reply); if (m) ntSetReply(m); return; }
     const b = e.target.closest('[data-del]'); if (!b) return;
     if (!b.classList.contains('sure')){
       ntList.querySelectorAll('.nt-del.sure').forEach(x => { x.classList.remove('sure'); x.textContent = 'xoá'; });

@@ -351,7 +351,9 @@ def notes(links, now):
                 stale.add(t); continue
             if now - at > NOTE_TTL: stale.add(t); continue
             h = m.get('h') if isinstance(m.get('h'), str) and re.fullmatch(r'[0-9a-f]{32}', m.get('h')) else ''
-            got[nid] = {'id': nid, 'n': name, 't': text, 'at': int(at), **({'h': h} if h else {})}
+            r = m.get('r') if isinstance(m.get('r'), str) and re.fullmatch(r'[a-z0-9]{6,32}', m.get('r')) else ''
+            rn = re.sub(r'\s+', ' ', clean(m.get('rn'), 24)) if r else ''
+            got[nid] = {'id': nid, 'n': name, 't': text, 'at': int(at), **({'h': h} if h else {}), **({'r': r, 'rn': rn} if r else {})}
     for nid, k in tomb.items():
         it = got.get(nid)
         if it and it.get('h') and sha(k)[:32] == it['h']:
