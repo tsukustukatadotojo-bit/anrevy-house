@@ -6,6 +6,14 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#000000">
 <title>vy@studio:~$</title>
+<link rel="icon" href="icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Studio">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Monoton&amp;display=swap" rel="stylesheet">
@@ -483,6 +491,7 @@
     <a role="menuitem" href="https://gemini.google.com" target="_blank" rel="noopener">✦ gemini ↗</a>
     <p>⌂ trang</p>
     <a role="menuitem" href="https://neocities.org/" target="_blank" rel="noopener">◎ neocities ↗</a>
+    <button type="button" role="menuitem" id="installBtn" hidden>⤓ cài studio thành app</button>
     <a role="menuitem" href="../home.html">⌂ anrevy house</a>
     <button type="button" role="menuitem" id="lockBtn">⏻ khoá studio</button>
   </div>
@@ -1468,6 +1477,25 @@
     document.addEventListener('visibilitychange', () => { if (!document.hidden){ lfPoll(); loadMusic(); } });
     tickClock(); setInterval(tickClock, 20000);
   }
+
+  /* ================= CÀI STUDIO THÀNH APP ================= */
+  if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  let installEvt = null;
+  const isApp = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  const iOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const instBtn = $('#installBtn');
+  addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; instBtn.hidden = false; });
+  addEventListener('appinstalled', () => { instBtn.hidden = true; installEvt = null; toast('✓ Đã cài Studio — mở từ màn hình chính hoặc danh sách ứng dụng'); });
+  if (iOS && !isApp()) instBtn.hidden = false;
+  instBtn.addEventListener('click', async () => {
+    menu.hidden = true; start.setAttribute('aria-expanded', 'false');
+    if (installEvt){
+      installEvt.prompt();
+      try { const r = await installEvt.userChoice; if (r.outcome === 'accepted') instBtn.hidden = true; } catch (e) {}
+      installEvt = null;
+    } else if (iOS) toast('Trên iPhone/iPad: bấm nút Chia sẻ của Safari → “Thêm vào MH chính”.');
+    else toast('Mở menu ⋮ của trình duyệt → “Cài đặt ứng dụng” / “Thêm vào màn hình chính”.');
+  });
 
   if (unlocked){ document.body.classList.remove('locked'); openDesk(); }
   else key.focus({ preventScroll: true });
