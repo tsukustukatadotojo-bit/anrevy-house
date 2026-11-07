@@ -15,6 +15,7 @@ Khách không tự gỡ được tranh đã treo: mọi yêu cầu gỡ (d/<id>)
 Chỉ chủ trang gỡ tranh bằng cách sửa gallery/uploads.json (và xoá ảnh trong gallery/uploads).
 Ô chat "note" trong Studio cũng gửi tin qua đây (anrevy-house-9q2/notes/v1/m/<id>): kịch bản lưu các tin
 trong 7 ngày gần nhất vào studio/data/notes.json và dọn tin cũ hơn 7 ngày (chat tự xoá sau 1 tuần).
+Người gửi tự xoá tin bằng d/<id> kèm khoá bí mật; tin chỉ chứa mã băm của khoá (h) nên chỉ người gửi xoá được.
 Chạy thử không đụng tới git:  python3 gallery_sync.py --dry   (BROKERS=ws://localhost:8883 để dùng máy chủ thử)
 """
 import base64, hashlib, io, json, os, random, re, string, struct, subprocess, sys, time, warnings
@@ -331,20 +332,30 @@ def notes(links, now):
     try: old = json.load(open(NOTES, encoding='utf-8')).get('items', [])
     except Exception: pass
     got = {it['id']: it for it in old if isinstance(it, dict) and it.get('id')}
-    stale = set()
+    stale, tomb = set(), {}
     for u, c, store in links:
         for t, p in store.items():
             if not t.startswith(NOTE_PFX) or not p: continue
             nid = t[len(NOTE_PFX):].split('/')[-1]
             try: m = json.loads(p.decode('utf-8'))
             except Exception: stale.add(t); continue
+            if t.startswith(NOTE_PFX + 'd/'):                       # yêu cầu xoá của người gửi
+                ok = isinstance(m, dict) and m.get('id') == nid and isinstance(m.get('k'), str) and now - float(m.get('at') or 0) <= NOTE_TTL
+                if ok: tomb[nid] = m['k']
+                else: stale.add(t)
+                continue
             at = float(m.get('at') or 0) if isinstance(m, dict) else 0
             name = re.sub(r'\s+', ' ', clean(m.get('n'), 24)) if isinstance(m, dict) else ''
             text = clean(m.get('t'), 600) if isinstance(m, dict) else ''
             if not t.startswith(NOTE_PFX + 'm/') or not re.fullmatch(r'[a-z0-9]{6,32}', nid) or m.get('id') != nid or not name or not text or at > now + 600000:
                 stale.add(t); continue
             if now - at > NOTE_TTL: stale.add(t); continue
-            got[nid] = {'id': nid, 'n': name, 't': text, 'at': int(at)}
+            h = m.get('h') if isinstance(m.get('h'), str) and re.fullmatch(r'[0-9a-f]{32}', m.get('h')) else ''
+            got[nid] = {'id': nid, 'n': name, 't': text, 'at': int(at), **({'h': h} if h else {})}
+    for nid, k in tomb.items():
+        it = got.get(nid)
+        if it and it.get('h') and sha(k)[:32] == it['h']:
+            del got[nid]; stale.add(NOTE_PFX + 'm/' + nid); print('note: người gửi xoá tin', nid)
     items = sorted((it for it in got.values() if now - float(it.get('at', 0)) <= NOTE_TTL), key=lambda x: x['at'])[-500:]
     print(f'note: {len(items)} tin trong 7 ngày, dọn {len(stale)} tin cũ/lỗi')
     return items, items != old, stale

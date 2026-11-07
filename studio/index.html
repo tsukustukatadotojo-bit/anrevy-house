@@ -8,7 +8,7 @@
 <title>vy@studio:~$</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Monoton&amp;family=Tiny5&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Monoton&amp;display=swap" rel="stylesheet">
 <style>
   /* Studio: tĩnh hoàn toàn (không hiệu ứng chuyển động), chữ xanh trên nền đen kiểu terminal.
      Màn hình chia khung: Letterboxd | nhạc mới | Spotify + Last.fm — mọi thứ chạy ngay trong trang. */
@@ -260,26 +260,29 @@
   .ig{display:flex;flex-direction:column;height:100%}
   .ig .frame{flex:1;min-height:0;background:#fff}
   #w-poolsuite{right:18px}
-  /* note.chat: kiểu khung chat trang cá nhân (chữ pixel, tên xanh, ngày hồng) */
+  /* note.chat: kiểu khung chat trang cá nhân (chữ giống dòng HaMi@studio, tên nhiều màu, ngày hồng) */
   #w-note{left:auto;right:18px;width:min(460px,42vw);min-width:320px}
   #w-note .tb{background:#101010;border-bottom-color:#2a2a2a}
-  .nt-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 12px 6px;background:#0b0b0b;font:18px/1.35 'Tiny5',var(--mono);color:#f2f2f2;scrollbar-width:thin;scrollbar-color:#333 #0b0b0b}
+  .nt-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 12px 6px;background:#0b0b0b;font:13.5px/1.5 var(--mono);color:#f2f2f2;scrollbar-width:thin;scrollbar-color:#333 #0b0b0b}
   .nt-msg{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed #222}
   .nt-msg:last-child{border-bottom:0}
   .nt-av{flex:none;width:34px;height:34px}
   .nt-av svg{display:block;width:34px;height:34px;image-rendering:pixelated}
   .nt-body{min-width:0;flex:1}
   .nt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}
-  .nt-head b{font-weight:400;font-size:19px;color:#b6ff6a}
-  .nt-head span{font-size:14px;color:#ff9ad5;text-decoration:underline;text-underline-offset:2px}
+  .nt-head b{font-weight:600;font-size:14px}
+  .nt-head span{font-size:12px;color:#ff9ad5;text-decoration:underline;text-underline-offset:2px}
+  .nt-del{margin-left:auto;padding:0 6px;border:1px solid #333;color:#888;font:11.5px/18px var(--mono)}
+  .nt-del:hover,.nt-del:focus-visible{border-color:#ff5c5c;color:#ff5c5c}
+  .nt-del.sure{border-color:#ff5c5c;background:#ff5c5c;color:#000}
   .nt-text{margin-top:2px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
   .nt-form{flex:none;display:flex;gap:6px;padding:8px;border-top:1px solid #2a2a2a;background:#101010}
-  .nt-form input{min-width:0;height:32px;padding:0 9px;background:#000;border:1px solid #333;border-radius:0;color:#f2f2f2;font:16px/1 'Tiny5',var(--mono)}
+  .nt-form input{min-width:0;height:32px;padding:0 9px;background:#000;border:1px solid #333;border-radius:0;color:#f2f2f2;font:13.5px/1 var(--mono)}
   .nt-form input:focus{outline:none;border-color:#b6ff6a}
   .nt-form input::placeholder{color:#666}
-  #ntName{flex:0 0 96px;color:#b6ff6a}
+  #ntName{flex:0 0 100px;color:#b6ff6a}
   #ntText{flex:1}
-  .nt-form button{flex:none;height:32px;padding:0 12px;background:#b6ff6a;color:#000;font:15px/1 'Tiny5',var(--mono)}
+  .nt-form button{flex:none;height:32px;padding:0 12px;background:#b6ff6a;color:#000;font:13.5px/1 var(--mono)}
   .nt-form button:hover{background:#ff9ad5}
   .ig-out{margin-left:auto;align-self:center;padding:0 10px;font:12px/1 var(--mono);color:var(--g-mid);white-space:nowrap}
   .ig .frame iframe{display:block;width:100%;height:100%;border:0}
@@ -1289,24 +1292,37 @@
   const NT = { msgs: new Map(), clients: [], started: false, last: 0 };
   const ntList = $('#ntList'), ntName = $('#ntName'), ntText = $('#ntText');
   ntName.value = ls.get('note-name') || '';
+  // màu tên theo từng tên: đỏ, xanh lá, xanh nước biển, vàng
+  const NT_COL = ['#ff5c5c', '#7dff6a', '#5cb8ff', '#ffd23f'];
+  function ntHash(name){ let h = 2166136261 >>> 0; for (const ch of name.toLowerCase()){ h ^= ch.codePointAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
+  const ntColor = name => NT_COL[ntHash(name) % NT_COL.length];
   function ntAvatar(name){
-    let h = 2166136261 >>> 0;
-    for (const ch of name.toLowerCase()){ h ^= ch.codePointAt(0); h = Math.imul(h, 16777619) >>> 0; }
-    const hue = h % 360; let cells = '';
+    let h = ntHash(name); const col = ntColor(name); let cells = '';
     for (let y = 0; y < 5; y++) for (let x = 0; x < 3; x++){
       h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0;
       if (h % 5 < 3){ cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`; if (x < 2) cells += `<rect x="${4 - x}" y="${y}" width="1" height="1"/>`; }
     }
-    return `<svg viewBox="-1 -1 7 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="-1" y="-1" width="7" height="7" fill="hsl(${hue} 45% 16%)"/><g fill="hsl(${hue} 90% 72%)">${cells}</g></svg>`;
+    return `<svg viewBox="-1 -1 7 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="-1" y="-1" width="7" height="7" fill="#161616"/><g fill="${col}">${cells}</g></svg>`;
+  }
+  // tin của mình: giữ khoá bí mật trên máy này; tin chỉ mang mã băm của khoá → chỉ người gửi xoá được
+  const ntOwn = () => ls.get('note-own') || {};
+  const ntHex = async t => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)))].map(x => x.toString(16).padStart(2, '0')).join('').slice(0, 32);
+  NT.gone = new Set(); NT.tomb = new Map();
+  async function ntTomb(id, k){
+    NT.tomb.set(id, k);
+    const m = NT.msgs.get(id);
+    if (m && m.h && await ntHex(k) === m.h){ NT.msgs.delete(id); NT.gone.add(id); ntPaint(); }
   }
   const ntTime = at => { const d = new Date(at); return String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
   function ntValid(m){
     return m && typeof m === 'object' && /^[a-z0-9]{6,32}$/.test(m.id || '') && typeof m.n === 'string' && m.n.trim() && typeof m.t === 'string' && m.t.trim() &&
-      typeof m.at === 'number' && Date.now() - m.at <= WEEK && m.at < Date.now() + 6e5;
+      typeof m.at === 'number' && Date.now() - m.at <= WEEK && m.at < Date.now() + 6e5 && (m.h == null || /^[0-9a-f]{32}$/.test(m.h));
   }
   function ntAdd(m){
-    if (!ntValid(m) || NT.msgs.has(m.id)) return false;
-    NT.msgs.set(m.id, { id: m.id, n: m.n.trim().slice(0, 24), t: m.t.trim().slice(0, 600), at: m.at }); return true;
+    if (!ntValid(m) || NT.msgs.has(m.id) || NT.gone.has(m.id)) return false;
+    NT.msgs.set(m.id, { id: m.id, n: m.n.trim().slice(0, 24), t: m.t.trim().slice(0, 600), at: m.at, h: m.h || '' });
+    if (NT.tomb.has(m.id)) ntTomb(m.id, NT.tomb.get(m.id));
+    return true;
   }
   let ntPaintT = 0;
   function ntPaint(){
@@ -1314,7 +1330,8 @@
     ntPaintT = setTimeout(() => {
       const atBottom = ntList.scrollHeight - ntList.scrollTop - ntList.clientHeight < 60;
       const list = [...NT.msgs.values()].filter(m => Date.now() - m.at <= WEEK).sort((a, b) => a.at - b.at);
-      ntList.innerHTML = list.map(m => `<div class="nt-msg"><span class="nt-av">${ntAvatar(m.n)}</span><div class="nt-body"><p class="nt-head"><b>${esc(m.n)}</b><span>@${esc(ntTime(m.at))}</span></p><p class="nt-text">${esc(m.t)}</p></div></div>`).join('');
+      const own = ntOwn();
+      ntList.innerHTML = list.map(m => `<div class="nt-msg"><span class="nt-av">${ntAvatar(m.n)}</span><div class="nt-body"><p class="nt-head"><b style="color:${ntColor(m.n)}">${esc(m.n)}</b><span>@${esc(ntTime(m.at))}</span>${own[m.id] ? `<button class="nt-del" type="button" data-del="${esc(m.id)}" aria-label="Xoá tin nhắn này">xoá</button>` : ''}</p><p class="nt-text">${esc(m.t)}</p></div></div>`).join('');
       if (atBottom || NT.first){ ntList.scrollTop = ntList.scrollHeight; NT.first = false; }
     }, 30);
   }
@@ -1342,11 +1359,15 @@
     try { c = window.mqtt.connect(url, { clientId: 'anrevy_note_' + Math.random().toString(36).slice(2, 12), clean: true, keepalive: 30, reconnectPeriod: 6000, connectTimeout: 12000, protocolVersion: ver }); }
     catch (e) { return; }
     let ok = false;
-    c.on('connect', () => { ok = true; c.subscribe(NOTE_PFX + 'm/+', { qos: 1 }); ntLive(); });
+    c.on('connect', () => { ok = true; c.subscribe([NOTE_PFX + 'm/+', NOTE_PFX + 'd/+'], { qos: 1 }); ntLive(); });
     c.on('close', ntLive); c.on('offline', ntLive); c.on('error', () => {});
     c.on('message', (topic, payload) => {
       if (!payload || !payload.length) return;
-      try { if (ntAdd(JSON.parse(new TextDecoder().decode(payload)))) ntPaint(); } catch (e) {}
+      try {
+        const j = JSON.parse(new TextDecoder().decode(payload));
+        if (topic.startsWith(NOTE_PFX + 'd/')){ if (j && typeof j.k === 'string' && /^[a-z0-9]{6,32}$/.test(j.id || '')) ntTomb(j.id, j.k); }
+        else if (ntAdd(j)) ntPaint();
+      } catch (e) {}
     });
     NT.clients.push(c);
     if (ver === 5) setTimeout(() => { if (!ok){ c.end(true); NT.clients.splice(NT.clients.indexOf(c), 1); ntClient(url, 4); } }, 15000);
@@ -1359,17 +1380,43 @@
     } else ntPaint();
     setTimeout(() => (ntName.value ? ntText : ntName).focus({ preventScroll: true }), 0);
   }
-  $('#ntForm').addEventListener('submit', e => {
+  $('#ntForm').addEventListener('submit', async e => {
     e.preventDefault();
     const n = ntName.value.trim().replace(/\s+/g, ' ').slice(0, 24), t = ntText.value.trim().slice(0, 600);
     if (!n){ ntName.focus(); return; }
     if (!t || Date.now() - NT.last < 700) return;
     const live = NT.clients.filter(c => c.connected);
     if (!live.length){ toast('◌ chưa kết nối, thử lại sau vài giây'); return; }
-    const m = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8), n, t, at: Date.now() };
+    NT.last = Date.now();
+    const k = Array.from(crypto.getRandomValues(new Uint8Array(18)), x => x.toString(16).padStart(2, '0')).join('');
+    const m = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8), n, t, at: Date.now(), h: await ntHex(k) };
+    const own = ntOwn(); own[m.id] = k;
+    Object.keys(own).forEach(id => { if (+parseInt(id.slice(0, 8), 36) < Date.now() - WEEK - 864e5) delete own[id]; });
+    ls.set('note-own', own);
     live.forEach(c => c.publish(NOTE_PFX + 'm/' + m.id, JSON.stringify(m), Object.assign({ qos: 1, retain: true }, c.options.protocolVersion === 5 ? { properties: { messageExpiryInterval: 7 * 86400 } } : {})));
     ls.set('note-name', n); NT.last = Date.now();
     ntAdd(m); NT.first = true; ntPaint(); ntText.value = ''; ntText.focus();
+  });
+
+  // xoá tin của chính mình: bấm "xoá" rồi bấm lần nữa để chắc chắn
+  ntList.addEventListener('click', e => {
+    const b = e.target.closest('[data-del]'); if (!b) return;
+    if (!b.classList.contains('sure')){
+      ntList.querySelectorAll('.nt-del.sure').forEach(x => { x.classList.remove('sure'); x.textContent = 'xoá'; });
+      b.classList.add('sure'); b.textContent = 'xoá thật?';
+      setTimeout(() => { if (b.isConnected){ b.classList.remove('sure'); b.textContent = 'xoá'; } }, 4000);
+      return;
+    }
+    const id = b.dataset.del, own = ntOwn(), k = own[id];
+    const live = NT.clients.filter(c => c.connected);
+    if (!k) return;
+    if (!live.length){ toast('◌ chưa kết nối, thử lại sau vài giây'); return; }
+    const tomb = JSON.stringify({ id, k, at: Date.now() });
+    live.forEach(c => {
+      c.publish(NOTE_PFX + 'd/' + id, tomb, Object.assign({ qos: 1, retain: true }, c.options.protocolVersion === 5 ? { properties: { messageExpiryInterval: 7 * 86400 } } : {}));
+      c.publish(NOTE_PFX + 'm/' + id, '', { qos: 1, retain: true });
+    });
+    NT.msgs.delete(id); NT.gone.add(id); delete own[id]; ls.set('note-own', own); ntPaint();
   });
 
   /* ================= INSTAGRAM ================= */
