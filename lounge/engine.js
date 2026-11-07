@@ -733,7 +733,8 @@
   }
   document.querySelectorAll('[data-leave]').forEach(a => a.addEventListener('click', e => { if (!inside) return; e.preventDefault(); leaveTo(a.href); }));
   $('#gateForm').addEventListener('submit', e => { e.preventDefault(); enter(); });
-  $('#leaveBtn').addEventListener('click', () => leave());
+  // nút "Rời phòng": rời cuộc gọi rồi ra thẳng trang khai báo (Jazz Club), không quay lại màn chọn nhân vật
+  $('#leaveBtn').addEventListener('click', () => { if (R.leaveHref) leaveTo(R.leaveHref, true); else leave(); });
   addEventListener('beforeunload', e => { if (inside && !leaving){ e.preventDefault(); e.returnValue = ''; } });
   addEventListener('pagehide', () => { if (inside){ pub(T_P + me, null, true); pub(T_BYE, { id: me }); } });
   addEventListener('pageshow', e => { if (e.persisted){ $('#fade').classList.remove('on'); leaving = false; } });
@@ -863,7 +864,8 @@
   resize(); addEventListener('resize', resize);
   function camera(){
     const vw = innerWidth, vh = innerHeight, small = vw < 760;
-    const padT = small ? 92 : 64, padB = small ? 72 : 78;
+    const barEl = $('#bar'), barTop = barEl.offsetHeight ? barEl.getBoundingClientRect().top : 0;
+    const padT = small ? 92 : 64, padB = small ? (barTop ? Math.max(72, vh - barTop + 8) : 104) : 78;
     const fit = Math.min(vw / W, (vh - padT - padB) / H);
     const s = Math.max(fit, small ? Math.max(.52, Math.min(.68, (vh - padT - padB) / H)) : .4);   // điện thoại: phóng to vừa chiều cao, camera đi theo mình
     let cx, cy;
