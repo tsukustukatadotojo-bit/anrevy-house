@@ -90,7 +90,7 @@
    "d": "2026-10-30",
    "a": "Editors",
    "w": "Surface, Echo & Sound",
-   "l": "Play It Again Sam"
+   "l": "PIAS"
   },
   {
    "d": "2026-10-30",
@@ -187,6 +187,13 @@
    "a": "Mylène Farmer",
    "w": "Égrégore",
    "l": "Stuffed Monkey"
+  },
+  {
+   "d": "2026-10-30",
+   "a": "Nettspend",
+   "w": "Virginia Creeper",
+   "g": "Rage, trap",
+   "l": "Grade A, Interscope"
   },
   {
    "d": "2026-10-30",
@@ -682,6 +689,12 @@
   },
   {
    "d": "2026-11-13",
+   "a": "Belly Gang Kushington",
+   "w": "Good Dope Sell Itself",
+   "l": "LVRN"
+  },
+  {
+   "d": "2026-11-13",
    "a": "Blackhaine",
    "w": "Saints in the Wethouse",
    "l": "XL"
@@ -908,5 +921,5 @@
    "l": "Big Hit Music"
   }
  ],
- "updated": "2026-11-06T14:50:23Z"
+ "updated": "2026-11-06T22:02:57Z"
 }

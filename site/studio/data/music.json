@@ -1,6 +1,432 @@
 {
  "items": [
   {
+   "s": "npr",
+   "k": "news",
+   "t": "My Chemical Romance goes to No. 1 on the Billboard albums chart",
+   "u": "https://www.npr.org/2026/11/06/nx-s1-6027352/my-chemical-romance-goes-to-no-1-on-the-billboard-albums-chart",
+   "d": "2026-11-06T21:53:09Z",
+   "x": "NPR Music's Stephen Thompson reports on a surprising hit album this week.",
+   "f": "https://feeds.npr.org/1039/rss.xml"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Hear Fiona Apple and the Bolt Cutters Cover Mother Earth’s ‘Revolution’",
+   "u": "https://www.rollingstone.com/music/music-news/fiona-apple-the-bolt-cutters-cover-mother-earth-revolution-1235654198/",
+   "d": "2026-11-06T21:45:07Z",
+   "x": "Song was culled for Right Now album benefitting Doctors Without Borders",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Fiona Apple Releases New Cover of Mother Earth’s “Revolution”: Steam",
+   "u": "https://consequence.net/2026/11/fiona-apple-new-cover-mother-earth-revolution/",
+   "d": "2026-11-06T21:35:12Z",
+   "x": "To celebrate the results of Tuesday's midterms. \n Fiona Apple Releases New Cover of Mother Earth’s “Revolution”: Steam \n\n Alex Young",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/07/Fiona-Apple.jpg?quality=80"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "XIAOJUN Stars in Billboard China Artist Book Issue 02 With First Solo EP",
+   "u": "https://www.billboard.com/music/music-news/xiaojun-billboard-china-artist-book-issue-02-hey-somebody-1236376677/",
+   "d": "2026-11-06T21:28:58Z",
+   "x": "The WayV member unveils his solo debut Hey, Somebody in Billboard China Special Issue.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/04/billboard-china-smtr25-billboard-1800.jpg?w=237&h=147&crop=1"
+  },
+  {
+   "s": "stereogum",
+   "k": "song",
+   "t": "Dusted – “Black Tattoo”",
+   "u": "https://stereogum.com/2516785/dusted-black-tattoo-brian-borcherdt-holy-fuck/music/",
+   "d": "2026-11-06T21:17:35Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "a": "Dusted",
+   "w": "Black Tattoo",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/blacktattoo.jpg?w=200"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Madison Square Garden Responds to Macklemore: ‘He’s Not an Arena Level Act’",
+   "u": "https://www.billboard.com/music/music-news/msg-macklemore-arena-level-act-1236376589/",
+   "d": "2026-11-06T20:52:00Z",
+   "x": "The rapper also accused eight other arenas of blocking his Free Palestine tour from visiting.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/10/macklemore-free-palestine-zoe-rain-261026-zoe-rain-9765-e1793067332745.jpg?w=237&h=147&crop=1"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "MJ Lenderman Shares New Neil Young Cover, Harry Crews Book Foreword",
+   "u": "https://stereogum.com/2516876/mj-lenderman-shares-new-neil-young-cover-harry-crews-book-foreword/music/",
+   "d": "2026-11-06T20:42:36Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/3000x3000bb-100.jpg?w=200"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "The 5 Best Songs Of The Week",
+   "u": "https://stereogum.com/2516820/the-5-best-songs-of-the-week-651/lists/the-5-best-songs-of-the-week/",
+   "d": "2026-11-06T20:23:18Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/5best.jpeg?w=200"
+  },
+  {
+   "s": "diy",
+   "k": "news",
+   "t": "HUNNY BUZZ, Pack of Animals, & nobody’s dad confirmed for Bristol edition of DIY Neu Nights",
+   "u": "https://diymag.com/news/hunny-buzz-pack-of-animals-nobodys-dad-confirmed-for-bristol-edition-of-diy-neu-nights",
+   "d": "2026-11-06T19:59:00Z",
+   "x": "For its latest instalment, our new music gig series — hosted in collaboration with PRS For Music — is heading to Exchange.",
+   "f": "https://diymag.com/feed",
+   "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/H/HUNNY-BUZZ/_1500x1000_crop_center-center_100_line/@A_Life_Well_ProductionsXHUNNYBUZZ-48-1.jpg"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "In Photos: “The Art of Metallica” Exhibit Opens in San Francisco",
+   "u": "https://consequence.net/2026/11/the-art-of-metallica-exhibit-san-francisco-photos/",
+   "d": "2026-11-06T19:55:21Z",
+   "x": "The exhibit at the Haight Street Art Center runs through January 10th, 2027. \n In Photos: “The Art of Metallica” Exhibit Opens in San Francisco \n\n Heavy Consequence Staff",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/The-Art-of-Metallica-featured.jpeg?quality=80"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Nick Diamonds – “Got The Devil” (Feat. Fat Tony & Yoni Wolf) & “The River” (Feat. Giovanni Marks & Fat Tony)",
+   "u": "https://stereogum.com/2516833/nick-diamonds-got-the-devil-the-river-fat-tony-yoni-wolf-giovanni-marks/music/",
+   "d": "2026-11-06T19:46:17Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/gotthedevil.jpg?w=200"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Macklemore Says Nine U.S. Venues Turned Down ‘Free Palestine’ Tour: ‘They Got Me F-cked Up’",
+   "u": "https://www.rollingstone.com/music/music-news/macklemore-us-venues-free-palestine-tour-1235654083/",
+   "d": "2026-11-06T19:38:17Z",
+   "x": "The rapper performed three sold-out shows in Europe with special guests in support of organizations providing aid to Gaza, but says bringing the tour stateside has been more challenging",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Alanis Morissette Releases First Holiday Album Good Weather for Immaculate Conception: Stream",
+   "u": "https://consequence.net/2026/11/alanis-morissette-releases-christmas-album/",
+   "d": "2026-11-06T19:37:16Z",
+   "x": "The Christmas record contains 12 yuletide classics and two new original songs. \n Alanis Morissette Releases First Holiday Album Good Weather for Immaculate Conception: Stream \n\n Travis Bland",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/Alanis-Morissette-holiday-album-promo-1.jpg?quality=80"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Fiona Apple & The Bolt Cutters Cover Mother Earth’s “Revolution” For Doctors Without Borders Benefit Comp",
+   "u": "https://stereogum.com/2516832/fiona-apple-the-bolt-cutters-cover-mother-earths-revolution-for-doctors-without-borders-benefit-comp/music/",
+   "d": "2026-11-06T19:18:30Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/892497324_18649631890048912_680473460516450367_n.jpg?w=200"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Tegan and Sara Celebrate the Season With ‘I Love Christmas’ and ‘A December to Remember’",
+   "u": "https://www.rollingstone.com/music/music-news/tegan-and-sara-i-love-christmas-december-to-remember-videos-1235654055/",
+   "d": "2026-11-06T19:18:29Z",
+   "x": "“These songs are for people who love Christmas, but also for people who don’t,” Tegan says",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "bandcamp",
+   "k": "news",
+   "t": "The Best Electronic Music on Bandcamp, October 2026",
+   "u": "https://daily.bandcamp.com/best-electronic/the-best-electronic-music-on-bandcamp-october-2026",
+   "d": "2026-11-06T19:16:01Z",
+   "x": "Our guide to the month’s crucial electronic LPs. \n Read full story on the Bandcamp Daily .",
+   "f": "https://daily.bandcamp.com/feed",
+   "i": "https://f4.bcbits.com/img/0048397068_10.jpg"
+  },
+  {
+   "s": "clash",
+   "k": "news",
+   "t": "Florence + The Machine – Everybody Scream Tour Live",
+   "u": "https://www.clashmusic.com/reviews/florence-the-machine-everybody-scream-tour-live/",
+   "d": "2026-11-06T19:14:18Z",
+   "x": "Fresh off a Mercury nomination for their acclaimed sixth album Everybody Scream, Florence + The Machine return with ‘Everybody Scream Tour Live’, which captures the tour of the same name. It is perhaps a shame the album wasn’t closer to Halloween, coming almost a full year after the studio release.…",
+   "f": "https://www.clashmusic.com/feed/"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "From JENNIE to Lil Baby, Jack Harlow & More, Which New Music Release Is Your Favorite This Week? Vote!",
+   "u": "https://www.billboard.com/music/music-news/blackpink-jennie-lil-baby-jack-harlow-best-new-music-poll-1236376101/",
+   "d": "2026-11-06T19:09:10Z",
+   "x": "Boys Noize, Dove Cameron, Kings of Leon and others also dropped fresh projects.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/11/Lil-Baby-2026-Press-Photo-Credit-Kendall-Bessent-billboard-1800.jpg?w=237&h=147&crop=1"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Bad History Month Shares Fundraising EP After Accidentally Getting Shot In His Calf",
+   "u": "https://stereogum.com/2516817/bad-history-month-shares-fundraising-ep-after-getting-shot-in-his-calf/music/",
+   "d": "2026-11-06T19:02:54Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/a2181120592_10.jpg?w=200"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Nick Cave Launches 2027 Tour",
+   "u": "https://pitchfork.com/story/nick-cave-launches-2027-tour/",
+   "d": "2026-11-06T19:02:49Z",
+   "x": "Conversations With Nick Cave: An Evening of Talk & Music will combine a Q&A with live performance",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aed376e2e98f66215d0ae12/master/w_200,c_limit/GettyImages-2288494541.jpg",
+   "v": 3
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Macklemore Calls Out MSG, Kia Forum & More U.S. Arenas for Allegedly Refusing to Host His Free Palestine Tour",
+   "u": "https://www.billboard.com/music/music-news/macklemore-free-palestine-tour-us-venues-refuse-to-host-1236376181/",
+   "d": "2026-11-06T18:50:43Z",
+   "x": "\"In over twenty years of touring, I've never experienced anything like this,\" the rapper wrote.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/10/macklemore-free-palestine-zoe-rain-billboard-1800.jpg?w=237&h=147&crop=1"
+  },
+  {
+   "s": "stereogum",
+   "k": "song",
+   "t": "Becky And The Birds – “Way Back To You”",
+   "u": "https://stereogum.com/2516783/becky-and-the-birds-way-back-to-you/music/",
+   "d": "2026-11-06T18:48:14Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "a": "Becky And The Birds",
+   "w": "Way Back To You",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/beckyandthebirds.jpg?w=200"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "‘I Think Our Generation Is Having a Really Rough Time’: La Roux Explores the Millennial Ache on Her New Album",
+   "u": "https://www.billboard.com/music/music-news/la-roux-new-album-cabin-fever-hilary-duff-tour-bulletproof-1236376131/",
+   "d": "2026-11-06T18:34:06Z",
+   "x": "The English artist's fourth album, Cabin Fever , is out today (Nov. 6). She talks about touring with Hilary Duff and what \"In For the Kill\" was really about.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/11/Billboard_Cabin-Fever.jpg?w=300"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Nick Cave Announces “Conversations With Nick Cave” Tour",
+   "u": "https://consequence.net/2026/11/nick-cave-conversations-tour/",
+   "d": "2026-11-06T18:32:58Z",
+   "x": "The 25-date tour will feature the singer-songwriter answering unvetted audience questions and playing his songs with piano. \n Nick Cave Announces “Conversations With Nick Cave” Tour \n\n Travis Bland",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/Conversations-with-Nick-Cave-tour-poster.jpg?quality=80"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Bruiser Wolf & Conductor Williams Announce New Album The Dealer Wins: Hear “The Score” (Feat. Marv Won)",
+   "u": "https://stereogum.com/2516807/bruiser-wolf-conductor-williams-announce-new-album-the-dealer-wins-hear-the-score-feat-marv-won/music/",
+   "d": "2026-11-06T18:31:20Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Bruiser-Wolf-The-Dealer-Wins.jpg?w=200"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Nick Cave Will Now Be Answering Your Questions in Person",
+   "u": "https://www.rollingstone.com/music/music-news/nick-cave-conversations-audience-questions-tour-dates-1235653362/",
+   "d": "2026-11-06T18:23:01Z",
+   "x": "Artist has set Conversations With Nick Cave tour dates for the spring",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "stereogum",
+   "k": "song",
+   "t": "Tegan And Sara – “I Love Christmas” & “A December To Remember”",
+   "u": "https://stereogum.com/2516784/tegan-and-sara-i-love-christmas-a-december-to-remember-holiday-songs/music/",
+   "d": "2026-11-06T18:20:42Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "a": "Tegan And Sara",
+   "w": "I Love Christmas” & “A December To Remember",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/TeganAndSara.jpg?w=200"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Macklemore Accuses U.S. Arenas of Turning Down Free Palestine Tour",
+   "u": "https://pitchfork.com/story/macklemore-accuses-arenas-of-turning-down-free-palestine-tour/",
+   "d": "2026-11-06T18:17:37Z",
+   "x": "“Once they realized these were my benefit shows for Palestine, those dates were suddenly off the table”",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aee136206e89e006e0fae05/master/w_200,c_limit/macklemore-paris-free-palestine-zoe-rain-261029-zoe-rain-4374.jpg",
+   "v": 3
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Stream On This Week: Alan Ritchson Doesn’t Need Words to Get Vengeance",
+   "u": "https://consequence.net/2026/11/stream-on-motor-city-reggie-dinkins/",
+   "d": "2026-11-06T18:00:57Z",
+   "x": "Here are the best movies and TV shows to stream the weekend of November 6th. \n Stream On This Week: Alan Ritchson Doesn’t Need Words to Get Vengeance \n\n Liz Shannon Miller",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/stream-on-motor-city-alan-ritchson.jpg?quality=80"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Macklemore Says Major Arenas Refusing to Host His “Free Palestine” Tour in US",
+   "u": "https://consequence.net/2026/11/macklemore-free-palestine-tour-us-venues-blocking/",
+   "d": "2026-11-06T17:58:49Z",
+   "x": "Venues including Madison Square Garden, Barclays Center, Kia Forum, and Crypto.com Arena allegedly withdrew available dates after learning the shows would benefit Palestine. \n Macklemore Says Major Arenas Refusing to Host His “Free Palestine” Tour in US \n\n Alex Young",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/09/Macklemore-2026.jpeg?quality=80"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Heavy Song of the Week: Whitechapel Display Deathcore Mastery on “Bedlam”",
+   "u": "https://consequence.net/2026/11/heavy-song-of-the-week-whitechapel-bedlam/",
+   "d": "2026-11-06T17:55:34Z",
+   "x": "Whitechapel's \"Bedlam\" is an exercise in deathcore perfection, utilizing their hard-won chops to deliver a raging banger. \n Heavy Song of the Week: Whitechapel Display Deathcore Mastery on “Bedlam” \n\n Langdon Hickman",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/06/whitechapel-band-photo.jpg?quality=80"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Macklemore Says US Arenas Won’t Host His Free Palestine Tour",
+   "u": "https://stereogum.com/2516796/macklemore-says-us-arenas-wont-host-his-free-palestine-tour/news/",
+   "d": "2026-11-06T17:50:40Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Macklemore.jpg?w=200"
+  },
+  {
+   "s": "clash",
+   "k": "album",
+   "t": "Cruel Santino Shares New Album ‘K.O.T.B – The Bomberman Chronicles’",
+   "u": "https://www.clashmusic.com/news/cruel-santino-shares-new-album-k-o-t-b-the-bomberman-chronicles/",
+   "d": "2026-11-06T17:50:01Z",
+   "x": "Cruel Santino has shared his new album, ‘Kings of the Bounce – The Bomberman Chronicles’ (acronymed K.O.T.B), today through Native Sounds and Warner Records. His third studio album to date, the record is anchored in a profoundly intimate exploration of loss and communal survival set against the backdrop of the… \n The post Cruel Santino Shares New Album ‘K.O.T.B – The Bomberman Chronicles’ appeared",
+   "f": "https://www.clashmusic.com/feed/",
+   "a": "Cruel Santino",
+   "w": "K.O.T.B – The Bomberman Chronicles"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Cynthia Nixon Recalls Being ‘Startled & Thrilled’ When Olivia Rodrigo Asked Her to Star in New Music Video",
+   "u": "https://www.billboard.com/music/music-news/cynthia-nixon-olivia-rodrigo-take-me-home-video-invite-react-1236376077/",
+   "d": "2026-11-06T17:29:06Z",
+   "x": "The Sex and the City star made a cameo in the pop singer's \"Take Me Home (4 Christmas)\" visual.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/04/P104S4UR-e1777558692723.jpg?crop=0px%2C40px%2C1800px%2C1117px&resize=237%2C147"
+  },
+  {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Cleo Reed Announces New EP Is This How Empires Die?",
+   "u": "https://pitchfork.com/story/cleo-reed-announces-new-ep-is-this-how-empires-die/",
+   "d": "2026-11-06T17:26:52Z",
+   "x": "Watch the music video for “American Dream,” filmed in Oklahoma on the Fourth of July",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6aedfebf78d0dfa19820e73f/master/w_200,c_limit/unnamed%20(62).jpg",
+   "v": 3
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Lost John Coltrane Recordings The Tiberi Tapes Released for First Time Ever",
+   "u": "https://consequence.net/2026/11/john-coltrane-tiberi-tapes-announced/",
+   "d": "2026-11-06T17:26:51Z",
+   "x": "The collection, stowed away for 65 years, will come out in 4xLP, 3xCD, and digital editions, as well as a more than 100-performance, 26-hour special edition. \n Lost John Coltrane Recordings The Tiberi Tapes Released for First Time Ever \n\n Travis Bland",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/09/John-Coltrane-and-the-Tiberi-Tapes.jpg?quality=80"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Vince Neil’s Girlfriend Arrested for Alleged Attack on the Mötley Crüe Singer",
+   "u": "https://consequence.net/2026/11/vince-neil-girlfriend-arrested-attack-motley-crue-singer/",
+   "d": "2026-11-06T17:14:41Z",
+   "x": "Rain Hannah was jailed for misdemeanor domestic assault. \n Vince Neil’s Girlfriend Arrested for Alleged Attack on the Mötley Crüe Singer \n\n Spencer Kaufman",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/Rain-Hannah-and-Vince-Neil.jpeg?quality=80"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Maluma Announces 2027 World Tour",
+   "u": "https://consequence.net/2026/11/maluma-2027-world-tour/",
+   "d": "2026-11-06T17:03:04Z",
+   "x": "The 60-date tour will include stops in Latin America, North America, Europe and Africa. \n Maluma Announces 2027 World Tour \n\n Paolo Ragusa",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/Maluma-2027-World-Tour.jpg?quality=80"
+  },
+  {
+   "s": "stereogum",
+   "k": "news",
+   "t": "Stove God Cooks – “Stovie’s Home (Down Down)” (Prod. Swizz Beatz)",
+   "u": "https://stereogum.com/2516790/stove-god-cooks-stovies-home-down-down-prod-swizz-beatz/music/",
+   "d": "2026-11-06T17:00:26Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Stove-God-Cooks.jpg?w=200"
+  },
+  {
+   "s": "stereogum",
+   "k": "song",
+   "t": "Lindstrøm – “Not The End Of It All”",
+   "u": "https://stereogum.com/2516781/lindstrom-not-the-end-of-it-all/music/",
+   "d": "2026-11-06T16:56:19Z",
+   "x": "",
+   "f": "https://www.stereogum.com/feed/",
+   "a": "Lindstrøm",
+   "w": "Not The End Of It All",
+   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/lindstrom.png?w=200"
+  },
+  {
+   "s": "billboard",
+   "k": "news",
+   "t": "Taylor Swift Called the ‘Fakest’ New York Knicks Fan by 2 of Team’s Players: ‘It’s a Little Performative’",
+   "u": "https://www.billboard.com/music/music-news/taylor-swift-fakest-ny-knicks-fan-tyler-kolek-miles-mcbride-1236375916/",
+   "d": "2026-11-06T16:48:14Z",
+   "x": "\"I'm gonna get some hate from the Swifties,\" Tyler Kolek acknowledged.",
+   "f": "https://www.billboard.com/c/music/music-news/feed/",
+   "i": "https://www.billboard.com/wp-content/uploads/2026/05/P1055G9G-e1783438236552.jpg?crop=0px%2C5px%2C1800px%2C1116px&resize=237%2C147"
+  },
+  {
+   "s": "consequence",
+   "k": "news",
+   "t": "Netflix Announces Stranger Things Prequel Series, Exploring Other Worlds in the 1950s",
+   "u": "https://consequence.net/2026/11/stranger-things-prequel-other-worlds-netflix/",
+   "d": "2026-11-06T16:42:08Z",
+   "x": "Joe Wright will direct the first three episodes of the new spinoff, expected to premiere in 2028. \n Netflix Announces Stranger Things Prequel Series, Exploring Other Worlds in the 1950s \n\n Liz Shannon Miller",
+   "f": "https://consequence.net/feed/",
+   "i": "https://consequence.net/wp-content/uploads/2026/11/other-worlds-stranger-things-announcement.jpg?quality=80"
+  },
+  {
    "s": "consequence",
    "k": "news",
    "t": "Embarrassed Prime Video Uses Friday News Dump to Share Melania: The Series Trailer",
@@ -21,6 +447,16 @@
    "i": "https://consequence.net/wp-content/uploads/2026/11/Screenshot-52.jpg?quality=80"
   },
   {
+   "s": "bandcamp",
+   "k": "news",
+   "t": "Darryl Jenifer Looks Back at the Early Days of Bad Brains",
+   "u": "https://daily.bandcamp.com/features/darryl-jenifer-bad-brains-interview",
+   "d": "2026-11-06T16:36:04Z",
+   "x": "The band’s first ever studio sessions finally see the light of day. \n Read full story on the Bandcamp Daily .",
+   "f": "https://daily.bandcamp.com/feed",
+   "i": "https://f4.bcbits.com/img/0048423610_10.jpg"
+  },
+  {
    "s": "clash",
    "k": "news",
    "t": "Vagrant Real Estate Wins SAY Award 2026",
@@ -35,7 +471,7 @@
    "t": "Britney Spears Adds Five Previously Unreleased Songs to ‘Britney’ 25th Anniversary Edition",
    "u": "https://www.rollingstone.com/music/music-news/britney-anniversary-new-britney-spears-songs-1235653844/",
    "d": "2026-11-06T16:34:02Z",
-   "x": "Upcoming release features \"Right Now (Taste The Victory),” “Am I a Sinner,” “When I Say So,” “My Big Secret,\" and “She’ll Never Be Me,” the latter co-written with Justin Timberlake in 2001",
+   "x": "Upcoming release features “Right Now (Taste The Victory),” “Am I a Sinner,” “When I Say So,” “My Big Secret,” and “She’ll Never Be Me,” the latter co-written with Justin Timberlake in 2001",
    "f": "https://www.rollingstone.com/music/music-news/feed/"
   },
   {
@@ -149,16 +585,6 @@
    "i": "https://www.nme.com/wp-content/uploads/2026/11/kim_gordon_fender_2000-400x254.jpg"
   },
   {
-   "s": "consequence",
-   "k": "news",
-   "t": "Celine Dion Slaps a Mean Air Bass While Rocking Out to Metallica at Sphere: Watch",
-   "u": "https://consequence.net/2026/11/celine-dion-air-bass-metallica-sphere/",
-   "d": "2026-11-06T15:48:28Z",
-   "x": "The footage also shows the singer alongside members of Guns N' Roses and No Doubt at the show. \n Celine Dion Slaps a Mean Air Bass While Rocking Out to Metallica at Sphere: Watch \n\n Langdon Hickman",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Metallica-Celine-Dion.jpeg?quality=80"
-  },
-  {
    "s": "diy",
    "k": "news",
    "t": "Katy J Pearson, Pedestrian Band and congratulations announced for SON Estrella Galicia’s autumn/winter series",
@@ -167,16 +593,6 @@
    "x": "The next Estrella backed shows will take place at The Victoria, Dream Bags Jaguar Shoes and Paper Dress Vintage.",
    "f": "https://diymag.com/feed",
    "i": "https://d94thh4m1x8qv.cloudfront.net/d/diy/Artists/K/Katy-J-Pearson/_1500x1000_crop_center-center_100_line/Katy-J-Pearson-May-24-pc-Seren-Carys.jpg"
-  },
-  {
-   "s": "consequence",
-   "k": "news",
-   "t": "Angine de Poitrine Debut New Song and New Character at Toronto Show: Watch",
-   "u": "https://consequence.net/2026/11/angine-de-poitrine-new-song-new-character-toronto-watch/",
-   "d": "2026-11-06T15:36:46Z",
-   "x": "The new character was clad in the same polka dot aesthetic as the band, but with a large box on their head. \n Angine de Poitrine Debut New Song and New Character at Toronto Show: Watch \n\n Paolo Ragusa",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Angine.jpeg?quality=80"
   },
   {
    "s": "pitchfork",
@@ -221,16 +637,6 @@
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Slayyyter.jpeg?w=200"
   },
   {
-   "s": "consequence",
-   "k": "news",
-   "t": "New York Knicks Players Give Taylor Swift “Fakest Celebrity Fan” Crown",
-   "u": "https://consequence.net/2026/11/taylor-swift-new-york-knicks-fake-fan/",
-   "d": "2026-11-06T15:16:08Z",
-   "x": "Tyler Kolek and Deuce McBride know the Swifties aren't gonna like to hear it, but they agree the pop star's courtside appearance was \"performative.\" \n New York Knicks Players Give Taylor Swift “Fakest Celebrity Fan” Crown \n\n Ben Kaye",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/taylor-swift-celebrity-fan-fake-performative-new-york-knicks-Deuce-McBride-and-Tyler-Kolek-new-york-knicks.jpg?quality=80"
-  },
-  {
    "s": "rollingstone",
    "k": "news",
    "t": "Future Assembles His Avengers With Drake, Travis Scott, and Loe Shimmy on ‘Ya Hit’",
@@ -245,7 +651,7 @@
    "t": "Clem Cattini obituary",
    "u": "https://www.theguardian.com/music/2026/nov/06/clem-cattini-obituary",
    "d": "2026-11-06T15:15:27Z",
-   "x": "Drummer who as a session musician made an unsung contribution to more than 40 No 1 singles The drummer Clem Cattini, who has died aged 86, had the distinction of playing on more than 40 No 1 singles. Largely unknown outside the music business, he was revered inside it as one of the best session musicians of his generation. Over a 45-year period from 1960 to 2005, Cattini provided the backbeat for",
+   "x": "Drummer who as a session musician made an unsung contribution to more than 40 No 1 singles The drummer Clem Cattini, who has died aged 89, had the distinction of playing on more than 40 No 1 singles. Largely unknown outside the music business, he was revered inside it as one of the best session musicians of his generation. Over a 45-year period from 1960 to 2005, Cattini provided the backbeat for",
    "f": "https://www.theguardian.com/music/rss",
    "i": "https://i.guim.co.uk/img/media/344556d4a617c61a0ec613654d55b7c6d853bae1/252_211_3006_2405/master/3006.jpg?width=140&quality=85&auto=format&fit=max&s=5adc41fcd58b2234e5a42e7ec8f16304"
   },
@@ -259,16 +665,6 @@
    "f": "https://www.clashmusic.com/feed/"
   },
   {
-   "s": "consequence",
-   "k": "news",
-   "t": "Midnight Generation Turned Life on the Road Into a Reflection on Home With New Album Rooted",
-   "u": "https://consequence.net/2026/11/midnight-generation-new-album-rooted-interview/",
-   "d": "2026-11-06T15:08:55Z",
-   "x": "The Mexican quintet announce a 2027 world tour and reveal how limited studio time, unexpected discoveries, and questions of identity shaped their newest album. \n Midnight Generation Turned Life on the Road Into a Reflection on Home With New Album Rooted \n\n Pedro Camacho",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Midnight-Generation-2027-Rooted-Tour-Official-Poster-scaled.png"
-  },
-  {
    "s": "clash",
    "k": "news",
    "t": "Melodic Ancestral Prayers: Telemakus Interviewed",
@@ -276,16 +672,6 @@
    "d": "2026-11-06T14:59:24Z",
    "x": "“Eight silver rings curl around my finger joints. They sleep with me, eat with me, play with me,” says Nu-Jazz maestro Telemakus. The Indian-American artist’s newest album, ‘Eight Ring Revival’, is a joyous celebration of how he’s evolved as a pianist and a producer since his Ehlers-Danlos diagnosis completely altered…",
    "f": "https://www.clashmusic.com/feed/"
-  },
-  {
-   "s": "consequence",
-   "k": "news",
-   "t": "Sharon Osbourne Says Ozzfest 2027 Lineup Is 50-Percent Booked, Details Unreleased Ozzy Songs",
-   "u": "https://consequence.net/2026/11/sharon-osbourne-ozzfest-2027-lineup-unreleased-ozzy-songs/",
-   "d": "2026-11-06T14:55:38Z",
-   "x": "Sharon offers some details on the return of Ozzfest and the intended destination of unreleased Ozzy songs. \n Sharon Osbourne Says Ozzfest 2027 Lineup Is 50-Percent Booked, Details Unreleased Ozzy Songs \n\n Spencer Kaufman",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/06/Sharon-Ozzy.jpg?quality=80"
   },
   {
    "s": "clash",
@@ -319,16 +705,6 @@
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Screenshot-2026-11-06-at-2.19.08-PM.png?w=200"
   },
   {
-   "s": "consequence",
-   "k": "news",
-   "t": "Rosalía Celebrates First Anniversary of LUX with Deluxe Vinyl Box Set",
-   "u": "https://consequence.net/2026/11/rosalia-lux-anniversay-deluxe-vinyl-box-set/",
-   "d": "2026-11-06T14:45:51Z",
-   "x": "The announcement follows the release of an official sheet music book, as speculation grows about a possible film documenting her world tour. \n Rosalía Celebrates First Anniversary of LUX with Deluxe Vinyl Box Set \n\n Pedro Camacho",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Rosalia-LUX-Vinyl-Box.jpg?quality=80"
-  },
-  {
    "s": "guardian",
    "k": "news",
    "t": "Spice Girls: The Singles Collection review – stop fleecing your fans right now, thank you very much",
@@ -357,16 +733,6 @@
    "f": "https://pitchfork.com/feed/feed-news/rss",
    "i": "https://media.pitchfork.com/photos/6aeb9e29a66e1f90616234f2/master/w_200,c_limit/TwistedTeens_2026_promo_04_MartinCrudo_2250x1500_300%20(2).jpg",
    "v": 3
-  },
-  {
-   "s": "consequence",
-   "k": "news",
-   "t": "Kings of Leon Announce 2027 Tour In Support of New Album",
-   "u": "https://consequence.net/2026/11/kings-of-leon-2027-tour-new-album/",
-   "d": "2026-11-06T14:27:57Z",
-   "x": "The 30-date outing sees the band on the road with Band of Horses and Dexter and the Moonrocks. \n Kings of Leon Announce 2027 Tour In Support of New Album \n\n Alex Young",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Kings-of-Leon-2027-tour-scaled.jpg?quality=80"
   },
   {
    "s": "stereogum",
@@ -511,15 +877,6 @@
    "i": "https://static.spinmagazine.com/files/2026/11/BLACK-WATCH-BY-BREN-HOLMES.jpg"
   },
   {
-   "s": "clash",
-   "k": "news",
-   "t": "Next Wave #1216: Bathing Suits",
-   "u": "https://www.clashmusic.com/next-wave/next-wave-1216-bathing-suits/",
-   "d": "2026-11-06T12:57:54Z",
-   "x": "Bathing Suits are potentially the fastest-rising band in the U.K., which is no surprise to anyone who has seen them live. Having formed in Leeds in 2024, Bathing Suits have been on an incredible rise, from being one of the most talked-about bands in Leeds’ DIY scene, to becoming a…",
-   "f": "https://www.clashmusic.com/feed/"
-  },
-  {
    "s": "quietus",
    "k": "news",
    "t": "English Folk Dance and Song Society Changes Name",
@@ -528,17 +885,6 @@
    "x": "It marks a major shift as the organisation approaches its centenary \n Cecil Sharp House \n The English Folk Dance and Song Society has formally changed its trading name to Folk England, a decision it says aligns with a mission to \"make folk music, song, and dance inclusive for all.\" \n Founded in 1932 following the merger of the Folk-Song Society and the English Folk Dance Society, the decision repr",
    "f": "https://thequietus.com/feed",
    "i": "https://thequietus.com/app/uploads/2026/11/Cecil-Sharp-House-featuring-old-EFDSS-sign-700x466.jpg"
-  },
-  {
-   "s": "clash",
-   "k": "album",
-   "t": "Katie Gregson-MacLeod Shares Debut Album ‘Albatross’",
-   "u": "https://www.clashmusic.com/news/katie-gregson-macleod-shares-debut-album-albatross/",
-   "d": "2026-11-06T12:46:18Z",
-   "x": "Scottish singer-songwriter Katie Gregson-MacLeod has released her debut album ‘Albatross’. The 25-year-old Scottish singer-songwriter gained traction on TikTok in 2021 with her song ‘Complex’. She is now working independently releasing the album via Matt Maltese’s Last Recordings on Earth. The album takes influence from Samuel Taylor Coleridge’s The Rime of… \n The post Katie Gregson-MacLeod Shares",
-   "f": "https://www.clashmusic.com/feed/",
-   "a": "Katie Gregson-MacLeod",
-   "w": "Albatross"
   },
   {
    "s": "nme",
@@ -578,6 +924,16 @@
    "d": "2026-11-06T12:04:44Z",
    "x": "Joy and Kim Hyun Jin have shared their thoughts on working together in the upcoming romance drama “One of a Kind Romance”! Based on a webtoon, “One of a Kind Romance” follows Gong Yu Il (Red Velvet’s Joy), an ordinary woman on the job hunt who unexpectedly becomes the manager of Tak Mu I (Kim… Continue reading Joy And Kim Hyun Jin Talk About Their Roles And Heart-Fluttering Romance In “One Of A Ki",
    "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "Cage The Elephant’s Matt Shultz Joins ‘Lipps Service’",
+   "u": "https://www.spinmagazine.com/2026/11/cage-the-elephant-lipps-service/",
+   "d": "2026-11-06T12:00:00Z",
+   "x": "Cage The Elephant frontman Matt Shultz is the guest on the latest installment of the SPIN Presents Lipps Service podcast.",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/11/Main-Press-Photo-scaled.jpg"
   },
   {
    "s": "nme",
@@ -649,26 +1005,6 @@
    "f": "https://www.soompi.com/feed"
   },
   {
-   "s": "quietus",
-   "k": "news",
-   "t": "Into The Risk Area: Factory Floor Interviewed",
-   "u": "https://thequietus.com/interviews/factory-floor-interview-2/",
-   "d": "2026-11-06T09:38:01Z",
-   "x": "Jim Osman talks to a newly revitalised Factory Floor on the eve of the release of their first album in ten years, One Trip. All portraits: Harry Ward \n One Trip by Factory Floor \n What catches Nik Colk Void’s eye is not the dramatic landscape itself but evidence that somebody has been there before her: tape torn from a wall, scratches in a surface, cables worn through years of use. She finds a sim",
-   "f": "https://thequietus.com/feed",
-   "i": "https://thequietus.com/app/uploads/2026/11/Screenshot-2026-11-04-at-10.55.41-2-700x466.jpg"
-  },
-  {
-   "s": "guardian",
-   "k": "news",
-   "t": "Enrico Rava Fearless Five with Joe Lovano: Corners review | John Fordham's jazz album of the month",
-   "u": "https://www.theguardian.com/music/2026/nov/06/enrico-rava-fearless-five-with-joe-lovano-corners-review-miles-davis",
-   "d": "2026-11-06T09:30:48Z",
-   "x": "(ECM)\n The Italian trumpeter’s group – featuring an old friend – rip through originals and free improvisation while balancing late-Miles funk with excellent vocals and horn ballads Miles Davis was the gamechanger behind at least three landmark transformations in jazz-making methods between the late 1940s and the 1960s – yet he was perhaps too instinctively lyrical, and too worldly, to take the fre",
-   "f": "https://www.theguardian.com/music/rss",
-   "i": "https://i.guim.co.uk/img/media/2420f40eefd1adb04b1dae0b7cc0d8e764db4645/488_5_6417_5133/master/6417.jpg?width=140&quality=85&auto=format&fit=max&s=d496ec7ef0d31f15be3a07154bda036d"
-  },
-  {
    "s": "nme",
    "k": "album",
    "t": "Shygirl – Swallow!",
@@ -679,43 +1015,6 @@
    "a": "Shygirl",
    "w": "Swallow!",
    "i": "https://www.nme.com/wp-content/uploads/2026/11/Shygirl-Credit-Jessica-Madavo-400x254.jpeg"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "7 K-Dramas With Electrifying Romantic Chemistry",
-   "u": "https://www.soompi.com/article/1884060wpp/7-k-dramas-with-electrifying-romantic-chemistry",
-   "d": "2026-11-06T09:20:23Z",
-   "x": "Some K-drama couples have a way of making your heart race with every glance, touch, and interaction. Whether it’s the undeniable attraction, intense tension, or the way they look at each other, these couples bring a whole new level of excitement to their romances. Here are some K-dramas with romantic chemistry between leads that will… Continue reading 7 K-Dramas With Electrifying Romantic Chemistr",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Watch: Park Min Young And Yook Sungjae Preview Their Chemistry On Set Of “Nine To Six”",
-   "u": "https://www.soompi.com/article/1884715wpp/watch-park-min-young-and-yook-sungjae-preview-their-chemistry-on-set-of-nine-to-six",
-   "d": "2026-11-06T09:06:16Z",
-   "x": "“Nine to Six” has released a new teaser previewing lively behind-the-scenes moments! “Nine to Six” is a romance drama starring Park Min Young as Kang Ji Yi, a workaholic who has long put her love life on the back burner due to her intense focus on work. After meeting the thoughtful and warm-hearted Han Seon… Continue reading Watch: Park Min Young And Yook Sungjae Preview Their Chemistry On Set Of",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "THE BOYZ’s Younghoon And WJSN’s Luda Bring Modern Tech To The Joseon Era In “Wi-Fi Love In The Palace”",
-   "u": "https://www.soompi.com/article/1884722wpp/the-boyzs-younghoon-and-wjsns-luda-bring-modern-tech-to-the-joseon-era-in-wi-fi-love-in-the-palace",
-   "d": "2026-11-06T08:55:00Z",
-   "x": "The upcoming romantic comedy film “Wi-Fi Love in the Palace” has unveiled its main poster! Based on a webtoon, “Wi-Fi Love in the Palace” is a time-crossing romantic comedy about Tae Pung (THE BOYZ’s Younghoon), a webtoon artist who finds himself giving romance advice to So Hyang (WJSN’s Luda), a court lady from the Joseon… Continue reading THE BOYZ’s Younghoon And WJSN’s Luda Bring Modern Tech To",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "quietus",
-   "k": "news",
-   "t": "45 Years On: OMD’s Architecture & Morality Remembered",
-   "u": "https://thequietus.com/opinion-and-essays/anniversary/omd-architecture-morality-review/",
-   "d": "2026-11-06T08:36:03Z",
-   "x": "Orchestral Manoeuvres In The Dark released one of the Quietus' favourite albums in 1981. John Doran reflects on the warmth of Architecture & Morality and talks to Andy McCluskey \n A lazy but widespread criticism of the English synth pop scene of the early 80s was that it was soulless or lacking in human warmth. While there certainly were acts who came across as detached or alienated (Cabaret Volta",
-   "f": "https://thequietus.com/feed",
-   "i": "https://thequietus.com/app/uploads/2026/11/OMD-Architecture-and-Morality-album-cover-820.jpg-300x300.webp"
   },
   {
    "s": "rollingstone",
@@ -729,45 +1028,6 @@
    "w": "Someone to Hold"
   },
   {
-   "s": "soompi",
-   "k": "news",
-   "t": "Seo Hyun Jin Confronts Yoo Yeon Seok As Their Battle Over The Truth Intensifies In “The Perfect Lie”",
-   "u": "https://www.soompi.com/article/1884716wpp/seo-hyun-jin-confronts-yoo-yeon-seok-as-their-battle-over-the-truth-intensifies-in-the-perfect-lie",
-   "d": "2026-11-06T08:31:41Z",
-   "x": "MBC’s “The Perfect Lie” has unveiled new stills ahead of tonight’s new episode! Helmed by “You and Everything Else” director Jo Young Min, “The Perfect Lie” is a psychological thriller in which a man and a woman offer completely opposite accounts of the same memory, clashing fiercely in their search for the truth. Spoilers Previously,… Continue reading Seo Hyun Jin Confronts Yoo Yeon Seok As Their",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "guardian",
-   "k": "news",
-   "t": "La Roux: Old Flames review – a breezy, hook-packed twist on a breakup album",
-   "u": "https://www.theguardian.com/music/2026/nov/06/la-roux-old-flames-review",
-   "d": "2026-11-06T08:30:47Z",
-   "x": "(Vertigo)\n Devastating moments are dressed up with warm production and kinetic 00s R&B in the now quiff-less singer’s grownup fourth album Over the six years that La Roux, AKA Elly Jackson, was making her fourth album, the singer ended a 17-year relationship, confronted her weed dependency, received autism and ADHD diagnoses and lopped off her signature Johnny Bravo-esque quiff. One might expect t",
-   "f": "https://www.theguardian.com/music/rss",
-   "i": "https://i.guim.co.uk/img/media/2145e975fe4f3978627a84de10a41e60aca5d6be/841_384_6185_4948/master/6185.jpg?width=140&quality=85&auto=format&fit=max&s=d1e13984de14a187987d69105055fa41"
-  },
-  {
-   "s": "quietus",
-   "k": "news",
-   "t": "Reissue of the Week: Henning Christiansen’s Symphony Natura",
-   "u": "https://thequietus.com/quietus-reviews/reissue-of-the-week/henning-christiansen-symphony-natura-review/",
-   "d": "2026-11-06T08:30:00Z",
-   "x": "Why Listen to Animals? asks Francis Gooding after immersing himself in some questionable musique concrète \n Symphony Natura by Henning Christiansen and Lorenzo Mammi \n \"The zoo\", wrote John Berger in a 1977 essay called 'Why Look At Animals?', \"cannot but disappoint\". The purpose of the visit is to see the animals, to look at them, but the animals always avoid being seen: they are bunched up at th",
-   "f": "https://thequietus.com/feed",
-   "i": "https://thequietus.com/app/uploads/2026/11/a4259900867_10-700x466.jpg"
-  },
-  {
-   "s": "nme",
-   "k": "news",
-   "t": "Why are veteran acts turning their backs on touring – and what hope is there for new artists?",
-   "u": "https://www.nme.com/news/music/why-veteran-established-artists-quit-touring-new-artist-help-3975004",
-   "d": "2026-11-06T08:00:51Z",
-   "x": "With the likes of Frank Turner and Enter Shikari calling hiatuses, and Garbage winding down how they tour, NME talks to gigging veterans, industry bosses and rising acts about the “clusterfuck” of obstacles stopping artists getting on stage, and what can be done",
-   "f": "https://www.nme.com/news/music/feed",
-   "i": "https://www.nme.com/wp-content/uploads/2026/11/touring_crisis_piece-400x254.jpg"
-  },
-  {
    "s": "nme",
    "k": "album",
    "t": "Royal Blood – Dead Company",
@@ -778,137 +1038,6 @@
    "a": "Royal Blood",
    "w": "Dead Company",
    "i": "https://www.nme.com/wp-content/uploads/2026/11/royal-blood-credit-Edward-Cooke-400x254.jpeg"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Gong Seung Yeon Unveils Stunning New Profile Photos",
-   "u": "https://www.soompi.com/article/1884702wpp/gong-seung-yeon-unveils-stunning-new-profile-photos",
-   "d": "2026-11-06T07:53:35Z",
-   "x": "Gong Seung Yeon has unveiled new profile photos! On November 6, VARO Entertainment shared five new profile photos of Gong Seung Yeon. The stunning profile photos highlight simplicity, conveying the actress’s elegance through simple styling and various hairstyles. Check out the profile photos below! Watch Gong Seung Yeon in “Flower Crew: Joseon Marriage Agency” below:… Continue reading Gong Seung Y",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Choi Woo Shik’s Agency Warns Legal Action Against Malicious Posts",
-   "u": "https://www.soompi.com/article/1884685wpp/choi-woo-shiks-agency-warns-legal-action-against-malicious-posts",
-   "d": "2026-11-06T07:40:24Z",
-   "x": "Actor Choi Woo Shik’s agency has warned strong legal action against malicious rumors. On November 6, his agency FABLE COMPANY announced through their official social media that they will take legal action against those who spread malicious posts. Hello, this is FABLE COMPANY. We are writing to address the recent spread of false information regarding… Continue reading Choi Woo Shik’s Agency Warns L",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "rollingstone",
-   "k": "news",
-   "t": "Slayyyter Goes Looking for Love in ‘Hey Boyyy’ Music Video",
-   "u": "https://www.rollingstone.com/music/music-news/slayyyter-hey-boyyy-single-music-video-1235653808/",
-   "d": "2026-11-06T07:39:25Z",
-   "x": "The track will appear on the singer’s forthcoming album, Wor$t Man in America",
-   "f": "https://www.rollingstone.com/music/music-news/feed/"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Son Hyun Joo Presses Lee Jung Eun About Kim Ji Won’s True Identity In “Doctor X”",
-   "u": "https://www.soompi.com/article/1884684wpp/son-hyun-joo-presses-lee-jung-eun-about-kim-ji-wons-true-identity-in-doctor-x",
-   "d": "2026-11-06T07:36:51Z",
-   "x": "“Doctor X” has unveiled a glimpse of Son Hyun Joo’s confrontation with Lee Jung Eun! Based on the hit Japanese series of the same name, SBS’s “Doctor X” is a medical noir drama starring Kim Ji Won as Gye Soo Jung, a genius surgeon who proves what it truly means to be a doctor through… Continue reading Son Hyun Joo Presses Lee Jung Eun About Kim Ji Won’s True Identity In “Doctor X” \n The post Son H",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Watch: Yim Si Wan, Seol In Ah, And More Show Playful And Close Chemistry On Set Of “Love In Disguise”",
-   "u": "https://www.soompi.com/article/1884613wpp/watch-yim-si-wan-seol-in-ah-and-more-show-playful-and-close-chemistry-on-set-of-love-in-disguise",
-   "d": "2026-11-06T07:34:56Z",
-   "x": "tvN’s “Love in Disguise” has shared a new making-of video for episodes 5 and 6! The making-of video highlights the bright atmosphere on set. Seol In Ah explains the concept of how to film a making-of video to Yim Si Wan, encouraging him to greet his fans. Yim Si Wan and Seol In Ah also… Continue reading Watch: Yim Si Wan, Seol In Ah, And More Show Playful And Close Chemistry On Set Of “Love In Dis",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Lee Min Ki And His T.C.I. Team Take On A New Case With Newest Member Jisung In “Crash 2”",
-   "u": "https://www.soompi.com/article/1884663wpp/lee-min-ki-and-his-t-c-i-team-take-on-a-new-case-with-newest-member-jisung-in-crash-2",
-   "d": "2026-11-06T07:07:19Z",
-   "x": "“Crash 2” has unveiled new stills featuring the members of its T.C.I. team! “Crash 2” is the second installment of the hit 2024 drama “Crash,” which made history as the first Korean drama to focus on traffic crime investigations. In “Crash 2,” the Traffic Crime Investigation (T.C.I.) team from Namgang Police Station evolves into a… Continue reading Lee Min Ki And His T.C.I. Team Take On A New Case",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Seo Hyun Jin Sneaks Into Yoo Yeon Seok’s House To Look For Evidence In “The Perfect Lie”",
-   "u": "https://www.soompi.com/article/1884618wpp/seo-hyun-jin-sneaks-into-yoo-yeon-seoks-house-to-look-for-evidence-in-the-perfect-lie",
-   "d": "2026-11-06T07:02:29Z",
-   "x": "MBC’s “The Perfect Lie” has unveiled new stills ahead of tonight’s new episode! Helmed by “You and Everything Else” director Jo Young Min, “The Perfect Lie” is a psychological thriller in which a man and a woman offer completely opposite accounts of the same memory, clashing fiercely in their search for the truth. Spoilers While… Continue reading Seo Hyun Jin Sneaks Into Yoo Yeon Seok’s House To L",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "7 K-Pop Tracks With Harmonies So Beautiful They’ll Give You Goosebumps",
-   "u": "https://www.soompi.com/article/1884517wpp/7-k-pop-tracks-with-harmonies-so-beautiful-theyll-give-you-goosebumps",
-   "d": "2026-11-06T06:52:43Z",
-   "x": "Vocal harmonies might not be something typically associated with the K-pop genre, but that doesn’t mean that these groups don’t know how to get it right! The perfect harmony is something that will give you goosebumps every time you hear them—and these songs prove it. Get ready to hear the most angelic playlist you’ve ever… Continue reading 7 K-Pop Tracks With Harmonies So Beautiful They’ll Give Yo",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Kim Ji Won Risks It All With An Impossible Surgery In Desperate Bid To Save Child Patient In “Doctor X”",
-   "u": "https://www.soompi.com/article/1884622wpp/kim-ji-won-risks-it-all-with-an-impossible-surgery-in-desperate-bid-to-save-child-patient-in-doctor-x",
-   "d": "2026-11-06T06:33:51Z",
-   "x": "“Doctor X” has unveiled new stills ahead of its upcoming episode. Based on the hit Japanese series of the same name, SBS’s “Doctor X” is a medical noir drama starring Kim Ji Won as Gye Soo Jung, a genius surgeon who proves what it truly means to be a doctor through pure skill alone as… Continue reading Kim Ji Won Risks It All With An Impossible Surgery In Desperate Bid To Save Child Patient In “Do",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "billboard",
-   "k": "news",
-   "t": "Lil Baby, JENNIE, Dove Cameron, XG, Boys Noize & More: New Music Friday Guide",
-   "u": "https://www.billboard.com/music/music-news/lil-baby-jennie-dove-cameron-new-music-friday-guide-1236374328/",
-   "d": "2026-11-06T06:16:41Z",
-   "x": "Check out the must-hear releases of the week.",
-   "f": "https://www.billboard.com/c/music/music-news/feed/"
-  },
-  {
-   "s": "quietus",
-   "k": "news",
-   "t": "Rizan Said – Ma Waraa Al-Shaabi (ما وراء الشعبي) / Beyond Shaabi",
-   "u": "https://thequietus.com/quietus-reviews/rizan-said/",
-   "d": "2026-11-06T06:00:00Z",
-   "x": "Rizan Said \n Ma Waraa Al-Shaabi (ما وراء الشعبي) / Beyond Shaabi \n On his third solo outing, Syrian keyboard king Rizan Said preserves regional musical traditions by driving them forward \n Ma Waraa Al-Shaabi (ما وراء الشعبي) – Beyond Shaabi by Rizan Said \n Despite the fact that I have only been to two weddings in my entire life, I have actually been to a Syrian one. Meridian Water, 2024, sometime",
-   "f": "https://thequietus.com/feed",
-   "i": "https://thequietus.com/app/uploads/2026/11/riza-said-beyond-shaabi.avif"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "tvN Announces December Premiere Date For “Signal” Season 2",
-   "u": "https://www.soompi.com/article/1884583wpp/tvn-announces-december-premiere-date-for-signal-season-2",
-   "d": "2026-11-06T05:57:04Z",
-   "x": "tvN has issued an official statement regarding the release date of Season 2 of “Signal.” “The Second Signal,” the long-awaited second season of the hit 2016 drama “Signal,” was originally scheduled to premiere in June for tvN’s 20th anniversary, but the show was put on hold due to star Cho Jin Woong’s controversy. In December… Continue reading tvN Announces December Premiere Date For “Signal” Seas",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "pitchfork",
-   "k": "news",
-   "t": "Watch Slayyyter Date a Skeleton in New “Hey Boyyy” Video",
-   "u": "https://pitchfork.com/story/watch-slayyyter-date-a-skeleton-in-new-hey-boyyy-video/",
-   "d": "2026-11-06T05:20:22Z",
-   "x": "Including a romantic excursion on the Seine",
-   "f": "https://pitchfork.com/feed/feed-news/rss",
-   "i": "https://media.pitchfork.com/photos/6aecf5f9b0fa15a54106afd1/master/w_200,c_limit/img-f35e77d9-559b-43a4-84bf-d27635e2afa2.jpeg",
-   "v": 3
-  },
-  {
-   "s": "pitchfork",
-   "k": "news",
-   "t": "Go Fishing With Twisted Teens in Video for “I Spend My Time Crying”",
-   "u": "https://pitchfork.com/story/go-fishing-with-twisted-teens-in-new-video-for-i-spend-my-time-crying/",
-   "d": "2026-11-06T05:18:01Z",
-   "x": "Their new album, The Holy Cross Tigers, is out today",
-   "f": "https://pitchfork.com/feed/feed-news/rss",
-   "i": "https://media.pitchfork.com/photos/6aecf3e7b0fa15a54106afbe/master/w_200,c_limit/TwistedTeens_2026_promo_18_MartinCrudo_2250x1500_300%20(4).jpg",
-   "v": 3
   },
   {
    "s": "pitchfork",
@@ -953,16 +1082,6 @@
    "v": 3
   },
   {
-   "s": "guardian",
-   "k": "news",
-   "t": "‘It’s a new world. It’s a little fascistic. And it needs a different response’: U2 on 50 years together – and why Bono can’t work with Trump",
-   "u": "https://www.theguardian.com/music/2026/nov/06/its-a-new-world-its-a-little-fascistic-and-it-needs-a-different-response-u2-on-50-years-together-and-their-undimmed-faith-in-humanity",
-   "d": "2026-11-06T05:00:44Z",
-   "x": "After some so-so albums, can U2’s new one, Carnaval de Luz, restore them to glory? They discuss male egos, working with Dolly Parton, and explain why, despite Trump, they still believe in democracy – at least in their band La Petite Maison, in Nice, has a certain reputation as a five-star celebrity haunt. Beyoncé eats here. So do Elton John, Tom Cruise, Harry Styles and Leonardo DiCaprio, their me",
-   "f": "https://www.theguardian.com/music/rss",
-   "i": "https://i.guim.co.uk/img/media/d461f59fb9214d97e5aaa4575eb283294777e9c9/541_0_6830_5464/master/6830.jpg?width=140&quality=85&auto=format&fit=max&s=023af475c7d85b44ea2d708f35bb2c26"
-  },
-  {
    "s": "pitchfork",
    "k": "album",
    "t": "gyrofield – Great Jobs",
@@ -974,75 +1093,6 @@
    "w": "Great Jobs",
    "i": "https://media.pitchfork.com/photos/6aeca9b677ca41c6e0456d40/master/w_200,c_limit/gyrofield%20-%20Great%20Jobs.jpg",
    "sc": 7.4,
-   "v": 3
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "3 Points To Look Forward To In “What A Boss Wants”",
-   "u": "https://www.soompi.com/article/1884542wpp/3-points-to-look-forward-to-in-what-a-boss-wants",
-   "d": "2026-11-06T04:50:10Z",
-   "x": "The upcoming drama “What a Boss Wants” has shared three key points to look forward to! Based on a web novel, “What a Boss Wants” is a romance drama starring Sung Hoon as Kwon Do Hyuk, a chaebol boss with zero sense of taste who sets out to find a mysterious woman whose voice he… Continue reading 3 Points To Look Forward To In “What A Boss Wants” \n The post 3 Points To Look Forward To In “What A Bo",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "KATSEYE Postpones Chicago And Minneapolis Concerts",
-   "u": "https://www.soompi.com/article/1884547wpp/katseye-postpones-chicago-and-minneapolis-concerts",
-   "d": "2026-11-06T04:22:24Z",
-   "x": "Global girl group KATSEYE has postponed a series of their North American tour dates following a concussion diagnosis for member Megan. On November 5 (local time), KATSEYE’s agency announced the postponement of the Chicago and Minneapolis shows via the group’s official Instagram account. Read the full announcement below: Megan took to her Instagram to share… Continue reading KATSEYE Postpones Chica",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "consequence",
-   "k": "news",
-   "t": "HYUKOH Announce New Album, 33, First US Tour Dates Since 2019",
-   "u": "https://consequence.net/2026/11/hyukoh-announce-new-album-tour-dates/",
-   "d": "2026-11-06T03:32:12Z",
-   "x": "The new release marks the South Korean indie band's first solo release since 2020, while the U.S. tour dates mark their first stateside shows since 2019. \n HYUKOH Announce New Album, 33, First US Tour Dates Since 2019 \n\n Travis Bland",
-   "f": "https://consequence.net/feed/",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/HYUKOH.jpg?quality=80"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Actor Do Sang Woo And Model Park Ji Hye To Tie The Knot",
-   "u": "https://www.soompi.com/article/1884527wpp/actor-do-sang-woo-and-model-park-ji-hye-to-tie-the-knot",
-   "d": "2026-11-06T01:39:20Z",
-   "x": "Actor Do Sang Woo and model Park Ji Hye are getting married! On November 6, industry insiders reported that the two will tie the knot in February of next year. In response to the report, Do Sang Woo’s agency J-Wide Company stated through an official announcement, “Do Sang Woo has met a precious partner to… Continue reading Actor Do Sang Woo And Model Park Ji Hye To Tie The Knot \n The post Actor Do",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "rollingstone",
-   "k": "news",
-   "t": "Nile Rodgers Defends AI Use in Music Video: ‘We Created Everything … The AI Did What We Told It to Do’",
-   "u": "https://www.rollingstone.com/music/music-news/nile-rodgers-defends-ai-use-new-music-video-christmas-song-1235653717/",
-   "d": "2026-11-06T01:30:10Z",
-   "x": "The musician called it “hypocritical” to be “anti AI” when people are “using it all the time because it makes your life convenient”",
-   "f": "https://www.rollingstone.com/music/music-news/feed/"
-  },
-  {
-   "s": "consequence",
-   "k": "song",
-   "t": "Olivia Rodrigo Unveils New Holiday Song “Take me home (4 christmas)”",
-   "u": "https://consequence.net/2026/11/olivia-rodrigo-take-me-home-4-christmas-holiday-song-stream/",
-   "d": "2026-11-06T01:28:00Z",
-   "x": "Watch the song's official music video now, which stars Cynthia Nixon and Ben Marshall. \n Olivia Rodrigo Unveils New Holiday Song “Take me home (4 christmas)” \n\n Paolo Ragusa",
-   "f": "https://consequence.net/feed/",
-   "a": "Olivia Rodrigo",
-   "w": "Take me home (4 christmas)",
-   "i": "https://consequence.net/wp-content/uploads/2026/11/Olivia-Rodrigo.jpeg?quality=80"
-  },
-  {
-   "s": "pitchfork",
-   "k": "news",
-   "t": "Listen to Olivia Rodrigo’s New Song “Take Me Home (4 Christmas)”",
-   "u": "https://pitchfork.com/story/listen-to-olivia-rodrigos-new-song-take-me-home-4-christmas/",
-   "d": "2026-11-06T01:15:37Z",
-   "x": "She just wants to enjoy a hungover brunch with your mom",
-   "f": "https://pitchfork.com/feed/feed-news/rss",
-   "i": "https://media.pitchfork.com/photos/6aebd73d891075d9a7f6873c/master/w_200,c_limit/orod.jpg",
    "v": 3
   },
   {
@@ -1104,42 +1154,6 @@
    "a": "Eev Frances",
    "w": "Shake",
    "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/eevfrances.jpg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "song",
-   "t": "Spencer Peppet – “Power”",
-   "u": "https://stereogum.com/2516638/spencer-peppet-power/music/",
-   "d": "2026-11-05T18:37:32Z",
-   "x": "",
-   "f": "https://www.stereogum.com/feed/",
-   "a": "Spencer Peppet",
-   "w": "Power",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/52e8653e-aa41-e935-7eb0-26379b085fdb.png?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "song",
-   "t": "Liquid Mike – “Inanimate Object”",
-   "u": "https://stereogum.com/2516609/liquid-mike-inanimate-object/music/",
-   "d": "2026-11-05T16:31:43Z",
-   "x": "",
-   "f": "https://www.stereogum.com/feed/",
-   "a": "Liquid Mike",
-   "w": "Inanimate Object",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Liquid-Mike.jpg?w=200"
-  },
-  {
-   "s": "stereogum",
-   "k": "song",
-   "t": "Morphine – “Spaceman Charm”",
-   "u": "https://stereogum.com/2516589/morphine-spaceman-charm/music/",
-   "d": "2026-11-05T15:14:58Z",
-   "x": "",
-   "f": "https://www.stereogum.com/feed/",
-   "a": "Morphine",
-   "w": "Spaceman Charm",
-   "i": "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/Morphine.jpeg?w=200"
   },
   {
    "s": "pitchfork",
@@ -2060,83 +2074,113 @@
    "a": "Tommy Guerrero",
    "t": "El Camino Negro",
    "s": "Silence Nogood",
-   "lv": 895,
+   "lv": 853,
    "i": "https://static.hypem.com/items_images/69/2smb9_120.jpg",
    "u": "https://hypem.com/track/2smb9",
    "d": "2026-11-05T05:05:00Z"
   },
   {
    "p": 2,
-   "a": "Pale Jay",
-   "t": "Dreaming In Slow Motion",
-   "s": "Silence Nogood",
-   "lv": 24,
-   "i": "https://static.hypem.com/items_images/32/35zhj_120.jpg",
-   "u": "https://hypem.com/track/35zhj",
-   "d": "2026-11-05T05:04:16Z"
-  },
-  {
-   "p": 3,
-   "a": "Lo Barnes",
-   "t": "Heaven Was His Name",
-   "s": "Podcart",
-   "lv": 10,
-   "i": "https://static.hypem.com/items_images/ba/3aqxt_120.jpg",
-   "u": "https://hypem.com/track/3aqxt",
-   "d": "2026-11-05T18:56:08Z"
-  },
-  {
-   "p": 4,
-   "a": "The Olivia Tremor Control",
-   "t": "The Same Place",
-   "s": "Spectrum Culture",
-   "lv": 24,
-   "i": "https://static.hypem.com/items_images/25/37fs5_120.jpg",
-   "u": "https://hypem.com/track/37fs5",
-   "d": "2026-11-05T06:44:11Z"
-  },
-  {
-   "p": 5,
-   "a": "Flamingosis",
-   "t": "Believe In Me",
-   "s": "Silence Nogood",
-   "lv": 2538,
-   "i": "https://static.hypem.com/items_images/6f/2gt3f_120.jpg",
-   "u": "https://hypem.com/track/2gt3f",
-   "d": "2026-11-05T05:04:42Z"
-  },
-  {
-   "p": 6,
-   "a": "BadBadNotGood",
-   "t": "In Your Eyes (Feat. Charlotte Day Wilson)",
-   "s": "Silence Nogood",
-   "lv": 2708,
-   "i": "https://static.hypem.com/items_images/fb/2grqv_120.jpg",
-   "u": "https://hypem.com/track/2grqv",
-   "d": "2026-11-05T05:04:29Z"
-  },
-  {
-   "p": 7,
    "a": "Les Imprimés",
    "t": "I'll Never Leave",
    "s": "Silence Nogood",
-   "lv": 35,
+   "lv": 43,
    "i": "https://static.hypem.com/items_images/90/34n4g_120.jpg",
    "u": "https://hypem.com/track/34n4g",
    "d": "2026-11-05T05:04:35Z"
   },
   {
+   "p": 3,
+   "a": "Pale Jay",
+   "t": "Dreaming In Slow Motion",
+   "s": "Silence Nogood",
+   "lv": 20,
+   "i": "https://static.hypem.com/items_images/32/35zhj_120.jpg",
+   "u": "https://hypem.com/track/35zhj",
+   "d": "2026-11-05T05:04:16Z"
+  },
+  {
+   "p": 4,
+   "a": "Lo Barnes",
+   "t": "Heaven Was His Name",
+   "s": "No Transmission",
+   "lv": 10,
+   "i": "https://static.hypem.com/items_images/ba/3aqxt_120.jpg",
+   "u": "https://hypem.com/track/3aqxt",
+   "d": "2026-11-06T16:52:43Z"
+  },
+  {
+   "p": 5,
+   "a": "Galaxie 500",
+   "t": "Snowstorm",
+   "s": "Christmas Underground",
+   "lv": 36,
+   "i": "https://static.hypem.com/items_images/12/rnrj_120.jpg",
+   "u": "https://hypem.com/track/rnrj",
+   "d": "2026-11-06T15:13:07Z"
+  },
+  {
+   "p": 6,
+   "a": "LOUDWERX",
+   "t": "Bass Go Boom feat. Magic & Bird",
+   "s": "Future Classics",
+   "lv": 15,
+   "i": "https://static.hypem.com/items_images/c2/3ar62_120.jpg",
+   "u": "https://hypem.com/track/3ar62",
+   "d": "2026-11-05T17:44:37Z"
+  },
+  {
+   "p": 7,
+   "a": "The Olivia Tremor Control",
+   "t": "The Same Place",
+   "s": "Spectrum Culture",
+   "lv": 23,
+   "i": "https://static.hypem.com/items_images/25/37fs5_120.jpg",
+   "u": "https://hypem.com/track/37fs5",
+   "d": "2026-11-05T06:44:11Z"
+  },
+  {
    "p": 8,
+   "a": "Flamingosis",
+   "t": "Believe In Me",
+   "s": "Silence Nogood",
+   "lv": 2493,
+   "i": "https://static.hypem.com/items_images/6f/2gt3f_120.jpg",
+   "u": "https://hypem.com/track/2gt3f",
+   "d": "2026-11-05T05:04:42Z"
+  },
+  {
+   "p": 9,
+   "a": "BadBadNotGood",
+   "t": "In Your Eyes (Feat. Charlotte Day Wilson)",
+   "s": "Silence Nogood",
+   "lv": 2651,
+   "i": "https://static.hypem.com/items_images/fb/2grqv_120.jpg",
+   "u": "https://hypem.com/track/2grqv",
+   "d": "2026-11-05T05:04:29Z"
+  },
+  {
+   "p": 10,
+   "a": "Charlotte Adigéry & Bolis Pupul",
+   "t": "Googoo Gaga",
+   "s": "Sodwee",
+   "lv": 6,
+   "i": "https://static.hypem.com/items_images/4e/3ajte_120.jpg",
+   "u": "https://hypem.com/track/3ajte",
+   "d": "2026-11-04T22:32:31Z"
+  },
+  {
+   "p": 11,
    "a": "Jengi",
    "t": "Feels Like Friday",
    "s": "acid stag",
-   "lv": 10,
+   "lv": 13,
    "i": "https://static.hypem.com/items_images/3c/3ar1w_120.jpg",
    "u": "https://hypem.com/track/3ar1w",
    "d": "2026-11-04T02:24:33Z"
   },
   {
-   "p": 9,
+   "p": 12,
    "a": "Melissa Weikart",
    "t": "L'amour se construit",
    "s": "We All Want Someone To Shout For",
@@ -2146,27 +2190,17 @@
    "d": "2026-11-04T01:48:19Z"
   },
   {
-   "p": 10,
-   "a": "Galaxie 500",
-   "t": "Snowstorm",
-   "s": "Christmas Underground",
-   "lv": 31,
-   "i": "https://static.hypem.com/items_images/12/rnrj_120.jpg",
-   "u": "https://hypem.com/track/rnrj",
-   "d": "2026-11-06T15:13:07Z"
+   "p": 13,
+   "a": "fka boursin",
+   "t": "Listless Intertext (Frank & Tony's Housebeat Dub) (Scissor & Thread)",
+   "s": "Inverted Audio",
+   "lv": 5,
+   "i": "https://static.hypem.com/items_images/82/38t42_120.jpg",
+   "u": "https://hypem.com/track/38t42",
+   "d": "2026-11-06T17:13:09Z"
   },
   {
-   "p": 11,
-   "a": "Fujiya & Miyagi",
-   "t": "No Green Light",
-   "s": "I Left Without My Hat",
-   "lv": 2,
-   "i": "https://static.hypem.com/items_images/af/3ar5f_120.jpg",
-   "u": "https://hypem.com/track/3ar5f",
-   "d": "2026-11-06T06:16:23Z"
-  },
-  {
-   "p": 12,
+   "p": 14,
    "a": "The Wedding Present",
    "t": "This Boy Can Wait (A Bit Longer!)",
    "s": "THE VINYL VILLAIN",
@@ -2176,37 +2210,27 @@
    "d": "2026-11-06T06:04:36Z"
   },
   {
-   "p": 13,
-   "a": "LOUDWERX",
-   "t": "Bass Go Boom feat. Magic & Bird",
-   "s": "Future Classics",
-   "lv": 8,
-   "i": "https://static.hypem.com/items_images/c2/3ar62_120.jpg",
-   "u": "https://hypem.com/track/3ar62",
-   "d": "2026-11-05T17:44:37Z"
-  },
-  {
-   "p": 14,
+   "p": 15,
    "a": "The Divine Comedy",
    "t": "The Frog Princess",
    "s": "THE VINYL VILLAIN",
-   "lv": 18,
+   "lv": 22,
    "i": "https://static.hypem.com/items_images/b0/rrng_120.jpg",
    "u": "https://hypem.com/track/rrng",
    "d": "2026-11-05T05:48:24Z"
   },
   {
-   "p": 15,
+   "p": 16,
    "a": "Khruangbin",
    "t": "White Gloves",
    "s": "Silence Nogood",
-   "lv": 1895,
+   "lv": 1944,
    "i": "https://static.hypem.com/items_images/21/2cv91_120.jpg",
    "u": "https://hypem.com/track/2cv91",
    "d": "2026-11-05T05:04:48Z"
   },
   {
-   "p": 16,
+   "p": 17,
    "a": "Thee Sinseers",
    "t": "Sinseerly Yours",
    "s": "Silence Nogood",
@@ -2216,17 +2240,317 @@
    "d": "2026-11-05T05:04:55Z"
   },
   {
-   "p": 17,
+   "p": 18,
    "a": "Easterhouse",
    "t": "Whistling In The Dark",
    "s": "THE VINYL VILLAIN",
-   "lv": 22,
+   "lv": 18,
    "i": "https://static.hypem.com/items_images/68/1kab8_120.jpg",
    "u": "https://hypem.com/track/1kab8",
    "d": "2026-11-04T05:36:11Z"
   },
   {
-   "p": 18,
+   "p": 19,
+   "a": "Genosky",
+   "t": "Pushing My Luck",
+   "s": "UpToHear",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/42/3ara2_120.jpg",
+   "u": "https://hypem.com/track/3ara2",
+   "d": "2026-11-06T20:52:16Z"
+  },
+  {
+   "p": 20,
+   "a": "HEXED",
+   "t": "ONE OF MINE",
+   "s": "Future Classics",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/45/3ara5_120.jpg",
+   "u": "https://hypem.com/track/3ara5",
+   "d": "2026-11-06T20:56:22Z"
+  },
+  {
+   "p": 21,
+   "a": "Like & Subscribe",
+   "t": "Pump Up The Jam",
+   "s": "Future Classics",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/44/3ara4_120.jpg",
+   "u": "https://hypem.com/track/3ara4",
+   "d": "2026-11-06T20:56:15Z"
+  },
+  {
+   "p": 22,
+   "a": "Lizdek",
+   "t": "VENGEANCE",
+   "s": "Future Classics",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/43/3ara3_120.jpg",
+   "u": "https://hypem.com/track/3ara3",
+   "d": "2026-11-06T20:56:08Z"
+  },
+  {
+   "p": 23,
+   "a": "Resonants",
+   "t": "Liar Liar",
+   "s": "a little bit of sol",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/40/3ara0_120.jpg",
+   "u": "https://hypem.com/track/3ara0",
+   "d": "2026-11-06T20:28:11Z"
+  },
+  {
+   "p": 24,
+   "a": "Cloudbelly",
+   "t": "Throw The Game",
+   "s": "UpToHear",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/41/3ara1_120.jpg",
+   "u": "https://hypem.com/track/3ara1",
+   "d": "2026-11-06T20:52:10Z"
+  },
+  {
+   "p": 25,
+   "a": "Anton",
+   "t": "Serpent Des Villes",
+   "s": "Post-Punk.com",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/3c/3ar9w_120.jpg",
+   "u": "https://hypem.com/track/3ar9w",
+   "d": "2026-11-06T19:48:15Z"
+  },
+  {
+   "p": 26,
+   "a": "Matrefakt",
+   "t": "good times (PP Remix)",
+   "s": "When We Dip",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/46/3ara6_120.jpg",
+   "u": "https://hypem.com/track/3ara6",
+   "d": "2026-11-06T21:24:11Z"
+  },
+  {
+   "p": 27,
+   "a": "Matrefakt",
+   "t": "good times",
+   "s": "When We Dip",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/47/3ara7_120.jpg",
+   "u": "https://hypem.com/track/3ara7",
+   "d": "2026-11-06T21:24:17Z"
+  },
+  {
+   "p": 28,
+   "a": "KingCrowney & Zoe Kypri",
+   "t": "Coat On (Wez Whynt Remix)",
+   "s": "When We Dip",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/3b/3ar9v_120.jpg",
+   "u": "https://hypem.com/track/3ar9v",
+   "d": "2026-11-06T19:24:25Z"
+  },
+  {
+   "p": 29,
+   "a": "Lydia Loveless",
+   "t": "Avoiding Highways",
+   "s": "Rainbow Rodeo",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/58/3aqtr_120.jpg",
+   "u": "https://hypem.com/track/3aqtr",
+   "d": "2026-11-06T19:56:08Z"
+  },
+  {
+   "p": 30,
+   "a": "Willi Carlisle",
+   "t": "The Master's Hammer",
+   "s": "Rainbow Rodeo",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/3e/3ar9y_120.jpg",
+   "u": "https://hypem.com/track/3ar9y",
+   "d": "2026-11-06T19:56:17Z"
+  },
+  {
+   "p": 31,
+   "a": "Robin Shakedown",
+   "t": "Ruthless",
+   "s": "Rainbow Rodeo",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/3f/3ar9z_120.jpg",
+   "u": "https://hypem.com/track/3ar9z",
+   "d": "2026-11-06T19:56:24Z"
+  },
+  {
+   "p": 32,
+   "a": "DEADROADS",
+   "t": "Tomorrow Dies Today",
+   "s": "Destroy//Exist",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/38/3ar9r_120.jpg",
+   "u": "https://hypem.com/track/3ar9r",
+   "d": "2026-11-06T19:12:20Z"
+  },
+  {
+   "p": 33,
+   "a": "Velatine",
+   "t": "Tonight I am a Vampire",
+   "s": "Destroy//Exist",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/37/3ar9q_120.jpg",
+   "u": "https://hypem.com/track/3ar9q",
+   "d": "2026-11-06T19:12:14Z"
+  },
+  {
+   "p": 34,
+   "a": "Her New Knife",
+   "t": "lyre",
+   "s": "Retratando Voces",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/35/3ar9n_120.jpg",
+   "u": "https://hypem.com/track/3ar9n",
+   "d": "2026-11-06T18:48:13Z"
+  },
+  {
+   "p": 35,
+   "a": "the Silent Boys",
+   "t": "Number 7",
+   "s": "janglepophub",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/da/3anet_120.jpg",
+   "u": "https://hypem.com/track/3anet",
+   "d": "2026-11-06T18:36:30Z"
+  },
+  {
+   "p": 36,
+   "a": "the Silent Boys",
+   "t": "The Whistle Blower",
+   "s": "janglepophub",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/32/3ar9j_120.jpg",
+   "u": "https://hypem.com/track/3ar9j",
+   "d": "2026-11-06T18:36:17Z"
+  },
+  {
+   "p": 37,
+   "a": "the Silent Boys",
+   "t": "Think Of Me",
+   "s": "janglepophub",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/33/3ar9k_120.jpg",
+   "u": "https://hypem.com/track/3ar9k",
+   "d": "2026-11-06T18:36:23Z"
+  },
+  {
+   "p": 38,
+   "a": "STAY GOLDEN, Belyi",
+   "t": "4EVER (Original Mix) (SNIPPET)",
+   "s": "When We Dip",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/39/3ar9s_120.jpg",
+   "u": "https://hypem.com/track/3ar9s",
+   "d": "2026-11-06T19:24:11Z"
+  },
+  {
+   "p": 39,
+   "a": "Belyi, Kirr, STAY GOLDEN",
+   "t": "Bali Dance (Original Mix) (SNIPPET)",
+   "s": "When We Dip",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/3a/3ar9t_120.jpg",
+   "u": "https://hypem.com/track/3ar9t",
+   "d": "2026-11-06T19:24:18Z"
+  },
+  {
+   "p": 40,
+   "a": "frix",
+   "t": "Cascade",
+   "s": "electric sound of joy",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/30/3ar9g_120.jpg",
+   "u": "https://hypem.com/track/3ar9g",
+   "d": "2026-11-06T18:20:26Z"
+  },
+  {
+   "p": 41,
+   "a": "Alba Liv",
+   "t": "softswallowfly",
+   "s": "electric sound of joy",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/c2/3aqp2_120.jpg",
+   "u": "https://hypem.com/track/3aqp2",
+   "d": "2026-11-06T18:20:19Z"
+  },
+  {
+   "p": 42,
+   "a": "JW Francis",
+   "t": "Scootin' Boogie",
+   "s": "electric sound of joy",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/90/3apcg_120.jpg",
+   "u": "https://hypem.com/track/3apcg",
+   "d": "2026-11-06T18:20:12Z"
+  },
+  {
+   "p": 43,
+   "a": "Krash Slaughta",
+   "t": "Side A5. Rap Insurgents",
+   "s": "Monkeyboxing",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/31/3ar9h_120.jpg",
+   "u": "https://hypem.com/track/3ar9h",
+   "d": "2026-11-06T18:36:11Z"
+  },
+  {
+   "p": 44,
+   "a": "Strings for Palestine",
+   "t": "Yuma at Nightfall (Live in London)",
+   "s": "Petal Motel",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/2d/3ar9d_120.jpg",
+   "u": "https://hypem.com/track/3ar9d",
+   "d": "2026-11-06T17:48:23Z"
+  },
+  {
+   "p": 45,
+   "a": "Head of Femur",
+   "t": "Blackout",
+   "s": "Lazy-i",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/36/3ar9p_120.jpg",
+   "u": "https://hypem.com/track/3ar9p",
+   "d": "2026-11-06T19:00:16Z"
+  },
+  {
+   "p": 46,
+   "a": "Hernan Cattaneo, Hicky & Kalo",
+   "t": "Distant Memories (Guy Mantzur & Chicola Remix)",
+   "s": "When We Dip",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/2b/3ar9b_120.jpg",
+   "u": "https://hypem.com/track/3ar9b",
+   "d": "2026-11-06T17:16:10Z"
+  },
+  {
+   "p": 47,
+   "a": "Lou Turner",
+   "t": "Beaver Moon",
+   "s": "Record Crates United",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/29/3ar99_120.jpg",
+   "u": "https://hypem.com/track/3ar99",
+   "d": "2026-11-06T17:12:50Z"
+  },
+  {
+   "p": 48,
+   "a": "Olof Dreijer",
+   "t": "Shisandra Replanted",
+   "s": "Super Super Sounds",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/2c/3ar9c_120.jpg",
+   "u": "https://hypem.com/track/3ar9c",
+   "d": "2026-11-06T17:36:10Z"
+  },
+  {
+   "p": 49,
    "a": "Båndet",
    "t": "MOD ØST",
    "s": "Passive/Aggressive",
@@ -2236,7 +2560,7 @@
    "d": "2026-11-06T15:48:16Z"
   },
   {
-   "p": 19,
+   "p": 50,
    "a": "Båndet",
    "t": "LILLE FUGL",
    "s": "Passive/Aggressive",
@@ -2244,316 +2568,6 @@
    "i": "https://static.hypem.com/items_images/24/3ar94_120.jpg",
    "u": "https://hypem.com/track/3ar94",
    "d": "2026-11-06T15:48:23Z"
-  },
-  {
-   "p": 20,
-   "a": "Båndet",
-   "t": "SMÅ OG MELLEMSTORE VIRKSOMHEDER",
-   "s": "Passive/Aggressive",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/25/3ar95_120.jpg",
-   "u": "https://hypem.com/track/3ar95",
-   "d": "2026-11-06T15:48:29Z"
-  },
-  {
-   "p": 21,
-   "a": "AYK",
-   "t": "All In",
-   "s": "Grauu",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/21/3ar91_120.jpg",
-   "u": "https://hypem.com/track/3ar91",
-   "d": "2026-11-06T15:33:26Z"
-  },
-  {
-   "p": 22,
-   "a": "NIGHTSISTER",
-   "t": "Baptized in Gasoline",
-   "s": "I Die: You Die ",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/61/39nk1_120.jpg",
-   "u": "https://hypem.com/track/39nk1",
-   "d": "2026-11-06T16:08:42Z"
-  },
-  {
-   "p": 23,
-   "a": "FLOWTAPE",
-   "t": "SIGNAL72 – STATIC FIELD",
-   "s": "I Die: You Die ",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/26/3ar96_120.jpg",
-   "u": "https://hypem.com/track/3ar96",
-   "d": "2026-11-06T16:08:24Z"
-  },
-  {
-   "p": 24,
-   "a": "test plan",
-   "t": "Signal",
-   "s": "Destroy//Exist",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/1d/3ar8x_120.jpg",
-   "u": "https://hypem.com/track/3ar8x",
-   "d": "2026-11-06T15:13:40Z"
-  },
-  {
-   "p": 25,
-   "a": "The Magnetic Fields",
-   "t": "'01: Have You Seen It in the Snow?",
-   "s": "Christmas Underground",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/2f/33whf_120.jpg",
-   "u": "https://hypem.com/track/33whf",
-   "d": "2026-11-06T15:12:42Z"
-  },
-  {
-   "p": 26,
-   "a": "Superchunk",
-   "t": "The Blizzard of '78",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/16/3ar8p_120.jpg",
-   "u": "https://hypem.com/track/3ar8p",
-   "d": "2026-11-06T15:12:51Z"
-  },
-  {
-   "p": 27,
-   "a": "The Magnetic Fields",
-   "t": "'78: The Blizzard of '78",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/17/3ar8q_120.jpg",
-   "u": "https://hypem.com/track/3ar8q",
-   "d": "2026-11-06T15:13:00Z"
-  },
-  {
-   "p": 28,
-   "a": "Superchunk",
-   "t": "Snowstorm",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/19/3ar8s_120.jpg",
-   "u": "https://hypem.com/track/3ar8s",
-   "d": "2026-11-06T15:13:14Z"
-  },
-  {
-   "p": 29,
-   "a": "Superchunk",
-   "t": "Last Christmas",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/1a/3ar8t_120.jpg",
-   "u": "https://hypem.com/track/3ar8t",
-   "d": "2026-11-06T15:13:20Z"
-  },
-  {
-   "p": 30,
-   "a": "Superchunk",
-   "t": "Have You Seen It in the Snow",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/1b/3ar8v_120.jpg",
-   "u": "https://hypem.com/track/3ar8v",
-   "d": "2026-11-06T15:13:27Z"
-  },
-  {
-   "p": 31,
-   "a": "Superchunk",
-   "t": "Shortest Day of the Year (No Tinsel Mix)",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/1c/3ar8w_120.jpg",
-   "u": "https://hypem.com/track/3ar8w",
-   "d": "2026-11-06T15:13:32Z"
-  },
-  {
-   "p": 32,
-   "a": "amr*",
-   "t": "Unemployment for the Afternoon",
-   "s": "Asian Dan",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/22/3ar92_120.jpg",
-   "u": "https://hypem.com/track/3ar92",
-   "d": "2026-11-06T15:44:15Z"
-  },
-  {
-   "p": 33,
-   "a": "ARMOURS",
-   "t": "Allegiance",
-   "s": "Destroy//Exist",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/14/3ar8m_120.jpg",
-   "u": "https://hypem.com/track/3ar8m",
-   "d": "2026-11-06T15:12:31Z"
-  },
-  {
-   "p": 34,
-   "a": "lxst child",
-   "t": "Memories",
-   "s": "Grauu",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/20/3ar90_120.jpg",
-   "u": "https://hypem.com/track/3ar90",
-   "d": "2026-11-06T15:33:00Z"
-  },
-  {
-   "p": 35,
-   "a": "SISSY MISFIT",
-   "t": "PULLING HAIR (FEAT. AGE REFORM)",
-   "s": "ReGen Magazine",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/13/3ar8k_120.jpg",
-   "u": "https://hypem.com/track/3ar8k",
-   "d": "2026-11-06T14:52:23Z"
-  },
-  {
-   "p": 36,
-   "a": "Club Level Records",
-   "t": "LOWKEY",
-   "s": "Grauu",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/1f/3ar8z_120.jpg",
-   "u": "https://hypem.com/track/3ar8z",
-   "d": "2026-11-06T15:32:47Z"
-  },
-  {
-   "p": 37,
-   "a": "Jafa",
-   "t": "Open Sesame",
-   "s": "Grauu",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/1e/3ar8y_120.jpg",
-   "u": "https://hypem.com/track/3ar8y",
-   "d": "2026-11-06T15:32:31Z"
-  },
-  {
-   "p": 38,
-   "a": "Holy Void",
-   "t": "Goat",
-   "s": "Austin Town Hall",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/f/3ar8f_120.jpg",
-   "u": "https://hypem.com/track/3ar8f",
-   "d": "2026-11-06T14:09:05Z"
-  },
-  {
-   "p": 39,
-   "a": "Fulton Lights",
-   "t": "Best World",
-   "s": "START-TRACK",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/f9/39xfs_120.jpg",
-   "u": "https://hypem.com/track/39xfs",
-   "d": "2026-11-06T14:32:47Z"
-  },
-  {
-   "p": 40,
-   "a": "LWCD",
-   "t": "Subsequently",
-   "s": "Grauu",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/11/3ar8h_120.jpg",
-   "u": "https://hypem.com/track/3ar8h",
-   "d": "2026-11-06T14:32:33Z"
-  },
-  {
-   "p": 41,
-   "a": "Hyus",
-   "t": "Come and Vibe",
-   "s": "Grauu",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/10/3ar8g_120.jpg",
-   "u": "https://hypem.com/track/3ar8g",
-   "d": "2026-11-06T14:32:26Z"
-  },
-  {
-   "p": 42,
-   "a": "Kiara Eve",
-   "t": "Recklessly Abandon Me",
-   "s": "ParaPOP ",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/e/3ar8e_120.jpg",
-   "u": "https://hypem.com/track/3ar8e",
-   "d": "2026-11-06T14:08:57Z"
-  },
-  {
-   "p": 43,
-   "a": "Enticed",
-   "t": "No Justice",
-   "s": "Grauu",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/a/3ar8a_120.jpg",
-   "u": "https://hypem.com/track/3ar8a",
-   "d": "2026-11-06T13:32:14Z"
-  },
-  {
-   "p": 44,
-   "a": "Spankraght",
-   "t": "Killing Spree",
-   "s": "ReGen Magazine",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/d/3ar8d_120.jpg",
-   "u": "https://hypem.com/track/3ar8d",
-   "d": "2026-11-06T13:52:33Z"
-  },
-  {
-   "p": 45,
-   "a": "The Lovely Basement",
-   "t": "Bristol Out Of My Window",
-   "s": "Louder Than War",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/b/3ar8b_120.jpg",
-   "u": "https://hypem.com/track/3ar8b",
-   "d": "2026-11-06T13:52:18Z"
-  },
-  {
-   "p": 46,
-   "a": "The Lovely Basement",
-   "t": "We Love You",
-   "s": "Louder Than War",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/c/3ar8c_120.jpg",
-   "u": "https://hypem.com/track/3ar8c",
-   "d": "2026-11-06T13:52:25Z"
-  },
-  {
-   "p": 47,
-   "a": "Kimaya Diggs",
-   "t": "Plants (still grow)",
-   "s": "Tonic Grain",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/9/3ar89_120.jpg",
-   "u": "https://hypem.com/track/3ar89",
-   "d": "2026-11-06T13:08:45Z"
-  },
-  {
-   "p": 48,
-   "a": "Angry Snowmans",
-   "t": "Time To Decorate",
-   "s": "Christmas a Go Go",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/2/3ar82_120.jpg",
-   "u": "https://hypem.com/track/3ar82",
-   "d": "2026-11-06T12:08:08Z"
-  },
-  {
-   "p": 49,
-   "a": "Angry Snowmans",
-   "t": "Reindeer's Life",
-   "s": "Christmas a Go Go",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/3/3ar83_120.jpg",
-   "u": "https://hypem.com/track/3ar83",
-   "d": "2026-11-06T12:08:15Z"
-  },
-  {
-   "p": 50,
-   "a": "Angry Snowmans",
-   "t": "Fuzzy Red Hat",
-   "s": "Christmas a Go Go",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/4/3ar84_120.jpg",
-   "u": "https://hypem.com/track/3ar84",
-   "d": "2026-11-06T12:08:23Z"
   }
  ],
  "bandcamp": [
@@ -2565,6 +2579,9 @@
    "g": "rock",
    "u": "https://gatornate.bandcamp.com/album/miss-florida",
    "i": "https://f4.bcbits.com/img/a2344376083_7.jpg",
+   "s": "https://t4.bcbits.com/stream/7752a8f2e527cd3811383f141492ee4e/mp3-128/142297935?p=0&ts=1794088971&t=9cb7ac18313254a8861473ef7c678339224e0d8e&token=1794088971_44e13f346d6fe761dce5dc6b97bd8ec6aa77a293",
+   "ft": "Treeshade",
+   "dur": 192,
    "d": "2026-11-06T12:23:44Z"
   },
   {
@@ -2575,6 +2592,9 @@
    "g": "pop",
    "u": "https://saintjosy.bandcamp.com/album/rote-wangen",
    "i": "https://f4.bcbits.com/img/a2258302066_7.jpg",
+   "s": "https://t4.bcbits.com/stream/10b9eef6c1e4f5b6841a4241e6a91072/mp3-128/265454390?p=0&ts=1794088971&t=590b6becdcfbe318e9b62795e038ac858dc60c94&token=1794088971_494c9abdd6c5436f0f537d7c739f771b747b4c7b",
+   "ft": "Rote Wangen",
+   "dur": 261,
    "d": "2026-11-05T14:41:29Z"
   },
   {
@@ -2585,6 +2605,9 @@
    "g": "metal",
    "u": "https://callo.bandcamp.com/album/zanim-minie-ciemno",
    "i": "https://f4.bcbits.com/img/a1862577169_7.jpg",
+   "s": "https://t4.bcbits.com/stream/9c67f81eae8cceb7d9de02edeb23eb20/mp3-128/4172745908?p=0&ts=1794088971&t=ab1123ad00d418e2e0a7f0f0ce9d203a898a7f40&token=1794088971_0efb2a06c5164a0ba87b1c4e58a83206521f25ce",
+   "ft": "Za Kończenie",
+   "dur": 369,
    "d": "2026-11-06T12:28:41Z"
   },
   {
@@ -2595,6 +2618,9 @@
    "g": "alternative",
    "u": "https://skotkremen.bandcamp.com/album/new-dawn",
    "i": "https://f4.bcbits.com/img/a3094114130_7.jpg",
+   "s": "https://t4.bcbits.com/stream/35b62f9a4ff4bc7d3a48d49f55305d85/mp3-128/926391714?p=0&ts=1794088971&t=73abff09495cff4034426cbf26edbf2cb41734ea&token=1794088971_b2ac171a56f3461e4e92f4c2b9082fa2440e28ca",
+   "ft": "New Dawn",
+   "dur": 347,
    "d": "2026-11-06T12:28:37Z"
   },
   {
@@ -2605,6 +2631,9 @@
    "g": "alternative",
    "u": "https://lalitree.bandcamp.com/album/ethereal",
    "i": "https://f4.bcbits.com/img/a517829346_7.jpg",
+   "s": "https://t4.bcbits.com/stream/7d12e4b5aafeecacce946b440b7334af/mp3-128/2296216434?p=0&ts=1794088971&t=7b24bdf50493ec495d70eb3e8a65de2992e6fdc7&token=1794088971_d11255ef6ecb7320a7522cdea37326879e720072",
+   "ft": "Ethereal",
+   "dur": 272,
    "d": "2026-11-06T12:28:31Z"
   },
   {
@@ -2615,6 +2644,9 @@
    "g": "experimental",
    "u": "https://lecterjames47.bandcamp.com/album/works-of-art-47",
    "i": "https://f4.bcbits.com/img/a3038514393_7.jpg",
+   "s": "https://t4.bcbits.com/stream/c101af5b829a8e6ffa90db18898679ee/mp3-128/2524604919?p=0&ts=1794088971&t=56d19d699ca8b2b6e6d757d144fa7dca28cb7fe7&token=1794088971_69de59933465036c99e7898b267f0d329eff8ede",
+   "ft": "Big Slime Johnson",
+   "dur": 48,
    "d": "2026-11-06T12:20:00Z"
   },
   {
@@ -2625,6 +2657,9 @@
    "g": "experimental",
    "u": "https://astroal.bandcamp.com/album/riot-of-fear",
    "i": "https://f4.bcbits.com/img/a2926116656_7.jpg",
+   "s": "https://t4.bcbits.com/stream/cdf8f91bacabdb5a34f9046b062a5168/mp3-128/497021132?p=0&ts=1794088971&t=f975888b2ac385a50bf373c5c3326db625f74fdf&token=1794088971_c2f867a6a4e887ebb84c4119aabfc98ad72e4a59",
+   "ft": "Surfin’ On Poe’s Stash",
+   "dur": 194,
    "d": "2026-11-06T12:27:58Z"
   },
   {
@@ -2635,6 +2670,9 @@
    "g": "folk",
    "u": "https://adamfleming.bandcamp.com/album/live-at-willow-wild",
    "i": "https://f4.bcbits.com/img/a1888699687_7.jpg",
+   "s": "https://t4.bcbits.com/stream/6d1a6bcaf108acf9b8ce3ae6c14a5ab6/mp3-128/767172465?p=0&ts=1794088971&t=c2441bad6da0c560fdacd3e5dfdee2079d1beecf&token=1794088971_ba8495b79f5b2eb8eaa4c9ff50eb60e44398b057",
+   "ft": "The Silent Answer",
+   "dur": 228,
    "d": "2026-11-06T11:36:49Z"
   },
   {
@@ -2645,6 +2683,9 @@
    "g": "r&b/soul",
    "u": "https://medley1.bandcamp.com/album/bright-green-burnt-orange",
    "i": "https://f4.bcbits.com/img/a512002370_7.jpg",
+   "s": "https://t4.bcbits.com/stream/39589c5ede70c1bba0e45647486beeae/mp3-128/2746967318?p=0&ts=1794088971&t=d4ac3ace5f2f9ff549e2d9caaa99f5d34c647f11&token=1794088971_4201cafc0d89578bdcfbffcbdc1dd4b93eefc295",
+   "ft": "Bright Green",
+   "dur": 118,
    "d": "2026-11-06T12:27:42Z"
   },
   {
@@ -2655,6 +2696,9 @@
    "g": "alternative",
    "u": "https://digital.waysideandwoodland.com/album/twelve-months-volume-five",
    "i": "https://f4.bcbits.com/img/a3893244026_7.jpg",
+   "s": "https://t4.bcbits.com/stream/d265671e32122e1c994c36bd456abf99/mp3-128/2834199457?p=0&ts=1794088971&t=d82c6c2ddad6a9c20e80821068d636cdc2aee5bb&token=1794088971_220c2ed58ef231dd03a7979fcea4762ff4f439ab",
+   "ft": "January (Morning Frost On Communal Lawns)",
+   "dur": 251,
    "d": "2026-11-06T12:27:37Z"
   },
   {
@@ -2665,6 +2709,9 @@
    "g": "electronic",
    "u": "https://djhazemnabil.bandcamp.com/album/dj-hazem-nabil-edm-dance-hits",
    "i": "https://f4.bcbits.com/img/a3461215767_7.jpg",
+   "s": "https://t4.bcbits.com/stream/c0af9ed9853da286185df64fac6941da/mp3-128/4179111200?p=0&ts=1794088971&t=c35e4a21bb1b53cdb75e86e26b6aa054e352325d&token=1794088971_8f99fec1056031e9100378b15cc52776dcd6c1bd",
+   "ft": "Spinning in Circles - Radio Edit",
+   "dur": 146,
    "d": "2026-11-06T12:27:32Z"
   },
   {
@@ -2675,6 +2722,9 @@
    "g": "electronic",
    "u": "https://rococreative.bandcamp.com/album/la-tierra-marca-el-paso",
    "i": "https://f4.bcbits.com/img/a2959461536_7.jpg",
+   "s": "https://t4.bcbits.com/stream/5a5fdf2f1ed2ef3d165c71a4d1d8aacb/mp3-128/538051599?p=0&ts=1794088971&t=3960c7feda6a67125a6ba225cf1c5c0afc29df31&token=1794088971_366ec013c1e4893b02d53a63173f932876ad7e66",
+   "ft": "La tierra marca el paso",
+   "dur": 182,
    "d": "2026-11-06T12:26:20Z"
   },
   {
@@ -2685,6 +2735,9 @@
    "g": "electronic",
    "u": "https://craigpadilla.bandcamp.com/album/first-light-over-aurora",
    "i": "https://f4.bcbits.com/img/a2217576680_7.jpg",
+   "s": "https://t4.bcbits.com/stream/0e330b9fed684dad27fbba7dfa95efc0/mp3-128/3495067670?p=0&ts=1794088971&t=1914f1ac08bf155d434992080a53e1450c3ee3ba&token=1794088971_b76fd53d290ba206f7a27971a1cf7a673d4bc79d",
+   "ft": "First Light Over Aurora (Live 2026)",
+   "dur": 1056,
    "d": "2026-11-06T12:10:21Z"
   },
   {
@@ -2695,6 +2748,9 @@
    "g": "hip-hop/rap",
    "u": "https://qmmusic.bandcamp.com/album/spaceships-in-the-pyramids",
    "i": "https://f4.bcbits.com/img/a2484055792_7.jpg",
+   "s": "https://t4.bcbits.com/stream/e52d1ff334d5e9b00fe36b6d6beb4d73/mp3-128/2503829526?p=0&ts=1794088971&t=0d513d37b3dac134d948f715376119e409751d5e&token=1794088971_e8dad2de32eed79afb8bae164a2eeeeb9eec590b",
+   "ft": "Spaceships in the Pyramids",
+   "dur": 137,
    "d": "2026-11-06T12:27:10Z"
   },
   {
@@ -2705,6 +2761,9 @@
    "g": "electronic",
    "u": "https://rhizome-industrie.bandcamp.com/album/canopy-natty-dreadlock",
    "i": "https://f4.bcbits.com/img/a1131344276_7.jpg",
+   "s": "https://t4.bcbits.com/stream/387e60c710980e2abb527eeb01d4dff0/mp3-128/3119954274?p=0&ts=1794088971&t=8ee7a2da883492fa9c8bee3edcd5db0dcbbae727&token=1794088971_e91c669d53dead5d8394085cf81522628c11d85a",
+   "ft": "Canopy",
+   "dur": 269,
    "d": "2026-11-05T11:30:56Z"
   },
   {
@@ -2715,6 +2774,9 @@
    "g": "acoustic",
    "u": "https://thefuelandwoodsituation.bandcamp.com/album/the-fuel-and-wood-situation",
    "i": "https://f4.bcbits.com/img/a2912604671_7.jpg",
+   "s": "https://t4.bcbits.com/stream/9ca896a6b7c19009145ec5a7d9ab3e74/mp3-128/868296414?p=0&ts=1794088971&t=059758e5ec562da8dfa65390c77b330e081cd0d8&token=1794088971_705ffa9a099c1c3bddb6d06465bcbdae6cc64ce7",
+   "ft": "The Fuel and Wood Situation",
+   "dur": 132,
    "d": "2026-11-06T12:25:56Z"
   },
   {
@@ -2725,6 +2787,9 @@
    "g": "punk",
    "u": "https://hellcannonrecords.bandcamp.com/album/expect-nothing",
    "i": "https://f4.bcbits.com/img/a3635433450_7.jpg",
+   "s": "https://t4.bcbits.com/stream/79d2cc3160c88b7c66ded76b6212e864/mp3-128/408166060?p=0&ts=1794088971&t=454a53e0a58b8e20bb8162396f1a59fcb15ad9c0&token=1794088971_e9f56574afcf82ba2a97ec721ea3b2d04dabeda8",
+   "ft": "Resolve",
+   "dur": 54,
    "d": "2026-11-06T09:54:12Z"
   },
   {
@@ -2735,6 +2800,9 @@
    "g": "comedy",
    "u": "https://scapegoatgirl.bandcamp.com/album/total",
    "i": "https://f4.bcbits.com/img/a126514267_7.jpg",
+   "s": "https://t4.bcbits.com/stream/ee35978cc6a4c772c1c7474d245f6bf3/mp3-128/2015966129?p=0&ts=1794088971&t=b1ee6c1823b1f9ebc154ca92253cf23aac542609&token=1794088971_24e1853457281a2282d948006f2491f05bc2c611",
+   "ft": "the world",
+   "dur": 156,
    "d": "2026-11-06T12:26:30Z"
   },
   {
@@ -2745,6 +2813,9 @@
    "g": "electronic",
    "u": "https://dill-note.bandcamp.com/album/animamus",
    "i": "https://f4.bcbits.com/img/a122662104_7.jpg",
+   "s": "https://t4.bcbits.com/stream/7bcb07d83fb25c8e03a4ec7ec7a00f56/mp3-128/1027698217?p=0&ts=1794088971&t=827e155a2975be14c95f862fbde3dfeb82a79346&token=1794088971_2788831e64769221e9b8fafa4ab6b60cdad192eb",
+   "ft": "Coda Dato (Tanz mix)",
+   "dur": 162,
    "d": "2026-11-06T11:08:42Z"
   },
   {
@@ -2755,6 +2826,9 @@
    "g": "electronic",
    "u": "https://2tuf4u.com/album/essential-plates-27",
    "i": "https://f4.bcbits.com/img/a1968198121_7.jpg",
+   "s": "https://t4.bcbits.com/stream/d323ef31d6f96846525dbb3ed5cc4219/mp3-128/1145101359?p=0&ts=1794088971&t=333409ca0cff5029ebe588da72efed063dd78409&token=1794088971_7d719c5aaef51188122ec6104c2067ce124af1d2",
+   "ft": "Track Previews A&B PLATE 27",
+   "dur": 118,
    "d": "2026-11-06T12:26:26Z"
   },
   {
@@ -2765,6 +2839,9 @@
    "g": "blues",
    "u": "https://mulebone.bandcamp.com/album/mulebone-live-made-in-the-mitten",
    "i": "https://f4.bcbits.com/img/a3389959181_7.jpg",
+   "s": "https://t4.bcbits.com/stream/d1335a2f8a2dc95149f14359d1e406ac/mp3-128/669664195?p=0&ts=1794088971&t=95ed49aecb4d7b1e4220ccf61bf88494eba0a4e5&token=1794088971_a1b4dcfe82eed5f355640d2420aa8a6cc6de88eb",
+   "ft": "Million Miles From Nowhere",
+   "dur": 194,
    "d": "2026-11-06T12:11:39Z"
   },
   {
@@ -2775,6 +2852,9 @@
    "g": "",
    "u": "https://tampuirecords.bandcamp.com/album/set-grief-rudiment-all-shapes-must-die",
    "i": "https://f4.bcbits.com/img/a628862916_7.jpg",
+   "s": "https://t4.bcbits.com/stream/23d8156077b6f7204e432a491df5a5e5/mp3-128/1287956977?p=0&ts=1794088971&t=4e472dc86eb8a66ba15e9e6db0956d764850ccee&token=1794088971_077ff3c37dfd74b457b13c2c3fe15bdc793c8509",
+   "ft": "Barisan Takdir",
+   "dur": 180,
    "d": "2026-11-06T12:15:45Z"
   },
   {
@@ -2785,6 +2865,9 @@
    "g": "electronic",
    "u": "https://kormdigitaal.bandcamp.com/album/modern-musique-concrete-composers-vol-1-the-netherlands",
    "i": "https://f4.bcbits.com/img/a2944035092_7.jpg",
+   "s": "https://t4.bcbits.com/stream/c689ff910ae29892e26a3252e647f299/mp3-128/1900300304?p=0&ts=1794088971&t=ab4df292b07bce9bb41ea22c345e08c83d83558c&token=1794088971_2eb5d9f79177d12163a009e67a5ea680c3b0221d",
+   "ft": "Jos Smolders – Electro-Acoustische Studie",
+   "dur": 447,
    "d": "2026-11-06T12:20:33Z"
   },
   {
@@ -2795,6 +2878,9 @@
    "g": "electronic",
    "u": "https://musicpilots.bandcamp.com/album/the-holding-still-feat-wooo",
    "i": "https://f4.bcbits.com/img/a2914394858_7.jpg",
+   "s": "https://t4.bcbits.com/stream/7f3006c9371c1b06fe8f287a4032498c/mp3-128/2638504222?p=0&ts=1794088971&t=22f61bcd42bbfafa2dffc2b2c59dd77e14615851&token=1794088971_c87074c42a00c55aa90e320012a73432d4476c56",
+   "ft": "The Holding Still (feat. Wooo)",
+   "dur": 172,
    "d": "2026-11-06T12:25:27Z"
   },
   {
@@ -2805,6 +2891,9 @@
    "g": "acoustic",
    "u": "https://ellebarker.bandcamp.com/album/live-from-the-louisiana-2-11-26",
    "i": "https://f4.bcbits.com/img/a43208093_7.jpg",
+   "s": "https://t4.bcbits.com/stream/c2fb2010aec3d94b79d548e7317bc391/mp3-128/312058650?p=0&ts=1794088971&t=f2f443da673ceb4e1bf226272ae8bca1600cb5bf&token=1794088971_430e9963aa5107fbe4417946431608307e4cfd14",
+   "ft": "live from the louisiana, 2/11/26",
+   "dur": 1719,
    "d": "2026-11-06T12:20:30Z"
   },
   {
@@ -2814,7 +2903,10 @@
    "a": "Encephalic Curettage",
    "g": "metal",
    "u": "https://dreadfulslaughter.bandcamp.com/album/live-brain-extraction",
-   "i": "https://f4.bcbits.com/img/a739302435_7.jpg",
+   "i": "https://f4.bcbits.com/img/a2741882064_7.jpg",
+   "s": "https://t4.bcbits.com/stream/9072447a6b1b26b860851f1082220529/mp3-128/2681744585?p=0&ts=1794088971&t=64cee6327a784a7da5dfa62cabbd5cca52deb987&token=1794088971_62c2d3945ad40a3ac80ebe691035ec5b087fd178",
+   "ft": "Live Brain Extraction",
+   "dur": 32,
    "d": "2026-11-06T12:18:23Z"
   },
   {
@@ -2825,6 +2917,9 @@
    "g": "experimental",
    "u": "https://nikikita.bandcamp.com/album/minimal-less",
    "i": "https://f4.bcbits.com/img/a4059746230_7.jpg",
+   "s": "https://t4.bcbits.com/stream/e6bc7c89fb5d3c61285efaa04ffda23f/mp3-128/2363416258?p=0&ts=1794088971&t=88a58ade5be2d41985b7aaa736325b2fb2b2e0ef&token=1794088971_ad9f9f36cba880a566f742b3d8b8041d9f992531",
+   "ft": "Roxy Ann in  Pyssla 2 (featuring Furby) [musiche di Nikikita-Nikkanjo]",
+   "dur": 119,
    "d": "2026-11-04T23:00:54Z"
   },
   {
@@ -2835,6 +2930,9 @@
    "g": "experimental",
    "u": "https://arhamc.bandcamp.com/album/disso",
    "i": "https://f4.bcbits.com/img/a1325509621_7.jpg",
+   "s": "https://t4.bcbits.com/stream/fb7555e9f820d99cdbe29c6c0147e3de/mp3-128/976268778?p=0&ts=1794088971&t=1d7e094dad3efb124744b84bdac9ff8a028cdc14&token=1794088971_48f122d12c2c903a09f665bfc3484471127358d4",
+   "ft": "bloodshot",
+   "dur": 141,
    "d": "2026-11-06T12:21:39Z"
   },
   {
@@ -2845,6 +2943,9 @@
    "g": "electronic",
    "u": "https://musicpilots.bandcamp.com/album/ta-ta-ta-feat-wooo",
    "i": "https://f4.bcbits.com/img/a999172421_7.jpg",
+   "s": "https://t4.bcbits.com/stream/369409133823944644de143ef9712fe8/mp3-128/1827229904?p=0&ts=1794088971&t=b5007878d7ee218daafce309711c82a413a91933&token=1794088971_b7c6b0b400fda742fe89c742958f861f71dfab5b",
+   "ft": "Ta-ta-ta (feat. Wooo)",
+   "dur": 186,
    "d": "2026-11-06T12:24:41Z"
   },
   {
@@ -2855,6 +2956,9 @@
    "g": "alternative",
    "u": "https://skyqode.bandcamp.com/album/nowhere",
    "i": "https://f4.bcbits.com/img/a1561790437_7.jpg",
+   "s": "https://t4.bcbits.com/stream/3ae6d7a1251ff23aa695c32caebf5599/mp3-128/1229459529?p=0&ts=1794088971&t=586e55b50d8166038327c10a953eb03c1381da45&token=1794088971_c6d2087e43b317db4c52e6ecf752679dc1e7601c",
+   "ft": "Nowhere in this World",
+   "dur": 350,
    "d": "2026-11-06T11:29:58Z"
   },
   {
@@ -2865,6 +2969,9 @@
    "g": "electronic",
    "u": "https://coolaboola.bandcamp.com/album/tir-na-nog",
    "i": "https://f4.bcbits.com/img/a1340181253_7.jpg",
+   "s": "https://t4.bcbits.com/stream/1fbbfdc287195119f2d7d778ccce487f/mp3-128/3136839642?p=0&ts=1794088971&t=653f7da8336e4454197520adb6d824b1840ae2c4&token=1794088971_af3430aeeb647f978a97e1ee74beb4e41ddf46ae",
+   "ft": "Tir na Nog",
+   "dur": 237,
    "d": "2026-11-06T12:23:49Z"
   },
   {
@@ -2875,6 +2982,9 @@
    "g": "experimental",
    "u": "https://bhupeshpanter.bandcamp.com/album/speaking-in-colors",
    "i": "https://f4.bcbits.com/img/a590866556_7.jpg",
+   "s": "https://t4.bcbits.com/stream/298ce8e861bf92573eb571499c9760f5/mp3-128/4038410064?p=0&ts=1794088971&t=e4e5a0302402af9e9e3afffeb0a5f2d98dae6e1f&token=1794088971_3c48dbde0d56a437631947573040ba198c071c70",
+   "ft": "Exhaling in Bloom",
+   "dur": 280,
    "d": "2026-11-06T12:23:23Z"
   },
   {
@@ -2885,6 +2995,9 @@
    "g": "electronic",
    "u": "https://infectedsenses.bandcamp.com/album/reflect-a-bandcamp-friday-sampler",
    "i": "https://f4.bcbits.com/img/a1418227496_7.jpg",
+   "s": "https://t4.bcbits.com/stream/dc5e12de467d08cbccc687d0d92f6bcf/mp3-128/4110159381?p=0&ts=1794088971&t=9afad23302bfade4b38b10f201d081ce61289a3b&token=1794088971_8ef1f1934a1a0c9381522656835231b9c8085a6b",
+   "ft": "Five dimensional chicken (From Pop-up uncertainty)",
+   "dur": 174,
    "d": "2026-11-06T12:22:55Z"
   },
   {
@@ -2895,6 +3008,9 @@
    "g": "electronic",
    "u": "https://deejaydisc.bandcamp.com/album/remix-for-djs-vol-288",
    "i": "https://f4.bcbits.com/img/a3611986185_7.jpg",
+   "s": "https://t4.bcbits.com/stream/9dca2767c8d46df115b713b8fa7ad421/mp3-128/1262537085?p=0&ts=1794088971&t=bdce0163f21d5cee7e69a2e7be42e4c9cedd2d63&token=1794088971_9240e7a968f1cb9cee9049dda122bb6bb733aa2c",
+   "ft": "Audioslave - Like A Stone (HAM Remix)",
+   "dur": 272,
    "d": "2026-11-06T12:22:38Z"
   },
   {
@@ -2905,6 +3021,9 @@
    "g": "ambient",
    "u": "https://laaps-records.com/album/vorox",
    "i": "https://f4.bcbits.com/img/a199338772_7.jpg",
+   "s": "https://t4.bcbits.com/stream/f10b5f3eed6813d9d516ec13bb3e691c/mp3-128/2446701176?p=0&ts=1794088971&t=bfc2a89e79976a468ff559d47e93cce603777fe9&token=1794088971_423eda906f2b579d1312da50dfe272674a76047d",
+   "ft": "Marrysea (feat. Kitten Captain)",
+   "dur": 265,
    "d": "2026-11-03T03:43:33Z"
   },
   {
@@ -2915,6 +3034,9 @@
    "g": "rock",
    "u": "https://ugochill.bandcamp.com/album/its-electric",
    "i": "https://f4.bcbits.com/img/a2449650441_7.jpg",
+   "s": "https://t4.bcbits.com/stream/305deaa3ef1fa3a4dab253cae7d57d48/mp3-128/355256402?p=0&ts=1794088971&t=2af9d16033b47975a0fea3cf2c408542ccefdadd&token=1794088971_c62ed9209db17df9459be3a608f532155451c9c5",
+   "ft": "Perfect Conductor",
+   "dur": 293,
    "d": "2026-11-05T19:50:46Z"
   },
   {
@@ -2925,6 +3047,9 @@
    "g": "electronic",
    "u": "https://soulexmachina.bandcamp.com/album/three-dog-night-lp",
    "i": "https://f4.bcbits.com/img/a2519886339_7.jpg",
+   "s": "https://t4.bcbits.com/stream/b998573e6840b41263d64664d5e4fcc8/mp3-128/1942316912?p=0&ts=1794088971&t=23531fce4f6d4252fb2b3b72a46ceb194050f9a5&token=1794088971_50f1da5939c7cbb8ad138946a3e5e194fd59a358",
+   "ft": "Freedom",
+   "dur": 305,
    "d": "2026-11-06T12:22:26Z"
   },
   {
@@ -2935,6 +3060,9 @@
    "g": "ambient",
    "u": "https://tibor.bandcamp.com/album/layers-organism-ii",
    "i": "https://f4.bcbits.com/img/a3904993946_7.jpg",
+   "s": "https://t4.bcbits.com/stream/1da72ff277ab26447b076a36e88fb3d2/mp3-128/3807185449?p=0&ts=1794088971&t=e10ced8329b4d42d75564c2998afc9a7e15a1974&token=1794088971_de96e036651f76659810a13894c4945e334b43ad",
+   "ft": "Layers (Organism II)",
+   "dur": 2684,
    "d": "2026-11-06T12:20:58Z"
   },
   {
@@ -2945,6 +3073,9 @@
    "g": "electronic",
    "u": "https://cardboardarchitecture.bandcamp.com/album/project-e526",
    "i": "https://f4.bcbits.com/img/a699651732_7.jpg",
+   "s": "https://t4.bcbits.com/stream/7402122f331a977654cf0e2e65860d82/mp3-128/3499024001?p=0&ts=1794088971&t=31d21c110679d886a396478940dadccb8c8c23d9&token=1794088971_a1279f35397dcfd8dc2392e9520d9bd2144b9792",
+   "ft": "G.A.S",
+   "dur": 175,
    "d": "2026-11-06T07:14:58Z"
   },
   {
@@ -2955,6 +3086,9 @@
    "g": "hip-hop/rap",
    "u": "https://krashslaughta.bandcamp.com/album/phill-most-chill-krash-slaughta-play-it-back",
    "i": "https://f4.bcbits.com/img/a2860238620_7.jpg",
+   "s": "https://t4.bcbits.com/stream/aff77b31848d345abd3c6b41cfd18fb0/mp3-128/2736658270?p=0&ts=1794088971&t=d903a07ae65faaa5ef4d42e7f0c137401d408ff5&token=1794088971_f5154b6b332bb567229e2a8112d510cebaebf16d",
+   "ft": "Side A1. Krash The Party",
+   "dur": 216,
    "d": "2026-11-06T12:21:20Z"
   },
   {
@@ -2965,6 +3099,9 @@
    "g": "electronic",
    "u": "https://mixcult.bandcamp.com/album/mind-set-ep",
    "i": "https://f4.bcbits.com/img/a1986966409_7.jpg",
+   "s": "https://t4.bcbits.com/stream/dbade352bdc55b6ca6df096397458d8b/mp3-128/1677374599?p=0&ts=1794088971&t=46c319d576344d6395e5cef082a9e19e53881ed2&token=1794088971_dab07c0de7f36f6a08983661c76373dcf880d897",
+   "ft": "808 Days",
+   "dur": 589,
    "d": "2026-11-02T17:09:36Z"
   },
   {
@@ -2975,6 +3112,9 @@
    "g": "electronic",
    "u": "https://frostskade.bandcamp.com/album/improv-2-atlantean-nobility",
    "i": "https://f4.bcbits.com/img/a339839599_7.jpg",
+   "s": "https://t4.bcbits.com/stream/690fefebd34f8f375d5a6a628e5c372e/mp3-128/1258761864?p=0&ts=1794088971&t=6a18cfcf64c16e5a6a2a1e4783fad14b3232b18b&token=1794088971_3c6879cc893c30d09f3f693ecbaa2f22010e17f4",
+   "ft": "IMPROV2.0/ ATLANTEAN NOBILITY",
+   "dur": 178,
    "d": "2026-11-06T12:21:02Z"
   },
   {
@@ -2985,6 +3125,9 @@
    "g": "funk",
    "u": "https://terraformband.bandcamp.com/album/terraform-live-on-wcbn-pt-2",
    "i": "https://f4.bcbits.com/img/a1326744200_7.jpg",
+   "s": "https://t4.bcbits.com/stream/a797ce5198de9ef125fe37c5e9cd2248/mp3-128/2112100488?p=0&ts=1794088971&t=91fbde75888baa86f494529c3ef2d85d3ba0d788&token=1794088971_5365a1ee88a91c29b80d28664825fb32f0382f1b",
+   "ft": "Sylph / Sough",
+   "dur": 506,
    "d": "2026-11-06T12:20:32Z"
   },
   {
@@ -2995,6 +3138,9 @@
    "g": "hip-hop/rap",
    "u": "https://londonmoon.bandcamp.com/album/heaven-don-t-last-forever",
    "i": "https://f4.bcbits.com/img/a1182197117_7.jpg",
+   "s": "https://t4.bcbits.com/stream/4890b567103a118bc4f9ba7077bddf35/mp3-128/1961995996?p=0&ts=1794088971&t=9450980e6850adf03a9e5cbd348b7b80a4c2dfc1&token=1794088971_a9970493a681fd3bd47f79362ff398c5b94491dc",
+   "ft": "Flowers",
+   "dur": 223,
    "d": "2026-11-02T21:37:09Z"
   },
   {
@@ -3005,6 +3151,9 @@
    "g": "electronic",
    "u": "https://2tuf4u.com/album/essential-plates-28",
    "i": "https://f4.bcbits.com/img/a385974642_7.jpg",
+   "s": "https://t4.bcbits.com/stream/5e30c802a0ac8f475165c4d25a37c061/mp3-128/1002062872?p=0&ts=1794088971&t=e33832e6dce5e1f0986741ec92f0d2e4bbc4d653&token=1794088971_76773c5f635a933551b7bee71268716a7d869ae2",
+   "ft": "Track Previews A&B PLATE 28",
+   "dur": 132,
    "d": "2026-11-06T12:19:39Z"
   },
   {
@@ -3015,6 +3164,9 @@
    "g": "electronic",
    "u": "https://theunderwatertemple.bandcamp.com/album/acid-planet-2-and-techno-collection-2",
    "i": "https://f4.bcbits.com/img/a3738577633_7.jpg",
+   "s": "https://t4.bcbits.com/stream/ff175581fa341a56aeb16ab510d70f65/mp3-128/2931303706?p=0&ts=1794088971&t=09f1ce2127ea5d1575befa6ee6d2c2a7409704f1&token=1794088971_313d11e87117431d0fefc5e7b69c8f7711a8c666",
+   "ft": "Acid planet2-1",
+   "dur": 336,
    "d": "2026-11-06T09:31:33Z"
   },
   {
@@ -3025,6 +3177,9 @@
    "g": "punk",
    "u": "https://leibnizofficial.bandcamp.com/album/compassion",
    "i": "https://f4.bcbits.com/img/a3674578941_7.jpg",
+   "s": "https://t4.bcbits.com/stream/41fa786dee22acdf684d901ca4902ffa/mp3-128/1058325440?p=0&ts=1794088971&t=6c98776aac430fe8d03c88fcdb2f550303218f6a&token=1794088971_b56258b50b47575c0514bbd07acbe81252f36ade",
+   "ft": "Self-Congratulatory",
+   "dur": 201,
    "d": "2026-11-03T15:37:42Z"
   },
   {
@@ -3035,8 +3190,11 @@
    "g": "hip-hop/rap",
    "u": "https://grimmiebakers.bandcamp.com/album/durbanwavzi",
    "i": "https://f4.bcbits.com/img/a3771720363_7.jpg",
+   "s": "https://t4.bcbits.com/stream/ae29a11ce8cb17451970b033ea78cec9/mp3-128/2276379917?p=0&ts=1794088971&t=2aef0163e67bfa6ae66ff296ba8e7ac3e7dd9406&token=1794088971_978651076a012ee0e58ae2d56eaeba24248c0f01",
+   "ft": "Durban Funk",
+   "dur": 112,
    "d": "2026-11-06T12:18:59Z"
   }
  ],
- "updated": "2026-11-06T16:41:34Z"
+ "updated": "2026-11-06T22:02:51Z"
 }

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AN VY ARCADE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=Bungee&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../room.css">
+<style>
+  :root{--bg:#120a2a;--ink:#fff6d6;--accent:#ffd23f;--accent-soft:rgba(255,210,63,.4);--hud-bg:rgba(18,10,42,.85);--hud-ink:#fff6d6;--hud-ink-on:#1a0f00;
+    --hud-font:400 11px 'Press Start 2P',monospace;--btn-r:4px;--tip-bg:#1a1036;--tip-ink:#fff6d6;--tip-font:'Bungee',system-ui,sans-serif;--tip-size:18px;--tip-r:6px;
+    --box-bg:linear-gradient(180deg,#24124a,#120a2a);--box-r:8px;--title-font:400 16px 'Press Start 2P',monospace;--hint-font:400 11px 'Press Start 2P',monospace;--enter:#ffd23f;
+    --hover-filter:drop-shadow(0 0 10px rgba(255,210,63,.9)) brightness(1.12)}
+  .hud a,.hud button{padding:7px 12px;line-height:1.2}
+  .hint{line-height:1.7}
+  .room-title{font:400 clamp(12px,1.5vw,16px) 'Press Start 2P',monospace;color:#ffd23f;letter-spacing:.12em;text-shadow:3px 3px 0 #ff2a6d}
+  .room-title span{display:block;margin-top:6px;font:400 13px 'Bungee',sans-serif;letter-spacing:.3em;color:#7df9ff;text-align:center;text-shadow:none}
+</style>
+</head>
+<body>
+<div class="enter"></div>
+<div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Phòng arcade cổ điển: dãy máy chơi game, bàn bi-a, máy đua xe, máy ném bóng rổ"></svg></div>
+<nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> MÁY GAME</span></button></nav>
+<button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
+<div class="hint" id="hint"></div>
+<div class="tip" id="tip" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="list" id="list" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="list-bg" data-close></div><div class="list-box" id="listBox"><div class="list-head"><h2 id="listTitle">AN VY ARCADE</h2><p id="listCount"></p></div><ol></ol><button class="list-x" data-close aria-label="Đóng">✕</button></div></div>
+<div class="tv" id="tv"><div class="tv-bar"><span class="tv-t">♪ arcade.fm</span><button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt nhạc">off</button><button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Ẩn video">–</button></div><div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div></div>
+<script>
+(() => {
+  /* ======= MÁY GAME TRONG PHÒNG (thứ tự = data-i của đồ vật) ======= */
+  const LINKS = [
+    { n: 'Tetris', d: 'Xếp gạch huyền thoại', u: 'https://tetris.com/play-tetris' },
+    { n: 'Pac-Man', d: 'Ăn chấm, né ma (bản Google Doodle)', u: 'https://www.google.com/logos/2010/pacman10-i.html' },
+    { n: 'Snake', d: 'Rắn săn mồi cổ điển', u: 'https://playsnake.org/' },
+    { n: 'Minesweeper', d: 'Dò mìn', u: 'https://minesweeper.online/' },
+    { n: '2048', d: 'Ghép số tới 2048', u: 'https://play2048.co/' },
+    { n: 'Dino Run', d: 'Khủng long chạy của Chrome', u: 'https://chromedino.com/' },
+    { n: 'Lichess', d: 'Chơi cờ vua online', u: 'https://lichess.org/' },
+    { n: 'Cá ngựa', d: 'Ludo King: đua cá ngựa với bạn bè', u: 'https://www.crazygames.com/game/ludo-king' },
+    { n: 'Card Games', d: 'Tiến lên, xì dách, solitaire… đủ loại bài', u: 'https://cardgames.io/' },
+    { n: 'Mind Games', d: 'Trò chơi luyện trí não', u: 'https://www.mindgames.com/' },
+    { n: 'Math Fun', d: 'Trò chơi với những con số', u: 'https://www.mathsisfun.com/games/index-number.html' },
+    { n: 'Line 98', d: 'Xếp 5 viên bi cùng màu', u: 'https://www.line98.vn/' },
+    { n: 'Color', d: 'Thử thách mắt nhìn màu', u: 'https://color.method.ac/' },
+    { n: 'Numberle', d: 'Đoán phép tính trong 6 lượt', u: 'https://numberle.online/' },
+    { n: 'Slow Roads', d: 'Lái xe thư giãn trên đường vô tận', u: 'https://slowroads.io/' },
+    { n: 'Basketball FRVR', d: 'Ném bóng rổ', u: 'https://basketball.frvr.com/' },
+    { n: 'The Useless Web', d: 'Bấm nút để tới một trang web vô dụng bất kỳ', u: 'https://theuselessweb.com/' },
+    { n: '8 Ball Pool', d: 'Bi-a online', u: 'https://8ballpool.com/game' },
+    { n: 'Tuổi thơ An Vy', d: 'Tiệm sushi băng chuyền trên Sóc nhí', u: 'https://socnhi.com/Cong-vien-game/detail/396/Tiem-sushi-bang-chuyen.html' },
+    { n: 'Mê cung', d: 'Trò chơi giải mê cung', u: 'https://frvr.com/tags/maze/' },
+    { n: 'Escape Room', d: 'Tìm đường thoát khỏi phòng kín', u: 'https://www.crazygames.com/t/escape' },
+    { n: 'Simon Tatham Puzzles', d: 'Bộ sưu tập trò giải đố kinh điển', u: 'https://www.chiark.greenend.org.uk/~sgtatham/puzzles/' },
+    { n: 'Ai là triệu phú', d: 'Trả lời câu hỏi để thành triệu phú', u: 'https://www.crazygames.com/vn/game/millionaire-quiz' },
+    { n: 'Mensa IQ Test', d: 'Bài kiểm tra IQ của Mensa', u: 'https://test.mensa.no/' },
+    { n: 'Newgrounds', d: 'Cổng game và hoạt hình Flash huyền thoại', u: 'https://www.newgrounds.com/' },
+    { n: 'Retro TV', d: 'Kênh phim và chương trình truyền hình cổ điển, xem trực tuyến', u: 'https://www.getafteritmedia.com/retrotv' },
+    { n: 'club404', d: 'Mạng lưới Neocities nhỏ: bức tường chung và các trang web cá nhân', u: 'https://club404.neocities.org/' },
+  ];
+  /* ============================================================= */
+  // Phòng tĩnh hoàn toàn (không đèn nhấp nháy, không nhân vật) để chạy nhẹ trên mọi máy.
+  let seed = 61; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const L = (i, x, y, s, inner) => `<g transform="translate(${x} ${y}) scale(${s})"><a class="lk" data-i="${i}"><g>${inner}</g></a></g>`;
+  const px = (t, x, y, size, fill, anchor = 'middle') => `<text x="${x}" y="${y}" font-family="'Press Start 2P',monospace" font-size="${size}" fill="${fill}" text-anchor="${anchor}">${t}</text>`;
+
+  let svg = `<defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b0e3d"/><stop offset="1" stop-color="#2c1660"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1030"/><stop offset="1" stop-color="#05081c"/></linearGradient>
+    <linearGradient id="felt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f8a5a"/><stop offset="1" stop-color="#156b45"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a4f22"/><stop offset="1" stop-color="#5a3014"/></linearGradient>
+    <pattern id="carpet" width="120" height="120" patternUnits="userSpaceOnUse"><rect width="120" height="120" fill="#170c33"/>
+      <path d="M12 20l14 6-10 10z" fill="#ff2a6d"/><circle cx="78" cy="22" r="7" fill="none" stroke="#7df9ff" stroke-width="4"/><path d="M40 70q8-10 16 0t16 0" fill="none" stroke="#ffd23f" stroke-width="4" stroke-linecap="round"/>
+      <path d="M96 84l10 14h-20z" fill="#9b5cff"/><rect x="20" y="96" width="12" height="12" fill="#2bff88" transform="rotate(20 26 102)"/><circle cx="62" cy="108" r="4" fill="#ff8a00"/></pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wall)"/>`;
+  // ô tường + dải đèn tĩnh
+  for (let x = 0; x < 1600; x += 80) svg += `<path d="M${x} 0V600" stroke="#24124f" stroke-width="2"/>`;
+  svg += `<rect x="0" y="236" width="1600" height="10" fill="#ff2a6d" opacity=".55"/><rect x="0" y="246" width="1600" height="4" fill="#ffd23f" opacity=".5"/>`;
+  // biển hiệu giữa tường (đèn tĩnh)
+  svg += `<g><rect x="560" y="34" width="480" height="120" rx="16" fill="#0e0626" stroke="#ffd23f" stroke-width="5"/><rect x="572" y="46" width="456" height="96" rx="10" fill="none" stroke="#ff2a6d" stroke-width="2"/>
+    ${px('AN VY', 800, 96, 34, '#ffd23f')}${px('ARCADE', 800, 132, 20, '#7df9ff')}${[590, 1010].map(x => `<path d="M${x} 70l8 16 18 2-13 12 3 18-16-9-16 9 3-18-13-12 18-2z" fill="#ff2a6d" transform="translate(${x === 590 ? 0 : 0} 0) scale(.8) translate(${x * .25} 22)"/>`).join('')}</g>`;
+  // sàn thảm arcade
+  svg += `<rect x="0" y="600" width="1600" height="300" fill="url(#carpet)"/><rect x="0" y="600" width="1600" height="300" fill="#0b0520" opacity=".42"/><rect x="0" y="596" width="1600" height="8" fill="#0b0520"/>`;
+
+  /* ---------- Áp phích trên tường ---------- */
+  // 19 — mê cung
+  svg += L(19, 150, 210, 1, `<rect x="-80" y="-170" width="160" height="170" fill="#fff6d6" stroke="#ffd23f" stroke-width="5"/><g fill="none" stroke="#2c1660" stroke-width="7" stroke-linecap="square"><path d="M-62 -152H62V-18H-62Z"/><path d="M-62 -122H24M-30 -122V-60H34M62 -92H0M-62 -60H-40M-30 -40H40V-18"/></g><circle cx="-46" cy="-136" r="7" fill="#ff2a6d"/><circle cx="46" cy="-34" r="7" fill="#2bff88"/>${px('MAZE', 0, -178, 12, '#ffd23f')}`);
+  // 21 — hộp giải đố
+  svg += L(21, 380, 214, 1, `<rect x="-70" y="-150" width="140" height="150" rx="10" fill="#2bff88" stroke="#0b0520" stroke-width="4"/>${[0, 1, 2].map(r => [0, 1, 2].map(c => `<rect x="${-56 + c * 38}" y="${-136 + r * 40}" width="34" height="36" rx="4" fill="${(r + c) % 2 ? '#0b0520' : '#fff6d6'}"/>`).join('')).join('')}${px('?', 0, -64, 24, '#ff2a6d')}${px('PUZZLES', 0, -158, 10, '#2bff88')}`);
+  // 22 — ai là triệu phú
+  svg += L(22, 1220, 214, 1, `<circle cy="-80" r="78" fill="#0e0626" stroke="#7df9ff" stroke-width="5"/><circle cy="-80" r="60" fill="none" stroke="#9b5cff" stroke-width="3"/><text x="0" y="-62" font-family="Bungee" font-size="54" fill="#ffd23f" text-anchor="middle">$</text>${['A', 'B', 'C', 'D'].map((t, k) => `<rect x="${-96 + (k % 2) * 100}" y="${-6 + Math.floor(k / 2) * 0}" width="0" height="0"/>`).join('')}${px('1.000.000', 0, -20, 11, '#7df9ff')}`);
+  // 23 — Mensa IQ
+  svg += L(23, 1430, 214, 1, `<rect x="-76" y="-160" width="152" height="160" fill="#fff6d6" stroke="#ff2a6d" stroke-width="5"/><path d="M-10 -40c-44 2-50-46-22-58-6-26 26-40 40-26 16-16 50-4 44 22 26 12 18 58-24 62z" fill="#ff8ab0" stroke="#2c1660" stroke-width="4"/><path d="M2 -118v76M-30 -88q16 8 30 0M8 -70q18 8 34-4" stroke="#2c1660" stroke-width="3" fill="none"/>${px('IQ?', 0, -14, 14, '#2c1660')}`);
+  // 20 — cửa thoát hiểm (escape room)
+  svg += L(20, 1545, 596, 1, `<rect x="-52" y="-330" width="104" height="330" fill="#3a2a6a" stroke="#0b0520" stroke-width="5"/><rect x="-40" y="-316" width="80" height="300" fill="#4a3884"/><circle cx="28" cy="-160" r="6" fill="#ffd23f"/><rect x="-46" y="-372" width="92" height="32" rx="4" fill="#2bff88"/>${px('EXIT', 0, -348, 14, '#0b0520')}<path d="M-20 -230h28l-10-12M8 -230l-10 12" stroke="#2bff88" stroke-width="5" fill="none"/>`);
+
+  /* ---------- Dãy máy arcade (màn hình tĩnh) ---------- */
+  const ART = {
+    tetris: () => [[0, 3, '#7df9ff'], [1, 3, '#7df9ff'], [2, 3, '#7df9ff'], [3, 3, '#7df9ff'], [0, 2, '#ffd23f'], [1, 2, '#ffd23f'], [1, 1, '#ff2a6d'], [2, 1, '#ff2a6d'], [2, 2, '#ff2a6d'], [3, 0, '#2bff88'], [3, 1, '#2bff88'], [3, 2, '#9b5cff']].map(([c, r, f]) => `<rect x="${-30 + c * 15}" y="${-20 + r * 15 - 30}" width="14" height="14" fill="${f}"/>`).join(''),
+    pac: () => `<path d="M-14 -40 6 -50A22 22 0 1 0 6 -30Z" fill="#ffd23f" transform="translate(-10 0)"/>${[14, 26, 38].map(x => `<circle cx="${x}" cy="-40" r="3" fill="#fff6d6"/>`).join('')}<path d="M-38 -6v-14a10 10 0 0 1 20 0v14l-5-4-5 4-5-4z" fill="#ff2a6d"/>`,
+    snake: () => `<path d="M-34 -10H-6V-40H24V-58" fill="none" stroke="#2bff88" stroke-width="9" stroke-linejoin="round"/><circle cx="24" cy="-60" r="2" fill="#000"/><circle cx="-26" cy="-58" r="6" fill="#ff2a6d"/>`,
+    mines: () => { let r = ''; for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) r += `<rect x="${-32 + i * 16}" y="${-70 + j * 16}" width="15" height="15" fill="${(i + j) % 3 ? '#c9c9d6' : '#8a8aa0'}"/>`; return r + `<text x="-16" y="-44" font-size="11" font-family="monospace" fill="#2244ff" text-anchor="middle">1</text><text x="16" y="-28" font-size="11" font-family="monospace" fill="#c00" text-anchor="middle">3</text><path d="M2 -58v-10l8 4z" fill="#ff2a6d"/>`; },
+    n2048: () => [[-34, -72, '#eee4da', '2'], [2, -72, '#f2b179', '8'], [-34, -36, '#f59563', '64'], [2, -36, '#edc22e', '2048']].map(([x, y, f, t]) => `<rect x="${x}" y="${y}" width="32" height="32" rx="3" fill="${f}"/><text x="${x + 16}" y="${y + 21}" font-family="monospace" font-weight="700" font-size="${t.length > 2 ? 9 : 13}" fill="#5a4a3a" text-anchor="middle">${t}</text>`).join(''),
+    dino: () => `<rect x="-40" y="-14" width="80" height="2" fill="#c9c9d6"/><path d="M-30 -14v-20h6v-10h16v10h-6v4h4v4h-10v12h-4v-6h-2v6z" fill="#c9c9d6"/><path d="M20 -14v-26h6v26zM14 -26h6v6h-6zM26 -32h6v8h-6z" fill="#2bff88"/>`,
+    mind: () => `<path d="M-4 -24c-30 2-34-30-14-38-4-18 18-26 26-16 12-10 32-2 28 14 18 8 12 38-16 40z" fill="#ff8ab0"/><path d="M4 -66v40" stroke="#2c1660" stroke-width="2"/>`,
+    math: () => `${px('+', -18, -48, 18, '#ffd23f')}${px('−', 18, -48, 18, '#7df9ff')}${px('×', -18, -16, 18, '#ff2a6d')}${px('÷', 18, -16, 18, '#2bff88')}`,
+    line98: () => { const c = ['#ff4d4d', '#ffd23f', '#4dabf7', '#69db7c', '#cc5de8']; let r = ''; for (let i = 0; i < 5; i++) for (let j = 0; j < 4; j++) if ((i * 7 + j * 3) % 3) r += `<circle cx="${-32 + i * 16}" cy="${-68 + j * 16}" r="6" fill="${c[(i + j) % 5]}"/>`; return r; },
+    color: () => `<circle cy="-42" r="28" fill="#ff5fa2"/><path d="M0 -42 0 -70A28 28 0 0 1 24 -56Z" fill="#ffd23f"/><path d="M0 -42 24 -56A28 28 0 0 1 24 -28Z" fill="#2bff88"/><path d="M0 -42 24 -28A28 28 0 0 1 0 -14Z" fill="#4dabf7"/><path d="M0 -42 0 -14A28 28 0 0 1 -24 -28Z" fill="#9b5cff"/>`,
+    numberle: () => { let r = ''; const cl = ['#6aaa64', '#c9b458', '#3a3a4c']; for (let j = 0; j < 3; j++) for (let i = 0; i < 5; i++) r += `<rect x="${-36 + i * 15}" y="${-70 + j * 18}" width="13" height="15" fill="${cl[(i * 2 + j) % 3]}"/><text x="${-29.5 + i * 15}" y="${-58 + j * 18}" font-family="monospace" font-size="10" fill="#fff" text-anchor="middle">${'12+3=6×4-'.charAt((i + j * 5) % 9)}</text>`; return r; },
+  };
+  const CABS = [[0, 'TETRIS', '#ff2a6d', 'tetris'], [1, 'PAC-MAN', '#ffd23f', 'pac'], [2, 'SNAKE', '#2bff88', 'snake'], [3, 'MINES', '#7df9ff', 'mines'], [4, '2048', '#ff8a00', 'n2048'], [5, 'DINO', '#c9c9d6', 'dino'],
+    [9, 'MIND', '#ff8ab0', 'mind'], [10, 'MATH', '#9b5cff', 'math'], [11, 'LINE 98', '#4dabf7', 'line98'], [12, 'COLOR', '#ff5fa2', 'color'], [13, 'NUMBERLE', '#6aaa64', 'numberle']];
+  CABS.forEach(([i, name, col, art], k) => {
+    const x = 160 + k * 118, body = ['#3a1d7a', '#5a1a3a', '#1a3a6a', '#2a2a2a', '#5a3a0a'][k % 5];
+    svg += L(i, x, 600, 1, `<ellipse cx="0" cy="-2" rx="58" ry="8" fill="#000" opacity=".45"/>
+      <path d="M-52 0V-250Q-52 -268 -36 -270H36Q52 -268 52 -250V0Z" fill="${body}" stroke="#0b0520" stroke-width="4"/>
+      <path d="M-52 -250V0" stroke="${col}" stroke-width="5"/><path d="M52 -250V0" stroke="${col}" stroke-width="5"/>
+      <rect x="-46" y="-262" width="92" height="30" rx="4" fill="#0b0520" stroke="${col}" stroke-width="3"/>${px(name, 0, -242, name.length > 6 ? 7 : 9, col)}
+      <rect x="-44" y="-222" width="88" height="88" rx="6" fill="#111" /><rect x="-40" y="-218" width="80" height="80" rx="4" fill="url(#screen)"/>
+      <g transform="translate(0 -136)">${ART[art]()}</g>
+      <path d="M-50 -132H50L56 -104H-56Z" fill="#1a1036" stroke="#0b0520" stroke-width="3"/>
+      <circle cx="-26" cy="-118" r="5" fill="#0b0520"/><path d="M-26 -118V-130" stroke="#0b0520" stroke-width="3"/><circle cx="-26" cy="-132" r="5" fill="#ff2a6d"/>
+      <circle cx="10" cy="-116" r="5" fill="#ffd23f"/><circle cx="26" cy="-120" r="5" fill="#7df9ff"/><circle cx="40" cy="-116" r="5" fill="#2bff88"/>
+      <rect x="-14" y="-70" width="28" height="36" rx="3" fill="#0b0520"/><rect x="-6" y="-62" width="12" height="4" fill="#ffd23f"/>${px('25¢', 0, -40, 6, '#ffd23f')}`);
+  });
+
+  /* ---------- Đồ phía trước ---------- */
+  // 14 — máy đua xe
+  svg += L(14, 150, 890, 1, `<ellipse cx="0" cy="-4" rx="130" ry="12" fill="#000" opacity=".5"/><path d="M-110 0V-170Q-110 -190 -90 -190H40Q60 -190 60 -170V0Z" fill="#ff2a6d" stroke="#0b0520" stroke-width="4"/>
+    <rect x="-98" y="-178" width="146" height="86" rx="6" fill="#0b0520"/><rect x="-92" y="-172" width="134" height="74" rx="4" fill="#4dabf7"/><path d="M-92 -120H42V-98H-92Z" fill="#2bff88"/><path d="M-40 -98 -20 -140H-8L12 -98Z" fill="#5a5a6a"/><path d="M-14 -98V-136" stroke="#fff" stroke-width="2" stroke-dasharray="6 6"/><circle cx="20" cy="-150" r="10" fill="#ffd23f"/>
+    ${px('SLOW ROADS', -25, -66, 8, '#fff6d6')}<circle cx="-25" cy="-34" r="22" fill="none" stroke="#0b0520" stroke-width="8"/><path d="M-25 -56V-12M-47 -34H-3" stroke="#0b0520" stroke-width="4"/>
+    <path d="M70 0V-60Q70 -96 104 -96H116V0Z" fill="#2a1a4a" stroke="#0b0520" stroke-width="4"/>`);
+  // 6, 7, 8 — bàn cờ vua, cá ngựa, bài
+  svg += `<g><rect x="330" y="760" width="420" height="22" rx="6" fill="url(#wood)"/><rect x="350" y="782" width="16" height="96" fill="#5a3014"/><rect x="714" y="782" width="16" height="96" fill="#5a3014"/><ellipse cx="540" cy="884" rx="230" ry="12" fill="#000" opacity=".4"/></g>`;
+  svg += L(6, 410, 762, 1, `${[0, 1, 2, 3, 4, 5].map(r => [0, 1, 2, 3, 4, 5].map(c => `<rect x="${-48 + c * 16}" y="${-60 + r * 10}" width="16" height="10" fill="${(r + c) % 2 ? '#5a3014' : '#f3e2c0'}"/>`).join('')).join('')}<rect x="-48" y="-60" width="96" height="60" fill="none" stroke="#2a1408" stroke-width="3"/><path d="M-20 -60v-26h-8l6-10h-4l8-10 8 10h-4l6 10h-8v26z" fill="#fff6d6" stroke="#2a1408" stroke-width="2"/><path d="M14 -60c0-14-12-16-6-34 8-6 18 4 14 14l6 2v18z" fill="#1a1a1a"/>`);
+  svg += L(7, 540, 762, 1, `<rect x="-48" y="-66" width="96" height="62" fill="#fff6d6" stroke="#2a1408" stroke-width="3"/><rect x="-48" y="-66" width="40" height="26" fill="#ff4d4d"/><rect x="8" y="-66" width="40" height="26" fill="#4dabf7"/><rect x="-48" y="-30" width="40" height="26" fill="#ffd23f"/><rect x="8" y="-30" width="40" height="26" fill="#69db7c"/><path d="M-8 -36 0 -44 8 -36 0 -28Z" fill="#9b5cff"/>${[[-28, -54, '#ff4d4d'], [28, -54, '#4dabf7'], [-28, -18, '#ffd23f'], [28, -18, '#69db7c']].map(([x, y, c]) => `<path d="M${x} ${y}m-6 8v-10a6 6 0 0 1 12 0v10z" fill="${c}" stroke="#2a1408" stroke-width="1.5"/>`).join('')}<rect x="54" y="-30" width="18" height="18" rx="3" fill="#fff" stroke="#2a1408" stroke-width="2"/><circle cx="59" cy="-25" r="2" fill="#000"/><circle cx="67" cy="-17" r="2" fill="#000"/>`);
+  svg += L(8, 670, 762, 1, `${[-30, -12, 6, 24].map((a, k) => `<g transform="rotate(${a} 0 0)"><rect x="-16" y="-70" width="32" height="46" rx="4" fill="#fff" stroke="#2a1408" stroke-width="2"/><text x="-10" y="-54" font-family="serif" font-size="13" fill="${k % 2 ? '#c00' : '#111'}">${['A', 'K', 'Q', 'J'][k]}</text><text x="2" y="-36" font-family="serif" font-size="16" fill="${k % 2 ? '#c00' : '#111'}">${['♠', '♥', '♣', '♦'][k]}</text></g>`).join('')}`);
+  // 17 — bàn bi-a
+  svg += L(17, 1000, 880, 1, `<ellipse cx="0" cy="-4" rx="210" ry="14" fill="#000" opacity=".5"/><rect x="-180" y="-60" width="22" height="58" fill="#5a3014"/><rect x="158" y="-60" width="22" height="58" fill="#5a3014"/>
+    <path d="M-200 -150H200L214 -56H-214Z" fill="url(#wood)" stroke="#2a1408" stroke-width="4"/><path d="M-176 -136H176L186 -70H-186Z" fill="url(#felt)"/>
+    ${[[-178, -134], [0, -138], [178, -134], [-186, -70], [0, -66], [186, -70]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="8" fill="#0b0520"/>`).join('')}
+    ${[[60, -104, '#ffd23f'], [76, -112, '#ff2a6d'], [76, -96, '#4dabf7'], [92, -120, '#111'], [92, -104, '#ff8a00'], [92, -88, '#9b5cff']].map(([x, y, c]) => `<circle cx="${x}" cy="${y}" r="7" fill="${c}" stroke="#0b0520" stroke-width="1.5"/>`).join('')}
+    <circle cx="-90" cy="-100" r="7" fill="#fff"/><path d="M-104 -96 -250 -40" stroke="#c9a070" stroke-width="6" stroke-linecap="round"/>${px('8 BALL POOL', 0, -160, 10, '#ffd23f')}`);
+  // 16 — máy The Useless Web (nút đỏ to)
+  svg += L(16, 1250, 890, 1, `<ellipse cx="0" cy="-4" rx="70" ry="10" fill="#000" opacity=".5"/><path d="M-50 0V-150H50V0Z" fill="#fff6d6" stroke="#0b0520" stroke-width="4"/><rect x="-40" y="-140" width="80" height="26" fill="#0b0520"/>${px('USELESS', 0, -122, 8, '#ffd23f')}<ellipse cx="0" cy="-70" rx="34" ry="14" fill="#8a0000"/><path d="M-34 -70v-10a34 14 0 0 0 68 0v10" fill="#c00" stroke="#0b0520" stroke-width="2"/><ellipse cx="0" cy="-80" rx="34" ry="14" fill="#ff2a2a"/>${px('PUSH', 0, -30, 9, '#0b0520')}`);
+  // 18 — máy Tuổi thơ An Vy: tiệm sushi băng chuyền
+  svg += L(18, 1390, 890, 1, `<ellipse cx="0" cy="-4" rx="70" ry="10" fill="#000" opacity=".5"/><path d="M-56 0V-210Q-56 -236 -30 -236H30Q56 -236 56 -210V0Z" fill="#ff9ce6" stroke="#0b0520" stroke-width="4"/>
+    <rect x="-48" y="-228" width="96" height="30" rx="6" fill="#fff6d6"/><text x="0" y="-208" font-family="Bungee" font-size="11" fill="#c2185b" text-anchor="middle">TUỔI THƠ</text>
+    <rect x="-44" y="-190" width="88" height="80" rx="6" fill="#0b0520"/><rect x="-40" y="-186" width="80" height="72" rx="4" fill="#ffe6c8"/><rect x="-40" y="-140" width="80" height="12" fill="#8a8a9a"/>
+    ${[-26, 0, 26].map((x, k) => `<ellipse cx="${x}" cy="-142" rx="10" ry="4" fill="#fff"/><rect x="${x - 7}" y="-152" width="14" height="8" rx="3" fill="${['#ff6a4a', '#ffd23f', '#2bff88'][k]}"/><rect x="${x - 7}" y="-150" width="14" height="3" fill="#111"/>`).join('')}
+    <circle cx="-20" cy="-170" r="8" fill="#ffd9b0"/><path d="M-28 -172q8 -10 16 0" fill="#3a2a1a"/>${px('AN VY', 0, -86, 10, '#c2185b')}<rect x="-14" y="-60" width="28" height="34" rx="3" fill="#0b0520"/><rect x="-6" y="-52" width="12" height="4" fill="#ffd23f"/>`);
+  // 15 — máy ném bóng rổ
+  svg += L(15, 1520, 890, 1, `<ellipse cx="0" cy="-4" rx="62" ry="10" fill="#000" opacity=".5"/><path d="M-50 0V-120H50V0Z" fill="#ff8a00" stroke="#0b0520" stroke-width="4"/><path d="M-50 -120 -40 -250H40L50 -120" fill="none" stroke="#0b0520" stroke-width="4"/><path d="M-44 -120 -36 -240H36L44 -120" fill="#1a1036" opacity=".55"/>
+    <rect x="-34" y="-262" width="68" height="44" fill="#fff6d6" stroke="#0b0520" stroke-width="3"/><rect x="-12" y="-248" width="24" height="16" fill="none" stroke="#ff2a6d" stroke-width="3"/><ellipse cx="0" cy="-216" rx="16" ry="5" fill="none" stroke="#ff2a6d" stroke-width="4"/><path d="M-14 -214 -8 -196H8L14 -214" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="-20" cy="-140" r="12" fill="#e8742a" stroke="#0b0520" stroke-width="2"/><circle cx="8" cy="-140" r="12" fill="#e8742a" stroke="#0b0520" stroke-width="2"/>${px('HOOPS', 0, -60, 10, '#0b0520')}`);
+
+  /* ---------- Treo tường thêm ---------- */
+  // 25 — TV cổ treo tường (Retro TV)
+  svg += L(25, 270, 212, 1, `<path d="M-14 -120 -30 -150M14 -120 30 -152" stroke="#c9c9d6" stroke-width="3"/><circle cx="-30" cy="-150" r="4" fill="#ff2a6d"/><circle cx="30" cy="-152" r="4" fill="#7df9ff"/>
+    <rect x="-38" y="-120" width="76" height="76" rx="10" fill="#8a5a3a" stroke="#0b0520" stroke-width="4"/><rect x="-31" y="-112" width="48" height="56" rx="8" fill="#0b0520"/>
+    ${['#fff6d6', '#ffd23f', '#7df9ff', '#2bff88', '#ff9ce6', '#ff2a6d'].map((c, k) => `<rect x="${-28 + k * 7}" y="-108" width="7" height="32" fill="${c}"/>`).join('')}<rect x="-28" y="-76" width="42" height="16" fill="#2c1660"/>${px('TV', -7, -64, 7, '#fff6d6')}
+    <circle cx="27" cy="-102" r="5" fill="#ffd23f" stroke="#0b0520" stroke-width="2"/><circle cx="27" cy="-86" r="5" fill="#ffd23f" stroke="#0b0520" stroke-width="2"/><rect x="22" y="-72" width="10" height="14" fill="#0b0520"/>
+    <path d="M-20 -44V-30M20 -44V-30" stroke="#0b0520" stroke-width="5"/><rect x="-40" y="-30" width="80" height="22" rx="4" fill="#0e0626" stroke="#ffd23f" stroke-width="2"/>${px('RETRO', 0, -14, 8, '#ffd23f')}`);
+  // 26 — biển neon "club 404"
+  svg += L(26, 505, 212, 1, `<rect x="-47" y="-152" width="94" height="152" rx="8" fill="#0e0626" stroke="#7df9ff" stroke-width="4"/><rect x="-39" y="-144" width="78" height="136" rx="5" fill="none" stroke="#ff2a6d" stroke-width="1.5" opacity=".7"/>
+    <text x="0" y="-108" font-family="Bungee" font-size="24" fill="#ff9ce6" text-anchor="middle" stroke="#ff2a6d" stroke-width="1">club</text>
+    ${px('404', 0, -66, 20, '#7df9ff')}<path d="M-32 -50H32" stroke="#ffd23f" stroke-width="2" stroke-dasharray="4 4"/>
+    <path d="M0 -14c-12-10-26-22-15-31 6-5 13-2 15 4 2-6 9-9 15-4 11 9-3 21-15 31z" fill="#ff2a6d" stroke="#0b0520" stroke-width="2"/>`);
+  // 24 — áp phích game Flash (Newgrounds)
+  svg += L(24, 1091, 212, 1, `<rect x="-45" y="-164" width="90" height="164" fill="#ff8a00" stroke="#0b0520" stroke-width="4"/><rect x="-37" y="-156" width="74" height="24" fill="#0b0520"/>${px('FLASH', 0, -139, 10, '#ffd23f')}
+    <path d="M8 -124 -20 -70H0L-12 -30 24 -90H4L16 -124Z" fill="#ffd23f" stroke="#0b0520" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="-37" y="-24" width="74" height="16" fill="#0b0520"/>${px('GAMES', 0, -11, 8, '#fff6d6')}`);
+
+  document.getElementById('scene').innerHTML = svg;
+  window.ROOM = { title: 'An Vy Arcade', music: 'aTfDtUFiquY', links: LINKS };
+})();
+</script>
+<script src="../room.js"></script>
+</body>
+</html>
