@@ -8,7 +8,7 @@
 <title>vy@studio:~$</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Monoton&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Monoton&amp;family=Tiny5&amp;display=swap" rel="stylesheet">
 <style>
   /* Studio: tĩnh hoàn toàn (không hiệu ứng chuyển động), chữ xanh trên nền đen kiểu terminal.
      Màn hình chia khung: Letterboxd | nhạc mới | Spotify + Last.fm — mọi thứ chạy ngay trong trang. */
@@ -260,6 +260,27 @@
   .ig{display:flex;flex-direction:column;height:100%}
   .ig .frame{flex:1;min-height:0;background:#fff}
   #w-poolsuite{right:18px}
+  /* note.chat: kiểu khung chat trang cá nhân (chữ pixel, tên xanh, ngày hồng) */
+  #w-note{left:auto;right:18px;width:min(460px,42vw);min-width:320px}
+  #w-note .tb{background:#101010;border-bottom-color:#2a2a2a}
+  .nt-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 12px 6px;background:#0b0b0b;font:18px/1.35 'Tiny5',var(--mono);color:#f2f2f2;scrollbar-width:thin;scrollbar-color:#333 #0b0b0b}
+  .nt-msg{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed #222}
+  .nt-msg:last-child{border-bottom:0}
+  .nt-av{flex:none;width:34px;height:34px}
+  .nt-av svg{display:block;width:34px;height:34px;image-rendering:pixelated}
+  .nt-body{min-width:0;flex:1}
+  .nt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}
+  .nt-head b{font-weight:400;font-size:19px;color:#b6ff6a}
+  .nt-head span{font-size:14px;color:#ff9ad5;text-decoration:underline;text-underline-offset:2px}
+  .nt-text{margin-top:2px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+  .nt-form{flex:none;display:flex;gap:6px;padding:8px;border-top:1px solid #2a2a2a;background:#101010}
+  .nt-form input{min-width:0;height:32px;padding:0 9px;background:#000;border:1px solid #333;border-radius:0;color:#f2f2f2;font:16px/1 'Tiny5',var(--mono)}
+  .nt-form input:focus{outline:none;border-color:#b6ff6a}
+  .nt-form input::placeholder{color:#666}
+  #ntName{flex:0 0 96px;color:#b6ff6a}
+  #ntText{flex:1}
+  .nt-form button{flex:none;height:32px;padding:0 12px;background:#b6ff6a;color:#000;font:15px/1 'Tiny5',var(--mono)}
+  .nt-form button:hover{background:#ff9ad5}
   .ig-out{margin-left:auto;align-self:center;padding:0 10px;font:12px/1 var(--mono);color:var(--g-mid);white-space:nowrap}
   .ig .frame iframe{display:block;width:100%;height:100%;border:0}
 
@@ -296,6 +317,7 @@
     #w-letterboxd{order:6;flex:none;height:70vh;margin:12px}
     .win.full{bottom:var(--bar)!important;z-index:980!important}
     #w-poolsuite{right:0}
+    #w-note{right:0;width:auto;min-width:0}
     #w-spotify{position:fixed;left:0;right:0;bottom:var(--bar);height:var(--spmini);z-index:60;flex:none}
     #w-spotify:not(.big) .sp-ctl,#w-spotify:not(.big) .sp-foot,#w-spotify:not(.big) .sp-res{display:none!important}
     #w-spotify.big{left:0;right:0;top:auto;bottom:var(--bar);height:84vh;height:84dvh}
@@ -406,6 +428,17 @@
     <div class="wb" style="overflow:hidden;background:#fff"><iframe id="poolFrame" title="Poolsuite — summer radio" allow="autoplay; encrypted-media; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
   </section>
 
+  <!-- Note: ô chat ghi chú (tin tự xoá sau 7 ngày) -->
+  <section class="win app drag" id="w-note" data-app="note" aria-label="Note" hidden>
+    <div class="tb"><span class="t">note.chat</span><span class="r" id="ntLive">◌</span><button type="button" data-act="hide" aria-label="Ẩn khung note">_</button><button type="button" data-full aria-label="Mở rộng toàn màn hình" aria-pressed="false">⛶</button></div>
+    <div class="nt-list" id="ntList" role="log" aria-live="polite" aria-label="Tin nhắn"></div>
+    <form class="nt-form" id="ntForm" autocomplete="off">
+      <label class="sr" for="ntName">Tên</label><input id="ntName" maxlength="24" placeholder="tên" autocomplete="nickname" spellcheck="false">
+      <label class="sr" for="ntText">Tin nhắn</label><input id="ntText" maxlength="600" placeholder="tin nhắn" enterkeyhint="send">
+      <button type="submit">gửi</button>
+    </form>
+  </section>
+
   <!-- Instagram -->
   <section class="win app drag" id="w-instagram" data-app="instagram" aria-label="Instagram" hidden>
     <div class="tb"><span class="t">instagram</span><button type="button" data-act="close" aria-label="Ẩn Instagram">_</button></div>
@@ -426,18 +459,21 @@
     <button type="button" role="menuitem" data-app="music">◎ new music</button>
     <button type="button" role="menuitem" data-app="letterboxd">▣ letterboxd</button>
     <button type="button" role="menuitem" data-app="lastfm">▮ last.fm</button>
-    <button type="button" role="menuitem" data-app="plaza">▤ plaza.one · radio</button>
     <button type="button" role="menuitem" data-app="instagram">◫ instagram</button>
     <a role="menuitem" href="https://streamimdb.ru/" target="_blank" rel="noopener noreferrer">▶ imdb ↗</a>
     <p>♫ web nhạc</p>
+    <button type="button" role="menuitem" data-app="plaza">▤ plaza.one · radio</button>
     <button type="button" role="menuitem" id="poolBtn">☼ poolsuite · summer radio</button>
-    <button type="button" role="menuitem" data-nm="hypem">♨ hype machine · popular</button>
-    <button type="button" role="menuitem" data-nm="bandcamp">▣ bandcamp · new arrivals</button>
+    <p>✎ ghi chú</p>
+    <button type="button" role="menuitem" data-app="note">✎ note · chat</button>
+    <a role="menuitem" href="https://keep.google.com/u/0/#home" target="_blank" rel="noopener">✎ google keep ↗</a>
+    <a role="menuitem" href="https://app.standardnotes.com/" target="_blank" rel="noopener">✎ standard notes ↗</a>
     <p>✦ ai</p>
     <a role="menuitem" href="https://claude.ai/new" target="_blank" rel="noopener">✦ claude ↗</a>
     <a role="menuitem" href="https://chatgpt.com" target="_blank" rel="noopener">✦ chatgpt ↗</a>
     <a role="menuitem" href="https://gemini.google.com" target="_blank" rel="noopener">✦ gemini ↗</a>
     <p>⌂ trang</p>
+    <a role="menuitem" href="https://neocities.org/" target="_blank" rel="noopener">◎ neocities ↗</a>
     <a role="menuitem" href="../home.html">⌂ anrevy house</a>
     <button type="button" role="menuitem" id="lockBtn">⏻ khoá studio</button>
   </div>
@@ -528,8 +564,8 @@
   /* ---------- 3. cửa sổ, thanh tác vụ, menu ---------- */
   let z = 10;
   const wins = {}, tasks = $('#tasks');
-  ['plaza', 'letterboxd', 'music', 'spotify', 'lastfm', 'instagram', 'poolsuite'].forEach(a => { wins[a] = $('#w-' + a); });
-  const NAMES = { plaza: 'plaza', spotify: 'spotify', music: 'new music', letterboxd: 'letterboxd', lastfm: 'last.fm', instagram: 'instagram' };
+  ['plaza', 'letterboxd', 'music', 'spotify', 'lastfm', 'instagram', 'poolsuite', 'note'].forEach(a => { wins[a] = $('#w-' + a); });
+  const NAMES = { plaza: 'plaza', spotify: 'spotify', music: 'new music', letterboxd: 'letterboxd', lastfm: 'last.fm', instagram: 'instagram', note: '✎ note' };
   function front(w){
     Object.values(wins).forEach(x => x.classList.remove('front'));
     w.classList.add('front'); w.style.zIndex = ++z;
@@ -548,7 +584,9 @@
     const w = wins[app]; if (!w) return;
     if (app === 'spotify' && spW.classList.contains('big')) setBig(false);
     if (w.classList.contains('full')) setFull(w, false);
-    w.hidden = true; taskBtn(app).classList.add('min'); HID.add(app); saveHid(); updBare();
+    w.hidden = true; taskBtn(app).classList.add('min');
+    if (app !== 'note'){ HID.add(app); saveHid(); }
+    updBare();
   }
   function openApp(app){
     const w = wins[app]; if (!w) return;
@@ -559,6 +597,7 @@
     else if (app === 'spotify'){ if (narrow()) setBig(true); else $('#spQ').focus({ preventScroll: true }); }
     else if (narrow()) w.scrollIntoView({ block: 'start' });
     if (app === 'lastfm') lfPoll();
+    if (app === 'note') noteOpen();
     $('#menu').hidden = true; $('#start').setAttribute('aria-expanded', 'false');
   }
   // Poolsuite: _ ẩn (nhạc vẫn phát) · ✕ tắt hẳn
@@ -1241,6 +1280,98 @@
     }
   }
 
+  /* ================= NOTE.CHAT: tin nhắn chung, tự xoá sau 7 ngày ================= */
+  const NOTE_PFX = 'anrevy-house-9q2/notes/v1/';
+  let NOTE_BROKERS = ['wss://broker.emqx.io:8084/mqtt', 'wss://broker.hivemq.com:8884/mqtt'];
+  { const qb = new URLSearchParams(location.search).get('broker'); if (qb) NOTE_BROKERS = qb.split(','); }
+  const NOTE_LIB = 'https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js';
+  const WEEK = 7 * 864e5;
+  const NT = { msgs: new Map(), clients: [], started: false, last: 0 };
+  const ntList = $('#ntList'), ntName = $('#ntName'), ntText = $('#ntText');
+  ntName.value = ls.get('note-name') || '';
+  function ntAvatar(name){
+    let h = 2166136261 >>> 0;
+    for (const ch of name.toLowerCase()){ h ^= ch.codePointAt(0); h = Math.imul(h, 16777619) >>> 0; }
+    const hue = h % 360; let cells = '';
+    for (let y = 0; y < 5; y++) for (let x = 0; x < 3; x++){
+      h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0;
+      if (h % 5 < 3){ cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`; if (x < 2) cells += `<rect x="${4 - x}" y="${y}" width="1" height="1"/>`; }
+    }
+    return `<svg viewBox="-1 -1 7 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="-1" y="-1" width="7" height="7" fill="hsl(${hue} 45% 16%)"/><g fill="hsl(${hue} 90% 72%)">${cells}</g></svg>`;
+  }
+  const ntTime = at => { const d = new Date(at); return String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+  function ntValid(m){
+    return m && typeof m === 'object' && /^[a-z0-9]{6,32}$/.test(m.id || '') && typeof m.n === 'string' && m.n.trim() && typeof m.t === 'string' && m.t.trim() &&
+      typeof m.at === 'number' && Date.now() - m.at <= WEEK && m.at < Date.now() + 6e5;
+  }
+  function ntAdd(m){
+    if (!ntValid(m) || NT.msgs.has(m.id)) return false;
+    NT.msgs.set(m.id, { id: m.id, n: m.n.trim().slice(0, 24), t: m.t.trim().slice(0, 600), at: m.at }); return true;
+  }
+  let ntPaintT = 0;
+  function ntPaint(){
+    clearTimeout(ntPaintT);
+    ntPaintT = setTimeout(() => {
+      const atBottom = ntList.scrollHeight - ntList.scrollTop - ntList.clientHeight < 60;
+      const list = [...NT.msgs.values()].filter(m => Date.now() - m.at <= WEEK).sort((a, b) => a.at - b.at);
+      ntList.innerHTML = list.map(m => `<div class="nt-msg"><span class="nt-av">${ntAvatar(m.n)}</span><div class="nt-body"><p class="nt-head"><b>${esc(m.n)}</b><span>@${esc(ntTime(m.at))}</span></p><p class="nt-text">${esc(m.t)}</p></div></div>`).join('');
+      if (atBottom || NT.first){ ntList.scrollTop = ntList.scrollHeight; NT.first = false; }
+    }, 30);
+  }
+  function ntLive(){
+    const n = NT.clients.filter(c => c.connected).length;
+    $('#ntLive').textContent = n ? '◉' : '◌'; $('#ntLive').className = 'r' + (n ? ' on' : '');
+  }
+  function ntLoadLib(cb){
+    if (window.mqtt) return cb();
+    const srcs = [NOTE_LIB, NOTE_LIB.replace('https://cdn.jsdelivr.net/npm/', 'https://unpkg.com/')];
+    (function next(i){
+      if (i >= srcs.length) return;
+      const sc = document.createElement('script'); sc.src = srcs[i]; sc.async = true;
+      sc.onload = () => window.mqtt ? cb() : next(i + 1); sc.onerror = () => next(i + 1);
+      document.head.appendChild(sc);
+    })(0);
+  }
+  function ntConnect(){
+    const v0 = +(new URLSearchParams(location.search).get('nv') || 5);
+    NOTE_BROKERS.forEach(url => ntClient(url, v0));
+  }
+  // MQTT 5 để tin tự hết hạn sau 7 ngày trên máy chủ; máy chủ nào không hỗ trợ thì dùng bản 3.1.1
+  function ntClient(url, ver){
+    let c;
+    try { c = window.mqtt.connect(url, { clientId: 'anrevy_note_' + Math.random().toString(36).slice(2, 12), clean: true, keepalive: 30, reconnectPeriod: 6000, connectTimeout: 12000, protocolVersion: ver }); }
+    catch (e) { return; }
+    let ok = false;
+    c.on('connect', () => { ok = true; c.subscribe(NOTE_PFX + 'm/+', { qos: 1 }); ntLive(); });
+    c.on('close', ntLive); c.on('offline', ntLive); c.on('error', () => {});
+    c.on('message', (topic, payload) => {
+      if (!payload || !payload.length) return;
+      try { if (ntAdd(JSON.parse(new TextDecoder().decode(payload)))) ntPaint(); } catch (e) {}
+    });
+    NT.clients.push(c);
+    if (ver === 5) setTimeout(() => { if (!ok){ c.end(true); NT.clients.splice(NT.clients.indexOf(c), 1); ntClient(url, 4); } }, 15000);
+  }
+  function noteOpen(){
+    if (!NT.started){
+      NT.started = true; NT.first = true;
+      fetch('data/notes.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => { ((d && d.items) || []).forEach(ntAdd); ntPaint(); }).catch(() => {});
+      ntLoadLib(ntConnect);
+    } else ntPaint();
+    setTimeout(() => (ntName.value ? ntText : ntName).focus({ preventScroll: true }), 0);
+  }
+  $('#ntForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const n = ntName.value.trim().replace(/\s+/g, ' ').slice(0, 24), t = ntText.value.trim().slice(0, 600);
+    if (!n){ ntName.focus(); return; }
+    if (!t || Date.now() - NT.last < 700) return;
+    const live = NT.clients.filter(c => c.connected);
+    if (!live.length){ toast('◌ chưa kết nối, thử lại sau vài giây'); return; }
+    const m = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8), n, t, at: Date.now() };
+    live.forEach(c => c.publish(NOTE_PFX + 'm/' + m.id, JSON.stringify(m), Object.assign({ qos: 1, retain: true }, c.options.protocolVersion === 5 ? { properties: { messageExpiryInterval: 7 * 86400 } } : {})));
+    ls.set('note-name', n); NT.last = Date.now();
+    ntAdd(m); NT.first = true; ntPaint(); ntText.value = ''; ntText.focus();
+  });
+
   /* ================= INSTAGRAM ================= */
   let igCur = IG_USERS[0];
   function igShow(u){
@@ -1258,7 +1389,8 @@
   async function openDesk(){
     if (opened) return; opened = true;
     $('#desk').hidden = false; document.body.classList.remove('locked');
-    ['plaza', 'spotify', 'music', 'letterboxd', 'lastfm'].forEach(taskBtn);
+    ['plaza', 'spotify', 'music', 'letterboxd', 'lastfm', 'note'].forEach(taskBtn);
+    taskBtn('note').classList.add('min');
     $('#plFrame').src = 'https://plaza.one/';
     front(wins.music);
     HID.forEach(app => { if (wins[app] && app !== 'instagram'){ wins[app].hidden = true; taskBtn(app).classList.add('min'); } });

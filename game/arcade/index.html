@@ -57,6 +57,9 @@
     { n: 'Simon Tatham Puzzles', d: 'Bộ sưu tập trò giải đố kinh điển', u: 'https://www.chiark.greenend.org.uk/~sgtatham/puzzles/' },
     { n: 'Ai là triệu phú', d: 'Trả lời câu hỏi để thành triệu phú', u: 'https://www.crazygames.com/vn/game/millionaire-quiz' },
     { n: 'Mensa IQ Test', d: 'Bài kiểm tra IQ của Mensa', u: 'https://test.mensa.no/' },
+    { n: 'Newgrounds', d: 'Cổng game và hoạt hình Flash huyền thoại', u: 'https://www.newgrounds.com/' },
+    { n: 'Retro TV', d: 'Kênh phim và chương trình truyền hình cổ điển, xem trực tuyến', u: 'https://www.getafteritmedia.com/retrotv' },
+    { n: 'club404', d: 'Mạng lưới Neocities nhỏ: bức tường chung và các trang web cá nhân', u: 'https://club404.neocities.org/' },
   ];
   /* ============================================================= */
   // Phòng tĩnh hoàn toàn (không đèn nhấp nháy, không nhân vật) để chạy nhẹ trên mọi máy.
@@ -154,6 +157,23 @@
   svg += L(15, 1520, 890, 1, `<ellipse cx="0" cy="-4" rx="62" ry="10" fill="#000" opacity=".5"/><path d="M-50 0V-120H50V0Z" fill="#ff8a00" stroke="#0b0520" stroke-width="4"/><path d="M-50 -120 -40 -250H40L50 -120" fill="none" stroke="#0b0520" stroke-width="4"/><path d="M-44 -120 -36 -240H36L44 -120" fill="#1a1036" opacity=".55"/>
     <rect x="-34" y="-262" width="68" height="44" fill="#fff6d6" stroke="#0b0520" stroke-width="3"/><rect x="-12" y="-248" width="24" height="16" fill="none" stroke="#ff2a6d" stroke-width="3"/><ellipse cx="0" cy="-216" rx="16" ry="5" fill="none" stroke="#ff2a6d" stroke-width="4"/><path d="M-14 -214 -8 -196H8L14 -214" fill="none" stroke="#fff" stroke-width="1.5"/>
     <circle cx="-20" cy="-140" r="12" fill="#e8742a" stroke="#0b0520" stroke-width="2"/><circle cx="8" cy="-140" r="12" fill="#e8742a" stroke="#0b0520" stroke-width="2"/>${px('HOOPS', 0, -60, 10, '#0b0520')}`);
+
+  /* ---------- Treo tường thêm ---------- */
+  // 25 — TV cổ treo tường (Retro TV)
+  svg += L(25, 270, 212, 1, `<path d="M-14 -120 -30 -150M14 -120 30 -152" stroke="#c9c9d6" stroke-width="3"/><circle cx="-30" cy="-150" r="4" fill="#ff2a6d"/><circle cx="30" cy="-152" r="4" fill="#7df9ff"/>
+    <rect x="-38" y="-120" width="76" height="76" rx="10" fill="#8a5a3a" stroke="#0b0520" stroke-width="4"/><rect x="-31" y="-112" width="48" height="56" rx="8" fill="#0b0520"/>
+    ${['#fff6d6', '#ffd23f', '#7df9ff', '#2bff88', '#ff9ce6', '#ff2a6d'].map((c, k) => `<rect x="${-28 + k * 7}" y="-108" width="7" height="32" fill="${c}"/>`).join('')}<rect x="-28" y="-76" width="42" height="16" fill="#2c1660"/>${px('TV', -7, -64, 7, '#fff6d6')}
+    <circle cx="27" cy="-102" r="5" fill="#ffd23f" stroke="#0b0520" stroke-width="2"/><circle cx="27" cy="-86" r="5" fill="#ffd23f" stroke="#0b0520" stroke-width="2"/><rect x="22" y="-72" width="10" height="14" fill="#0b0520"/>
+    <path d="M-20 -44V-30M20 -44V-30" stroke="#0b0520" stroke-width="5"/><rect x="-40" y="-30" width="80" height="22" rx="4" fill="#0e0626" stroke="#ffd23f" stroke-width="2"/>${px('RETRO', 0, -14, 8, '#ffd23f')}`);
+  // 26 — biển neon "club 404"
+  svg += L(26, 505, 212, 1, `<rect x="-47" y="-152" width="94" height="152" rx="8" fill="#0e0626" stroke="#7df9ff" stroke-width="4"/><rect x="-39" y="-144" width="78" height="136" rx="5" fill="none" stroke="#ff2a6d" stroke-width="1.5" opacity=".7"/>
+    <text x="0" y="-108" font-family="Bungee" font-size="24" fill="#ff9ce6" text-anchor="middle" stroke="#ff2a6d" stroke-width="1">club</text>
+    ${px('404', 0, -66, 20, '#7df9ff')}<path d="M-32 -50H32" stroke="#ffd23f" stroke-width="2" stroke-dasharray="4 4"/>
+    <path d="M0 -14c-12-10-26-22-15-31 6-5 13-2 15 4 2-6 9-9 15-4 11 9-3 21-15 31z" fill="#ff2a6d" stroke="#0b0520" stroke-width="2"/>`);
+  // 24 — áp phích game Flash (Newgrounds)
+  svg += L(24, 1091, 212, 1, `<rect x="-45" y="-164" width="90" height="164" fill="#ff8a00" stroke="#0b0520" stroke-width="4"/><rect x="-37" y="-156" width="74" height="24" fill="#0b0520"/>${px('FLASH', 0, -139, 10, '#ffd23f')}
+    <path d="M8 -124 -20 -70H0L-12 -30 24 -90H4L16 -124Z" fill="#ffd23f" stroke="#0b0520" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="-37" y="-24" width="74" height="16" fill="#0b0520"/>${px('GAMES', 0, -11, 8, '#fff6d6')}`);
 
   document.getElementById('scene').innerHTML = svg;
   window.ROOM = { title: 'An Vy Arcade', music: 'aTfDtUFiquY', links: LINKS };

@@ -13,6 +13,8 @@ Kịch bản này chạy định kỳ trên GitHub Actions:
   5. xoá tin giữ lại của những tranh đã được lưu từ lần chạy trước (lúc đó trang web đã có bản lâu dài).
 Khách không tự gỡ được tranh đã treo: mọi yêu cầu gỡ (d/<id>) đều bị bỏ qua và dọn đi.
 Chỉ chủ trang gỡ tranh bằng cách sửa gallery/uploads.json (và xoá ảnh trong gallery/uploads).
+Ô chat "note" trong Studio cũng gửi tin qua đây (anrevy-house-9q2/notes/v1/m/<id>): kịch bản lưu các tin
+trong 7 ngày gần nhất vào studio/data/notes.json và dọn tin cũ hơn 7 ngày (chat tự xoá sau 1 tuần).
 Chạy thử không đụng tới git:  python3 gallery_sync.py --dry   (BROKERS=ws://localhost:8883 để dùng máy chủ thử)
 """
 import base64, hashlib, io, json, os, random, re, string, struct, subprocess, sys, time, warnings
@@ -22,6 +24,9 @@ from paho.mqtt.enums import CallbackAPIVersion
 from PIL import Image, ImageOps
 
 PFX = 'anrevy-house-9q2/gallery/v1/'
+NOTE_PFX = 'anrevy-house-9q2/notes/v1/'
+NOTES = 'studio/data/notes.json'
+NOTE_TTL = 7 * 86400 * 1000                    # tin chat giữ 7 ngày
 DEFAULT_BROKERS = 'tcp://broker.emqx.io:1883,tcp://broker.hivemq.com:1883'
 DB = 'gallery/uploads.json'
 DIR = 'gallery/uploads'
@@ -172,7 +177,7 @@ def main():
             print('không kết nối được', u, repr(e))
     if not links: print('không có máy chủ nào'); return
     time.sleep(2)
-    for u, c, store in links: c.subscribe(PFX + '#', 1)
+    for u, c, store in links: c.subscribe(PFX + '#', 1); c.subscribe(NOTE_PFX + '#', 1)
     t0 = LAST[0] = time.time()
     while True:                                          # đợi tới khi 10 giây không còn tin mới (tối đa 5 phút)
         time.sleep(1)
@@ -279,6 +284,9 @@ def main():
             print('bỏ tranh không đạt kiểm định', gid, repr(e)); rejected.append(gid)
             clear_all(gid, max(int(m.get('on') or 0) for _, _, m in metas) + max(int(m.get('n') or 0) for _, _, m in metas))
 
+    # 2b) ô chat note của Studio: giữ tin trong 7 ngày, dọn tin cũ
+    note_items, notes_changed, note_stale = notes(links, now)
+
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
     if not changed and not DRY:
@@ -287,12 +295,16 @@ def main():
             keep = time.time() - last > 45 * 86400
         except Exception: pass
 
-    if changed or keep:
-        items.sort(key=lambda it: it.get('at', 0))
-        db = {'about': 'Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động). image = ảnh xem nhanh, full = bản gốc.', 'items': items}
-        if keep: db['checked'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
-        with open(DB, 'w', encoding='utf-8') as f: json.dump(db, f, ensure_ascii=False, indent=1)
-        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '']))
+    if changed or keep or notes_changed:
+        if changed or keep:
+            items.sort(key=lambda it: it.get('at', 0))
+            db = {'about': 'Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động). image = ảnh xem nhanh, full = bản gốc.', 'items': items}
+            if keep: db['checked'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+            with open(DB, 'w', encoding='utf-8') as f: json.dump(db, f, ensure_ascii=False, indent=1)
+        if notes_changed:
+            os.makedirs(os.path.dirname(NOTES), exist_ok=True)
+            with open(NOTES, 'w', encoding='utf-8') as f: json.dump({'items': note_items}, f, ensure_ascii=False, indent=1)
+        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '']))
         print(msg, added)
         if not DRY and not push(msg):
             print('push thất bại — không xoá tin giữ lại, lần sau thử lại')
@@ -304,7 +316,7 @@ def main():
     def mine(t):
         rest = t[len(PFX):].split('/')
         return len(rest) >= 2 and rest[0] in ('m', 'c', 'o') and rest[1] in keep_ids
-    clear = {t for t in clear if not mine(t)}
+    clear = {t for t in clear if not mine(t)} | note_stale
     print('xoá', len(clear), 'tin giữ lại')
     if os.environ.get('GITHUB_ACTIONS'):
         print(f'::notice title=gallery-sync::{len(per)} mã trên máy chủ · đã lưu {len(items)} · thêm {len(added)} · không đạt {len(rejected)} · dọn {len(clear)} tin')
@@ -313,12 +325,36 @@ def main():
     time.sleep(5)
     for u, c, s in links: c.loop_stop(); c.disconnect()
 
+def notes(links, now):
+    """Gộp tin chat trên máy chủ với notes.json; bỏ tin quá 7 ngày hoặc không hợp lệ."""
+    old = []
+    try: old = json.load(open(NOTES, encoding='utf-8')).get('items', [])
+    except Exception: pass
+    got = {it['id']: it for it in old if isinstance(it, dict) and it.get('id')}
+    stale = set()
+    for u, c, store in links:
+        for t, p in store.items():
+            if not t.startswith(NOTE_PFX) or not p: continue
+            nid = t[len(NOTE_PFX):].split('/')[-1]
+            try: m = json.loads(p.decode('utf-8'))
+            except Exception: stale.add(t); continue
+            at = float(m.get('at') or 0) if isinstance(m, dict) else 0
+            name = re.sub(r'\s+', ' ', clean(m.get('n'), 24)) if isinstance(m, dict) else ''
+            text = clean(m.get('t'), 600) if isinstance(m, dict) else ''
+            if not t.startswith(NOTE_PFX + 'm/') or not re.fullmatch(r'[a-z0-9]{6,32}', nid) or m.get('id') != nid or not name or not text or at > now + 600000:
+                stale.add(t); continue
+            if now - at > NOTE_TTL: stale.add(t); continue
+            got[nid] = {'id': nid, 'n': name, 't': text, 'at': int(at)}
+    items = sorted((it for it in got.values() if now - float(it.get('at', 0)) <= NOTE_TTL), key=lambda x: x['at'])[-500:]
+    print(f'note: {len(items)} tin trong 7 ngày, dọn {len(stale)} tin cũ/lỗi')
+    return items, items != old, stale
+
 def git(*a): return subprocess.run(['git', *a], capture_output=True, text=True)
 
 def push(msg):
     git('config', 'user.name', 'github-actions[bot]')
     git('config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com')
-    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []))
+    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []), *([NOTES] if os.path.exists(NOTES) else []))
     r = git('commit', '-m', msg)
     if r.returncode != 0 and 'nothing to commit' not in r.stdout: print(r.stdout, r.stderr); return False
     for i in range(4):

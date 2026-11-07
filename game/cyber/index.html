@@ -16,6 +16,7 @@
   .room-title{font:800 clamp(14px,2vw,20px) 'Orbitron',sans-serif;letter-spacing:.4em;color:#fff;text-shadow:-2px 0 #ff2a6d,2px 0 #05d9e8,0 0 18px #ff2a6d}
   .room-title span{display:block;font:400 12px 'Share Tech Mono',monospace;letter-spacing:.5em;color:#05d9e8;text-align:center;margin-top:4px;text-shadow:none}
   .jp{font-family:'Noto Sans JP',sans-serif;font-weight:900}
+  .or{font-family:'Orbitron',sans-serif;font-weight:800}
   .flk{animation:flk 6s infinite}
   .flk.b{animation-delay:-2.7s;animation-duration:8.5s}
   .flk.c{animation-delay:-4.1s;animation-duration:5.2s}
@@ -76,6 +77,9 @@
     { n: 'Human Benchmark', d: 'Đo phản xạ, trí nhớ, độ nhanh tay', u: 'https://humanbenchmark.com/' },
     { n: 'Incredibox', d: 'Kéo thả biểu tượng để làm ban nhạc beatbox', u: 'https://www.incredibox.com/' },
     { n: 'Bruno Simon', d: 'Lái chiếc xe nhỏ đi khắp thế giới 3D', u: 'https://bruno-simon.com/' },
+    { n: 'noclip', d: 'Bảo tàng số: đi xuyên qua các màn chơi game 3D kinh điển', u: 'https://noclip.website/' },
+    { n: 'sealo !', d: 'Blog cá nhân dễ thương của sealington trên Neocities', u: 'https://sealo.neocities.org/' },
+    { n: 'Nightscape Lounge', d: 'Blog cá nhân kiểu quán bar đêm trên Neocities', u: 'https://message.neocities.org/' },
   ];
   /* ============================================================= */
 
@@ -177,6 +181,13 @@
   svg += L(14, 1510, 420, 1, `<path d="M-30 0 0 -170 30 0" fill="none" stroke="#5a4a70" stroke-width="4"/><path d="M-22 -40H22M-14 -90H14M-8 -130H8" stroke="#5a4a70" stroke-width="3"/><circle class="led" cy="-174" r="7" fill="#ff3040"/><g class="flk" fill="none" stroke="#ff71ce" stroke-width="3" opacity=".8"><path d="M18 -184a24 24 0 0 1 0 22"/><path d="M28 -194a40 40 0 0 1 0 42"/><path d="M-18 -184a24 24 0 0 0 0 22"/><path d="M-28 -194a40 40 0 0 0 0 42"/></g>`);
   // mưa phủ + vũng nước loáng (trang trí)
   svg += `<g opacity=".35">${[[700, 760, 90], [1000, 820, 120], [540, 870, 80]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .12}" fill="url(#refl)"/>`).join('')}</g>`;
+
+  // 26 — biển neon "NIGHTSCAPE LOUNGE" (blog message.neocities)
+  svg += L(26, 115, 532, 1, `<rect x="-86" y="-120" width="172" height="114" rx="10" fill="#0e0418" stroke="#9b5cff" stroke-width="2" stroke-opacity=".55"/><g class="flk b">${neon('M-50 -98a21 21 0 1 0 19 30a16 16 0 1 1 -19 -30z', '#ffd23f', 2.2)}</g>${ntext('LOUNGE', 20, -68, 24, '#ff71ce', 'or', 'flk c')}${ntext('NIGHTSCAPE', 0, -30, 15, '#05d9e8', 'or')}<path d="M-62 -16H62" stroke="#9b5cff" stroke-width="2" stroke-opacity=".6"/>`);
+  // 24 — máy chiếu hologram màn chơi 3D trên lan can (noclip)
+  svg += L(24, 1150, 386, 1, `<path d="M-16 0h32l-6 -10h-20z" fill="#2a2238" stroke="#5a4a70" stroke-width="2"/><path d="M-8 -10 -70 -98H70L8 -10Z" fill="#05d9e8" opacity=".08"/><g class="holo">${neon('M0 -96 -56 -72 0 -48 56 -72Z', '#05d9e8', 1.4)}${neon('M-56 -72V-40L0 -16 56 -40V-72M0 -48V-16', '#05d9e8', 1.4)}${neon('M-30 -58V-32M28 -58V-32M-18 -80 18 -66', '#2bff88', 1)}</g>${ntext('noclip', 0, -106, 15, '#05d9e8', 'or')}`);
+  // 25 — bé hải cẩu ngồi trên vũng nước (blog sealo)
+  svg += L(25, 1080, 862, 1, `<ellipse cy="-2" rx="64" ry="9" fill="#000" opacity=".45"/><path d="M-56 -4Q-62 -42 -24 -54Q10 -62 30 -40Q44 -26 58 -30Q68 -16 50 -8Q20 0 -56 -4Z" fill="#cfd6e6" stroke="#8a92a6" stroke-width="2"/><path d="M-30 -10q-6 10 -18 10M20 -6q10 8 22 4" stroke="#a8b0c4" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="-26" cy="-36" r="4" fill="#0a0612"/><circle cx="-10" cy="-38" r="4" fill="#0a0612"/><circle cx="-24.6" cy="-37.4" r="1.2" fill="#fff"/><circle cx="-8.6" cy="-39.4" r="1.2" fill="#fff"/><ellipse cx="-18" cy="-29" rx="4" ry="3" fill="#ff71ce"/><path d="M-30 -27h-13M-30 -24l-12 4M-6 -29h13M-6 -26l12 4" stroke="#7a8296" stroke-width="1.4"/><ellipse cx="-35" cy="-28" rx="4" ry="2.5" fill="#ff71ce" opacity=".45"/><ellipse cx="0" cy="-30" rx="4" ry="2.5" fill="#ff71ce" opacity=".45"/>${ntext('sealo !', 0, -72, 16, '#2bff88', 'or', 'flk')}`);
 
   document.getElementById('scene').innerHTML = svg;
 
