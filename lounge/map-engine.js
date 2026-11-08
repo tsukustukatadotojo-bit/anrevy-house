@@ -931,6 +931,37 @@
     }
   }
 
+  /* ----- chỉ nhìn thấy phòng mình đang đứng (phòng khác chìm trong bóng tối) ----- */
+  const OUTDOOR = new Set(['garden', 'entry', 'pond'].map(id => MAP.ZI[id]));
+  const VIS = new Float32Array(ZONES.length).fill(1);
+  const HOLES = ZONES.map(z => z.poly ? ZONES.filter(o => o.poly && o !== z && o.parent === z.id && o.bb[0] >= z.bb[0] && o.bb[2] <= z.bb[2] && o.bb[1] >= z.bb[1] && o.bb[3] <= z.bb[3]) : []);
+  const NESTED = new Set(HOLES.flat());
+  const FOOT = ZONES.filter(z => z.poly && !NESTED.has(z));
+  const fogCv = document.createElement('canvas'), fg = fogCv.getContext('2d');
+  let drawnPeople = [];
+  PROPS.forEach(p => { p.zi = zoneAt((p.b[0] + p.b[2]) / 2, p.y - 6); });
+  const polyPath = (g, P) => { g.moveTo(P[0][0], P[0][1]); for (let i = 1; i < P.length; i++) g.lineTo(P[i][0], P[i][1]); g.closePath(); };
+  function visTarget(i){ if (!self) return 1; const z = self.zs; if (i === z || (OUTDOOR.has(z) && OUTDOOR.has(i))) return 1; if (LINKS.has(z + '|' + i)) return .32; return 0; }
+  const zoneVis = zi => VIS[zi] == null ? 1 : VIS[zi];
+  function drawFog(dt, vb){
+    for (let i = 0; i < ZONES.length; i++) VIS[i] += (visTarget(i) - VIS[i]) * Math.min(1, dt * 7);
+    if (!inside || !self) return;
+    if (fogCv.width !== cv.width || fogCv.height !== cv.height){ fogCv.width = cv.width; fogCv.height = cv.height; }
+    fg.setTransform(1, 0, 0, 1, 0, 0); fg.clearRect(0, 0, fogCv.width, fogCv.height);
+    fg.setTransform(view.s * DPR, 0, 0, view.s * DPR, view.ox * DPR, view.oy * DPR);
+    const DARK = .955, aG = (1 - VIS[0]) * DARK;
+    if (aG > .01){ fg.fillStyle = `rgba(5,4,10,${aG})`; fg.beginPath(); fg.rect(vb[0] - 60, vb[1] - 60, vb[2] - vb[0] + 120, vb[3] - vb[1] + 120); FOOT.forEach(z => polyPath(fg, z.poly)); fg.fill('evenodd'); }
+    for (let i = 1; i < ZONES.length; i++){ const z = ZONES[i]; if (!z.poly || !hitB(z.bb, vb)) continue; const a = (1 - VIS[i]) * DARK; if (a < .01) continue; fg.fillStyle = `rgba(5,4,10,${a})`; fg.beginPath(); polyPath(fg, z.poly); HOLES[i].forEach(o => polyPath(fg, o.poly)); fg.fill('evenodd'); }
+    // nhân vật và đồ cao trong phòng đang thấy thì hiện trọn (không bị bóng tối phòng bên cắt ngang)
+    fg.globalCompositeOperation = 'destination-out';
+    PROPS.forEach(p => { if (p.zi != null && zoneVis(p.zi) > .5 && hitB(p.b, vb)) p.d(fg, clock); });
+    drawnPeople.forEach(p => { if (p === self || zoneVis(p.zs) > .5) drawBody(fg, p, clock); });
+    fg.globalCompositeOperation = 'source-over';
+    const cz = ZONES[self.zs];
+    if (cz && cz.poly && !OUTDOOR.has(self.zs)){ fg.globalCompositeOperation = 'destination-out'; fg.strokeStyle = '#000'; fg.lineWidth = T + 8; fg.lineJoin = 'round'; fg.beginPath(); polyPath(fg, cz.poly); fg.stroke(); fg.globalCompositeOperation = 'source-over'; }
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(fogCv, 0, 0);
+    ctx.setTransform(view.s * DPR, 0, 0, view.s * DPR, view.ox * DPR, view.oy * DPR);
+  }
   /* ----- nền tĩnh chia ô (đỡ tốn bộ nhớ điện thoại) ----- */
   const TILE = 1024, TS = TOUCH ? 1 : 1.25, MAXT = TOUCH ? 10 : 16;
   const tiles = new Map(); let tileClock = 0, tilesMade = 0;
@@ -992,10 +1023,12 @@
     PROPS.forEach(p => { if (hitB(p.b, vb)) list.push(p); });
     const people = freshPeers(); if (self) people.push(self);
     const vis = people.filter(p => { const P = pose(p); return P.x > vb[0] - 120 && P.x < vb[2] + 120 && P.y > vb[1] - 60 && P.y < vb[3] + 200; });
+    drawnPeople = vis;
     vis.forEach(p => { const P = pose(p); list.push({ y: P.lying ? seatZ(p.seat) : p.y + (p === self ? .1 : 0), d: g => drawBody(g, p, clock) }); });
     list.sort((a, b) => a.y - b.y).forEach(o => o.d(ctx, clock));
     MAP.overlay(ctx, clock, vb);
-    vis.forEach(p => drawLabel(ctx, p, clock, p === self));
+    drawFog(dt, vb);
+    vis.forEach(p => { if (p === self || !inside || zoneVis(p.zs) > .5) drawLabel(ctx, p, clock, p === self); });
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     if (mapOpen) drawMapFrame(clock);
   }

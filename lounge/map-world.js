@@ -194,7 +194,7 @@ window.LOUNGE_MAP = function (K) {
   /* ======================= DANH SÁCH ĐỒ ======================= */
   const STATIC = [], DECO = [], NODECO = [], PROPS = [], DYN = [], OB = [], SEATS = [], HOTS = [], LAMPS = [], GLOWS = [];
   const bbx = (x0, y0, x1, y1, m = 16) => [x0 - m, y0 - m, x1 + m, y1 + m];
-  const bg = (b, d) => STATIC.push({ b, d });
+  const bg = (b, d, l = 1) => STATIC.push({ b, d, l });
   const deco = (b, d, wy, xr) => { DECO.push({ b, d }); if (xr) NODECO.push({ y: wy, x0: xr[0], x1: xr[1] }); };
   const prop = (y, b, d) => PROPS.push({ y, b, d });
   const dyn = (b, d) => DYN.push({ b, d });
@@ -258,6 +258,11 @@ window.LOUNGE_MAP = function (K) {
     if (!v){ let bx = x + 4, i = 0; while (bx < x + w - 10){ const bw = 7 + Math.floor(hash(bx, y) * 8); g.fillStyle = cols[Math.floor(hash(i, x) * cols.length)]; g.fillRect(bx, y + 4, bw - 1.5, h - 8); bx += bw; i++; } }
     else { let by = y + 4, i = 0; while (by < y + h - 10){ const bh = 7 + Math.floor(hash(by, x) * 8); g.fillStyle = cols[Math.floor(hash(i, y) * cols.length)]; g.fillRect(x + 4, by, w - 8, bh - 1.5); by += bh; i++; } }
     strokeRR(g, x, y, w, h, 4, 'rgba(0,0,0,.45)', 2); }
+  function dPantry(g, x, y, w, h){ const v = h > w, L = v ? h : w; shadowR(g, x, y, w, h, 4); fillRR(g, x, y, w, h, 4, '#5a3c22'); fillRR(g, x + 3, y + 3, w - 6, h - 6, 3, '#8a6a46');
+    const cols = ['#e05a3a', '#ffd43b', '#69db7c', '#f4efe6', '#c9a24a', '#ff9ac0', '#8a5a2a', '#4dabf7'], n = Math.max(1, Math.floor(L / 21));
+    for (let i = 0; i < n; i++){ const t = 11 + i * (L - 22) / Math.max(1, n - 1), c = cols[Math.floor(hash(i, x | 0) * cols.length)], k = hash(i, y | 0), cx = v ? x + w / 2 : x + t, cy = v ? y + t : y + h / 2, r = Math.min(7.5, (v ? w : h) / 2 - 4);
+      if (k < .45){ dot(g, cx, cy, r, c); dot(g, cx - 2, cy - 2, r * .4, 'rgba(255,255,255,.45)'); } else if (k < .75) fillRR(g, cx - r, cy - r, r * 2, r * 2, 3, c); else { dot(g, cx, cy, r, '#d8d0c0'); dot(g, cx, cy, r * .7, c); } }
+    strokeRR(g, x, y, w, h, 4, 'rgba(0,0,0,.4)', 2); }
   function dCounter(g, x, y, w, h){ shadowR(g, x, y, w, h, 4); fillRR(g, x, y, w, h, 4, '#cfc0a2'); fillRR(g, x + 3, y + 3, w - 6, h - 6, 3, '#f2ede4'); g.fillStyle = 'rgba(160,150,140,.3)'; for (let i = 0; i < 8; i++) g.fillRect(x + 4 + hash(i, x | 0) * (w - 8), y + 3, 1.2, h - 6); strokeRR(g, x, y, w, h, 4, 'rgba(0,0,0,.35)', 2); }
   function dBasin(g, x, y, w, h){ oval(g, x, y, w / 2, h / 2, '#9aa4ac'); oval(g, x, y, w / 2 - 4, h / 2 - 4, '#d4dce2'); oval(g, x, y + 2, w / 2 - 10, h / 2 - 9, '#bcc6ce'); g.strokeStyle = '#7a848c'; g.lineWidth = 4; g.lineCap = 'round'; g.beginPath(); g.moveTo(x, y - h / 2 - 2); g.lineTo(x, y - h / 2 + 10); g.stroke(); g.lineCap = 'butt'; }
   function dToilet(g, cx, cy, dir){ g.save(); g.translate(cx, cy); g.rotate({ s: 0, w: Math.PI / 2, n: Math.PI, e: -Math.PI / 2 }[dir]); shadowR(g, -22, -38, 44, 70, 10); fillRR(g, -24, -40, 48, 20, 5, '#f4f6f8'); strokeRR(g, -24, -40, 48, 20, 5, 'rgba(0,0,0,.25)', 1.5); oval(g, 0, 2, 19, 24, '#f4f6f8'); g.strokeStyle = 'rgba(0,0,0,.25)'; g.lineWidth = 1.5; g.beginPath(); g.ellipse(0, 2, 19, 24, 0, 0, TAU); g.stroke(); oval(g, 0, 4, 11, 15, '#cfe6ee'); g.restore(); }
@@ -315,7 +320,7 @@ window.LOUNGE_MAP = function (K) {
   const Arm = (cx, cy, back, grp, col) => Sofa(cx - 18, cy - 18, 36, 36, back, grp, { col, n: 1, label: 'Ngồi ghế bành' });
   function Chair(cx, cy, back, grp, o = {}){
     const x = X(cx), y = Y(cy), col = o.col || '#7a2228', d = 58;
-    bg(bbx(x - 30, y - 34, x + 30, y + 34), g => dChair(g, x, y, back, col));
+    bg(bbx(x - 30, y - 34, x + 30, y + 34), g => dChair(g, x, y, back, col)); obC(x, y, 20);
     if (back === 'n') seat({ x, y: y + 12, ax: x, ay: y - d, g: grp, pose: 'sit', z: y + 12 });
     else if (back === 's'){ seat({ x, y: y + 4, ax: x, ay: y + d + 8, g: grp, pose: 'back', z: y + 4 }); prop(y + 24, bbx(x - 30, y + 10, x + 30, y + 34), g => dChairBack(g, x, y)); }
     else if (back === 'w') seat({ x: x + 4, y: y + 14, ax: x - d, ay: y, g: grp, pose: 'sit', face: 1, z: y + 14 });
@@ -325,7 +330,7 @@ window.LOUNGE_MAP = function (K) {
   // ghế đẩu/đệm ngồi không tựa: dir = phía người ngồi quay mặt tới
   function Stool(cx, cy, dir, grp, o = {}){
     const x = cx, y = cy, d = 56;
-    bg(bbx(x - 26, y - 26, x + 26, y + 26), g => o.bean ? dBeanBag(g, x, y, o.bean) : dStool(g, x, y));
+    bg(bbx(x - 26, y - 26, x + 26, y + 26), g => o.bean ? dBeanBag(g, x, y, o.bean) : dStool(g, x, y)); obC(x, y, o.bean ? 24 : 17);
     const P = { s: ['sit', 0, x, y - d], n: ['back', 0, x, y + d], e: ['sit', 1, x - d, y], w: ['sit', -1, x + d, y] }[dir];
     seat({ x, y: y + (dir === 'n' ? 2 : 10), ax: P[2], ay: P[3], g: grp, pose: P[0], face: P[1] || undefined, z: y + 4 });
     sitAt([x - 26, y - 26, x + 26, y + 26], o.label || 'Ngồi', grp);
@@ -334,7 +339,7 @@ window.LOUNGE_MAP = function (K) {
   function RoundT(icx, icy, ir, o = {}){ const x = X(icx), y = Y(icy), r = S(ir); bg(bbx(x - r, y - r, x + r, y + r), g => { dRound(g, x, y, r, o.top, o.rim); if (o.on) o.on(g, x, y, r); }); obC(x, y, r * .92); return { x, y, r }; }
   function Rug(ix, iy, iw, ih, col = '#9e1f22', bord = '#e09a3a', round){ const x = X(ix), y = Y(iy), w = S(iw), h = S(ih); bg(bbx(x, y, x + w, y + h, 6), g => {
       g.fillStyle = 'rgba(0,0,0,.18)'; if (round){ g.beginPath(); g.ellipse(x + w / 2 + 4, y + h / 2 + 6, w / 2, h / 2, 0, 0, TAU); g.fill(); g.fillStyle = col; g.beginPath(); g.ellipse(x + w / 2, y + h / 2, w / 2, h / 2, 0, 0, TAU); g.fill(); g.strokeStyle = bord; g.lineWidth = 5; g.beginPath(); g.ellipse(x + w / 2, y + h / 2, w / 2 - 14, h / 2 - 14, 0, 0, TAU); g.stroke(); return; }
-      g.fillRect(x + 4, y + 6, w, h); g.fillStyle = col; g.fillRect(x, y, w, h); g.strokeStyle = bord; g.lineWidth = 5; g.strokeRect(x + 14, y + 14, w - 28, h - 28); g.lineWidth = 2; g.strokeRect(x + 24, y + 24, w - 48, h - 48); }); }
+      g.fillRect(x + 4, y + 6, w, h); g.fillStyle = col; g.fillRect(x, y, w, h); g.strokeStyle = bord; g.lineWidth = 5; g.strokeRect(x + 14, y + 14, w - 28, h - 28); g.lineWidth = 2; g.strokeRect(x + 24, y + 24, w - 48, h - 48); }, 0); }
   function Bed(ix, iy, iw, ih, grp, c1, c2){
     const x = X(ix), y = Y(iy), w = S(iw), h = S(ih);
     bg(bbx(x, y, x + w, y + h), g => dBed(g, x, y, w, h)); obR(x, y, x + w, y + h);
@@ -345,7 +350,7 @@ window.LOUNGE_MAP = function (K) {
   // đèn bàn: bấm để bật/tắt đèn cả phòng
   function Lamp(x, y, key, ax, ay){ LAMPS.push({ x, y, key }); prop(y + 1, bbx(x - 30, y - 30, x + 30, y + 30), g => dLamp(g, x, y, ex(key, true))); act([x - 32, y - 36, x + 32, y + 28], ax != null ? ax : x, ay != null ? ay : y + 56, () => ex(key, true) ? 'Tắt đèn' : 'Bật đèn', () => { flip(key, true); K.toast(ex(key, true) ? 'Đã bật đèn 💡' : 'Đã tắt đèn 🌙'); }, { rad: 110 }); }
   function Night(ix, iy, key){ const x = X(ix), y = Y(iy), s = 54; bg(bbx(x, y, x + s, y + s), g => { shadowR(g, x, y, s, s, 6); fillRR(g, x, y, s, s, 6, WOOD.m); fillRR(g, x + 4, y + 4, s - 8, s - 8, 5, WOOD.l); }); obR(x, y, x + s, y + s); if (key) Lamp(x + s / 2, y + s / 2, key); }
-  function Shelf(ix, iy, iw, ih, side, label, fn){ const x = X(ix), y = Y(iy), w = S(iw), h = S(ih); bg(bbx(x, y, x + w, y + h), g => dShelf(g, x, y, w, h)); obR(x, y, x + w, y + h);
+  function Shelf(ix, iy, iw, ih, side, label, fn, o = {}){ const x = X(ix), y = Y(iy), w = S(iw), h = S(ih); bg(bbx(x, y, x + w, y + h), g => o.food ? dPantry(g, x, y, w, h) : dShelf(g, x, y, w, h)); obR(x, y, x + w, y + h);
     if (label){ const P = { e: [x + w + 46, y + h / 2], w: [x - 46, y + h / 2], s: [x + w / 2, y + h + 46], n: [x + w / 2, y - 46] }[side]; act([x, y, x + w, y + h], P[0], P[1], label, fn, { rad: 120 }); } }
   function Counter(ix, iy, iw, ih, o = {}){ const x = X(ix), y = Y(iy), w = S(iw), h = S(ih); bg(bbx(x, y, x + w, y + h), g => { dCounter(g, x, y, w, h); if (o.on) o.on(g, x, y, w, h); }); obR(x, y, x + w, y + h); return { x, y, w, h }; }
   // bồn rửa: mở vòi nước (đồng bộ)
@@ -434,8 +439,8 @@ window.LOUNGE_MAP = function (K) {
   /* --- Walk-in Pantry --- */
   const SNACKS = ['Lấy một gói bim bim 🍿', 'Một hũ mứt dâu 🍓', 'Bánh quy bơ giòn tan 🍪', 'Mì gói cho đêm khuya 🍜', 'Một thanh socola 🍫', 'Trà sữa đóng chai 🧋'];
   const snack = () => K.toast(SNACKS[Math.floor(Math.random() * SNACKS.length)]);
-  Shelf(181, 893, 21, 320, 'e', 'Lấy đồ ăn vặt', snack); Shelf(215, 891, 115, 18, 's', 'Lấy đồ ăn vặt', snack);
-  Shelf(240, 960, 34, 190, 'e', 'Lấy đồ ăn vặt', snack); Shelf(215, 1198, 115, 18, 'n', 'Lấy đồ ăn vặt', snack);
+  Shelf(181, 893, 21, 320, 'e', 'Lấy đồ ăn vặt', snack, { food: true }); Shelf(215, 891, 115, 18, 's', 'Lấy đồ ăn vặt', snack, { food: true });
+  Shelf(240, 960, 34, 190, 'e', 'Lấy đồ ăn vặt', snack, { food: true }); Shelf(215, 1198, 115, 18, 'n', 'Lấy đồ ăn vặt', snack, { food: true });
   { const x = X(320), y = Y(1180); bg(bbx(x - 30, y - 30, x + 30, y + 30), g => { dot(g, x + 4, y + 6, 26, 'rgba(0,0,0,.3)'); dot(g, x, y, 26, '#7a4a2a'); dot(g, x, y, 20, '#8a5a32'); g.strokeStyle = '#3a2a1a'; g.lineWidth = 3; g.beginPath(); g.arc(x, y, 23, 0, TAU); g.stroke(); }); obC(x, y, 24); }
   /* --- Phòng bếp --- */
   { const c = Counter(348, 891, 238, 26); const sx = X(420), sy = c.y + c.h / 2; Sink(sx, sy, sx, c.y + c.h + 52, 54, 36);
@@ -502,7 +507,7 @@ window.LOUNGE_MAP = function (K) {
       fillRR(g, cx - 26, cy + (R + r) / 2 - 10, 52, 16, 4, '#b8b8c0'); [-16, 0, 16].forEach(dx => fillRR(g, cx + dx - 3, cy + (R + r) / 2 - 18, 6, 12, 2, '#c9963a')); });
     for (let a = a0; a <= a1 + .01; a += (a1 - a0) / 10) obC(cx + Math.cos(a) * (R + r) / 2, cy + Math.sin(a) * (R + r) / 2, (R - r) / 2 + 2);
     const Rs = S(86); [-10, 25, 60, 95, 130, 165].forEach((deg, i) => { const a = deg * Math.PI / 180, sx = cx + Math.cos(a) * Rs, sy = cy + Math.sin(a) * Rs, s = Math.sin(a), c = Math.cos(a);
-      bg(bbx(sx - 26, sy - 26, sx + 26, sy + 26), g => dStool(g, sx, sy));
+      bg(bbx(sx - 26, sy - 26, sx + 26, sy + 26), g => dStool(g, sx, sy)); obC(sx, sy, 17);
       const pose = s > .5 ? 'back' : 'sit', face = s > .5 ? undefined : (c > 0 ? -1 : 1);
       seat({ x: sx, y: sy + (pose === 'back' ? 2 : 10), ax: cx + Math.cos(a) * (Rs + 58), ay: cy + Math.sin(a) * (Rs + 58), g: 'pubStool' + i, pose, face, z: sy + 4 });
       sitAt([sx - 26, sy - 26, sx + 26, sy + 26], 'Ngồi quầy bar', 'pubStool' + i); });
@@ -559,17 +564,17 @@ window.LOUNGE_MAP = function (K) {
   { const x = X(1520), y = Y(518), w = X(1708) - x, h = Y(556) - y; bg(bbx(x, y, x + w, y + h), g => dStairs(g, x, y, w, h)); obR(x, y, x + w, y + h);
     act([x, y, x + w, y + h], x - 50, y + h / 2, 'Lên tầng 2', () => K.toast('Tầng 2 đang được xây, quay lại sau nhé 🚧'), { rad: 120 }); }
   /* --- Bể bơi --- */
-  { const x = X(1505), y = Y(612), w = X(1660) - x, h = Y(952) - y;
+  { const x = X(1515), y = Y(650), w = X(1645) - x, h = Y(880) - y;
     bg(bbx(x, y, x + w, y + h, 20), g => { fillRR(g, x - 12, y - 12, w + 24, h + 24, 14, '#f2ead8'); const gr = g.createLinearGradient(0, y, 0, y + h); gr.addColorStop(0, '#5ec6e6'); gr.addColorStop(1, '#2a8ab8'); g.fillStyle = gr; rr(g, x, y, w, h, 8); g.fill(); g.strokeStyle = '#1a6a90'; g.lineWidth = 3; rr(g, x, y, w, h, 8); g.stroke();
-      g.strokeStyle = '#d8d8e0'; g.lineWidth = 4; [Y(690), Y(712)].forEach(yy => { g.beginPath(); g.moveTo(x - 6, yy); g.lineTo(x + 18, yy); g.stroke(); }); g.beginPath(); g.moveTo(x + 4, Y(680)); g.lineTo(x + 4, Y(722)); g.stroke(); });
+      g.strokeStyle = '#d8d8e0'; g.lineWidth = 4; [Y(706), Y(728)].forEach(yy => { g.beginPath(); g.moveTo(x - 6, yy); g.lineTo(x + 18, yy); g.stroke(); }); g.beginPath(); g.moveTo(x + 4, Y(696)); g.lineTo(x + 4, Y(738)); g.stroke(); });
     obR(x, y, x + w, y + h);
     dyn(bbx(x, y, x + w, y + h), (g, t) => { g.save(); rr(g, x, y, w, h, 8); g.clip(); g.strokeStyle = 'rgba(255,255,255,.28)'; g.lineWidth = 2; for (let i = 0; i < 14; i++){ const yy = y + 20 + i * (h - 40) / 13; g.beginPath(); for (let xx = x; xx <= x + w; xx += 20) g.lineTo(xx, yy + Math.sin(xx * .03 + t * 1.6 + i) * 5); g.stroke(); }
       const dx = x + w / 2 + Math.sin(t * .3) * w * .3, dy = y + h * .45 + Math.cos(t * .23) * h * .3; oval(g, dx, dy, 22, 16, '#ffd43b'); dot(g, dx + 14, dy - 12, 10, '#ffd43b'); oval(g, dx + 22, dy - 12, 6, 3, '#ff8a3a'); dot(g, dx + 16, dy - 14, 2, '#1a1a1a'); g.restore(); });
-    const SW = [[1540, 680], [1622, 700], [1560, 790], [1630, 820], [1545, 900], [1620, 912]];
-    SW.forEach(([ix, iy], i) => seat({ x: X(ix), y: Y(iy), ax: X(1488), ay: Y(820), g: 'swim', pose: 'swim', z: Y(iy) }));
+    const SW = [[1545, 694], [1614, 708], [1548, 772], [1612, 786], [1550, 850], [1612, 854]];
+    SW.forEach(([ix, iy], i) => seat({ x: X(ix), y: Y(iy), ax: X(1488), ay: Y(760), g: 'swim', pose: 'swim', z: Y(iy) }));
     sitAt([x, y, x + w, y + h], 'Bơi', 'swim'); }
-  [[1455, 615], [1455, 888], [1668, 875]].forEach(([ix, iy], i) => { const x = X(ix), y = Y(iy), w = S(36), h = S(88), grp = 'lounger' + i; bg(bbx(x, y, x + w, y + h), g => dLounger(g, x, y, w, h)); obR(x, y, x + w, y + h); seat({ x: x + w / 2, y: y + 46, ax: x + w / 2, ay: i === 0 ? y + h + 44 : y - 44, g: grp, pose: 'lie', z: y + 46.5 }); prop(y + 47, bbx(x, y + 60, x + w, y + h), g => dTowel(g, x, y, w, h)); sitAt([x, y, x + w, y + h], 'Nằm phơi nắng', grp); });
-  Shower(1684, 592, 26, 24, 1690, 640);
+  [[1453, 886], [1672, 886]].forEach(([ix, iy], i) => { const x = X(ix), y = Y(iy), w = S(36), h = S(88), grp = 'lounger' + i; bg(bbx(x, y, x + w, y + h), g => dLounger(g, x, y, w, h)); obR(x, y, x + w, y + h); seat({ x: x + w / 2, y: y + 46, ax: x + w / 2, ay: y - 44, g: grp, pose: 'lie', z: y + 46.5 }); prop(y + 47, bbx(x, y + 60, x + w, y + h), g => dTowel(g, x, y, w, h)); sitAt([x, y, x + w, y + h], 'Nằm phơi nắng', grp); });
+  Shower(1566, 590, 30, 22, 1580, 632);
   /* --- Phòng nhạc --- */
   Rug(1722, 682, 160, 290, '#7a1218', '#e0b04a');
   { const x = X(1758), y = Y(690), w = S(96), h = S(88); bg(bbx(x, y, x + w, y + h), g => dPiano(g, x, y, w, h)); obR(x, y, x + w, y + h);
@@ -660,6 +665,137 @@ window.LOUNGE_MAP = function (K) {
   for (let ix = 40; ix <= 1960; ix += 95) { Tree(ix, 42, (ix / 95) | 0, false); if (ix < 1080 || ix > 1290) Tree(ix, 1545, ((ix / 95) | 0) + 1, false); }
   for (let iy = 140; iy <= 1460; iy += 105){ Tree(22, iy, (iy / 105) | 0, false); Tree(1975, iy, ((iy / 105) | 0) + 2, false); }
 
+  /* ======================= TRANG TRÍ THÊM (chỉ để ngắm, không tương tác) ======================= */
+  // đồ nhỏ đặt trên bàn / sàn (toạ độ bản vẽ gốc)
+  const put = (ix, iy, r, f, l = 2) => { const x = X(ix), y = Y(iy); bg(bbx(x - r, y - r, x + r, y + r), g => f(g, x, y), l); };
+  const plate = (g, x, y, r = 14) => { oval(g, x + 2, y + 3, r, r * .9, 'rgba(0,0,0,.18)'); dot(g, x, y, r, '#fbfaf6'); dot(g, x, y, r * .62, '#efe8da'); g.strokeStyle = 'rgba(0,0,0,.12)'; g.lineWidth = 1; g.beginPath(); g.arc(x, y, r, 0, TAU); g.stroke(); };
+  const glassS = (g, x, y, c) => { dot(g, x, y, 6.5, 'rgba(255,255,255,.6)'); dot(g, x, y, 4.5, c || 'rgba(170,215,240,.9)'); };
+  const fork = (g, x, y) => { g.fillStyle = '#b8bcc4'; g.fillRect(x - 1, y - 10, 2, 20); };
+  const mug = (g, x, y, c = '#e8e0d0') => { dot(g, x, y, 8, c); dot(g, x, y, 5, '#6a3a1a'); g.strokeStyle = c; g.lineWidth = 3; g.beginPath(); g.arc(x + 9, y, 4, -1.3, 1.3); g.stroke(); };
+  const stack = (g, x, y, n = 3) => { const cs = ['#8a2a2a', '#2a4a6a', '#c9a24a', '#3a6a3a', '#6a3a6a']; for (let i = 0; i < n; i++) { fillRR(g, x - 17 + i * 2, y - 6 - i * 6, 34, 10, 2, cs[(i + Math.round(x)) % cs.length]); g.fillStyle = 'rgba(255,255,255,.5)'; g.fillRect(x - 14 + i * 2, y - 4 - i * 6, 28, 1.5); } };
+  const bowl = (g, x, y) => { dot(g, x + 3, y + 4, 21, 'rgba(0,0,0,.2)'); dot(g, x, y, 21, '#c9a46a'); dot(g, x, y, 17, '#a8824a'); [['#d42a2a', -7, -5], ['#ffd43b', 7, -4], ['#69db7c', 0, 6], ['#ff8a3a', -8, 6], ['#7a2a8a', 8, 6], ['#d42a2a', 0, -9]].forEach(([c, a, b]) => dot(g, x + a, y + b, 6.5, c)); };
+  const vaseS = (g, x, y, c = '#2a5a8a') => { dot(g, x + 2, y + 3, 10, 'rgba(0,0,0,.2)'); dot(g, x, y, 10, c); dot(g, x - 3, y - 3, 3, 'rgba(255,255,255,.4)'); [['#ff7aa8', -8, -12], ['#ffd43b', 0, -16], ['#fff1f5', 8, -12], ['#c77dff', 3, -8]].forEach(([f, a, b]) => { dot(g, x + a, y + b + 2, 3, '#3f7a3a'); dot(g, x + a, y + b, 5, f); }); };
+  const candleS = (g, x, y) => { dot(g, x, y, 7, '#c9963a'); dot(g, x, y, 5, '#f4ece0'); oval(g, x, y - 6, 2.5, 5, '#ffb347'); };
+  const cboard = (g, x, y) => { fillRR(g, x - 28, y - 17, 56, 34, 7, '#b8864a'); g.strokeStyle = 'rgba(0,0,0,.2)'; g.lineWidth = 1.5; rr(g, x - 28, y - 17, 56, 34, 7); g.stroke(); dot(g, x - 12, y - 3, 7, '#e05a3a'); dot(g, x + 1, y + 5, 5.5, '#4a9a3a'); fillRR(g, x + 8, y - 9, 14, 5, 2, '#f4efe6'); g.fillStyle = '#9aa4ac'; g.fillRect(x - 22, y + 9, 24, 3.5); g.fillStyle = '#2a1a12'; g.fillRect(x + 2, y + 9, 10, 3.5); };
+  const pot = (g, x, y, r = 14, c = '#9aa0a8') => { g.fillStyle = '#2a2a30'; g.fillRect(x + r - 2, y - 2.5, 14, 5); dot(g, x, y, r + 2, '#2a2a30'); dot(g, x, y, r, c); dot(g, x, y, r * .65, '#d8a868'); };
+  const kettle = (g, x, y, c = '#c0392b') => { g.fillStyle = c; g.fillRect(x - 20, y - 2, 9, 4); dot(g, x, y, 12, c); dot(g, x, y, 5, '#e8e0d0'); };
+  const boxA = (g, x, y, w, h, c, f) => { shadowR(g, x - w / 2, y - h / 2, w, h, 4); fillRR(g, x - w / 2, y - h / 2, w, h, 4, c); if (f) f(); strokeRR(g, x - w / 2, y - h / 2, w, h, 4, 'rgba(0,0,0,.3)', 1.5); };
+  const toaster = (g, x, y) => boxA(g, x, y, 34, 24, '#c8ced4', () => { g.fillStyle = '#2a2a30'; g.fillRect(x - 10, y - 7, 20, 4); g.fillRect(x - 10, y + 2, 20, 4); });
+  const micro = (g, x, y) => boxA(g, x, y, 48, 30, '#2a2a30', () => { fillRR(g, x - 20, y - 11, 28, 22, 3, '#4a5a6a'); dot(g, x + 15, y - 5, 2.5, '#5be38a'); });
+  const knives = (g, x, y) => { fillRR(g, x - 10, y - 8, 20, 16, 3, '#6a3e22'); ['#2a2a30', '#2a2a30', '#2a2a30'].forEach((c, i) => fillRR(g, x - 7 + i * 6, y - 13, 3.5, 7, 1, c)); };
+  const spices = (g, x, y, n = 5) => { const cs = ['#c0392b', '#e0a030', '#3f7a3a', '#8a5a2a', '#d8d0c0', '#e05a3a']; for (let i = 0; i < n; i++){ dot(g, x, y - (n - 1) * 8 + i * 16, 6.5, '#f4efe6'); dot(g, x, y - (n - 1) * 8 + i * 16, 4.5, cs[i % cs.length]); } };
+  const dishes = (g, x, y) => { fillRR(g, x - 18, y - 24, 36, 48, 4, '#b8c0c8'); for (let i = 0; i < 5; i++) fillRR(g, x - 14, y - 20 + i * 9, 28, 5, 2, i % 2 ? '#fbfaf6' : '#cfe3ee'); };
+  const bread = (g, x, y) => { oval(g, x, y, 20, 13, '#a8824a'); oval(g, x - 6, y - 1, 9, 5.5, '#e8b060'); oval(g, x + 6, y + 2, 9, 5.5, '#d89a4a'); };
+  const wine = (g, x, y) => { dot(g, x + 2, y + 3, 7, 'rgba(0,0,0,.2)'); dot(g, x, y, 7, '#3a0a14'); dot(g, x, y, 3, '#c9963a'); };
+  const mag = (g, x, y, c = '#c0392b') => { g.save(); g.translate(x, y); g.rotate(.25); fillRR(g, -16, -20, 32, 40, 2, '#f4efe6'); fillRR(g, -13, -17, 26, 16, 1, c); g.fillStyle = '#8a7a6a'; [4, 9, 14].forEach(t => g.fillRect(-13, t, 26, 2)); g.restore(); };
+  const remote = (g, x, y) => { fillRR(g, x - 5, y - 14, 10, 28, 4, '#2a2a30'); dot(g, x, y - 8, 2, '#c0392b'); };
+  const slippers = (g, x, y) => { oval(g, x - 7, y, 6, 12, '#ff9ac0'); oval(g, x + 7, y, 6, 12, '#ff9ac0'); oval(g, x - 7, y - 4, 4, 5, '#fff'); oval(g, x + 7, y - 4, 4, 5, '#fff'); };
+  const perfume = (g, x, y) => { [['#ff9ac0', -10], ['#c9a24a', 2], ['#9fd8f0', 13]].forEach(([c, dx]) => { fillRR(g, x + dx - 5, y - 6, 10, 12, 3, c); dot(g, x + dx, y - 8, 2.5, '#c9963a'); }); };
+  const towels = (g, x, y, c1 = '#ffffff', c2 = '#9fd8f0') => { fillRR(g, x - 20, y - 14, 40, 14, 4, c1); fillRR(g, x - 20, y, 40, 14, 4, c2); };
+  const soap = (g, x, y) => { oval(g, x, y, 11, 7, '#e8eef2'); oval(g, x, y - 1, 7, 4.5, '#ffb3d1'); };
+  const laptop = (g, x, y) => { fillRR(g, x - 26, y - 17, 52, 34, 3, '#c8ced4'); fillRR(g, x - 22, y - 13, 44, 26, 2, '#3a6a9a'); };
+  const pens = (g, x, y) => { dot(g, x, y, 8, '#2a2a30'); ['#c0392b', '#ffd43b', '#4dabf7'].forEach((c, i) => dot(g, x - 3 + i * 3, y - 3 + (i % 2) * 3, 2.2, c)); };
+  const papers = (g, x, y) => { g.save(); g.translate(x, y); g.rotate(-.15); fillRR(g, -15, -20, 30, 40, 1, '#ffffff'); g.fillStyle = '#9aa4ac'; for (let i = 0; i < 6; i++) g.fillRect(-11, -14 + i * 6, 22 - (i % 3) * 4, 1.5); g.restore(); };
+  const cushion = (g, x, y, c) => { fillRR(g, x - 22, y - 22, 44, 44, 12, c); g.strokeStyle = 'rgba(0,0,0,.2)'; g.lineWidth = 2; rr(g, x - 22, y - 22, 44, 44, 12); g.stroke(); dot(g, x, y, 3, 'rgba(0,0,0,.25)'); };
+  const mat = (ix, iy, iw, ih, c1, c2) => { const x = X(ix), y = Y(iy), w = S(iw), h = S(ih); bg(bbx(x, y, x + w, y + h, 4), g => { fillRR(g, x, y, w, h, 8, c1); g.strokeStyle = c2; g.lineWidth = 3; rr(g, x + 6, y + 6, w - 12, h - 12, 6); g.stroke(); for (let i = 1; i < 6; i++){ g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(x + 8, y + i * h / 6, w - 16, 2); } }, 0); };
+  const crate = (ix, iy) => { const x = X(ix), y = Y(iy); bg(bbx(x - 34, y - 30, x + 34, y + 30), g => { boxA(g, x, y, 60, 48, '#a8784a', () => { g.strokeStyle = '#6a4628'; g.lineWidth = 2.5; g.beginPath(); g.moveTo(x - 30, y - 8); g.lineTo(x + 30, y - 8); g.moveTo(x - 30, y + 8); g.lineTo(x + 30, y + 8); g.stroke(); [['#e05a3a', -14], ['#ffd43b', 0], ['#69db7c', 14]].forEach(([c, dx]) => dot(g, x + dx, y - 16, 6, c)); }); }); obR(x - 30, y - 24, x + 30, y + 24); };
+  const sack = (ix, iy) => { const x = X(ix), y = Y(iy); bg(bbx(x - 30, y - 30, x + 30, y + 30), g => { oval(g, x + 4, y + 6, 26, 22, 'rgba(0,0,0,.25)'); oval(g, x, y, 26, 22, '#d8c49a'); oval(g, x, y - 14, 12, 7, '#c8b48a'); g.fillStyle = '#8a6a3a'; g.font = '700 12px Fredoka, sans-serif'; g.textAlign = 'center'; g.fillText('GẠO', x, y + 6); }); obC(x, y, 22); };
+  const barrel = (ix, iy) => { const x = X(ix), y = Y(iy); bg(bbx(x - 34, y - 34, x + 34, y + 34), g => { dot(g, x + 4, y + 6, 30, 'rgba(0,0,0,.3)'); dot(g, x, y, 30, '#6a4628'); dot(g, x, y, 24, '#8a5a32'); g.strokeStyle = '#2a2a30'; g.lineWidth = 3; [30, 18].forEach(r => { g.beginPath(); g.arc(x, y, r, 0, TAU); g.stroke(); }); }); obC(x, y, 28); };
+  // đồ cao (vẽ xen với nhân vật)
+  const tall = (ix, iy, r, f, ob = 0, glowR) => { const x = X(ix), y = Y(iy); prop(y, bbx(x - r, y - r * 2.2, x + r, y + 16), (g, t) => f(g, x, y, t)); if (ob) obC(x, y, ob); if (glowR) GLOWS.push({ x, y: y - 110, r: glowR, a: .2 }); };
+  const floorLamp = (g, x, y) => { oval(g, x + 4, y + 6, 20, 7, 'rgba(0,0,0,.3)'); g.fillStyle = '#2a2a30'; g.fillRect(x - 3, y - 108, 6, 110); g.fillStyle = '#ffe9b8'; g.beginPath(); g.moveTo(x - 28, y - 100); g.lineTo(x + 28, y - 100); g.lineTo(x + 19, y - 134); g.lineTo(x - 19, y - 134); g.closePath(); g.fill(); g.strokeStyle = '#c9963a'; g.lineWidth = 2; g.stroke(); };
+  const clock = (g, x, y, t) => { oval(g, x + 4, y + 6, 26, 8, 'rgba(0,0,0,.3)'); fillRR(g, x - 22, y - 150, 44, 154, 8, '#4a2a18'); fillRR(g, x - 17, y - 144, 34, 34, 17, '#f4ece0'); g.strokeStyle = '#2a1a12'; g.lineWidth = 2; const a = t * .5; g.beginPath(); g.moveTo(x, y - 127); g.lineTo(x + Math.cos(a) * 11, y - 127 + Math.sin(a) * 11); g.moveTo(x, y - 127); g.lineTo(x + Math.cos(a / 12) * 7, y - 127 + Math.sin(a / 12) * 7); g.stroke(); fillRR(g, x - 12, y - 100, 24, 80, 4, '#2a160c'); const sw = Math.sin(t * 3) * 8; g.strokeStyle = '#c9963a'; g.beginPath(); g.moveTo(x, y - 98); g.lineTo(x + sw, y - 40); g.stroke(); dot(g, x + sw, y - 38, 7, '#e2b84e'); };
+  const guitar = (g, x, y) => { oval(g, x + 3, y + 5, 18, 6, 'rgba(0,0,0,.3)'); g.save(); g.translate(x, y - 40); g.rotate(-.18); oval(g, 0, 18, 20, 24, '#c97a2a'); oval(g, 0, -10, 15, 17, '#c97a2a'); dot(g, 0, 4, 7, '#2a1a12'); g.fillStyle = '#3a2416'; g.fillRect(-3, -70, 6, 60); fillRR(g, -6, -84, 12, 16, 3, '#2a1a12'); g.strokeStyle = 'rgba(255,240,200,.7)'; g.lineWidth = .8; for (let i = -2; i <= 2; i++){ g.beginPath(); g.moveTo(i * 1.2, -70); g.lineTo(i * 1.2, 30); g.stroke(); } g.restore(); };
+  const cello = (g, x, y) => { oval(g, x + 3, y + 5, 20, 7, 'rgba(0,0,0,.3)'); oval(g, x, y - 30, 22, 30, '#8a3a12'); oval(g, x, y - 72, 17, 20, '#8a3a12'); g.fillStyle = '#1a0e08'; g.fillRect(x - 3, y - 140, 6, 80); fillRR(g, x - 5, y - 150, 10, 14, 4, '#1a0e08'); g.strokeStyle = 'rgba(255,240,200,.6)'; g.lineWidth = .8; for (let i = -1.5; i <= 1.5; i++){ g.beginPath(); g.moveTo(x + i * 1.6, y - 140); g.lineTo(x + i * 1.6, y - 14); g.stroke(); } };
+  const stand = (g, x, y) => { g.strokeStyle = '#2a2a30'; g.lineWidth = 3; g.beginPath(); g.moveTo(x - 14, y); g.lineTo(x, y - 12); g.lineTo(x + 14, y); g.moveTo(x, y - 12); g.lineTo(x, y - 80); g.stroke(); fillRR(g, x - 26, y - 104, 52, 30, 3, '#2a2a30'); fillRR(g, x - 22, y - 100, 44, 22, 2, '#fbfaf6'); g.fillStyle = '#2a2a30'; for (let i = 0; i < 4; i++) g.fillRect(x - 19, y - 96 + i * 5, 38, 1); };
+  const gramo = (g, x, y, t) => { dRound(g, x, y, 30, '#6a3e22'); dot(g, x - 4, y + 2, 18, '#111'); dot(g, x - 4, y + 2, 5, '#c0392b'); g.save(); g.translate(x + 14, y - 10); g.rotate(-.6 + Math.sin(t) * .03); g.fillStyle = '#c9963a'; g.beginPath(); g.moveTo(0, 0); g.lineTo(26, -16); g.lineTo(34, 6); g.closePath(); g.fill(); g.restore(); };
+  const umbStand = (g, x, y) => { oval(g, x + 3, y + 5, 16, 6, 'rgba(0,0,0,.3)'); fillRR(g, x - 13, y - 44, 26, 48, 6, '#2a4a6a'); [['#c0392b', -6], ['#2a2a30', 4], ['#e0c070', 8]].forEach(([c, dx]) => { g.strokeStyle = c; g.lineWidth = 4; g.beginPath(); g.moveTo(x + dx, y - 40); g.lineTo(x + dx * 1.6, y - 92); g.stroke(); }); };
+  const birdbath = (g, x, y, t) => { oval(g, x + 4, y + 6, 24, 8, 'rgba(0,0,0,.3)'); fillRR(g, x - 8, y - 46, 16, 48, 4, '#cdbfa6'); oval(g, x, y - 50, 34, 14, '#d8ccb4'); oval(g, x, y - 52, 26, 9, '#7ac0e0'); const hop = Math.abs(Math.sin(t * 2)) * 3; oval(g, x + 16, y - 62 - hop, 7, 6, '#8a6a4a'); dot(g, x + 21, y - 66 - hop, 4, '#8a6a4a'); };
+  const gnome = (g, x, y) => { oval(g, x + 3, y + 4, 14, 5, 'rgba(0,0,0,.3)'); oval(g, x, y - 12, 12, 14, '#2a6a9a'); oval(g, x, y - 26, 9, 9, '#ffd8c0'); oval(g, x, y - 20, 9, 7, '#f4f4f4'); g.fillStyle = '#d42a2a'; g.beginPath(); g.moveTo(x - 11, y - 30); g.lineTo(x + 11, y - 30); g.lineTo(x + 2, y - 58); g.closePath(); g.fill(); };
+  const mailbox = (g, x, y) => { oval(g, x + 3, y + 5, 14, 5, 'rgba(0,0,0,.3)'); g.fillStyle = '#4a2a18'; g.fillRect(x - 3, y - 50, 6, 52); fillRR(g, x - 18, y - 76, 36, 28, 10, '#b3261e'); g.fillStyle = '#ffd43b'; g.fillRect(x + 14, y - 80, 3, 16); };
+  const bin = (g, x, y) => { oval(g, x + 3, y + 5, 15, 5, 'rgba(0,0,0,.3)'); fillRR(g, x - 13, y - 34, 26, 36, 5, '#8a949c'); fillRR(g, x - 15, y - 38, 30, 7, 3, '#6a747c'); };
+  const plantD = (g, x, y) => dPlant(g, x, y, .8);
+  const lampT = (g, x, y) => { dot(g, x + 3, y + 4, 13, 'rgba(0,0,0,.25)'); dot(g, x, y, 13, '#ffe9b8'); g.strokeStyle = '#c9963a'; g.lineWidth = 2; g.beginPath(); g.arc(x, y, 13, 0, TAU); g.stroke(); dot(g, x, y, 4, '#fff6dc'); };
+  const sideT = (ix, iy, f) => { const x = X(ix), y = Y(iy); bg(bbx(x - 26, y - 26, x + 26, y + 26), g => { dRound(g, x, y, 22); if (f) f(g, x, y); }); obC(x, y, 20); };
+
+  /* --- Phòng bếp: đồ làm bếp và nội thất --- */
+  mat(400, 928, 160, 30, '#7a2a20', '#e0b04a');
+  put(520, 900, 20, (g, x, y) => pot(g, x, y, 13, '#c0392b')); put(552, 911, 20, (g, x, y) => kettle(g, x, y, '#2a6a9a'));
+  put(462, 904, 30, cboard); put(482, 898, 14, knives); put(575, 904, 26, micro);
+  Counter(346, 920, 24, 78); put(358, 958, 30, (g, x, y) => spices(g, x, y, 5));
+  Counter(346, 1092, 24, 60); put(358, 1121, 28, dishes);
+  Counter(606, 928, 24, 154); put(618, 950, 22, toaster); put(618, 990, 22, (g, x, y) => kettle(g, x, y)); put(618, 1035, 24, bowl); put(618, 1066, 22, bread);
+  put(452, 1012, 24, bowl); put(482, 1004, 20, (g, x, y) => { glassS(g, x - 8, y); glassS(g, x + 8, y); }); put(515, 1016, 16, vaseS); put(502, 1030, 16, mug);
+  RoundT(482, 1140, 19, { top: '#f4ece0', rim: '#c9963a', on: (g, x, y) => { vaseS(g, x, y - 6, '#c0392b'); mug(g, x - 18, y + 12); mug(g, x + 18, y + 12, '#9fd8f0'); } });
+  Chair(453, 1140, 'w', 'kNookA', { col: '#c0392b' }); Chair(511, 1140, 'e', 'kNookB', { col: '#c0392b' });
+  tall(590, 1180, 18, bin, 13); tall(620, 1182, 30, plantD, 12);
+  /* --- Pantry --- */
+  crate(300, 932); sack(318, 975); sack(296, 1120); crate(300, 1160);
+  /* --- Phòng ngủ Master --- */
+  Rug(140, 418, 172, 92, '#5a2a4e', '#e0b04a');
+  { const x = X(430), y = Y(492), w = S(80), h = S(18); bg(bbx(x, y, x + w, y + h), g => { shadowR(g, x, y, w, h, 8); fillRR(g, x, y, w, h, 8, '#5a2a4e'); fillRR(g, x + 4, y + 4, w - 8, h - 8, 6, '#7a3e6a'); }); obR(x, y, x + w, y + h); }
+  put(393, 384, 18, (g, x, y) => stack(g, x, y, 2)); put(544, 384, 16, mug); put(226, 446, 16, (g, x, y) => stack(g, x + 4, y + 8, 2));
+  put(400, 478, 16, slippers, 0); put(352, 598, 22, perfume);
+  tall(138, 378, 32, floorLamp, 12, 180); tall(140, 598, 30, plantD, 14);
+  /* --- WC Master --- */
+  mat(150, 712, 70, 22, '#9fd8f0', '#ffffff'); put(274, 650, 14, soap); put(140, 760, 12, candleS); put(140, 790, 12, candleS);
+  { const x0 = X(250), x1 = X(300), wy = Y(620) + T / 2; deco(bbx(x0, wy, x1, wy + FACE), g => { g.fillStyle = '#c9963a'; g.fillRect(x0 + 6, wy + 10, x1 - x0 - 12, 3); towels(g, (x0 + x1) / 2, wy + 26); }, Y(620), [x0 - 10, x1 + 10]); }
+  /* --- Phòng làm việc --- */
+  put(470, 672, 20, pens); put(530, 676, 18, (g, x, y) => mug(g, x, y, '#2a6a3a')); put(392, 657, 18, (g, x, y) => stack(g, x, y + 4, 2), 2);
+  { const x = X(566), y = Y(648), w = S(20), h = S(24); bg(bbx(x, y, x + w, y + h), g => { boxA(g, x + w / 2, y + h / 2, w, h, '#6a7a8a', () => { g.fillStyle = '#4a5a6a'; [8, 26, 44].forEach(t => g.fillRect(x + 4, y + t, w - 8, 3)); }); }); obR(x, y, x + w, y + h); }
+  tall(336, 812, 32, floorLamp, 12, 170); put(352, 794, 14, mug); put(545, 793, 20, (g, x, y) => stack(g, x, y, 3), 1);
+  /* --- Hallway --- */
+  tall(652, 1176, 22, umbStand, 12); tall(712, 1058, 30, plantD, 0);
+  { const x = X(640), y = Y(990), w = S(14), h = S(60); bg(bbx(x, y, x + w, y + h), g => { dTable(g, x, y, w, h, '#8a5a32'); [12, 44, 76, 108].forEach((t, i) => { oval(g, x + w / 2, y + t, 7, 11, ['#2a2a30', '#b3261e', '#e0c070', '#2a4a6a'][i]); }); }); obR(x, y, x + w, y + h); }
+  /* --- Phòng sinh hoạt chung --- */
+  put(752, 710, 20, (g, x, y) => mag(g, x, y)); put(785, 728, 14, remote); put(792, 712, 14, mug);
+  sideT(728, 803, (g, x, y) => lampT(g, x, y)); tall(857, 772, 26, (g, x, y) => { oval(g, x + 3, y + 5, 22, 8, 'rgba(0,0,0,.3)'); fillRR(g, x - 20, y - 30, 40, 34, 8, '#a8784a'); fillRR(g, x - 16, y - 42, 32, 16, 6, '#c9b48a'); fillRR(g, x - 12, y - 46, 26, 12, 5, '#7a2228'); }, 18);
+  put(612, 760, 26, (g, x, y) => cushion(g, x, y, '#c0392b'), 1); put(640, 790, 26, (g, x, y) => cushion(g, x, y, '#e0b04a'), 1);
+  /* --- Phòng giải trí --- */
+  { const x = X(845), y = Y(421), w = S(70), h = S(14); bg(bbx(x, y, x + w, y + h), g => { dTable(g, x, y, w, h, '#6a3e22'); ['#c0392b', '#2a6a9a', '#e0c070', '#3a8a3a', '#6a3a8a'].forEach((c, i) => fillRR(g, x + 8 + i * (w - 16) / 5, y + 5, (w - 16) / 5 - 4, h - 10, 2, c)); }); obR(x, y, x + w, y + h); }
+  put(655, 540, 20, (g, x, y) => { glassS(g, x - 22, y - 16, 'rgba(240,180,40,.9)'); glassS(g, x + 22, y + 14, 'rgba(240,180,40,.9)'); });
+  tall(600, 566, 30, plantD, 14); put(648, 486, 18, (g, x, y) => { fillRR(g, x - 18, y - 10, 36, 20, 8, '#2a2a30'); dot(g, x - 9, y, 3, '#c0392b'); dot(g, x + 9, y, 3, '#4dabf7'); }, 0);
+  /* --- Pub --- */
+  barrel(1222, 566); put(1018, 550, 18, (g, x, y) => { candleS(g, x, y); glassS(g, x + 14, y - 8, 'rgba(240,180,40,.9)'); }); put(1196, 392, 16, candleS);
+  { const x0 = X(1045), x1 = X(1172), wy = Y(285) + T / 2; dyn(bbx(x0, wy - 10, x1, wy + 30), (g, t) => { g.save(); g.font = '700 20px Fredoka, sans-serif'; g.textAlign = 'center'; g.shadowColor = '#ff4fa3'; g.shadowBlur = 12 + Math.sin(t * 6) * 4; g.fillStyle = Math.sin(t * 1.7) > -.92 ? '#ffd0ea' : '#7a3a5a'; g.fillText('★ PUB ★', (x0 + x1) / 2, wy + 2); g.restore(); }); }
+  /* --- Sân trong --- */
+  Lantern(878, 606); Lantern(1228, 655);
+  put(995, 660, 22, (g, x, y) => { dot(g, x + 3, y + 4, 18, 'rgba(0,0,0,.25)'); dot(g, x, y, 18, '#b06a3a'); dFlowers(g, x - 14, y - 14, 28, 28); }, 1); put(1115, 660, 22, (g, x, y) => { dot(g, x + 3, y + 4, 18, 'rgba(0,0,0,.25)'); dot(g, x, y, 18, '#b06a3a'); dFlowers(g, x - 14, y - 14, 28, 28); }, 1);
+  /* --- Nhà ăn: bày bàn tiệc --- */
+  [869, 927, 985, 1043, 1101].forEach(ix => { put(ix, 941, 22, (g, x, y) => { plate(g, x, y); fork(g, x - 22, y); fork(g, x + 22, y); glassS(g, x + 16, y - 14, 'rgba(150,20,40,.85)'); }); put(ix, 969, 22, (g, x, y) => { plate(g, x, y); fork(g, x - 22, y); fork(g, x + 22, y); glassS(g, x - 16, y + 14, 'rgba(150,20,40,.85)'); }); });
+  put(853, 955, 18, (g, x, y) => plate(g, x, y, 13)); put(1117, 955, 18, (g, x, y) => plate(g, x, y, 13));
+  put(918, 955, 22, vaseS); put(1052, 955, 22, (g, x, y) => vaseS(g, x, y, '#b3261e')); put(950, 957, 22, bread); put(1018, 952, 12, wine);
+  GLOWS.push({ x: X(985), y: Y(955), r: 380, a: .1 });
+  /* --- Sảnh chính --- */
+  tall(1126, 1258, 30, plantD, 12); tall(1232, 1258, 30, plantD, 12); tall(1022, 1108, 26, clock, 18);
+  GLOWS.push({ x: X(1170), y: Y(1185), r: 260, a: .14 });
+  /* --- Lối hành lang & sảnh nhỏ --- */
+  tall(1250, 818, 30, plantD, 14); Lantern(1342, 668); Lantern(1342, 975);
+  Rug(1302, 512, 80, 80, '#2a3a6a', '#e0b04a', true);
+  /* --- Bể bơi --- */
+  RoundT(1580, 935, 12, { top: '#f4ece0', rim: '#c9963a', on: (g, x, y) => { glassS(g, x - 8, y - 4, 'rgba(255,140,60,.9)'); glassS(g, x + 8, y + 4, 'rgba(255,200,60,.9)'); } });
+  { const x = X(1580), y = Y(935); prop(y + 20, bbx(x - 110, y - 170, x + 110, y + 40), g => dUmbrella(g, x, y)); }
+  dyn(bbx(X(1515), Y(650), X(1645), Y(880)), (g, t) => { const x = X(1600) + Math.sin(t * .4) * 40, y = Y(800) + Math.cos(t * .3) * 30; g.strokeStyle = '#ff5a5a'; g.lineWidth = 9; g.beginPath(); g.arc(x, y, 18, 0, TAU); g.stroke(); g.strokeStyle = '#fff'; g.lineWidth = 9; g.setLineDash([9, 19]); g.beginPath(); g.arc(x, y, 18, 0, TAU); g.stroke(); g.setLineDash([]); });
+  /* --- Phòng nhạc --- */
+  tall(1732, 688, 30, guitar, 12); tall(1872, 806, 30, cello, 12); tall(1787, 850, 30, stand, 0); tall(1870, 682, 32, floorLamp, 12, 170);
+  sideT(1738, 914, (g, x, y, t) => gramo(g, x, y, 0));
+  /* --- Phòng ngủ 01 --- */
+  tall(1496, 396, 30, guitar, 12); tall(1486, 244, 28, plantD, 14); put(1612, 378, 26, (g, x, y) => cushion(g, x, y, '#e0b04a'), 1); put(1532, 254, 16, (g, x, y) => stack(g, x, y, 2)); put(1668, 253, 14, mug);
+  put(1592, 354, 16, slippers, 0); tall(1702, 372, 22, (g, x, y) => { oval(g, x + 3, y + 5, 18, 6, 'rgba(0,0,0,.3)'); fillRR(g, x - 17, y - 34, 34, 36, 7, '#c9b48a'); g.strokeStyle = '#8a7a5a'; g.lineWidth = 1.5; for (let i = 1; i < 4; i++){ g.beginPath(); g.moveTo(x - 17, y - 34 + i * 9); g.lineTo(x + 17, y - 34 + i * 9); g.stroke(); } fillRR(g, x - 12, y - 42, 24, 12, 5, '#9fd8f0'); }, 14);
+  put(1580, 460, 16, (g, x, y) => { mug(g, x - 8, y - 4); vaseS(g, x + 10, y + 6, '#c0392b'); });
+  /* --- Các WC --- */
+  mat(1500, 1045, 50, 16, '#9fd8f0', '#fff'); put(1405, 1021, 12, soap);
+  tall(1748, 1052, 20, (g, x, y) => { oval(g, x + 3, y + 5, 16, 6, 'rgba(0,0,0,.3)'); fillRR(g, x - 15, y - 30, 30, 32, 6, '#c9b48a'); fillRR(g, x - 10, y - 38, 20, 12, 5, '#ffb3d1'); }, 12); put(1705, 1021, 12, soap);
+  /* --- Phòng khách --- */
+  sideT(1563, 1132, (g, x, y) => lampT(g, x, y)); sideT(1563, 1306, (g, x, y) => lampT(g, x, y));
+  { const x = X(1640), y = Y(1276); bg(bbx(x - 34, y - 34, x + 34, y + 34), g => { dot(g, x + 4, y + 6, 30, 'rgba(0,0,0,.28)'); dot(g, x, y, 30, '#7a2228'); dot(g, x, y, 24, '#9a3036'); dot(g, x, y, 4, '#5a161c'); }); obC(x, y, 26); }
+  put(1662, 1200, 22, (g, x, y) => { mag(g, x - 6, y + 4, '#2a6a9a'); candleS(g, x + 12, y - 14); }); tall(1352, 1100, 26, clock, 18); tall(1450, 1104, 30, plantD, 14);
+  /* --- Sân vườn: đồ trang trí --- */
+  tall(600, 300, 36, birdbath, 26); tall(655, 1244, 18, gnome, 0); tall(1500, 1432, 18, gnome, 0); tall(1180, 245, 18, gnome, 0); tall(1272, 1468, 22, mailbox, 10);
+  put(1720, 150, 60, (g, x, y) => { g.save(); g.translate(x, y); g.rotate(-.12); fillRR(g, -70, -46, 140, 92, 6, '#f4f1ea'); g.fillStyle = '#d42a2a'; for (let i = 0; i < 7; i++) for (let j = 0; j < 5; j++) if ((i + j) % 2) g.fillRect(-70 + i * 20, -46 + j * 18.4, 20, 18.4); g.restore(); fillRR(g, x + 24, y - 18, 40, 30, 6, '#a8784a'); bowl(g, x - 24, y + 4); }, 0);
+  bg(bbx(X(450), Y(1228), X(480), Y(1300)), g => { for (let i = 0; i < 3; i++) fillRR(g, X(452) + (i % 2) * 20, Y(1236) + i * 52, 70, 38, 12, '#cdbfa6'); }, 0);
+  Flowers(510, 1256, 110, 18); Bush(1918, 630, 30); Bush(980, 1300, 32); Bush(88, 660, 30);
+
   const BOOKS = ['📖 "Rừng Na Uy" — Haruki Murakami', '📖 "Hoàng tử bé" — Antoine de Saint-Exupéry', '📖 "Nhà giả kim" — Paulo Coelho', '📖 "Đắc nhân tâm" — Dale Carnegie', '📖 "Số đỏ" — Vũ Trọng Phụng', '📖 "Dế mèn phiêu lưu ký" — Tô Hoài', '📖 "1984" — George Orwell'];
   const PENTA = [261.6, 293.7, 329.6, 392, 440, 523.3, 587.3, 659.3];
 
@@ -718,7 +854,7 @@ window.LOUNGE_MAP = function (K) {
     // hàng rào bao quanh
     if (b[0] < 120 || b[1] < 170 || b[2] > W - 120 || b[3] > H - 120){ g.strokeStyle = '#6a4a2a'; g.lineWidth = 6; g.setLineDash([18, 10]); g.strokeRect(X(45) - 20, Y(42) - 20, X(1955) - X(45) + 40, Y(1515) - Y(42) + 40); g.setLineDash([]); }
     for (let i = 1; i < ZONES.length; i++){ const z = ZONES[i]; if (!z.floor || z.floor === 'grass' || !hit(z.bb, b)) continue; g.fillStyle = pat(g, z.floor); pathPoly(g, z.poly); g.fill(); if (z.floor === 'carpet'){ g.save(); pathPoly(g, z.poly); g.clip(); g.strokeStyle = '#e0b04a'; g.lineWidth = 6; g.strokeRect(z.bb[0] + 34, z.bb[1] + 90, z.bb[2] - z.bb[0] - 68, z.bb[3] - z.bb[1] - 120); g.restore(); } }
-    STATIC.forEach(s => { if (hit(s.b, b)) s.d(g); });
+    for (let l = 0; l < 3; l++) STATIC.forEach(s => { if (s.l === l && hit(s.b, b)) s.d(g); });
     HW.forEach(w => { if (hit([w.x0 - T, w.y - T, w.x1 + T, w.y + T / 2 + FACE + 26], b)) drawFace(g, w); });
     DECO.forEach(s => { if (hit(s.b, b)) s.d(g); });
     frames(g, b);
@@ -769,7 +905,7 @@ window.LOUNGE_MAP = function (K) {
     g.fillStyle = '#4f7d3f'; rr(g, X(45) - 30, Y(42) - 30, X(1955) - X(45) + 60, Y(1515) - Y(42) + 60, 40); g.fill();
     g.fillStyle = '#cdbfa6'; g.fillRect(X(1120), Y(1275), X(1235) - X(1120), Y(1520) - Y(1275));
     for (let i = 1; i < ZONES.length; i++){ const z = ZONES[i]; g.fillStyle = MAPCOL[z.floor] || '#ddd'; pathPoly(g, z.poly); g.fill(); if (locked.has(z.id)){ g.fillStyle = 'rgba(255,60,60,.25)'; pathPoly(g, z.poly); g.fill(); } }
-    g.fillStyle = '#3a8ab0'; rr(g, X(1505), Y(612), X(1660) - X(1505), Y(952) - Y(612), 10); g.fill();
+    g.fillStyle = '#3a8ab0'; rr(g, X(1515), Y(650), X(1645) - X(1515), Y(880) - Y(650), 10); g.fill();
     g.beginPath(); g.ellipse(X(1055), Y(708), S(40), S(36), 0, 0, TAU); g.fill(); g.beginPath(); g.ellipse(X(1335), Y(332), S(60), S(42), 0, 0, TAU); g.fill();
     g.fillStyle = '#2a1c18'; HW.forEach(w => g.fillRect(w.x0 - (w.ea ? T / 2 : 0), w.y - T / 2, w.x1 - w.x0 + (w.ea ? T / 2 : 0) + (w.eb ? T / 2 : 0), T)); VW.forEach(w => g.fillRect(w.x - T / 2, w.y0 - (w.ea ? T / 2 : 0), T, w.y1 - w.y0 + (w.ea ? T / 2 : 0) + (w.eb ? T / 2 : 0))); DW.forEach(d => capD(g, d));
     DOORS.forEach(d => { g.fillStyle = d.lock && locked.has(d.owner) ? '#ff5a5a' : '#c9963a'; if (d.v) g.fillRect(d.at - 5, d.a0, 10, d.a1 - d.a0); else g.fillRect(d.a0, d.at - 5, d.a1 - d.a0, 10); });
