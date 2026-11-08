@@ -505,7 +505,7 @@
 <script>
 (() => {
   /* ===================== CẤU HÌNH ===================== */
-  const CODE = '111213';                                   // mã mở Studio (gõ trên màn hình đen)
+  const CODE = '212322';                                   // mã mở Studio (gõ trên màn hình đen)
   const STREAM_MS = 3000;                                  // dòng code chạy trong 3 giây
   // Spotify — Client ID của app trên developer.spotify.com (Redirect URI: địa chỉ trang studio/).
   // Để trống thì có thể dán Client ID ngay trong khung Spotify (nút "kết nối spotify").
@@ -552,7 +552,7 @@
   let unlocked = false;
   try { unlocked = sessionStorage.getItem('studio-open') === '1'; } catch (e) {}
 
-  /* ---------- 1. màn hình đen: gõ 111213 (không hiện gì) ---------- */
+  /* ---------- 1. màn hình đen: gõ 212322 (không hiện gì) ---------- */
   const key = $('#key');
   let buf = '';
   function feed(d){
