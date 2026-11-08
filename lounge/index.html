@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>⌈ＴＨＥ　ＬＯＵＮＧＥ⌋</title>
+<title>⌈ＬＯＵＮＧＥ　ＭＡＰ⌋</title>
 <link rel="icon" href="../icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
@@ -16,193 +16,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=VT323&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="engine.css">
+<link rel="stylesheet" href="map.css">
 </head>
 <body>
-<script>
-/* ===== THE LOUNGE — phòng chờ nói chuyện (cấu hình riêng; phần chung nằm ở engine.js) ===== */
-(() => {
-  const W = 1200, H = 1000;
-  const FL = { x0: 40, y0: 150, x1: 1160, y1: 960 };
-  const RUG = { x0: 380, y0: 360, x1: 860, y1: 760 };
-  const DOOR = { x0: 160, x1: 290 };
-  // tranh trên tường: [x, y, rộng, cao, màu]
-  const FRAMES = [[70, 26, 92, 56, '#6a4a7a'], [180, 40, 48, 36, '#2a6a5a'], [250, 18, 150, 50, '#9fb3c8'], [420, 30, 56, 56, '#d98a2a'], [620, 20, 120, 80, '#5a7a9a'], [760, 26, 60, 42, '#e0c070'], [840, 22, 92, 60, '#b3261e'], [950, 44, 46, 34, '#3a5a3a'], [1010, 20, 120, 76, '#b0c4d8']];
-  const RED = FRAMES[6];   // bức tranh đỏ
-
-  function drawBG(g, K, S){
-    const rr = K.rr; g.setTransform(S, 0, 0, S, 0, 0);
-    g.fillStyle = '#120c0e'; g.fillRect(0, 0, W, H);
-    // sàn gỗ xương cá
-    g.save(); g.beginPath(); g.rect(FL.x0, FL.y0, FL.x1 - FL.x0, FL.y1 - FL.y0); g.clip();
-    const CW = 40, RH = 20, tones = ['#d8b384', '#cfa776', '#dcb98c', '#c9a06e'];
-    for (let c = 0, x = FL.x0 - 40; x < FL.x1 + 40; c++, x += CW){
-      for (let r = 0, y = FL.y0 - 60; y < FL.y1 + 60; r++, y += RH){
-        g.fillStyle = tones[(c * 7 + r * 3 + ((r / 3) | 0)) % 4];
-        g.beginPath();
-        if (c % 2 === 0){ g.moveTo(x, y + RH); g.lineTo(x + CW, y); g.lineTo(x + CW, y + RH); g.lineTo(x, y + 2 * RH); }
-        else { g.moveTo(x, y); g.lineTo(x + CW, y + RH); g.lineTo(x + CW, y + 2 * RH); g.lineTo(x, y + RH); }
-        g.closePath(); g.fill();
-        g.strokeStyle = 'rgba(110,70,36,.55)'; g.lineWidth = 1.2; g.stroke();
-      }
-    }
-    for (let i = 0; i < 3000; i++){ g.fillStyle = Math.random() < .5 ? 'rgba(90,50,20,.07)' : 'rgba(255,240,210,.06)'; g.fillRect(FL.x0 + Math.random() * (FL.x1 - FL.x0), FL.y0 + Math.random() * (FL.y1 - FL.y0), 2, 2); }
-    const sh = g.createLinearGradient(0, FL.y0, 0, FL.y0 + 70); sh.addColorStop(0, 'rgba(0,0,0,.45)'); sh.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = sh; g.fillRect(FL.x0, FL.y0, FL.x1 - FL.x0, 70);
-    g.restore();
-    // thảm đỏ viền vàng
-    g.fillStyle = 'rgba(0,0,0,.25)'; g.fillRect(RUG.x0 + 6, RUG.y0 + 8, RUG.x1 - RUG.x0, RUG.y1 - RUG.y0);
-    g.fillStyle = '#9e1f22'; g.fillRect(RUG.x0, RUG.y0, RUG.x1 - RUG.x0, RUG.y1 - RUG.y0);
-    g.strokeStyle = '#e09a3a'; g.lineWidth = 6; g.strokeRect(RUG.x0 + 18, RUG.y0 + 18, RUG.x1 - RUG.x0 - 36, RUG.y1 - RUG.y0 - 36);
-    g.lineWidth = 2.5; g.strokeRect(RUG.x0 + 30, RUG.y0 + 30, RUG.x1 - RUG.x0 - 60, RUG.y1 - RUG.y0 - 60);
-    for (let i = 0; i < 900; i++){ g.fillStyle = 'rgba(60,0,0,.18)'; g.fillRect(RUG.x0 + Math.random() * (RUG.x1 - RUG.x0), RUG.y0 + Math.random() * (RUG.y1 - RUG.y0), 2, 2); }
-    // tường trên có tranh
-    const wg = g.createLinearGradient(0, 0, 0, FL.y0); wg.addColorStop(0, '#231a24'); wg.addColorStop(1, '#3a2c36');
-    g.fillStyle = wg; g.fillRect(FL.x0, 0, FL.x1 - FL.x0, FL.y0);
-    for (let x = FL.x0; x < FL.x1; x += 26){ g.fillStyle = 'rgba(255,255,255,.025)'; g.fillRect(x, 0, 12, FL.y0 - 34); }
-    g.fillStyle = '#4a2e1e'; g.fillRect(FL.x0, FL.y0 - 34, FL.x1 - FL.x0, 34);
-    g.fillStyle = '#6a4228'; g.fillRect(FL.x0, FL.y0 - 36, FL.x1 - FL.x0, 5);
-    FRAMES.forEach(([x, y, w, h, c]) => { g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(x + 4, y + 5, w, h); g.fillStyle = '#c9963a'; g.fillRect(x, y, w, h); g.fillStyle = c; g.fillRect(x + 5, y + 5, w - 10, h - 10); g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(x + 5, y + 5, w - 10, (h - 10) * .4); });
-    // tường bao
-    g.fillStyle = '#0d0a0c'; g.fillRect(0, 0, FL.x0, H); g.fillRect(FL.x1, 0, W - FL.x1, H); g.fillRect(0, FL.y1, W, H - FL.y1);
-    g.fillStyle = '#2a2226'; g.fillRect(FL.x0 - 8, 0, 8, H); g.fillRect(FL.x1, 0, 8, H); g.fillRect(0, FL.y1, W, 8);
-    // khung cửa ra
-    g.fillStyle = '#3a2a1e'; g.fillRect(DOOR.x0 - 10, FL.y1 - 4, DOOR.x1 - DOOR.x0 + 20, 48);
-    g.fillStyle = '#1a120c'; g.fillRect(DOOR.x0, FL.y1, DOOR.x1 - DOOR.x0, 40);
-    g.fillStyle = '#b07a3a'; g.fillRect(DOOR.x0, FL.y1 - 2, DOOR.x1 - DOOR.x0, 4);
-    // sofa chữ L
-    const sofa = '#7a2228', sofaD = '#5a161c', sofaL = '#9a3036';
-    g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(48, 160, 444, 112); g.fillRect(48, 160, 134, 428);
-    g.fillStyle = sofaD; rr(g, 40, 150, 446, 112, 18); g.fill(); rr(g, 40, 150, 136, 430, 18); g.fill();
-    g.fillStyle = sofa; rr(g, 52, 162, 422, 44, 14); g.fill(); rr(g, 52, 162, 44, 406, 14); g.fill();
-    g.fillStyle = sofaL;
-    for (let i = 0; i < 4; i++){ rr(g, 104 + i * 92, 210, 86, 46, 10); g.fill(); }
-    for (let i = 0; i < 4; i++){ rr(g, 102, 270 + i * 74, 66, 68, 10); g.fill(); }
-    g.strokeStyle = 'rgba(0,0,0,.3)'; g.lineWidth = 2;
-    for (let i = 0; i < 4; i++){ rr(g, 104 + i * 92, 210, 86, 46, 10); g.stroke(); rr(g, 102, 270 + i * 74, 66, 68, 10); g.stroke(); }
-    g.fillStyle = '#c9b090'; rr(g, 120, 196, 40, 30, 8); g.fill(); g.fillStyle = '#e8d8b8'; rr(g, 380, 196, 40, 30, 8); g.fill();
-    // quầy bar + kệ chai
-    g.fillStyle = '#2a1a12'; g.fillRect(420, 920, 560, 40);
-    const bot = ['#3a6a3a', '#8a2a2a', '#c9a24a', '#2a4a6a', '#6a3a1a', '#d8d8c8'];
-    for (let i = 0; i < 22; i++){ g.fillStyle = bot[i % bot.length]; rr(g, 430 + i * 25, 926, 14, 26, 5); g.fill(); g.fillStyle = 'rgba(255,255,255,.3)'; g.fillRect(434 + i * 25, 930, 3, 16); }
-    g.fillStyle = 'rgba(0,0,0,.35)'; rr(g, 426, 846, 560, 84, 26); g.fill();
-    g.fillStyle = '#4a2a18'; rr(g, 420, 834, 560, 84, 26); g.fill();
-    g.fillStyle = '#6a3e22'; rr(g, 430, 842, 540, 50, 20); g.fill();
-    g.strokeStyle = '#2a160c'; g.lineWidth = 3; rr(g, 420, 834, 560, 84, 26); g.stroke();
-    [[470, 860, '#e8f4ff'], [560, 856, '#c9e8a0'], [700, 862, '#e8f4ff'], [770, 856, '#ffd28a'], [900, 860, '#e8f4ff']].forEach(([x, y, c]) => { g.fillStyle = 'rgba(0,0,0,.25)'; g.beginPath(); g.ellipse(x + 3, y + 4, 12, 8, 0, 0, 7); g.fill(); g.fillStyle = c; g.beginPath(); g.ellipse(x, y, 11, 8, 0, 0, 7); g.fill(); g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 1.5; g.stroke(); });
-    // xe đẩy rượu
-    g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(48, 650, 104, 222);
-    g.strokeStyle = '#b07a3a'; g.lineWidth = 5; rr(g, 44, 642, 100, 222, 10); g.stroke();
-    g.fillStyle = '#3a2a24'; rr(g, 50, 650, 88, 96, 6); g.fill(); rr(g, 50, 760, 88, 96, 6); g.fill();
-    [[72, 674, '#2a3a4a'], [104, 690, '#3a4a5a'], [76, 716, '#2a3a4a'], [86, 790, '#d8d8c8'], [114, 800, '#8a2a2a']].forEach(([x, y, c]) => { g.fillStyle = c; g.beginPath(); g.arc(x, y, 13, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,.25)'; g.beginPath(); g.arc(x - 4, y - 4, 4, 0, 7); g.fill(); });
-  }
-
-  /* đồ vật cao: vẽ xen kẽ với nhân vật theo chiều sâu */
-  function drawLamp(g){
-    g.fillStyle = 'rgba(0,0,0,.3)'; g.beginPath(); g.ellipse(544, 236, 30, 10, 0, 0, 7); g.fill();
-    g.fillStyle = '#1e1a1c'; g.beginPath(); g.arc(540, 226, 22, 0, 7); g.fill();
-    g.strokeStyle = '#1e1a1c'; g.lineWidth = 6; g.beginPath(); g.moveTo(540, 226); g.lineTo(540, 160); g.stroke();
-    const glow = g.createRadialGradient(540, 150, 10, 540, 150, 120); glow.addColorStop(0, 'rgba(255,220,140,.35)'); glow.addColorStop(1, 'rgba(255,220,140,0)'); g.fillStyle = glow; g.beginPath(); g.arc(540, 150, 120, 0, 7); g.fill();
-    g.save(); g.translate(540, 150);
-    for (let i = 0; i < 8; i++){ g.fillStyle = i % 2 ? '#5a7a4a' : '#7a9a5a'; g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, 46, i * Math.PI / 4, (i + 1) * Math.PI / 4); g.closePath(); g.fill(); }
-    g.strokeStyle = '#c9963a'; g.lineWidth = 2.5; for (let i = 0; i < 8; i++){ g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(i * Math.PI / 4) * 46, Math.sin(i * Math.PI / 4) * 46); g.stroke(); }
-    g.beginPath(); g.arc(0, 0, 46, 0, 7); g.stroke(); g.fillStyle = '#e8a03a'; g.beginPath(); g.arc(0, 0, 8, 0, 7); g.fill();
-    g.restore();
-  }
-  function drawSideTable(g, x, y, drink){
-    g.fillStyle = 'rgba(0,0,0,.3)'; g.beginPath(); g.ellipse(x + 4, y + 8, 36, 14, 0, 0, 7); g.fill();
-    g.strokeStyle = '#2a1a12'; g.lineWidth = 5; g.beginPath(); g.moveTo(x, y); g.lineTo(x, y + 30); g.stroke();
-    g.fillStyle = '#4a2c1a'; g.beginPath(); g.ellipse(x, y - 4, 34, 26, 0, 0, 7); g.fill();
-    g.fillStyle = '#6a3e24'; g.beginPath(); g.ellipse(x, y - 6, 28, 21, 0, 0, 7); g.fill();
-    if (drink){ g.fillStyle = '#e8f4ff'; g.beginPath(); g.arc(x - 8, y - 8, 8, 0, 7); g.fill(); g.fillStyle = '#d9902a'; g.beginPath(); g.arc(x - 8, y - 8, 5, 0, 7); g.fill(); g.fillStyle = '#a0a0a8'; g.fillRect(x + 6, y - 14, 10, 10); }
-  }
-  function drawGlobe(g){
-    g.fillStyle = 'rgba(0,0,0,.3)'; g.beginPath(); g.ellipse(990, 300, 70, 18, 0, 0, 7); g.fill();
-    g.strokeStyle = '#c9963a'; g.lineWidth = 6; [[948, 296, 960, 250], [1022, 296, 1010, 250], [985, 304, 985, 262]].forEach(([a, b, c, d]) => { g.beginPath(); g.moveTo(a, b); g.lineTo(c, d); g.stroke(); });
-    g.fillStyle = '#8a5a2a'; g.beginPath(); g.arc(985, 230, 62, 0, 7); g.fill();
-    g.fillStyle = '#3a2416'; g.beginPath(); g.arc(985, 230, 50, 0, 7); g.fill();
-    [[968, 222, '#a8c8a0'], [996, 214, '#a8c8a0'], [984, 244, '#c8e0c0'], [1006, 238, '#8ab088']].forEach(([x, y, c]) => { g.fillStyle = c; g.beginPath(); g.arc(x, y, 12, 0, 7); g.fill(); g.fillStyle = '#4a6a4a'; g.beginPath(); g.arc(x, y, 4, 0, 7); g.fill(); });
-    g.strokeStyle = '#c9963a'; g.lineWidth = 5; g.beginPath(); g.arc(985, 230, 62, 0, 7); g.stroke();
-    g.fillStyle = '#b07a3a'; g.beginPath(); g.moveTo(940, 186); g.quadraticCurveTo(985, 120, 1048, 170); g.lineTo(1040, 182); g.quadraticCurveTo(990, 146, 950, 194); g.fill();
-    g.strokeStyle = '#6a4a2a'; g.lineWidth = 2; g.beginPath(); g.moveTo(960, 168); g.quadraticCurveTo(990, 150, 1020, 160); g.stroke();
-  }
-  function drawArmchair(g, K){
-    const rr = K.rr;
-    g.fillStyle = 'rgba(0,0,0,.3)'; rr(g, 998, 552, 140, 122, 30); g.fill();
-    g.fillStyle = '#8a5a3a'; rr(g, 990, 540, 142, 124, 34); g.fill();
-    g.fillStyle = '#a8724a'; rr(g, 1000, 558, 96, 88, 22); g.fill();
-    g.fillStyle = '#7a4a2e'; rr(g, 1092, 548, 36, 108, 16); g.fill();
-    g.strokeStyle = 'rgba(0,0,0,.3)'; g.lineWidth = 2.5; rr(g, 990, 540, 142, 124, 34); g.stroke();
-    g.fillStyle = '#c9a07a'; rr(g, 1010, 570, 70, 64, 16); g.fill();
-  }
-  function drawJukebox(g, t, K){
-    const rr = K.rr, on = K.soundOn;
-    g.fillStyle = 'rgba(0,0,0,.35)'; rr(g, 1068, 330, 92, 130, 14); g.fill();
-    g.fillStyle = '#5a2a14'; rr(g, 1076, 318, 84, 134, 30); g.fill();
-    const gl = g.createLinearGradient(1076, 0, 1160, 0); gl.addColorStop(0, '#ff7a3a'); gl.addColorStop(.5, '#ffe08a'); gl.addColorStop(1, '#ff7a3a');
-    g.strokeStyle = gl; g.lineWidth = 5; rr(g, 1080, 322, 76, 126, 26); g.stroke();
-    g.fillStyle = on ? `hsl(${(t * 60) % 360},80%,62%)` : '#6a4a3a'; rr(g, 1092, 340, 52, 34, 10); g.fill();
-    g.fillStyle = '#2a1a12'; for (let i = 0; i < 4; i++) g.fillRect(1094, 388 + i * 12, 48, 6);
-    g.fillStyle = '#ffd28a'; g.font = '700 11px Fredoka, sans-serif'; g.textAlign = 'center'; g.fillText(on ? '♪ ON' : '♪', 1118, 438);
-  }
-  function drawPlant(g, x, y){
-    g.fillStyle = 'rgba(0,0,0,.3)'; g.beginPath(); g.ellipse(x + 4, y + 14, 30, 10, 0, 0, 7); g.fill();
-    g.fillStyle = '#b06a3a'; g.beginPath(); g.ellipse(x, y + 4, 24, 16, 0, 0, 7); g.fill();
-    g.fillStyle = '#3a2416'; g.beginPath(); g.ellipse(x, y, 19, 11, 0, 0, 7); g.fill();
-    for (let i = 0; i < 9; i++){ const a = i / 9 * Math.PI * 2; g.fillStyle = i % 2 ? '#3f8a4a' : '#56a85a'; g.beginPath(); g.ellipse(x + Math.cos(a) * 18, y - 22 + Math.sin(a) * 14, 16, 8, a, 0, 7); g.fill(); }
-    g.fillStyle = '#6ac06a'; g.beginPath(); g.arc(x, y - 24, 12, 0, 7); g.fill();
-  }
-
-  // chỗ ngồi: sofa chữ L có 8 đệm (4 đệm hàng trên, 4 đệm cánh trái) + ghế bành
-  const SOFA_TOP = [0, 1, 2, 3].map(i => 147 + i * 92), SOFA_LEFT = [0, 1, 2, 3].map(i => 304 + i * 74);
-  const SEATS = [
-    ...SOFA_TOP.map((x, i) => ({ x, y: 250, ax: i ? x : 214, ay: 304, g: 'sofa', pose: 'sit', z: 250 })),
-    ...SOFA_LEFT.map(y => ({ x: 138, y: y + 16, ax: 218, ay: y + 10, g: 'sofa', pose: 'sit', z: y + 16 })),
-    { x: 1046, y: 626, ax: 952, ay: 616, g: 'arm', pose: 'sit', z: 670 }
-  ];
-
-  window.ROOM = {
-    key: 'lounge',
-    prefix: 'anrevy-house-9q2/lounge/v1',
-    title: 'THE LOUNGE', sub: 'phòng nói chuyện của AnreVy · gọi thoại cùng nhau', tvName: 'lounge.fm',
-    links: [['← JAZZ CLUB', '../jazz/'], ['⌂ ANREVY HOUSE', '../home.html']],
-    exitHref: '../jazz/',
-    leaveHref: '../jazz/',          // nút "Rời phòng" → Jazz Club
-    music: 'mM1dIwGO00w',          // nhạc jazz phát liên tục (YouTube live)
-    W, H, FL, DOOR,
-    welcome: 'Đã vào phòng. Bấm sofa để ngồi (đủ chỗ cho 8 người), bấm máy hát để bật nhạc.',
-    seats: SEATS,
-    seatFull: 'Sofa đã kín cả 8 chỗ rồi.',
-    seatFullBy: { sofa: 'Sofa đã kín cả 8 chỗ rồi.', arm: 'Ghế bành có người ngồi rồi.' },
-    BOUND: { x0: 72, y0: 190, x1: 1128, y1: 944 },
-    PANEL: { x: 322, y: 940 },
-    SPAWN: { x: 226, y: 905 },
-    OB: [
-      { r: [40, 150, 486, 266] }, { r: [40, 150, 176, 580] },
-      { c: [540, 222, 26] }, { c: [860, 228, 34] }, { c: [985, 250, 64] },
-      { r: [1076, 320, 1160, 452] }, { r: [992, 540, 1132, 664] }, { c: [1096, 724, 32] },
-      { r: [420, 834, 980, 960] }, { r: [40, 640, 146, 866] },
-      { c: [92, 920, 30] }, { c: [1112, 910, 30] }
-    ],
-    drawBG,
-    props: K => [
-      { y: 236, d: g => drawLamp(g) }, { y: 236, d: g => drawSideTable(g, 860, 228, false) }, { y: 300, d: g => drawGlobe(g) },
-      { y: 452, d: (g, t) => drawJukebox(g, t, K) }, { y: 664, d: g => drawArmchair(g, K) }, { y: 742, d: g => drawSideTable(g, 1096, 724, true) },
-      { y: 932, d: g => drawPlant(g, 92, 918) }, { y: 924, d: g => drawPlant(g, 1112, 908) }
-    ],
-    onSeat: (i, K) => { if (SEATS[i].g === 'sofa') K.toast('Đã ngồi xuống sofa 🛋️ (bấm xuống sàn để đứng dậy)'); },
-    hotspots: K => [
-      { r: [1068, 312, 1164, 456], always: true, act: () => K.toggleMusic() },
-      // sofa chữ L (8 chỗ) và ghế bành: đi tới chỗ trống gần nhất rồi ngồi
-      { r: [40, 150, 486, 266], act: () => K.claimSeat('sofa') },
-      { r: [40, 150, 176, 580], act: () => K.claimSeat('sofa') },
-      { r: [990, 540, 1132, 664], act: () => K.claimSeat('arm') },
-      // bức tranh đỏ: không có dấu hiệu gì, bấm vào là sang căn phòng phía sau
-      { r: [RED[0], RED[1], RED[0] + RED[2], RED[1] + RED[3]], act: () => K.leaveTo('red/', true) }
-    ]
-  };
-})();
-</script>
+<!-- LOUNGE MAP: dinh thự nhiều phòng · bản đồ & đồ đạc ở map-world.js, phần chạy ở map-engine.js -->
 <script src="https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js"></script>
-<script src="engine.js"></script>
+<script src="map-world.js"></script>
+<script src="map-engine.js"></script>
 </body>
 </html>

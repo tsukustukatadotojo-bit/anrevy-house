@@ -146,8 +146,7 @@
   <div class="nogl"><b>TRAVIS SCOTT</b><p>Trình duyệt này không mở được không gian 3D. Nhạc vẫn phát ở màn hình nhỏ góc phải, bấm ≡ để chọn bài.</p></div>
 
   <nav class="hud hud-tl" aria-label="Lối ra">
-    <a href="../jazz/">← JAZZ CLUB</a>
-    <a href="../home.html">⌂ ANREVY HOUSE</a>
+    <a href="../home.html">← ANREVY HOUSE</a>
     <button id="photosBtn" aria-haspopup="dialog">▣ ẢNH &amp; NGUỒN</button>
   </nav>
 
@@ -897,7 +896,7 @@
   const exitDoor = add(new T.PlaneGeometry(1.7, 2.8), new T.MeshLambertMaterial({ map: doorTex }), 0, 1.4, ZB - .07);
   exitDoor.rotation.y = Math.PI;
   add(new T.BoxGeometry(1.96, 3.0, .08), M.lam('#140a06'), 0, 1.5, ZB - .01);
-  hot(exitDoor, 'CỬA · về Jazz Club', () => { location.href = '../jazz/'; });
+  hot(exitDoor, 'CỬA · về Anrevy House', () => { location.href = '../home.html'; });
   const posterTex = (title, sub, a, b) => cTex(256, 360, (g, w, h) => {
     const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, a); gr.addColorStop(1, b); g.fillStyle = gr; g.fillRect(0, 0, w, h);
     g.fillStyle = 'rgba(0,0,0,.25)'; g.beginPath(); g.arc(w / 2, h * .62, 90, 0, Math.PI * 2); g.fill();
