@@ -880,7 +880,7 @@
     <section class="win reveal s5 c-studio room wide" id="studio">
       <div class="tb"><span>studio.exe</span><span class="tb-btns" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
       <div class="wb">
-      <a class="studio-door" href="studio/" aria-label="Vào Studio">
+      <a class="studio-door" href="/anvy-studio/" aria-label="Vào Studio">
 <pre class="sd-code" aria-hidden="true"><i>&lt;!DOCTYPE html&gt;</i>
 <i>&lt;html</i> lang="vi"<i>&gt;</i>
 <i>&lt;head&gt;</i>
@@ -1370,7 +1370,7 @@
 
   /* ================= LINK NGẪU NHIÊN ================= */
   // đưa tới một căn phòng bất kỳ trong nhà
-  const ROOMS = ['gallery/', 'pool/', 'game/', 'jazz/', 'lounge/', 'travis/', 'studio/'];
+  const ROOMS = ['gallery/', 'pool/', 'game/', 'jazz/', 'lounge/', 'travis/', '/anvy-studio/'];
   $('#linkCount').textContent = `${ROOMS.length} rooms to wander`;
   $('#portal').addEventListener('click', () => { location.href = pick(ROOMS); });
 
