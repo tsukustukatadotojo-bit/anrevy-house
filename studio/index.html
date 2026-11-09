@@ -10,6 +10,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<script src="../desk-check.js" defer></script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Studio">
@@ -301,14 +302,18 @@
   .ig .frame iframe{display:block;width:100%;height:100%;border:0}
 
   /* thanh tác vụ */
-  .taskbar{grid-column:1/-1;grid-row:2;margin:0 -18px;display:flex;align-items:center;gap:8px;padding:0 10px;border-top:1px solid var(--g-dim);background:#000;font:20px/1 var(--vt);z-index:950}
+  /* thanh dưới: cả thanh (kể cả START) cuộn ngang được — kéo chuột, lăn chuột hoặc vuốt */
+  .taskbar{grid-column:1/-1;grid-row:2;margin:0 -18px;display:flex;align-items:center;gap:8px;padding:0 10px;border-top:1px solid var(--g-dim);background:#000;font:20px/1 var(--vt);z-index:950;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .taskbar::-webkit-scrollbar{display:none}
+  .taskbar.dragging{cursor:grabbing;user-select:none}
+  .taskbar.dragging *{cursor:grabbing!important;pointer-events:none}
   .start{flex:none;height:36px;padding:0 16px;border:1px solid var(--g);color:#000;background:var(--g)}
   .start[aria-expanded="true"]{background:#000;color:var(--g)}
-  .tasks{flex:1;min-width:0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  .tasks{flex:none;display:flex;gap:8px}
   .tasks button{flex:none;height:36px;padding:0 14px;border:1px solid var(--g-dim);color:var(--g-mid);white-space:nowrap;font:14px/1 var(--mono)}
   .tasks button.front{border-color:var(--g);color:var(--g)}
   .tasks button.min{border-style:dashed;color:var(--g-dim)}
-  .clock{flex:none;color:var(--g-mid);padding:0 6px;font:14px/1 var(--mono)}
+  .clock{flex:none;margin-left:auto;color:var(--g-mid);padding:0 6px;font:14px/1 var(--mono)}
   .menu{position:fixed;left:8px;bottom:calc(var(--bar) + 4px);z-index:999;min-width:240px;border:1px solid var(--g);background:#000}
   .menu p{padding:8px 12px;border-bottom:1px dashed var(--g-line);font:12px/1.3 var(--mono);color:var(--g-mid)}
   .menu p:not(:first-child){border-top:1px dashed var(--g-line);padding:6px 12px}
@@ -489,6 +494,7 @@
     <button type="button" role="menuitem" data-app="note">✎ note · chat</button>
     <a role="menuitem" href="https://keep.google.com/u/0/#home" target="_blank" rel="noopener">✎ google keep ↗</a>
     <a role="menuitem" href="https://app.standardnotes.com/" target="_blank" rel="noopener">✎ standard notes ↗</a>
+    <a role="menuitem" href="https://anvy.nimbusweb.me/home" target="_blank" rel="noopener">✎ An Vy Nimbus ↗</a>
     <p>✦ ai</p>
     <a role="menuitem" href="https://claude.ai/new" target="_blank" rel="noopener">✦ claude ↗</a>
     <a role="menuitem" href="https://chatgpt.com" target="_blank" rel="noopener">✦ chatgpt ↗</a>
@@ -1483,6 +1489,22 @@
   }
 
   /* ================= CÀI STUDIO THÀNH APP ================= */
+  /* ---------- thanh dưới cuộn ngang: kéo bằng chuột (máy tính chia đôi màn hình), lăn chuột, vuốt ---------- */
+  {
+    const bar = document.querySelector('.taskbar');
+    let drag = null, moved = false;
+    bar.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0 || bar.scrollWidth <= bar.clientWidth + 2) return; drag = { x: e.clientX, s: bar.scrollLeft, id: e.pointerId }; moved = false; });
+    addEventListener('pointermove', e => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const dx = e.clientX - drag.x;
+      if (!moved && Math.abs(dx) > 6){ moved = true; bar.classList.add('dragging'); }
+      if (moved) bar.scrollLeft = drag.s - dx;
+    });
+    const end = () => { if (!drag) return; drag = null; setTimeout(() => { bar.classList.remove('dragging'); moved = false; }, 0); };
+    addEventListener('pointerup', end); addEventListener('pointercancel', end);
+    bar.addEventListener('click', e => { if (moved){ e.preventDefault(); e.stopPropagation(); } }, true);
+    bar.addEventListener('wheel', e => { if (bar.scrollWidth <= bar.clientWidth + 2) return; const d = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX; bar.scrollLeft += d; e.preventDefault(); }, { passive: false });
+  }
   if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
   let installEvt = null;
   const isApp = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;

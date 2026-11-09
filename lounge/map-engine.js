@@ -37,20 +37,20 @@
         <div class="hats" id="hats" role="radiogroup" aria-labelledby="hatLbl"></div>
         <p class="err" id="gErr" role="alert"></p>
         <button class="go" id="goBtn" type="submit">Vào Lounge Map</button>
-        <span class="back-home"><a href="../home.html">← quay lại Anrevy House</a></span>
+        <span class="back-home"><a href="../login.html">← về Anrevy House</a></span>
       </div>
     </form>
   </div>
   <div class="joy" id="joy" aria-label="Nút xoay tròn để di chuyển" role="application"><div class="joy-knob" id="joyKnob"></div></div>
   <button class="actbtn" id="actBtn" type="button" hidden><span id="actT"></span><kbd>E</kbd></button>
   <div class="modal" id="exitModal" role="dialog" aria-modal="true" aria-labelledby="exTitle">
-    <div class="card"><h2 id="exTitle">RỜI LOUNGE MAP?</h2><p class="sub" style="margin-top:8px">Bạn đang đứng ở Lối vào. Ra ngoài sẽ ngắt cuộc gọi và quay về Anrevy House.</p>
+    <div class="card"><h2 id="exTitle">RỜI LOUNGE MAP?</h2><p class="sub" style="margin-top:8px">Bạn đang đứng ở Lối vào. Ra ngoài sẽ ngắt cuộc gọi và quay về cổng Anrevy House (trang nhập mật khẩu).</p>
       <div class="row"><button class="go ghost" type="button" id="exStay">Ở lại</button><button class="go" type="button" id="exGo">Rời đi</button></div></div>
   </div>
   <div class="mapm" id="mapModal" role="dialog" aria-modal="true" aria-label="Bản đồ Lounge Map">
     <div class="map-card"><div class="map-head"><b>LOUNGE MAP</b><small id="mapNote"></small><button class="map-x" id="mapClose" aria-label="Đóng bản đồ">✕</button></div><canvas id="mapCv"></canvas></div>
   </div>
-  <div class="rotate" id="rotate"><div class="ph" aria-hidden="true"></div><h2>XOAY NGANG ĐIỆN THOẠI</h2><p>Lounge Map chỉ chơi được khi điện thoại nằm ngang. Hãy xoay máy (và tắt khoá xoay màn hình nếu đang bật).</p><a href="../home.html">← quay lại Anrevy House</a></div>
+  <div class="rotate" id="rotate"><div class="ph" aria-hidden="true"></div><h2>XOAY NGANG ĐIỆN THOẠI</h2><p>Lounge Map chỉ chơi được khi điện thoại nằm ngang. Hãy xoay máy (và tắt khoá xoay màn hình nếu đang bật).</p><a href="../login.html">← về Anrevy House</a></div>
   <div class="toasts" id="toasts" aria-live="polite"></div>
   <button class="btn hot tapaudio" id="tapAudio">🔊 Chạm để nghe mọi người</button>
   <div id="audios" hidden></div>
@@ -67,7 +67,7 @@
   let AWAY_KICK_MS = 15 * 60 * 1000;        // rời trang quá 15 phút thì tự ra khỏi Lounge Map
   const MAX_PEOPLE = 10;                    // gọi thoại kiểu mạng lưới: tối đa 10 người
   const HEAR_FULL = 620, HEAR_MAX = 1080;   // khoảng cách nghe rõ / hết nghe (đơn vị bản đồ)
-  const EXIT_HREF = '../home.html';
+  const EXIT_HREF = '../login.html';                // rời Lounge Map → về trang nhập mật khẩu của Anrevy House
   let BROKERS = ['wss://broker.emqx.io:8084/mqtt', 'wss://test.mosquitto.org:8081/mqtt'];
   const ICE = [{ urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302', 'stun:stun.cloudflare.com:3478'] }];
   /* ============================ */
