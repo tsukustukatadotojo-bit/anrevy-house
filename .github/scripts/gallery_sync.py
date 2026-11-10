@@ -286,7 +286,7 @@ def main():
             clear_all(gid, max(int(m.get('on') or 0) for _, _, m in metas) + max(int(m.get('n') or 0) for _, _, m in metas))
 
     # 2b) ô chat note của Studio: giữ tin trong 7 ngày, dọn tin cũ
-    note_items, notes_changed, note_stale = notes(links, now)
+    note_items, notes_changed, note_stale, note_wipe = notes(links, now)
 
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
@@ -304,7 +304,7 @@ def main():
             with open(DB, 'w', encoding='utf-8') as f: json.dump(db, f, ensure_ascii=False, indent=1)
         if notes_changed:
             os.makedirs(os.path.dirname(NOTES), exist_ok=True)
-            with open(NOTES, 'w', encoding='utf-8') as f: json.dump({'items': note_items}, f, ensure_ascii=False, indent=1)
+            with open(NOTES, 'w', encoding='utf-8') as f: json.dump({'items': note_items, **({'wipe': note_wipe} if note_wipe else {})}, f, ensure_ascii=False, indent=1)
         msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '']))
         print(msg, added)
         if not DRY and not push(msg):
@@ -328,10 +328,12 @@ def main():
 
 def notes(links, now):
     """Gộp tin chat trên máy chủ với notes.json; bỏ tin quá 7 ngày hoặc không hợp lệ."""
-    old = []
-    try: old = json.load(open(NOTES, encoding='utf-8')).get('items', [])
+    old, wipe = [], 0
+    try:
+        j = json.load(open(NOTES, encoding='utf-8'))
+        old, wipe = j.get('items', []), int(j.get('wipe') or 0)     # wipe: mốc "xoá toàn bộ" — tin gửi trước mốc này bị bỏ hẳn
     except Exception: pass
-    got = {it['id']: it for it in old if isinstance(it, dict) and it.get('id')}
+    got = {it['id']: it for it in old if isinstance(it, dict) and it.get('id') and float(it.get('at', 0)) > wipe}
     stale, tomb = set(), {}
     for u, c, store in links:
         for t, p in store.items():
@@ -340,7 +342,7 @@ def notes(links, now):
             try: m = json.loads(p.decode('utf-8'))
             except Exception: stale.add(t); continue
             if t.startswith(NOTE_PFX + 'd/'):                       # yêu cầu xoá của người gửi
-                ok = isinstance(m, dict) and m.get('id') == nid and isinstance(m.get('k'), str) and now - float(m.get('at') or 0) <= NOTE_TTL
+                ok = isinstance(m, dict) and m.get('id') == nid and isinstance(m.get('k'), str) and now - float(m.get('at') or 0) <= NOTE_TTL and float(m.get('at') or 0) > wipe
                 if ok: tomb[nid] = m['k']
                 else: stale.add(t)
                 continue
@@ -349,7 +351,7 @@ def notes(links, now):
             text = clean(m.get('t'), 600) if isinstance(m, dict) else ''
             if not t.startswith(NOTE_PFX + 'm/') or not re.fullmatch(r'[a-z0-9]{6,32}', nid) or m.get('id') != nid or not name or not text or at > now + 600000:
                 stale.add(t); continue
-            if now - at > NOTE_TTL: stale.add(t); continue
+            if now - at > NOTE_TTL or at <= wipe: stale.add(t); continue
             h = m.get('h') if isinstance(m.get('h'), str) and re.fullmatch(r'[0-9a-f]{32}', m.get('h')) else ''
             r = m.get('r') if isinstance(m.get('r'), str) and re.fullmatch(r'[a-z0-9]{6,32}', m.get('r')) else ''
             rn = re.sub(r'\s+', ' ', clean(m.get('rn'), 24)) if r else ''
@@ -359,8 +361,8 @@ def notes(links, now):
         if it and it.get('h') and sha(k)[:32] == it['h']:
             del got[nid]; stale.add(NOTE_PFX + 'm/' + nid); print('note: người gửi xoá tin', nid)
     items = sorted((it for it in got.values() if now - float(it.get('at', 0)) <= NOTE_TTL), key=lambda x: x['at'])[-500:]
-    print(f'note: {len(items)} tin trong 7 ngày, dọn {len(stale)} tin cũ/lỗi')
-    return items, items != old, stale
+    print(f'note: {len(items)} tin trong 7 ngày, dọn {len(stale)} tin cũ/lỗi' + (f' (xoá toàn bộ tin trước {wipe})' if wipe else ''))
+    return items, items != old, stale, wipe
 
 def git(*a): return subprocess.run(['git', *a], capture_output=True, text=True)
 
