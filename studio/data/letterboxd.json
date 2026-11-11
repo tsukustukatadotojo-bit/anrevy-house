@@ -764,8 +764,303 @@
   "the-batman": ""
  },
  "watchlist": {
-  "total": 476,
+  "total": 512,
   "items": [
+   {
+    "t": "Evil Dead Trap",
+    "y": "1988",
+    "s": "evil-dead-trap",
+    "f": "24843",
+    "k": "96ef4d93",
+    "pc": 1
+   },
+   {
+    "t": "Daisies",
+    "y": "1966",
+    "s": "daisies",
+    "f": "18447",
+    "k": "6c61ae69",
+    "pc": 1
+   },
+   {
+    "t": "Orlando",
+    "y": "1992",
+    "s": "orlando",
+    "f": "47292",
+    "k": "a5622694",
+    "pc": 1
+   },
+   {
+    "t": "Hiroshima Mon Amour",
+    "y": "1959",
+    "s": "hiroshima-mon-amour",
+    "f": "48800",
+    "k": "6c1bc925",
+    "p": "https://m.media-amazon.com/images/M/MV5BMzY2NTA1MzUwN15BMl5BanBnXkFtZTgwOTc4NTU4MjE@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
+   {
+    "t": "Do the Right Thing",
+    "y": "1989",
+    "s": "do-the-right-thing",
+    "f": "51228",
+    "k": "b6f43cb1",
+    "pc": 1
+   },
+   {
+    "t": "Kingdom in the Clouds",
+    "y": "1968",
+    "s": "kingdom-in-the-clouds",
+    "f": "147625",
+    "k": "6d7759dd",
+    "pc": 1
+   },
+   {
+    "t": "A Single Man",
+    "y": "2009",
+    "s": "a-single-man",
+    "f": "29035",
+    "k": "2a7ca9ee",
+    "pc": 1
+   },
+   {
+    "t": "Mon Oncle",
+    "y": "1958",
+    "s": "mon-oncle",
+    "f": "51668",
+    "k": "2fa2ff71",
+    "pc": 1
+   },
+   {
+    "t": "The Great Gatsby",
+    "y": "2013",
+    "s": "the-great-gatsby-2013",
+    "f": "285",
+    "k": "29136c6c",
+    "p": "https://m.media-amazon.com/images/M/MV5BMTkxNTk1ODcxNl5BMl5BanBnXkFtZTcwMDI1OTMzOQ@@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
+   {
+    "t": "The Brutalist",
+    "y": "2024",
+    "s": "the-brutalist",
+    "f": "478428",
+    "k": "deaf6908",
+    "pc": 1
+   },
+   {
+    "t": "Rear Window",
+    "y": "1954",
+    "s": "rear-window",
+    "f": "51552",
+    "k": "fa9e4cc9",
+    "pc": 1
+   },
+   {
+    "t": "Roman Holiday",
+    "y": "1953",
+    "s": "roman-holiday",
+    "f": "51348",
+    "k": "158c8121",
+    "pc": 1
+   },
+   {
+    "t": "Rebel Without a Cause",
+    "y": "1955",
+    "s": "rebel-without-a-cause",
+    "f": "51835",
+    "k": "cc72d406",
+    "pc": 1
+   },
+   {
+    "t": "Paris, Texas",
+    "y": "1984",
+    "s": "paris-texas",
+    "f": "51469",
+    "k": "a82a3526",
+    "pc": 1
+   },
+   {
+    "t": "The Wizard of Oz",
+    "y": "1939",
+    "s": "the-wizard-of-oz-1939",
+    "f": "51494",
+    "k": "e8bad426",
+    "pc": 1
+   },
+   {
+    "t": "Gentlemen Prefer Blondes",
+    "y": "1953",
+    "s": "gentlemen-prefer-blondes",
+    "f": "51393",
+    "k": "fb901135",
+    "pc": 1
+   },
+   {
+    "t": "The Grandmother",
+    "y": "1970",
+    "s": "the-grandmother",
+    "f": "20673",
+    "k": "7bd616ba",
+    "p": "https://m.media-amazon.com/images/M/MV5BN2E5YjhmN2ItMDI1NC00YzEzLWI4OGUtY2ViZTNkZjNlNzMyXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
+   {
+    "t": "Early Experiments",
+    "y": "2008",
+    "s": "early-experiments",
+    "f": "464888",
+    "k": "6c9cace2",
+    "pc": 1
+   },
+   {
+    "t": "Mulholland Dr.",
+    "y": "1999",
+    "s": "mulholland-dr-1999",
+    "f": "134363",
+    "k": "11685580",
+    "p": "https://m.media-amazon.com/images/M/MV5BNjA1NGRjM2UtOGM2Zi00MDM0LTkwMGMtODRhNWQ2ZTkwNWMzXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
+   {
+    "t": "Dune",
+    "y": "2021",
+    "s": "dune-2021",
+    "f": "371378",
+    "k": "e7158565",
+    "p": "https://m.media-amazon.com/images/M/MV5BNWIyNmU5MGYtZDZmNi00ZjAwLWJlYjgtZTc0ZGIxMDE4ZGYwXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
+   {
+    "t": "Alphaville",
+    "y": "1965",
+    "s": "alphaville",
+    "f": "47893",
+    "k": "53e627ce",
+    "pc": 1
+   },
+   {
+    "t": "Tenebre",
+    "y": "1982",
+    "s": "tenebre",
+    "f": "32623",
+    "k": "859afebe",
+    "pc": 1
+   },
+   {
+    "t": "Gattaca",
+    "y": "1997",
+    "s": "gattaca",
+    "f": "51370",
+    "k": "5cac010a",
+    "pc": 1
+   },
+   {
+    "t": "Videodrome",
+    "y": "1983",
+    "s": "videodrome",
+    "f": "51315",
+    "k": "b24d477f",
+    "pc": 1
+   },
+   {
+    "t": "In the Mouth of Madness",
+    "y": "1994",
+    "s": "in-the-mouth-of-madness",
+    "f": "50166",
+    "k": "d49bfd50",
+    "pc": 1
+   },
+   {
+    "t": "On the Silver Globe",
+    "y": "1988",
+    "s": "on-the-silver-globe",
+    "f": "34824",
+    "k": "b1b7d273",
+    "pc": 1
+   },
+   {
+    "t": "The Spirit of the Beehive",
+    "y": "1973",
+    "s": "the-spirit-of-the-beehive",
+    "f": "49296",
+    "k": "981688f6",
+    "pc": 1
+   },
+   {
+    "t": "Kite",
+    "y": "1998",
+    "s": "kite",
+    "f": "40032",
+    "k": "118f4ae6",
+    "pc": 1
+   },
+   {
+    "t": "Paranoia Agent",
+    "y": "2004",
+    "s": "paranoia-agent",
+    "f": "520304",
+    "k": "7440c9b9",
+    "pc": 1
+   },
+   {
+    "t": "What Lies Beneath",
+    "y": "2000",
+    "s": "what-lies-beneath",
+    "f": "50165",
+    "k": "492d937a",
+    "pc": 1
+   },
+   {
+    "t": "Deep Red",
+    "y": "1975",
+    "s": "deep-red",
+    "f": "39219",
+    "k": "5af42793",
+    "pc": 1
+   },
+   {
+    "t": "Stoker",
+    "y": "2013",
+    "s": "stoker",
+    "f": "73371",
+    "k": "ae8ac6d3",
+    "pc": 1
+   },
+   {
+    "t": "It",
+    "y": "1990",
+    "s": "it-1990",
+    "f": "50156",
+    "k": "854054aa",
+    "p": "https://m.media-amazon.com/images/M/MV5BZDFhODExOTctNTFkZS00NjE1LWE2MWMtY2Q1ZThhMGY5NjJkXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
+   {
+    "t": "Inferno",
+    "y": "1980",
+    "s": "inferno-1980",
+    "f": "41588",
+    "k": "241d60ac",
+    "p": "https://m.media-amazon.com/images/M/MV5BOTEyMTMxZjQtM2FiNi00ZjllLTllMWYtY2FiYTVlYmU1YzhjXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
+   {
+    "t": "In the Eye of the Hurricane",
+    "y": "1971",
+    "s": "in-the-eye-of-the-hurricane",
+    "f": "85057",
+    "k": "ad3c0318",
+    "pc": 1
+   },
+   {
+    "t": "The Substance",
+    "y": "2024",
+    "s": "the-substance",
+    "f": "838140",
+    "k": "f269611b",
+    "pc": 1
+   },
    {
     "t": "Farewell My Concubine",
     "y": "1993",
@@ -3153,7 +3448,7 @@
     "y": "1972",
     "s": "solaris",
     "f": "51528",
-    "k": "e78098c5",
+    "k": "c105b87f",
     "pc": 1
    },
    {
@@ -4690,5 +4985,5 @@
    }
   ]
  },
- "updated": "2026-11-08T16:16:28Z"
+ "updated": "2026-11-11T02:13:22Z"
 }

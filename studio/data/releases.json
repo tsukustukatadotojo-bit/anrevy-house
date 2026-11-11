@@ -1,19 +1,6 @@
 {
  "items": [
   {
-   "d": "2026-11-01",
-   "a": "Liffey Light Orchestra",
-   "w": "Ana Livia",
-   "l": "Legal Records"
-  },
-  {
-   "d": "2026-11-03",
-   "a": "BOM (Miranda! and Lali)",
-   "w": "Bailar o Morir",
-   "g": "Italo disco, dance-pop, house",
-   "l": "Sony Argentina"
-  },
-  {
    "d": "2026-11-04",
    "a": "Yoasobi",
    "w": "Yoasobi 5th Anniversary Dome Live 2024 \"Chō-genjitsu\" at Tokyo Dome",
@@ -41,7 +28,13 @@
    "d": "2026-11-06",
    "a": "Bassvictim",
    "w": "Peace + War",
-   "l": "VOTB"
+   "l": "VOTB, Warner"
+  },
+  {
+   "d": "2026-11-06",
+   "a": "Best Ex",
+   "w": "Good Girl",
+   "l": "Iodine"
   },
   {
    "d": "2026-11-06",
@@ -150,6 +143,7 @@
    "d": "2026-11-06",
    "a": "Hatebreed",
    "w": "Fatal Paradox",
+   "g": "Metalcore, hardcore punk",
    "l": "BlkIIBlk"
   },
   {
@@ -530,6 +524,11 @@
   },
   {
    "d": "2026-11-13",
+   "a": "Kittie",
+   "w": "Oracle XXV"
+  },
+  {
+   "d": "2026-11-13",
    "a": "Krill",
    "w": "Secret Language",
    "l": "Exploding in Sound"
@@ -661,7 +660,144 @@
    "a": "Tomorrow X Together",
    "w": "Perfect Storm",
    "l": "Big Hit Music"
+  },
+  {
+   "d": "2026-11-19",
+   "a": "Angelus Apatrida",
+   "w": "The Reckoning",
+   "l": "Napalm"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Alan Vega",
+   "w": "Live at Max's Kansas City",
+   "l": "Sacred Bones"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Any Given Sin",
+   "w": "Until We Disappear"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Desperate Journalist",
+   "w": "Gilding the Lily",
+   "l": "Fierce Panda"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Disfear",
+   "w": "The Last Nail",
+   "l": "Relapse"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Down",
+   "w": "Volume V",
+   "l": "Nuclear Blast"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Eidola",
+   "w": "The Will to Power",
+   "l": "3DOT Recordings"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Girish and the Chronicles",
+   "w": "Disintegrate"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Joshua Redman",
+   "w": "If Ever You Would Leave Us (We Play for Rollins)",
+   "l": "Blue Note"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Julianna Barwick and Mary Lattimore",
+   "w": "Threshold (Original Motion Picture Score)",
+   "l": "Florid Recordings, Blue Pool Recordings"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Lael Neale",
+   "w": "As Killers Do",
+   "l": "Consensual Sound"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Lambchop",
+   "w": "Demoed"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Lorenzo Senni",
+   "w": "All Ages",
+   "l": "Warp"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Mez",
+   "w": "Electric Future Gangster",
+   "l": "Mass Appeal"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "R.E.M.",
+   "w": "The Black Sessions Revealed",
+   "l": "Craft"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Rammstein",
+   "w": "Live in Mexico City"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Richard Skelton and Lawrence English",
+   "w": "Noon",
+   "l": "Phantom Limb"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Suicide Silence",
+   "w": "Graceless"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Take That",
+   "w": "Dreamers",
+   "l": "EMI"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Then Comes Silence",
+   "w": "Requiem Ballroom"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Thy Catafalque",
+   "w": "XIII: Sárga Erdő",
+   "l": "Season of Mist"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Toro y Moi",
+   "w": "Unusua"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Trivium",
+   "w": "Crown in the Grave",
+   "l": "Roadrunner"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Wolf",
+   "w": "Hour of the Wolf",
+   "l": "Fireflash Records"
   }
  ],
- "updated": "2026-11-08T02:23:50Z"
+ "updated": "2026-11-11T02:13:53Z"
 }
