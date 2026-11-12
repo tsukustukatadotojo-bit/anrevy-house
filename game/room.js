@@ -67,12 +67,12 @@
   wrap.scrollLeft = (wrap.scrollWidth - wrap.clientWidth) * (R.startAt != null ? R.startAt : .5);
   // gợi ý
   const hint = $('#hint');
-  if (hint){ hint.textContent = touch ? (document.body.classList.contains('scrolly') ? 'vuốt ngang để xem cả phòng · chạm vào đồ vật để xem tên, chạm lần nữa để mở' : 'chạm vào đồ vật để xem tên, chạm lần nữa để mở') : 'rê chuột lên đồ vật để xem · bấm để mở trò chơi'; setTimeout(() => hint.classList.add('on'), 900); setTimeout(() => hint.classList.remove('on'), 8000); }
+  if (hint){ hint.textContent = touch ? (document.body.classList.contains('scrolly') ? 'vuốt ngang để xem cả phòng · chạm vào đồ vật để xem tên, chạm lần nữa để mở' : 'chạm vào đồ vật để xem tên, chạm lần nữa để mở') : 'rê chuột lên đồ vật để xem · ' + (R.openHint || 'bấm để mở trò chơi'); setTimeout(() => hint.classList.add('on'), 900); setTimeout(() => hint.classList.remove('on'), 8000); }
 
   /* ---- danh sách tất cả link trong phòng ---- */
   const list = $('#list');
   $('#listBox ol').innerHTML = R.links.map(L => `<li><a href="${esc(L.u)}" target="_blank" rel="noopener"><span><b>${esc(L.n)}</b> <small>— ${esc(L.d)}</small></span></a></li>`).join('');
-  $('#listCount').textContent = R.links.length + ' trò trong phòng · bấm tên để mở ở thẻ mới';
+  $('#listCount').textContent = R.links.length + ' ' + (R.noun || 'trò') + ' trong phòng · bấm tên để mở ở thẻ mới';
   $('#listBtn').addEventListener('click', () => { list.classList.add('open'); const a = list.querySelector('a'); if (a) a.focus({ preventScroll: true }); });
   list.addEventListener('click', e => { if (e.target.closest('[data-close]')){ list.classList.remove('open'); $('#listBtn').focus({ preventScroll: true }); } });
   addEventListener('keydown', e => { if (e.key === 'Escape'){ list.classList.remove('open'); hideTip(); } });

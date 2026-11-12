@@ -68,12 +68,17 @@
   const MAX_PEOPLE = 10;                    // gọi thoại kiểu mạng lưới: tối đa 10 người
   const HEAR_FULL = 620, HEAR_MAX = 1080;   // khoảng cách nghe rõ / hết nghe (đơn vị bản đồ)
   const EXIT_HREF = '../login.html';                // rời Lounge Map → về trang nhập mật khẩu của Anrevy House
+  const UP_HREF = 'red/';                           // cầu thang → tầng 2 (The Red Room), không phải nhập lại tên & nhân vật
   let BROKERS = ['wss://broker.emqx.io:8084/mqtt', 'wss://test.mosquitto.org:8081/mqtt'];
   const ICE = [{ urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302', 'stun:stun.cloudflare.com:3478'] }];
   /* ============================ */
 
   const qs = new URLSearchParams(location.search);
   if (qs.get('broker')) BROKERS = qs.get('broker').split(',');
+  // đi cầu thang giữa tầng 1 (Lounge Map) và tầng 2 (Red Room): để lại "vé" trong phiên, trang bên kia tự vào luôn
+  function hopSet(to){ try { sessionStorage.setItem('lounge-hop', JSON.stringify({ to, at: Date.now() })); } catch (e) {} }
+  function hopTake(here){ try { const h = JSON.parse(sessionStorage.getItem('lounge-hop') || 'null'); sessionStorage.removeItem('lounge-hop'); if (h && h.to === here && Date.now() - h.at < 90000) return h; } catch (e) {} return null; }
+  const HOP = hopTake('map');
   if (qs.get('awayms')) AWAY_KICK_MS = Math.max(2000, Math.min(AWAY_KICK_MS, +qs.get('awayms') || AWAY_KICK_MS));
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const rid = (n = 10) => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => (b % 36).toString(36)).join('');
@@ -93,14 +98,14 @@
 
   /* ================= TRẠNG THÁI ================= */
   const peers = new Map();
-  let self = null, inside = false, leaving = false, seatPending = -1, actPending = null, clock = 0, marker = null;
+  let self = null, inside = false, leaving = false, seatPending = -1, actPending = null, clock = 0, marker = null, fromStairs = false;
   let extras = { at: 0 };
   const locks = {};
   const freshPeers = () => [...peers.values()].filter(p => Date.now() - p.seen < 45000);
 
   /* ================= THẾ GIỚI ================= */
   const K = {
-    rr, toast, claimSeat, approach, setExtras, toggleLock, openMap, note, sound, leaveTo,
+    rr, toast, claimSeat, approach, setExtras, toggleLock, openMap, note, sound, leaveTo, upstairs: () => upstairs(),
     lockOn: room => lockOn(room), occupant: i => occupant(i), toggleMusic: () => toggleMusic(),
     publishFx: d => pub(T_FX, Object.assign({ from: me }, d)),
     get extras(){ return extras; }, get self(){ return self; }, get inside(){ return inside; }, get clock(){ return clock; }, get soundOn(){ return soundOn; }, me
@@ -639,16 +644,18 @@
     if (!micOk) toast('Không dùng được micro — bạn vẫn nghe được mọi người và nhắn tin được.', true);
     localAn = localStream ? analyser(localStream) : null;
     startCapture();
-    self = { id: me, name, col: prof.col, hat: prof.hat, x: SPAWN.x + Math.round(Math.random() * 60 - 30), y: SPAWN.y, tx: SPAWN.x, ty: SPAWN.y, ph: Math.random() * 6, face: 1, mic: !!localStream, away: false, speaking: 0, moving: false, seat: -1, zs: null };
+    const sp = fromStairs ? MAP.STAIRS_TO : SPAWN;
+    self = { id: me, name, col: prof.col, hat: prof.hat, x: sp.x + Math.round(Math.random() * (fromStairs ? 16 : 60) - (fromStairs ? 8 : 30)), y: sp.y, tx: sp.x, ty: sp.y, ph: Math.random() * 6, face: 1, mic: !!localStream, away: false, speaking: 0, moving: false, seat: -1, zs: null };
     trackZone(self);
     inside = true; leaving = false; enteredAt = Date.now(); exitArmed = false; document.body.classList.add('inside');
     clients.forEach(c => { if (c.connected) c.subscribe(T_AUD, { qos: 0 }); });
-    goTo(MAP.ENTER_TO.x + Math.round(Math.random() * 80 - 40), MAP.ENTER_TO.y);
+    if (!fromStairs) goTo(MAP.ENTER_TO.x + Math.round(Math.random() * 80 - 40), MAP.ENTER_TO.y);
     publishPresence();
     freshPeers().forEach(p => { ensurePeer(p.id); sendKey(p.id); });
     micUI(); ui(); musicDuck(); hearTick();
     try { history.pushState({ loungeMap: 1 }, ''); } catch (e) {}
     $('#room').focus({ preventScroll: true });
+    if (fromStairs){ fromStairs = false; toast('Đã xuống tầng 1 · cầu thang cạnh bể bơi.'); return; }
     toast(connectedCount ? (TOUCH ? 'Đã vào Lounge Map. Kéo nút tròn để đi, chạm vào đồ vật để dùng.' : 'Đã vào Lounge Map. Bấm xuống sàn hoặc dùng phím mũi tên để đi.') : 'Chưa kết nối được máy chủ — bạn đang đi dạo một mình.', !connectedCount);
   }
   function leave(reason){
@@ -664,6 +671,8 @@
     musicDuck(); ui();
     if (reason){ gErr.textContent = reason; toast(reason, true); }
   }
+  // cầu thang: rời cuộc gọi tầng 1 rồi lên thẳng Red Room (tầng 2)
+  function upstairs(){ if (!inside || leaving) return; hopSet('red'); toast('Đang lên tầng 2…'); leaveTo(UP_HREF, true); }
   function leaveTo(href, fade){
     leaving = true; leave();
     if (location.search.includes('broker=') && !href.includes('?')) href += location.search;
@@ -1064,5 +1073,15 @@
 
   /* ================= KHỞI ĐỘNG ================= */
   ui(); connectNet();
+  // vừa đi cầu thang từ tầng 2 xuống: vào luôn bằng tên & nhân vật cũ, đứng ở chân cầu thang
+  if (HOP && prof.name){
+    fromStairs = true; $('#fade').classList.add('on');
+    const go = async () => { await enter(); $('#fade').classList.remove('on'); if (!inside) fromStairs = false; };
+    if (document.body.classList.contains('portrait')){
+      $('#fade').classList.remove('on'); gErr.textContent = 'Xoay ngang điện thoại để quay lại tầng 1.';
+      const onTurn = () => setTimeout(() => { if (!inside && fromStairs && !document.body.classList.contains('portrait')){ removeEventListener('resize', onTurn); go(); } }, 120);
+      addEventListener('resize', onTurn);
+    } else setTimeout(go, 60);
+  }
   window.__lounge = { me, peers, pcs, get inside(){ return inside; }, get self(){ return self; }, get connected(){ return connectedCount; }, get extras(){ return extras; }, locks, lockOn, enter, leave, setMic, claimSeat, setExtras, dbg, linkMode, needRelay, hearVol, zoneAt, ZONES, DOORS, SEATS, HOTS: ALLHOTS, blocked, MAP, joy, get view(){ return view; }, get tilesMade(){ return tilesMade; }, openMap, closeMap, toggleLock, goTo, screen: (x, y) => ({ x: view.ox + x * view.s, y: view.oy + y * view.s }), test: { clients } };
 })();

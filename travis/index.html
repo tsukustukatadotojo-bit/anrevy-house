@@ -879,18 +879,18 @@
   place(neon('RECORDS', '#ffb15c', 4, 1.25, 96), -XW + .05, 8.3, -9, Math.PI / 2);
   place(neon('KICKS', '#e8cfa6', 2.6, .82, 96), XW - .05, 4.6, SZ0 + 1.8, -Math.PI / 2);
   place(neon('AWARDS', '#ffd27a', 2.6, .82, 90), -XW + .05, 3.6, -1.2, Math.PI / 2);
-  place(neon('EXIT · JAZZ CLUB', '#ff7aa8', 3, .94, 80), 0, 4.1, ZB - .06, Math.PI);
+  place(neon('EXIT · HOME', '#ff7aa8', 3, .94, 80), 0, 4.1, ZB - .06, Math.PI);
   place(neon('PHOTOS', '#ffd2a0', 2.6, .8, 90), -XW + .05, 5.6, 6.2, Math.PI / 2);
   neonImg('sig', 3.6, '#ffb15c', -XW + .07, 7.7, 5.6, Math.PI / 2);
   neonImg('cj', 5.2, '#ff6a1a', 9.0, 7.0, ZB - .07, Math.PI);
 
-  /* ---------- tường sau: cửa về Jazz Club + poster ---------- */
+  /* ---------- tường sau: cửa về Anrevy House + poster ---------- */
   const doorTex = cTex(256, 420, (g, w, h) => {
     g.fillStyle = '#3a2214'; g.fillRect(0, 0, w, h);
     for (let x = 0; x < w; x += 12){ g.fillStyle = x % 24 ? 'rgba(0,0,0,.12)' : 'rgba(255,200,150,.05)'; g.fillRect(x, 0, 12, h); }
     g.strokeStyle = '#1a0e08'; g.lineWidth = 6; g.strokeRect(28, 30, w - 56, 150); g.strokeRect(28, 214, w - 56, 170);
     g.fillStyle = '#e2b84e'; g.fillRect(52, 240, w - 104, 46);
-    g.fillStyle = '#2a1006'; g.textAlign = 'center'; fit(g, 'JAZZ CLUB', w - 124, 34, ANTON); g.fillText('JAZZ CLUB', w / 2, 276);
+    g.fillStyle = '#2a1006'; g.textAlign = 'center'; fit(g, 'ANREVY HOUSE', w - 124, 34, ANTON); g.fillText('ANREVY HOUSE', w / 2, 276);
     g.fillStyle = '#e2b84e'; g.beginPath(); g.arc(w - 40, 230, 10, 0, Math.PI * 2); g.fill();
   });
   texts.push(doorTex);

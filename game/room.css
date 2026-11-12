@@ -1,4 +1,4 @@
-/* ===== PHẦN CHUNG CHO 5 PHÒNG GAME VẼ TAY (cyber, space, vapor, solar, dark) ===== */
+/* ===== PHẦN CHUNG CHO CÁC PHÒNG VẼ TAY TRONG GAME ROOM (cyber, space, vapor, solar, dark, cinema) ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--bg,#000);color:var(--ink,#fff);-webkit-tap-highlight-color:transparent}
 button{font:inherit;color:inherit}

@@ -65,6 +65,8 @@
   .go:hover,.go:focus-visible{filter:brightness(1.08);outline:none}
   .go:active{transform:translateY(2px);box-shadow:0 2px 0 #8a6414}
   .go[disabled]{opacity:.55;cursor:wait}
+  .gback{display:block;margin-top:12px;text-align:center;font-weight:600;font-size:14px;color:var(--dim);text-decoration:none;letter-spacing:.04em}
+  .gback:hover,.gback:focus-visible{color:#fff;text-decoration:underline}
   .note{margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--dim);text-align:center}
   .shake{animation:shake .4s}
   @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
@@ -85,7 +87,7 @@
   .tapaudio{position:fixed;z-index:85;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:none}
   .tapaudio.on{display:block}
 
-  /* ===== MÀN HÌNH NHẠC JAZZ ===== */
+  /* ===== MÀN HÌNH NHẠC ===== */
   .tv{--tvw:clamp(170px,17vw,240px);position:fixed;z-index:35;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));
     width:var(--tvw);overflow:hidden;border-radius:10px;background:rgba(16,8,6,.92);border:1.5px solid var(--gold);box-shadow:0 0 14px rgba(226,184,78,.35);font-family:'VT323',monospace}
   .tv-bar{display:flex;align-items:center;gap:4px;padding:3px 4px 3px 9px;font-size:15px;line-height:1;letter-spacing:.08em}

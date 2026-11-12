@@ -135,8 +135,8 @@
   <div class="tap" id="tap">chạm vào màn hình ▼</div>
   <button class="skip" id="skip" aria-label="Bỏ qua đoạn mở đầu">BỎ QUA ›</button>
 
-  <!-- SẢNH 6 CỬA -->
-  <main class="hub" id="hub" hidden aria-label="Sảnh trò chơi với 6 cánh cửa">
+  <!-- SẢNH 7 CỬA -->
+  <main class="hub" id="hub" hidden aria-label="Sảnh trò chơi với 7 cánh cửa">
     <div class="hub-in" id="hubIn">
       <canvas id="hubCv" aria-hidden="true"></canvas>
       <div id="doors"></div>
@@ -172,7 +172,7 @@
     'Chợp mắt chút đi, còn lâu mới đến'
   ];
   const LINE_ARRIVE = 'Đến nơi rồi, tự do trải nghiệm nhé';
-  // 6 cánh cửa (không ghi tên, chỉ khác màu) → 6 phòng game
+  // 7 cánh cửa (không ghi tên, chỉ khác màu) → 6 phòng game + phòng chiếu phim (cửa xám ở giữa tường cuối)
   const DOORS = [
     { href: 'cyber/',  col: '#ff2a6d' },
     { href: 'space/',  col: '#18e0ff' },
@@ -180,6 +180,7 @@
     { href: 'vapor/',  col: '#ff9ce6' },
     { href: 'solar/',  col: '#4fe08a' },
     { href: 'dark/',   col: '#9a5cff' },
+    { href: 'cinema/', col: '#a7adb5' },
   ];
   /* ======================= */
 
@@ -346,16 +347,17 @@
   skipBtn.addEventListener('click', e => { e.stopPropagation(); stopIntro(); showHub(); });
   replay.addEventListener('click', () => { lids.style.opacity = '1'; history.replaceState(null, '', location.pathname); intro(); });
 
-  /* ================= SẢNH 6 CỬA (vẽ phối cảnh, thảm đỏ, tường đèn nháy) ================= */
+  /* ================= SẢNH 7 CỬA (vẽ phối cảnh, thảm đỏ, tường đèn nháy) ================= */
   const hc = $('#hubCv'), hx = hc.getContext('2d'), doorsEl = $('#doors');
   let HW = 0, HH = 0, HF = 1, HCY = 0, hubOn = false, opening = null, hoverDoor = -1;
   const CAM = { x: 0, y: 1.6, z: 2.6 };
   const RW = 3.1, RH = 3.6, ZB = -12;   // nửa bề ngang hành lang, trần, tường cuối
-  // cửa: 2 bên trái, 2 bên phải, 2 ở tường cuối
+  // cửa: 2 bên trái, 2 bên phải, 3 ở tường cuối (cửa xám ở giữa)
   const DPOS = [
     { side: -1, z: -3.2 }, { side: 1, z: -3.2 },
     { side: -1, z: -7.4 }, { side: 1, z: -7.4 },
-    { back: true, x: -1.15 }, { back: true, x: 1.15 },
+    { back: true, x: -1.9 }, { back: true, x: 1.9 },
+    { back: true, x: 0 },
   ];
   const DW = 1.25, DH = 2.5;
   function P(x, y, z){ const dz = CAM.z - z; if (dz < .05) return null; return [HW / 2 + HF * (x - CAM.x) / dz, HCY - HF * (y - CAM.y) / dz, dz]; }
@@ -426,7 +428,7 @@
     // tường cuối
     q = Q([[-RW, 0, ZB], [RW, 0, ZB], [RW, RH, ZB], [-RW, RH, ZB]]);
     if (q){ poly(q); const g = hx.createLinearGradient(0, q[2][1], 0, q[0][1]); g.addColorStop(0, '#140726'); g.addColorStop(1, '#2a0a2e'); hx.fillStyle = g; hx.fill();
-      for (let xi = 0; xi < 12; xi++) for (let yi = 0; yi < 7; yi++){ const x0 = -RW + .1 + xi * .5, y0 = .35 + yi * .46; if (Math.abs(x0 + .2) < 2.0 && y0 < DH + .25) continue; const c = Q([[x0, y0, ZB + .01], [x0 + .44, y0, ZB + .01], [x0 + .44, y0 + .4, ZB + .01], [x0, y0 + .4, ZB + .01]]); if (!c) continue; const col = LED[(xi + yi + Math.floor(beat / 3)) % LED.length]; poly(c); hx.fillStyle = hex2(col, hashf(xi, yi, beat) > .5 ? .75 : .1); hx.fill(); } }
+      for (let xi = 0; xi < 12; xi++) for (let yi = 0; yi < 7; yi++){ const x0 = -RW + .1 + xi * .5, y0 = .35 + yi * .46; if (y0 < DH + .25 && DPOS.some(d => d.back && x0 < d.x + DW / 2 + .06 && x0 + .44 > d.x - DW / 2 - .06)) continue; const c = Q([[x0, y0, ZB + .01], [x0 + .44, y0, ZB + .01], [x0 + .44, y0 + .4, ZB + .01], [x0, y0 + .4, ZB + .01]]); if (!c) continue; const col = LED[(xi + yi + Math.floor(beat / 3)) % LED.length]; poly(c); hx.fillStyle = hex2(col, hashf(xi, yi, beat) > .5 ? .75 : .1); hx.fill(); } }
     // sàn tối + thảm đỏ chạy giữa
     q = Q([[-RW, 0, NZ], [RW, 0, NZ], [RW, 0, ZB], [-RW, 0, ZB]]); if (q){ poly(q); hx.fillStyle = '#120a10'; hx.fill(); }
     q = Q([[-RW + .15, 0, NZ], [RW - .15, 0, NZ], [RW - .15, 0, ZB], [-RW + .15, 0, ZB]]);

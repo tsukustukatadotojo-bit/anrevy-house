@@ -33,7 +33,7 @@ window.LOUNGE_MAP = function (K) {
   zone('corridor', 'Lối hành lang mở', 'hall', R4(1240, 655, 1330, 1075), { floor: 'marble', paper: '#d8ccb4' });
   zone('poolpath', 'Lối đi ra bể bơi', 'hall', R4(1330, 655, 1445, 985), { floor: 'paver', paper: '#d8ccb4' });
   zone('smallhall', 'Sảnh nhỏ', 'hall', R4(1240, 430, 1445, 655), { floor: 'marble', paper: '#d8ccb4' });
-  zone('stairs', 'Lối thang bộ lên tầng 2', 'hall', R4(1445, 490, 1715, 560), { floor: 'marble', paper: '#d8ccb4' });
+  zone('stairs', 'Cầu thang lên tầng 2 · Red Room', 'hall', R4(1445, 490, 1715, 560), { floor: 'marble', paper: '#d8ccb4' });
   zone('pool', 'Bể bơi', 'room', R4(1445, 560, 1715, 985), { floor: 'deck', paper: '#bfe0e6' });
   zone('music', 'Phòng nhạc', 'room', R4(1715, 655, 1890, 985), { floor: 'carpet', paper: '#5a1a1e' });
   zone('bed01', 'Phòng ngủ 01 (Tùng)', 'room', R4(1445, 205, 1760, 490), { lock: true, floor: 'carpet', paper: '#6a1a1e' });
@@ -562,7 +562,7 @@ window.LOUNGE_MAP = function (K) {
   Plant(1428, 638, .85);
   /* --- Cầu thang lên tầng 2 --- */
   { const x = X(1520), y = Y(518), w = X(1708) - x, h = Y(556) - y; bg(bbx(x, y, x + w, y + h), g => dStairs(g, x, y, w, h)); obR(x, y, x + w, y + h);
-    act([x, y, x + w, y + h], x - 50, y + h / 2, 'Lên tầng 2', () => K.toast('Tầng 2 đang được xây, quay lại sau nhé 🚧'), { rad: 120 }); }
+    act([x, y, x + w, y + h], x - 50, y + h / 2, 'Lên tầng 2 · Red Room', () => K.upstairs(), { rad: 120 }); }
   /* --- Bể bơi --- */
   { const x = X(1515), y = Y(650), w = X(1645) - x, h = Y(880) - y;
     bg(bbx(x, y, x + w, y + h, 20), g => { fillRR(g, x - 12, y - 12, w + 24, h + 24, 14, '#f2ead8'); const gr = g.createLinearGradient(0, y, 0, y + h); gr.addColorStop(0, '#5ec6e6'); gr.addColorStop(1, '#2a8ab8'); g.fillStyle = gr; rr(g, x, y, w, h, 8); g.fill(); g.strokeStyle = '#1a6a90'; g.lineWidth = 3; rr(g, x, y, w, h, 8); g.stroke();
@@ -924,6 +924,7 @@ window.LOUNGE_MAP = function (K) {
     W, H, T, FACE, ZONES, ZI, zoneAt, GAPS, DOORS, HW, VW, DW, OB, SEATS, HOTS, PROPS, DYN, EXIT,
     BOUND: { x0: X(45), y0: Y(42), x1: X(1955), y1: Y(1515) },
     SPAWN: { x: X(1177), y: Y(1408) }, ENTER_TO: { x: X(1177), y: Y(1330) }, VIEW0: { x: X(1170), y: Y(1150) },
+    STAIRS_TO: { x: X(1520) - 56, y: Math.round((Y(518) + Y(556)) / 2) },     // chân cầu thang: chỗ đứng khi từ tầng 2 xuống
     links: [['entry', 'garden'], ['pond', 'garden']],
     drawStatic, drawDoor, overlay, drawMap, onFx,
     onSeat: i => { const s = SEATS[i]; if (s.onSit) s.onSit(); },

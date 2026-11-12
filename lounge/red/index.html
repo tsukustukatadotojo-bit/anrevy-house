@@ -711,13 +711,15 @@
   window.ROOM = {
     key: 'red',
     prefix: 'anrevy-house-9q2/red/v1',
-    title: 'THE RED ROOM', sub: 'căn phòng ấm áp sau bức tranh đỏ · gọi thoại cùng nhau', tvName: 'red.fm',
-    links: [['← JAZZ CLUB', '../../jazz/'], ['⌂ ANREVY HOUSE', '../../home.html']],
-    exitHref: '../../jazz/',
-    leaveHref: '../../jazz/',       // nút "Rời phòng" → ra hẳn Jazz Club
+    title: 'THE RED ROOM', sub: 'tầng 2 của Lounge Map · căn phòng ấm áp sau bức tranh đỏ', tvName: 'red.fm',
+    links: [['↓ XUỐNG TẦNG 1', '../']],
+    exitHref: '../',                // đi ra cửa phía dưới → xuống tầng 1 (Lounge Map), đứng ở chân cầu thang
+    leaveHref: '../',               // nút "Rời phòng" → cũng xuống tầng 1
+    hop: { here: 'red', back: 'map', href: '../' },   // tầng 2 của Lounge Map: chỉ lên bằng cầu thang, không chọn lại tên & nhân vật
     music: 'mM1dIwGO00w', volIn: 28,
     outside: '#120806',
-    welcome: 'Đã vào phòng. Bấm giường để nằm, bấm cửa sổ để mở, ngồi ghế ngắm trăng. Cửa bên phải dẫn sang phòng tắm (bấm đèn trên gương hoặc công tắc ĐÈN để tắt/bật đèn phòng tắm).',
+    leaveLabel: 'Xuống tầng 1',
+    welcome: 'Đã lên tầng 2. Bấm giường để nằm, bấm cửa sổ để mở, ngồi ghế ngắm trăng. Cửa bên phải dẫn sang phòng tắm (bấm đèn trên gương hoặc công tắc ĐÈN để tắt/bật đèn phòng tắm). Đi ra cửa phía dưới để xuống tầng 1.',
     seatFull: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.',
     seatFullBy: { bed: 'Giường chỉ đủ chỗ cho 2 người nằm thôi.', chair1: 'Ghế này có người ngồi rồi.', chair2: 'Ghế này có người ngồi rồi.', tub: 'Bồn tắm chỉ đủ chỗ cho 2 người thôi.', wc: 'Nhà vệ sinh đang có người.' },
     W, H, FL, DOOR,

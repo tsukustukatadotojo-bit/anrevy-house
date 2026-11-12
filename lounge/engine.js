@@ -6,6 +6,13 @@
 (() => {
   const R = window.ROOM;
   const $ = s => document.querySelector(s);
+  // phòng nằm trong một bản đồ lớn hơn (R.hop: Red Room = tầng 2 của Lounge Map): chỉ vào được bằng cầu thang,
+  // đi cầu thang thì không phải nhập lại tên & nhân vật — trang hai bên để lại "vé" trong phiên cho nhau
+  function hopSet(to){ try { sessionStorage.setItem('lounge-hop', JSON.stringify({ to, at: Date.now() })); } catch (e) {} }
+  function hopTake(here){ try { const h = JSON.parse(sessionStorage.getItem('lounge-hop') || 'null'); sessionStorage.removeItem('lounge-hop'); if (h && h.to === here && Date.now() - h.at < 90000) return h; } catch (e) {} return null; }
+  const HOP = R.hop ? hopTake(R.hop.here) : null;
+  const isHopHref = href => { try { return !!R.hop && new URL(href, location.href).pathname === new URL(R.hop.href, location.href).pathname; } catch (e) { return false; } };
+  if (R.hop && !HOP){ location.replace(R.hop.href + (location.search.includes('broker=') ? location.search : '')); return; }
 
   /* ---------- dựng giao diện ---------- */
   const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -29,7 +36,7 @@
         <input class="field" id="pwIn" type="password" maxlength="32" placeholder="nhập mật khẩu người khoá phòng đã đặt" autocomplete="off">
       </div>
       <p class="err" id="gErr" role="alert"></p>
-      <button class="go" id="goBtn" type="submit">Vào phòng</button>
+      <button class="go" id="goBtn" type="submit">Vào phòng</button>${R.hop ? `<a class="gback" href="${esc(R.hop.href)}" data-leave>↓ ${esc(R.hop.label || 'Xuống tầng 1')}</a>` : ''}
       <p class="note">Trang sẽ xin quyền dùng micro để nói chuyện. Khi đang nói chuyện bạn phải ở lại trang này: rời trang thì micro tự tắt, rời quá 60 giây thì cuộc gọi bị ngắt. Nên dùng tai nghe để tiếng không bị vọng.</p>
     </form>
   </div>
@@ -38,7 +45,7 @@
     <button class="btn" id="lockBtn" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path id="shackle" d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="t" id="lockT">Khoá phòng</span></button>
     <button class="btn" id="chatBtn" aria-label="Nhắn tin" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
     <form class="chat" id="chat"><input id="chatIn" maxlength="140" placeholder="Nhắn gì đó… (Enter)" aria-label="Tin nhắn"><button class="btn" type="submit" aria-label="Gửi">➤</button></form>
-    <button class="btn" id="leaveBtn" aria-label="Rời phòng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h10"/></svg><span class="t">Rời phòng</span></button>
+    <button class="btn" id="leaveBtn" aria-label="${esc(R.leaveLabel || 'Rời phòng')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h10"/></svg><span class="t">${esc(R.leaveLabel || 'Rời phòng')}</span></button>
   </div>
   <div class="modal" id="lockModal" role="dialog" aria-modal="true" aria-labelledby="lmTitle">
     <form class="card" id="lockForm" autocomplete="off">
@@ -726,14 +733,15 @@
     if (reason) { gErr.textContent = reason; }
   }
   function leaveTo(href, fade){
+    if (isHopHref(href)) hopSet(R.hop.back);
     leaving = true; leave();
     if (location.search.includes('broker=') && !href.includes('?')) href += location.search;   // giữ cấu hình khi chạy thử
     if (fade){ $('#fade').classList.add('on'); setTimeout(() => { location.href = href; }, 650); }
     else setTimeout(() => { location.href = href; }, 160);
   }
-  document.querySelectorAll('[data-leave]').forEach(a => a.addEventListener('click', e => { if (!inside) return; e.preventDefault(); leaveTo(a.href); }));
+  document.querySelectorAll('[data-leave]').forEach(a => a.addEventListener('click', e => { if (!inside){ if (isHopHref(a.href)) hopSet(R.hop.back); if (location.search.includes('broker=') && !a.href.includes('?')) a.href += location.search; return; } e.preventDefault(); leaveTo(a.href); }));
   $('#gateForm').addEventListener('submit', e => { e.preventDefault(); enter(); });
-  // nút "Rời phòng": rời cuộc gọi rồi ra thẳng trang khai báo (Jazz Club), không quay lại màn chọn nhân vật
+  // nút "Rời phòng": rời cuộc gọi rồi ra thẳng trang khai báo (Red Room: xuống tầng 1 Lounge Map), không quay lại màn chọn nhân vật
   $('#leaveBtn').addEventListener('click', () => { if (R.leaveHref) leaveTo(R.leaveHref, true); else leave(); });
   addEventListener('beforeunload', e => { if (inside && !leaving){ e.preventDefault(); e.returnValue = ''; } });
   addEventListener('pagehide', () => { if (inside){ pub(T_P + me, null, true); pub(T_BYE, { id: me }); } });
@@ -1021,5 +1029,17 @@
   /* ================= KHỞI ĐỘNG ================= */
   ui(); connectNet();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintPicker);
+  // vừa đi cầu thang lên: vào luôn bằng tên & nhân vật cũ (đợi đọc xong trạng thái khoá phòng để không lọt vào phòng đang khoá)
+  if (HOP && prof.name){
+    $('#fade').classList.add('on');
+    (async () => {
+      for (let i = 0; i < 80 && !(connectedCount && stateKnown); i++) await new Promise(r => setTimeout(r, 100));
+      if (!connectedCount){ $('#fade').classList.remove('on'); gErr.textContent = 'Chưa kết nối được tới phòng — bấm “Vào phòng” để thử lại.'; return; }
+      $('#name').value = prof.name;
+      if (lockOn()){ $('#fade').classList.remove('on'); setTimeout(() => $('#pwIn').focus({ preventScroll: true }), 50); return; }   // phòng đang khoá: hỏi mật khẩu, không báo lỗi
+      await enter();
+      $('#fade').classList.remove('on');
+    })();
+  }
   window.__lounge = { me, peers, pcs, get inside(){ return inside; }, get state(){ return roomState; }, get self(){ return self; }, get connected(){ return connectedCount; }, get extras(){ return extras; }, lockOn, enter, leave, setMic, claimSeat, setExtras, dbg, linkMode, needRelay, get relayTx(){ return relayTx; }, get relayRx(){ return relayRx; }, hot: HOT, screen: (x, y) => ({ x: view.ox + x * view.s, y: view.oy + y * view.s }), test: { pubState: st => pub(T_STATE, st, true), clients } };
 })();
