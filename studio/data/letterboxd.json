@@ -796,8 +796,8 @@
     "s": "hiroshima-mon-amour",
     "f": "48800",
     "k": "6c1bc925",
-    "p": "https://m.media-amazon.com/images/M/MV5BMzY2NTA1MzUwN15BMl5BanBnXkFtZTgwOTc4NTU4MjE@._V1_QL75_UX150_.jpg",
-    "pc": 1
+    "pc": 1,
+    "p": "https://m.media-amazon.com/images/M/MV5BMzY2NTA1MzUwN15BMl5BanBnXkFtZTgwOTc4NTU4MjE@._V1_QL75_UX150_.jpg"
    },
    {
     "t": "Do the Right Thing",
@@ -837,8 +837,8 @@
     "s": "the-great-gatsby-2013",
     "f": "285",
     "k": "29136c6c",
-    "p": "https://m.media-amazon.com/images/M/MV5BMTkxNTk1ODcxNl5BMl5BanBnXkFtZTcwMDI1OTMzOQ@@._V1_QL75_UX150_.jpg",
-    "pc": 1
+    "pc": 1,
+    "p": "https://m.media-amazon.com/images/M/MV5BMTkxNTk1ODcxNl5BMl5BanBnXkFtZTcwMDI1OTMzOQ@@._V1_QL75_UX150_.jpg"
    },
    {
     "t": "The Brutalist",
@@ -902,8 +902,8 @@
     "s": "the-grandmother",
     "f": "20673",
     "k": "7bd616ba",
-    "p": "https://m.media-amazon.com/images/M/MV5BN2E5YjhmN2ItMDI1NC00YzEzLWI4OGUtY2ViZTNkZjNlNzMyXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
-    "pc": 1
+    "pc": 1,
+    "p": "https://m.media-amazon.com/images/M/MV5BN2E5YjhmN2ItMDI1NC00YzEzLWI4OGUtY2ViZTNkZjNlNzMyXkEyXkFqcGc@._V1_QL75_UX150_.jpg"
    },
    {
     "t": "Early Experiments",
@@ -919,8 +919,8 @@
     "s": "mulholland-dr-1999",
     "f": "134363",
     "k": "11685580",
-    "p": "https://m.media-amazon.com/images/M/MV5BNjA1NGRjM2UtOGM2Zi00MDM0LTkwMGMtODRhNWQ2ZTkwNWMzXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
-    "pc": 1
+    "pc": 1,
+    "p": "https://m.media-amazon.com/images/M/MV5BNjA1NGRjM2UtOGM2Zi00MDM0LTkwMGMtODRhNWQ2ZTkwNWMzXkEyXkFqcGc@._V1_QL75_UX150_.jpg"
    },
    {
     "t": "Dune",
@@ -928,8 +928,8 @@
     "s": "dune-2021",
     "f": "371378",
     "k": "e7158565",
-    "p": "https://m.media-amazon.com/images/M/MV5BNWIyNmU5MGYtZDZmNi00ZjAwLWJlYjgtZTc0ZGIxMDE4ZGYwXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
-    "pc": 1
+    "pc": 1,
+    "p": "https://m.media-amazon.com/images/M/MV5BNWIyNmU5MGYtZDZmNi00ZjAwLWJlYjgtZTc0ZGIxMDE4ZGYwXkEyXkFqcGc@._V1_QL75_UX150_.jpg"
    },
    {
     "t": "Alphaville",
@@ -1033,8 +1033,8 @@
     "s": "it-1990",
     "f": "50156",
     "k": "854054aa",
-    "p": "https://m.media-amazon.com/images/M/MV5BZDFhODExOTctNTFkZS00NjE1LWE2MWMtY2Q1ZThhMGY5NjJkXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
-    "pc": 1
+    "pc": 1,
+    "p": "https://m.media-amazon.com/images/M/MV5BZDFhODExOTctNTFkZS00NjE1LWE2MWMtY2Q1ZThhMGY5NjJkXkEyXkFqcGc@._V1_QL75_UX150_.jpg"
    },
    {
     "t": "Inferno",
@@ -1042,8 +1042,8 @@
     "s": "inferno-1980",
     "f": "41588",
     "k": "241d60ac",
-    "p": "https://m.media-amazon.com/images/M/MV5BOTEyMTMxZjQtM2FiNi00ZjllLTllMWYtY2FiYTVlYmU1YzhjXkEyXkFqcGc@._V1_QL75_UX150_.jpg",
-    "pc": 1
+    "pc": 1,
+    "p": "https://m.media-amazon.com/images/M/MV5BOTEyMTMxZjQtM2FiNi00ZjllLTllMWYtY2FiYTVlYmU1YzhjXkEyXkFqcGc@._V1_QL75_UX150_.jpg"
    },
    {
     "t": "In the Eye of the Hurricane",
@@ -2310,7 +2310,7 @@
     "y": "1994",
     "s": "faust",
     "f": "39998",
-    "k": "64606276",
+    "k": "6ff186dd",
     "pc": 1
    },
    {
@@ -4985,5 +4985,5 @@
    }
   ]
  },
- "updated": "2026-11-11T02:13:22Z"
+ "updated": "2026-11-12T03:55:26Z"
 }
