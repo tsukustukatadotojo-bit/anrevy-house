@@ -229,7 +229,6 @@ FEEDS = [
     ('diy', 'news', 'https://diymag.com/feed'),
     ('spin', 'news', 'https://www.spin.com/feed/'),
     ('soompi', 'news', 'https://www.soompi.com/feed'),
-    ('paste', 'news', 'https://www.pastemagazine.com/rss.xml'),      # Paste gộp mọi chuyên mục: chỉ lấy bài trong /music/
 ]
 NEWS_MIN, NEWS_MAX = 3, 12        # tin nhạc: mỗi nguồn có ít nhất 3 tin mới nhất (nguồn ít đăng như NPR không bị lấn), tối đa 12
 RELEASE_DAYS = (-7, 10)          # album phát hành: 7 ngày trước → 10 ngày tới
@@ -307,13 +306,11 @@ def music():
         if not raw:
             items += [it for it in old.get('items', []) if it.get('s') == src and it.get('f') == url]; continue
         n = 0
-        for it in rss_items(raw)[:(90 if src == 'paste' else 30)]:
+        for it in rss_items(raw)[:30]:
             f, cats, img = fields(it)
             title = plain(f.get('title', ''))
             link = (f.get('link') or '').strip()
             if not title or not link: continue
-            if src == 'paste' and '/music/' not in link: continue
-            if n >= 30: break
             link = re.sub(r'\?utm_[^#]*', '', link)
             k, artist, work, sc = kind or 'news', '', '', None
             desc = plain(f.get('description') or f.get('encoded') or '', 400)
@@ -541,18 +538,7 @@ def push(msg):
     r = git('push', 'origin', 'HEAD:gh-pages')
     if r.returncode != 0: print('push gh-pages lỗi', r.stderr.strip()[-300:])
 
-def probe_frames():
-    for u in ['https://www.npr.org/music/', 'https://pitchfork.com/', 'https://www.rollingstone.com/music/', 'https://www.pastemagazine.com/music', 'https://musicboard.app/albums?order_by=new']:
-        try: r = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': UA, 'Accept': 'text/html'}), timeout=25); code, h = r.status, r.headers
-        except urllib.error.HTTPError as e: code, h = e.code, e.headers
-        except Exception as e: print('KHUNG', u, 'lỗi', repr(e)[:120]); continue
-        csp = ' '.join(x for x in (h.get('Content-Security-Policy') or '').split(';') if 'frame-ancestors' in x)
-        print('KHUNG', u, code, 'XFO=', h.get('X-Frame-Options'), 'CSP=', csp[:200])
-
 def main():
-    if os.environ.get('GITHUB_EVENT_NAME') == 'push':
-        try: probe_frames()
-        except Exception as e: print('KHUNG lỗi', repr(e)[:200])
     try: letterboxd()
     except Exception as e: print('Letterboxd lỗi', repr(e)[:300])
     if HEAVY:
