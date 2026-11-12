@@ -2,7 +2,7 @@
  "charts": {
   "us": {
    "name": "US · Spotify top 200",
-   "date": "2026/11/10",
+   "date": "2026/11/11",
    "src": "https://kworb.net/spotify/country/us_daily.html",
    "items": [
     {
@@ -23,35 +23,35 @@
      "p": 3,
      "a": "Ashe",
      "t": "Stop The Wedding!",
-     "c": "+1",
+     "c": "=",
      "sp": "7MOO89Qv9AV7VZkt5mcqA8"
     },
     {
      "p": 4,
      "a": "ADÉLA",
      "t": "Nicole Kidman",
-     "c": "-1",
+     "c": "=",
      "sp": "70cHKK8bHAfJrOGVnfRG9J"
     },
     {
      "p": 5,
-     "a": "Olivia Rodrigo",
-     "t": "stupid song",
-     "c": "=",
-     "sp": "49j6SvuvWfbEKZKzsHCdLJ"
+     "a": "Malcolm Todd",
+     "t": "Earrings",
+     "c": "+5",
+     "sp": "0eAuGrXyGFYwur9ARUe7LJ"
     },
     {
      "p": 6,
-     "a": "KAROL G",
-     "t": "BbY WOW (w/ Judeline, rusowsky)",
-     "c": "+3",
-     "sp": "3h5T5JypYU7huFiVYhv1dr"
+     "a": "Olivia Rodrigo",
+     "t": "stupid song",
+     "c": "-1",
+     "sp": "49j6SvuvWfbEKZKzsHCdLJ"
     },
     {
      "p": 7,
      "a": "Olivia Rodrigo",
      "t": "the cure",
-     "c": "-1",
+     "c": "=",
      "sp": "55pBIZO1cqoldeqpp5WR7H"
     },
     {
@@ -63,115 +63,115 @@
     },
     {
      "p": 9,
-     "a": "Steve Lacy",
-     "t": "nothing",
-     "c": "+2",
-     "sp": "3lIHa4fUwNKOCSS5k3Za0i"
+     "a": "KAROL G",
+     "t": "BbY WOW (w/ Judeline, rusowsky)",
+     "c": "-3",
+     "sp": "3h5T5JypYU7huFiVYhv1dr"
     },
     {
      "p": 10,
-     "a": "Malcolm Todd",
-     "t": "Earrings",
-     "c": "-3",
-     "sp": "0eAuGrXyGFYwur9ARUe7LJ"
+     "a": "Olivia Dean",
+     "t": "Man I Need",
+     "c": "+3",
+     "sp": "1qbmS6ep2hbBRaEZFpn7BX"
     },
     {
      "p": 11,
+     "a": "The Goo Goo Dolls",
+     "t": "Iris",
+     "c": "+6",
+     "sp": "6Qyc6fS4DsZjB2mRW9DsQs"
+    },
+    {
+     "p": 12,
      "a": "Wham!",
      "t": "Last Christmas",
      "c": "-1",
      "sp": "2FRnf9qhLbvw8fu4IBXx78"
     },
     {
-     "p": 12,
-     "a": "Whiskey Myers",
-     "t": "Broken Window Serenade",
-     "c": "=",
-     "sp": "1VOSSXuWRcBj2rpfxNdX9v"
-    },
-    {
      "p": 13,
-     "a": "Olivia Dean",
-     "t": "Man I Need",
-     "c": "+2",
-     "sp": "1qbmS6ep2hbBRaEZFpn7BX"
+     "a": "Steve Lacy",
+     "t": "nothing",
+     "c": "-4",
+     "sp": "3lIHa4fUwNKOCSS5k3Za0i"
     },
     {
      "p": 14,
-     "a": "Noah Kahan",
-     "t": "Orbiter",
-     "c": "+4",
-     "sp": "77fL8ATR0dpUDLI0XLmDBV"
+     "a": "Whiskey Myers",
+     "t": "Broken Window Serenade",
+     "c": "-2",
+     "sp": "1VOSSXuWRcBj2rpfxNdX9v"
     },
     {
      "p": 15,
-     "a": "ADÉLA",
-     "t": "Ain't In LA",
-     "c": "+1",
-     "sp": "6U9VpmP3dEinuezxCJ2Zg9"
-    },
-    {
-     "p": 16,
      "a": "Mariah Carey",
      "t": "All I Want for Christmas Is You",
-     "c": "-3",
+     "c": "+1",
      "sp": "0bYg9bo50gSsH3LtXe2SQn"
     },
     {
+     "p": 16,
+     "a": "Noah Kahan",
+     "t": "Orbiter",
+     "c": "-2",
+     "sp": "77fL8ATR0dpUDLI0XLmDBV"
+    },
+    {
      "p": 17,
-     "a": "The Goo Goo Dolls",
-     "t": "Iris",
-     "c": "+2",
-     "sp": "6Qyc6fS4DsZjB2mRW9DsQs"
+     "a": "The Neighbourhood",
+     "t": "Sweater Weather",
+     "c": "+3",
+     "sp": "2QjOHCTQ1Jl3zawyYOpxh6"
     },
     {
      "p": 18,
      "a": "Steve Lacy",
      "t": "the feeling",
-     "c": "-4",
+     "c": "=",
      "sp": "1OWBh1eVxUdA1Z6UA8r4nh"
     },
     {
      "p": 19,
-     "a": "Future",
-     "t": "Ya Hit (w/ Drake, Travis Scott, Loe Shimmy)",
-     "c": "+12",
-     "sp": "76jR5C9oKb1DJR3rab6dGV"
+     "a": "ADÉLA",
+     "t": "Ain't In LA",
+     "c": "-4",
+     "sp": "6U9VpmP3dEinuezxCJ2Zg9"
     },
     {
      "p": 20,
-     "a": "The Neighbourhood",
-     "t": "Sweater Weather",
-     "c": "-3",
-     "sp": "2QjOHCTQ1Jl3zawyYOpxh6"
+     "a": "STELLA LEFTY",
+     "t": "Boston",
+     "c": "+13",
+     "sp": "36idurZmYRjJ56KQ8JD9bN"
     },
     {
      "p": 21,
-     "a": "Noah Kahan",
-     "t": "Willing and Able",
-     "c": "+2",
-     "sp": "6pk6E0SZxILzfaAGFngxEs"
-    },
-    {
-     "p": 22,
      "a": "Jamie Miller",
      "t": "Babydoll",
-     "c": "+2",
+     "c": "+1",
      "sp": "1o9mAOmNm3wT2NdyGV1Ard"
     },
     {
+     "p": 22,
+     "a": "Noah Kahan",
+     "t": "Willing and Able",
+     "c": "-1",
+     "sp": "6pk6E0SZxILzfaAGFngxEs"
+    },
+    {
      "p": 23,
-     "a": "Gordon Lightfoot",
-     "t": "The Wreck of the Edmund Fitzgerald",
-     "c": "RE",
-     "sp": "536L9C0N7vhYdibCJx3cI2"
+     "a": "Arctic Monkeys",
+     "t": "505",
+     "c": "+1",
+     "sp": "58ge6dfP91o9oXMzq3XkIS"
     },
     {
      "p": 24,
-     "a": "Arctic Monkeys",
-     "t": "505",
-     "c": "-2",
-     "sp": "58ge6dfP91o9oXMzq3XkIS"
+     "a": "Steve Lacy",
+     "t": "oh yeah?",
+     "c": "+2",
+     "sp": "22NHkFYbgxB2Zirj29Gbp8"
     },
     {
      "p": 25,
@@ -182,1234 +182,1234 @@
     },
     {
      "p": 26,
-     "a": "Steve Lacy",
-     "t": "oh yeah?",
-     "c": "-5",
-     "sp": "22NHkFYbgxB2Zirj29Gbp8"
+     "a": "Noah Kahan",
+     "t": "Stick Season",
+     "c": "+9",
+     "sp": "0mflMxspEfB0VbI1kyLiAv"
     },
     {
      "p": 27,
-     "a": "Tame Impala",
-     "t": "Loser",
-     "c": "-7",
-     "sp": "7bxaFZ1O3cHkgLKMsdC3xR"
+     "a": "Ella Langley",
+     "t": "Be Her",
+     "c": "+5",
+     "sp": "13HD3tYTiz8oSRxWzXEq7g"
     },
     {
      "p": 28,
-     "a": "Olivia Rodrigo",
-     "t": "expectations (w/ Chappell Roan)",
-     "c": "=",
-     "sp": "3XmwAZpIMNpTJy8faw3ajD"
-    },
-    {
-     "p": 29,
-     "a": "Harry Styles",
-     "t": "Coming Up Roses",
-     "c": "+1",
-     "sp": "0QPdjsMOUhwouq1NS3HwfQ"
-    },
-    {
-     "p": 30,
      "a": "sombr",
      "t": "back to friends",
-     "c": "-3",
+     "c": "+2",
      "sp": "7qjZnBKE73H4Oxkopwulqe"
     },
     {
+     "p": 29,
+     "a": "Paramore",
+     "t": "The Only Exception",
+     "c": "+19",
+     "sp": "7JIuqL4ZqkpfGKQhYlrirs"
+    },
+    {
+     "p": 30,
+     "a": "Bobby Helms",
+     "t": "Jingle Bell Rock",
+     "c": "+7",
+     "sp": "7vQbuQcyTflfCIOu3Uzzya"
+    },
+    {
      "p": 31,
-     "a": "Sam Fender",
-     "t": "Rein Me In (w/ Olivia Dean)",
-     "c": "-5",
-     "sp": "0MUXBhPUDF8or0kfQ0EHwV"
+     "a": "Fleetwood Mac",
+     "t": "Dreams - 2001 Remaster",
+     "c": "+7",
+     "sp": "53qkszfgztIvkFyF31GfdQ"
     },
     {
      "p": 32,
      "a": "Ella Langley",
-     "t": "Be Her",
-     "c": "+4",
-     "sp": "13HD3tYTiz8oSRxWzXEq7g"
-    },
-    {
-     "p": 33,
-     "a": "STELLA LEFTY",
-     "t": "Boston",
-     "c": "+1",
-     "sp": "36idurZmYRjJ56KQ8JD9bN"
-    },
-    {
-     "p": 34,
-     "a": "Radiohead",
-     "t": "Creep",
-     "c": "-2",
-     "sp": "70LcF31zb1H0PyJoS1Sx1r"
-    },
-    {
-     "p": 35,
-     "a": "Noah Kahan",
-     "t": "Stick Season",
-     "c": "+11",
-     "sp": "0mflMxspEfB0VbI1kyLiAv"
-    },
-    {
-     "p": 36,
-     "a": "Ella Langley",
      "t": "weren't for the wind",
-     "c": "+3",
+     "c": "+4",
      "sp": "2A22iI0x4EYAVXNpKPhNEM"
     },
     {
+     "p": 33,
+     "a": "Brenda Lee",
+     "t": "Rockin' Around The Christmas Tree",
+     "c": "+8",
+     "sp": "2EjXfH91m7f8HiJN1yQg97"
+    },
+    {
+     "p": 34,
+     "a": "Olivia Rodrigo",
+     "t": "expectations (w/ Chappell Roan)",
+     "c": "-6",
+     "sp": "3XmwAZpIMNpTJy8faw3ajD"
+    },
+    {
+     "p": 35,
+     "a": "Radiohead",
+     "t": "Creep",
+     "c": "-1",
+     "sp": "70LcF31zb1H0PyJoS1Sx1r"
+    },
+    {
+     "p": 36,
+     "a": "Dominic Fike",
+     "t": "Babydoll",
+     "c": "+6",
+     "sp": "7yNf9YjeO5JXUE3JEBgnYc"
+    },
+    {
      "p": 37,
-     "a": "Bobby Helms",
-     "t": "Jingle Bell Rock",
+     "a": "Harry Styles",
+     "t": "Coming Up Roses",
      "c": "-8",
-     "sp": "7vQbuQcyTflfCIOu3Uzzya"
+     "sp": "0QPdjsMOUhwouq1NS3HwfQ"
     },
     {
      "p": 38,
-     "a": "Fleetwood Mac",
-     "t": "Dreams - 2001 Remaster",
-     "c": "=",
-     "sp": "53qkszfgztIvkFyF31GfdQ"
+     "a": "Tame Impala",
+     "t": "Loser",
+     "c": "-11",
+     "sp": "7bxaFZ1O3cHkgLKMsdC3xR"
     },
     {
      "p": 39,
-     "a": "Miguel",
-     "t": "Sure Thing",
-     "c": "-2",
-     "sp": "0JXXNGljqupsJaZsgSbMZV"
+     "a": "Ariana Grande",
+     "t": "Santa Tell Me",
+     "c": "+20",
+     "sp": "0lizgQ7Qw35od7CYaoMBZb"
     },
     {
      "p": 40,
      "a": "Drake",
      "t": "Janice STFU",
-     "c": "+3",
+     "c": "=",
      "sp": "514joG57v4yKTsfQmz7stz"
     },
     {
      "p": 41,
-     "a": "Brenda Lee",
-     "t": "Rockin' Around The Christmas Tree",
-     "c": "-8",
-     "sp": "2EjXfH91m7f8HiJN1yQg97"
-    },
-    {
-     "p": 42,
-     "a": "Dominic Fike",
-     "t": "Babydoll",
-     "c": "-2",
-     "sp": "7yNf9YjeO5JXUE3JEBgnYc"
-    },
-    {
-     "p": 43,
-     "a": "Foo Fighters",
-     "t": "Everlong",
-     "c": "+1",
-     "sp": "5UWwZ5lm5PKu6eKsHAGxOk"
-    },
-    {
-     "p": 44,
-     "a": "The Cranberries",
-     "t": "Linger - Remastered 2026",
-     "c": "-2",
-     "sp": "1WYrTfvKjQYaYfVziGG1ET"
-    },
-    {
-     "p": 45,
-     "a": "Alyssa Grace",
-     "t": "bloodstream",
-     "c": "-4",
-     "sp": "2oWFJJW9d1bIra3zHjR6GO"
-    },
-    {
-     "p": 46,
      "a": "Gigi Perez",
      "t": "Sailor Song",
-     "c": "+3",
+     "c": "+5",
      "sp": "21IYMdzTrzSe191Cy5eMap"
     },
     {
-     "p": 47,
-     "a": "F3miii",
-     "t": "NOBLE",
-     "c": "-2",
-     "sp": "4Jsus7N4d8hFB2G9gcRdBv"
+     "p": 42,
+     "a": "Sam Fender",
+     "t": "Rein Me In (w/ Olivia Dean)",
+     "c": "-11",
+     "sp": "0MUXBhPUDF8or0kfQ0EHwV"
     },
     {
-     "p": 48,
-     "a": "Paramore",
-     "t": "The Only Exception",
-     "c": "+8",
-     "sp": "7JIuqL4ZqkpfGKQhYlrirs"
-    },
-    {
-     "p": 49,
-     "a": "Taylor Swift",
-     "t": "Patient Zero",
-     "c": "+14",
-     "sp": "11hcBLPtbMp4aQI6zGQLub"
-    },
-    {
-     "p": 50,
-     "a": "Olivia Rodrigo",
-     "t": "take me home (4 christmas)",
-     "c": "-15",
-     "sp": "4UjYZS6Jbt3lee27qmiNOu"
-    },
-    {
-     "p": 51,
-     "a": "J. Cole",
-     "t": "No Role Modelz",
-     "c": "+14",
-     "sp": "68Dni7IE4VyPkTOH9mRWHr"
-    },
-    {
-     "p": 52,
-     "a": "SIENNA SPIRO",
-     "t": "Great Expectation",
-     "c": "=",
-     "sp": "7ujApz6iFP3PmKIDGcaGbe"
-    },
-    {
-     "p": 53,
-     "a": "Evanescence",
-     "t": "Bring Me To Life",
-     "c": "+6",
-     "sp": "0COqiPhxzoWICwFCS4eZcp"
-    },
-    {
-     "p": 54,
-     "a": "Omar Apollo",
-     "t": "Evergreen",
-     "c": "-6",
-     "sp": "2TktkzfozZifbQhXjT6I33"
-    },
-    {
-     "p": 55,
-     "a": "Drake",
-     "t": "Headlines",
-     "c": "+14",
-     "sp": "6LxSe8YmdPxy095Ux6znaQ"
-    },
-    {
-     "p": 56,
-     "a": "Olivia Rodrigo",
-     "t": "cigarette smoke",
-     "c": "-1",
-     "sp": "0e4u0sFRGxHL4U2iFBrUvZ"
-    },
-    {
-     "p": 57,
+     "p": 43,
      "a": "Kelly Clarkson",
      "t": "Underneath the Tree",
-     "c": "-6",
+     "c": "+14",
      "sp": "3nAp4IvdMPPWEH9uuXFFV5"
     },
     {
-     "p": 58,
+     "p": 44,
      "a": "Olivia Rodrigo",
      "t": "deja vu",
-     "c": "+6",
+     "c": "+14",
      "sp": "6HU7h9RYOaPRFeh0R3UeAr"
     },
     {
-     "p": 59,
-     "a": "Ariana Grande",
-     "t": "Santa Tell Me",
-     "c": "-9",
-     "sp": "0lizgQ7Qw35od7CYaoMBZb"
-    },
-    {
-     "p": 60,
-     "a": "Cody Johnson",
-     "t": "Take Me Back (Leave Me There)",
+     "p": 45,
+     "a": "Miguel",
+     "t": "Sure Thing",
      "c": "-6",
-     "sp": "3eZcmEO0X0nsfV8E3NZelo"
+     "sp": "0JXXNGljqupsJaZsgSbMZV"
     },
     {
-     "p": 61,
-     "a": "Zach Bryan",
-     "t": "Lies (w/ Lana Del Rey)",
-     "c": "-8",
-     "sp": "4EVSMqqVEehvyyOBmjNTlA"
+     "p": 46,
+     "a": "Coldplay",
+     "t": "Sparks",
+     "c": "+94",
+     "sp": "7D0RhFcb3CrfPuTJ0obrod"
     },
     {
-     "p": 62,
-     "a": "Dexter and The Moonrocks",
-     "t": "Freakin’ Out",
-     "c": "-5",
-     "sp": "2SaWT781xr3hHLdbVt5DB7"
+     "p": 47,
+     "a": "Alex Warren",
+     "t": "Ordinary",
+     "c": "+35",
+     "sp": "2RkZ5LkEzeHGRsmDqKwmaJ"
     },
     {
-     "p": 63,
-     "a": "TLC",
-     "t": "No Scrubs",
-     "c": "+9",
-     "sp": "1KGi9sZVMeszgZOWivFpxs"
+     "p": 48,
+     "a": "Evanescence",
+     "t": "Bring Me To Life",
+     "c": "+5",
+     "sp": "0COqiPhxzoWICwFCS4eZcp"
     },
     {
-     "p": 64,
-     "a": "sombr",
-     "t": "Homewrecker",
+     "p": 49,
+     "a": "J. Cole",
+     "t": "No Role Modelz",
      "c": "+2",
-     "sp": "7tICCrK3CcyRFKza7yrR0z"
+     "sp": "68Dni7IE4VyPkTOH9mRWHr"
     },
     {
-     "p": 65,
-     "a": "Frank Ocean",
-     "t": "Novacane",
-     "c": "+3",
-     "sp": "4osgfFTICMkcGbbigdsa53"
-    },
-    {
-     "p": 66,
+     "p": 50,
      "a": "P!nk",
      "t": "Just Give Me a Reason (w/ Nate Ruess)",
-     "c": "-5",
+     "c": "+16",
      "sp": "1mKXFLRA179hdOWQBwUk9e"
     },
     {
-     "p": 67,
-     "a": "Mazzy Star",
-     "t": "Fade Into You",
-     "c": "-9",
-     "sp": "1LzNfuep1bnAUR9skqdHCK"
-    },
-    {
-     "p": 68,
+     "p": 51,
      "a": "Olivia Rodrigo",
      "t": "drop dead",
-     "c": "-1",
+     "c": "+17",
      "sp": "3fRCAPMMZ8l8P9YKI6OCzD"
     },
     {
+     "p": 52,
+     "a": "Foo Fighters",
+     "t": "Everlong",
+     "c": "-9",
+     "sp": "5UWwZ5lm5PKu6eKsHAGxOk"
+    },
+    {
+     "p": 53,
+     "a": "Gordon Lightfoot",
+     "t": "The Wreck of the Edmund Fitzgerald",
+     "c": "-30",
+     "sp": "536L9C0N7vhYdibCJx3cI2"
+    },
+    {
+     "p": 54,
+     "a": "Alyssa Grace",
+     "t": "bloodstream",
+     "c": "-9",
+     "sp": "2oWFJJW9d1bIra3zHjR6GO"
+    },
+    {
+     "p": 55,
+     "a": "Coldplay",
+     "t": "Yellow",
+     "c": "+69",
+     "sp": "3AJwUDP919kvQ9QcozQPxg"
+    },
+    {
+     "p": 56,
+     "a": "TLC",
+     "t": "No Scrubs",
+     "c": "+7",
+     "sp": "1KGi9sZVMeszgZOWivFpxs"
+    },
+    {
+     "p": 57,
+     "a": "Zach Bryan",
+     "t": "Lies (w/ Lana Del Rey)",
+     "c": "+4",
+     "sp": "4EVSMqqVEehvyyOBmjNTlA"
+    },
+    {
+     "p": 58,
+     "a": "Djo",
+     "t": "End of Beginning",
+     "c": "+34",
+     "sp": "3qhlB30KknSejmIvZZLjOD"
+    },
+    {
+     "p": 59,
+     "a": "Taylor Swift",
+     "t": "Patient Zero",
+     "c": "-10",
+     "sp": "11hcBLPtbMp4aQI6zGQLub"
+    },
+    {
+     "p": 60,
+     "a": "SIENNA SPIRO",
+     "t": "Great Expectation",
+     "c": "-8",
+     "sp": "7ujApz6iFP3PmKIDGcaGbe"
+    },
+    {
+     "p": 61,
+     "a": "A Boogie Wit da Hoodie",
+     "t": "Still Think About You",
+     "c": "+58",
+     "sp": "2FTeQQ5Rg9tBpgpTF5mnhE"
+    },
+    {
+     "p": 62,
+     "a": "Future",
+     "t": "Ya Hit (w/ Drake, Travis Scott, Loe Shimmy)",
+     "c": "-43",
+     "sp": "76jR5C9oKb1DJR3rab6dGV"
+    },
+    {
+     "p": 63,
+     "a": "Kanye West",
+     "t": "Flashing Lights (w/ Dwele)",
+     "c": "+18",
+     "sp": "5TRPicyLGbAF2LGBFbHGvO"
+    },
+    {
+     "p": 64,
+     "a": "Drake",
+     "t": "Headlines",
+     "c": "-9",
+     "sp": "6LxSe8YmdPxy095Ux6znaQ"
+    },
+    {
+     "p": 65,
+     "a": "bôa",
+     "t": "Duvet",
+     "c": "+64",
+     "sp": "42qNWdLKCI41S4uzfamhFM"
+    },
+    {
+     "p": 66,
+     "a": "Linkin Park",
+     "t": "In the End",
+     "c": "+17",
+     "sp": "60a0Rd6pjrkxjPbaKzXjfq"
+    },
+    {
+     "p": 67,
+     "a": "Cody Johnson",
+     "t": "Take Me Back (Leave Me There)",
+     "c": "-7",
+     "sp": "3eZcmEO0X0nsfV8E3NZelo"
+    },
+    {
+     "p": 68,
+     "a": "F3miii",
+     "t": "NOBLE",
+     "c": "-21",
+     "sp": "4Jsus7N4d8hFB2G9gcRdBv"
+    },
+    {
      "p": 69,
-     "a": "Cigarettes After Sex",
-     "t": "Apocalypse",
-     "c": "+1",
-     "sp": "1oAwsWBovWRIp7qLMGPIet"
+     "a": "Morgan Wallen",
+     "t": "I Got Better",
+     "c": "+10",
+     "sp": "4gfrYDtaRmp6HPvN80V2ob"
     },
     {
      "p": 70,
-     "a": "Olivia Dean",
-     "t": "So Easy (To Fall In Love)",
-     "c": "+7",
-     "sp": "6sGIMrtIzQjdzNndVxe397"
+     "a": "Olivia Rodrigo",
+     "t": "cigarette smoke",
+     "c": "-14",
+     "sp": "0e4u0sFRGxHL4U2iFBrUvZ"
     },
     {
      "p": 71,
-     "a": "Childish Gambino",
-     "t": "Les",
-     "c": "+2",
-     "sp": "7ghKr0pCYyPPyp7t1FH8k4"
+     "a": "Andy Williams",
+     "t": "It's the Most Wonderful Time of the Year",
+     "c": "+23",
+     "sp": "1IcR6RlgvDczfvoWJSSY2A"
     },
     {
      "p": 72,
      "a": "Ariana Grande",
      "t": "hate that i made you love me",
-     "c": "+3",
+     "c": "=",
      "sp": "3iy2QuCtCzpWnR6tia39AB"
     },
     {
      "p": 73,
-     "a": "Harry Styles",
-     "t": "Sign of the Times",
+     "a": "Dexter and The Moonrocks",
+     "t": "Freakin’ Out",
      "c": "-11",
-     "sp": "5Ohxk2dO5COHF1krpoPigN"
+     "sp": "2SaWT781xr3hHLdbVt5DB7"
     },
     {
      "p": 74,
-     "a": "Kings of Leon",
-     "t": "Wait for Me",
-     "c": "-14",
-     "sp": "2nO1DYEg1X5GHi8SSuNJQj"
+     "a": "The Cranberries",
+     "t": "Linger - Remastered 2026",
+     "c": "-30",
+     "sp": "1WYrTfvKjQYaYfVziGG1ET"
     },
     {
      "p": 75,
-     "a": "Don Toliver",
-     "t": "E85",
-     "c": "+5",
-     "sp": "3B4cjvGlPvyBLNG3AzEgkZ"
+     "a": "Olivia Rodrigo",
+     "t": "take me home (4 christmas)",
+     "c": "-25",
+     "sp": "4UjYZS6Jbt3lee27qmiNOu"
     },
     {
      "p": 76,
-     "a": "Morgan Wallen",
-     "t": "Been By Now",
-     "c": "+5",
-     "sp": "3xwMjQriBVW0OGEvNKo9c0"
+     "a": "Olivia Dean",
+     "t": "So Easy (To Fall In Love)",
+     "c": "-6",
+     "sp": "6sGIMrtIzQjdzNndVxe397"
     },
     {
      "p": 77,
-     "a": "Lady Gaga",
-     "t": "Die With A Smile (w/ Bruno Mars)",
-     "c": "+9",
-     "sp": "7so0lgd0zP2Sbgs2d7a1SZ"
+     "a": "Vance Joy",
+     "t": "Riptide",
+     "c": "+19",
+     "sp": "7yq4Qj7cqayVTp3FF9CWbm"
     },
     {
      "p": 78,
-     "a": "Nelly Furtado",
-     "t": "Promiscuous (w/ Timbaland)",
-     "c": "+25",
-     "sp": "2gam98EZKrF9XuOkU13ApN"
+     "a": "Lady Gaga",
+     "t": "Die With A Smile (w/ Bruno Mars)",
+     "c": "-1",
+     "sp": "7so0lgd0zP2Sbgs2d7a1SZ"
     },
     {
      "p": 79,
-     "a": "Morgan Wallen",
-     "t": "I Got Better",
-     "c": "-3",
-     "sp": "4gfrYDtaRmp6HPvN80V2ob"
+     "a": "Riley Green",
+     "t": "Worst Way",
+     "c": "+22",
+     "sp": "1osfLqL6L2iQsirRf83ded"
     },
     {
      "p": 80,
-     "a": "Billie Eilish",
-     "t": "BIRDS OF A FEATHER",
-     "c": "+13",
-     "sp": "6dOtVTDdiauQNBQEDOtlAB"
+     "a": "Noah Kahan",
+     "t": "Draw You Out (w/ The Hunger Games)",
+     "c": "+11",
+     "sp": "5KTcGJKm4HgLhLt8Tc7EQ5"
     },
     {
      "p": 81,
-     "a": "Kanye West",
-     "t": "Flashing Lights (w/ Dwele)",
-     "c": "-3",
-     "sp": "5TRPicyLGbAF2LGBFbHGvO"
+     "a": "Omar Apollo",
+     "t": "Evergreen",
+     "c": "-27",
+     "sp": "2TktkzfozZifbQhXjT6I33"
     },
     {
      "p": 82,
-     "a": "Alex Warren",
-     "t": "Ordinary",
-     "c": "+3",
-     "sp": "2RkZ5LkEzeHGRsmDqKwmaJ"
+     "a": "Zach Bryan",
+     "t": "Something in the Orange",
+     "c": "+36",
+     "sp": "3WMj8moIAXJhHsyLaqIIHI"
     },
     {
      "p": 83,
-     "a": "Linkin Park",
-     "t": "In the End",
-     "c": "+15",
-     "sp": "60a0Rd6pjrkxjPbaKzXjfq"
+     "a": "Billie Eilish",
+     "t": "BIRDS OF A FEATHER",
+     "c": "-3",
+     "sp": "6dOtVTDdiauQNBQEDOtlAB"
     },
     {
      "p": 84,
-     "a": "girl in red",
-     "t": "we fell in love in october",
-     "c": "-13",
-     "sp": "6IPwKM3fUUzlElbvKw2sKl"
+     "a": "Morgan Wallen",
+     "t": "Been By Now",
+     "c": "-8",
+     "sp": "3xwMjQriBVW0OGEvNKo9c0"
     },
     {
      "p": 85,
-     "a": "Rihanna",
-     "t": "Don't Stop The Music",
-     "c": "+20",
-     "sp": "1Jo0Zg7XlrA6z0mFTZVdkn"
+     "a": "Mazzy Star",
+     "t": "Fade Into You",
+     "c": "-18",
+     "sp": "1LzNfuep1bnAUR9skqdHCK"
     },
     {
      "p": 86,
-     "a": "TV Girl",
-     "t": "Lovers Rock",
-     "c": "-7",
-     "sp": "6dBUzqjtbnIa1TwYbyw5CM"
+     "a": "sombr",
+     "t": "Homewrecker",
+     "c": "-22",
+     "sp": "7tICCrK3CcyRFKza7yrR0z"
     },
     {
      "p": 87,
      "a": "Katy Perry",
      "t": "The One That Got Away",
-     "c": "-4",
+     "c": "=",
      "sp": "2009X8GyWTqyxIdzAEYW6N"
     },
     {
      "p": 88,
-     "a": "Tame Impala",
-     "t": "The Less I Know The Better",
-     "c": "-6",
-     "sp": "6K4t31amVTZDgR3sKmwUJJ"
+     "a": "Childish Gambino",
+     "t": "Les",
+     "c": "-17",
+     "sp": "7ghKr0pCYyPPyp7t1FH8k4"
     },
     {
      "p": 89,
-     "a": "The Police",
-     "t": "Every Breath You Take",
-     "c": "+6",
-     "sp": "1JSTJqkT5qHq8MDJnJbRE1"
+     "a": "Linkin Park",
+     "t": "Somewhere I Belong",
+     "c": "+97",
+     "sp": "3fjmSxt0PskST13CSdBUFx"
     },
     {
      "p": 90,
-     "a": "Michael Jackson",
-     "t": "Billie Jean",
-     "c": "-6",
-     "sp": "7J1uxwnxfQLu4APicE5Rnj"
-    },
-    {
-     "p": 91,
-     "a": "Noah Kahan",
-     "t": "Draw You Out (w/ The Hunger Games)",
-     "c": "+33",
-     "sp": "5KTcGJKm4HgLhLt8Tc7EQ5"
-    },
-    {
-     "p": 92,
-     "a": "Djo",
-     "t": "End of Beginning",
-     "c": "+5",
-     "sp": "3qhlB30KknSejmIvZZLjOD"
-    },
-    {
-     "p": 93,
-     "a": "sombr",
-     "t": "12 to 12",
-     "c": "+3",
-     "sp": "05od2qm2MTSKCHxy1GBp5W"
-    },
-    {
-     "p": 94,
-     "a": "Andy Williams",
-     "t": "It's the Most Wonderful Time of the Year",
-     "c": "-20",
-     "sp": "1IcR6RlgvDczfvoWJSSY2A"
-    },
-    {
-     "p": 95,
-     "a": "Nirvana",
-     "t": "Smells Like Teen Spirit - Remastered",
-     "c": "+13",
-     "sp": "0gucTLf7trAf37Ua1uAyAu"
-    },
-    {
-     "p": 96,
-     "a": "Vance Joy",
-     "t": "Riptide",
-     "c": "-4",
-     "sp": "7yq4Qj7cqayVTp3FF9CWbm"
-    },
-    {
-     "p": 97,
-     "a": "Justin Bieber",
-     "t": "Beauty And A Beat (w/ Nicki Minaj)",
-     "c": "+10",
-     "sp": "6QFCMUUq1T2Vf5sFUXcuQ7"
-    },
-    {
-     "p": 98,
-     "a": "J. Cole",
-     "t": "Power Trip (w/ Miguel)",
-     "c": "-11",
-     "sp": "2uwnP6tZVVmTovzX5ELooy"
-    },
-    {
-     "p": 99,
-     "a": "Frank Ocean",
-     "t": "Thinkin Bout You",
-     "c": "-5",
-     "sp": "7DfFc7a6Rwfi3YQMRbDMau"
-    },
-    {
-     "p": 100,
-     "a": "Staind",
-     "t": "It's Been Awhile",
-     "c": "-11",
-     "sp": "25CMmGsl22APKhfuj4Tp7j"
-    },
-    {
-     "p": 101,
-     "a": "Riley Green",
-     "t": "Worst Way",
-     "c": "+25",
-     "sp": "1osfLqL6L2iQsirRf83ded"
-    },
-    {
-     "p": 102,
-     "a": "Steve Lacy",
-     "t": "Bad Habit",
-     "c": "-11",
-     "sp": "4k6Uh1HXdhtusDW5y8Gbvy"
-    },
-    {
-     "p": 103,
-     "a": "Lil Baby",
-     "t": "Dead Fresh",
-     "c": "+33",
-     "sp": "5ZAMlvo6ZUjVRZOGu2bJib"
-    },
-    {
-     "p": 104,
-     "a": "SIENNA SPIRO",
-     "t": "Die On This Hill",
-     "c": "-4",
-     "sp": "2gYTC8DsplN3RNdpdBcCOQ"
-    },
-    {
-     "p": 105,
-     "a": "Tory Lanez",
-     "t": "The Color Violet",
-     "c": "-1",
-     "sp": "3azJifCSqg9fRij2yKIbWz"
-    },
-    {
-     "p": 106,
-     "a": "Kendrick Lamar",
-     "t": "luther",
-     "c": "+25",
-     "sp": "2CGNAOSuO1MEFCbBRgUzjd"
-    },
-    {
-     "p": 107,
      "a": "Temper City",
      "t": "Self Aware",
-     "c": "-60",
+     "c": "+17",
      "sp": "4qW3BbQAwZsrnu8a3ZRdyT"
     },
     {
-     "p": 108,
-     "a": "Ravyn Lenae",
-     "t": "Love Me Not",
-     "c": "-18",
-     "sp": "4WFgvKVfEhb3IUAFGrutTR"
+     "p": 91,
+     "a": "Olivia Rodrigo",
+     "t": "expectations",
+     "c": "+36",
+     "sp": "4bkClAuofJULiaIZsuL3gT"
     },
     {
-     "p": 109,
-     "a": "Drake",
-     "t": "Passionfruit",
-     "c": "-7",
-     "sp": "7hDc8b7IXETo14hHIHdnhd"
+     "p": 92,
+     "a": "Justin Bieber",
+     "t": "Beauty And A Beat (w/ Nicki Minaj)",
+     "c": "+5",
+     "sp": "6QFCMUUq1T2Vf5sFUXcuQ7"
     },
     {
-     "p": 110,
-     "a": "Post Malone",
-     "t": "Circles",
-     "c": "-11",
-     "sp": "21jGcNKet2qwijlDFuPiPb"
+     "p": 93,
+     "a": "Fleetwood Mac",
+     "t": "Landslide",
+     "c": "+56",
+     "sp": "5ihS6UUlyQAfmp48eSkxuQ"
     },
     {
-     "p": 111,
+     "p": 94,
+     "a": "Nirvana",
+     "t": "Smells Like Teen Spirit - Remastered",
+     "c": "+1",
+     "sp": "0gucTLf7trAf37Ua1uAyAu"
+    },
+    {
+     "p": 95,
+     "a": "Zach Bryan",
+     "t": "I Remember Everything (w/ Kacey Musgraves)",
+     "c": "+30",
+     "sp": "4KULAymBBJcPRpk1yO4dOG"
+    },
+    {
+     "p": 96,
+     "a": "Darlene Love",
+     "t": "Christmas (Baby Please Come Home)",
+     "c": "+58",
+     "sp": "47ohYW8e7dxCYn9qbUMBCI"
+    },
+    {
+     "p": 97,
+     "a": "Bad Bunny",
+     "t": "DtMF",
+     "c": "+76",
+     "sp": "3sK8wGT43QFpWrvNQsrQya"
+    },
+    {
+     "p": 98,
      "a": "Tyler, The Creator",
      "t": "See You Again (w/ Kali Uchis)",
-     "c": "-5",
+     "c": "+13",
      "sp": "7KA4W4McWYRpgf0fWsJZWB"
     },
     {
+     "p": 99,
+     "a": "Don Toliver",
+     "t": "E85",
+     "c": "-24",
+     "sp": "3B4cjvGlPvyBLNG3AzEgkZ"
+    },
+    {
+     "p": 100,
+     "a": "Ravyn Lenae",
+     "t": "Love Me Not",
+     "c": "+8",
+     "sp": "4WFgvKVfEhb3IUAFGrutTR"
+    },
+    {
+     "p": 101,
+     "a": "TV Girl",
+     "t": "Lovers Rock",
+     "c": "-15",
+     "sp": "6dBUzqjtbnIa1TwYbyw5CM"
+    },
+    {
+     "p": 102,
+     "a": "BigXthaPlug",
+     "t": "Hell At Night (w/ Ella Langley)",
+     "c": "+57",
+     "sp": "3pAVk6Ydn0dcGpG8gDyxSJ"
+    },
+    {
+     "p": 103,
+     "a": "Michael Jackson",
+     "t": "Billie Jean",
+     "c": "-13",
+     "sp": "7J1uxwnxfQLu4APicE5Rnj"
+    },
+    {
+     "p": 104,
+     "a": "Kings of Leon",
+     "t": "Wait for Me",
+     "c": "-30",
+     "sp": "2nO1DYEg1X5GHi8SSuNJQj"
+    },
+    {
+     "p": 105,
+     "a": "Sia",
+     "t": "Snowman",
+     "c": "+33",
+     "sp": "7uoFMmxln0GPXQ0AcCBXRq"
+    },
+    {
+     "p": 106,
+     "a": "Frank Ocean",
+     "t": "Thinkin Bout You",
+     "c": "-7",
+     "sp": "7DfFc7a6Rwfi3YQMRbDMau"
+    },
+    {
+     "p": 107,
+     "a": "Nelly Furtado",
+     "t": "Promiscuous (w/ Timbaland)",
+     "c": "-29",
+     "sp": "2gam98EZKrF9XuOkU13ApN"
+    },
+    {
+     "p": 108,
+     "a": "Harry Styles",
+     "t": "Sign of the Times",
+     "c": "-35",
+     "sp": "5Ohxk2dO5COHF1krpoPigN"
+    },
+    {
+     "p": 109,
+     "a": "Justice",
+     "t": "Flower In A Hurricane (w/ Tame Impala, SZA, Grand Theft Auto VI, King Gizzard & The Lizard Wizard)",
+     "c": "+11",
+     "sp": "4HCOHRCSQelz2GPX8iTamO"
+    },
+    {
+     "p": 110,
+     "a": "Rihanna",
+     "t": "Don't Stop The Music",
+     "c": "-25",
+     "sp": "1Jo0Zg7XlrA6z0mFTZVdkn"
+    },
+    {
+     "p": 111,
+     "a": "Don Toliver",
+     "t": "No Pole",
+     "c": "+11",
+     "sp": "0eaVIYo2zeOaGJeqZ5TwYz"
+    },
+    {
      "p": 112,
-     "a": "Soundgarden",
-     "t": "Black Hole Sun",
-     "c": "-2",
-     "sp": "4xdHI4eFNst0vTZuuKrWjr"
+     "a": "Linkin Park",
+     "t": "Numb",
+     "c": "+25",
+     "sp": "2nLtzopw4rPReszdYBJU6h"
     },
     {
      "p": 113,
-     "a": "Tate McRae",
-     "t": "Sports car",
-     "c": "+22",
-     "sp": "5UJbgR4XF4y1DvbkxEqe8S"
+     "a": "Lil Baby",
+     "t": "Dead Fresh",
+     "c": "-10",
+     "sp": "5ZAMlvo6ZUjVRZOGu2bJib"
     },
     {
      "p": 114,
      "a": "Drake",
      "t": "One Dance (w/ Wizkid, Kyla)",
-     "c": "-5",
+     "c": "=",
      "sp": "1zi7xx7UVEFkmKfv06H8x0"
     },
     {
      "p": 115,
-     "a": "Olivia Dean",
-     "t": "A Couple Minutes",
-     "c": "+3",
-     "sp": "312z6PZ8wwREck8613PkJk"
+     "a": "Drake",
+     "t": "Passionfruit",
+     "c": "-6",
+     "sp": "7hDc8b7IXETo14hHIHdnhd"
     },
     {
      "p": 116,
-     "a": "Lil Wayne",
-     "t": "Love Me (w/ Drake, Future)",
-     "c": "+11",
-     "sp": "2XHzzp1j4IfTNp1FTn7YFg"
+     "a": "The Marías",
+     "t": "No One Noticed",
+     "c": "+23",
+     "sp": "3siwsiaEoU4Kuuc9WKMUy5"
     },
     {
      "p": 117,
-     "a": "Ella Langley",
-     "t": "I Can't Love You Anymore (w/ Morgan Wallen)",
-     "c": "+13",
-     "sp": "61rwYQu9An4QWrcCUyFUyq"
+     "a": "Kendrick Lamar",
+     "t": "luther",
+     "c": "-11",
+     "sp": "2CGNAOSuO1MEFCbBRgUzjd"
     },
     {
      "p": 118,
-     "a": "Zach Bryan",
-     "t": "Something in the Orange",
-     "c": "-30",
-     "sp": "3WMj8moIAXJhHsyLaqIIHI"
+     "a": "Noah Kahan",
+     "t": "Northern Attitude",
+     "c": "+28",
+     "sp": "4O2rRsoSPb5aN7N3tG6Y3v"
     },
     {
      "p": 119,
-     "a": "A Boogie Wit da Hoodie",
-     "t": "Still Think About You",
-     "c": "+30",
-     "sp": "2FTeQQ5Rg9tBpgpTF5mnhE"
+     "a": "J. Cole",
+     "t": "Power Trip (w/ Miguel)",
+     "c": "-21",
+     "sp": "2uwnP6tZVVmTovzX5ELooy"
     },
     {
      "p": 120,
-     "a": "Justice",
-     "t": "Flower In A Hurricane (w/ Tame Impala, SZA, Grand Theft Auto VI, King Gizzard & The Lizard Wizard)",
-     "c": "+49",
-     "sp": "4HCOHRCSQelz2GPX8iTamO"
+     "a": "Steve Lacy",
+     "t": "Bad Habit",
+     "c": "-18",
+     "sp": "4k6Uh1HXdhtusDW5y8Gbvy"
     },
     {
      "p": 121,
-     "a": "Chris Stapleton",
-     "t": "Tennessee Whiskey",
-     "c": "-2",
-     "sp": "3fqwjXwUGN6vbzIwvyFMhx"
+     "a": "Nat King Cole",
+     "t": "The Christmas Song (Merry Christmas To You) - Remastered 1999",
+     "c": "+50",
+     "sp": "4cqLCCMzG6GQ9Bch2PBzFp"
     },
     {
      "p": 122,
-     "a": "Don Toliver",
-     "t": "No Pole",
-     "c": "+25",
-     "sp": "0eaVIYo2zeOaGJeqZ5TwYz"
+     "a": "Ella Langley",
+     "t": "I Can't Love You Anymore (w/ Morgan Wallen)",
+     "c": "-5",
+     "sp": "61rwYQu9An4QWrcCUyFUyq"
     },
     {
      "p": 123,
-     "a": "Olivia Rodrigo",
-     "t": "honeybee",
-     "c": "-6",
-     "sp": "4kX7xkopoXZCfE1D6fNwl2"
+     "a": "Tame Impala",
+     "t": "The Less I Know The Better",
+     "c": "-35",
+     "sp": "6K4t31amVTZDgR3sKmwUJJ"
     },
     {
      "p": 124,
-     "a": "Coldplay",
-     "t": "Yellow",
-     "c": "+24",
-     "sp": "3AJwUDP919kvQ9QcozQPxg"
+     "a": "Olivia Dean",
+     "t": "A Couple Minutes",
+     "c": "-9",
+     "sp": "312z6PZ8wwREck8613PkJk"
     },
     {
      "p": 125,
-     "a": "Zach Bryan",
-     "t": "I Remember Everything (w/ Kacey Musgraves)",
-     "c": "-4",
-     "sp": "4KULAymBBJcPRpk1yO4dOG"
+     "a": "Kendrick Lamar",
+     "t": "All The Stars (w/ SZA)",
+     "c": "+62",
+     "sp": "3GCdLUSnKSMJhs4Tj6CV3s"
     },
     {
      "p": 126,
-     "a": "Waka Flocka Flame",
-     "t": "No Hands (w/ Roscoe Dash, Wale)",
-     "c": "+13",
-     "sp": "03tqyYWC9Um2ZqU0ZN849H"
+     "a": "Creedence Clearwater Revival",
+     "t": "Have You Ever Seen The Rain",
+     "c": "+54",
+     "sp": "2LawezPeJhN4AWuSB0GtAU"
     },
     {
      "p": 127,
-     "a": "Olivia Rodrigo",
-     "t": "expectations",
-     "c": "+2",
-     "sp": "4bkClAuofJULiaIZsuL3gT"
+     "a": "Feist",
+     "t": "My Moon My Man",
+     "c": "+23",
+     "sp": "4fQVQKIiidREPI0MhFEuDn"
     },
     {
      "p": 128,
-     "a": "Three Days Grace",
-     "t": "I Hate Everything About You",
-     "c": "+10",
-     "sp": "0M955bMOoilikPXwKLYpoi"
+     "a": "Lil Wayne",
+     "t": "Love Me (w/ Drake, Future)",
+     "c": "-12",
+     "sp": "2XHzzp1j4IfTNp1FTn7YFg"
     },
     {
      "p": 129,
-     "a": "bôa",
-     "t": "Duvet",
-     "c": "-13",
-     "sp": "42qNWdLKCI41S4uzfamhFM"
+     "a": "Treaty Oak Revival",
+     "t": "Missed Call",
+     "c": "+29",
+     "sp": "6ybZUqlfk938oS6WeBmDab"
     },
     {
      "p": 130,
      "a": "Drake",
      "t": "Hold On, We're Going Home (w/ Majid Jordan)",
-     "c": "-5",
+     "c": "=",
      "sp": "7nBFpFa8ZFMUqzwPmWaD6u"
     },
     {
      "p": 131,
-     "a": "Rihanna",
-     "t": "Kiss It Better",
-     "c": "+19",
-     "sp": "0UHB9METy4VCXNgkcGqHqS"
+     "a": "Frank Ocean",
+     "t": "Novacane",
+     "c": "-66",
+     "sp": "4osgfFTICMkcGbbigdsa53"
     },
     {
      "p": 132,
-     "a": "Panchiko",
-     "t": "D>E>A>T>H>M>E>T>A>L",
-     "c": "-31",
-     "sp": "0R7BWzdXe7BVtGgFV6jqay"
+     "a": "Chris Stapleton",
+     "t": "Tennessee Whiskey",
+     "c": "-11",
+     "sp": "3fqwjXwUGN6vbzIwvyFMhx"
     },
     {
      "p": 133,
-     "a": "Justin Bieber",
-     "t": "DAISIES",
-     "c": "+28",
-     "sp": "5BZsQlgw21vDOAjoqkNgKb"
+     "a": "Waka Flocka Flame",
+     "t": "No Hands (w/ Roscoe Dash, Wale)",
+     "c": "-7",
+     "sp": "03tqyYWC9Um2ZqU0ZN849H"
     },
     {
      "p": 134,
-     "a": "Fetty Wap",
-     "t": "Trap Queen",
-     "c": "+9",
-     "sp": "2d8JP84HNLKhmd6IYOoupQ"
+     "a": "Paramore",
+     "t": "All I Wanted",
+     "c": "+55",
+     "sp": "1Bv3h7Vc4AaYA2BcSM3rVd"
     },
     {
      "p": 135,
-     "a": "Bryson Tiller",
-     "t": "Don't",
-     "c": "-24",
-     "sp": "3pXF1nA74528Edde4of9CC"
+     "a": "Cigarettes After Sex",
+     "t": "Apocalypse",
+     "c": "-66",
+     "sp": "1oAwsWBovWRIp7qLMGPIet"
     },
     {
      "p": 136,
-     "a": "Brooks & Dunn",
-     "t": "Neon Moon",
-     "c": "+1",
-     "sp": "2M38X60UJnupGPbFTkVPNQ"
+     "a": "Staind",
+     "t": "It's Been Awhile",
+     "c": "-36",
+     "sp": "25CMmGsl22APKhfuj4Tp7j"
     },
     {
      "p": 137,
-     "a": "Linkin Park",
-     "t": "Numb",
-     "c": "+31",
-     "sp": "2nLtzopw4rPReszdYBJU6h"
-    },
-    {
-     "p": 138,
-     "a": "Sia",
-     "t": "Snowman",
-     "c": "-23",
-     "sp": "7uoFMmxln0GPXQ0AcCBXRq"
-    },
-    {
-     "p": 139,
-     "a": "The Marías",
-     "t": "No One Noticed",
-     "c": "-27",
-     "sp": "3siwsiaEoU4Kuuc9WKMUy5"
-    },
-    {
-     "p": 140,
-     "a": "Coldplay",
-     "t": "Sparks",
-     "c": "+11",
-     "sp": "7D0RhFcb3CrfPuTJ0obrod"
-    },
-    {
-     "p": 141,
-     "a": "comehelpglo",
-     "t": "onsra",
-     "c": "-8",
-     "sp": "7wS6EAZast0FJGw79CXGND"
-    },
-    {
-     "p": 142,
-     "a": "Olivia Rodrigo",
-     "t": "maggots for brains",
-     "c": "+2",
-     "sp": "6jfiwkcwt8iYCdkbLukxeI"
-    },
-    {
-     "p": 143,
-     "a": "PinkPantheress",
-     "t": "Stateside + Zara Larsson (w/ Zara Larsson)",
-     "c": "-2",
-     "sp": "1DwscornXpj8fmOmYVlqZt"
-    },
-    {
-     "p": 144,
-     "a": "Hozier",
-     "t": "Take Me To Church",
-     "c": "-16",
-     "sp": "3dYD57lRAUcMHufyqn9GcI"
-    },
-    {
-     "p": 145,
-     "a": "Lord Huron",
-     "t": "The Night We Met",
-     "c": "-23",
-     "sp": "3hRV0jL3vUpRrcy398teAU"
-    },
-    {
-     "p": 146,
-     "a": "Noah Kahan",
-     "t": "Northern Attitude",
-     "c": "+32",
-     "sp": "4O2rRsoSPb5aN7N3tG6Y3v"
-    },
-    {
-     "p": 147,
-     "a": "Tears For Fears",
-     "t": "Everybody Wants To Rule The World",
-     "c": "+13",
-     "sp": "4RvWPyQ5RL0ao9LPZeSouE"
-    },
-    {
-     "p": 148,
-     "a": "Gorillaz",
-     "t": "Feel Good Inc",
-     "c": "+15",
-     "sp": "0d28khcov6AiegSCpG5TuT"
-    },
-    {
-     "p": 149,
-     "a": "Fleetwood Mac",
-     "t": "Landslide",
-     "c": "+10",
-     "sp": "5ihS6UUlyQAfmp48eSkxuQ"
-    },
-    {
-     "p": 150,
-     "a": "Feist",
-     "t": "My Moon My Man",
-     "c": "NEW",
-     "sp": "4fQVQKIiidREPI0MhFEuDn"
-    },
-    {
-     "p": 151,
-     "a": "3 Doors Down",
-     "t": "Kryptonite",
-     "c": "+1",
-     "sp": "6ZOBP3NvffbU4SZcrnt1k6"
-    },
-    {
-     "p": 152,
      "a": "Jeezy",
      "t": "Leave You Alone (w/ Ne-Yo)",
      "c": "+15",
      "sp": "5GOqOUVv7vk0jWDdNToHtA"
     },
     {
-     "p": 153,
-     "a": "sombr",
-     "t": "My Body Isn't Ready",
-     "c": "-8",
-     "sp": "79RJg6MqIJlBuedcMqB9F0"
+     "p": 138,
+     "a": "Lord Huron",
+     "t": "The Night We Met",
+     "c": "+7",
+     "sp": "3hRV0jL3vUpRrcy398teAU"
     },
     {
-     "p": 154,
-     "a": "Darlene Love",
-     "t": "Christmas (Baby Please Come Home)",
-     "c": "-41",
-     "sp": "47ohYW8e7dxCYn9qbUMBCI"
+     "p": 139,
+     "a": "The Police",
+     "t": "Every Breath You Take",
+     "c": "-50",
+     "sp": "1JSTJqkT5qHq8MDJnJbRE1"
     },
     {
-     "p": 155,
-     "a": "Michael Bublé",
-     "t": "It's Beginning to Look a Lot like Christmas",
-     "c": "-41",
-     "sp": "1rv46mRwDqMEhOBZ7vODg3"
-    },
-    {
-     "p": 156,
-     "a": "Kings of Leon",
-     "t": "Sex on Fire",
-     "c": "-2",
-     "sp": "0ntQJM78wzOLVeCUAW7Y45"
-    },
-    {
-     "p": 157,
-     "a": "Clairo",
-     "t": "Bags",
-     "c": "-25",
-     "sp": "1wicceeNVtcnym2YjiOmyj"
-    },
-    {
-     "p": 158,
-     "a": "Treaty Oak Revival",
-     "t": "Missed Call",
-     "c": "-5",
-     "sp": "6ybZUqlfk938oS6WeBmDab"
-    },
-    {
-     "p": 159,
-     "a": "BigXthaPlug",
-     "t": "Hell At Night (w/ Ella Langley)",
-     "c": "-1",
-     "sp": "3pAVk6Ydn0dcGpG8gDyxSJ"
-    },
-    {
-     "p": 160,
-     "a": "Noah Kahan",
-     "t": "The Great Divide",
-     "c": "RE",
-     "sp": "4ck9vo0gEmjVHWUb5q2rYe"
-    },
-    {
-     "p": 161,
-     "a": "Miguel",
-     "t": "damned",
-     "c": "-21",
-     "sp": "2ZCe5vjgNDAmoWe73C46nc"
-    },
-    {
-     "p": 162,
-     "a": "Tame Impala",
-     "t": "Dracula",
-     "c": "-20",
-     "sp": "1NXbNEAcPvY5G1xvfN57aA"
-    },
-    {
-     "p": 163,
-     "a": "Hoobastank",
-     "t": "The Reason",
-     "c": "-7",
-     "sp": "5B5eTk7DF8KVp1zpQoY1XY"
-    },
-    {
-     "p": 164,
-     "a": "Lil Uzi Vert",
-     "t": "20 Min",
-     "c": "-2",
-     "sp": "0uxSUdBrJy9Un0EYoBowng"
-    },
-    {
-     "p": 165,
-     "a": "J. Cole",
-     "t": "Work Out",
-     "c": "+18",
-     "sp": "2wAJTrFhCnQyNSD3oUgTZO"
-    },
-    {
-     "p": 166,
-     "a": "Faouzia",
-     "t": "UNETHICAL",
-     "c": "-32",
-     "sp": "7G8EmDx7L5zRHb6rBJDqEG"
-    },
-    {
-     "p": 167,
-     "a": "Daniel Caesar",
-     "t": "Who Knows",
-     "c": "-2",
-     "sp": "6DH13QYXK7lKkYHSU88N48"
-    },
-    {
-     "p": 168,
-     "a": "Dean Martin",
-     "t": "Let It Snow! Let It Snow! Let It Snow!",
-     "c": "-48",
-     "sp": "2uFaJJtFpPDc5Pa95XzTvg"
-    },
-    {
-     "p": 169,
-     "a": "Chris Stapleton",
-     "t": "You Should Probably Leave",
-     "c": "+5",
-     "sp": "2UikqkwBv7aIvlixeVXHWt"
-    },
-    {
-     "p": 170,
-     "a": "HUNTR/X",
-     "t": "Golden (w/ EJae, AUDREY NUNA, REI AMI, KPop Demon Hunters Cast)",
-     "c": "+18",
-     "sp": "1CPZ5BxNNd0n0nF4Orb9JS"
-    },
-    {
-     "p": 171,
-     "a": "Nat King Cole",
-     "t": "The Christmas Song (Merry Christmas To You) - Remastered 1999",
-     "c": "-48",
-     "sp": "4cqLCCMzG6GQ9Bch2PBzFp"
-    },
-    {
-     "p": 172,
-     "a": "Nickelback",
-     "t": "How You Remind Me",
-     "c": "-8",
-     "sp": "0gmbgwZ8iqyMPmXefof8Yf"
-    },
-    {
-     "p": 173,
-     "a": "Bad Bunny",
-     "t": "DtMF",
-     "c": "+11",
-     "sp": "3sK8wGT43QFpWrvNQsrQya"
-    },
-    {
-     "p": 174,
-     "a": "Julia Wolf",
-     "t": "In My Room",
-     "c": "-8",
-     "sp": "2Ui2JtVjnbHZuExldryCOA"
-    },
-    {
-     "p": 175,
+     "p": 140,
      "a": "Kanye West",
      "t": "Heartless",
-     "c": "-29",
+     "c": "+35",
      "sp": "4EWCNWgDS8707fNSZ1oaA5"
     },
     {
-     "p": 176,
-     "a": "Morgan Wallen",
-     "t": "I'm The Problem",
-     "c": "+18",
-     "sp": "7AeM1BGYM7emrqmQn1PuWv"
+     "p": 141,
+     "a": "Three Days Grace",
+     "t": "I Hate Everything About You",
+     "c": "-13",
+     "sp": "0M955bMOoilikPXwKLYpoi"
     },
     {
-     "p": 177,
+     "p": 142,
+     "a": "comehelpglo",
+     "t": "onsra",
+     "c": "-1",
+     "sp": "7wS6EAZast0FJGw79CXGND"
+    },
+    {
+     "p": 143,
+     "a": "Dean Martin",
+     "t": "Let It Snow! Let It Snow! Let It Snow!",
+     "c": "+25",
+     "sp": "2uFaJJtFpPDc5Pa95XzTvg"
+    },
+    {
+     "p": 144,
+     "a": "Brooks & Dunn",
+     "t": "Neon Moon",
+     "c": "-8",
+     "sp": "2M38X60UJnupGPbFTkVPNQ"
+    },
+    {
+     "p": 145,
+     "a": "SIENNA SPIRO",
+     "t": "Die On This Hill",
+     "c": "-41",
+     "sp": "2gYTC8DsplN3RNdpdBcCOQ"
+    },
+    {
+     "p": 146,
+     "a": "Justin Bieber",
+     "t": "DAISIES",
+     "c": "-13",
+     "sp": "5BZsQlgw21vDOAjoqkNgKb"
+    },
+    {
+     "p": 147,
      "a": "Red Hot Chili Peppers",
      "t": "Under the Bridge - 2014 Remaster",
-     "c": "=",
+     "c": "+30",
      "sp": "0TQJyNIPt63T7QyFRArf8I"
     },
     {
-     "p": 178,
-     "a": "George Michael",
-     "t": "Cowboys and Angels - Remastered",
-     "c": "-23",
-     "sp": "1TDzHrMyt99Ey8IB72i7u9"
-    },
-    {
-     "p": 179,
-     "a": "Jeff Buckley",
-     "t": "Lover, You Should've Come Over",
-     "c": "-22",
-     "sp": "6Jv7kjGkhY2fT4yuBF3aTz"
-    },
-    {
-     "p": 180,
-     "a": "Creedence Clearwater Revival",
-     "t": "Have You Ever Seen The Rain",
-     "c": "+11",
-     "sp": "2LawezPeJhN4AWuSB0GtAU"
-    },
-    {
-     "p": 181,
-     "a": "Taylor Swift",
-     "t": "The Fate of Ophelia",
+     "p": 148,
+     "a": "Michael Jackson",
+     "t": "Chicago",
      "c": "RE",
-     "sp": "53iuhJlwXhSER5J2IYYv1W"
+     "sp": "5BKKy9fIJL5uM9fz1SnqyP"
     },
     {
-     "p": 182,
-     "a": "Chappell Roan",
-     "t": "Casual",
-     "c": "-11",
-     "sp": "3WSOUb3U7tqURbBSgZTrZX"
+     "p": 149,
+     "a": "Michael Bublé",
+     "t": "It's Beginning to Look a Lot like Christmas",
+     "c": "+6",
+     "sp": "1rv46mRwDqMEhOBZ7vODg3"
     },
     {
-     "p": 183,
+     "p": 150,
+     "a": "Fetty Wap",
+     "t": "Trap Queen",
+     "c": "-16",
+     "sp": "2d8JP84HNLKhmd6IYOoupQ"
+    },
+    {
+     "p": 151,
+     "a": "Olivia Rodrigo",
+     "t": "honeybee",
+     "c": "-28",
+     "sp": "4kX7xkopoXZCfE1D6fNwl2"
+    },
+    {
+     "p": 152,
+     "a": "Nickelback",
+     "t": "How You Remind Me",
+     "c": "+20",
+     "sp": "0gmbgwZ8iqyMPmXefof8Yf"
+    },
+    {
+     "p": 153,
+     "a": "Bryson Tiller",
+     "t": "Don't",
+     "c": "-18",
+     "sp": "3pXF1nA74528Edde4of9CC"
+    },
+    {
+     "p": 154,
+     "a": "Linkin Park",
+     "t": "Faint",
+     "c": "RE",
+     "sp": "4Yf5bqU3NK4kNOypcrLYwU"
+    },
+    {
+     "p": 155,
+     "a": "Olivia Rodrigo",
+     "t": "maggots for brains",
+     "c": "-13",
+     "sp": "6jfiwkcwt8iYCdkbLukxeI"
+    },
+    {
+     "p": 156,
      "a": "Morgan Wallen",
      "t": "Last Thing You Need (from GTAVI: The Album) (w/ Grand Theft Auto VI)",
-     "c": "-10",
+     "c": "+27",
      "sp": "5qGziX9216V8hKJjGg8RtH"
     },
     {
-     "p": 184,
-     "a": "Three Days Grace",
-     "t": "Animal I Have Become",
-     "c": "+12",
-     "sp": "5eFxwmqKrHpSQDOEIFYlgY"
+     "p": 157,
+     "a": "PinkPantheress",
+     "t": "Stateside + Zara Larsson (w/ Zara Larsson)",
+     "c": "-14",
+     "sp": "1DwscornXpj8fmOmYVlqZt"
     },
     {
-     "p": 185,
-     "a": "Sixpence None The Richer",
-     "t": "Kiss Me",
-     "c": "+5",
-     "sp": "754kgU5rWscRTfvlsuEwFp"
+     "p": 158,
+     "a": "sombr",
+     "t": "12 to 12",
+     "c": "-65",
+     "sp": "05od2qm2MTSKCHxy1GBp5W"
     },
     {
-     "p": 186,
-     "a": "Linkin Park",
-     "t": "Somewhere I Belong",
-     "c": "RE",
-     "sp": "3fjmSxt0PskST13CSdBUFx"
+     "p": 159,
+     "a": "Gorillaz",
+     "t": "Feel Good Inc",
+     "c": "-11",
+     "sp": "0d28khcov6AiegSCpG5TuT"
     },
     {
-     "p": 187,
-     "a": "Kendrick Lamar",
-     "t": "All The Stars (w/ SZA)",
+     "p": 160,
+     "a": "Panchiko",
+     "t": "D>E>A>T>H>M>E>T>A>L",
+     "c": "-28",
+     "sp": "0R7BWzdXe7BVtGgFV6jqay"
+    },
+    {
+     "p": 161,
+     "a": "Tate McRae",
+     "t": "Sports car",
+     "c": "-48",
+     "sp": "5UJbgR4XF4y1DvbkxEqe8S"
+    },
+    {
+     "p": 162,
+     "a": "Post Malone",
+     "t": "Circles",
+     "c": "-52",
+     "sp": "21jGcNKet2qwijlDFuPiPb"
+    },
+    {
+     "p": 163,
+     "a": "girl in red",
+     "t": "we fell in love in october",
+     "c": "-79",
+     "sp": "6IPwKM3fUUzlElbvKw2sKl"
+    },
+    {
+     "p": 164,
+     "a": "The Smashing Pumpkins",
+     "t": "1979",
+     "c": "NEW",
+     "sp": "0jiEKj0fXevcv46JXUdcKh"
+    },
+    {
+     "p": 165,
+     "a": "Nirvana",
+     "t": "Come As You Are - Remastered",
+     "c": "+35",
+     "sp": "5AEOqLsRJFAoSS4ay4Jzao"
+    },
+    {
+     "p": 166,
+     "a": "3 Doors Down",
+     "t": "Kryptonite",
+     "c": "-15",
+     "sp": "6ZOBP3NvffbU4SZcrnt1k6"
+    },
+    {
+     "p": 167,
+     "a": "Tory Lanez",
+     "t": "The Color Violet",
+     "c": "-62",
+     "sp": "3azJifCSqg9fRij2yKIbWz"
+    },
+    {
+     "p": 168,
+     "a": "HUNTR/X",
+     "t": "Golden (w/ EJae, AUDREY NUNA, REI AMI, KPop Demon Hunters Cast)",
      "c": "+2",
-     "sp": "3GCdLUSnKSMJhs4Tj6CV3s"
+     "sp": "1CPZ5BxNNd0n0nF4Orb9JS"
     },
     {
-     "p": 188,
-     "a": "The Fray",
-     "t": "How to Save a Life",
-     "c": "-6",
-     "sp": "5fVZC9GiM4e8vu99W0Xf6J"
-    },
-    {
-     "p": 189,
-     "a": "Paramore",
-     "t": "All I Wanted",
-     "c": "RE",
-     "sp": "1Bv3h7Vc4AaYA2BcSM3rVd"
-    },
-    {
-     "p": 190,
-     "a": "Bruno Mars",
-     "t": "Locked out of Heaven",
-     "c": "+3",
-     "sp": "5g7sDjBhZ4I3gcFIpkrLuI"
-    },
-    {
-     "p": 191,
+     "p": 169,
      "a": "Tove Lo",
      "t": "Habits (Stay High)",
-     "c": "+6",
+     "c": "+22",
      "sp": "73DdlUXPj6SIOJQRrqgjld"
     },
     {
-     "p": 192,
-     "a": "Bella Kay",
-     "t": "iloveitiloveitiloveit",
-     "c": "-13",
-     "sp": "5IMpnpD0tQVcqWlVIgtAtV"
+     "p": 170,
+     "a": "Kings of Leon",
+     "t": "Sex on Fire",
+     "c": "-14",
+     "sp": "0ntQJM78wzOLVeCUAW7Y45"
     },
     {
-     "p": 193,
-     "a": "Benson Boone",
-     "t": "Beautiful Things",
+     "p": 171,
+     "a": "The Neighbourhood",
+     "t": "Reflections",
+     "c": "NEW",
+     "sp": "2xql0pid3EUwW38AsywxhV"
+    },
+    {
+     "p": 172,
+     "a": "Chris Stapleton",
+     "t": "You Should Probably Leave",
+     "c": "-3",
+     "sp": "2UikqkwBv7aIvlixeVXHWt"
+    },
+    {
+     "p": 173,
+     "a": "Zara Larsson",
+     "t": "Midnight Sun",
      "c": "RE",
-     "sp": "3xkHsmpQCBMytMJNiDf3Ii"
+     "sp": "1qRV1dKLOfH1s00b9J2LUQ"
     },
     {
-     "p": 194,
-     "a": "Tame Impala",
-     "t": "Dracula - JENNIE Remix (w/ JENNIE)",
-     "c": "-24",
-     "sp": "5yvVYFDUpbnjcnRBgjwTzM"
+     "p": 174,
+     "a": "Rihanna",
+     "t": "Kiss It Better",
+     "c": "-43",
+     "sp": "0UHB9METy4VCXNgkcGqHqS"
     },
     {
-     "p": 195,
-     "a": "Malcolm Todd",
-     "t": "Sweet Boy",
-     "c": "-23",
-     "sp": "59c2xv2kMzYM6HR9oY6BIa"
-    },
-    {
-     "p": 196,
-     "a": "Bad Bunny",
-     "t": "EoO",
-     "c": "RE",
-     "sp": "6J5kc12BW5HuP3d7C3vvx8"
-    },
-    {
-     "p": 197,
-     "a": "Billie Eilish",
-     "t": "WILDFLOWER",
+     "p": 175,
+     "a": "Lil Uzi Vert",
+     "t": "20 Min",
      "c": "-11",
-     "sp": "3QaPy1KgI7nu9FJEQUgn6h"
+     "sp": "0uxSUdBrJy9Un0EYoBowng"
     },
     {
-     "p": 198,
-     "a": "Malcolm Todd",
-     "t": "Roommates",
+     "p": 176,
+     "a": "The Red Clay Strays",
+     "t": "Wondering Why",
+     "c": "RE",
+     "sp": "1HbzxLqpNVPdiBXvpC7Ovb"
+    },
+    {
+     "p": 177,
+     "a": "Morgan Wallen",
+     "t": "I'm The Problem",
+     "c": "-1",
+     "sp": "7AeM1BGYM7emrqmQn1PuWv"
+    },
+    {
+     "p": 178,
+     "a": "Noah Kahan",
+     "t": "The Great Divide",
      "c": "-18",
-     "sp": "5vPUv0xziXbV4lnWeVNXNq"
+     "sp": "4ck9vo0gEmjVHWUb5q2rYe"
     },
     {
-     "p": 199,
+     "p": 179,
      "a": "Teddy Swims",
      "t": "Lose Control",
-     "c": "RE",
+     "c": "+20",
      "sp": "17phhZDn6oGtzMe56NuWvj"
     },
     {
-     "p": 200,
-     "a": "Nirvana",
-     "t": "Come As You Are - Remastered",
+     "p": 180,
+     "a": "Oasis",
+     "t": "Wonderwall - Remastered",
      "c": "RE",
-     "sp": "5AEOqLsRJFAoSS4ay4Jzao"
+     "sp": "5qqabIl2vWzo9ApSC317sa"
+    },
+    {
+     "p": 181,
+     "a": "Audioslave",
+     "t": "Like a Stone",
+     "c": "RE",
+     "sp": "2xt2piJx6jlFkjS77YiqpL"
+    },
+    {
+     "p": 182,
+     "a": "Creed",
+     "t": "One Last Breath",
+     "c": "RE",
+     "sp": "42T2QQv3xgBlpQxaSP7lnK"
+    },
+    {
+     "p": 183,
+     "a": "Tears For Fears",
+     "t": "Everybody Wants To Rule The World",
+     "c": "-36",
+     "sp": "4RvWPyQ5RL0ao9LPZeSouE"
+    },
+    {
+     "p": 184,
+     "a": "Hozier",
+     "t": "Take Me To Church",
+     "c": "-40",
+     "sp": "3dYD57lRAUcMHufyqn9GcI"
+    },
+    {
+     "p": 185,
+     "a": "Hozier",
+     "t": "Too Sweet",
+     "c": "RE",
+     "sp": "19XpFsce28aByvCC4g89tJ"
+    },
+    {
+     "p": 186,
+     "a": "Suki Waterhouse",
+     "t": "Good Looking",
+     "c": "RE",
+     "sp": "5ZjV4yevHO1QhMw8AjyQbZ"
+    },
+    {
+     "p": 187,
+     "a": "Darius Rucker",
+     "t": "Wagon Wheel",
+     "c": "RE",
+     "sp": "3xdjjKMcMOFgo1eQrfbogM"
+    },
+    {
+     "p": 188,
+     "a": "Deftones",
+     "t": "Change (In the House of Flies)",
+     "c": "RE",
+     "sp": "51c94ac31swyDQj9B3Lzs3"
+    },
+    {
+     "p": 189,
+     "a": "Three Days Grace",
+     "t": "Animal I Have Become",
+     "c": "-5",
+     "sp": "5eFxwmqKrHpSQDOEIFYlgY"
+    },
+    {
+     "p": 190,
+     "a": "The Ronettes",
+     "t": "Sleigh Ride",
+     "c": "RE",
+     "sp": "7fUYUcWy853HS8YJn0b3Sr"
+    },
+    {
+     "p": 191,
+     "a": "Soundgarden",
+     "t": "Black Hole Sun",
+     "c": "-79",
+     "sp": "4xdHI4eFNst0vTZuuKrWjr"
+    },
+    {
+     "p": 192,
+     "a": "Rihanna",
+     "t": "Love On The Brain",
+     "c": "RE",
+     "sp": "5oO3drDxtziYU2H1X23ZIp"
+    },
+    {
+     "p": 193,
+     "a": "RAYE",
+     "t": "WHERE IS MY HUSBAND!",
+     "c": "RE",
+     "sp": "55lijDD6OAjLFFUHU9tcDm"
+    },
+    {
+     "p": 194,
+     "a": "Benson Boone",
+     "t": "Beautiful Things",
+     "c": "-1",
+     "sp": "3xkHsmpQCBMytMJNiDf3Ii"
+    },
+    {
+     "p": 195,
+     "a": "Miguel",
+     "t": "damned",
+     "c": "-34",
+     "sp": "2ZCe5vjgNDAmoWe73C46nc"
+    },
+    {
+     "p": 196,
+     "a": "Julia Wolf",
+     "t": "In My Room",
+     "c": "-22",
+     "sp": "2Ui2JtVjnbHZuExldryCOA"
+    },
+    {
+     "p": 197,
+     "a": "Gracie Abrams",
+     "t": "That’s So True",
+     "c": "RE",
+     "sp": "7ne4VBA60CxGM75vw0EYad"
+    },
+    {
+     "p": 198,
+     "a": "Deftones",
+     "t": "Cherry Waves",
+     "c": "NEW",
+     "sp": "09BcfKrwj4lQZje8w7JbhQ"
+    },
+    {
+     "p": 199,
+     "a": "Post Malone",
+     "t": "Sunflower - Spider-Man: Into the Spider-Verse (w/ Swae Lee)",
+     "c": "RE",
+     "sp": "0RiRZpuVRbi7oqRdSMwhQY"
+    },
+    {
+     "p": 200,
+     "a": "Jeff Buckley",
+     "t": "Lover, You Should've Come Over",
+     "c": "-21",
+     "sp": "6Jv7kjGkhY2fT4yuBF3aTz"
     }
    ]
   },
   "gb": {
    "name": "UK · Spotify top 200",
-   "date": "2026/11/10",
+   "date": "2026/11/11",
    "src": "https://kworb.net/spotify/country/gb_daily.html",
    "items": [
     {
@@ -1423,14 +1423,14 @@
      "p": 2,
      "a": "Ashe",
      "t": "Stop The Wedding!",
-     "c": "+1",
+     "c": "=",
      "sp": "7MOO89Qv9AV7VZkt5mcqA8"
     },
     {
      "p": 3,
      "a": "Tate McRae",
      "t": "Housewife",
-     "c": "-1",
+     "c": "=",
      "sp": "2sFepQNyl1WjpROruP8bJ0"
     },
     {
@@ -1458,57 +1458,57 @@
      "p": 7,
      "a": "Olivia Rodrigo",
      "t": "the cure",
-     "c": "+1",
+     "c": "=",
      "sp": "55pBIZO1cqoldeqpp5WR7H"
     },
     {
      "p": 8,
      "a": "Olivia Rodrigo",
      "t": "stupid song",
-     "c": "-1",
+     "c": "=",
      "sp": "49j6SvuvWfbEKZKzsHCdLJ"
     },
     {
      "p": 9,
-     "a": "ADÉLA",
-     "t": "Nicole Kidman",
-     "c": "=",
-     "sp": "70cHKK8bHAfJrOGVnfRG9J"
+     "a": "The Goo Goo Dolls",
+     "t": "Iris",
+     "c": "+8",
+     "sp": "6Qyc6fS4DsZjB2mRW9DsQs"
     },
     {
      "p": 10,
      "a": "Wham!",
      "t": "Last Christmas",
-     "c": "+1",
+     "c": "=",
      "sp": "2FRnf9qhLbvw8fu4IBXx78"
     },
     {
      "p": 11,
+     "a": "Ella Langley",
+     "t": "Choosin' Texas",
+     "c": "+1",
+     "sp": "7scFxt9VhL4FJwuPSfRlfN"
+    },
+    {
+     "p": 12,
      "a": "sombr",
      "t": "My Body Isn't Ready",
      "c": "-1",
      "sp": "79RJg6MqIJlBuedcMqB9F0"
     },
     {
-     "p": 12,
-     "a": "Ella Langley",
-     "t": "Choosin' Texas",
-     "c": "=",
-     "sp": "7scFxt9VhL4FJwuPSfRlfN"
-    },
-    {
      "p": 13,
-     "a": "The Killers",
-     "t": "Mr. Brightside",
-     "c": "=",
-     "sp": "003vvx7Niy0yvhvHt4a68B"
+     "a": "ADÉLA",
+     "t": "Nicole Kidman",
+     "c": "-4",
+     "sp": "70cHKK8bHAfJrOGVnfRG9J"
     },
     {
      "p": 14,
-     "a": "sombr",
-     "t": "Homewrecker",
-     "c": "=",
-     "sp": "7tICCrK3CcyRFKza7yrR0z"
+     "a": "The Killers",
+     "t": "Mr. Brightside",
+     "c": "-1",
+     "sp": "003vvx7Niy0yvhvHt4a68B"
     },
     {
      "p": 15,
@@ -1519,17 +1519,17 @@
     },
     {
      "p": 16,
-     "a": "ADÉLA",
-     "t": "Ain't In LA",
-     "c": "=",
-     "sp": "6U9VpmP3dEinuezxCJ2Zg9"
+     "a": "STELLA LEFTY",
+     "t": "Boston",
+     "c": "+5",
+     "sp": "36idurZmYRjJ56KQ8JD9bN"
     },
     {
      "p": 17,
-     "a": "The Goo Goo Dolls",
-     "t": "Iris",
-     "c": "+3",
-     "sp": "6Qyc6fS4DsZjB2mRW9DsQs"
+     "a": "sombr",
+     "t": "Homewrecker",
+     "c": "-3",
+     "sp": "7tICCrK3CcyRFKza7yrR0z"
     },
     {
      "p": 18,
@@ -1542,190 +1542,190 @@
      "p": 19,
      "a": "Noah Kahan",
      "t": "Orbiter",
-     "c": "-2",
+     "c": "=",
      "sp": "77fL8ATR0dpUDLI0XLmDBV"
     },
     {
      "p": 20,
-     "a": "SIENNA SPIRO",
-     "t": "Die On This Hill",
-     "c": "+1",
-     "sp": "2gYTC8DsplN3RNdpdBcCOQ"
-    },
-    {
-     "p": 21,
-     "a": "STELLA LEFTY",
-     "t": "Boston",
-     "c": "+1",
-     "sp": "36idurZmYRjJ56KQ8JD9bN"
-    },
-    {
-     "p": 22,
-     "a": "Dream Supplier",
-     "t": "Clean Baby Sleep White Noise (Loopable no fade)",
-     "c": "-3",
-     "sp": "3BgK59BTBUs8iQtnegfMfz"
-    },
-    {
-     "p": 23,
      "a": "P!nk",
      "t": "Just Give Me a Reason (w/ Nate Ruess)",
-     "c": "+4",
+     "c": "+3",
      "sp": "1mKXFLRA179hdOWQBwUk9e"
     },
     {
-     "p": 24,
-     "a": "sombr",
-     "t": "12 to 12",
-     "c": "+6",
-     "sp": "05od2qm2MTSKCHxy1GBp5W"
+     "p": 21,
+     "a": "ADÉLA",
+     "t": "Ain't In LA",
+     "c": "-5",
+     "sp": "6U9VpmP3dEinuezxCJ2Zg9"
     },
     {
-     "p": 25,
-     "a": "Bella Kay",
-     "t": "iloveitiloveitiloveit",
-     "c": "+3",
-     "sp": "5IMpnpD0tQVcqWlVIgtAtV"
-    },
-    {
-     "p": 26,
-     "a": "Olivia Rodrigo",
-     "t": "expectations (w/ Chappell Roan)",
+     "p": 22,
+     "a": "SIENNA SPIRO",
+     "t": "Die On This Hill",
      "c": "-2",
-     "sp": "3XmwAZpIMNpTJy8faw3ajD"
+     "sp": "2gYTC8DsplN3RNdpdBcCOQ"
     },
     {
-     "p": 27,
+     "p": 23,
+     "a": "Malcolm Todd",
+     "t": "Earrings",
+     "c": "+11",
+     "sp": "0eAuGrXyGFYwur9ARUe7LJ"
+    },
+    {
+     "p": 24,
      "a": "Season 25",
      "t": "Shotta's.",
-     "c": "-1",
+     "c": "+3",
      "sp": "1ApUYfDejOBvrTnar2Wyf3"
     },
     {
-     "p": 28,
-     "a": "Olivia Dean",
-     "t": "Nice To Each Other",
+     "p": 25,
+     "a": "Olivia Rodrigo",
+     "t": "expectations (w/ Chappell Roan)",
      "c": "+1",
-     "sp": "7gKxCvTDWwV9wBhdeBbr3l"
+     "sp": "3XmwAZpIMNpTJy8faw3ajD"
     },
     {
-     "p": 29,
-     "a": "Dream Supplier",
-     "t": "Clean Baby Sleep White Noise (Loopable)",
-     "c": "+2",
-     "sp": "4yVBarJHjhhzP1q7fU4p0W"
+     "p": 26,
+     "a": "Bella Kay",
+     "t": "iloveitiloveitiloveit",
+     "c": "-1",
+     "sp": "5IMpnpD0tQVcqWlVIgtAtV"
     },
     {
-     "p": 30,
+     "p": 27,
      "a": "Dave",
      "t": "Raindance (w/ Tems)",
      "c": "+3",
      "sp": "3oTuTpF1F3A7rEC6RKsMRz"
     },
     {
-     "p": 31,
+     "p": 28,
+     "a": "Alex Warren",
+     "t": "Ordinary",
+     "c": "+12",
+     "sp": "2RkZ5LkEzeHGRsmDqKwmaJ"
+    },
+    {
+     "p": 29,
      "a": "RAYE",
      "t": "WHERE IS MY HUSBAND!",
-     "c": "+9",
+     "c": "+2",
      "sp": "55lijDD6OAjLFFUHU9tcDm"
+    },
+    {
+     "p": 30,
+     "a": "sombr",
+     "t": "back to friends",
+     "c": "+2",
+     "sp": "7qjZnBKE73H4Oxkopwulqe"
+    },
+    {
+     "p": 31,
+     "a": "Olivia Dean",
+     "t": "Nice To Each Other",
+     "c": "-3",
+     "sp": "7gKxCvTDWwV9wBhdeBbr3l"
     },
     {
      "p": 32,
      "a": "sombr",
-     "t": "back to friends",
-     "c": "=",
-     "sp": "7qjZnBKE73H4Oxkopwulqe"
+     "t": "12 to 12",
+     "c": "-8",
+     "sp": "05od2qm2MTSKCHxy1GBp5W"
     },
     {
      "p": 33,
-     "a": "Olivia Rodrigo",
-     "t": "take me home (4 christmas)",
-     "c": "-8",
-     "sp": "4UjYZS6Jbt3lee27qmiNOu"
-    },
-    {
-     "p": 34,
-     "a": "Malcolm Todd",
-     "t": "Earrings",
-     "c": "-11",
-     "sp": "0eAuGrXyGFYwur9ARUe7LJ"
-    },
-    {
-     "p": 35,
      "a": "The Neighbourhood",
      "t": "Sweater Weather",
-     "c": "+1",
+     "c": "+2",
      "sp": "2QjOHCTQ1Jl3zawyYOpxh6"
     },
     {
+     "p": 34,
+     "a": "Noah Kahan",
+     "t": "Stick Season",
+     "c": "+9",
+     "sp": "0mflMxspEfB0VbI1kyLiAv"
+    },
+    {
+     "p": 35,
+     "a": "TLC",
+     "t": "No Scrubs",
+     "c": "+7",
+     "sp": "1KGi9sZVMeszgZOWivFpxs"
+    },
+    {
      "p": 36,
-     "a": "Harry Styles",
-     "t": "Coming Up Roses",
-     "c": "+5",
-     "sp": "0QPdjsMOUhwouq1NS3HwfQ"
+     "a": "sombr",
+     "t": "My Body Isn't Ready - Orchestral Version from Sound City",
+     "c": "+63",
+     "sp": "5wA2qmCu9hcu6KAqNE4FOC"
     },
     {
      "p": 37,
-     "a": "Alyssa Grace",
-     "t": "bloodstream",
-     "c": "-2",
-     "sp": "2oWFJJW9d1bIra3zHjR6GO"
+     "a": "Fleetwood Mac",
+     "t": "Dreams - 2001 Remaster",
+     "c": "+8",
+     "sp": "53qkszfgztIvkFyF31GfdQ"
     },
     {
      "p": 38,
+     "a": "Alyssa Grace",
+     "t": "bloodstream",
+     "c": "-1",
+     "sp": "2oWFJJW9d1bIra3zHjR6GO"
+    },
+    {
+     "p": 39,
      "a": "Olivia Dean",
      "t": "So Easy (To Fall In Love)",
      "c": "-1",
      "sp": "6sGIMrtIzQjdzNndVxe397"
     },
     {
-     "p": 39,
-     "a": "Zach Bryan",
-     "t": "Lies (w/ Lana Del Rey)",
-     "c": "-1",
-     "sp": "4EVSMqqVEehvyyOBmjNTlA"
-    },
-    {
      "p": 40,
-     "a": "Alex Warren",
-     "t": "Ordinary",
-     "c": "+2",
-     "sp": "2RkZ5LkEzeHGRsmDqKwmaJ"
+     "a": "SIENNA SPIRO",
+     "t": "Material Lover - from The Devil Wears Prada 2 Original Motion Picture",
+     "c": "+10",
+     "sp": "2aQcGu5C6qFcicPsaywTEK"
     },
     {
      "p": 41,
-     "a": "Fontaines D.C.",
-     "t": "Japan",
+     "a": "Zach Bryan",
+     "t": "Lies (w/ Lana Del Rey)",
      "c": "-2",
-     "sp": "29USgREdEXy48zHm3OnhAZ"
+     "sp": "4EVSMqqVEehvyyOBmjNTlA"
     },
     {
      "p": 42,
-     "a": "TLC",
-     "t": "No Scrubs",
-     "c": "+3",
-     "sp": "1KGi9sZVMeszgZOWivFpxs"
+     "a": "Olivia Rodrigo",
+     "t": "take me home (4 christmas)",
+     "c": "-9",
+     "sp": "4UjYZS6Jbt3lee27qmiNOu"
     },
     {
      "p": 43,
-     "a": "Noah Kahan",
-     "t": "Stick Season",
-     "c": "+7",
-     "sp": "0mflMxspEfB0VbI1kyLiAv"
+     "a": "Harry Styles",
+     "t": "Coming Up Roses",
+     "c": "-7",
+     "sp": "0QPdjsMOUhwouq1NS3HwfQ"
     },
     {
      "p": 44,
-     "a": "Tame Impala",
-     "t": "Loser",
-     "c": "-10",
-     "sp": "7bxaFZ1O3cHkgLKMsdC3xR"
+     "a": "Fontaines D.C.",
+     "t": "Japan",
+     "c": "-3",
+     "sp": "29USgREdEXy48zHm3OnhAZ"
     },
     {
      "p": 45,
-     "a": "Fleetwood Mac",
-     "t": "Dreams - 2001 Remaster",
-     "c": "+2",
-     "sp": "53qkszfgztIvkFyF31GfdQ"
+     "a": "Djo",
+     "t": "End of Beginning",
+     "c": "+15",
+     "sp": "3qhlB30KknSejmIvZZLjOD"
     },
     {
      "p": 46,
@@ -1736,1081 +1736,1081 @@
     },
     {
      "p": 47,
-     "a": "Miguel",
-     "t": "Sure Thing",
-     "c": "-3",
-     "sp": "0JXXNGljqupsJaZsgSbMZV"
-    },
-    {
-     "p": 48,
-     "a": "Harry Styles",
-     "t": "Sign of the Times",
-     "c": "-5",
-     "sp": "5Ohxk2dO5COHF1krpoPigN"
-    },
-    {
-     "p": 49,
-     "a": "Florence + The Machine",
-     "t": "Dog Days Are Over",
-     "c": "=",
-     "sp": "456WNXWhDwYOSf5SpTuqxd"
-    },
-    {
-     "p": 50,
-     "a": "SIENNA SPIRO",
-     "t": "Material Lover - from The Devil Wears Prada 2 Original Motion Picture",
-     "c": "+1",
-     "sp": "2aQcGu5C6qFcicPsaywTEK"
-    },
-    {
-     "p": 51,
-     "a": "Ravyn Lenae",
-     "t": "Love Me Not",
-     "c": "+1",
-     "sp": "4WFgvKVfEhb3IUAFGrutTR"
-    },
-    {
-     "p": 52,
-     "a": "Justice",
-     "t": "Flower In A Hurricane (w/ Tame Impala, SZA, Grand Theft Auto VI, King Gizzard & The Lizard Wizard)",
-     "c": "+15",
-     "sp": "4HCOHRCSQelz2GPX8iTamO"
-    },
-    {
-     "p": 53,
-     "a": "The Cranberries",
-     "t": "Linger - Remastered 2026",
-     "c": "=",
-     "sp": "1WYrTfvKjQYaYfVziGG1ET"
-    },
-    {
-     "p": 54,
-     "a": "Kings of Leon",
-     "t": "Wait for Me",
-     "c": "-6",
-     "sp": "2nO1DYEg1X5GHi8SSuNJQj"
-    },
-    {
-     "p": 55,
-     "a": "Kingfishr",
-     "t": "The Sun Will Never Settle",
-     "c": "=",
-     "sp": "23SqhGYsqaZJNbDSc17wqA"
-    },
-    {
-     "p": 56,
-     "a": "Kelly Clarkson",
-     "t": "Underneath the Tree",
-     "c": "+5",
-     "sp": "3nAp4IvdMPPWEH9uuXFFV5"
-    },
-    {
-     "p": 57,
-     "a": "The Pogues",
-     "t": "Fairytale of New York (w/ Kirsty MacColl)",
-     "c": "+6",
-     "sp": "3VTNVsTTu05dmTsVFrmGpK"
-    },
-    {
-     "p": 58,
-     "a": "The Script",
-     "t": "The Man Who Can't Be Moved",
-     "c": "-1",
-     "sp": "3nqqDo8CcCLke3ZoTgiOKf"
-    },
-    {
-     "p": 59,
-     "a": "The Police",
-     "t": "Every Breath You Take",
-     "c": "+3",
-     "sp": "1JSTJqkT5qHq8MDJnJbRE1"
-    },
-    {
-     "p": 60,
-     "a": "Djo",
-     "t": "End of Beginning",
-     "c": "+14",
-     "sp": "3qhlB30KknSejmIvZZLjOD"
-    },
-    {
-     "p": 61,
      "a": "Ariana Grande",
      "t": "Santa Tell Me",
-     "c": "+3",
+     "c": "+14",
      "sp": "0lizgQ7Qw35od7CYaoMBZb"
     },
     {
-     "p": 62,
-     "a": "Taylor Swift",
-     "t": "Patient Zero",
-     "c": "+3",
-     "sp": "11hcBLPtbMp4aQI6zGQLub"
+     "p": 48,
+     "a": "Justice",
+     "t": "Flower In A Hurricane (w/ Tame Impala, SZA, Grand Theft Auto VI, King Gizzard & The Lizard Wizard)",
+     "c": "+4",
+     "sp": "4HCOHRCSQelz2GPX8iTamO"
     },
     {
-     "p": 63,
-     "a": "Justin Bieber",
-     "t": "Beauty And A Beat (w/ Nicki Minaj)",
+     "p": 49,
+     "a": "Kelly Clarkson",
+     "t": "Underneath the Tree",
+     "c": "+7",
+     "sp": "3nAp4IvdMPPWEH9uuXFFV5"
+    },
+    {
+     "p": 50,
+     "a": "Kingfishr",
+     "t": "The Sun Will Never Settle",
+     "c": "+5",
+     "sp": "23SqhGYsqaZJNbDSc17wqA"
+    },
+    {
+     "p": 51,
+     "a": "Harry Styles",
+     "t": "Sign of the Times",
      "c": "-3",
-     "sp": "6QFCMUUq1T2Vf5sFUXcuQ7"
+     "sp": "5Ohxk2dO5COHF1krpoPigN"
     },
     {
-     "p": 64,
-     "a": "Fontaines D.C.",
-     "t": "I Love You",
-     "c": "-10",
-     "sp": "5XhMgAWzou6EjDmQtoyoZE"
+     "p": 52,
+     "a": "Miguel",
+     "t": "Sure Thing",
+     "c": "-5",
+     "sp": "0JXXNGljqupsJaZsgSbMZV"
     },
     {
-     "p": 65,
-     "a": "Fontaines D.C.",
-     "t": "Starburster",
-     "c": "-6",
-     "sp": "09ttHg3ZNVgDlYBZa1ZBw0"
-    },
-    {
-     "p": 66,
-     "a": "Radiohead",
-     "t": "Creep",
-     "c": "-8",
-     "sp": "70LcF31zb1H0PyJoS1Sx1r"
-    },
-    {
-     "p": 67,
+     "p": 53,
      "a": "Vance Joy",
      "t": "Riptide",
-     "c": "+4",
+     "c": "+14",
      "sp": "7yq4Qj7cqayVTp3FF9CWbm"
     },
     {
-     "p": 68,
+     "p": 54,
+     "a": "Coldplay",
+     "t": "Yellow",
+     "c": "+63",
+     "sp": "3AJwUDP919kvQ9QcozQPxg"
+    },
+    {
+     "p": 55,
+     "a": "Ravyn Lenae",
+     "t": "Love Me Not",
+     "c": "-4",
+     "sp": "4WFgvKVfEhb3IUAFGrutTR"
+    },
+    {
+     "p": 56,
+     "a": "Tame Impala",
+     "t": "Loser",
+     "c": "-12",
+     "sp": "7bxaFZ1O3cHkgLKMsdC3xR"
+    },
+    {
+     "p": 57,
+     "a": "Florence + The Machine",
+     "t": "Dog Days Are Over",
+     "c": "-8",
+     "sp": "456WNXWhDwYOSf5SpTuqxd"
+    },
+    {
+     "p": 58,
+     "a": "Fontaines D.C.",
+     "t": "I Love You",
+     "c": "+6",
+     "sp": "5XhMgAWzou6EjDmQtoyoZE"
+    },
+    {
+     "p": 59,
      "a": "Gigi Perez",
      "t": "Sailor Song",
-     "c": "+1",
+     "c": "+9",
      "sp": "21IYMdzTrzSe191Cy5eMap"
     },
     {
-     "p": 69,
-     "a": "Snow Patrol",
-     "t": "Chasing Cars",
-     "c": "+4",
-     "sp": "5hnyJvgoWiQUYZttV4wXy6"
-    },
-    {
-     "p": 70,
-     "a": "Dominic Fike",
-     "t": "Babydoll",
+     "p": 60,
+     "a": "The Script",
+     "t": "The Man Who Can't Be Moved",
      "c": "-2",
-     "sp": "7yNf9YjeO5JXUE3JEBgnYc"
+     "sp": "3nqqDo8CcCLke3ZoTgiOKf"
     },
     {
-     "p": 71,
-     "a": "Arctic Monkeys",
-     "t": "Do I Wanna Know?",
-     "c": "-5",
-     "sp": "5FVd6KXrgO9B3JPmC8OPst"
-    },
-    {
-     "p": 72,
-     "a": "Evanescence",
-     "t": "Bring Me To Life",
-     "c": "-2",
-     "sp": "0COqiPhxzoWICwFCS4eZcp"
-    },
-    {
-     "p": 73,
-     "a": "Michael Jackson",
-     "t": "Billie Jean",
-     "c": "-1",
-     "sp": "7J1uxwnxfQLu4APicE5Rnj"
-    },
-    {
-     "p": 74,
-     "a": "Mac Miller",
-     "t": "Cinderella (w/ Ty Dolla $ign)",
-     "c": "+4",
-     "sp": "2lpygKqzPFtItQ4ss3cgfb"
-    },
-    {
-     "p": 75,
-     "a": "SIENNA SPIRO",
-     "t": "Pure",
-     "c": "+1",
-     "sp": "31IKMjvv6Oskp4hjGVeYsT"
-    },
-    {
-     "p": 76,
-     "a": "Kings of Leon",
-     "t": "Sex on Fire",
-     "c": "+1",
-     "sp": "0ntQJM78wzOLVeCUAW7Y45"
-    },
-    {
-     "p": 77,
-     "a": "The Fray",
-     "t": "How to Save a Life",
-     "c": "+10",
-     "sp": "5fVZC9GiM4e8vu99W0Xf6J"
-    },
-    {
-     "p": 78,
-     "a": "Katy Perry",
-     "t": "The One That Got Away",
-     "c": "+3",
-     "sp": "2009X8GyWTqyxIdzAEYW6N"
-    },
-    {
-     "p": 79,
-     "a": "Mazzy Star",
-     "t": "Fade Into You",
-     "c": "=",
-     "sp": "1LzNfuep1bnAUR9skqdHCK"
-    },
-    {
-     "p": 80,
-     "a": "Prospa",
-     "t": "Free Your Mind (w/ Cloonee)",
-     "c": "=",
-     "sp": "39hHUnYBmyMwprzRaPODCX"
-    },
-    {
-     "p": 81,
-     "a": "Sam Fender",
-     "t": "Seventeen Going Under",
-     "c": "-6",
-     "sp": "5rF6YUIlgiat22OT1lWspJ"
-    },
-    {
-     "p": 82,
-     "a": "Hozier",
-     "t": "Take Me To Church",
-     "c": "+6",
-     "sp": "3dYD57lRAUcMHufyqn9GcI"
-    },
-    {
-     "p": 83,
-     "a": "Nelly Furtado",
-     "t": "Promiscuous (w/ Timbaland)",
-     "c": "+21",
-     "sp": "2gam98EZKrF9XuOkU13ApN"
-    },
-    {
-     "p": 84,
-     "a": "The Cranberries",
-     "t": "Zombie - 2025 Remastered",
-     "c": "-1",
-     "sp": "3gjHnylel3PTRpjS44ocqr"
-    },
-    {
-     "p": 85,
-     "a": "Fontaines D.C.",
-     "t": "Marianne",
-     "c": "+1",
-     "sp": "69rHKcrQpYGfToPThOV1UB"
-    },
-    {
-     "p": 86,
-     "a": "Robyn",
-     "t": "Dancing On My Own",
-     "c": "-1",
-     "sp": "6aqNCrRA7vs7v6QvRpI50t"
-    },
-    {
-     "p": 87,
-     "a": "Tears For Fears",
-     "t": "Everybody Wants To Rule The World",
-     "c": "+4",
-     "sp": "4RvWPyQ5RL0ao9LPZeSouE"
-    },
-    {
-     "p": 88,
-     "a": "Olivia Dean",
-     "t": "A Couple Minutes",
-     "c": "+17",
-     "sp": "312z6PZ8wwREck8613PkJk"
-    },
-    {
-     "p": 89,
-     "a": "Zara Larsson",
-     "t": "Midnight Sun",
-     "c": "+3",
-     "sp": "1qRV1dKLOfH1s00b9J2LUQ"
-    },
-    {
-     "p": 90,
-     "a": "ANOTR",
-     "t": "Talk To You (ft. 54 Ultra) (w/ 54 Ultra)",
-     "c": "+8",
-     "sp": "0eUP3XYOCAj7lGoz4LOhyQ"
-    },
-    {
-     "p": 91,
-     "a": "The Verve",
-     "t": "Bitter Sweet Symphony",
-     "c": "+6",
-     "sp": "57iDDD9N9tTWe75x6qhStw"
-    },
-    {
-     "p": 92,
-     "a": "sombr",
-     "t": "undressed",
-     "c": "+1",
-     "sp": "0TFTAtCYhp2tQ9KcJIZb55"
-    },
-    {
-     "p": 93,
-     "a": "Brenda Lee",
-     "t": "Rockin' Around The Christmas Tree",
-     "c": "+9",
-     "sp": "2EjXfH91m7f8HiJN1yQg97"
-    },
-    {
-     "p": 94,
-     "a": "Oasis",
-     "t": "Wonderwall - Remastered",
+     "p": 61,
+     "a": "Radiohead",
+     "t": "Creep",
      "c": "+5",
-     "sp": "5qqabIl2vWzo9ApSC317sa"
+     "sp": "70LcF31zb1H0PyJoS1Sx1r"
     },
     {
-     "p": 95,
+     "p": 62,
+     "a": "Justin Bieber",
+     "t": "Beauty And A Beat (w/ Nicki Minaj)",
+     "c": "+1",
+     "sp": "6QFCMUUq1T2Vf5sFUXcuQ7"
+    },
+    {
+     "p": 63,
+     "a": "The Cranberries",
+     "t": "Linger - Remastered 2026",
+     "c": "-10",
+     "sp": "1WYrTfvKjQYaYfVziGG1ET"
+    },
+    {
+     "p": 64,
+     "a": "Taylor Swift",
+     "t": "Patient Zero",
+     "c": "-2",
+     "sp": "11hcBLPtbMp4aQI6zGQLub"
+    },
+    {
+     "p": 65,
      "a": "Olivia Rodrigo",
      "t": "drop dead",
-     "c": "-6",
+     "c": "+30",
      "sp": "3fRCAPMMZ8l8P9YKI6OCzD"
     },
     {
-     "p": 96,
-     "a": "Billie Eilish",
-     "t": "BIRDS OF A FEATHER",
-     "c": "+7",
-     "sp": "6dOtVTDdiauQNBQEDOtlAB"
+     "p": 66,
+     "a": "Dominic Fike",
+     "t": "Babydoll",
+     "c": "+4",
+     "sp": "7yNf9YjeO5JXUE3JEBgnYc"
     },
     {
-     "p": 97,
+     "p": 67,
+     "a": "Fleetwood Mac",
+     "t": "Landslide",
+     "c": "+43",
+     "sp": "5ihS6UUlyQAfmp48eSkxuQ"
+    },
+    {
+     "p": 68,
+     "a": "The Pogues",
+     "t": "Fairytale of New York (w/ Kirsty MacColl)",
+     "c": "-11",
+     "sp": "3VTNVsTTu05dmTsVFrmGpK"
+    },
+    {
+     "p": 69,
+     "a": "Kings of Leon",
+     "t": "Wait for Me",
+     "c": "-15",
+     "sp": "2nO1DYEg1X5GHi8SSuNJQj"
+    },
+    {
+     "p": 70,
+     "a": "Fontaines D.C.",
+     "t": "Starburster",
+     "c": "-5",
+     "sp": "09ttHg3ZNVgDlYBZa1ZBw0"
+    },
+    {
+     "p": 71,
+     "a": "Evanescence",
+     "t": "Bring Me To Life",
+     "c": "+1",
+     "sp": "0COqiPhxzoWICwFCS4eZcp"
+    },
+    {
+     "p": 72,
+     "a": "Snow Patrol",
+     "t": "Chasing Cars",
+     "c": "-3",
+     "sp": "5hnyJvgoWiQUYZttV4wXy6"
+    },
+    {
+     "p": 73,
+     "a": "SIENNA SPIRO",
+     "t": "Pure",
+     "c": "+2",
+     "sp": "31IKMjvv6Oskp4hjGVeYsT"
+    },
+    {
+     "p": 74,
+     "a": "Arctic Monkeys",
+     "t": "Do I Wanna Know?",
+     "c": "-3",
+     "sp": "5FVd6KXrgO9B3JPmC8OPst"
+    },
+    {
+     "p": 75,
+     "a": "Prospa",
+     "t": "Free Your Mind (w/ Cloonee)",
+     "c": "+5",
+     "sp": "39hHUnYBmyMwprzRaPODCX"
+    },
+    {
+     "p": 76,
+     "a": "Katy Perry",
+     "t": "The One That Got Away",
+     "c": "+2",
+     "sp": "2009X8GyWTqyxIdzAEYW6N"
+    },
+    {
+     "p": 77,
+     "a": "Zara Larsson",
+     "t": "Midnight Sun",
+     "c": "+12",
+     "sp": "1qRV1dKLOfH1s00b9J2LUQ"
+    },
+    {
+     "p": 78,
+     "a": "The Police",
+     "t": "Every Breath You Take",
+     "c": "-19",
+     "sp": "1JSTJqkT5qHq8MDJnJbRE1"
+    },
+    {
+     "p": 79,
+     "a": "Oasis",
+     "t": "Wonderwall - Remastered",
+     "c": "+15",
+     "sp": "5qqabIl2vWzo9ApSC317sa"
+    },
+    {
+     "p": 80,
+     "a": "Kings of Leon",
+     "t": "Sex on Fire",
+     "c": "-4",
+     "sp": "0ntQJM78wzOLVeCUAW7Y45"
+    },
+    {
+     "p": 81,
+     "a": "Mac Miller",
+     "t": "Cinderella (w/ Ty Dolla $ign)",
+     "c": "-7",
+     "sp": "2lpygKqzPFtItQ4ss3cgfb"
+    },
+    {
+     "p": 82,
+     "a": "Fontaines D.C.",
+     "t": "Marianne",
+     "c": "+3",
+     "sp": "69rHKcrQpYGfToPThOV1UB"
+    },
+    {
+     "p": 83,
      "a": "Gracie Abrams",
      "t": "That’s So True",
-     "c": "-1",
+     "c": "+14",
      "sp": "7ne4VBA60CxGM75vw0EYad"
     },
     {
-     "p": 98,
-     "a": "JADE",
-     "t": "Angel Of My Dreams",
-     "c": "+15",
-     "sp": "46i8ZYPRekK8tmaXJO6M9r"
+     "p": 84,
+     "a": "Fleetwood Mac",
+     "t": "The Chain - 2001 Remaster",
+     "c": "+23",
+     "sp": "2MRjYBbIbH1VTToIrO1mdi"
     },
     {
-     "p": 99,
-     "a": "sombr",
-     "t": "My Body Isn't Ready - Orchestral Version from Sound City",
-     "c": "+34",
-     "sp": "5wA2qmCu9hcu6KAqNE4FOC"
+     "p": 85,
+     "a": "Hozier",
+     "t": "Take Me To Church",
+     "c": "-3",
+     "sp": "3dYD57lRAUcMHufyqn9GcI"
     },
     {
-     "p": 100,
-     "a": "Tate McRae",
-     "t": "Sports car",
-     "c": "=",
-     "sp": "5UJbgR4XF4y1DvbkxEqe8S"
+     "p": 86,
+     "a": "Olivia Dean",
+     "t": "A Couple Minutes",
+     "c": "+2",
+     "sp": "312z6PZ8wwREck8613PkJk"
     },
     {
-     "p": 101,
-     "a": "Justin Bieber",
-     "t": "DAISIES",
-     "c": "+15",
-     "sp": "5BZsQlgw21vDOAjoqkNgKb"
+     "p": 87,
+     "a": "Linkin Park",
+     "t": "In the End",
+     "c": "+31",
+     "sp": "60a0Rd6pjrkxjPbaKzXjfq"
     },
     {
-     "p": 102,
+     "p": 88,
      "a": "Temper City",
      "t": "Self Aware",
-     "c": "-46",
+     "c": "+14",
      "sp": "4qW3BbQAwZsrnu8a3ZRdyT"
     },
     {
-     "p": 103,
-     "a": "F3miii",
-     "t": "NOBLE",
+     "p": 89,
+     "a": "Michael Jackson",
+     "t": "Billie Jean",
+     "c": "-16",
+     "sp": "7J1uxwnxfQLu4APicE5Rnj"
+    },
+    {
+     "p": 90,
+     "a": "Robyn",
+     "t": "Dancing On My Own",
+     "c": "-4",
+     "sp": "6aqNCrRA7vs7v6QvRpI50t"
+    },
+    {
+     "p": 91,
+     "a": "Olivia Dean",
+     "t": "The Hardest Part",
+     "c": "+39",
+     "sp": "3cPoiK69oQ1SdbB2j2ulGm"
+    },
+    {
+     "p": 92,
+     "a": "Fleetwood Mac",
+     "t": "Everywhere",
+     "c": "+20",
+     "sp": "38iKuyifRL4mQ36F2hIxmF"
+    },
+    {
+     "p": 93,
+     "a": "The Cranberries",
+     "t": "Zombie - 2025 Remastered",
      "c": "-9",
-     "sp": "4Jsus7N4d8hFB2G9gcRdBv"
+     "sp": "3gjHnylel3PTRpjS44ocqr"
+    },
+    {
+     "p": 94,
+     "a": "Brenda Lee",
+     "t": "Rockin' Around The Christmas Tree",
+     "c": "-1",
+     "sp": "2EjXfH91m7f8HiJN1yQg97"
+    },
+    {
+     "p": 95,
+     "a": "Mazzy Star",
+     "t": "Fade Into You",
+     "c": "-16",
+     "sp": "1LzNfuep1bnAUR9skqdHCK"
+    },
+    {
+     "p": 96,
+     "a": "Sam Fender",
+     "t": "People Watching",
+     "c": "+17",
+     "sp": "6gBjUipB0ZxHd1BvwdJTDQ"
+    },
+    {
+     "p": 97,
+     "a": "Arctic Monkeys",
+     "t": "505",
+     "c": "+18",
+     "sp": "58ge6dfP91o9oXMzq3XkIS"
+    },
+    {
+     "p": 98,
+     "a": "sombr",
+     "t": "undressed",
+     "c": "-6",
+     "sp": "0TFTAtCYhp2tQ9KcJIZb55"
+    },
+    {
+     "p": 99,
+     "a": "Silva Bumpa",
+     "t": "On 2nite",
+     "c": "+23",
+     "sp": "2BoSbGSp2OaDBOx5NFHkrr"
+    },
+    {
+     "p": 100,
+     "a": "Sam Fender",
+     "t": "Seventeen Going Under",
+     "c": "-19",
+     "sp": "5rF6YUIlgiat22OT1lWspJ"
+    },
+    {
+     "p": 101,
+     "a": "Prince",
+     "t": "Purple Rain",
+     "c": "+20",
+     "sp": "1uvyZBs4IZYRebHIB1747m"
+    },
+    {
+     "p": 102,
+     "a": "Train",
+     "t": "Drops of Jupiter",
+     "c": "RE",
+     "sp": "2hKdd3qO7cWr2Jo0Bcs0MA"
+    },
+    {
+     "p": 103,
+     "a": "Feist",
+     "t": "My Moon My Man",
+     "c": "+58",
+     "sp": "4fQVQKIiidREPI0MhFEuDn"
     },
     {
      "p": 104,
-     "a": "The Kooks",
-     "t": "Naive",
-     "c": "-22",
-     "sp": "7BHPGtpuuWWsvE7cCaMuEU"
+     "a": "ANOTR",
+     "t": "Talk To You (ft. 54 Ultra) (w/ 54 Ultra)",
+     "c": "-14",
+     "sp": "0eUP3XYOCAj7lGoz4LOhyQ"
     },
     {
      "p": 105,
-     "a": "Faouzia",
-     "t": "UNETHICAL",
-     "c": "-21",
-     "sp": "7G8EmDx7L5zRHb6rBJDqEG"
+     "a": "Sia",
+     "t": "Snowman",
+     "c": "+4",
+     "sp": "7uoFMmxln0GPXQ0AcCBXRq"
     },
     {
      "p": 106,
      "a": "Ariana Grande",
      "t": "hate that i made you love me",
-     "c": "-11",
+     "c": "=",
      "sp": "3iy2QuCtCzpWnR6tia39AB"
     },
     {
      "p": 107,
-     "a": "Fleetwood Mac",
-     "t": "The Chain - 2001 Remaster",
-     "c": "-1",
-     "sp": "2MRjYBbIbH1VTToIrO1mdi"
+     "a": "J. Cole",
+     "t": "No Role Modelz",
+     "c": "+25",
+     "sp": "68Dni7IE4VyPkTOH9mRWHr"
     },
     {
      "p": 108,
-     "a": "Drake",
-     "t": "Janice STFU",
-     "c": "+1",
-     "sp": "514joG57v4yKTsfQmz7stz"
+     "a": "Cloonee",
+     "t": "Good Girl (w/ Prospa, Tristan Henry)",
+     "c": "+15",
+     "sp": "263Ecah3YA4hVZHxR2Ex9p"
     },
     {
      "p": 109,
-     "a": "Sia",
-     "t": "Snowman",
-     "c": "+12",
-     "sp": "7uoFMmxln0GPXQ0AcCBXRq"
+     "a": "The Verve",
+     "t": "Bitter Sweet Symphony",
+     "c": "-18",
+     "sp": "57iDDD9N9tTWe75x6qhStw"
     },
     {
      "p": 110,
-     "a": "Fleetwood Mac",
-     "t": "Landslide",
-     "c": "+2",
-     "sp": "5ihS6UUlyQAfmp48eSkxuQ"
+     "a": "Olivia Rodrigo",
+     "t": "expectations",
+     "c": "+40",
+     "sp": "4bkClAuofJULiaIZsuL3gT"
     },
     {
      "p": 111,
-     "a": "Taylor Swift",
-     "t": "The Fate of Ophelia",
-     "c": "+29",
-     "sp": "53iuhJlwXhSER5J2IYYv1W"
+     "a": "Justin Bieber",
+     "t": "DAISIES",
+     "c": "-10",
+     "sp": "5BZsQlgw21vDOAjoqkNgKb"
     },
     {
      "p": 112,
-     "a": "Fleetwood Mac",
-     "t": "Everywhere",
-     "c": "+2",
-     "sp": "38iKuyifRL4mQ36F2hIxmF"
+     "a": "Tears For Fears",
+     "t": "Everybody Wants To Rule The World",
+     "c": "-25",
+     "sp": "4RvWPyQ5RL0ao9LPZeSouE"
     },
     {
      "p": 113,
-     "a": "Sam Fender",
-     "t": "People Watching",
-     "c": "-2",
-     "sp": "6gBjUipB0ZxHd1BvwdJTDQ"
+     "a": "Billie Eilish",
+     "t": "BIRDS OF A FEATHER",
+     "c": "-17",
+     "sp": "6dOtVTDdiauQNBQEDOtlAB"
     },
     {
      "p": 114,
-     "a": "Bobby Helms",
-     "t": "Jingle Bell Rock",
-     "c": "+1",
-     "sp": "7vQbuQcyTflfCIOu3Uzzya"
+     "a": "Drake",
+     "t": "One Dance (w/ Wizkid, Kyla)",
+     "c": "+11",
+     "sp": "1zi7xx7UVEFkmKfv06H8x0"
     },
     {
      "p": 115,
-     "a": "Arctic Monkeys",
-     "t": "505",
-     "c": "-8",
-     "sp": "58ge6dfP91o9oXMzq3XkIS"
+     "a": "The Kooks",
+     "t": "Naive",
+     "c": "-11",
+     "sp": "7BHPGtpuuWWsvE7cCaMuEU"
     },
     {
      "p": 116,
-     "a": "Steve Lacy",
-     "t": "oh yeah?",
-     "c": "-26",
-     "sp": "22NHkFYbgxB2Zirj29Gbp8"
+     "a": "bôa",
+     "t": "Duvet",
+     "c": "+59",
+     "sp": "42qNWdLKCI41S4uzfamhFM"
     },
     {
      "p": 117,
-     "a": "Coldplay",
-     "t": "Yellow",
-     "c": "+12",
-     "sp": "3AJwUDP919kvQ9QcozQPxg"
+     "a": "The Fray",
+     "t": "How to Save a Life",
+     "c": "-40",
+     "sp": "5fVZC9GiM4e8vu99W0Xf6J"
     },
     {
      "p": 118,
-     "a": "Linkin Park",
-     "t": "In the End",
-     "c": "+5",
-     "sp": "60a0Rd6pjrkxjPbaKzXjfq"
+     "a": "Steve Lacy",
+     "t": "oh yeah?",
+     "c": "-2",
+     "sp": "22NHkFYbgxB2Zirj29Gbp8"
     },
     {
      "p": 119,
-     "a": "Alex Warren",
-     "t": "FEVER DREAM",
-     "c": "+13",
-     "sp": "7ogpGbKc4Io6NCU6ydxXwZ"
+     "a": "Drake",
+     "t": "Janice STFU",
+     "c": "-11",
+     "sp": "514joG57v4yKTsfQmz7stz"
     },
     {
      "p": 120,
      "a": "Shakira",
      "t": "Dai Dai (w/ Burna Boy)",
-     "c": "-10",
+     "c": "=",
      "sp": "0kosUz0jePvjiz4ctmR6wL"
     },
     {
      "p": 121,
-     "a": "Prince",
-     "t": "Purple Rain",
-     "c": "-3",
-     "sp": "1uvyZBs4IZYRebHIB1747m"
-    },
-    {
-     "p": 122,
-     "a": "Silva Bumpa",
-     "t": "On 2nite",
-     "c": "+2",
-     "sp": "2BoSbGSp2OaDBOx5NFHkrr"
-    },
-    {
-     "p": 123,
-     "a": "Cloonee",
-     "t": "Good Girl (w/ Prospa, Tristan Henry)",
-     "c": "-22",
-     "sp": "263Ecah3YA4hVZHxR2Ex9p"
-    },
-    {
-     "p": 124,
-     "a": "Rihanna",
-     "t": "Don't Stop The Music",
-     "c": "+19",
-     "sp": "1Jo0Zg7XlrA6z0mFTZVdkn"
-    },
-    {
-     "p": 125,
-     "a": "Drake",
-     "t": "One Dance (w/ Wizkid, Kyla)",
-     "c": "+2",
-     "sp": "1zi7xx7UVEFkmKfv06H8x0"
-    },
-    {
-     "p": 126,
-     "a": "Tove Lo",
-     "t": "Talking Body",
-     "c": "=",
-     "sp": "7cgu4JBW3hq1GwTM1ilkKQ"
-    },
-    {
-     "p": 127,
-     "a": "Kings of Leon",
-     "t": "Use Somebody",
-     "c": "-7",
-     "sp": "5VGlqQANWDKJFl0MBG3sg2"
-    },
-    {
-     "p": 128,
-     "a": "Noah Kahan",
-     "t": "Northern Attitude",
-     "c": "+8",
-     "sp": "4O2rRsoSPb5aN7N3tG6Y3v"
-    },
-    {
-     "p": 129,
-     "a": "Steve Lacy",
-     "t": "nothing",
-     "c": "-21",
-     "sp": "3lIHa4fUwNKOCSS5k3Za0i"
-    },
-    {
-     "p": 130,
-     "a": "Olivia Dean",
-     "t": "The Hardest Part",
-     "c": "-2",
-     "sp": "3cPoiK69oQ1SdbB2j2ulGm"
-    },
-    {
-     "p": 131,
-     "a": "Lola Young",
-     "t": "Messy",
-     "c": "=",
-     "sp": "35ISBknsCeZQtq66xABI9g"
-    },
-    {
-     "p": 132,
-     "a": "J. Cole",
-     "t": "No Role Modelz",
-     "c": "+7",
-     "sp": "68Dni7IE4VyPkTOH9mRWHr"
-    },
-    {
-     "p": 133,
-     "a": "Michael Jackson",
-     "t": "Beat It",
-     "c": "-3",
-     "sp": "3BovdzfaX4jb5KFQwoPfAw"
-    },
-    {
-     "p": 134,
-     "a": "Audrey Hobert",
-     "t": "Sue me",
-     "c": "-9",
-     "sp": "6ZAuQOgLrNQb9s7BXheuTy"
-    },
-    {
-     "p": 135,
      "a": "Noah Kahan",
      "t": "Draw You Out (w/ The Hunger Games)",
-     "c": "-13",
+     "c": "+14",
      "sp": "5KTcGJKm4HgLhLt8Tc7EQ5"
     },
     {
-     "p": 136,
-     "a": "Thekidszn",
-     "t": "IMPULSIVE",
-     "c": "-19",
-     "sp": "4TnnvhiNjsYdcHxODzNiKA"
-    },
-    {
-     "p": 137,
-     "a": "Mark Ronson",
-     "t": "Valerie (w/ Amy Winehouse)",
-     "c": "+11",
-     "sp": "6kopmMZiyLmw7h66uXcXR7"
-    },
-    {
-     "p": 138,
-     "a": "Olivia Rodrigo",
-     "t": "cigarette smoke",
-     "c": "-1",
-     "sp": "0e4u0sFRGxHL4U2iFBrUvZ"
-    },
-    {
-     "p": 139,
-     "a": "George Michael",
-     "t": "Cowboys and Angels - Remastered",
-     "c": "-20",
-     "sp": "1TDzHrMyt99Ey8IB72i7u9"
-    },
-    {
-     "p": 140,
-     "a": "Mario",
-     "t": "Let Me Love You",
-     "c": "+17",
-     "sp": "7GaFYUqP2WdR4KTPk7cXoP"
-    },
-    {
-     "p": 141,
-     "a": "Drake",
-     "t": "Headlines",
-     "c": "+9",
-     "sp": "6LxSe8YmdPxy095Ux6znaQ"
-    },
-    {
-     "p": 142,
-     "a": "Olivia Dean",
-     "t": "Ok Love You Bye",
+     "p": 122,
+     "a": "Bobby Helms",
+     "t": "Jingle Bell Rock",
      "c": "-8",
-     "sp": "66YywMJbAgzQrGkFKjnSsK"
+     "sp": "7vQbuQcyTflfCIOu3Uzzya"
     },
     {
-     "p": 143,
+     "p": 123,
+     "a": "Alex Warren",
+     "t": "FEVER DREAM",
+     "c": "-4",
+     "sp": "7ogpGbKc4Io6NCU6ydxXwZ"
+    },
+    {
+     "p": 124,
+     "a": "Nelly Furtado",
+     "t": "Promiscuous (w/ Timbaland)",
+     "c": "-41",
+     "sp": "2gam98EZKrF9XuOkU13ApN"
+    },
+    {
+     "p": 125,
      "a": "Disco Lines",
      "t": "No Broke Boys (w/ Tinashe)",
-     "c": "-1",
+     "c": "+18",
      "sp": "3cZajhyr8LmtPfHZ9296tj"
     },
     {
-     "p": 144,
-     "a": "Nirvana",
-     "t": "Smells Like Teen Spirit - Remastered",
-     "c": "+5",
-     "sp": "0gucTLf7trAf37Ua1uAyAu"
-    },
-    {
-     "p": 145,
-     "a": "SIENNA SPIRO",
-     "t": "The Visitor",
-     "c": "=",
-     "sp": "36OpC3NK7kQzcOo8qiCHaA"
-    },
-    {
-     "p": 146,
-     "a": "PinkPantheress",
-     "t": "Stateside + Zara Larsson (w/ Zara Larsson)",
-     "c": "-8",
-     "sp": "1DwscornXpj8fmOmYVlqZt"
-    },
-    {
-     "p": 147,
-     "a": "Dominic Fike",
-     "t": "White Keys",
-     "c": "-12",
-     "sp": "5ViLKrbyL3HD6wsq3AB9eI"
-    },
-    {
-     "p": 148,
-     "a": "Rihanna",
-     "t": "Only Girl (In The World)",
-     "c": "+11",
-     "sp": "2ENexcMEMsYk0rVJigVD3i"
-    },
-    {
-     "p": 149,
-     "a": "Sixpence None The Richer",
-     "t": "Kiss Me",
-     "c": "+32",
-     "sp": "754kgU5rWscRTfvlsuEwFp"
-    },
-    {
-     "p": 150,
-     "a": "Olivia Rodrigo",
-     "t": "expectations",
-     "c": "-6",
-     "sp": "4bkClAuofJULiaIZsuL3gT"
-    },
-    {
-     "p": 151,
-     "a": "Foo Fighters",
-     "t": "Everlong",
-     "c": "-5",
-     "sp": "5UWwZ5lm5PKu6eKsHAGxOk"
-    },
-    {
-     "p": 152,
-     "a": "Rihanna",
-     "t": "Kiss It Better",
-     "c": "+21",
-     "sp": "0UHB9METy4VCXNgkcGqHqS"
-    },
-    {
-     "p": 153,
-     "a": "Tame Impala",
-     "t": "The Less I Know The Better",
-     "c": "-1",
-     "sp": "6K4t31amVTZDgR3sKmwUJJ"
-    },
-    {
-     "p": 154,
-     "a": "Fred again..",
-     "t": "Victory Lap (w/ Skepta, PlaqueBoyMax)",
-     "c": "+1",
-     "sp": "1lbNgoJ5iMrMluCyhI4OQP"
-    },
-    {
-     "p": 155,
-     "a": "Lady Gaga",
-     "t": "Die With A Smile (w/ Bruno Mars)",
-     "c": "+22",
-     "sp": "7so0lgd0zP2Sbgs2d7a1SZ"
-    },
-    {
-     "p": 156,
-     "a": "Arctic Monkeys",
-     "t": "I Wanna Be Yours",
-     "c": "-3",
-     "sp": "5XeFesFbtLpXzIVDNQP22n"
-    },
-    {
-     "p": 157,
+     "p": 126,
      "a": "Noah Kahan",
-     "t": "The Great Divide",
-     "c": "-10",
-     "sp": "4ck9vo0gEmjVHWUb5q2rYe"
+     "t": "Northern Attitude",
+     "c": "+2",
+     "sp": "4O2rRsoSPb5aN7N3tG6Y3v"
     },
     {
-     "p": 158,
-     "a": "Rihanna",
-     "t": "Disturbia",
-     "c": "+27",
-     "sp": "30VrBsh1STRBoIrhQOAwzK"
-    },
-    {
-     "p": 159,
-     "a": "Black Eyed Peas",
-     "t": "Meet Me Halfway",
-     "c": "+41",
-     "sp": "3F9ByoUqu31xU0I3G5xfVg"
-    },
-    {
-     "p": 160,
-     "a": "Olivia Rodrigo",
-     "t": "honeybee",
-     "c": "-9",
-     "sp": "4kX7xkopoXZCfE1D6fNwl2"
-    },
-    {
-     "p": 161,
-     "a": "Feist",
-     "t": "My Moon My Man",
-     "c": "NEW",
-     "sp": "4fQVQKIiidREPI0MhFEuDn"
-    },
-    {
-     "p": 162,
-     "a": "Benson Boone",
-     "t": "Beautiful Things",
-     "c": "+20",
-     "sp": "3xkHsmpQCBMytMJNiDf3Ii"
-    },
-    {
-     "p": 163,
-     "a": "Zara Larsson",
-     "t": "Lush Life",
-     "c": "+4",
-     "sp": "1rIKgCH4H52lrvDcz50hS8"
-    },
-    {
-     "p": 164,
-     "a": "TOTO",
-     "t": "Africa",
-     "c": "+7",
-     "sp": "2374M0fQpWi3dLnB54qaLX"
-    },
-    {
-     "p": 165,
-     "a": "Oasis",
-     "t": "Don't Look Back in Anger - Remastered",
-     "c": "+5",
-     "sp": "0UvCh63URrLFcPkKt99hHd"
-    },
-    {
-     "p": 166,
-     "a": "Coldplay",
-     "t": "Viva La Vida",
-     "c": "+10",
-     "sp": "1mea3bSkSGXuIRvnydlB5b"
-    },
-    {
-     "p": 167,
-     "a": "The Killers",
-     "t": "Somebody Told Me",
-     "c": "-26",
-     "sp": "6PwjJ58I4t7Mae9xfZ9l9v"
-    },
-    {
-     "p": 168,
-     "a": "Linkin Park",
-     "t": "Numb",
-     "c": "+6",
-     "sp": "2nLtzopw4rPReszdYBJU6h"
-    },
-    {
-     "p": 169,
-     "a": "Alicia Keys",
-     "t": "Un-thinkable (I'm Ready) (w/ Drake)",
-     "c": "-3",
-     "sp": "4o4wEDRqotccDTXiQ7TORu"
-    },
-    {
-     "p": 170,
-     "a": "Franz Ferdinand",
-     "t": "Take Me Out",
-     "c": "-14",
-     "sp": "20I8RduZC2PWMWTDCZuuAN"
-    },
-    {
-     "p": 171,
-     "a": "Rihanna",
-     "t": "S&M",
-     "c": "+9",
-     "sp": "7ySUcLPVX7KudhnmNcgY2D"
-    },
-    {
-     "p": 172,
-     "a": "HUNTR/X",
-     "t": "Golden (w/ EJae, AUDREY NUNA, REI AMI, KPop Demon Hunters Cast)",
-     "c": "+19",
-     "sp": "1CPZ5BxNNd0n0nF4Orb9JS"
-    },
-    {
-     "p": 173,
-     "a": "Childish Gambino",
-     "t": "Les",
-     "c": "-1",
-     "sp": "7ghKr0pCYyPPyp7t1FH8k4"
-    },
-    {
-     "p": 174,
-     "a": "Crowded House",
-     "t": "Don't Dream It's Over",
-     "c": "-14",
-     "sp": "7G7tgVYORlDuVprcYHuFJh"
-    },
-    {
-     "p": 175,
-     "a": "bôa",
-     "t": "Duvet",
-     "c": "-14",
-     "sp": "42qNWdLKCI41S4uzfamhFM"
-    },
-    {
-     "p": 176,
-     "a": "Nelly Furtado",
-     "t": "Maneater",
-     "c": "+12",
-     "sp": "4wH4dJgrsxONID6KS2tDQM"
-    },
-    {
-     "p": 177,
-     "a": "Cigarettes After Sex",
-     "t": "Apocalypse",
-     "c": "-2",
-     "sp": "1oAwsWBovWRIp7qLMGPIet"
-    },
-    {
-     "p": 178,
-     "a": "a-ha",
-     "t": "Take on Me - 2015 Remaster",
-     "c": "RE",
-     "sp": "04aigH9HRGebQZu1JAN6X1"
-    },
-    {
-     "p": 179,
-     "a": "Stereophonics",
-     "t": "Dakota",
-     "c": "-16",
-     "sp": "3qaSqrrevBrb84xl5JlptU"
-    },
-    {
-     "p": 180,
-     "a": "J. Cole",
-     "t": "Power Trip (w/ Miguel)",
-     "c": "-16",
-     "sp": "2uwnP6tZVVmTovzX5ELooy"
-    },
-    {
-     "p": 181,
-     "a": "Olivia Dean",
-     "t": "Baby Steps",
-     "c": "+16",
-     "sp": "5SruEBX3KpgpDvEcIuN53P"
-    },
-    {
-     "p": 182,
-     "a": "Gorillaz",
-     "t": "Feel Good Inc",
-     "c": "+16",
-     "sp": "0d28khcov6AiegSCpG5TuT"
-    },
-    {
-     "p": 183,
-     "a": "Nickelback",
-     "t": "How You Remind Me",
-     "c": "-29",
-     "sp": "0gmbgwZ8iqyMPmXefof8Yf"
-    },
-    {
-     "p": 184,
+     "p": 127,
      "a": "Paramore",
      "t": "The Only Exception",
-     "c": "+8",
+     "c": "+57",
      "sp": "7JIuqL4ZqkpfGKQhYlrirs"
     },
     {
-     "p": 185,
+     "p": 128,
+     "a": "JADE",
+     "t": "Angel Of My Dreams",
+     "c": "-30",
+     "sp": "46i8ZYPRekK8tmaXJO6M9r"
+    },
+    {
+     "p": 129,
+     "a": "Faouzia",
+     "t": "UNETHICAL",
+     "c": "-24",
+     "sp": "7G8EmDx7L5zRHb6rBJDqEG"
+    },
+    {
+     "p": 130,
+     "a": "George Michael",
+     "t": "Cowboys and Angels - Remastered",
+     "c": "+9",
+     "sp": "1TDzHrMyt99Ey8IB72i7u9"
+    },
+    {
+     "p": 131,
+     "a": "Coldplay",
+     "t": "The Scientist",
+     "c": "+58",
+     "sp": "75JFxkI2RXiU7L9VXzMkle"
+    },
+    {
+     "p": 132,
+     "a": "Olivia Dean",
+     "t": "Ok Love You Bye",
+     "c": "+10",
+     "sp": "66YywMJbAgzQrGkFKjnSsK"
+    },
+    {
+     "p": 133,
+     "a": "Lola Young",
+     "t": "Messy",
+     "c": "-2",
+     "sp": "35ISBknsCeZQtq66xABI9g"
+    },
+    {
+     "p": 134,
+     "a": "Nirvana",
+     "t": "Smells Like Teen Spirit - Remastered",
+     "c": "+10",
+     "sp": "0gucTLf7trAf37Ua1uAyAu"
+    },
+    {
+     "p": 135,
+     "a": "Olivia Rodrigo",
+     "t": "cigarette smoke",
+     "c": "+3",
+     "sp": "0e4u0sFRGxHL4U2iFBrUvZ"
+    },
+    {
+     "p": 136,
+     "a": "Stereophonics",
+     "t": "Dakota",
+     "c": "+43",
+     "sp": "3qaSqrrevBrb84xl5JlptU"
+    },
+    {
+     "p": 137,
+     "a": "Steve Lacy",
+     "t": "nothing",
+     "c": "-8",
+     "sp": "3lIHa4fUwNKOCSS5k3Za0i"
+    },
+    {
+     "p": 138,
+     "a": "Paolo Nutini",
+     "t": "Candy",
+     "c": "+60",
+     "sp": "4h5m56ExHLPUC9NGz7U1Qa"
+    },
+    {
+     "p": 139,
+     "a": "Wheatus",
+     "t": "Teenage Dirtbag",
+     "c": "+52",
+     "sp": "25FTMokYEbEWHEdss5JLZS"
+    },
+    {
+     "p": 140,
+     "a": "Arctic Monkeys",
+     "t": "I Wanna Be Yours",
+     "c": "+16",
+     "sp": "5XeFesFbtLpXzIVDNQP22n"
+    },
+    {
+     "p": 141,
+     "a": "Tate McRae",
+     "t": "Sports car",
+     "c": "-41",
+     "sp": "5UJbgR4XF4y1DvbkxEqe8S"
+    },
+    {
+     "p": 142,
+     "a": "Coldplay",
+     "t": "Sparks",
+     "c": "RE",
+     "sp": "7D0RhFcb3CrfPuTJ0obrod"
+    },
+    {
+     "p": 143,
+     "a": "Myles Smith",
+     "t": "Stargazing",
+     "c": "RE",
+     "sp": "3Vr3zh0r7ALn8VLqCiRR10"
+    },
+    {
+     "p": 144,
+     "a": "Drake",
+     "t": "Headlines",
+     "c": "-3",
+     "sp": "6LxSe8YmdPxy095Ux6znaQ"
+    },
+    {
+     "p": 145,
+     "a": "Kings of Leon",
+     "t": "Use Somebody",
+     "c": "-18",
+     "sp": "5VGlqQANWDKJFl0MBG3sg2"
+    },
+    {
+     "p": 146,
+     "a": "F3miii",
+     "t": "NOBLE",
+     "c": "-43",
+     "sp": "4Jsus7N4d8hFB2G9gcRdBv"
+    },
+    {
+     "p": 147,
+     "a": "Mark Ronson",
+     "t": "Valerie (w/ Amy Winehouse)",
+     "c": "-10",
+     "sp": "6kopmMZiyLmw7h66uXcXR7"
+    },
+    {
+     "p": 148,
+     "a": "Taylor Swift",
+     "t": "The Fate of Ophelia",
+     "c": "-37",
+     "sp": "53iuhJlwXhSER5J2IYYv1W"
+    },
+    {
+     "p": 149,
+     "a": "Mario",
+     "t": "Let Me Love You",
+     "c": "-9",
+     "sp": "7GaFYUqP2WdR4KTPk7cXoP"
+    },
+    {
+     "p": 150,
+     "a": "Audrey Hobert",
+     "t": "Sue me",
+     "c": "-16",
+     "sp": "6ZAuQOgLrNQb9s7BXheuTy"
+    },
+    {
+     "p": 151,
+     "a": "SIENNA SPIRO",
+     "t": "The Visitor",
+     "c": "-6",
+     "sp": "36OpC3NK7kQzcOo8qiCHaA"
+    },
+    {
+     "p": 152,
+     "a": "Linkin Park",
+     "t": "Numb",
+     "c": "+16",
+     "sp": "2nLtzopw4rPReszdYBJU6h"
+    },
+    {
+     "p": 153,
+     "a": "Tove Lo",
+     "t": "Talking Body",
+     "c": "-27",
+     "sp": "7cgu4JBW3hq1GwTM1ilkKQ"
+    },
+    {
+     "p": 154,
+     "a": "Lady Gaga",
+     "t": "Die With A Smile (w/ Bruno Mars)",
+     "c": "+1",
+     "sp": "7so0lgd0zP2Sbgs2d7a1SZ"
+    },
+    {
+     "p": 155,
+     "a": "Nickelback",
+     "t": "How You Remind Me",
+     "c": "+28",
+     "sp": "0gmbgwZ8iqyMPmXefof8Yf"
+    },
+    {
+     "p": 156,
+     "a": "Olivia Rodrigo",
+     "t": "deja vu",
+     "c": "RE",
+     "sp": "6HU7h9RYOaPRFeh0R3UeAr"
+    },
+    {
+     "p": 157,
+     "a": "Rihanna",
+     "t": "Only Girl (In The World)",
+     "c": "-9",
+     "sp": "2ENexcMEMsYk0rVJigVD3i"
+    },
+    {
+     "p": 158,
+     "a": "Michael Jackson",
+     "t": "Beat It",
+     "c": "-25",
+     "sp": "3BovdzfaX4jb5KFQwoPfAw"
+    },
+    {
+     "p": 159,
+     "a": "Fred again..",
+     "t": "Victory Lap (w/ Skepta, PlaqueBoyMax)",
+     "c": "-5",
+     "sp": "1lbNgoJ5iMrMluCyhI4OQP"
+    },
+    {
+     "p": 160,
+     "a": "Rihanna",
+     "t": "Don't Stop The Music",
+     "c": "-36",
+     "sp": "1Jo0Zg7XlrA6z0mFTZVdkn"
+    },
+    {
+     "p": 161,
+     "a": "Coldplay",
+     "t": "Viva La Vida",
+     "c": "+5",
+     "sp": "1mea3bSkSGXuIRvnydlB5b"
+    },
+    {
+     "p": 162,
+     "a": "J. Cole",
+     "t": "Power Trip (w/ Miguel)",
+     "c": "+18",
+     "sp": "2uwnP6tZVVmTovzX5ELooy"
+    },
+    {
+     "p": 163,
+     "a": "Chappell Roan",
+     "t": "Pink Pony Club",
+     "c": "RE",
+     "sp": "6393yGahSJ9slVdOwSxOVR"
+    },
+    {
+     "p": 164,
+     "a": "Skepta",
+     "t": "Broken Hearts (w/ Central Cee, Jorja Smith)",
+     "c": "RE",
+     "sp": "0VXl4cbYCgvIZh4Bque6w3"
+    },
+    {
+     "p": 165,
+     "a": "Dominic Fike",
+     "t": "White Keys",
+     "c": "-18",
+     "sp": "5ViLKrbyL3HD6wsq3AB9eI"
+    },
+    {
+     "p": 166,
+     "a": "Lord Huron",
+     "t": "The Night We Met",
+     "c": "RE",
+     "sp": "3hRV0jL3vUpRrcy398teAU"
+    },
+    {
+     "p": 167,
+     "a": "Benson Boone",
+     "t": "Beautiful Things",
+     "c": "-5",
+     "sp": "3xkHsmpQCBMytMJNiDf3Ii"
+    },
+    {
+     "p": 168,
+     "a": "Thekidszn",
+     "t": "IMPULSIVE",
+     "c": "-32",
+     "sp": "4TnnvhiNjsYdcHxODzNiKA"
+    },
+    {
+     "p": 169,
+     "a": "Oasis",
+     "t": "Don't Look Back in Anger - Remastered",
+     "c": "-4",
+     "sp": "0UvCh63URrLFcPkKt99hHd"
+    },
+    {
+     "p": 170,
+     "a": "Kanye West",
+     "t": "Flashing Lights (w/ Dwele)",
+     "c": "RE",
+     "sp": "5TRPicyLGbAF2LGBFbHGvO"
+    },
+    {
+     "p": 171,
+     "a": "Foo Fighters",
+     "t": "Everlong",
+     "c": "-20",
+     "sp": "5UWwZ5lm5PKu6eKsHAGxOk"
+    },
+    {
+     "p": 172,
      "a": "Radiohead",
      "t": "Let Down",
-     "c": "-20",
+     "c": "+13",
      "sp": "2fuYa3Lx06QQJAm0MjztKr"
     },
     {
+     "p": 173,
+     "a": "Alicia Keys",
+     "t": "Un-thinkable (I'm Ready) (w/ Drake)",
+     "c": "-4",
+     "sp": "4o4wEDRqotccDTXiQ7TORu"
+    },
+    {
+     "p": 174,
+     "a": "PinkPantheress",
+     "t": "Stateside + Zara Larsson (w/ Zara Larsson)",
+     "c": "-28",
+     "sp": "1DwscornXpj8fmOmYVlqZt"
+    },
+    {
+     "p": 175,
+     "a": "Sixpence None The Richer",
+     "t": "Kiss Me",
+     "c": "-26",
+     "sp": "754kgU5rWscRTfvlsuEwFp"
+    },
+    {
+     "p": 176,
+     "a": "Childish Gambino",
+     "t": "Les",
+     "c": "-3",
+     "sp": "7ghKr0pCYyPPyp7t1FH8k4"
+    },
+    {
+     "p": 177,
+     "a": "The Smiths",
+     "t": "There Is a Light That Never Goes Out",
+     "c": "NEW",
+     "sp": "0GaPY2luSt5cmke9phvJGe"
+    },
+    {
+     "p": 178,
+     "a": "Empire Of The Sun",
+     "t": "We Are The People",
+     "c": "RE",
+     "sp": "3zEN0ii6s4DHHBpnTp3RP7"
+    },
+    {
+     "p": 179,
+     "a": "Olivia Rodrigo",
+     "t": "honeybee",
+     "c": "-19",
+     "sp": "4kX7xkopoXZCfE1D6fNwl2"
+    },
+    {
+     "p": 180,
+     "a": "Chris Lorenzo",
+     "t": "Fancy Footwork (w/ Chromeo)",
+     "c": "RE",
+     "sp": "0BK6ACxpzK8nkWa3YKuunX"
+    },
+    {
+     "p": 181,
+     "a": "Kendrick Lamar",
+     "t": "All The Stars (w/ SZA)",
+     "c": "RE",
+     "sp": "3GCdLUSnKSMJhs4Tj6CV3s"
+    },
+    {
+     "p": 182,
+     "a": "Noah Kahan",
+     "t": "The Great Divide",
+     "c": "-25",
+     "sp": "4ck9vo0gEmjVHWUb5q2rYe"
+    },
+    {
+     "p": 183,
+     "a": "HUNTR/X",
+     "t": "Golden (w/ EJae, AUDREY NUNA, REI AMI, KPop Demon Hunters Cast)",
+     "c": "-11",
+     "sp": "1CPZ5BxNNd0n0nF4Orb9JS"
+    },
+    {
+     "p": 184,
+     "a": "TOTO",
+     "t": "Africa",
+     "c": "-20",
+     "sp": "2374M0fQpWi3dLnB54qaLX"
+    },
+    {
+     "p": 185,
+     "a": "OneRepublic",
+     "t": "Counting Stars",
+     "c": "RE",
+     "sp": "2tpWsVSb9UEmDRxAl1zhX1"
+    },
+    {
      "p": 186,
-     "a": "Olivia Dean",
-     "t": "Lady Lady",
-     "c": "-8",
-     "sp": "1XwbJNPOcLuSRTQNR9zz4r"
+     "a": "Nelly Furtado",
+     "t": "Maneater",
+     "c": "-10",
+     "sp": "4wH4dJgrsxONID6KS2tDQM"
     },
     {
      "p": 187,
      "a": "Ariana Grande",
      "t": "Into You",
-     "c": "+3",
+     "c": "=",
      "sp": "7yHEDfrJNd0zWOfXwydNH0"
     },
     {
      "p": 188,
-     "a": "The Temper Trap",
-     "t": "Sweet Disposition",
-     "c": "-2",
-     "sp": "49x8Zp5wDjoquBE1THLLCV"
+     "a": "The Killers",
+     "t": "Somebody Told Me",
+     "c": "-21",
+     "sp": "6PwjJ58I4t7Mae9xfZ9l9v"
     },
     {
      "p": 189,
-     "a": "Coldplay",
-     "t": "The Scientist",
+     "a": "Sabrina Carpenter",
+     "t": "Manchild",
      "c": "RE",
-     "sp": "75JFxkI2RXiU7L9VXzMkle"
+     "sp": "2BwO5K8Q7EPAJSGze3AAh9"
     },
     {
      "p": 190,
-     "a": "Noah Kahan",
-     "t": "Staying Still",
-     "c": "-28",
-     "sp": "35po0dhj4pRkbVDeooNVBW"
+     "a": "Kanye West",
+     "t": "Homecoming (w/ Chris Martin)",
+     "c": "RE",
+     "sp": "4iz9lGMjU1lXS51oPmUmTe"
     },
     {
      "p": 191,
-     "a": "Wheatus",
-     "t": "Teenage Dirtbag",
-     "c": "-12",
-     "sp": "25FTMokYEbEWHEdss5JLZS"
+     "a": "Olivia Dean",
+     "t": "Baby Steps",
+     "c": "-10",
+     "sp": "5SruEBX3KpgpDvEcIuN53P"
     },
     {
      "p": 192,
-     "a": "Gotye",
-     "t": "Somebody That I Used To Know (w/ Kimbra)",
-     "c": "-23",
-     "sp": "1qDrWA6lyx8cLECdZE7TV7"
+     "a": "Rihanna",
+     "t": "Kiss It Better",
+     "c": "-40",
+     "sp": "0UHB9METy4VCXNgkcGqHqS"
     },
     {
      "p": 193,
-     "a": "Noah Kahan",
-     "t": "Doors",
-     "c": "-4",
-     "sp": "3iU2qsthCTo5EeTE03l3Si"
+     "a": "Dua Lipa",
+     "t": "Training Season",
+     "c": "RE",
+     "sp": "5b5cPscqVEMChvDqscVw26"
     },
     {
      "p": 194,
-     "a": "Tame Impala",
-     "t": "Dracula - JENNIE Remix (w/ JENNIE)",
-     "c": "-26",
-     "sp": "5yvVYFDUpbnjcnRBgjwTzM"
+     "a": "Teddy Swims",
+     "t": "Lose Control",
+     "c": "RE",
+     "sp": "17phhZDn6oGtzMe56NuWvj"
     },
     {
      "p": 195,
-     "a": "Chappell Roan",
-     "t": "Casual",
-     "c": "-11",
-     "sp": "3WSOUb3U7tqURbBSgZTrZX"
+     "a": "Harry Styles",
+     "t": "American Girls",
+     "c": "RE",
+     "sp": "7gtG45ieyQzKtNKobfLd49"
     },
     {
      "p": 196,
-     "a": "Childish Gambino",
-     "t": "Heartbeat",
-     "c": "-9",
-     "sp": "5AGQSF0ytihJyt96K5vW9d"
+     "a": "Rihanna",
+     "t": "S&M",
+     "c": "-25",
+     "sp": "7ySUcLPVX7KudhnmNcgY2D"
     },
     {
      "p": 197,
-     "a": "RAYE",
-     "t": "Escapism. (w/ 070 Shake)",
-     "c": "-4",
-     "sp": "5mHdCZtVyb4DcJw8799hZp"
+     "a": "Marvin Gaye",
+     "t": "Ain't No Mountain High Enough (w/ Tammi Terrell)",
+     "c": "RE",
+     "sp": "7tqhbajSfrz2F7E1Z75ASX"
     },
     {
      "p": 198,
-     "a": "Paolo Nutini",
-     "t": "Candy",
-     "c": "-40",
-     "sp": "4h5m56ExHLPUC9NGz7U1Qa"
+     "a": "Keane",
+     "t": "Somewhere Only We Know",
+     "c": "RE",
+     "sp": "0ll8uFnc0nANY35E0Lfxvg"
     },
     {
      "p": 199,
-     "a": "Chappell Roan",
-     "t": "Good Luck, Babe!",
-     "c": "RE",
-     "sp": "0WbMK4wrZ1wFSty9F7FCgu"
+     "a": "Red Hot Chili Peppers",
+     "t": "Can't Stop - 2014 Remaster",
+     "c": "+1",
+     "sp": "6ojiTSzyv2qPMWqyhUKAqz"
     },
     {
      "p": 200,
-     "a": "Red Hot Chili Peppers",
-     "t": "Can't Stop - 2014 Remaster",
-     "c": "RE",
-     "sp": "6ojiTSzyv2qPMWqyhUKAqz"
+     "a": "RAYE",
+     "t": "Escapism. (w/ 070 Shake)",
+     "c": "-3",
+     "sp": "5mHdCZtVyb4DcJw8799hZp"
     }
    ]
   },
@@ -2853,7 +2853,7 @@
      "p": 6,
      "a": "BEARWOLF",
      "t": "Феникс",
-     "c": "+1"
+     "c": "="
     },
     {
      "p": 7,
@@ -2865,7 +2865,7 @@
      "p": 8,
      "a": "Татьяна Буланова",
      "t": "Ледяное сердце",
-     "c": "-2"
+     "c": "-1"
     },
     {
      "p": 9,
@@ -2887,21 +2887,21 @@
     },
     {
      "p": 12,
-     "a": "Miyagi & Эндшпиль",
-     "t": "I Got Love (feat. Рем Дигга)",
-     "c": "+2"
+     "a": "Ankara Echoes",
+     "t": "Beni Al (Ta Ki Seni Görene Kadar) [Beni Al Afro House Remix]",
+     "c": "+1"
     },
     {
      "p": 13,
-     "a": "Ankara Echoes",
-     "t": "Beni Al (Ta Ki Seni Görene Kadar) [Beni Al Afro House Remix]",
+     "a": "madk1d",
+     "t": "так п***й",
      "c": "-1"
     },
     {
      "p": 14,
-     "a": "madk1d",
-     "t": "так п***й",
-     "c": "-1"
+     "a": "Miyagi & Эндшпиль",
+     "t": "I Got Love (feat. Рем Дигга)",
+     "c": "="
     },
     {
      "p": 15,
@@ -2919,7 +2919,7 @@
      "p": 17,
      "a": "BTS",
      "t": "SWIM",
-     "c": "+1"
+     "c": "NEW"
     },
     {
      "p": 18,
@@ -2929,39 +2929,39 @@
     },
     {
      "p": 19,
-     "a": "By Индия",
-     "t": "спектакль",
-     "c": "+4"
+     "a": "Jakone & Kiliana",
+     "t": "Асфальт",
+     "c": "="
     },
     {
      "p": 20,
      "a": "SAYAN",
      "t": "Мальборо",
-     "c": "="
+     "c": "-2"
     },
     {
      "p": 21,
-     "a": "Jakone & Kiliana",
-     "t": "Асфальт",
-     "c": "-2"
+     "a": "By Индия",
+     "t": "спектакль",
+     "c": "-1"
     },
     {
      "p": 22,
      "a": "NAVAI",
      "t": "Сгореть",
-     "c": "="
+     "c": "+1"
     },
     {
      "p": 23,
-     "a": "Ваня Дмитриенко",
-     "t": "Шёлк",
-     "c": "+3"
+     "a": "ARTIK & ASTI",
+     "t": "Лампочки",
+     "c": "+1"
     },
     {
      "p": 24,
-     "a": "ARTIK & ASTI",
-     "t": "Лампочки",
-     "c": "="
+     "a": "madk1d & VILLIAN",
+     "t": "8 миля",
+     "c": "-2"
     },
     {
      "p": 25,
@@ -2971,27 +2971,27 @@
     },
     {
      "p": 26,
-     "a": "madk1d & VILLIAN",
-     "t": "8 миля",
+     "a": "Ваня Дмитриенко",
+     "t": "Шёлк",
      "c": "-1"
     },
     {
      "p": 27,
-     "a": "MIA BOYKA",
-     "t": "ЭКСПОНАТ",
-     "c": "="
+     "a": "Света",
+     "t": "Мои слёзы",
+     "c": "+4"
     },
     {
      "p": 28,
-     "a": "Kai Angel",
-     "t": "andy warhol",
-     "c": "+1"
+     "a": "MIA BOYKA",
+     "t": "ЭКСПОНАТ",
+     "c": "-1"
     },
     {
      "p": 29,
-     "a": "Света",
-     "t": "Мои слёзы",
-     "c": "+14"
+     "a": "Kai Angel",
+     "t": "andy warhol",
+     "c": "-3"
     },
     {
      "p": 30,
@@ -3003,13 +3003,13 @@
      "p": 31,
      "a": "Полка & YASMI",
      "t": "Омут",
-     "c": "="
+     "c": "-2"
     },
     {
      "p": 32,
      "a": "Женя Трофимов & Комната культуры",
      "t": "Поезда",
-     "c": "="
+     "c": "+5"
     },
     {
      "p": 33,
@@ -3021,235 +3021,235 @@
      "p": 34,
      "a": "GATASKI",
      "t": "ПЕРВЫЙ РАЗ",
-     "c": "-1"
+     "c": "="
     },
     {
      "p": 35,
-     "a": "Баста",
-     "t": "На заре",
-     "c": "="
+     "a": "Voskresenskii",
+     "t": "Франсе",
+     "c": "-3"
     },
     {
      "p": 36,
-     "a": "XOLIDAYBOY",
-     "t": "Пожары",
-     "c": "="
+     "a": "Баста",
+     "t": "На заре",
+     "c": "-1"
     },
     {
      "p": 37,
-     "a": "Баста & Zivert",
-     "t": "неболей",
-     "c": "+1"
+     "a": "XOLIDAYBOY",
+     "t": "Пожары",
+     "c": "-1"
     },
     {
      "p": 38,
-     "a": "Voskresenskii",
-     "t": "Франсе",
-     "c": "-4"
+     "a": "Zivert",
+     "t": "Beverly Hills",
+     "c": "+8"
     },
     {
      "p": 39,
-     "a": "Zivert",
-     "t": "Credo",
-     "c": "+3"
+     "a": "Егор Крид",
+     "t": "Мало 2.0 (feat. OG Buda, Toxi$, Мэйби Бэйби, Baby Cute, Дора, madk1d & тёмный принц)",
+     "c": "-6"
     },
     {
      "p": 40,
      "a": "ANNA ASTI",
      "t": "Царица",
-     "c": "-3"
-    },
-    {
-     "p": 41,
-     "a": "Егор Крид",
-     "t": "Мало 2.0 (feat. OG Buda, Toxi$, Мэйби Бэйби, Baby Cute, Дора, madk1d & тёмный принц)",
-     "c": "-2"
-    },
-    {
-     "p": 42,
-     "a": "Fontaines D.C.",
-     "t": "Starburster",
-     "c": "+3"
-    },
-    {
-     "p": 43,
-     "a": "Ваня Дмитриенко, Мальбэк & Сюзанна",
-     "t": "Отражение",
-     "c": "-3"
-    },
-    {
-     "p": 44,
-     "a": "Zivert",
-     "t": "Beverly Hills",
-     "c": "+3"
-    },
-    {
-     "p": 45,
-     "a": "Zivert",
-     "t": "Зелёные волны",
      "c": "+1"
     },
     {
-     "p": 46,
+     "p": 41,
+     "a": "Zivert",
+     "t": "Credo",
+     "c": "+1"
+    },
+    {
+     "p": 42,
+     "a": "Баста & Zivert",
+     "t": "неболей",
+     "c": "-4"
+    },
+    {
+     "p": 43,
+     "a": "Fontaines D.C.",
+     "t": "Starburster",
+     "c": "+1"
+    },
+    {
+     "p": 44,
+     "a": "Ваня Дмитриенко, Мальбэк & Сюзанна",
+     "t": "Отражение",
+     "c": "-5"
+    },
+    {
+     "p": 45,
      "a": "Баста & Гуф",
      "t": "В сигаретном дыму",
      "c": "-2"
     },
     {
+     "p": 46,
+     "a": "HOLLYFLAME",
+     "t": "Нежность",
+     "c": "+7"
+    },
+    {
      "p": 47,
-     "a": "Женя Трофимов",
-     "t": "Самолеты",
-     "c": "+3"
+     "a": "Zivert",
+     "t": "Зелёные волны",
+     "c": "+2"
     },
     {
      "p": 48,
      "a": "IOWA",
      "t": "МЫ",
-     "c": "-7"
+     "c": "-3"
     },
     {
      "p": 49,
-     "a": "HOLLYFLAME",
-     "t": "Нежность",
-     "c": "+3"
+     "a": "Ваня Дмитриенко & Аня Пересильд",
+     "t": "Силуэт (из к/ф «Алиса в Стране Чудес»)",
+     "c": "-2"
     },
     {
      "p": 50,
+     "a": "урал гайсин & снялцепи",
+     "t": "ты в моих мыслях навсегда",
+     "c": "-10"
+    },
+    {
+     "p": 51,
+     "a": "Женя Трофимов",
+     "t": "Самолеты",
+     "c": "-3"
+    },
+    {
+     "p": 52,
      "a": "Zivert, Эвер & directoreels",
      "t": "Давай на самый верх",
      "c": "-2"
     },
     {
-     "p": 51,
-     "a": "Ваня Дмитриенко & Аня Пересильд",
-     "t": "Силуэт (из к/ф «Алиса в Стране Чудес»)",
-     "c": "+3"
-    },
-    {
-     "p": 52,
-     "a": "ARTIK & ASTI",
-     "t": "Гармония",
-     "c": "-1"
-    },
-    {
      "p": 53,
-     "a": "урал гайсин & снялцепи",
-     "t": "ты в моих мыслях навсегда",
-     "c": "-4"
+     "a": "Лирида",
+     "t": "Мой дом",
+     "c": "-2"
     },
     {
      "p": 54,
-     "a": "Лирида",
-     "t": "Мой дом",
-     "c": "-1"
+     "a": "ARTIK & ASTI",
+     "t": "Гармония",
+     "c": "-2"
     },
     {
      "p": 55,
-     "a": "MONA",
-     "t": "Иордан",
-     "c": "+1"
+     "a": "NEXTIME & Даник",
+     "t": "КИС Ю",
+     "c": "+16"
     },
     {
      "p": 56,
-     "a": "NEXTIME & Даник",
-     "t": "КИС Ю",
-     "c": "+12"
+     "a": "Retrie",
+     "t": "Take me there (slowed)",
+     "c": "+19"
     },
     {
      "p": 57,
      "a": "Хаски",
      "t": "Ветром Снегом Зноем",
-     "c": "+3"
-    },
-    {
-     "p": 58,
-     "a": "HammAli & Navai",
-     "t": "Птичка",
      "c": "-3"
     },
     {
+     "p": 58,
+     "a": "Nirvana",
+     "t": "Smells Like Teen Spirit",
+     "c": "="
+    },
+    {
      "p": 59,
+     "a": "MONA",
+     "t": "Иордан",
+     "c": "-3"
+    },
+    {
+     "p": 60,
      "a": "ANNA ASTI",
      "t": "По барам",
      "c": "-1"
     },
     {
-     "p": 60,
-     "a": "Nirvana",
-     "t": "Smells Like Teen Spirit",
-     "c": "+1"
-    },
-    {
      "p": 61,
-     "a": "Король и Шут",
-     "t": "Кукла колдуна",
-     "c": "+6"
-    },
-    {
-     "p": 62,
-     "a": "Jakone & Kiliana",
-     "t": "Жиганская",
-     "c": "-3"
-    },
-    {
-     "p": 63,
-     "a": "Retrie",
-     "t": "Take me there (slowed)",
-     "c": "+37"
-    },
-    {
-     "p": 64,
-     "a": "BEARWOLF",
-     "t": "Валькирия",
-     "c": "+12"
-    },
-    {
-     "p": 65,
-     "a": "Akmal'",
-     "t": "Любовная",
-     "c": "-8"
-    },
-    {
-     "p": 66,
-     "a": "LINKIN PARK",
-     "t": "In the End",
-     "c": "+3"
-    },
-    {
-     "p": 67,
-     "a": "Jakone & Kiliana",
-     "t": "Была, не была",
-     "c": "-3"
-    },
-    {
-     "p": 68,
-     "a": "Женя Трофимов & Комната культуры",
-     "t": "Привет",
-     "c": "-2"
-    },
-    {
-     "p": 69,
-     "a": "LINKIN PARK",
-     "t": "Numb",
+     "a": "HammAli & Navai",
+     "t": "Птичка",
      "c": "-6"
     },
     {
-     "p": 70,
-     "a": "ARTIK & ASTI",
-     "t": "Девочка танцуй",
-     "c": "-8"
+     "p": 62,
+     "a": "Король и Шут",
+     "t": "Кукла колдуна",
+     "c": "-1"
     },
     {
-     "p": 71,
+     "p": 63,
      "a": "VILLIAN & Aarne",
      "t": "Общество Мертвых Поэтов",
      "c": "-6"
     },
     {
+     "p": 64,
+     "a": "Jakone & Kiliana",
+     "t": "Была, не была",
+     "c": "-1"
+    },
+    {
+     "p": 65,
+     "a": "Jakone & Kiliana",
+     "t": "Жиганская",
+     "c": "-5"
+    },
+    {
+     "p": 66,
+     "a": "ARTIK & ASTI",
+     "t": "Девочка танцуй",
+     "c": "-1"
+    },
+    {
+     "p": 67,
+     "a": "BEARWOLF",
+     "t": "Валькирия",
+     "c": "+3"
+    },
+    {
+     "p": 68,
+     "a": "Женя Трофимов & Комната культуры",
+     "t": "Привет",
+     "c": "="
+    },
+    {
+     "p": 69,
+     "a": "LINKIN PARK",
+     "t": "Numb",
+     "c": "-5"
+    },
+    {
+     "p": 70,
+     "a": "Akmal'",
+     "t": "Любовная",
+     "c": "-8"
+    },
+    {
+     "p": 71,
+     "a": "LINKIN PARK",
+     "t": "In the End",
+     "c": "-5"
+    },
+    {
      "p": 72,
      "a": "СДП",
      "t": "Сыпь, гармоника! (First Take Master)",
-     "c": "-2"
+     "c": "-3"
     },
     {
      "p": 73,
@@ -3259,27 +3259,27 @@
     },
     {
      "p": 74,
-     "a": "Rammstein",
-     "t": "Sonne",
-     "c": "+17"
+     "a": "The Chemical Brothers",
+     "t": "Go (feat. Q-Tip)",
+     "c": "+6"
     },
     {
      "p": 75,
-     "a": "Джиган, ARTIK & ASTI & NILETTO",
-     "t": "Худи",
-     "c": "+10"
+     "a": "Rammstein",
+     "t": "Sonne",
+     "c": "+6"
     },
     {
      "p": 76,
-     "a": "Марго Нуар, Александра Чистякова & Лилия Вайн",
-     "t": "Возраст - это просто пин-код",
-     "c": "-5"
+     "a": "The Weeknd",
+     "t": "Blinding Lights",
+     "c": "NEW"
     },
     {
      "p": 77,
-     "a": "Bruno Mars",
-     "t": "I Just Might (Mixed)",
-     "c": "-3"
+     "a": "Егор Крид",
+     "t": "милый ублюдок",
+     "c": "-10"
     },
     {
      "p": 78,
@@ -3289,735 +3289,735 @@
     },
     {
      "p": 79,
-     "a": "Drake",
-     "t": "Janice STFU (Mixed)",
-     "c": "-7"
+     "a": "Джиган, ARTIK & ASTI & NILETTO",
+     "t": "Худи",
+     "c": "+8"
     },
     {
      "p": 80,
-     "a": "The Chemical Brothers",
-     "t": "Go (feat. Q-Tip)",
-     "c": "-1"
+     "a": "Justice, Tame Impala, SZA & King Gizzard & The Lizard Wizard",
+     "t": "Flower In A Hurricane [From GTAVI: Original Score]",
+     "c": "+15"
     },
     {
      "p": 81,
-     "a": "The Weeknd",
-     "t": "Blinding Lights",
-     "c": "-6"
+     "a": "Bruno Mars",
+     "t": "I Just Might (Mixed)",
+     "c": "NEW"
     },
     {
      "p": 82,
-     "a": "Егор Крид",
-     "t": "милый ублюдок",
-     "c": "-4"
+     "a": "Бонд с кнопкой",
+     "t": "Кухни",
+     "c": "-3"
     },
     {
      "p": 83,
-     "a": "Артём Качер & ARTIK & ASTI",
-     "t": "Грустный дэнс",
-     "c": "-3"
+     "a": "Скриптонит",
+     "t": "Москва любит...",
+     "c": "-9"
     },
     {
      "p": 84,
-     "a": "VILLIAN & OG Buda",
-     "t": "101 причина",
-     "c": "-3"
+     "a": "Drake",
+     "t": "Janice STFU (Mixed)",
+     "c": "NEW"
     },
     {
      "p": 85,
-     "a": "Скриптонит",
-     "t": "Москва любит...",
-     "c": "-2"
+     "a": "Марго Нуар, Александра Чистякова & Лилия Вайн",
+     "t": "Возраст - это просто пин-код",
+     "c": "-7"
     },
     {
      "p": 86,
-     "a": "Бонд с кнопкой",
-     "t": "Кухни",
-     "c": "+3"
+     "a": "greyrock, tewiq & madk1d",
+     "t": "распять",
+     "c": "-10"
     },
     {
      "p": 87,
-     "a": "Ева Власова",
-     "t": "Вчера (Cover)",
-     "c": "-3"
+     "a": "Юля Паршута",
+     "t": "Моя Сирин",
+     "c": "+2"
     },
     {
      "p": 88,
-     "a": "Zara Larsson",
-     "t": "Lush Life",
+     "a": "Ramila",
+     "t": "Родная сторона",
      "c": "-6"
     },
     {
      "p": 89,
-     "a": "Дискотека Авария",
-     "t": "КУКЛА (feat. VONAMOUR) [Remix 2026]",
-     "c": "+4"
+     "a": "Артём Качер & ARTIK & ASTI",
+     "t": "Грустный дэнс",
+     "c": "-5"
     },
     {
      "p": 90,
-     "a": "Justice, Tame Impala, SZA & King Gizzard & The Lizard Wizard",
-     "t": "Flower In A Hurricane [From GTAVI: Original Score]",
-     "c": "+12"
+     "a": "Дискотека Авария",
+     "t": "КУКЛА (feat. VONAMOUR) [Remix 2026]",
+     "c": "+1"
     },
     {
      "p": 91,
-     "a": "Юля Паршута",
-     "t": "Моя Сирин",
-     "c": "-4"
-    },
-    {
-     "p": 92,
-     "a": "greyrock, tewiq & madk1d",
-     "t": "распять",
-     "c": "-2"
-    },
-    {
-     "p": 93,
-     "a": "Три дня дождя & MONA",
-     "t": "Прощание",
-     "c": "+3"
-    },
-    {
-     "p": 94,
-     "a": "Король и Шут",
-     "t": "Лесник",
-     "c": "+4"
-    },
-    {
-     "p": 95,
-     "a": "Моя Мишель",
-     "t": "Зима в сердце",
-     "c": "-9"
-    },
-    {
-     "p": 96,
-     "a": "Ramila",
-     "t": "Родная сторона",
-     "c": "-2"
-    },
-    {
-     "p": 97,
-     "a": "Icegergert & SKY RAE",
-     "t": "Наследство",
-     "c": "="
-    },
-    {
-     "p": 98,
      "a": "NEMIGA & Дорогой Дневник",
      "t": "Весь этот мир",
      "c": "+7"
     },
     {
+     "p": 92,
+     "a": "Icegergert & SKY RAE",
+     "t": "Наследство",
+     "c": "+1"
+    },
+    {
+     "p": 93,
+     "a": "Zara Larsson",
+     "t": "Lush Life",
+     "c": "-10"
+    },
+    {
+     "p": 94,
+     "a": "Три дня дождя & MONA",
+     "t": "Прощание",
+     "c": "-6"
+    },
+    {
+     "p": 95,
+     "a": "VILLIAN & OG Buda",
+     "t": "101 причина",
+     "c": "-23"
+    },
+    {
+     "p": 96,
+     "a": "Моя Мишель",
+     "t": "Зима в сердце",
+     "c": "-4"
+    },
+    {
+     "p": 97,
+     "a": "Ева Власова",
+     "t": "Вчера (Cover)",
+     "c": "-3"
+    },
+    {
+     "p": 98,
+     "a": "Король и Шут",
+     "t": "Лесник",
+     "c": "-2"
+    },
+    {
      "p": 99,
      "a": "9mice, Егор Крид, тёмный принц & madk1d",
      "t": "Jealous",
-     "c": "-4"
+     "c": "-13"
     },
     {
      "p": 100,
      "a": "Aarne, Toxi$ & Big Baby Tape",
      "t": "NOBODY",
-     "c": "-8"
+     "c": "-10"
     },
     {
      "p": 101,
      "a": "МИЛЕНА MIBREOO & Давид Туров",
      "t": "Ненавидеть",
-     "c": "-13"
+     "c": "-16"
     },
     {
      "p": 102,
      "a": "MACAN",
      "t": "ASPHALT 8",
-     "c": "+1"
+     "c": "-1"
     },
     {
      "p": 103,
-     "a": "Женя Трофимов & Комната культуры",
-     "t": "Море",
-     "c": "+11"
+     "a": "Akmal'",
+     "t": "Из-за тебя",
+     "c": "-6"
     },
     {
      "p": 104,
-     "a": "Akmal'",
-     "t": "Из-за тебя",
-     "c": "-5"
+     "a": "Женя Трофимов & Комната культуры",
+     "t": "Море",
+     "c": "-2"
     },
     {
      "p": 105,
      "a": "MATRANG",
      "t": "Заманчивая",
-     "c": "+3"
+     "c": "-6"
     },
     {
      "p": 106,
      "a": "NAVAI & MONA",
      "t": "Есенин",
-     "c": "+4"
+     "c": "-2"
     },
     {
      "p": 107,
-     "a": "HammAli & Navai",
-     "t": "Пустите меня на танцпол",
-     "c": "+5"
+     "a": "The Weeknd",
+     "t": "Starboy (feat. Daft Punk)",
+     "c": "+34"
     },
     {
      "p": 108,
-     "a": "LINKIN PARK",
-     "t": "Faint",
-     "c": "-1"
+     "a": "Антон Токарев",
+     "t": "Седьмой лепесток",
+     "c": "+8"
     },
     {
      "p": 109,
-     "a": "HammAli & Navai",
-     "t": "Прятки",
-     "c": "+36"
+     "a": "Pimp Schwab",
+     "t": "Всё Что Нас Не Убивает (Extended Club Mix)",
+     "c": "-6"
     },
     {
      "p": 110,
-     "a": "Pimp Schwab",
-     "t": "Всё Что Нас Не Убивает (Extended Club Mix)",
-     "c": "+7"
+     "a": "MONA",
+     "t": "Воин и дракон (Из к/с «Ониксовый шторм»)",
+     "c": "-4"
     },
     {
      "p": 111,
-     "a": "MONA",
-     "t": "Воин и дракон (Из к/с «Ониксовый шторм»)",
-     "c": "-5"
+     "a": "Хаски",
+     "t": "Бит шатает голову",
+     "c": "+12"
     },
     {
      "p": 112,
-     "a": "MIROLYBOVA & BARABANOV",
-     "t": "Пьяная без вина 2.0",
-     "c": "+10"
+     "a": "HammAli & Navai",
+     "t": "Пустите меня на танцпол",
+     "c": "-7"
     },
     {
      "p": 113,
-     "a": "Антон Токарев",
-     "t": "Седьмой лепесток",
-     "c": "+5"
+     "a": "HammAli & Navai",
+     "t": "Прятки",
+     "c": "+25"
     },
     {
      "p": 114,
-     "a": "Хаски",
-     "t": "Бит шатает голову",
-     "c": "+9"
+     "a": "LINKIN PARK",
+     "t": "Faint",
+     "c": "-14"
     },
     {
      "p": 115,
-     "a": "9 Грамм",
-     "t": "Рапапам (feat. Miyagi & Эндшпиль)",
-     "c": "+25"
+     "a": "AY YOLA",
+     "t": "Homay",
+     "c": "+18"
     },
     {
      "p": 116,
      "a": "Eminem",
      "t": "Mockingbird",
-     "c": "+8"
+     "c": "-1"
     },
     {
      "p": 117,
-     "a": "GAYAZOV$ BROTHER$",
-     "t": "Санта Лючия",
-     "c": "-2"
+     "a": "Radiohead",
+     "t": "Creep",
+     "c": "+7"
     },
     {
      "p": 118,
-     "a": "LOBODA",
-     "t": "К чёрту любовь",
-     "c": "-9"
-    },
-    {
-     "p": 119,
-     "a": "Bebe Rexha & Faithless",
-     "t": "New Religion",
-     "c": "-15"
-    },
-    {
-     "p": 120,
-     "a": "Miyagi & Andy Panda",
-     "t": "Minor",
-     "c": "+6"
-    },
-    {
-     "p": 121,
-     "a": "AY YOLA",
-     "t": "Homay",
-     "c": "+29"
-    },
-    {
-     "p": 122,
-     "a": "Сплин",
-     "t": "Выхода нет",
-     "c": "+8"
-    },
-    {
-     "p": 123,
-     "a": "JONY",
-     "t": "Комета",
-     "c": "-12"
-    },
-    {
-     "p": 124,
-     "a": "The Weeknd",
-     "t": "Starboy (feat. Daft Punk)",
+     "a": "9 Грамм",
+     "t": "Рапапам (feat. Miyagi & Эндшпиль)",
      "c": "+13"
     },
     {
-     "p": 125,
-     "a": "Michael Jackson",
-     "t": "Beat It",
+     "p": 119,
+     "a": "LOBODA",
+     "t": "К чёрту любовь",
      "c": "-12"
     },
     {
-     "p": 126,
-     "a": "Coolio",
-     "t": "Gangsta's Paradise (feat. L.V.)",
-     "c": "NEW"
-    },
-    {
-     "p": 127,
-     "a": "Radiohead",
-     "t": "Creep",
-     "c": "+24"
-    },
-    {
-     "p": 128,
+     "p": 120,
      "a": "NAVAI",
      "t": "Дай знать",
+     "c": "-12"
+    },
+    {
+     "p": 121,
+     "a": "Сплин",
+     "t": "Выхода нет",
+     "c": "+7"
+    },
+    {
+     "p": 122,
+     "a": "GAYAZOV$ BROTHER$",
+     "t": "Санта Лючия",
+     "c": "-10"
+    },
+    {
+     "p": 123,
+     "a": "Кино",
+     "t": "Звезда по имени Солнце",
+     "c": "-4"
+    },
+    {
+     "p": 124,
+     "a": "MIROLYBOVA & BARABANOV",
+     "t": "Пьяная без вина 2.0",
+     "c": "+5"
+    },
+    {
+     "p": 125,
+     "a": "Miyagi & Andy Panda",
+     "t": "Minor",
      "c": "-3"
     },
     {
-     "p": 129,
-     "a": "Люся Чеботина",
-     "t": "СОЛНЦЕ МОНАКО",
-     "c": "="
+     "p": 126,
+     "a": "Bebe Rexha & Faithless",
+     "t": "New Religion",
+     "c": "-13"
     },
     {
-     "p": 130,
-     "a": "YASMI",
-     "t": "Сайга",
-     "c": "-11"
-    },
-    {
-     "p": 131,
-     "a": "SABI & MIA BOYKA",
-     "t": "Базовый минимум",
-     "c": "-11"
-    },
-    {
-     "p": 132,
-     "a": "МОТ",
-     "t": "Любовь не каршеринг",
-     "c": "-16"
-    },
-    {
-     "p": 133,
-     "a": "Ramil'",
-     "t": "Сияй",
-     "c": "+21"
-    },
-    {
-     "p": 134,
-     "a": "Гио ПиКа & MIRAVI",
-     "t": "Мир",
-     "c": "+19"
-    },
-    {
-     "p": 135,
-     "a": "Кино",
-     "t": "Звезда по имени Солнце",
-     "c": "-7"
-    },
-    {
-     "p": 136,
-     "a": "Akmal'",
-     "t": "Мир нам завидовал",
-     "c": "-2"
-    },
-    {
-     "p": 137,
-     "a": "АлСми",
-     "t": "Танцуешь на поминках",
-     "c": "-36"
-    },
-    {
-     "p": 138,
-     "a": "Руслан Добрый",
-     "t": "Счастье вокруг",
-     "c": "-6"
-    },
-    {
-     "p": 139,
+     "p": 127,
      "a": "Eminem",
      "t": "Without Me",
      "c": "-1"
     },
     {
+     "p": 128,
+     "a": "Coolio",
+     "t": "Gangsta's Paradise (feat. L.V.) [2023 Remaster]",
+     "c": "NEW"
+    },
+    {
+     "p": 129,
+     "a": "JONY",
+     "t": "Комета",
+     "c": "-18"
+    },
+    {
+     "p": 130,
+     "a": "Michael Jackson",
+     "t": "Beat It",
+     "c": "-20"
+    },
+    {
+     "p": 131,
+     "a": "YASMI",
+     "t": "Сайга",
+     "c": "-14"
+    },
+    {
+     "p": 132,
+     "a": "Гио ПиКа & MIRAVI",
+     "t": "Мир",
+     "c": "+21"
+    },
+    {
+     "p": 133,
+     "a": "HammAli & Navai",
+     "t": "Ноты",
+     "c": "-1"
+    },
+    {
+     "p": 134,
+     "a": "madk1d & тёмный принц",
+     "t": "ты че обиделась",
+     "c": "-7"
+    },
+    {
+     "p": 135,
+     "a": "Люся Чеботина",
+     "t": "СОЛНЦЕ МОНАКО",
+     "c": "-17"
+    },
+    {
+     "p": 136,
+     "a": "Sting",
+     "t": "Shape of My Heart",
+     "c": "+32"
+    },
+    {
+     "p": 137,
+     "a": "SABI & MIA BOYKA",
+     "t": "Базовый минимум",
+     "c": "-23"
+    },
+    {
+     "p": 138,
+     "a": "Руслан Добрый",
+     "t": "Счастье вокруг",
+     "c": "-13"
+    },
+    {
+     "p": 139,
+     "a": "Miyagi & Andy Panda",
+     "t": "Там ревели горы",
+     "c": "-3"
+    },
+    {
      "p": 140,
+     "a": "Ваня Дмитриенко",
+     "t": "Венера-Юпитер",
+     "c": "+2"
+    },
+    {
+     "p": 141,
+     "a": "Sting",
+     "t": "Desert Rose",
+     "c": "+24"
+    },
+    {
+     "p": 142,
+     "a": "Akmal'",
+     "t": "Мир нам завидовал",
+     "c": "-7"
+    },
+    {
+     "p": 143,
      "a": "GAYAZOV$ BROTHER$",
      "t": "МАЛИНОВАЯ ЛАДА",
      "c": "-13"
     },
     {
-     "p": 141,
-     "a": "Miyagi & Andy Panda",
-     "t": "Там ревели горы",
-     "c": "-6"
-    },
-    {
-     "p": 142,
-     "a": "Sting",
-     "t": "Shape of My Heart",
-     "c": "+33"
-    },
-    {
-     "p": 143,
-     "a": "МОТ",
-     "t": "Капкан",
-     "c": "-10"
-    },
-    {
      "p": 144,
      "a": "MONA & Баста",
      "t": "Ты так мне необходим",
-     "c": "-23"
+     "c": "-24"
     },
     {
      "p": 145,
-     "a": "Ваня Дмитриенко",
-     "t": "Венера-Юпитер",
-     "c": "-1"
-    },
-    {
-     "p": 146,
-     "a": "Sting",
-     "t": "Desert Rose",
-     "c": "+35"
-    },
-    {
-     "p": 147,
-     "a": "System Of A Down",
-     "t": "Chop Suey!",
-     "c": "-1"
-    },
-    {
-     "p": 148,
-     "a": "Jakone & SCIRENA",
-     "t": "По весне",
-     "c": "+10"
-    },
-    {
-     "p": 149,
-     "a": "Кравц & Гио ПиКа",
-     "t": "Где прошла ты",
-     "c": "-13"
-    },
-    {
-     "p": 150,
-     "a": "HammAli & Navai",
-     "t": "Ноты",
-     "c": "-19"
-    },
-    {
-     "p": 151,
-     "a": "Егор Крид & ARTIK & ASTI",
-     "t": "KARMA",
-     "c": "+25"
-    },
-    {
-     "p": 152,
-     "a": "madk1d & тёмный принц",
-     "t": "ты че обиделась",
-     "c": "-4"
-    },
-    {
-     "p": 153,
-     "a": "Ed Sheeran",
-     "t": "Shape of You",
-     "c": "+13"
-    },
-    {
-     "p": 154,
-     "a": "белый шум для детей",
-     "t": "Белый шум для малышей",
+     "a": "Akmal'",
+     "t": "Ты мне покажи...",
      "c": "+18"
     },
     {
+     "p": 146,
+     "a": "Jakone & MACAN",
+     "t": "Purosangue",
+     "c": "-2"
+    },
+    {
+     "p": 147,
+     "a": "Eminem",
+     "t": "Lose Yourself",
+     "c": "+2"
+    },
+    {
+     "p": 148,
+     "a": "System Of A Down",
+     "t": "Chop Suey!",
+     "c": "-8"
+    },
+    {
+     "p": 149,
+     "a": "МОТ",
+     "t": "Любовь не каршеринг",
+     "c": "-28"
+    },
+    {
+     "p": 150,
+     "a": "Ramil'",
+     "t": "Сияй",
+     "c": "+10"
+    },
+    {
+     "p": 151,
+     "a": "Кравц & Гио ПиКа",
+     "t": "Где прошла ты",
+     "c": "-14"
+    },
+    {
+     "p": 152,
+     "a": "Баста",
+     "t": "Моя Вселенная (feat. Тати)",
+     "c": "-5"
+    },
+    {
+     "p": 153,
+     "a": "Jakone & SCIRENA",
+     "t": "По весне",
+     "c": "+1"
+    },
+    {
+     "p": 154,
+     "a": "МОТ",
+     "t": "Капкан",
+     "c": "-15"
+    },
+    {
      "p": 155,
-     "a": "Akmal'",
-     "t": "Ты мне покажи...",
+     "a": "Егор Крид & ARTIK & ASTI",
+     "t": "KARMA",
      "c": "+12"
     },
     {
      "p": 156,
-     "a": "Zivert",
-     "t": "Три Дня Любви",
-     "c": "+3"
+     "a": "Jah Khalib",
+     "t": "Медина",
+     "c": "-10"
     },
     {
      "p": 157,
-     "a": "ANNA ASTI",
-     "t": "Феникс",
-     "c": "-1"
+     "a": "Ed Sheeran",
+     "t": "Shape of You",
+     "c": "-2"
     },
     {
      "p": 158,
-     "a": "Баста",
-     "t": "Моя Вселенная (feat. Тати)",
-     "c": "-11"
+     "a": "ANNA ASTI",
+     "t": "Верю в тебя",
+     "c": "="
     },
     {
      "p": 159,
-     "a": "ANNA ASTI",
-     "t": "Верю в тебя",
-     "c": "-17"
+     "a": "Ramil' & Баста",
+     "t": "Сияй",
+     "c": "+2"
     },
     {
      "p": 160,
-     "a": "Ramil' & Баста",
-     "t": "Сияй",
-     "c": "-5"
+     "a": "АлСми",
+     "t": "Танцуешь на поминках",
+     "c": "-51"
     },
     {
      "p": 161,
-     "a": "МакSим",
-     "t": "Знаешь ли ты",
-     "c": "+8"
+     "a": "Бонд с кнопкой",
+     "t": "Боязно",
+     "c": "+3"
     },
     {
      "p": 162,
-     "a": "Бонд с кнопкой",
-     "t": "Боязно",
-     "c": "+11"
+     "a": "Кино",
+     "t": "Группа крови",
+     "c": "="
     },
     {
      "p": 163,
-     "a": "Кино",
-     "t": "Группа крови",
-     "c": "+14"
+     "a": "Rammstein",
+     "t": "Deutschland",
+     "c": "+13"
     },
     {
      "p": 164,
-     "a": "Jakone & MACAN",
-     "t": "Purosangue",
-     "c": "-3"
+     "a": "Порнофильмы",
+     "t": "Я так соскучился",
+     "c": "+9"
     },
     {
      "p": 165,
-     "a": "NAVAI",
-     "t": "Больше, чем ближе",
-     "c": "-8"
+     "a": "ANNA ASTI",
+     "t": "Ночью на кухне",
+     "c": "-9"
     },
     {
      "p": 166,
-     "a": "Земфира",
-     "t": "ИСКАЛА",
-     "c": "-4"
+     "a": "МакSим",
+     "t": "Знаешь ли ты",
+     "c": "+4"
     },
     {
      "p": 167,
-     "a": "Jah Khalib",
-     "t": "Медина",
-     "c": "-26"
-    },
-    {
-     "p": 168,
-     "a": "Порнофильмы",
-     "t": "Я так соскучился",
-     "c": "+6"
-    },
-    {
-     "p": 169,
-     "a": "SQWOZ BAB & Satyr",
-     "t": "СКИНЬ НОЖКИ",
-     "c": "-20"
-    },
-    {
-     "p": 170,
-     "a": "Jakone",
-     "t": "Дорога дальняя",
-     "c": "+9"
-    },
-    {
-     "p": 171,
-     "a": "LINKIN PARK",
-     "t": "Somewhere I Belong",
-     "c": "-11"
-    },
-    {
-     "p": 172,
-     "a": "ANNA ASTI",
-     "t": "Ночью на кухне",
-     "c": "-33"
-    },
-    {
-     "p": 173,
-     "a": "Наутилус Помпилиус",
-     "t": "Дыхание",
-     "c": "+17"
-    },
-    {
-     "p": 174,
-     "a": "Eminem",
-     "t": "Lose Yourself",
+     "a": "NAVAI",
+     "t": "Больше, чем ближе",
      "c": "-22"
     },
     {
-     "p": 175,
-     "a": "ANNA ASTI",
-     "t": "Повело",
-     "c": "-12"
+     "p": 168,
+     "a": "Zivert",
+     "t": "Три Дня Любви",
+     "c": "-18"
     },
     {
-     "p": 176,
-     "a": "ELMAN",
-     "t": "С неба (feat. TRIDA)",
-     "c": "-12"
+     "p": 169,
+     "a": "Наутилус Помпилиус",
+     "t": "Дыхание",
+     "c": "+20"
     },
     {
-     "p": 177,
-     "a": "JONY",
-     "t": "Ты пари",
-     "c": "+9"
-    },
-    {
-     "p": 178,
+     "p": 170,
      "a": "The Prodigy",
      "t": "Smack My Bitch Up",
-     "c": "+5"
+     "c": "+16"
     },
     {
-     "p": 179,
-     "a": "Баста",
-     "t": "Моя игра (feat. Guf)",
-     "c": "-11"
+     "p": 171,
+     "a": "Земфира",
+     "t": "ИСКАЛА",
+     "c": "-19"
     },
     {
-     "p": 180,
-     "a": "XOLIDAYBOY",
-     "t": "Океаны",
-     "c": "+19"
-    },
-    {
-     "p": 181,
-     "a": "Miyagi & Эндшпиль",
-     "t": "Fire Man",
-     "c": "-3"
-    },
-    {
-     "p": 182,
-     "a": "Кино",
-     "t": "Пачка сигарет",
-     "c": "+7"
-    },
-    {
-     "p": 183,
-     "a": "XOLIDAYBOY",
-     "t": "Моя хулиганка",
-     "c": "-1"
-    },
-    {
-     "p": 184,
-     "a": "Агата Кристи",
-     "t": "Как на войне",
-     "c": "+14"
-    },
-    {
-     "p": 185,
-     "a": "КАЗАКИ ДЕЛАЮТ ХИТЫ",
-     "t": "Ледяное сердце",
-     "c": "-15"
-    },
-    {
-     "p": 186,
-     "a": "The Prodigy",
-     "t": "Breathe",
-     "c": "+6"
-    },
-    {
-     "p": 187,
-     "a": "Rammstein",
-     "t": "Deutschland",
-     "c": "-16"
-    },
-    {
-     "p": 188,
-     "a": "NILETTO, Олег Майами & Леша Свик",
-     "t": "Не вспоминай",
-     "c": "NEW"
-    },
-    {
-     "p": 189,
-     "a": "Баста & AMCHI",
-     "t": "Буду всегда с тобой",
-     "c": "NEW"
-    },
-    {
-     "p": 190,
-     "a": "Miyagi & Эндшпиль",
-     "t": "Untouchable (feat. Рем Дигга)",
-     "c": "NEW"
-    },
-    {
-     "p": 191,
-     "a": "LOBODA",
-     "t": "случайная",
-     "c": "-11"
-    },
-    {
-     "p": 192,
+     "p": 172,
      "a": "AIGEL",
      "t": "Пыяла",
      "c": "NEW"
     },
     {
-     "p": 193,
-     "a": "Каста",
-     "t": "Вокруг шум",
-     "c": "-6"
+     "p": 173,
+     "a": "Miyagi & Эндшпиль",
+     "t": "Fire Man",
+     "c": "+7"
     },
     {
-     "p": 194,
+     "p": 174,
+     "a": "LINKIN PARK",
+     "t": "Somewhere I Belong",
+     "c": "-31"
+    },
+    {
+     "p": 175,
+     "a": "SQWOZ BAB & Satyr",
+     "t": "СКИНЬ НОЖКИ",
+     "c": "-24"
+    },
+    {
+     "p": 176,
+     "a": "ANNA ASTI",
+     "t": "Феникс",
+     "c": "-17"
+    },
+    {
+     "p": 177,
+     "a": "ELMAN",
+     "t": "С неба (feat. TRIDA)",
+     "c": "-29"
+    },
+    {
+     "p": 178,
+     "a": "Агата Кристи",
+     "t": "Как на войне",
+     "c": "NEW"
+    },
+    {
+     "p": 179,
+     "a": "ANNA ASTI",
+     "t": "Повело",
+     "c": "-8"
+    },
+    {
+     "p": 180,
      "a": "Zericxxn",
      "t": "Raya (Slowed)",
      "c": "NEW"
     },
     {
-     "p": 195,
-     "a": "7Б",
-     "t": "Молодые ветра",
-     "c": "NEW"
+     "p": 181,
+     "a": "Jakone",
+     "t": "Дорога дальняя",
+     "c": "-3"
     },
     {
-     "p": 196,
-     "a": "Armin van Buuren",
-     "t": "In and Out of Love (feat. Sharon den Adel) [Radio Edit]",
-     "c": "NEW"
+     "p": 182,
+     "a": "Баста",
+     "t": "Моя игра (feat. Guf)",
+     "c": "-16"
     },
     {
-     "p": 197,
+     "p": 183,
+     "a": "The Neighbourhood",
+     "t": "Sweater Weather",
+     "c": "+5"
+    },
+    {
+     "p": 184,
+     "a": "ANNA ASTI & Дима Билан",
+     "t": "Эпилог",
+     "c": "-2"
+    },
+    {
+     "p": 185,
+     "a": "JONY",
+     "t": "Ты пари",
+     "c": "+13"
+    },
+    {
+     "p": 186,
      "a": "MONA & MACAN",
      "t": "Город дорог",
      "c": "NEW"
     },
     {
-     "p": 198,
-     "a": "ANNA ASTI & Дима Билан",
-     "t": "Эпилог",
+     "p": 187,
+     "a": "7Б",
+     "t": "Молодые ветра",
+     "c": "NEW"
+    },
+    {
+     "p": 188,
+     "a": "Кино",
+     "t": "Пачка сигарет",
+     "c": "-14"
+    },
+    {
+     "p": 189,
+     "a": "LOBODA",
+     "t": "случайная",
      "c": "-10"
     },
     {
-     "p": 199,
-     "a": "Ночные Снайперы",
-     "t": "секунду назад",
+     "p": 190,
+     "a": "Баста & AMCHI",
+     "t": "Буду всегда с тобой",
      "c": "NEW"
     },
     {
-     "p": 200,
-     "a": "Zivert",
-     "t": "Двусмысленно (feat. M'Dee)",
+     "p": 191,
+     "a": "XOLIDAYBOY",
+     "t": "Моя хулиганка",
+     "c": "-22"
+    },
+    {
+     "p": 192,
+     "a": "The Prodigy",
+     "t": "Breathe",
+     "c": "-9"
+    },
+    {
+     "p": 193,
+     "a": "Земфира",
+     "t": "П.М.М.Л.",
      "c": "NEW"
+    },
+    {
+     "p": 194,
+     "a": "Michael Jackson",
+     "t": "Smooth Criminal",
+     "c": "-37"
+    },
+    {
+     "p": 195,
+     "a": "КАЗАКИ ДЕЛАЮТ ХИТЫ",
+     "t": "Ледяное сердце",
+     "c": "-23"
+    },
+    {
+     "p": 196,
+     "a": "Каста",
+     "t": "Вокруг шум",
+     "c": "-6"
+    },
+    {
+     "p": 197,
+     "a": "Armin van Buuren",
+     "t": "In and Out of Love (feat. Sharon den Adel) [Radio Edit]",
+     "c": "-3"
+    },
+    {
+     "p": 198,
+     "a": "NILETTO, Олег Майами & Леша Свик",
+     "t": "Не вспоминай",
+     "c": "NEW"
+    },
+    {
+     "p": 199,
+     "a": "Катрин Штоль",
+     "t": "Пьяный",
+     "c": "+1"
+    },
+    {
+     "p": 200,
+     "a": "Дима Билан",
+     "t": "Я твой номер один",
+     "c": "-25"
     }
    ]
   },
@@ -4053,20 +4053,20 @@
     {
      "p": 5,
      "a": "周杰伦",
-     "t": "搁浅",
-     "c": "="
+     "t": "发如雪",
+     "c": "+1"
     },
     {
      "p": 6,
      "a": "周杰伦",
-     "t": "发如雪",
-     "c": "+1"
+     "t": "搁浅",
+     "c": "-1"
     },
     {
      "p": 7,
      "a": "孙燕姿",
      "t": "我怀念的",
-     "c": "-1"
+     "c": "="
     },
     {
      "p": 8,
@@ -4102,259 +4102,259 @@
      "p": 13,
      "a": "周杰伦",
      "t": "一路向北 (Bonus Track)",
-     "c": "+1"
+     "c": "="
     },
     {
      "p": 14,
-     "a": "周杰伦",
-     "t": "等你下课 (with 杨瑞代)",
-     "c": "+1"
-    },
-    {
-     "p": 15,
      "a": "梁静茹",
      "t": "情歌",
      "c": "+1"
     },
     {
+     "p": 15,
+     "a": "周杰伦",
+     "t": "等你下课 (with 杨瑞代)",
+     "c": "-1"
+    },
+    {
      "p": 16,
      "a": "周杰伦",
      "t": "爱在西元前",
-     "c": "+3"
+     "c": "="
     },
     {
      "p": 17,
-     "a": "王靖雯",
-     "t": "季候风",
-     "c": "-4"
+     "a": "周杰伦",
+     "t": "稻香",
+     "c": "+1"
     },
     {
      "p": 18,
-     "a": "周杰伦",
-     "t": "稻香",
-     "c": "+2"
+     "a": "王靖雯",
+     "t": "季候风",
+     "c": "-1"
     },
     {
      "p": 19,
      "a": "方大同",
      "t": "特别的人",
-     "c": "+3"
+     "c": "="
     },
     {
      "p": 20,
-     "a": "周杰伦",
-     "t": "那天下雨了",
-     "c": "-2"
+     "a": "BESTie",
+     "t": "Love Options",
+     "c": "+1"
     },
     {
      "p": 21,
-     "a": "BESTie",
-     "t": "Love Options",
-     "c": "+5"
-    },
-    {
-     "p": 22,
-     "a": "Ariana Grande",
-     "t": "hate that i made you love me",
-     "c": "-5"
-    },
-    {
-     "p": 23,
      "a": "周杰伦",
      "t": "夜曲",
      "c": "+2"
     },
     {
-     "p": 24,
+     "p": 22,
      "a": "周杰伦",
-     "t": "半岛铁盒",
-     "c": "="
-    },
-    {
-     "p": 25,
-     "a": "Gareth.T",
-     "t": "玻璃",
+     "t": "那天下雨了",
      "c": "-2"
     },
     {
+     "p": 23,
+     "a": "周杰伦",
+     "t": "半岛铁盒",
+     "c": "+1"
+    },
+    {
+     "p": 24,
+     "a": "Gareth.T",
+     "t": "玻璃",
+     "c": "+1"
+    },
+    {
+     "p": 25,
+     "a": "Ariana Grande",
+     "t": "hate that i made you love me",
+     "c": "-3"
+    },
+    {
      "p": 26,
-     "a": "陈奕迅",
-     "t": "爱情转移",
+     "a": "周杰伦",
+     "t": "烟花易冷",
      "c": "+1"
     },
     {
      "p": 27,
-     "a": "周杰伦",
-     "t": "烟花易冷",
-     "c": "+2"
+     "a": "陈奕迅",
+     "t": "爱情转移",
+     "c": "-1"
     },
     {
      "p": 28,
-     "a": "陶喆",
-     "t": "爱我还是他",
-     "c": "="
+     "a": "XG",
+     "t": "DEPENDS",
+     "c": "+2"
     },
     {
      "p": 29,
-     "a": "周杰伦",
-     "t": "告白气球",
-     "c": "+1"
+     "a": "陶喆",
+     "t": "爱我还是他",
+     "c": "-1"
     },
     {
      "p": 30,
-     "a": "XG",
-     "t": "DEPENDS",
-     "c": "+1"
+     "a": "周杰伦",
+     "t": "告白气球",
+     "c": "-1"
     },
     {
      "p": 31,
-     "a": "邓紫棋",
-     "t": "自由的你",
-     "c": "-10"
-    },
-    {
-     "p": 32,
      "a": "王力宏",
      "t": "你不知道的事",
      "c": "+1"
     },
     {
+     "p": 32,
+     "a": "周杰伦",
+     "t": "枫",
+     "c": "+2"
+    },
+    {
      "p": 33,
-     "a": "Olivia Dean",
-     "t": "So Easy (To Fall In Love)",
-     "c": "+11"
+     "a": "周杰伦",
+     "t": "简单爱",
+     "c": "+2"
     },
     {
      "p": 34,
-     "a": "周杰伦",
-     "t": "枫",
-     "c": "-2"
+     "a": "邓紫棋",
+     "t": "自由的你",
+     "c": "-3"
     },
     {
      "p": 35,
-     "a": "周杰伦",
-     "t": "简单爱",
-     "c": "-1"
+     "a": "杨丞琳",
+     "t": "雨爱",
+     "c": "+3"
     },
     {
      "p": 36,
-     "a": "邓紫棋",
-     "t": "多远都要在一起",
-     "c": "="
-    },
-    {
-     "p": 37,
      "a": "周杰伦 & 五月天 阿信",
      "t": "说好不哭",
-     "c": "-2"
-    },
-    {
-     "p": 38,
-     "a": "杨丞琳",
-     "t": "雨爱",
      "c": "+1"
     },
     {
-     "p": 39,
+     "p": 37,
+     "a": "邓紫棋",
+     "t": "多远都要在一起",
+     "c": "-1"
+    },
+    {
+     "p": 38,
      "a": "莫文蔚",
      "t": "阴天",
      "c": "+1"
     },
     {
-     "p": 40,
+     "p": 39,
      "a": "孙燕姿",
      "t": "遇见",
-     "c": "-2"
+     "c": "+1"
+    },
+    {
+     "p": 40,
+     "a": "Olivia Dean",
+     "t": "So Easy (To Fall In Love)",
+     "c": "-7"
     },
     {
      "p": 41,
      "a": "李佳薇",
      "t": "甲乙丙丁Strangers",
-     "c": "-4"
+     "c": "="
     },
     {
      "p": 42,
+     "a": "A2O & A2O SOUL",
+     "t": "Dancing in the Dark",
+     "c": "+9"
+    },
+    {
+     "p": 43,
      "a": "The Weeknd",
      "t": "After Hours",
      "c": "-1"
     },
     {
-     "p": 43,
+     "p": 44,
      "a": "ADÉLA",
      "t": "Nicole Kidman",
      "c": "-1"
     },
     {
-     "p": 44,
-     "a": "周杰伦",
-     "t": "红尘客栈",
-     "c": "-1"
-    },
-    {
      "p": 45,
-     "a": "邓紫棋",
-     "t": "唯一",
-     "c": "="
+     "a": "林俊杰",
+     "t": "关键词",
+     "c": "+3"
     },
     {
      "p": 46,
-     "a": "李荣浩",
-     "t": "恋人",
-     "c": "="
+     "a": "邓紫棋",
+     "t": "唯一",
+     "c": "-1"
     },
     {
      "p": 47,
-     "a": "周杰伦",
-     "t": "不该 (with 张惠妹)",
-     "c": "+2"
+     "a": "李荣浩",
+     "t": "恋人",
+     "c": "-1"
     },
     {
      "p": 48,
-     "a": "林俊杰",
-     "t": "关键词",
-     "c": "+2"
+     "a": "周杰伦",
+     "t": "红尘客栈",
+     "c": "-4"
     },
     {
      "p": 49,
      "a": "陈奕迅",
-     "t": "十年",
-     "c": "-2"
+     "t": "孤独患者",
+     "c": "+1"
     },
     {
      "p": 50,
      "a": "陈奕迅",
-     "t": "孤独患者",
-     "c": "-2"
+     "t": "十年",
+     "c": "-1"
     },
     {
      "p": 51,
-     "a": "A2O & A2O SOUL",
-     "t": "Dancing in the Dark",
-     "c": "+30"
+     "a": "周杰伦",
+     "t": "不该 (with 张惠妹)",
+     "c": "-4"
     },
     {
      "p": 52,
+     "a": "周杰伦",
+     "t": "暗号",
+     "c": "+1"
+    },
+    {
+     "p": 53,
      "a": "林宥嘉",
      "t": "说谎",
      "c": "-1"
     },
     {
-     "p": 53,
-     "a": "周杰伦",
-     "t": "暗号",
-     "c": "-1"
-    },
-    {
      "p": 54,
-     "a": "田馥甄",
-     "t": "你就不要想起我",
-     "c": "-1"
+     "a": "林俊杰",
+     "t": "可惜没如果",
+     "c": "+1"
     },
     {
      "p": 55,
-     "a": "林俊杰",
-     "t": "可惜没如果",
-     "c": "+2"
+     "a": "田馥甄",
+     "t": "你就不要想起我",
+     "c": "-1"
     },
     {
      "p": 56,
@@ -4364,57 +4364,57 @@
     },
     {
      "p": 57,
-     "a": "The Weeknd",
-     "t": "Die For You",
-     "c": "-3"
+     "a": "许嵩",
+     "t": "天龙八部之宿敌",
+     "c": "+1"
     },
     {
      "p": 58,
-     "a": "许嵩",
-     "t": "天龙八部之宿敌",
-     "c": "-3"
+     "a": "梁静茹",
+     "t": "会呼吸的痛",
+     "c": "+1"
     },
     {
      "p": 59,
-     "a": "梁静茹",
-     "t": "会呼吸的痛",
+     "a": "莫文蔚",
+     "t": "忽然之间",
      "c": "+2"
     },
     {
      "p": 60,
-     "a": "许茹芸",
-     "t": "泪海",
-     "c": "-2"
+     "a": "周杰伦",
+     "t": "反方向的钟",
+     "c": "+5"
     },
     {
      "p": 61,
-     "a": "莫文蔚",
-     "t": "忽然之间",
-     "c": "-1"
+     "a": "周杰伦",
+     "t": "说好的幸福呢",
+     "c": "+2"
     },
     {
      "p": 62,
      "a": "林俊杰",
      "t": "江南",
-     "c": "+5"
+     "c": "="
     },
     {
      "p": 63,
-     "a": "周杰伦",
-     "t": "说好的幸福呢",
-     "c": "-4"
+     "a": "The Weeknd",
+     "t": "Die For You",
+     "c": "-6"
     },
     {
      "p": 64,
-     "a": "陈奕迅",
-     "t": "最佳损友",
-     "c": "-1"
+     "a": "许茹芸",
+     "t": "泪海",
+     "c": "-4"
     },
     {
      "p": 65,
-     "a": "周杰伦",
-     "t": "反方向的钟",
-     "c": "="
+     "a": "陈奕迅",
+     "t": "最佳损友",
+     "c": "-1"
     },
     {
      "p": 66,
@@ -4424,183 +4424,183 @@
     },
     {
      "p": 67,
-     "a": "The Weeknd",
-     "t": "Starboy (feat. Daft Punk)",
-     "c": "-5"
-    },
-    {
-     "p": 68,
      "a": "方大同",
      "t": "爱爱爱",
      "c": "+1"
     },
     {
-     "p": 69,
+     "p": 68,
      "a": "陈奕迅",
      "t": "淘汰",
-     "c": "-1"
+     "c": "+1"
+    },
+    {
+     "p": 69,
+     "a": "The Weeknd",
+     "t": "Starboy (feat. Daft Punk)",
+     "c": "-2"
     },
     {
      "p": 70,
-     "a": "林俊杰",
-     "t": "交换余生",
-     "c": "+2"
+     "a": "周杰伦",
+     "t": "我落泪 . 情绪零碎",
+     "c": "+1"
     },
     {
      "p": 71,
-     "a": "周杰伦",
-     "t": "我落泪 . 情绪零碎",
-     "c": "="
+     "a": "林俊杰",
+     "t": "不为谁而作的歌",
+     "c": "+1"
     },
     {
      "p": 72,
      "a": "林俊杰",
-     "t": "不为谁而作的歌",
-     "c": "+2"
+     "t": "交换余生",
+     "c": "-2"
     },
     {
      "p": 73,
      "a": "Hearts2Hearts",
      "t": "Moonride",
-     "c": "-3"
+     "c": "="
     },
     {
      "p": 74,
      "a": "陈奕迅",
-     "t": "富士山下 (Eason音乐互动Free Party)",
-     "c": "-1"
+     "t": "富士山下",
+     "c": "NEW"
     },
     {
      "p": 75,
-     "a": "A2O & A2O SOUL",
-     "t": "SUPERSTAR",
-     "c": "-11"
+     "a": "薛之谦",
+     "t": "演员",
+     "c": "+5"
     },
     {
      "p": 76,
-     "a": "陈绮贞",
-     "t": "太聪明",
-     "c": "-1"
+     "a": "王力宏",
+     "t": "大城小爱",
+     "c": "+1"
     },
     {
      "p": 77,
-     "a": "王力宏",
-     "t": "大城小爱",
-     "c": "+2"
+     "a": "陶喆",
+     "t": "天天",
+     "c": "+1"
     },
     {
      "p": 78,
-     "a": "陶喆",
-     "t": "天天",
-     "c": "+2"
+     "a": "陈绮贞",
+     "t": "太聪明",
+     "c": "-2"
     },
     {
      "p": 79,
      "a": "Tate McRae",
      "t": "Housewife",
-     "c": "-2"
+     "c": "="
     },
     {
      "p": 80,
-     "a": "薛之谦",
-     "t": "演员",
-     "c": "+6"
+     "a": "陈奕迅",
+     "t": "好久不见",
+     "c": "+1"
     },
     {
      "p": 81,
-     "a": "陈奕迅",
-     "t": "好久不见",
-     "c": "+2"
+     "a": "林俊杰",
+     "t": "修炼爱情",
+     "c": "+6"
     },
     {
      "p": 82,
-     "a": "Ella Langley",
-     "t": "Choosin' Texas",
-     "c": "+52"
+     "a": "周杰伦",
+     "t": "珊瑚海 (feat. 梁心颐)",
+     "c": "+3"
     },
     {
      "p": 83,
-     "a": "The Weeknd, JENNIE & Lily Rose Depp",
-     "t": "One Of The Girls",
-     "c": "-7"
+     "a": "Taylor Swift",
+     "t": "Patient Zero",
+     "c": "+3"
     },
     {
      "p": 84,
      "a": "Justin Bieber",
      "t": "Beauty and a Beat (feat. Nicki Minaj)",
-     "c": "-2"
+     "c": "="
     },
     {
      "p": 85,
-     "a": "周杰伦",
-     "t": "珊瑚海 (feat. 梁心颐)",
-     "c": "-7"
+     "a": "梁静茹",
+     "t": "勇气",
+     "c": "+4"
     },
     {
      "p": 86,
-     "a": "Taylor Swift",
-     "t": "Patient Zero",
-     "c": "+19"
+     "a": "A2O & A2O SOUL",
+     "t": "SUPERSTAR",
+     "c": "+99"
     },
     {
      "p": 87,
-     "a": "林俊杰",
-     "t": "修炼爱情",
-     "c": "-3"
+     "a": "方大同",
+     "t": "麦恩莉",
+     "c": "+3"
     },
     {
      "p": 88,
+     "a": "周杰伦",
+     "t": "退后",
+     "c": "+3"
+    },
+    {
+     "p": 89,
      "a": "周杰伦",
      "t": "青花瓷",
      "c": "-1"
     },
     {
-     "p": 89,
-     "a": "梁静茹",
-     "t": "勇气",
-     "c": "-1"
-    },
-    {
      "p": 90,
-     "a": "方大同",
-     "t": "麦恩莉",
-     "c": "-5"
+     "a": "周杰伦",
+     "t": "手写的从前",
+     "c": "+5"
     },
     {
      "p": 91,
      "a": "周杰伦",
-     "t": "退后",
-     "c": "-2"
+     "t": "给我一首歌的时间",
+     "c": "+3"
     },
     {
      "p": 92,
-     "a": "林俊杰",
-     "t": "背对背拥抱",
-     "c": "+6"
+     "a": "The Weeknd, JENNIE & Lily Rose Depp",
+     "t": "One Of The Girls",
+     "c": "-9"
     },
     {
      "p": 93,
      "a": "林俊杰",
-     "t": "她说",
-     "c": "+6"
+     "t": "背对背拥抱",
+     "c": "-1"
     },
     {
      "p": 94,
-     "a": "周杰伦",
-     "t": "给我一首歌的时间",
-     "c": "-2"
+     "a": "陈粒",
+     "t": "小半",
+     "c": "+4"
     },
     {
      "p": 95,
-     "a": "周杰伦",
-     "t": "手写的从前",
-     "c": "-4"
+     "a": "林俊杰",
+     "t": "她说",
+     "c": "-2"
     },
     {
      "p": 96,
-     "a": "陈奕迅",
-     "t": "葡萄成熟时",
-     "c": "-3"
+     "a": "Ella Langley",
+     "t": "Choosin' Texas",
+     "c": "-14"
     },
     {
      "p": 97,
@@ -4610,369 +4610,369 @@
     },
     {
      "p": 98,
-     "a": "陈粒",
-     "t": "小半",
-     "c": "+3"
+     "a": "孙燕姿",
+     "t": "雨天",
+     "c": "+1"
     },
     {
      "p": 99,
-     "a": "孙燕姿",
-     "t": "雨天",
-     "c": "-4"
+     "a": "陈奕迅",
+     "t": "葡萄成熟时",
+     "c": "-3"
     },
     {
      "p": 100,
      "a": "周杰伦",
      "t": "你听得到",
-     "c": "-6"
-    },
-    {
-     "p": 101,
-     "a": "蔡健雅",
-     "t": "Letting Go",
-     "c": "-5"
-    },
-    {
-     "p": 102,
-     "a": "周杰伦",
-     "t": "说了再见",
      "c": "="
     },
     {
+     "p": 101,
+     "a": "周杰伦",
+     "t": "最长的电影",
+     "c": "+3"
+    },
+    {
+     "p": 102,
+     "a": "蔡健雅",
+     "t": "Letting Go",
+     "c": "-1"
+    },
+    {
      "p": 103,
-     "a": "梁静茹",
-     "t": "慢冷",
+     "a": "林俊杰",
+     "t": "美人鱼",
      "c": "+3"
     },
     {
      "p": 104,
-     "a": "周杰伦",
-     "t": "最长的电影",
-     "c": "-1"
+     "a": "林俊杰",
+     "t": "手心的蔷薇 (feat. 邓紫棋)",
+     "c": "+8"
     },
     {
      "p": 105,
-     "a": "孙燕姿",
-     "t": "半句再见",
-     "c": "-5"
+     "a": "薛之谦",
+     "t": "其实",
+     "c": "+3"
     },
     {
      "p": 106,
-     "a": "林俊杰",
-     "t": "美人鱼",
-     "c": "-2"
-    },
-    {
-     "p": 107,
-     "a": "许嵩",
-     "t": "素颜 (with 何曼婷)",
-     "c": "+6"
-    },
-    {
-     "p": 108,
-     "a": "薛之谦",
-     "t": "其实",
+     "a": "Gareth.T",
+     "t": "颜色",
      "c": "+7"
     },
     {
+     "p": 107,
+     "a": "周杰伦",
+     "t": "说了再见",
+     "c": "-5"
+    },
+    {
+     "p": 108,
+     "a": "林俊杰",
+     "t": "愿与愁",
+     "c": "+2"
+    },
+    {
      "p": 109,
-     "a": "张惠妹",
-     "t": "连名带姓",
-     "c": "="
+     "a": "许嵩",
+     "t": "素颜 (with 何曼婷)",
+     "c": "-2"
     },
     {
      "p": 110,
      "a": "林俊杰",
-     "t": "愿与愁",
-     "c": "="
+     "t": "黑夜问白天",
+     "c": "+1"
     },
     {
      "p": 111,
-     "a": "林俊杰",
-     "t": "黑夜问白天",
-     "c": "+3"
+     "a": "张惠妹",
+     "t": "连名带姓",
+     "c": "-2"
     },
     {
      "p": 112,
-     "a": "林俊杰",
-     "t": "手心的蔷薇 (feat. 邓紫棋)",
-     "c": "+6"
+     "a": "梁静茹",
+     "t": "慢冷",
+     "c": "-9"
     },
     {
      "p": 113,
-     "a": "Gareth.T",
-     "t": "颜色",
-     "c": "+6"
+     "a": "孙燕姿",
+     "t": "半句再见",
+     "c": "-8"
     },
     {
      "p": 114,
      "a": "周杰伦",
      "t": "蒲公英的约定",
-     "c": "-3"
+     "c": "="
     },
     {
      "p": 115,
-     "a": "Olivia Rodrigo",
-     "t": "drop dead",
-     "c": "+28"
+     "a": "周杰伦",
+     "t": "开不了口",
+     "c": "+2"
     },
     {
      "p": 116,
      "a": "许嵩",
      "t": "幻听",
-     "c": "+1"
+     "c": "="
     },
     {
      "p": 117,
-     "a": "周杰伦",
-     "t": "开不了口",
-     "c": "-5"
+     "a": "薛之谦",
+     "t": "我好像在哪见过你",
+     "c": "+5"
     },
     {
      "p": 118,
      "a": "郭静",
      "t": "下一个天亮",
-     "c": "+7"
+     "c": "="
     },
     {
      "p": 119,
-     "a": "周杰伦",
-     "t": "安静",
-     "c": "+3"
-    },
-    {
-     "p": 120,
      "a": "杨丞琳",
      "t": "匿名的好友",
      "c": "+1"
     },
     {
+     "p": 120,
+     "a": "蔡诗芸",
+     "t": "雨过后的风景",
+     "c": "+3"
+    },
+    {
      "p": 121,
+     "a": "周杰伦",
+     "t": "安静",
+     "c": "-2"
+    },
+    {
+     "p": 122,
      "a": "李荣浩",
      "t": "不将就 (电影《何以笙箫默》片尾曲)",
      "c": "-1"
     },
     {
-     "p": 122,
-     "a": "薛之谦",
-     "t": "我好像在哪见过你",
-     "c": "+2"
-    },
-    {
      "p": 123,
-     "a": "蔡诗芸",
-     "t": "雨过后的风景",
-     "c": "+5"
+     "a": "曾沛慈",
+     "t": "一个人想着一个人",
+     "c": "+4"
     },
     {
      "p": 124,
      "a": "周杰伦",
      "t": "可爱女人",
-     "c": "+3"
-    },
-    {
-     "p": 125,
-     "a": "The Weeknd",
-     "t": "Blinding Lights",
-     "c": "+6"
-    },
-    {
-     "p": 126,
-     "a": "张芸京",
-     "t": "偏爱",
-     "c": "-19"
-    },
-    {
-     "p": 127,
-     "a": "曾沛慈",
-     "t": "一个人想着一个人",
-     "c": "+10"
-    },
-    {
-     "p": 128,
-     "a": "Hearts2Hearts",
-     "t": "RUDE!",
-     "c": "-5"
-    },
-    {
-     "p": 129,
-     "a": "林俊杰",
-     "t": "Always Online",
-     "c": "+3"
-    },
-    {
-     "p": 130,
-     "a": "孙燕姿",
-     "t": "逆光",
-     "c": "-4"
-    },
-    {
-     "p": 131,
-     "a": "CORTIS",
-     "t": "REDRED",
-     "c": "-23"
-    },
-    {
-     "p": 132,
-     "a": "BIGBANG",
-     "t": "IF YOU",
-     "c": "-2"
-    },
-    {
-     "p": 133,
-     "a": "周杰伦",
-     "t": "回到过去",
      "c": "="
     },
     {
-     "p": 134,
+     "p": 125,
+     "a": "林俊杰",
+     "t": "Always Online",
+     "c": "+4"
+    },
+    {
+     "p": 126,
+     "a": "Olivia Rodrigo",
+     "t": "drop dead",
+     "c": "-11"
+    },
+    {
+     "p": 127,
+     "a": "Hearts2Hearts",
+     "t": "RUDE!",
+     "c": "+1"
+    },
+    {
+     "p": 128,
+     "a": "周杰伦",
+     "t": "爱你没差",
+     "c": "+8"
+    },
+    {
+     "p": 129,
+     "a": "孙燕姿",
+     "t": "逆光",
+     "c": "+1"
+    },
+    {
+     "p": 130,
+     "a": "周杰伦",
+     "t": "回到过去",
+     "c": "+3"
+    },
+    {
+     "p": 131,
      "a": "蔡健雅",
      "t": "红色高跟鞋",
-     "c": "+1"
+     "c": "+3"
+    },
+    {
+     "p": 132,
+     "a": "ILLIT",
+     "t": "You’re Under Arrest",
+     "c": "+6"
+    },
+    {
+     "p": 133,
+     "a": "BIGBANG",
+     "t": "IF YOU",
+     "c": "-1"
+    },
+    {
+     "p": 134,
+     "a": "CORTIS",
+     "t": "REDRED",
+     "c": "-3"
     },
     {
      "p": 135,
      "a": "aespa",
      "t": "LEMONADE",
-     "c": "-6"
-    },
-    {
-     "p": 136,
-     "a": "周杰伦",
-     "t": "爱你没差",
      "c": "="
     },
     {
+     "p": 136,
+     "a": "张芸京",
+     "t": "偏爱",
+     "c": "-10"
+    },
+    {
      "p": 137,
-     "a": "Olivia Rodrigo",
-     "t": "the cure",
-     "c": "-47"
+     "a": "The Weeknd",
+     "t": "Blinding Lights",
+     "c": "-12"
     },
     {
      "p": 138,
-     "a": "ILLIT",
-     "t": "You’re Under Arrest",
-     "c": "+10"
+     "a": "周杰伦",
+     "t": "我不配",
+     "c": "+5"
     },
     {
      "p": 139,
-     "a": "Drake",
-     "t": "Janice STFU",
-     "c": "+39"
+     "a": "周杰伦",
+     "t": "龙卷风",
+     "c": "+1"
     },
     {
      "p": 140,
      "a": "周杰伦",
-     "t": "龙卷风",
-     "c": "="
+     "t": "东风破",
+     "c": "+5"
     },
     {
      "p": 141,
-     "a": "王菲",
-     "t": "世界赠予我的",
-     "c": "-3"
+     "a": "aespa",
+     "t": "Whiplash",
+     "c": "+1"
     },
     {
      "p": 142,
-     "a": "aespa",
-     "t": "Whiplash",
-     "c": "+9"
+     "a": "王菲",
+     "t": "世界赠予我的",
+     "c": "-1"
     },
     {
      "p": 143,
      "a": "周杰伦",
-     "t": "我不配",
-     "c": "+6"
+     "t": "园游会",
+     "c": "+3"
     },
     {
      "p": 144,
-     "a": "卢广仲",
-     "t": "几分之几 (电影《花甲大人转男孩》主题曲)",
-     "c": "="
+     "a": "徐佳莹",
+     "t": "一样的月光",
+     "c": "+4"
     },
     {
      "p": 145,
-     "a": "周杰伦",
-     "t": "东风破",
-     "c": "-3"
+     "a": "Ariana Grande",
+     "t": "thank u, next",
+     "c": "+5"
     },
     {
      "p": 146,
-     "a": "周杰伦",
-     "t": "园游会",
-     "c": "-5"
+     "a": "卢广仲",
+     "t": "几分之几 (电影《花甲大人转男孩》主题曲)",
+     "c": "-2"
     },
     {
      "p": 147,
-     "a": "卢广仲",
-     "t": "刻在我心底的名字 (电影《刻在你心底的名字》主题曲)",
-     "c": "-8"
+     "a": "Olivia Rodrigo",
+     "t": "the cure",
+     "c": "-10"
     },
     {
      "p": 148,
-     "a": "徐佳莹",
-     "t": "一样的月光",
-     "c": "+8"
+     "a": "卢广仲",
+     "t": "刻在我心底的名字 (电影《刻在你心底的名字》主题曲)",
+     "c": "-1"
     },
     {
      "p": 149,
      "a": "ADÉLA",
      "t": "Ain't In LA",
-     "c": "-4"
+     "c": "="
     },
     {
      "p": 150,
-     "a": "Ariana Grande",
-     "t": "thank u, next",
-     "c": "-3"
-    },
-    {
-     "p": 151,
-     "a": "王力宏",
-     "t": "我们的歌",
+     "a": "陈奕迅",
+     "t": "十面埋伏",
      "c": "+2"
     },
     {
-     "p": 152,
-     "a": "陈奕迅",
-     "t": "十面埋伏",
-     "c": "-6"
-    },
-    {
-     "p": 153,
-     "a": "郭静",
-     "t": "爱情讯息",
-     "c": "-1"
-    },
-    {
-     "p": 154,
+     "p": 151,
      "a": "郭静",
      "t": "心墙",
      "c": "+3"
     },
     {
-     "p": 155,
+     "p": 152,
+     "a": "郭静",
+     "t": "爱情讯息",
+     "c": "+1"
+    },
+    {
+     "p": 153,
      "a": "周杰伦",
      "t": "轨迹",
-     "c": "="
+     "c": "+2"
+    },
+    {
+     "p": 154,
+     "a": "王力宏",
+     "t": "我们的歌",
+     "c": "-3"
+    },
+    {
+     "p": 155,
+     "a": "Drake",
+     "t": "Janice STFU",
+     "c": "-16"
     },
     {
      "p": 156,
      "a": "林忆莲",
      "t": "词不达意",
-     "c": "-6"
+     "c": "="
     },
     {
      "p": 157,
-     "a": "孙燕姿",
-     "t": "克卜勒",
-     "c": "-3"
+     "a": "王力宏",
+     "t": "Kiss Goodbye",
+     "c": "+1"
     },
     {
      "p": 158,
-     "a": "王力宏",
-     "t": "Kiss Goodbye",
-     "c": "="
+     "a": "徐佳莹",
+     "t": "失落沙洲",
+     "c": "+4"
     },
     {
      "p": 159,
@@ -4982,39 +4982,39 @@
     },
     {
      "p": 160,
-     "a": "A2O & A2O SOUL",
-     "t": "While We’re Young",
-     "c": "+16"
+     "a": "王菲",
+     "t": "红豆",
+     "c": "+1"
     },
     {
      "p": 161,
-     "a": "王菲",
-     "t": "红豆",
-     "c": "+2"
+     "a": "孙燕姿",
+     "t": "克卜勒",
+     "c": "-4"
     },
     {
      "p": 162,
-     "a": "徐佳莹",
-     "t": "失落沙洲",
-     "c": "-2"
+     "a": "林忆莲",
+     "t": "至少还有你",
+     "c": "+5"
     },
     {
      "p": 163,
-     "a": "Charlie Puth",
-     "t": "We Don’t Talk Anymore (feat. Selena Gomez)",
+     "a": "周杰伦",
+     "t": "借口",
      "c": "+1"
     },
     {
      "p": 164,
-     "a": "周杰伦",
-     "t": "借口",
-     "c": "-2"
+     "a": "A2O & A2O SOUL",
+     "t": "While We’re Young",
+     "c": "-4"
     },
     {
      "p": 165,
-     "a": "五月天",
-     "t": "我不愿让你一个人",
-     "c": "+7"
+     "a": "薛之谦",
+     "t": "方圆几里",
+     "c": "+3"
     },
     {
      "p": 166,
@@ -5024,210 +5024,210 @@
     },
     {
      "p": 167,
-     "a": "林忆莲",
-     "t": "至少还有你",
-     "c": "+10"
+     "a": "五月天",
+     "t": "我不愿让你一个人",
+     "c": "-2"
     },
     {
      "p": 168,
-     "a": "薛之谦",
-     "t": "方圆几里",
-     "c": "+7"
+     "a": "Charlie Puth",
+     "t": "We Don’t Talk Anymore (feat. Selena Gomez)",
+     "c": "-5"
     },
     {
      "p": 169,
-     "a": "方大同",
-     "t": "三人游",
-     "c": "-4"
+     "a": "颜人中",
+     "t": "夏夜最后的烟火",
+     "c": "+2"
     },
     {
      "p": 170,
      "a": "邓紫棋",
      "t": "泡沫",
-     "c": "+10"
+     "c": "="
     },
     {
      "p": 171,
-     "a": "颜人中",
-     "t": "夏夜最后的烟火",
-     "c": "+12"
+     "a": "方大同",
+     "t": "三人游",
+     "c": "-2"
     },
     {
      "p": 172,
-     "a": "Olivia Rodrigo",
-     "t": "stupid song",
-     "c": "+16"
-    },
-    {
-     "p": 173,
      "a": "田馥甄",
      "t": "寂寞寂寞就好",
      "c": "+1"
     },
     {
+     "p": 173,
+     "a": "Olivia Rodrigo",
+     "t": "stupid song",
+     "c": "-1"
+    },
+    {
      "p": 174,
      "a": "Suki刘舒妤",
      "t": "失眠",
-     "c": "-1"
+     "c": "="
     },
     {
      "p": 175,
      "a": "陈奕迅",
      "t": "K歌之王",
-     "c": "-5"
-    },
-    {
-     "p": 176,
-     "a": "Ariana Grande & The Weeknd",
-     "t": "Love Me Harder",
-     "c": "-8"
-    },
-    {
-     "p": 177,
-     "a": "周杰伦",
-     "t": "不能说的秘密",
-     "c": "-6"
-    },
-    {
-     "p": 178,
-     "a": "防弹少年团",
-     "t": "SWIM",
-     "c": "+4"
-    },
-    {
-     "p": 179,
-     "a": "江语晨",
-     "t": "最后一页",
      "c": "="
     },
     {
+     "p": 176,
+     "a": "周杰伦",
+     "t": "不能说的秘密",
+     "c": "+1"
+    },
+    {
+     "p": 177,
+     "a": "江语晨",
+     "t": "最后一页",
+     "c": "+2"
+    },
+    {
+     "p": 178,
+     "a": "Ariana Grande & The Weeknd",
+     "t": "Love Me Harder",
+     "c": "-2"
+    },
+    {
+     "p": 179,
+     "a": "陶喆",
+     "t": "普通朋友",
+     "c": "+2"
+    },
+    {
      "p": 180,
-     "a": "汪苏泷",
-     "t": "我想念",
-     "c": "+7"
+     "a": "防弹少年团",
+     "t": "SWIM",
+     "c": "-2"
     },
     {
      "p": 181,
-     "a": "陶喆",
-     "t": "普通朋友",
-     "c": "+5"
+     "a": "汪苏泷",
+     "t": "我想念",
+     "c": "-1"
     },
     {
      "p": 182,
      "a": "陶喆",
      "t": "流沙",
-     "c": "+2"
+     "c": "="
     },
     {
      "p": 183,
      "a": "薛之谦",
      "t": "认真的雪",
-     "c": "-2"
+     "c": "="
     },
     {
      "p": 184,
-     "a": "许飞",
-     "t": "明年依然好时节",
-     "c": "NEW"
-    },
-    {
-     "p": 185,
-     "a": "A2O & A2O SOUL",
-     "t": "SUPERSTAR",
-     "c": "NEW"
-    },
-    {
-     "p": 186,
-     "a": "单依纯",
-     "t": "最难得",
-     "c": "-19"
-    },
-    {
-     "p": 187,
      "a": "周杰伦",
      "t": "彩虹",
      "c": "+3"
     },
     {
+     "p": 185,
+     "a": "李荣浩",
+     "t": "乌梅子酱",
+     "c": "+4"
+    },
+    {
+     "p": 186,
+     "a": "周杰伦",
+     "t": "爱情废柴",
+     "c": "NEW"
+    },
+    {
+     "p": 187,
+     "a": "周杰伦",
+     "t": "听妈妈的话",
+     "c": "+5"
+    },
+    {
      "p": 188,
-     "a": "RESCENE",
-     "t": "With",
-     "c": "-19"
+     "a": "A-Lin",
+     "t": "爱 请问怎么走",
+     "c": "+8"
     },
     {
      "p": 189,
-     "a": "李荣浩",
-     "t": "乌梅子酱",
-     "c": "="
-    },
-    {
-     "p": 190,
-     "a": "曹格",
-     "t": "背叛",
-     "c": "+3"
-    },
-    {
-     "p": 191,
-     "a": "汪苏泷",
-     "t": "写故事的人",
-     "c": "-75"
-    },
-    {
-     "p": 192,
-     "a": "周杰伦",
-     "t": "听妈妈的话",
+     "a": "RESCENE",
+     "t": "With",
      "c": "-1"
     },
     {
-     "p": 193,
-     "a": "徐良",
-     "t": "那时雨",
-     "c": "-32"
-    },
-    {
-     "p": 194,
+     "p": 190,
      "a": "Top Barry & INDE company",
      "t": "一半一半",
      "c": "+4"
     },
     {
-     "p": 195,
-     "a": "A2O & A2O SOUL",
-     "t": "Very First Love (첫사랑)",
-     "c": "NEW"
+     "p": 191,
+     "a": "曹格",
+     "t": "背叛",
+     "c": "-1"
     },
     {
-     "p": 196,
-     "a": "A-Lin",
-     "t": "爱 请问怎么走",
-     "c": "NEW"
-    },
-    {
-     "p": 197,
-     "a": "YOON MIRAE, Tiger JK & Bizzy",
-     "t": "Angel",
-     "c": "="
-    },
-    {
-     "p": 198,
-     "a": "Gareth.T",
-     "t": "浅粉红 baby pink",
+     "p": 192,
+     "a": "单依纯",
+     "t": "最难得",
      "c": "-6"
     },
     {
-     "p": 199,
+     "p": 193,
      "a": "莫文蔚",
      "t": "如果没有你",
-     "c": "-5"
+     "c": "+6"
+    },
+    {
+     "p": 194,
+     "a": "莫文蔚",
+     "t": "盛夏的果实",
+     "c": "NEW"
+    },
+    {
+     "p": 195,
+     "a": "林俊杰",
+     "t": "将故事写成我们",
+     "c": "+5"
+    },
+    {
+     "p": 196,
+     "a": "Gareth.T",
+     "t": "浅粉红 baby pink",
+     "c": "+2"
+    },
+    {
+     "p": 197,
+     "a": "王力宏",
+     "t": "唯一",
+     "c": "NEW"
+    },
+    {
+     "p": 198,
+     "a": "许飞",
+     "t": "明年依然好时节",
+     "c": "-14"
+    },
+    {
+     "p": 199,
+     "a": "YOON MIRAE, Tiger JK & Bizzy",
+     "t": "Angel",
+     "c": "-2"
     },
     {
      "p": 200,
-     "a": "林俊杰",
-     "t": "将故事写成我们",
-     "c": "NEW"
+     "a": "陈奕迅",
+     "t": "富士山下 (Eason音乐互动Free Party)",
+     "c": "-126"
     }
    ]
   }
  },
- "updated": "2026-11-12T16:14:54Z"
+ "updated": "2026-11-12T22:26:59Z"
 }
