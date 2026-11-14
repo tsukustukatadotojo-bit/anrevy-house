@@ -1,6 +1,10 @@
 /* ===== PHẦN CHUNG CHO CÁC PHÒNG GAME VẼ TAY =====
    Mỗi trang khai báo window.ROOM = { title, music, links: [{n, d, u}], fx(ctx, t, dt, W, H, S) }
-   và vẽ cảnh vào <svg id="scene">; mỗi đồ vật có link là <a class="lk" data-i="số thứ tự link">. */
+   và vẽ cảnh vào <svg id="scene">; mỗi đồ vật là <a class="lk" data-i="…">, data-i trỏ vào ROOM.links
+   = link mà đồ vật đó được vẽ riêng cho (tên trên máy, hình trên áp phích…).
+   Link thật của phòng lấy từ game/links.json (qua shelf.js): link nào còn ở phòng thì giữ đồ vật của nó,
+   link mới gắn vào đồ vật còn trống (đổi nhãn tên trên đồ vật), đồ vật không còn link thành đồ trang trí,
+   link dư chỉ nằm trên giá sách (nút ☰). Không tải được file thì dùng ROOM.links như cũ. */
 (() => {
   const R = window.ROOM, $ = s => document.querySelector(s);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -10,12 +14,56 @@
 
   /* ---- gắn link vào đồ vật ---- */
   const LKS = [...document.querySelectorAll('#scene .lk')];
-  LKS.forEach(a => {
-    const L = R.links[+a.dataset.i]; if (!L){ a.removeAttribute('class'); return; }
-    a.setAttribute('href', L.u); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener');
-    a.setAttribute('aria-label', L.n + ': ' + L.d + ' (mở thẻ mới)');
-    a._L = L;
-  });
+  const HOME = R.links || [];                                   // link gốc của từng đồ vật (theo data-i)
+  const KEY = (location.pathname.match(/\/game\/([^/]+)\/?/) || [])[1] || '';
+  let roomLinks = HOME.map(L => ({ n: L.n, d: L.d, u: L.u })), attached = false;
+  const NS = 'http://www.w3.org/2000/svg';
+  function relabel(a, L){                                       // đồ vật vẽ cho link khác → giấu chữ cũ, treo bảng tên mới
+    const g = a.firstElementChild || a;
+    g.querySelectorAll('text').forEach(t => { if (t.textContent.trim().length >= 3) t.setAttribute('visibility', 'hidden'); });
+    let bb; try { bb = g.getBBox(); } catch (e) { return; }
+    if (!bb || !bb.width) return;
+    const fs = Math.max(10, Math.min(18, bb.width / 7)), nm = L.n.length > 18 ? L.n.slice(0, 17) + '…' : L.n;
+    const p = document.createElementNS(NS, 'g'); p.setAttribute('class', 'plq'); p.setAttribute('aria-hidden', 'true');
+    p.setAttribute('pointer-events', 'none');
+    const r = document.createElementNS(NS, 'rect'), t = document.createElementNS(NS, 'text');
+    t.textContent = nm;
+    // bảng tên nằm ở lớp trên cùng của cảnh (đồ vật vẽ sau không che mất), cùng toạ độ với đồ vật
+    const svgEl = document.getElementById('scene');
+    let layer = svgEl.querySelector('g.plqs'); if (!layer){ layer = document.createElementNS(NS, 'g'); layer.setAttribute('class', 'plqs'); svgEl.appendChild(layer); }
+    try { const m = svgEl.getScreenCTM().inverse().multiply(g.getScreenCTM()); p.setAttribute('transform', `matrix(${m.a} ${m.b} ${m.c} ${m.d} ${m.e} ${m.f})`); } catch (e) {}
+    Object.entries({ x: bb.x + bb.width / 2, y: bb.y + Math.min(bb.height * .22, fs * 2.2) + fs * .35, 'text-anchor': 'middle', 'font-size': fs.toFixed(1) })
+      .forEach(([k, v]) => t.setAttribute(k, v));
+    t.setAttribute('style', 'font-family:var(--tip-font,system-ui,sans-serif);fill:var(--tip-ink,#fff);letter-spacing:.02em');
+    p.append(r, t); layer.appendChild(p);
+    let w = fs * nm.length * .6; try { w = t.getComputedTextLength(); } catch (e) {}
+    const pw = w + fs * 1.1, ph = fs * 1.7, cy = +t.getAttribute('y') - fs * .35;
+    Object.entries({ x: bb.x + bb.width / 2 - pw / 2, y: cy - ph / 2, width: pw, height: ph, rx: Math.min(6, ph / 3) }).forEach(([k, v]) => r.setAttribute(k, v));
+    r.setAttribute('style', 'fill:var(--tip-bg,#111);fill-opacity:.9;stroke:var(--accent,#fff);stroke-width:' + Math.max(1.5, fs / 8).toFixed(1));
+  }
+  function attach(list){
+    if (attached) return; attached = true;
+    const free = new Set(LKS), byUrl = new Map(), pick = new Map(), rest = [];
+    LKS.forEach(a => { const h = HOME[+a.dataset.i]; if (h){ if (!byUrl.has(h.u)) byUrl.set(h.u, []); byUrl.get(h.u).push(a); } });
+    list.forEach(L => { const a = (byUrl.get(L.u) || []).find(x => free.has(x)); if (a){ free.delete(a); pick.set(a, L); } else rest.push(L); });
+    const spare = LKS.filter(a => free.has(a));
+    rest.forEach(L => { const a = spare.shift(); if (a){ free.delete(a); pick.set(a, L); } else L.shelfOnly = true; });
+    LKS.forEach(a => {
+      const L = pick.get(a);
+      if (!L){                                                  // không còn link: chỉ để trang trí
+        a.removeAttribute('href'); a.classList.remove('lk'); a.classList.add('deco'); a._L = null; return;
+      }
+      a.setAttribute('href', L.u); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener');
+      a.setAttribute('aria-label', L.n + (L.d ? ': ' + L.d : '') + ' (mở thẻ mới)');
+      a._L = L;
+      const h = HOME[+a.dataset.i]; if (!h || h.u !== L.u) relabel(a, L);
+    });
+    roomLinks = list;
+  }
+  if (window.Shelf && KEY && location.protocol !== 'file:'){
+    const fallback = setTimeout(() => attach(roomLinks), 5000);
+    Shelf.forRoom(KEY).then(list => { clearTimeout(fallback); attach(list); }).catch(() => { clearTimeout(fallback); attach(roomLinks); });
+  } else attach(roomLinks);
 
   /* ---- nhãn tên: rê chuột thì hiện, điện thoại chạm lần 1 hiện tên, chạm lần 2 mới mở ---- */
   const tip = $('#tip');
@@ -36,6 +84,7 @@
     a.addEventListener('focus', () => { const r = a.getBoundingClientRect(); showTip(a, r.left + r.width / 2, r.top + r.height / 2); });
     a.addEventListener('blur', hideTip);
     a.addEventListener('click', e => {
+      if (!a._L){ e.preventDefault(); return; }
       if (touch && (armed !== a || performance.now() - armT > 4000)){
         e.preventDefault();
         if (armed) armed.classList.remove('armed');
@@ -69,13 +118,14 @@
   const hint = $('#hint');
   if (hint){ hint.textContent = touch ? (document.body.classList.contains('scrolly') ? 'vuốt ngang để xem cả phòng · chạm vào đồ vật để xem tên, chạm lần nữa để mở' : 'chạm vào đồ vật để xem tên, chạm lần nữa để mở') : 'rê chuột lên đồ vật để xem · ' + (R.openHint || 'bấm để mở trò chơi'); setTimeout(() => hint.classList.add('on'), 900); setTimeout(() => hint.classList.remove('on'), 8000); }
 
-  /* ---- danh sách tất cả link trong phòng ---- */
-  const list = $('#list');
-  $('#listBox ol').innerHTML = R.links.map(L => `<li><a href="${esc(L.u)}" target="_blank" rel="noopener"><span><b>${esc(L.n)}</b> <small>— ${esc(L.d)}</small></span></a></li>`).join('');
-  $('#listCount').textContent = R.links.length + ' ' + (R.noun || 'trò') + ' trong phòng · bấm tên để mở ở thẻ mới';
-  $('#listBtn').addEventListener('click', () => { list.classList.add('open'); const a = list.querySelector('a'); if (a) a.focus({ preventScroll: true }); });
-  list.addEventListener('click', e => { if (e.target.closest('[data-close]')){ list.classList.remove('open'); $('#listBtn').focus({ preventScroll: true }); } });
-  addEventListener('keydown', e => { if (e.key === 'Escape'){ list.classList.remove('open'); hideTip(); } });
+  /* ---- giá sách: tất cả link trong phòng (kể cả link không có đồ vật) ---- */
+  const listBtn = $('#listBtn');
+  listBtn.addEventListener('click', () => {
+    hideTip();
+    const col = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    if (window.Shelf) Shelf.open({ title: R.title, col, links: roomLinks, opener: listBtn });
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') hideTip(); });
 
   /* ---- hiệu ứng hạt (mưa, sao, bụi phấn, tàn lửa…) ---- */
   const cv = $('#fx'), cx = cv.getContext('2d');
@@ -123,5 +173,5 @@
   setMin(startMin);
   tvMin.addEventListener('click', () => setMin(!tv.classList.contains('min')));
 
-  window.__room = { links: R.links, count: LKS.length, S, wrap };
+  window.__room = { get links(){ return roomLinks; }, get attached(){ return attached; }, home: HOME, count: LKS.length, S, wrap };
 })();
