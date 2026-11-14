@@ -1075,10 +1075,10 @@
   ui(); connectNet();
   // vừa đi cầu thang từ tầng 2 xuống: vào luôn bằng tên & nhân vật cũ, đứng ở chân cầu thang
   if (HOP && prof.name){
-    fromStairs = true; $('#fade').classList.add('on');
-    const go = async () => { await enter(); $('#fade').classList.remove('on'); if (!inside) fromStairs = false; };
+    fromStairs = true; document.body.classList.add('hopping');      // ẩn thẻ chọn nhân vật (không phủ màn đen) trong lúc bước vào
+    const go = async () => { await enter(); document.body.classList.remove('hopping'); if (!inside) fromStairs = false; };
     if (document.body.classList.contains('portrait')){
-      $('#fade').classList.remove('on'); gErr.textContent = 'Xoay ngang điện thoại để quay lại tầng 1.';
+      document.body.classList.remove('hopping'); gErr.textContent = 'Xoay ngang điện thoại để quay lại tầng 1.';
       const onTurn = () => setTimeout(() => { if (!inside && fromStairs && !document.body.classList.contains('portrait')){ removeEventListener('resize', onTurn); go(); } }, 120);
       addEventListener('resize', onTurn);
     } else setTimeout(go, 60);

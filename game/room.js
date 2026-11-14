@@ -3,7 +3,7 @@
    và vẽ cảnh vào <svg id="scene">; mỗi đồ vật là <a class="lk" data-i="…">, data-i trỏ vào ROOM.links
    = link mà đồ vật đó được vẽ riêng cho (tên trên máy, hình trên áp phích…).
    Link thật của phòng lấy từ game/links.json (qua shelf.js): link nào còn ở phòng thì giữ đồ vật của nó,
-   link mới gắn vào đồ vật còn trống (đổi nhãn tên trên đồ vật), đồ vật không còn link thành đồ trang trí,
+   link mới gắn vào đồ vật còn trống, đồ vật không còn link thành đồ trang trí,
    link dư chỉ nằm trên giá sách (nút ☰). Không tải được file thì dùng ROOM.links như cũ. */
 (() => {
   const R = window.ROOM, $ = s => document.querySelector(s);
@@ -12,35 +12,14 @@
   const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
 
+  /* ---- không có chữ nào trong phòng: tên link chỉ hiện khi rê chuột / chạm vào đồ vật ---- */
+  document.querySelectorAll('#scene text, .room-title').forEach(t => t.remove());
+
   /* ---- gắn link vào đồ vật ---- */
   const LKS = [...document.querySelectorAll('#scene .lk')];
   const HOME = R.links || [];                                   // link gốc của từng đồ vật (theo data-i)
   const KEY = (location.pathname.match(/\/game\/([^/]+)\/?/) || [])[1] || '';
   let roomLinks = HOME.map(L => ({ n: L.n, d: L.d, u: L.u })), attached = false;
-  const NS = 'http://www.w3.org/2000/svg';
-  function relabel(a, L){                                       // đồ vật vẽ cho link khác → giấu chữ cũ, treo bảng tên mới
-    const g = a.firstElementChild || a;
-    g.querySelectorAll('text').forEach(t => { if (t.textContent.trim().length >= 3) t.setAttribute('visibility', 'hidden'); });
-    let bb; try { bb = g.getBBox(); } catch (e) { return; }
-    if (!bb || !bb.width) return;
-    const fs = Math.max(10, Math.min(18, bb.width / 7)), nm = L.n.length > 18 ? L.n.slice(0, 17) + '…' : L.n;
-    const p = document.createElementNS(NS, 'g'); p.setAttribute('class', 'plq'); p.setAttribute('aria-hidden', 'true');
-    p.setAttribute('pointer-events', 'none');
-    const r = document.createElementNS(NS, 'rect'), t = document.createElementNS(NS, 'text');
-    t.textContent = nm;
-    // bảng tên nằm ở lớp trên cùng của cảnh (đồ vật vẽ sau không che mất), cùng toạ độ với đồ vật
-    const svgEl = document.getElementById('scene');
-    let layer = svgEl.querySelector('g.plqs'); if (!layer){ layer = document.createElementNS(NS, 'g'); layer.setAttribute('class', 'plqs'); svgEl.appendChild(layer); }
-    try { const m = svgEl.getScreenCTM().inverse().multiply(g.getScreenCTM()); p.setAttribute('transform', `matrix(${m.a} ${m.b} ${m.c} ${m.d} ${m.e} ${m.f})`); } catch (e) {}
-    Object.entries({ x: bb.x + bb.width / 2, y: bb.y + Math.min(bb.height * .22, fs * 2.2) + fs * .35, 'text-anchor': 'middle', 'font-size': fs.toFixed(1) })
-      .forEach(([k, v]) => t.setAttribute(k, v));
-    t.setAttribute('style', 'font-family:var(--tip-font,system-ui,sans-serif);fill:var(--tip-ink,#fff);letter-spacing:.02em');
-    p.append(r, t); layer.appendChild(p);
-    let w = fs * nm.length * .6; try { w = t.getComputedTextLength(); } catch (e) {}
-    const pw = w + fs * 1.1, ph = fs * 1.7, cy = +t.getAttribute('y') - fs * .35;
-    Object.entries({ x: bb.x + bb.width / 2 - pw / 2, y: cy - ph / 2, width: pw, height: ph, rx: Math.min(6, ph / 3) }).forEach(([k, v]) => r.setAttribute(k, v));
-    r.setAttribute('style', 'fill:var(--tip-bg,#111);fill-opacity:.9;stroke:var(--accent,#fff);stroke-width:' + Math.max(1.5, fs / 8).toFixed(1));
-  }
   function attach(list){
     if (attached) return; attached = true;
     const free = new Set(LKS), byUrl = new Map(), pick = new Map(), rest = [];
@@ -56,7 +35,6 @@
       a.setAttribute('href', L.u); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener');
       a.setAttribute('aria-label', L.n + (L.d ? ': ' + L.d : '') + ' (mở thẻ mới)');
       a._L = L;
-      const h = HOME[+a.dataset.i]; if (!h || h.u !== L.u) relabel(a, L);
     });
     roomLinks = list;
   }

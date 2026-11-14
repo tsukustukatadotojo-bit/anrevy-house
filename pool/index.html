@@ -108,31 +108,6 @@
   .tv.min{width:auto}
   .tv.min .tv-scr{position:absolute;top:100%;left:0;width:var(--tvw);opacity:0;pointer-events:none}
 
-  /* link kỳ dị giấu trong nước */
-  #links{position:fixed;inset:0;z-index:10;pointer-events:none}
-  .hl{
-    --v:0;
-    position:absolute;transform:translate(-50%,-50%);pointer-events:auto;
-    display:flex;flex-direction:column;align-items:center;gap:2px;
-    text-decoration:none;color:var(--ink);padding:8px;
-  }
-  .hl-g{
-    display:block;font-size:26px;line-height:1;
-    opacity:calc(.13 + var(--v) * .87);
-    filter:blur(calc((1 - var(--v)) * 1.6px));
-    text-shadow:0 0 calc(var(--v) * 16px) #fff, 0 0 calc(var(--v) * 4px) #fff;
-    animation:bob var(--d,7s) ease-in-out infinite alternate;
-  }
-  .hl-n{
-    font-size:17px;letter-spacing:.06em;white-space:nowrap;
-    padding:0 7px;border-radius:4px;background:rgba(255,255,255,.7);
-    opacity:var(--v);transform:translateY(calc((1 - var(--v)) * 6px));
-  }
-  .hl-n small{display:block;font-size:13px;color:var(--ink-soft);text-align:center}
-  .hl:focus-visible{outline:none;--v:1}
-  .hl:focus-visible .hl-n{box-shadow:0 0 0 2px var(--ink)}
-  @keyframes bob{from{transform:translateY(-5px) rotate(-4deg)}to{transform:translateY(6px) rotate(4deg)}}
-
   /* gợn nước khi chạm */
   .ripple{
     position:fixed;z-index:9;left:0;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;pointer-events:none;
@@ -159,25 +134,28 @@
   .dlg-more{position:absolute;right:16px;bottom:8px;font-style:normal;font-size:16px;animation:blink 1s steps(1) infinite;opacity:0}
   .dlg.done .dlg-more{opacity:1}
   @keyframes blink{50%{opacity:0}}
-  .hint{
-    position:fixed;z-index:20;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);
-    font-size:17px;letter-spacing:.12em;color:var(--ink-soft);white-space:nowrap;
-    opacity:0;transition:opacity 1.2s;text-shadow:0 0 8px #fff;
-  }
-  .hint.on{opacity:1}
+  /* cánh cửa đen: hiện dần sau 5 phút ở lại trong bể bơi → dẫn xuống Backroom */
+  .bdoor{position:fixed;z-index:12;left:50%;top:54%;width:clamp(64px,8.5vw,128px);aspect-ratio:1/2.15;transform:translate(-50%,-100%) scale(.97);
+    padding:0;border:0;border-radius:2px;cursor:pointer;opacity:0;filter:blur(6px);transition:opacity 28s ease,filter 28s ease,transform 28s ease;
+    background:radial-gradient(ellipse at 50% 70%,#0b0b0b,#000 70%);
+    box-shadow:0 0 0 3px rgba(20,22,22,.55),0 0 0 6px rgba(240,246,245,.35),0 0 46px 6px rgba(0,0,0,.28),inset 0 0 26px rgba(0,0,0,.95)}
+  .bdoor::after{content:'';position:absolute;left:-12%;right:-12%;bottom:-10px;height:14px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(0,0,0,.45),transparent 70%)}
+  .bdoor.on{opacity:.96;filter:blur(0);transform:translate(-50%,-100%) scale(1)}
+  @media (orientation:portrait){.bdoor{top:64%;width:clamp(56px,17vw,110px)}}
+  .bdoor:hover,.bdoor:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(20,22,22,.75),0 0 0 6px rgba(255,255,255,.6),0 0 60px 10px rgba(0,0,0,.4),inset 0 0 26px #000}
+  .blk{position:fixed;inset:0;z-index:60;background:#000;opacity:0;pointer-events:none;transition:opacity 1.8s ease}
+  .blk.on{opacity:1;pointer-events:auto}
   @media (max-width:640px){
-    .hint{top:auto;bottom:calc(52px + env(safe-area-inset-bottom,0px));font-size:15px}
-    .hl-g{font-size:22px}
-    .hl-n{font-size:14px}
-    .hl-n small{font-size:12px}
     .hud{font-size:16px}
     .hud .wide{display:none}
+    .hud-tr{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
     .tv{--tvw:156px}
     .tv-bar{font-size:14px}
   }
 
   @media (prefers-reduced-motion: reduce){
-    .grain,.hl-g,.dlg-more,.tv-t i{animation:none!important}
+    .grain,.dlg-more,.tv-t i{animation:none!important}
+    .bdoor{transition:opacity 3s ease}
   }
 </style>
 </head>
@@ -199,13 +177,10 @@
     </div>
     <div class="lvl" aria-hidden="true">LEVEL 37<span class="wide"> · THE POOLROOMS</span><small id="depth">depth 2.5 m</small></div>
   </div>
-  <div class="hud hud-tr"><a href="../home.html">↑ surface</a> <a href="confess/">✉ phòng thú tội</a></div>
+  <div class="hud hud-tr"><a href="../home.html">↑ surface</a> <a href="cure/">The Cure</a></div>
   <div class="hud hud-bl"><button id="amb" aria-pressed="false">♪ ambience: off</button></div>
-  <div class="hud hud-br" aria-live="polite"><span id="found">found 0 / 0</span><small class="wide">things hidden in the water</small></div>
-
-  <div class="hint" id="hint">move through the water to find what's hidden</div>
-
-  <nav id="links" aria-label="Những lối đi ẩn trong nước"></nav>
+  <button type="button" class="bdoor" id="bdoor" hidden aria-label="Một cánh cửa đen"></button>
+  <div class="blk" id="blk" aria-hidden="true"></div>
 
   <div class="dlg" id="dlg" role="status" aria-live="polite">
     <span class="dlg-who">◌ ＴＨＥ　ＰＯＯＬ</span>
@@ -221,22 +196,8 @@
   const LINE = 'Chỗ này sâu 2-3m;\nnhấn chìm mình hay thả trôi mình trong nước là dạng gột rửa';
   // NHẠC & VIDEO ở góc trên trái (mã video YouTube)
   const MUSIC = 'R0zVL1YePDY';
-  // LINK KỲ DỊ giấu trong nước: [tên, link, ghi chú, ký hiệu]
-  const LINKS = [
-    ['Mebious', 'https://mebious.neocities.org/', 'find mebious', '◌'],
-    ['Terminal 00', 'https://angusnicneven.com/', 'turn back', '⌂'],
-    ['973-eht-namuh-973', 'https://973-eht-namuh-973.com/', 'eht namuh', '∴'],
-    ['JODI', 'https://wwwwwwwww.jodi.org/', '%%%%', '⌇'],
-    ['fauux', 'https://fauux.neocities.org/', 'wired sound', '☾'],
-    ['Staggering Beauty', 'http://www.staggeringbeauty.com/', '⚠ flashing lights', '∿'],
-    ["Cameron's World", 'https://www.cameronsworld.net/', 'geocities', '✧'],
-    ['Zoomquilt', 'https://zzz.zoomquilt.org/', 'endless zoom', '◎'],
-    ['Infinite Flowers', 'https://infiniteflowers.net/', 'endless flowers', '✿'],
-    ['Onekoshima', 'https://onekoshima.pages.dev/', 'pixel cats', '⋆'],
-    ['The 88x31 Project', 'https://auvreil.github.io/88x31/', 'tiny old buttons', '▦'],
-    ['Superbad', 'https://superbad.com/index1.html', 'a maze with no map', '☍'],
-    ['C. McKenney', 'https://www.christophermckenneyart.com/', 'surreal photos', '◐'],
-  ];
+  // CỬA ĐEN: ở lại trang (đang mở trên màn hình) đủ bấy nhiêu giây thì cánh cửa hiện dần ra
+  const DOOR_AFTER = /[?&]door\b/.test(location.search) ? 3 : 300;
   /* ======================= */
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -464,39 +425,7 @@
     requestAnimationFrame(frame);
   }
 
-  /* ================= LINK GIẤU TRONG NƯỚC ================= */
-  const box = $('#links'), foundEl = $('#found');
-  const SPOTS = [
-    [33, 17], [58, 24], [84, 18],
-    [10, 43], [30, 38], [50, 47], [71, 40], [91, 46],
-    [20, 66], [42, 62], [64, 70], [85, 64],
-    [48, 84]
-  ];
-  const narrow = innerWidth < 640;
-  const items = LINKS.map((l, i) => {
-    const a = document.createElement('a');
-    a.className = 'hl'; a.href = l[1]; a.target = '_blank'; a.rel = 'noopener';
-    a.setAttribute('aria-label', l[0] + ' (mở thẻ mới)');
-    let [x, y] = SPOTS[i % SPOTS.length];
-    if (narrow){ x = 22 + (x - 8) / 85 * 56; y = 27 + (y - 15) * 0.76; }
-    a.style.left = (x + rand(-2, 2)) + '%'; a.style.top = (y + rand(-2, 2)) + '%';
-    a.innerHTML = `<span class="hl-g" style="--d:${rand(5, 9).toFixed(1)}s;animation-delay:${(-rand(0, 8)).toFixed(1)}s">${l[3]}</span>` +
-                  `<span class="hl-n">${l[0]}<small>${l[2]}</small></span>`;
-    box.appendChild(a);
-    return { a, v: 0, hold: 0, seen: false };
-  });
-  let found = 0;
-  foundEl.textContent = `found 0 / ${items.length}`;
-  function mark(it){
-    if (!it.seen && it.v > 0.85){
-      it.seen = true; found++;
-      foundEl.textContent = `found ${found} / ${items.length}` + (found === items.length ? ' ✧' : '');
-    }
-  }
-  let px = -999, py = -999;
-  addEventListener('pointermove', e => { if (e.pointerType === 'mouse'){ px = e.clientX; py = e.clientY; } });
-  document.addEventListener('mouseleave', () => { px = py = -999; });
-
+  /* ================= GỢN NƯỚC KHI CHẠM ================= */
   function ripple(x, y){
     for (const c of ['', ' b']){
       const r = document.createElement('span');
@@ -505,44 +434,35 @@
       r.addEventListener('animationend', () => r.remove());
     }
   }
-  addEventListener('pointerdown', e => {
-    if (e.target.closest('.hl, .hud, .dlg')) return;
-    ripple(e.clientX, e.clientY);
-    const now = performance.now();
-    for (const it of items){
-      const r = it.a.getBoundingClientRect();
-      if (Math.hypot(r.left + r.width / 2 - e.clientX, r.top + r.height / 2 - e.clientY) < (narrow ? 120 : 210)) it.hold = now + 3200;
-    }
-  });
-  // thỉnh thoảng một thứ tự nổi lên
-  setInterval(() => {
-    if (document.hidden) return;
-    const it = items[(Math.random() * items.length) | 0];
-    it.hold = Math.max(it.hold, performance.now() + 1600);
-  }, 5200);
+  addEventListener('pointerdown', e => { if (!e.target.closest('.hud, .dlg, .bdoor')) ripple(e.clientX, e.clientY); });
 
-  (function loop(){
-    requestAnimationFrame(loop);
-    const now = performance.now();
-    for (const it of items){
-      const r = it.a.getBoundingClientRect();
-      const d = Math.hypot(r.left + r.width / 2 - px, r.top + r.height / 2 - py);
-      let target = clamp(1 - (d - 40) / (narrow ? 90 : 150), 0, 1);
-      if (now < it.hold) target = Math.max(target, 1);
-      it.v += (target - it.v) * 0.12;
-      it.a.style.setProperty('--v', it.v.toFixed(3));
-      mark(it);
+  /* ================= CÁNH CỬA ĐEN → BACKROOM ================= */
+  // chỉ đếm lúc trang đang hiện trên màn hình; đủ 5 phút thì cánh cửa hiện dần trong khoảng nửa phút
+  const bdoor = $('#bdoor'), blk = $('#blk');
+  let stayed = 0, doorShown = false;
+  const doorT = setInterval(() => {
+    if (document.hidden || doorShown) return;
+    if (++stayed >= DOOR_AFTER){
+      doorShown = true; clearInterval(doorT);
+      bdoor.hidden = false; requestAnimationFrame(() => requestAnimationFrame(() => bdoor.classList.add('on')));
     }
-  })();
+  }, 1000);
+  bdoor.addEventListener('click', () => {
+    blk.classList.add('on');
+    try { if (ytReady) yt.mute(); } catch (e) {}
+    setOn(false);
+    setTimeout(() => { location.href = 'backroom/'; }, 1900);
+  });
+  addEventListener('pageshow', e => { if (e.persisted) blk.classList.remove('on'); });
 
   /* ================= CÂU THOẠI ================= */
-  const dlg = $('#dlg'), dlgText = $('#dlgText'), hint = $('#hint');
+  const dlg = $('#dlg'), dlgText = $('#dlgText');
   let typing = null, closed = false;
   function closeDlg(){
     if (closed) return;
     closed = true; clearInterval(typing);
     dlg.classList.remove('on');
-    setTimeout(() => { dlg.style.display = 'none'; hint.classList.add('on'); setTimeout(() => hint.classList.remove('on'), 7000); }, 900);
+    setTimeout(() => { dlg.style.display = 'none'; }, 900);
   }
   setTimeout(() => {
     dlg.classList.add('on');

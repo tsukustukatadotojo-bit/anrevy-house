@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEVEL 0 · ⌈ＴＨＥ　ＢＡＣＫＲＯＯＭＳ⌋</title>
+<link rel="icon" href="../../icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
+<link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<script src="../../desk-check.js" defer></script>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Anrevy House">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#2a2410">
+<script>if('serviceWorker' in navigator)addEventListener('load',function(){navigator.serviceWorker.register('../../sw.js').catch(function(){})})</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+  /* BACKROOM · LEVEL 0 — sau cánh cửa đen của The Pool: những căn phòng vàng nối nhau vô tận.
+     Bản đồ sinh ra từ toạ độ nên đi mãi cũng không bao giờ hết, không có lối ra trong khung cảnh. */
+  :root{--ink:#f3e7a8;--dim:rgba(243,231,168,.55)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:#1d1a0c}
+  body{color:var(--ink);font-family:'VT323',monospace;-webkit-tap-highlight-color:transparent;touch-action:none;user-select:none;-webkit-user-select:none}
+  #view{position:fixed;inset:0;width:100%;height:100%;display:block;image-rendering:auto;cursor:grab}
+  #view:active{cursor:grabbing}
+  /* hơi nhoè như băng VHS: vạch quét, viền tối, hạt nhiễu */
+  .vhs{position:fixed;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 58%,rgba(20,14,0,.5) 100%)}
+  .grain{position:fixed;inset:-50%;pointer-events:none;opacity:.08;background-image:radial-gradient(#000 .7px,transparent .8px);background-size:3px 3px;animation:grain .7s steps(3) infinite}
+  @keyframes grain{33%{transform:translate(1%,-1%)}66%{transform:translate(-1%,1%)}}
+  .in{position:fixed;inset:0;background:#000;pointer-events:none;animation:in 3.2s ease forwards}
+  @keyframes in{to{opacity:0}}
+  .hud{position:fixed;z-index:5;font-size:18px;letter-spacing:.12em;color:var(--dim);text-shadow:0 0 6px rgba(0,0,0,.6)}
+  .hud-tl{top:calc(12px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px))}
+  .hud-tl small{display:block;font-size:15px}
+  .hud-tr{top:calc(12px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));display:flex;gap:8px}
+  .hud a,.hud button{font:inherit;letter-spacing:inherit;color:var(--dim);text-decoration:none;cursor:pointer;background:rgba(30,24,4,.35);border:1px solid rgba(243,231,168,.25);padding:1px 10px;border-radius:999px}
+  .hud a:hover,.hud button:hover,.hud a:focus-visible,.hud button:focus-visible{color:#fff6c8;border-color:rgba(243,231,168,.7);outline:none}
+  .rec{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%;background:#e04a3a;animation:rec 1.6s steps(1) infinite}
+  @keyframes rec{50%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){.grain,.rec{animation:none}.in{animation-duration:.6s}}
+</style>
+</head>
+<body>
+  <canvas id="view" aria-label="Những căn phòng vàng vô tận. Phím mũi tên hoặc W A S D để đi, kéo chuột hoặc vuốt để nhìn quanh. Không chạm gì thì cứ thế đi mãi."></canvas>
+  <div class="vhs" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hud hud-tl" aria-hidden="true"><span class="rec"></span>LEVEL 0<small id="clock">00:00:00</small></div>
+  <div class="hud hud-tr"><button type="button" id="snd" aria-pressed="false">♪ off</button><a href="../">↑</a></div>
+  <div class="in" aria-hidden="true"></div>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const touch = matchMedia('(pointer: coarse)').matches;
+  const cv = document.getElementById('view'), cx = cv.getContext('2d', { alpha: false });
+
+  /* ================= BẢN ĐỒ VÔ TẬN (sinh từ toạ độ, không lưu) ================= */
+  const P = 6;                                                    // mỗi "phòng" rộng 6 ô; vách ngăn trên đường lưới, có lối đi
+  const mod = (a, n) => ((a % n) + n) % n;
+  function h(a, b, s){ let x = Math.imul(a | 0, 374761393) ^ Math.imul(b | 0, 668265263) ^ Math.imul(s | 0, 1442695041); x = Math.imul(x ^ (x >>> 13), 1274126177); x ^= x >>> 16; return (x >>> 0) / 4294967296; }
+  function seg(a, b, s, m){                                       // một đoạn vách dài P ô: có khi mất hẳn, thường có 1–2 lối qua
+    if (h(a, b, s) < .28) return false;
+    const g = 1 + Math.floor(h(a, b, s + 1) * (P - 1));
+    if (m === g) return false;
+    if (h(a, b, s + 2) < .45 && m === 1 + ((g + 2) % (P - 1))) return false;
+    return true;
+  }
+  function wall(i, j){
+    if (Math.abs(i - 3) <= 1 && Math.abs(j - 3) <= 1) return false;   // chỗ đứng lúc mới vào luôn thoáng
+    const mi = mod(i, P), mj = mod(j, P), a = Math.floor(i / P), b = Math.floor(j / P);
+    if (mi === 0 && mj === 0) return h(i, j, 7) < .8;              // cột ở góc phòng
+    if (mi === 0) return seg(a, b, 11, mj);
+    if (mj === 0) return seg(a, b, 23, mi);
+    return h(i, j, 31) < .03;                                     // thỉnh thoảng một cây cột giữa phòng
+  }
+  const lightAt = (i, j) => mod(i, 2) === 1 && mod(j, 2) === 1 && h(i, j, 41) > .07;   // đèn huỳnh quang trên trần, vài bóng tắt
+
+  /* ================= TEXTURE (vẽ bằng code, 64×64) ================= */
+  const T = 64;
+  const pack = (r, g, b) => (255 << 24) | (Math.max(0, Math.min(255, b)) << 16) | (Math.max(0, Math.min(255, g)) << 8) | Math.max(0, Math.min(255, r));
+  let sd = 9; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  function tex(fn){ const t = new Uint32Array(T * T); for (let y = 0; y < T; y++) for (let x = 0; x < T; x++) t[y * T + x] = fn(x, y); return t; }
+  const WALL = tex((x, y) => {                                    // giấy dán tường vàng úa: sọc mờ, hoa văn nhạt, chân tường nâu
+    if (y >= 58) return pack(108 - rnd() * 10, 86 - rnd() * 8, 40);
+    if (y >= 56) return pack(150, 124, 62);
+    let r = 205, g = 186, b = 104;
+    if (x % 16 < 2) { r -= 10; g -= 10; b -= 8; }
+    const dx = (x % 16) - 8, dy = (y % 16) - 8; if (Math.abs(dx) + Math.abs(dy) === 5) { r -= 9; g -= 9; b -= 9; }
+    const n = (rnd() - .5) * 12; r += n; g += n; b += n * .6;
+    if (y > 44) { const k = (y - 44) / 12 * 14; r -= k; g -= k; b -= k; }       // ố vàng dưới chân
+    return pack(r, g, b);
+  });
+  const FLOOR = tex(() => { const n = (rnd() - .5) * 22; return pack(150 + n, 128 + n, 66 + n * .6); });   // thảm ẩm
+  const CEIL = tex((x, y) => {                                    // trần tấm xốp: kẻ ô, lỗ chấm li ti
+    if (x < 2 || y < 2) return pack(170, 160, 112);
+    let v = 214 + (rnd() - .5) * 10; if (rnd() < .06) v -= 26;
+    return pack(v + 4, v, v - 50);
+  });
+  const LAMP = tex((x, y) => {                                    // tấm đèn huỳnh quang
+    if (x < 2 || y < 2) return pack(170, 160, 112);
+    if (x > 10 && x < 54 && y > 6 && y < 58){ const e = Math.min(x - 10, 54 - x, y - 6, 58 - y); return e < 3 ? pack(236, 228, 170) : pack(255, 252, 222); }
+    return pack(214, 208, 168);
+  });
+  const LAMP_OFF = tex((x, y) => {
+    if (x < 2 || y < 2) return pack(170, 160, 112);
+    if (x > 10 && x < 54 && y > 6 && y < 58) return pack(150, 146, 120);
+    return pack(208, 202, 160);
+  });
+
+  /* ================= MÀN HÌNH (độ phân giải thấp rồi phóng to: mờ như băng cũ) ================= */
+  let W = 0, H = 0, img = null, buf = null, ZB = null;
+  function size(){
+    const scale = innerWidth > 1200 ? 3.4 : innerWidth > 700 ? 3 : 2.4;
+    W = Math.max(200, Math.min(480, Math.round(innerWidth / scale)));
+    H = Math.max(120, Math.round(W * innerHeight / innerWidth));
+    cv.width = W; cv.height = H;
+    img = cx.createImageData(W, H); buf = new Uint32Array(img.data.buffer); ZB = new Float32Array(W);
+  }
+  size(); addEventListener('resize', size);
+
+  /* ================= NGƯỜI ĐI ================= */
+  const me = { x: 3.5, y: 3.5, a: Math.random() * Math.PI * 2, bob: 0 };
+  const R = .22;
+  const free = (x, y) => !wall(Math.floor(x - R), Math.floor(y - R)) && !wall(Math.floor(x + R), Math.floor(y - R)) && !wall(Math.floor(x - R), Math.floor(y + R)) && !wall(Math.floor(x + R), Math.floor(y + R));
+  function move(dx, dy){ let moved = false; if (free(me.x + dx, me.y)){ me.x += dx; moved = true; } if (free(me.x, me.y + dy)){ me.y += dy; moved = true; } return moved; }
+
+  // tự đi: men theo các hướng chính, gặp vách thì rẽ sang lối còn thoáng, thỉnh thoảng rẽ ngẫu nhiên ở chỗ giao nhau
+  const DIRS = [0, Math.PI / 2, Math.PI, -Math.PI / 2];
+  let goal = DIRS[Math.floor(Math.random() * 4)], nextTurn = 4 + Math.random() * 6;
+  const angDiff = (a, b) => { let d = (b - a) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return d; };
+  const openAhead = (ang, dist) => { for (let s = .4; s <= dist; s += .25){ if (wall(Math.floor(me.x + Math.cos(ang) * s), Math.floor(me.y + Math.sin(ang) * s))) return false; } return true; };
+  function autopilot(dt){
+    nextTurn -= dt;
+    const blocked = !openAhead(goal, 1.3);
+    if (blocked || nextTurn <= 0){
+      const opts = DIRS.filter(d => Math.abs(angDiff(d, goal)) > .1 && Math.abs(Math.abs(angDiff(d, goal)) - Math.PI) > .1 && openAhead(d, blocked ? 1.3 : 3));
+      if (opts.length) goal = opts[Math.floor(Math.random() * opts.length)];
+      else if (blocked) goal = goal + Math.PI;
+      nextTurn = 5 + Math.random() * 9;
+    }
+    goal = Math.atan2(Math.sin(goal), Math.cos(goal));
+    const d = angDiff(me.a, goal); me.a += Math.sign(d) * Math.min(Math.abs(d), 1.15 * dt);
+    if (Math.abs(d) < .5){
+      const sp = 1.05 * dt * (1 - Math.abs(d) * 1.2);
+      // giữ mình đi giữa lối (căn về giữa ô theo chiều ngang của hướng đi)
+      const cxo = Math.abs(Math.cos(goal)) > .5 ? 0 : (Math.floor(me.x) + .5 - me.x) * .9 * dt;
+      const cyo = Math.abs(Math.sin(goal)) > .5 ? 0 : (Math.floor(me.y) + .5 - me.y) * .9 * dt;
+      if (move(Math.cos(me.a) * sp + cxo, Math.sin(me.a) * sp + cyo)) return sp;
+    }
+    return 0;
+  }
+
+  /* ---- điều khiển: phím, kéo để nhìn; không chạm gì 6 giây thì tự đi tiếp ---- */
+  const keys = new Set(); let lastInput = -99, drag = null, holdT = 0, holding = false;
+  const now = () => performance.now() / 1000;
+  addEventListener('keydown', e => { const k = e.key.toLowerCase(); if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd', 'q', 'e'].includes(k)){ keys.add(k); lastInput = now(); e.preventDefault(); } });
+  addEventListener('keyup', e => keys.delete(e.key.toLowerCase()));
+  addEventListener('blur', () => keys.clear());
+  cv.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, moved: 0, id: e.pointerId }; holdT = now(); holding = false; lastInput = now(); try { cv.setPointerCapture(e.pointerId); } catch (_) {} startAudio(); });
+  cv.addEventListener('pointermove', e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.x; drag.x = e.clientX; drag.moved += Math.abs(dx) + Math.abs(e.clientY - drag.y); drag.y = e.clientY;
+    me.a += dx * (touch ? .0065 : .0045); lastInput = now();
+  });
+  const endDrag = () => { drag = null; holding = false; };
+  cv.addEventListener('pointerup', endDrag); cv.addEventListener('pointercancel', endDrag);
+  addEventListener('keydown', startAudio, { once: true });
+
+  /* ================= ÂM THANH: tiếng đèn huỳnh quang ù ù + bước chân trên thảm ================= */
+  let AC = null, master = null, hum = null, soundOn = false, wantSound = true;
+  const sndBtn = document.getElementById('snd');
+  function startAudio(){
+    if (!wantSound) return;
+    if (AC){ if (AC.state === 'suspended') AC.resume(); return; }
+    try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return; }
+    master = AC.createGain(); master.gain.value = 0; master.connect(AC.destination);
+    master.gain.linearRampToValueAtTime(.8, AC.currentTime + 2);
+    hum = AC.createGain(); hum.gain.value = .05; hum.connect(master);
+    const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1400; lp.connect(hum);
+    [[120, 'sawtooth', .22], [240, 'sine', .35], [60, 'sine', .5], [121.3, 'sawtooth', .12]].forEach(([f, t, g]) => { const o = AC.createOscillator(), gg = AC.createGain(); o.type = t; o.frequency.value = f; gg.gain.value = g; o.connect(gg).connect(lp); o.start(); });
+    const nb = AC.createBuffer(1, AC.sampleRate * 2, AC.sampleRate), d = nb.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    const ns = AC.createBufferSource(); ns.buffer = nb; ns.loop = true; const hp = AC.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 5000; const ng = AC.createGain(); ng.gain.value = .012;
+    ns.connect(hp).connect(ng).connect(master); ns.start();
+    soundOn = true; sndUI();
+  }
+  function step(){
+    if (!AC || !soundOn) return;
+    const t = AC.currentTime, n = AC.createBufferSource(), b = AC.createBuffer(1, AC.sampleRate * .12, AC.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
+    n.buffer = b; const f = AC.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 260 + Math.random() * 80; const g = AC.createGain(); g.gain.value = .3 + Math.random() * .1;
+    n.connect(f).connect(g).connect(master); n.start(t);
+  }
+  function flickerSound(on){ if (hum && AC) hum.gain.setTargetAtTime(on ? .05 : .015, AC.currentTime, .01); }
+  function sndUI(){ sndBtn.textContent = soundOn ? '♪ on' : '♪ off'; sndBtn.setAttribute('aria-pressed', String(soundOn)); }
+  sndBtn.addEventListener('click', () => {
+    if (!AC){ wantSound = true; startAudio(); return; }
+    soundOn = !soundOn; wantSound = soundOn;
+    master.gain.setTargetAtTime(soundOn ? .8 : 0, AC.currentTime, .1); sndUI();
+  });
+  document.addEventListener('visibilitychange', () => { if (AC){ if (document.hidden) AC.suspend(); else if (soundOn) AC.resume(); } });
+
+  /* ================= VẼ (dò tia kiểu Wolfenstein: tường, sàn, trần có texture) ================= */
+  const FOG = [124, 110, 50], FOGK = .13, FOV = .68;                // xa dần thì chìm vào màu vàng đục
+  let flick = 1, flickUntil = 0, nextFlick = 18 + Math.random() * 30, t0 = now(), last = now(), walkAcc = 0;
+  const clockEl = document.getElementById('clock');
+  function shade(c, k, f){                                         // nhân độ sáng k, trộn sương f (0..1)
+    const r = c & 255, g = (c >>> 8) & 255, b = (c >>> 16) & 255;
+    return (255 << 24) | ((b * k * (1 - f) + FOG[2] * f) << 16) | ((g * k * (1 - f) + FOG[1] * f) << 8) | (r * k * (1 - f) + FOG[0] * f);
+  }
+  function render(){
+    const dirX = Math.cos(me.a), dirY = Math.sin(me.a), plX = -dirY * FOV, plY = dirX * FOV;
+    const bob = reduce ? 0 : Math.sin(me.bob) * H * .008;
+    const hor = (H >> 1) + bob, posZ = H * .5;
+    // sàn & trần: từng hàng ngang
+    for (let y = 0; y < H; y++){
+      const below = y > hor, p = below ? y - hor : hor - y;
+      if (p < 1){ for (let x = 0; x < W; x++) buf[y * W + x] = shade(pack(FOG[0], FOG[1], FOG[2]), 1, 1); continue; }
+      const dist = posZ / p * (below ? 1 : 1);
+      const f = 1 - Math.exp(-dist * FOGK);
+      const sx = (dirX - plX) * dist + me.x, sy = (dirY - plY) * dist + me.y;
+      const stX = dist * 2 * plX / W, stY = dist * 2 * plY / W;
+      let fx = sx, fy = sy, row = y * W;
+      for (let x = 0; x < W; x++, fx += stX, fy += stY){
+        const ci = Math.floor(fx), cj = Math.floor(fy), tx = ((fx - ci) * T) & 63, ty = ((fy - cj) * T) & 63;
+        if (below){
+          // sáng hơn ngay dưới đèn
+          const lx = fx - 1.5 - 2 * Math.round((fx - 1.5) / 2), ly = fy - 1.5 - 2 * Math.round((fy - 1.5) / 2);
+          const glow = .78 + .3 * Math.max(0, 1 - (lx * lx + ly * ly) * .9);
+          const damp = .9 + .1 * h(ci, cj, 53);
+          buf[row + x] = shade(FLOOR[ty * T + tx], glow * damp * flick, f);
+        } else {
+          const L = lightAt(ci, cj);
+          buf[row + x] = shade(L ? (flick < .7 ? LAMP_OFF : LAMP)[ty * T + tx] : CEIL[ty * T + tx], L ? 1 : .9 * flick, f * (L ? .75 : 1));
+        }
+      }
+    }
+    // tường: từng cột dọc
+    for (let x = 0; x < W; x++){
+      const camX = 2 * x / W - 1, rx = dirX + plX * camX, ry = dirY + plY * camX;
+      let mx = Math.floor(me.x), my = Math.floor(me.y);
+      const ddx = Math.abs(1 / rx), ddy = Math.abs(1 / ry);
+      let stepX, stepY, sdx, sdy, side = 0, hit = false, n = 0;
+      if (rx < 0){ stepX = -1; sdx = (me.x - mx) * ddx; } else { stepX = 1; sdx = (mx + 1 - me.x) * ddx; }
+      if (ry < 0){ stepY = -1; sdy = (me.y - my) * ddy; } else { stepY = 1; sdy = (my + 1 - me.y) * ddy; }
+      while (!hit && n++ < 64){
+        if (sdx < sdy){ sdx += ddx; mx += stepX; side = 0; } else { sdy += ddy; my += stepY; side = 1; }
+        if (wall(mx, my)) hit = true;
+      }
+      if (!hit){ ZB[x] = 1e9; continue; }
+      const pd = side === 0 ? sdx - ddx : sdy - ddy;
+      ZB[x] = pd;
+      const lh = H / pd, top = Math.floor(hor - lh / 2), bot = Math.floor(hor + lh / 2);
+      let wx = side === 0 ? me.y + pd * ry : me.x + pd * rx; wx -= Math.floor(wx);
+      let tx = (wx * T) | 0; if ((side === 0 && rx > 0) || (side === 1 && ry < 0)) tx = T - tx - 1;
+      const f = 1 - Math.exp(-pd * FOGK), k = (side ? .84 : 1) * (.94 + .06 * h(mx, my, 61)) * flick;
+      const y0 = Math.max(0, top), y1 = Math.min(H - 1, bot), stepT = T / lh;
+      let tp = (y0 - top) * stepT;
+      for (let y = y0; y <= y1; y++, tp += stepT) buf[y * W + x] = shade(WALL[((tp | 0) & 63) * T + tx], k, f);
+    }
+    cx.putImageData(img, 0, 0);
+  }
+
+  function frame(){
+    requestAnimationFrame(frame);
+    const t = now(), dt = Math.min(.05, t - last); last = t;
+    let sp = 0;
+    const manual = keys.size > 0 || (t - lastInput < 6);
+    if (keys.size){
+      const turn = (keys.has('arrowright') || keys.has('d') ? 1 : 0) - (keys.has('arrowleft') || keys.has('a') ? 1 : 0);
+      const fwd = (keys.has('arrowup') || keys.has('w') ? 1 : 0) - (keys.has('arrowdown') || keys.has('s') ? 1 : 0);
+      const strafe = (keys.has('e') ? 1 : 0) - (keys.has('q') ? 1 : 0);
+      me.a += turn * 1.9 * dt;
+      const v = 1.7 * dt;
+      if (fwd || strafe){ if (move((Math.cos(me.a) * fwd - Math.sin(me.a) * strafe) * v, (Math.sin(me.a) * fwd + Math.cos(me.a) * strafe) * v)) sp = v; }
+      lastInput = t;
+    } else if (drag && touch && drag.moved < 14 && t - holdT > .3){       // điện thoại: chạm giữ để bước tới
+      holding = true;
+      if (move(Math.cos(me.a) * 1.4 * dt, Math.sin(me.a) * 1.4 * dt)) sp = 1.4 * dt;
+      lastInput = t;
+    } else if (!manual){
+      sp = autopilot(dt);
+    }
+    if (manual) goal = DIRS.reduce((b, d) => Math.abs(angDiff(me.a, d)) < Math.abs(angDiff(me.a, b)) ? d : b, DIRS[0]);   // lúc tự đi lại thì nối tiếp hướng đang nhìn
+    if (sp){ me.bob += sp * 7.5; walkAcc += sp; if (walkAcc > .62){ walkAcc = 0; step(); } }
+    // đèn chập chờn thỉnh thoảng
+    if (!reduce){
+      if (t - t0 > nextFlick){ flickUntil = t + .5 + Math.random() * .9; nextFlick = t - t0 + 20 + Math.random() * 40; }
+      const was = flick < .9;
+      flick = t < flickUntil ? (Math.random() < .45 ? .55 + Math.random() * .2 : 1) : 1;
+      if (was !== (flick < .9)) flickerSound(flick >= .9);
+    }
+    const s = Math.floor(t - t0); clockEl.textContent = [s / 3600, s / 60 % 60, s % 60].map(v => String(Math.floor(v)).padStart(2, '0')).join(':');
+    render();
+  }
+  requestAnimationFrame(frame);
+  window.__backroom = { me, wall, get W(){ return W; }, get H(){ return H; } };
+})();
+</script>
+</body>
+</html>

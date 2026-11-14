@@ -39,6 +39,9 @@
   .gate{position:fixed;z-index:50;inset:0;display:flex;align-items:center;justify-content:center;padding:70px 14px 24px;
     background:rgba(10,5,4,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);overflow:auto}
   body.inside .gate{display:none}
+  /* tầng 2 (đi cầu thang lên): không có phần chọn tên & nhân vật; thẻ cửa chỉ hiện khi cần mật khẩu hoặc vào lại */
+  body.hop .gate:not(.ask){display:none}
+  body.hop .gate .pick,body.hop .gate .note{display:none}
   .card{width:min(440px,100%);margin:auto;padding:22px 22px 20px;border-radius:18px;background:var(--panel);border:2px solid var(--gold);box-shadow:0 0 0 6px rgba(20,10,6,.8),0 20px 60px rgba(0,0,0,.6)}
   .card h1{font:400 44px/1 'VT323',monospace;letter-spacing:.12em;color:var(--cream);text-align:center;text-shadow:0 0 14px rgba(226,184,78,.55)}
   .card .sub{text-align:center;color:var(--dim);font-size:14px;margin-top:4px}

@@ -13,6 +13,8 @@
   const HOP = R.hop ? hopTake(R.hop.here) : null;
   const isHopHref = href => { try { return !!R.hop && new URL(href, location.href).pathname === new URL(R.hop.href, location.href).pathname; } catch (e) { return false; } };
   if (R.hop && !HOP){ location.replace(R.hop.href + (location.search.includes('broker=') ? location.search : '')); return; }
+  // tầng 2: không bao giờ hiện phần chọn tên & nhân vật — vào thẳng bằng hồ sơ của tầng 1
+  if (R.hop) document.body.classList.add('hop');
 
   /* ---------- dựng giao diện ---------- */
   const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -25,12 +27,12 @@
       <h1>${esc(R.title)}</h1>
       <p class="sub">${esc(R.sub)}</p>
       <div class="gstate"><span class="ico" id="gIco">⏳</span><div><b id="gHead">Đang kết nối tới phòng…</b><span id="gSub"></span><div class="who" id="gWho"></div></div></div>
-      <label class="lbl" for="name">Tên của bạn</label>
+      <div class="pick"><label class="lbl" for="name">Tên của bạn</label>
       <input class="field" id="name" maxlength="16" placeholder="vd. An Vy" required>
       <span class="lbl" id="colLbl">Màu</span>
       <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="colLbl"></div>
       <span class="lbl" id="hatLbl">Mũ</span>
-      <div class="hats" id="hats" role="radiogroup" aria-labelledby="hatLbl"></div>
+      <div class="hats" id="hats" role="radiogroup" aria-labelledby="hatLbl"></div></div>
       <div class="pw">
         <label class="lbl" for="pwIn">Mật khẩu phòng</label>
         <input class="field" id="pwIn" type="password" maxlength="32" placeholder="nhập mật khẩu người khoá phòng đã đặt" autocomplete="off">
@@ -731,6 +733,7 @@
     if (localStream){ localStream.getTracks().forEach(t => t.stop()); localStream = null; }
     self = null; seatPending = -1; actPending = null; clearTimeout(awayT); musicDuck(); ui();
     if (reason) { gErr.textContent = reason; }
+    if (R.hop && !leaving) gate.classList.add('ask');     // tầng 2: chỉ hiện nút vào lại (và mật khẩu nếu phòng khoá)
   }
   function leaveTo(href, fade){
     if (isHopHref(href)) hopSet(R.hop.back);
@@ -745,7 +748,11 @@
   $('#leaveBtn').addEventListener('click', () => { if (R.leaveHref) leaveTo(R.leaveHref, true); else leave(); });
   addEventListener('beforeunload', e => { if (inside && !leaving){ e.preventDefault(); e.returnValue = ''; } });
   addEventListener('pagehide', () => { if (inside){ pub(T_P + me, null, true); pub(T_BYE, { id: me }); } });
-  addEventListener('pageshow', e => { if (e.persisted){ $('#fade').classList.remove('on'); leaving = false; } });
+  addEventListener('pageshow', e => {
+    if (!e.persisted) return;
+    $('#fade').classList.remove('on'); leaving = false;
+    if (R.hop && !inside) location.replace(R.hop.href);   // quay lại bằng nút Back mà không đi cầu thang → về tầng 1
+  });
 
   // bắt buộc ở lại trang khi đang nói chuyện
   let awayT = null, micBeforeAway = true;
@@ -1029,16 +1036,16 @@
   /* ================= KHỞI ĐỘNG ================= */
   ui(); connectNet();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintPicker);
-  // vừa đi cầu thang lên: vào luôn bằng tên & nhân vật cũ (đợi đọc xong trạng thái khoá phòng để không lọt vào phòng đang khoá)
-  if (HOP && prof.name){
-    $('#fade').classList.add('on');
+  // vừa đi cầu thang lên: vào luôn bằng tên & nhân vật của tầng 1. Không phủ màn đen, không hiện phần chọn nhân vật:
+  // căn phòng hiện ngay, chờ tối đa 3 giây để biết phòng có khoá không rồi bước vào (mất mạng thì vẫn vào, ở một mình).
+  if (HOP){
+    if (!prof.name) prof.name = 'khách';
+    $('#name').value = prof.name;
     (async () => {
-      for (let i = 0; i < 80 && !(connectedCount && stateKnown); i++) await new Promise(r => setTimeout(r, 100));
-      if (!connectedCount){ $('#fade').classList.remove('on'); gErr.textContent = 'Chưa kết nối được tới phòng — bấm “Vào phòng” để thử lại.'; return; }
-      $('#name').value = prof.name;
-      if (lockOn()){ $('#fade').classList.remove('on'); setTimeout(() => $('#pwIn').focus({ preventScroll: true }), 50); return; }   // phòng đang khoá: hỏi mật khẩu, không báo lỗi
+      for (let i = 0; i < 30 && !(connectedCount && stateKnown); i++) await new Promise(r => setTimeout(r, 100));
+      if (connectedCount && lockOn()){ gate.classList.add('ask'); setTimeout(() => $('#pwIn').focus({ preventScroll: true }), 50); return; }   // phòng đang khoá: chỉ hỏi mật khẩu
       await enter();
-      $('#fade').classList.remove('on');
+      if (!inside) gate.classList.add('ask');
     })();
   }
   window.__lounge = { me, peers, pcs, get inside(){ return inside; }, get state(){ return roomState; }, get self(){ return self; }, get connected(){ return connectedCount; }, get extras(){ return extras; }, lockOn, enter, leave, setMic, claimSeat, setExtras, dbg, linkMode, needRelay, get relayTx(){ return relayTx; }, get relayRx(){ return relayRx; }, hot: HOT, screen: (x, y) => ({ x: view.ox + x * view.s, y: view.oy + y * view.s }), test: { pubState: st => pub(T_STATE, st, true), clients } };
