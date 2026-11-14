@@ -1,0 +1,35 @@
+{
+ "date": "2026-11-14",
+ "items": [
+  {
+   "at": "10:00",
+   "text": "Ăn quả nhớ kẻ trồng cây",
+   "kind": "tục ngữ"
+  },
+  {
+   "at": "12:00",
+   "text": "Ôn cố tri tân",
+   "kind": "hán việt"
+  },
+  {
+   "at": "14:00",
+   "text": "Bite the bullet",
+   "kind": "idiom"
+  },
+  {
+   "at": "16:00",
+   "text": "Nước đổ đầu vịt",
+   "kind": "thành ngữ"
+  },
+  {
+   "at": "18:00",
+   "text": "One must imagine Sisyphus happy. — Albert Camus, The Myth of Sisyphus",
+   "kind": "trích sách"
+  },
+  {
+   "at": "20:00",
+   "text": "Life moves pretty fast. If you don't stop and look around once in a while, you could miss it. — Ferris Bueller's Day Off (1986)",
+   "kind": "thoại phim"
+  }
+ ]
+}

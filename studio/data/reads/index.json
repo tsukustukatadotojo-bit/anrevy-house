@@ -1,0 +1,24 @@
+{
+ "items": [
+  {
+   "id": "2026-11-14-1",
+   "date": "2026-11-14",
+   "title": "Chủ nghĩa hiện sinh: tự do, lo âu và việc tự làm nên chính mình",
+   "topic": "triết học hiện sinh",
+   "kind": "big",
+   "lang": "vi",
+   "minutes": 32,
+   "summary": "Từ Kierkegaard, Nietzsche đến Sartre, Beauvoir và Camus: chủ nghĩa hiện sinh hỏi con người sống tiếp bằng cách nào khi không có gì bảo đảm ý nghĩa từ bên ngoài, và vì sao câu hỏi ấy vẫn còn nguyên giá trị hôm nay."
+  },
+  {
+   "id": "2026-11-14-2",
+   "date": "2026-11-14",
+   "title": "How a Refrigerator Works, and How to Use Yours Well",
+   "topic": "đồ gia dụng: tủ lạnh",
+   "kind": "small",
+   "lang": "en",
+   "minutes": 23,
+   "summary": "A fridge doesn't make cold; it moves heat. Here is what the compressor, condenser, capillary tube and evaporator each do, plus the right temperatures, where to store food, and how to save energy."
+  }
+ ]
+}
