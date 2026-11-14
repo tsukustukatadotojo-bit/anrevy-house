@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Projection Room</title>
+<title>Midnight Reel</title>
 <link rel="icon" href="../../icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
 <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
@@ -59,7 +59,7 @@
 <div class="enter"></div>
 <div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Phòng chiếu phim xám bạc: màn chiếu giữa hai tấm rèm nhung đỏ, giá đĩa nhạc, máy hát, máy jukebox và các món đồ đại diện cho từng bộ phim"></svg></div>
 <canvas id="fx" aria-hidden="true"></canvas>
-<div class="room-title" aria-hidden="true">THE PROJECTION ROOM<span>films, records &amp; late-night radio</span></div>
+<div class="room-title" aria-hidden="true">MIDNIGHT REEL<span>films, records &amp; late-night radio</span></div>
 <nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách phim và đĩa nhạc">☰<span class="wide"> DANH SÁCH</span></button></nav>
 <button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
 <div class="hint" id="hint"></div>
@@ -215,7 +215,7 @@
   // bụi lấp lánh trong chùm sáng máy chiếu
   const dust = Array.from({ length: 46 }, () => ({ t: Math.random(), u: Math.random(), v: .01 + Math.random() * .025, w: Math.random() * 6 }));
   window.ROOM = {
-    title: 'The Projection Room', music: 'PaFHwTjy1yE', links: LINKS, noun: 'phim & đĩa nhạc', openHint: 'bấm để mở (phim mở trên YouTube)',
+    title: 'Midnight Reel', music: 'PaFHwTjy1yE', links: LINKS, noun: 'phim & đĩa nhạc', openHint: 'bấm để mở (phim mở trên YouTube)',
     fx(g, t, dt, W, H, S){
       for (const d of dust){
         d.t += d.v * dt; if (d.t > 1){ d.t = 0; d.u = Math.random(); }

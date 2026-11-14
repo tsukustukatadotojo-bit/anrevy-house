@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>⌈ＮＥＯＮ　ＡＬＬＥＹ⌋</title>
+<title>⌈ＮＥＯＮ　ＲＡＩＮ⌋</title>
 <link rel="icon" href="../../icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
 <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
@@ -52,12 +52,12 @@
 <div class="enter"></div>
 <div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Con hẻm neon trong thành phố Cyberpunk, trời mưa"></svg></div>
 <canvas id="fx" aria-hidden="true"></canvas>
-<div class="room-title" aria-hidden="true">NEON ALLEY<span>夜市 · 電脳</span></div>
+<div class="room-title" aria-hidden="true">NEON RAIN<span>雨夜 · 電脳</span></div>
 <nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> DANH SÁCH</span></button></nav>
 <button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
 <div class="hint" id="hint"></div>
 <div class="tip" id="tip" aria-hidden="true"></div>
-<div class="list" id="list" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="list-bg" data-close></div><div class="list-box" id="listBox"><div class="list-head"><h2 id="listTitle">NEON ALLEY</h2><p id="listCount"></p></div><ol></ol><button class="list-x" data-close aria-label="Đóng">✕</button></div></div>
+<div class="list" id="list" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="list-bg" data-close></div><div class="list-box" id="listBox"><div class="list-head"><h2 id="listTitle">NEON RAIN</h2><p id="listCount"></p></div><ol></ol><button class="list-x" data-close aria-label="Đóng">✕</button></div></div>
 <div class="tv" id="tv"><div class="tv-bar"><span class="tv-t">♪ night.fm</span><button id="snd" aria-pressed="false" aria-label="Bật hoặc tắt nhạc">off</button><button id="tvMin" aria-expanded="true" aria-controls="tvScr" aria-label="Ẩn video">–</button></div><div class="tv-scr" id="tvScr"><div id="yt"></div><span class="tv-msg" id="tvMsg">tap anywhere for sound</span></div></div>
 <script>
 (() => {
@@ -205,7 +205,7 @@
   const drops = Array.from({ length: 260 }, () => ({ x: Math.random(), y: Math.random(), v: .7 + Math.random() * .6, l: 10 + Math.random() * 16 }));
   const steam = Array.from({ length: 16 }, () => ({ p: Math.random(), x: Math.random() }));
   window.ROOM = {
-    title: 'Neon Alley', music: '4xDzrJKXOOY', links: LINKS,
+    title: 'Neon Rain', music: '4xDzrJKXOOY', links: LINKS,
     fx(g, t, dt, W, H, S){
       g.lineCap = 'round';
       for (const d of drops){

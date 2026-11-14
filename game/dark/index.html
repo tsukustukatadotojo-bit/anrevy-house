@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Alchemist's Tower</title>
+<title>The Witching Hour</title>
 <link rel="icon" href="../../icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
 <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
@@ -69,7 +69,7 @@
 <div class="enter"></div>
 <div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Phòng giả kim trong tòa tháp đá: lò sưởi, vạc thuốc, giá sách, cửa sổ nhìn ra trăng"></svg></div>
 <canvas id="fx" aria-hidden="true"></canvas>
-<div class="room-title" aria-hidden="true">The Alchemist's Tower<span>~ chớ đánh thức con rồng ~</span></div>
+<div class="room-title" aria-hidden="true">The Witching Hour<span>~ chớ đánh thức con rồng ~</span></div>
 <nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> DANH SÁCH</span></button></nav>
 <button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
 <div class="hint" id="hint"></div>
@@ -207,7 +207,7 @@
   const embers = [];
   const fog = Array.from({ length: 9 }, (_, k) => ({ x: k / 9, s: .02 + Math.random() * .02, y: .86 + Math.random() * .1, r: 160 + Math.random() * 140 }));
   window.ROOM = {
-    title: "The Alchemist's Tower", music: 'l3UIq-swjco', links: LINKS,
+    title: 'The Witching Hour', music: 'l3UIq-swjco', links: LINKS,
     fx(g, t, dt, W, H, S){
       if (Math.random() < dt * 10) embers.push({ sx: 1340 + (Math.random() - .5) * 120, sy: 620, vx: (Math.random() - .5) * 20, vy: -60 - Math.random() * 60, life: 0, max: 2 + Math.random() * 2, c: '255,170,70' });
       if (Math.random() < dt * 5) embers.push({ sx: 800 + (Math.random() - .5) * 150, sy: 720, vx: (Math.random() - .5) * 14, vy: -40 - Math.random() * 40, life: 0, max: 1.6 + Math.random() * 1.5, c: '184,255,90' });

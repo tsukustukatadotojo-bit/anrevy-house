@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ORBITAL DECK · 07</title>
+<title>STARDOCK · 07</title>
 <link rel="icon" href="../../icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
 <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
@@ -52,7 +52,7 @@
 <div class="enter"></div>
 <div class="wrap" id="wrap"><svg id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Đài quan sát trên tàu vũ trụ, cửa kính lớn nhìn ra hành tinh"></svg></div>
 <canvas id="fx" aria-hidden="true"></canvas>
-<div class="room-title" aria-hidden="true">ORBITAL DECK<span>SECTOR 07 · OBSERVATORY</span></div>
+<div class="room-title" aria-hidden="true">STARDOCK<span>DOCK 07 · OBSERVATORY</span></div>
 <nav class="hud" aria-label="Điều hướng"><a href="../?hub">← SẢNH</a><a href="../../home.html" aria-label="Về Anrevy House">⌂<span class="wide"> ANREVY HOUSE</span></a><button id="listBtn" aria-haspopup="dialog" aria-label="Danh sách trò chơi">☰<span class="wide"> DANH SÁCH</span></button></nav>
 <button class="pan l" id="panL" aria-label="Xem bên trái">‹</button><button class="pan r" id="panR" aria-label="Xem bên phải">›</button>
 <div class="hint" id="hint"></div>
@@ -188,7 +188,7 @@
   const meteors = []; let nextM = 1.5;
   const motes = Array.from({ length: 34 }, () => ({ x: Math.random(), y: Math.random(), v: .01 + Math.random() * .02, p: Math.random() * 6 }));
   window.ROOM = {
-    title: 'Orbital Deck', music: '8wLwxmjrZj8', links: LINKS,
+    title: 'Stardock', music: '8wLwxmjrZj8', links: LINKS,
     fx(g, t, dt, W, H, S){
       nextM -= dt;
       if (nextM < 0){ nextM = 2.5 + Math.random() * 4; meteors.push({ x: 420 + Math.random() * 760, y: 90 + Math.random() * 160, life: 0 }); }

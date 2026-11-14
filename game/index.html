@@ -172,15 +172,15 @@
     'Chợp mắt chút đi, còn lâu mới đến'
   ];
   const LINE_ARRIVE = 'Đến nơi rồi, tự do trải nghiệm nhé';
-  // 7 cánh cửa (không ghi tên, chỉ khác màu) → 6 phòng game + phòng chiếu phim (cửa xám ở giữa tường cuối)
+  // 7 cánh cửa, mỗi cửa một màu và một biển tên neon phía trên → 6 phòng game + phòng chiếu phim (cửa xám ở giữa tường cuối)
   const DOORS = [
-    { href: 'cyber/',  col: '#ff2a6d' },
-    { href: 'space/',  col: '#18e0ff' },
-    { href: 'arcade/', col: '#ffd23f' },
-    { href: 'vapor/',  col: '#ff9ce6' },
-    { href: 'solar/',  col: '#4fe08a' },
-    { href: 'dark/',   col: '#9a5cff' },
-    { href: 'cinema/', col: '#a7adb5' },
+    { href: 'cyber/',  col: '#ff2a6d', name: 'NEON RAIN' },
+    { href: 'space/',  col: '#18e0ff', name: 'STARDOCK' },
+    { href: 'arcade/', col: '#ffd23f', name: 'PIXEL PALACE' },
+    { href: 'vapor/',  col: '#ff9ce6', name: 'PASTEL MALL' },
+    { href: 'solar/',  col: '#4fe08a', name: 'GREENHOUSE' },
+    { href: 'dark/',   col: '#9a5cff', name: 'WITCHING HOUR' },
+    { href: 'cinema/', col: '#a7adb5', name: 'MIDNIGHT REEL' },
   ];
   /* ======================= */
 
@@ -385,7 +385,7 @@
     });
   }
   DOORS.forEach((d, i) => {
-    const b = document.createElement('button'); b.className = 'door-btn'; b.setAttribute('aria-label', 'Cánh cửa số ' + (i + 1));
+    const b = document.createElement('button'); b.className = 'door-btn'; b.setAttribute('aria-label', 'Cửa ' + d.name);
     b.addEventListener('pointerenter', () => { hoverDoor = i; });
     b.addEventListener('pointerleave', () => { if (hoverDoor === i) hoverDoor = -1; });
     b.addEventListener('focus', () => { hoverDoor = i; }); b.addEventListener('blur', () => { if (hoverDoor === i) hoverDoor = -1; });
@@ -474,6 +474,44 @@
     const glow = hx.createRadialGradient(0, 0, 2, 0, 0, gR);
     glow.addColorStop(0, hex2(d.col, .55 + .3 * pulse)); glow.addColorStop(1, hex2(d.col, 0));
     hx.fillStyle = glow; hx.beginPath(); hx.arc(0, 0, gR, 0, 7); hx.fill(); hx.restore();
+    drawSign(i, hov);
+  }
+  // biển tên neon trên tường, ngay trên mỗi cửa: vẽ sẵn ra canvas phụ rồi dán theo phối cảnh (cắt dải dọc cho tường bên)
+  const SIGN_W = 640, SIGN_H = 128;
+  let signCache = [];
+  function signImg(i){
+    if (signCache[i]) return signCache[i];
+    const d = DOORS[i], cv = document.createElement('canvas'); cv.width = SIGN_W; cv.height = SIGN_H;
+    const g = cv.getContext('2d');
+    g.beginPath(); if (g.roundRect) g.roundRect(12, 16, SIGN_W - 24, SIGN_H - 32, 16); else g.rect(12, 16, SIGN_W - 24, SIGN_H - 32);
+    g.fillStyle = 'rgba(8,3,16,.92)'; g.fill();
+    g.lineWidth = 5; g.strokeStyle = d.col; g.shadowColor = d.col; g.shadowBlur = 16; g.stroke();
+    let fs = 64; g.font = `700 ${fs}px Orbitron, sans-serif`;
+    const w = g.measureText(d.name).width; if (w > SIGN_W - 90){ fs = Math.floor(fs * (SIGN_W - 90) / w); g.font = `700 ${fs}px Orbitron, sans-serif`; }
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.shadowColor = d.col; g.shadowBlur = 24; g.fillStyle = shade(d.col, .35); g.fillText(d.name, SIGN_W / 2, SIGN_H / 2 + 3);
+    g.shadowBlur = 6; g.fillStyle = '#fff'; g.globalAlpha = .85; g.fillText(d.name, SIGN_W / 2, SIGN_H / 2 + 3);
+    return (signCache[i] = cv);
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { signCache = []; });
+  function signPt(i, u, y){                    // u: 0 → 1 theo chiều đọc chữ (trái → phải khi đứng nhìn vào cửa)
+    const p = DPOS[i], ext = .12;
+    if (p.back){ const xa = p.x - DW / 2 - ext, xb = p.x + DW / 2 + ext; return [xa + (xb - xa) * u, y, ZB + .01]; }
+    const near = p.z + DW / 2 + ext, far = p.z - DW / 2 - ext;
+    return p.side > 0 ? [RW - .01, y, far + (near - far) * u] : [-RW + .01, y, near + (far - near) * u];
+  }
+  function drawSign(i, hov){
+    const img = signImg(i), N = DPOS[i].back ? 1 : 18, sw = SIGN_W / N, y0 = DH + .12, y1 = DH + .58;
+    hx.save(); hx.globalAlpha = hov ? 1 : .88;
+    for (let k = 0; k < N; k++){
+      const tl = P(...signPt(i, k / N, y1)), tr = P(...signPt(i, (k + 1) / N, y1)), bl = P(...signPt(i, k / N, y0));
+      if (!tl || !tr || !bl) continue;
+      hx.save();
+      hx.transform((tr[0] - tl[0]) / sw, (tr[1] - tl[1]) / sw, (bl[0] - tl[0]) / SIGN_H, (bl[1] - tl[1]) / SIGN_H, tl[0], tl[1]);
+      hx.drawImage(img, k * sw, 0, Math.min(sw + 1, SIGN_W - k * sw), SIGN_H, 0, 0, Math.min(sw + 1, SIGN_W - k * sw), SIGN_H);
+      hx.restore();
+    }
+    hx.restore();
   }
   function shade(hex, k){ const n = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)); return '#' + n.map(v => Math.round(k < 0 ? v * (1 + k) : v + (255 - v) * k).toString(16).padStart(2, '0')).join(''); }
   function openDoor(i){
