@@ -16,6 +16,9 @@ Chỉ chủ trang gỡ tranh bằng cách sửa gallery/uploads.json (và xoá �
 Ô chat "note" trong Studio cũng gửi tin qua đây (anrevy-house-9q2/notes/v1/m/<id>): kịch bản lưu các tin
 trong 7 ngày gần nhất vào studio/data/notes.json và dọn tin cũ hơn 7 ngày (chat tự xoá sau 1 tuần).
 Người gửi tự xoá tin bằng d/<id> kèm khoá bí mật; tin chỉ chứa mã băm của khoá (h) nên chỉ người gửi xoá được.
+Ghi chép sau bài đọc của Studio (anrevy-house-9q2/reads/v1/n/<mã bài>, {id, t, at}) được giữ lâu dài trong
+studio/data/readnotes.json (bản mới nhất theo at thắng; t rỗng = đã xoá). Tin giữ lại chỉ được dọn khi bản đó đã nằm
+trong file từ lần chạy trước (lúc ấy trang web đã có bản lâu dài).
 Chạy thử không đụng tới git:  python3 gallery_sync.py --dry   (BROKERS=ws://localhost:8883 để dùng máy chủ thử)
 """
 import base64, hashlib, io, json, os, random, re, string, struct, subprocess, sys, time, warnings
@@ -28,6 +31,8 @@ PFX = 'anrevy-house-9q2/gallery/v1/'
 NOTE_PFX = 'anrevy-house-9q2/notes/v1/'
 NOTES = 'studio/data/notes.json'
 NOTE_TTL = 7 * 86400 * 1000                    # tin chat giữ 7 ngày
+READ_PFX = 'anrevy-house-9q2/reads/v1/n/'      # ghi chép sau bài đọc
+READNOTES = 'studio/data/readnotes.json'
 DEFAULT_BROKERS = 'tcp://broker.emqx.io:1883,tcp://broker.hivemq.com:1883'
 DB = 'gallery/uploads.json'
 DIR = 'gallery/uploads'
@@ -178,7 +183,7 @@ def main():
             print('không kết nối được', u, repr(e))
     if not links: print('không có máy chủ nào'); return
     time.sleep(2)
-    for u, c, store in links: c.subscribe(PFX + '#', 1); c.subscribe(NOTE_PFX + '#', 1)
+    for u, c, store in links: c.subscribe(PFX + '#', 1); c.subscribe(NOTE_PFX + '#', 1); c.subscribe(READ_PFX + '+', 1)
     t0 = LAST[0] = time.time()
     while True:                                          # đợi tới khi 10 giây không còn tin mới (tối đa 5 phút)
         time.sleep(1)
@@ -287,6 +292,8 @@ def main():
 
     # 2b) ô chat note của Studio: giữ tin trong 7 ngày, dọn tin cũ
     note_items, notes_changed, note_stale, note_wipe = notes(links, now)
+    # 2c) ghi chép sau bài đọc: giữ lâu dài
+    rn_items, rn_changed, rn_stale = readnotes(links, now)
 
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
@@ -296,7 +303,7 @@ def main():
             keep = time.time() - last > 45 * 86400
         except Exception: pass
 
-    if changed or keep or notes_changed:
+    if changed or keep or notes_changed or rn_changed:
         if changed or keep:
             items.sort(key=lambda it: it.get('at', 0))
             db = {'about': 'Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động). image = ảnh xem nhanh, full = bản gốc.', 'items': items}
@@ -305,7 +312,10 @@ def main():
         if notes_changed:
             os.makedirs(os.path.dirname(NOTES), exist_ok=True)
             with open(NOTES, 'w', encoding='utf-8') as f: json.dump({'items': note_items, **({'wipe': note_wipe} if note_wipe else {})}, f, ensure_ascii=False, indent=1)
-        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '']))
+        if rn_changed:
+            os.makedirs(os.path.dirname(READNOTES), exist_ok=True)
+            with open(READNOTES, 'w', encoding='utf-8') as f: json.dump({'items': rn_items}, f, ensure_ascii=False, indent=1)
+        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '', f'ghi chép bài đọc: {sum(1 for v in rn_items.values() if v.get("t"))}' if rn_changed else '']))
         print(msg, added)
         if not DRY and not push(msg):
             print('push thất bại — không xoá tin giữ lại, lần sau thử lại')
@@ -317,7 +327,7 @@ def main():
     def mine(t):
         rest = t[len(PFX):].split('/')
         return len(rest) >= 2 and rest[0] in ('m', 'c', 'o') and rest[1] in keep_ids
-    clear = {t for t in clear if not mine(t)} | note_stale
+    clear = {t for t in clear if not mine(t)} | note_stale | rn_stale
     print('xoá', len(clear), 'tin giữ lại')
     if os.environ.get('GITHUB_ACTIONS'):
         print(f'::notice title=gallery-sync::{len(per)} mã trên máy chủ · đã lưu {len(items)} · thêm {len(added)} · không đạt {len(rejected)} · dọn {len(clear)} tin')
@@ -364,12 +374,40 @@ def notes(links, now):
     print(f'note: {len(items)} tin trong 7 ngày, dọn {len(stale)} tin cũ/lỗi' + (f' (xoá toàn bộ tin trước {wipe})' if wipe else ''))
     return items, items != old, stale, wipe
 
+def readnotes(links, now):
+    """Gộp ghi chép sau bài đọc trên máy chủ với readnotes.json (bản mới nhất theo at thắng, t rỗng = đã xoá)."""
+    old = {}
+    try:
+        j = json.load(open(READNOTES, encoding='utf-8'))
+        old = {k: v for k, v in (j.get('items') or {}).items() if isinstance(v, dict)}
+    except Exception: pass
+    got = {k: dict(v) for k, v in old.items()}
+    stale = set()
+    for u, c, store in links:
+        for t, p in store.items():
+            if not t.startswith(READ_PFX) or not p: continue
+            rid_ = t[len(READ_PFX):]
+            try: m = json.loads(p.decode('utf-8'))
+            except Exception: stale.add(t); continue
+            at = int(float(m.get('at') or 0)) if isinstance(m, dict) else 0
+            if not re.fullmatch(r'\d{4}-\d{2}-\d{2}-\d{1,2}', rid_) or not isinstance(m, dict) or m.get('id') != rid_ or not isinstance(m.get('t'), str) or at <= 0 or at > now + 600000:
+                stale.add(t); continue
+            o = old.get(rid_)
+            if o and int(o.get('at') or 0) >= at:                   # bản này (hoặc mới hơn) đã có trong file từ trước → dọn tin giữ lại
+                stale.add(t); continue
+            cur = got.get(rid_)
+            if not cur or int(cur.get('at') or 0) < at:
+                got[rid_] = {'t': clean(m['t'], 8000), 'at': at}
+    changed = got != old
+    print(f'ghi chép bài đọc: {sum(1 for v in got.values() if v.get("t"))} bài có ghi chép, dọn {len(stale)} tin đã lưu')
+    return dict(sorted(got.items())), changed, stale
+
 def git(*a): return subprocess.run(['git', *a], capture_output=True, text=True)
 
 def push(msg):
     git('config', 'user.name', 'github-actions[bot]')
     git('config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com')
-    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []), *([NOTES] if os.path.exists(NOTES) else []))
+    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []), *([NOTES] if os.path.exists(NOTES) else []), *([READNOTES] if os.path.exists(READNOTES) else []))
     r = git('commit', '-m', msg)
     if r.returncode != 0 and 'nothing to commit' not in r.stdout: print(r.stdout, r.stderr); return False
     for i in range(4):
