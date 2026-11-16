@@ -299,7 +299,7 @@ def main():
     # 2c) ghi chép sau bài đọc: giữ lâu dài
     rn_items, rn_changed, rn_stale = readnotes(links, now)
     mq_items, mq_changed, mq_stale = kvstore(links, now, MYQ_PFX, MYQUOTES, r'[a-z0-9]{8,24}',
-        lambda m: {'t': clean(m['t'], 2000), 's': clean(m.get('s'), 300), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'câu hay')
+        lambda m: {'t': clean(m['t'], 8000), 's': clean(m.get('s'), 300), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'câu hay')
 
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
