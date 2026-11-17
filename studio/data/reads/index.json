@@ -204,6 +204,21 @@
    "stage": null,
    "week": null,
    "unit": "Mở đầu: học cách học & tấm bản đồ của một năm"
+  },
+  {
+   "id": "2026-11-18-4",
+   "date": "2026-11-18",
+   "title": "The Feynman Technique: If You Can't Explain It Simply, You Don't Know It Yet",
+   "topic": "tư duy: kỹ thuật Feynman",
+   "kind": "small",
+   "lang": "en",
+   "minutes": 10,
+   "summary": "We think we understand far more than we can explain; the Feynman technique uses a blank page and a plain-language explanation to expose the gaps, send you back to the source, and turn reading into recall.",
+   "track": "D",
+   "role": "new",
+   "stage": null,
+   "week": null,
+   "unit": "Mở đầu: học cách học & tấm bản đồ của một năm"
   }
  ]
 }
