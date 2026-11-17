@@ -37,7 +37,7 @@ READ_PFX = 'anrevy-house-9q2/reads/v1/n/'      # ghi chép sau bài đọc
 READNOTES = 'studio/data/readnotes.json'
 MYQ_PFX = 'anrevy-house-9q2/quotes/v1/q/'      # câu hay Vy tự chép trong Studio
 MYQUOTES = 'studio/data/myquotes.json'
-DEFAULT_BROKERS = 'tcp://broker.emqx.io:1883,tcp://broker.hivemq.com:1883'
+DEFAULT_BROKERS = 'tcp://broker.emqx.io:1883,tcp://broker.hivemq.com:1883,tcp://test.mosquitto.org:1883'
 DB = 'gallery/uploads.json'
 DIR = 'gallery/uploads'
 FULL = DIR + '/full'
@@ -299,7 +299,7 @@ def main():
     # 2c) ghi chép sau bài đọc: giữ lâu dài
     rn_items, rn_changed, rn_stale = readnotes(links, now)
     mq_items, mq_changed, mq_stale = kvstore(links, now, MYQ_PFX, MYQUOTES, r'[a-z0-9]{8,24}',
-        lambda m: {'t': clean(m['t'], 8000), 's': clean(m.get('s'), 300), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'câu hay')
+        lambda m: {'t': clean(m['t'], 20000), 'c': m.get('c') if m.get('c') in ('doi', 'luan') else '', 'ti': clean(m.get('ti'), 200), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'note')
 
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
@@ -323,7 +323,7 @@ def main():
             with open(READNOTES, 'w', encoding='utf-8') as f: json.dump({'items': rn_items}, f, ensure_ascii=False, indent=1)
         if mq_changed:
             with open(MYQUOTES, 'w', encoding='utf-8') as f: json.dump({'items': mq_items}, f, ensure_ascii=False, indent=1)
-        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '', f'ghi chép bài đọc: {sum(1 for v in rn_items.values() if v.get("t"))}' if rn_changed else '', f'câu hay: {sum(1 for v in mq_items.values() if v.get("t"))}' if mq_changed else '']))
+        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '', f'ghi chép bài đọc: {sum(1 for v in rn_items.values() if v.get("t"))}' if rn_changed else '', f'note: {sum(1 for v in mq_items.values() if v.get("t"))}' if mq_changed else '']))
         print(msg, added)
         if not DRY and not push(msg):
             print('push thất bại — không xoá tin giữ lại, lần sau thử lại')
