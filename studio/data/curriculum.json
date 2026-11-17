@@ -1,0 +1,1559 @@
+{
+ "version": 1,
+ "about": "Lộ trình đọc của Studio: mỗi chặng 4 tuần, mỗi tuần một nhánh, 4 bài mỗi ngày theo 4 mạch A/B/C/D. Kế hoạch từng ngày: python3 studio/tools/plan.py YYYY-MM-DD",
+ "intro_start": "2026-11-18",
+ "stage1_start": "2026-11-23",
+ "tracks": {
+  "A": {
+   "name": "Nền tảng",
+   "kind": "big",
+   "minutes": [
+    25,
+    30
+   ],
+   "words": [
+    4000,
+    5500
+   ],
+   "desc": "Bức tranh lớn: cơ chế, lịch sử, luật, số liệu của chủ đề tuần."
+  },
+  "B": {
+   "name": "Đời sống vận hành thế nào",
+   "kind": "small",
+   "minutes": [
+    10,
+    15
+   ],
+   "words": [
+    1800,
+    2800
+   ],
+   "lang": "vi",
+   "desc": "Một câu hỏi 'vì sao / làm sao' cụ thể trong đời thường, giải thích tận gốc."
+  },
+  "C": {
+   "name": "Con người & ứng xử",
+   "kind": "big",
+   "minutes": [
+    20,
+    25
+   ],
+   "words": [
+    3000,
+    4500
+   ],
+   "lang": "vi",
+   "desc": "Ai ở trong chuyện này, nói gì, xưng hô ra sao, đọc họ thế nào; có lời thoại mẫu."
+  },
+  "D": {
+   "name": "Tư duy & ôn tập",
+   "kind": "small",
+   "minutes": [
+    8,
+    12
+   ],
+   "words": [
+    1200,
+    2000
+   ],
+   "lang": "en",
+   "desc": "Một công cụ tư duy, áp ngay vào chủ đề tuần; thứ Tư và Chủ nhật là bài ôn."
+  }
+ },
+ "roles": {
+  "new": "bài mới",
+  "review": "ôn giãn cách (thứ Tư)",
+  "week": "tổng kết tuần",
+  "stage": "tổng kết chặng",
+  "case": "tình huống tuần",
+  "quiz": "tự kiểm tra tuần",
+  "stagequiz": "tự kiểm tra chặng",
+  "year": "tổng kết năm"
+ },
+ "intro": {
+  "title": "Mở đầu: học cách học & tấm bản đồ của một năm",
+  "days": {
+   "2026-11-18": {
+    "A": "Trí nhớ hoạt động thế nào: vì sao đọc nhiều mà vẫn quên",
+    "B": "Đường cong quên và cách ôn giãn cách",
+    "C": "Hỏi để học: hỏi người lớn tuổi, đồng nghiệp sao cho không ngại",
+    "D": "The Feynman technique: explain it simply to understand it"
+   },
+   "2026-11-19": {
+    "A": "Tấm bản đồ của một năm: 12 chặng và vì sao theo thứ tự này",
+    "B": "Ghi chép hai câu sau mỗi bài: viết thế nào để nhớ",
+    "C": "Nhanh nhẹn và ý tứ là kỹ năng học được: quan sát trước, làm sau",
+    "D": "Mental models: why a latticework beats isolated facts"
+   },
+   "2026-11-20": {
+    "A": "Kiến thức ngầm: thứ không sách nào ghi mà ai cũng cần",
+    "B": "Học từ đời thường: biến một lần đi chợ, đi làm thủ tục thành bài học",
+    "C": "Quan sát người khác mà không phán xét",
+    "D": "Thinking, fast and slow: the two systems of the mind"
+   },
+   "2026-11-21": {
+    "A": "Tư duy phản biện là gì và không phải là gì",
+    "B": "Đọc một bài báo: phân biệt tin, ý kiến và quảng cáo",
+    "C": "Khi không biết thì hỏi thế nào cho khéo",
+    "D": "Cognitive biases: a field guide to the mind's shortcuts"
+   },
+   "2026-11-22": {
+    "A": null,
+    "B": "Sổ tay đời sống: ghi lại những câu hỏi gặp trong ngày",
+    "C": null,
+    "D": null
+   }
+  }
+ },
+ "stages": [
+  {
+   "n": 1,
+   "title": "Ngôi nhà & gia đình Việt",
+   "weeks": [
+    {
+     "title": "Gia đình, họ hàng & xưng hô",
+     "langA": "vi",
+     "A": [
+      "Gia đình Việt Nam: từ tam đại đồng đường đến gia đình hạt nhân",
+      "Họ, chi, nhánh, trưởng họ, gia phả: một dòng họ được tổ chức thế nào",
+      "Luật Hôn nhân và gia đình nói gì về quyền và nghĩa vụ giữa các thành viên"
+     ],
+     "B": [
+      "Cách tính vai vế: vì sao người ít tuổi hơn vẫn có thể là 'anh', 'chị' của mình",
+      "Nội và ngoại: cách gọi họ hàng bên bố và bên mẹ",
+      "Bác, chú, cô, dì, cậu, mợ, thím, dượng: khác nhau giữa miền Bắc và miền Nam",
+      "Định danh điện tử và cư trú: sổ hộ khẩu giấy đã được thay bằng gì"
+     ],
+     "C": [
+      "Xưng hô trong họ hàng: khi nào gọi theo vai vế, khi nào gọi theo tuổi",
+      "Đám giỗ: đến lúc nào, ngồi đâu, nói gì, phụ việc gì",
+      "Nói chuyện với người lớn tuổi trong họ: lắng nghe, hỏi han, tránh chủ đề nào",
+      "Khi bị họ hàng hỏi chuyện riêng: trả lời khéo mà không mất lòng"
+     ],
+     "D": [
+      "Thinking in systems: a family as a system of roles and feedback loops",
+      "Stocks, flows and feedback: the basic vocabulary of systems thinking",
+      "Why the same person behaves differently in different roles"
+     ]
+    },
+    {
+     "title": "Xây nhà, sửa nhà",
+     "langA": "vi",
+     "A": [
+      "Một ngôi nhà được xây thế nào: từ giấy phép đến cất nóc",
+      "Móng, cột, dầm, sàn: bộ khung chịu lực của một ngôi nhà",
+      "Giấy phép xây dựng, sổ đỏ, quy hoạch: những giấy tờ quanh một ngôi nhà"
+     ],
+     "B": [
+      "Vì sao gọi là 'đổ mái', và hôm đổ mái diễn ra những gì",
+      "Xi măng, bê tông, mác bê tông: những từ thợ hay nói",
+      "Chi phí xây nhà được tính theo mét vuông như thế nào",
+      "Vì sao tường hay bị thấm, nứt và cách xử lý"
+     ],
+     "C": [
+      "Ứng xử với thợ xây: mời nước, góp ý, trả tiền, giữ quan hệ",
+      "Động thổ, khai móng, đổ mái: vì sao chọn ngày giờ và mình nên làm gì",
+      "Xây nhà và hàng xóm: xin phép, xin lỗi, đền bù khi làm phiền"
+     ],
+     "D": [
+      "Fermi estimation: how to make a good guess with almost no data",
+      "Reading a quote: what is included, what is hidden",
+      "The planning fallacy: why projects always take longer"
+     ]
+    },
+    {
+     "title": "Điện, nước & vận hành ngôi nhà",
+     "langA": "vi",
+     "A": [
+      "Điện trong nhà: dây pha, dây trung tính, dây tiếp địa, aptomat và chống giật",
+      "Nước đi đâu về đâu: bồn nước, máy bơm, đường ống, bể phốt",
+      "Hoá đơn điện bậc thang: vì sao tháng hè tiền điện tăng vọt"
+     ],
+     "B": [
+      "Aptomat nhảy, cầu dao chống giật nhảy: nghĩa là gì và làm gì",
+      "Vòi nước rỉ, bồn cầu chảy mãi: nguyên nhân và cách tự sửa",
+      "Thông tắc bồn rửa: cái gì nên và không nên đổ xuống cống",
+      "Bóng đèn LED, công suất và lumen: chọn đèn thế nào"
+     ],
+     "C": [
+      "Gọi thợ điện nước: mô tả sự cố, hỏi giá, mặc cả lịch sự",
+      "Chia tiền điện nước khi ở chung: nói sao cho sòng phẳng mà không căng",
+      "Khi mình làm hỏng đồ của người khác: nhận lỗi và đền bù"
+     ],
+     "D": [
+      "Troubleshooting by elimination: how technicians find a fault",
+      "Root cause vs. symptom: the five whys",
+      "Occam's razor: start with the simplest explanation"
+     ]
+    },
+    {
+     "title": "Hàng xóm, tổ dân phố & làng xã",
+     "langA": "vi",
+     "A": [
+      "Làng Việt truyền thống: luỹ tre, đình làng, hương ước, 'phép vua thua lệ làng'",
+      "Thôn, tổ dân phố: đơn vị nhỏ nhất của đời sống cộng đồng ngày nay",
+      "Đô thị hoá: từ làng lên phố, điều gì còn giữ, điều gì mất đi"
+     ],
+     "B": [
+      "Đăng ký thường trú, tạm trú: làm ở đâu, cần gì",
+      "Các khoản đóng góp ở khu dân cư: khoản nào bắt buộc, khoản nào tự nguyện",
+      "Họp tổ dân phố: bàn những gì và vì sao nên đi",
+      "Công an khu vực, trưởng thôn, tổ trưởng: ai lo việc gì"
+     ],
+     "C": [
+      "Ứng xử với hàng xóm: chào hỏi, biếu quà, giữ khoảng cách vừa phải",
+      "Đám cưới, đám ma trong xóm: đi hay không, mừng bao nhiêu",
+      "Mâu thuẫn hàng xóm (tiếng ồn, lối đi, rác): nói chuyện thế nào trước khi căng"
+     ],
+     "D": [
+      "Social norms and conformity: what Asch's line experiment shows",
+      "In-groups and out-groups: why 'our village' feels different",
+      "Reciprocity: the invisible ledger of favours"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Công sở & bộ máy nhà nước",
+   "weeks": [
+    {
+     "title": "Bộ máy nhà nước nhìn từ trên xuống",
+     "langA": "vi",
+     "A": [
+      "Hiến pháp 2013 và hệ thống chính trị Việt Nam: Đảng, Nhà nước, Mặt trận",
+      "Quốc hội, Chủ tịch nước, Chính phủ, Toà án, Viện kiểm sát: ai làm gì",
+      "Chính quyền địa phương hai cấp: tỉnh và xã sau đợt sắp xếp năm 2025"
+     ],
+     "B": [
+      "Luật, nghị định, thông tư, quyết định: văn bản nào cao hơn văn bản nào",
+      "Dịch vụ công trực tuyến và VNeID: làm thủ tục mà không phải xếp hàng",
+      "Một đạo luật ra đời thế nào: từ dự thảo đến khi có hiệu lực",
+      "Phường, xã ngày nay làm những việc gì cho người dân"
+     ],
+     "C": [
+      "Đi làm thủ tục ở bộ phận một cửa: chuẩn bị, xưng hô, hỏi lại khi chưa rõ",
+      "Xưng hô trong cơ quan nhà nước: 'đồng chí', 'anh/chị', gọi theo chức danh khi nào",
+      "Viết đơn, kiến nghị: lịch sự, rõ ràng, gửi đúng nơi"
+     ],
+     "D": [
+      "How to read an official document: structure before details",
+      "Primary vs. secondary sources: who actually said it",
+      "Hierarchy and authority: why rank shapes what people say"
+     ]
+    },
+    {
+     "title": "Công chức, viên chức & văn hoá công sở",
+     "langA": "vi",
+     "A": [
+      "Công chức, viên chức, người lao động hợp đồng: khác nhau ở đâu",
+      "Ngạch, bậc, hệ số, lương cơ sở: lương khu vực nhà nước được tính thế nào",
+      "Đánh giá, xếp loại cuối năm, thi đua khen thưởng: vì sao quan trọng"
+     ],
+     "B": [
+      "Công văn, tờ trình, báo cáo, biên bản: mỗi loại dùng khi nào",
+      "Một văn bản đi từ người soạn đến người ký qua những bước nào",
+      "Giờ giấc, trang phục, thẻ công chức: những quy định ít ai nói thẳng",
+      "Email và tin nhắn công việc: viết sao cho đúng mực"
+     ],
+     "C": [
+      "Tuần đầu ở cơ quan mới: quan sát gì, hỏi ai, tránh gì",
+      "Đi họp: ngồi đâu, khi nào phát biểu, phát biểu thế nào",
+      "Tiếp khách đến cơ quan: mời nước, mời ngồi, giới thiệu"
+     ],
+     "D": [
+      "Authority bias: why we defer to titles",
+      "Unwritten rules: how to discover the norms nobody tells you",
+      "Chesterton's fence: understand a rule before you change it"
+     ]
+    },
+    {
+     "title": "Cấp trên, cấp dưới, đồng nghiệp",
+     "langA": "vi",
+     "A": [
+      "Tập trung dân chủ và chế độ thủ trưởng: quyết định được đưa ra thế nào trong cơ quan",
+      "Cơ cấu một cơ quan: lãnh đạo, phòng ban, chuyên viên, văn thư",
+      "Quyền lực chính thức và ảnh hưởng không chính thức trong tổ chức"
+     ],
+     "B": [
+      "Báo cáo công việc: báo cáo gì, khi nào, ngắn đến mức nào",
+      "Xin ý kiến cấp trên: mang theo phương án thay vì chỉ hỏi",
+      "Xin nghỉ phép, đi muộn, về sớm: xin thế nào cho đúng quy trình",
+      "Bàn giao công việc khi nghỉ hoặc chuyển vị trí"
+     ],
+     "C": [
+      "Nhận việc từ cấp trên: hỏi lại cho rõ, hẹn hạn, báo tiến độ",
+      "Đọc ý cấp trên: nghe điều chưa nói ra mà không đoán mò",
+      "Từ chối hoặc xin lùi hạn một việc mà không bị coi là ngại việc",
+      "Nhanh nhẹn khác hấp tấp: việc gì làm ngay, việc gì cân nhắc"
+     ],
+     "D": [
+      "Theory of mind: modelling what others know and want",
+      "Perspective-taking: seeing the task from your manager's chair",
+      "The curse of knowledge: why instructions are often unclear"
+     ]
+    },
+    {
+     "title": "Tình huống tế nhị: quà, tiệc, tin đồn",
+     "langA": "vi",
+     "A": [
+      "Quy định về tặng, nhận quà và phòng chống tham nhũng trong cơ quan nhà nước",
+      "Văn hoá quan hệ: ranh giới giữa tình cảm và lợi ích",
+      "Tổng kết, tất niên cuối năm ở cơ quan: ý nghĩa và nghi thức"
+     ],
+     "B": [
+      "Hiếu hỉ đồng nghiệp: quỹ chung và phần riêng",
+      "Tiệc cơ quan: ai ngồi mâm nào, ai mời ai",
+      "Quà Tết cho cấp trên, đồng nghiệp: có nên không, chọn gì",
+      "Đồng nghiệp ốm, sinh con, có việc riêng: thăm hỏi thế nào"
+     ],
+     "C": [
+      "Mời rượu và từ chối rượu ở bàn tiệc mà không mất lòng",
+      "Tin đồn và phe nhóm: đứng ở đâu, nói gì, im lặng khi nào",
+      "Khi bị đồng nghiệp nói xấu hoặc nhận vơ công sức"
+     ],
+     "D": [
+      "Moral dilemmas at work: loyalty, honesty and harm",
+      "The spotlight effect: others notice you less than you think",
+      "Gossip as social information: why humans talk about each other"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Văn hoá, tín ngưỡng & phong tục",
+   "weeks": [
+    {
+     "title": "Tín ngưỡng Việt: tổ tiên, Tam giáo, thờ Mẫu",
+     "langA": "vi",
+     "A": [
+      "Thờ cúng tổ tiên: trung tâm đời sống tâm linh của người Việt",
+      "Tam giáo đồng nguyên: Phật, Nho, Lão hoà trộn trong đời sống Việt",
+      "Tín ngưỡng thờ Mẫu Tam phủ: di sản được UNESCO ghi danh"
+     ],
+     "B": [
+      "Bàn thờ gia tiên đặt thế nào, thắp mấy nén hương và vì sao",
+      "Mùng một, ngày rằm: người Việt cúng gì, vì sao",
+      "Đình, đền, chùa, miếu, phủ: khác nhau thế nào",
+      "Lịch âm, can chi, tiết khí: cách người xưa tính thời gian"
+     ],
+     "C": [
+      "Ứng xử khi vào chùa, đền, nhà thờ: trang phục, lời nói, cử chỉ",
+      "Tôn trọng niềm tin của người khác khi mình không cùng tin",
+      "Đi lễ cùng gia đình: làm theo và hỏi đúng lúc"
+     ],
+     "D": [
+      "Belief and evidence: respecting faith without abandoning reason",
+      "Confirmation bias in everyday beliefs",
+      "Seeing culture like an anthropologist: insider and outsider views"
+     ]
+    },
+    {
+     "title": "Chuẩn bị Tết & lịch âm",
+     "langA": "vi",
+     "A": [
+      "Tết Nguyên đán: nguồn gốc, ý nghĩa và vì sao là dịp lớn nhất năm",
+      "Ông Công ông Táo ngày 23 tháng Chạp: truyền thuyết và nghi lễ",
+      "Tết xưa và Tết nay: những gì đã thay đổi"
+     ],
+     "B": [
+      "Mâm ngũ quả ba miền: mỗi loại quả mang ý nghĩa gì",
+      "Bánh chưng, bánh tét: cách gói, cách luộc, vì sao vuông và tròn",
+      "Dọn nhà, lau bàn thờ cuối năm: làm khi nào, kiêng gì",
+      "Chi tiêu dịp Tết: lì xì, quà biếu, mua sắm bao nhiêu là hợp lý"
+     ],
+     "C": [
+      "Quà Tết biếu ai, biếu gì, đưa thế nào cho khéo",
+      "Lì xì: mừng tuổi ai, bao nhiêu, nói câu gì",
+      "Về quê ăn Tết: phụ việc nhà mà không bị coi là khách"
+     ],
+     "D": [
+      "Traditions as living systems: why customs change",
+      "Mental accounting: why holiday money feels different",
+      "Social proof: why everyone buys the same things before Tết"
+     ]
+    },
+    {
+     "title": "Tết",
+     "langA": "vi",
+     "A": [
+      "Những phong tục ngày Tết: xông đất, khai bút, hái lộc, chúc Tết",
+      "Kiêng kỵ ngày Tết: nguồn gốc và cách hiểu ngày nay",
+      "Tết của các dân tộc và các nước láng giềng: giống và khác"
+     ],
+     "B": [
+      "'Mùng một Tết cha, mùng hai Tết mẹ, mùng ba Tết thầy': thứ tự chúc Tết",
+      "Xông đất: chọn người thế nào và vì sao",
+      "Đi lễ đầu năm, xin chữ, hái lộc: nên làm gì",
+      "Những câu chúc Tết hay cho người lớn tuổi, cấp trên, đồng nghiệp"
+     ],
+     "C": [
+      "Trả lời những câu hỏi khó ngày Tết: lương, người yêu, cưới xin",
+      "Chúc Tết đúng vai vế: câu nào cho ông bà, câu nào cho bạn bè",
+      "Được mời ăn, uống, chơi bài ngày Tết: nhận và từ chối khéo"
+     ],
+     "D": [
+      "Participant observation: how to watch a ritual you are part of",
+      "Rituals and meaning: what Durkheim called collective effervescence",
+      "Small talk as social glue: what it actually does"
+     ]
+    },
+    {
+     "title": "Vòng đời: cưới hỏi, tang lễ, giỗ chạp",
+     "langA": "vi",
+     "A": [
+      "Cưới hỏi của người Việt: dạm ngõ, ăn hỏi, lễ cưới",
+      "Tang lễ truyền thống: từ lúc mất đến cúng 49 ngày, 100 ngày",
+      "Đầy tháng, thôi nôi, mừng thọ: những nghi lễ của vòng đời"
+     ],
+     "B": [
+      "Mừng cưới bao nhiêu là vừa: người ta tính thế nào",
+      "Viếng đám tang: mặc gì, mang gì, làm gì khi vào viếng",
+      "Giỗ đầu, giỗ hết, giỗ thường: khác nhau thế nào",
+      "Thiệp cưới, cáo phó: đọc và đáp lại ra sao"
+     ],
+     "C": [
+      "Lời chia buồn: nói gì, viết gì khi người khác mất người thân",
+      "Đi đám cưới: chúc mừng, ăn uống, ra về thế nào cho phải",
+      "Khi không thể đến dự: báo, gửi quà và xin lỗi"
+     ],
+     "D": [
+      "Rites of passage: what van Gennep noticed about life transitions",
+      "Escalating commitment: why weddings keep getting bigger",
+      "Grief is not a straight line: what research says"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Con người: tâm lý & đọc người",
+   "weeks": [
+    {
+     "title": "Cảm xúc & bộ não",
+     "langA": "en",
+     "A": [
+      "How emotions work: the brain, the body and the stories we tell",
+      "System 1 and System 2: fast and slow thinking in daily life",
+      "Stress: what it does to the body and the mind"
+     ],
+     "B": [
+      "Vì sao đói thì dễ cáu: cơ thể ảnh hưởng tâm trạng ra sao",
+      "Thiếu ngủ làm cảm xúc thất thường thế nào",
+      "Vì sao lúc giận hay nói những lời làm mình hối hận",
+      "Hơi thở và sự bình tĩnh: cơ chế thật phía sau"
+     ],
+     "C": [
+      "Gọi tên cảm xúc của mình và của người khác",
+      "Giữ bình tĩnh khi bị nói nặng nơi đông người",
+      "Xin lỗi đúng cách: thừa nhận, sửa chữa, không biện minh"
+     ],
+     "D": [
+      "Anchoring: the first number sticks",
+      "Availability bias: why vivid stories feel common",
+      "The affect heuristic: when feelings decide for us"
+     ]
+    },
+    {
+     "title": "Tính cách & khác biệt",
+     "langA": "en",
+     "A": [
+      "The Big Five: what personality science actually measures",
+      "Introverts and extroverts: what the research says and doesn't",
+      "Why MBTI and horoscopes feel accurate: the Barnum effect"
+     ],
+     "B": [
+      "Vì sao anh chị em ruột lớn lên chung một nhà mà tính cách khác hẳn",
+      "Tính cách có thay đổi theo tuổi không",
+      "Người kỹ tính, người xuề xoà: điểm mạnh của mỗi kiểu",
+      "8x, 9x, Gen Z: khác biệt thật hay định kiến"
+     ],
+     "C": [
+      "Làm việc với người khó tính mà không tự ái",
+      "Hoà hợp với người khác nhịp: người nhanh và người chậm",
+      "Khen và góp ý: mỗi kiểu người cần một cách khác"
+     ],
+     "D": [
+      "The fundamental attribution error: blaming character, ignoring situation",
+      "Stereotypes: useful shortcuts or harmful errors?",
+      "The halo effect: one good trait colours everything"
+     ]
+    },
+    {
+     "title": "Giao tiếp: lời nói, im lặng, ẩn ý",
+     "langA": "en",
+     "A": [
+      "High-context and low-context cultures: why Vietnamese speech is indirect",
+      "Nonverbal communication: what science really knows about body language",
+      "Politeness and face: how conversations protect dignity"
+     ],
+     "B": [
+      "'Hôm nào rảnh qua nhà chơi': lời mời xã giao và lời mời thật",
+      "Vì sao người Việt hay hỏi 'ăn cơm chưa', 'đi đâu đấy'",
+      "Im lặng trong cuộc họp: đồng ý, phản đối hay chờ xem",
+      "Cười trừ: khi nào là ngại, khi nào là từ chối"
+     ],
+     "C": [
+      "Đọc ẩn ý: 'để chị xem đã', 'cũng được', 'tuỳ em'",
+      "Nói 'không' theo kiểu Việt mà vẫn rõ ràng",
+      "Lắng nghe chủ động: hỏi lại, tóm tắt, không vội khuyên"
+     ],
+     "D": [
+      "Thin-slicing: how accurate are first impressions?",
+      "The illusion of transparency: you are less obvious than you think",
+      "Asking good questions: open, closed and follow-up"
+     ]
+    },
+    {
+     "title": "Thuyết phục, thao túng & ranh giới",
+     "langA": "en",
+     "A": [
+      "Cialdini's principles of persuasion",
+      "Manipulation tactics: guilt-tripping, gaslighting, love-bombing",
+      "Boundaries: what they are and why they protect relationships"
+     ],
+     "B": [
+      "Các chiêu lừa đảo qua điện thoại phổ biến ở Việt Nam",
+      "Bán hàng đa cấp vận hành thế nào",
+      "Vì sao 'khuyến mãi chỉ hôm nay' làm mình mua vội",
+      "Hợp đồng và điều khoản nhỏ: đọc gì trước khi ký"
+     ],
+     "C": [
+      "Từ chối lời nhờ vả quá sức mà không áy náy",
+      "Khi người thân hỏi vay tiền: nói chuyện thế nào",
+      "Nhận ra mình đang bị thao túng và cách lùi lại"
+     ],
+     "D": [
+      "Scarcity and urgency: why 'last chance' works",
+      "Commitment and consistency: the foot-in-the-door technique",
+      "Reactance: why pressure makes people resist"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Tiền bạc & kinh tế",
+   "weeks": [
+    {
+     "title": "Tiền của mình",
+     "langA": "en",
+     "A": [
+      "What money is: from barter to bank deposits",
+      "Inflation: why prices rise and what it does to savings",
+      "Compound interest: the most important idea in personal finance"
+     ],
+     "B": [
+      "Lập ngân sách cá nhân bằng cách chia phần thu nhập",
+      "Quỹ khẩn cấp: cần bao nhiêu, để ở đâu",
+      "Gửi tiết kiệm ngân hàng: kỳ hạn, lãi suất, rút trước hạn",
+      "Thẻ tín dụng và mua trả góp: lợi ích và cái bẫy"
+     ],
+     "C": [
+      "Nói chuyện tiền bạc trong gia đình mà không cãi nhau",
+      "Cho người quen vay tiền: nên hay không, và nếu cho thì thế nào",
+      "Đi ăn chung: chia tiền, mời, trả thay"
+     ],
+     "D": [
+      "Thinking in probabilities",
+      "Expected value: weighing gains and losses",
+      "Loss aversion: why losing hurts more than winning pleases"
+     ]
+    },
+    {
+     "title": "Thuế, bảo hiểm, lương hưu",
+     "langA": "vi",
+     "A": [
+      "Thuế thu nhập cá nhân: biểu thuế luỹ tiến, giảm trừ gia cảnh, quyết toán",
+      "Bảo hiểm xã hội: đóng gì, được gì, lương hưu tính thế nào",
+      "Bảo hiểm y tế: quyền lợi, nơi khám ban đầu, chuyển tuyến"
+     ],
+     "B": [
+      "Đọc phiếu lương: lương gộp, các khoản trừ, lương thực nhận",
+      "Quyết toán thuế thu nhập cá nhân trực tuyến: các bước cơ bản",
+      "Người phụ thuộc là ai và đăng ký thế nào",
+      "Thuế nằm ở đâu trong giá một cốc cà phê"
+     ],
+     "C": [
+      "Hỏi về lương, phụ cấp khi đi làm mà không bị coi là thực dụng",
+      "Nói chuyện thu nhập với bạn bè: chia sẻ đến đâu",
+      "Nhờ người hiểu biết giúp giấy tờ thuế, bảo hiểm: nhờ thế nào"
+     ],
+     "D": [
+      "Base rates: compared to what?",
+      "Relative vs. absolute numbers: '50% more' of what?",
+      "Framing effects: the same number told two ways"
+     ]
+    },
+    {
+     "title": "Kinh tế vĩ mô cho người thường",
+     "langA": "en",
+     "A": [
+      "Supply and demand: the engine behind every price",
+      "GDP, growth and what they leave out",
+      "Central banks and interest rates: how the State Bank of Vietnam steers the economy"
+     ],
+     "B": [
+      "Vì sao giá xăng thay đổi theo từng kỳ điều hành",
+      "Vì sao giá vàng trong nước khác giá vàng thế giới",
+      "Tỷ giá đô la tăng thì đời sống mình thay đổi gì",
+      "Vì sao giá nhà ở các thành phố lớn cao như vậy"
+     ],
+     "C": [
+      "Bàn chuyện giá cả, kinh tế ở bàn trà mà không thành tranh cãi",
+      "Khi người lớn trong nhà có quan niệm tiền bạc khác mình",
+      "Khoe và giấu: thái độ với tiền trong văn hoá Việt"
+     ],
+     "D": [
+      "Correlation is not causation",
+      "Second-order thinking: and then what?",
+      "Incentives: show me the incentive and I'll show you the outcome"
+     ]
+    },
+    {
+     "title": "Đầu tư & bẫy tài chính",
+     "langA": "vi",
+     "A": [
+      "Cổ phiếu, trái phiếu, chứng chỉ quỹ, vàng, bất động sản: mỗi loại là gì",
+      "Rủi ro và lợi nhuận: vì sao không có bữa trưa miễn phí",
+      "Bong bóng tài sản trong lịch sử: từ hoa tulip đến bất động sản"
+     ],
+     "B": [
+      "Lừa đảo 'app đầu tư', 'việc nhẹ lương cao' vận hành thế nào",
+      "Tín dụng đen: vì sao lãi 'nhỏ mỗi ngày' lại khủng khiếp",
+      "Đa dạng hoá: 'đừng bỏ trứng vào một giỏ' nghĩa là gì trong thực tế",
+      "Bảo hiểm nhân thọ: đọc hợp đồng thế nào"
+     ],
+     "C": [
+      "Từ chối người quen rủ góp vốn, đầu tư",
+      "Khi người thân sa vào nợ nần: giúp thế nào cho đúng",
+      "Hỏi lời khuyên tài chính: hỏi ai, tin ai"
+     ],
+     "D": [
+      "Overconfidence: why most drivers think they are above average",
+      "Survivorship bias: we only hear from the winners",
+      "The gambler's fallacy and the hot hand"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Đi lại & máy móc",
+   "weeks": [
+    {
+     "title": "Xe máy",
+     "langA": "vi",
+     "A": [
+      "Động cơ bốn kỳ hoạt động thế nào: nạp, nén, nổ, xả",
+      "Xe số, xe tay ga, xe côn tay: khác nhau từ bên trong",
+      "Phanh đĩa, phanh tang trống, ABS, CBS: chiếc xe dừng lại ra sao"
+     ],
+     "B": [
+      "Thay dầu máy bao lâu một lần và vì sao",
+      "Lốp, săm, áp suất: dấu hiệu cần thay",
+      "Bugi, ắc quy, nhông xích, dây curoa: tên gọi và việc của từng bộ phận",
+      "Xe khó nổ buổi sáng: các nguyên nhân thường gặp"
+     ],
+     "C": [
+      "Ở tiệm sửa xe: tả bệnh, hỏi giá, tránh bị 'vẽ bệnh'",
+      "Mượn xe, cho mượn xe: những điều nên thoả thuận trước",
+      "Đi xe cùng người khác: chở, được chở, xin đi nhờ"
+     ],
+     "D": [
+      "Mental models of machines: inputs, process, outputs",
+      "Causal chains: tracing a fault back to its cause",
+      "Preventive vs. corrective maintenance: why small checks pay off"
+     ]
+    },
+    {
+     "title": "Luật giao thông & giấy tờ xe",
+     "langA": "vi",
+     "A": [
+      "Luật Trật tự, an toàn giao thông đường bộ 2024: những thay đổi chính",
+      "Giấy phép lái xe, điểm giấy phép lái xe và các hạng bằng",
+      "Vì sao tai nạn giao thông xảy ra: các nguyên nhân chính ở Việt Nam"
+     ],
+     "B": [
+      "Mức phạt các lỗi thường gặp: nồng độ cồn, vượt đèn đỏ, đi sai làn",
+      "Đăng ký xe, sang tên, đăng kiểm: thủ tục cơ bản",
+      "Bảo hiểm bắt buộc trách nhiệm dân sự của chủ xe: dùng khi nào",
+      "Những biển báo hay bị hiểu nhầm"
+     ],
+     "C": [
+      "Khi bị cảnh sát giao thông dừng xe: thái độ, giấy tờ, quyền của mình",
+      "Va chạm nhẹ trên đường: bình tĩnh, chụp ảnh, thoả thuận",
+      "Nhắc người thân không lái xe sau khi uống rượu bia"
+     ],
+     "D": [
+      "Risk perception: why we fear the wrong things",
+      "Normalization of deviance: when bad habits feel safe",
+      "Base rates of accidents: what the numbers say"
+     ]
+    },
+    {
+     "title": "Ô tô, tàu xe, máy bay",
+     "langA": "en",
+     "A": [
+      "How a car works: engine, transmission, brakes, steering",
+      "Electric vs. petrol cars: how they really compare",
+      "How aeroplanes fly and why flying is so safe"
+     ],
+     "B": [
+      "Đi máy bay: làm thủ tục, hành lý ký gửi, hành lý xách tay, cửa ra máy bay",
+      "Đi tàu hoả, xe khách đường dài: đặt vé, giờ giấc, hành lý",
+      "Metro, xe buýt: đọc bản đồ tuyến và đổi tuyến",
+      "Gọi xe công nghệ: cách tính giá, an toàn, đánh giá"
+     ],
+     "C": [
+      "Ứng xử trên phương tiện công cộng: nhường ghế, nói chuyện, nghe điện thoại",
+      "Đi chung xe với đồng nghiệp, cấp trên: ngồi đâu, nói gì",
+      "Đi công tác cùng đoàn: đúng giờ, chia phòng, ăn uống"
+     ],
+     "D": [
+      "Total cost of ownership: the hidden price of things",
+      "Trade-offs: every choice has a cost",
+      "Opportunity cost: what you give up"
+     ]
+    },
+    {
+     "title": "Máy móc trong nhà",
+     "langA": "en",
+     "A": [
+      "How air conditioners and refrigerators move heat",
+      "Washing machines, induction hobs, microwaves: the physics inside",
+      "Inverter technology and energy labels explained"
+     ],
+     "B": [
+      "Vệ sinh điều hoà: khi nào cần, tự làm được phần nào",
+      "Chọn mua đồ điện: công suất, nhãn năng lượng, bảo hành",
+      "Tiết kiệm điện thật sự: thiết bị nào tốn điện nhất",
+      "Ổ cắm, dây nối, quá tải: an toàn điện trong nhà"
+     ],
+     "C": [
+      "Bảo hành, đổi trả: nói chuyện với cửa hàng và trung tâm bảo hành",
+      "Đồ dùng chung trong nhà bị hỏng: ai sửa, ai trả",
+      "Nhờ người hiểu biết chọn đồ giúp: hỏi và cảm ơn thế nào"
+     ],
+     "D": [
+      "First-principles thinking: rebuilding from the basics",
+      "The Lindy effect: why old technology lasts",
+      "Feature creep: when more is worse"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "title": "Cơ thể & sức khoẻ",
+   "weeks": [
+    {
+     "title": "Cơ thể vận hành thế nào",
+     "langA": "en",
+     "A": [
+      "The heart and blood: how circulation keeps you alive",
+      "Digestion: what happens to a meal from mouth to gut",
+      "The immune system: how the body tells friend from foe"
+     ],
+     "B": [
+      "Đọc kết quả xét nghiệm máu cơ bản: các chỉ số thường gặp",
+      "Huyết áp bao nhiêu là cao, bao nhiêu là thấp",
+      "Vì sao bị sốt, và sốt có lợi hay có hại",
+      "Khám sức khoẻ định kỳ: nên khám những gì"
+     ],
+     "C": [
+      "Đi khám bệnh: kể triệu chứng, hỏi bác sĩ, ghi lại lời dặn",
+      "Hỏi thăm sức khoẻ người khác: tế nhị và đúng lúc",
+      "Khi người thân không chịu đi khám"
+     ],
+     "D": [
+      "Evidence-based medicine: the hierarchy of evidence",
+      "Anecdotes vs. data: 'it worked for my aunt'",
+      "Mechanism vs. outcome: plausible is not proven"
+     ]
+    },
+    {
+     "title": "Ăn, ngủ, vận động & nắng nóng",
+     "langA": "en",
+     "A": [
+      "Nutrition basics: what the science broadly agrees on",
+      "Sleep: why it matters for every organ",
+      "Exercise: what moving does for the body and the brain"
+     ],
+     "B": [
+      "Say nắng, sốc nhiệt: nhận biết và sơ cứu",
+      "Uống nước thế nào cho đủ trong mùa hè",
+      "Ngồi nhiều: tác hại và cách vận động xen kẽ ở văn phòng",
+      "Đọc nhãn thực phẩm: thành phần, hạn dùng, bảo quản"
+     ],
+     "C": [
+      "Đi ăn cùng người khác: chế độ ăn riêng, dị ứng, từ chối món",
+      "Rủ đồng nghiệp vận động mà không thành áp lực",
+      "Thăm người ốm: mang gì, ở bao lâu, nói gì"
+     ],
+     "D": [
+      "Spotting health misinformation online",
+      "Relative risk vs. absolute risk",
+      "The dose makes the poison"
+     ]
+    },
+    {
+     "title": "Bệnh thường gặp, thuốc & bệnh viện",
+     "langA": "en",
+     "A": [
+      "Antibiotics and antibiotic resistance",
+      "How vaccines work and how they are tested",
+      "Common chronic diseases: diabetes, high blood pressure and what drives them"
+     ],
+     "B": [
+      "Tủ thuốc gia đình: nên có gì và bảo quản thế nào",
+      "Đọc tờ hướng dẫn sử dụng thuốc",
+      "Dùng bảo hiểm y tế khi đi khám: thủ tục và chuyển tuyến",
+      "Cấp cứu: khi nào gọi 115 và gọi thế nào"
+     ],
+     "C": [
+      "Chăm người thân nằm viện: giấy tờ, ăn uống, nói chuyện với nhân viên y tế",
+      "Ứng xử với bác sĩ, điều dưỡng: tôn trọng và hỏi cho rõ",
+      "Chia sẻ tin xấu về sức khoẻ trong gia đình"
+     ],
+     "D": [
+      "The placebo effect",
+      "Regression to the mean: why remedies seem to work",
+      "Confounding: the hidden third factor"
+     ]
+    },
+    {
+     "title": "Sức khoẻ tinh thần",
+     "langA": "en",
+     "A": [
+      "Anxiety and depression: what they are and are not",
+      "Burnout: the science of exhaustion at work",
+      "Resilience: what helps people recover from hard times"
+     ],
+     "B": [
+      "Tìm hỗ trợ tâm lý ở Việt Nam: các kênh và cách bắt đầu",
+      "Vì sao mạng xã hội có thể làm mình buồn hơn",
+      "Giấc ngủ, vận động và tâm trạng: mối liên hệ",
+      "Nghỉ ngơi thật sự là gì"
+     ],
+     "C": [
+      "Lắng nghe người đang buồn mà không vội khuyên",
+      "Khi chính mình cần giúp: nói với ai và nói thế nào",
+      "Định kiến về bệnh tâm lý trong gia đình Việt"
+     ],
+     "D": [
+      "Metacognition: thinking about your own thinking",
+      "Thinking traps: catastrophizing and all-or-nothing thinking",
+      "Self-compassion vs. self-criticism: what research shows"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "title": "Lịch sử Việt Nam & vùng miền",
+   "weeks": [
+    {
+     "title": "Từ Văn Lang đến tự chủ",
+     "langA": "vi",
+     "A": [
+      "Văn Lang, Âu Lạc: truyền thuyết và khảo cổ học nói gì",
+      "Hơn nghìn năm Bắc thuộc: các cuộc khởi nghĩa và bản sắc còn giữ được",
+      "Ngô Quyền và trận Bạch Đằng năm 938: mở ra thời tự chủ"
+     ],
+     "B": [
+      "Trống đồng Đông Sơn: làm thế nào, dùng làm gì",
+      "Vì sao người Việt nhận là 'con Rồng cháu Tiên'",
+      "Giỗ Tổ Hùng Vương mùng 10 tháng 3: nguồn gốc",
+      "Tên đất, tên làng quanh mình kể chuyện lịch sử gì"
+     ],
+     "C": [
+      "Nói chuyện lịch sử với người lớn tuổi: nghe ký ức, hỏi chuyện xưa",
+      "Đến di tích: tham quan, chụp ảnh thế nào cho đúng mực",
+      "Khi hai người nhớ lịch sử khác nhau"
+     ],
+     "D": [
+      "Reading history: sources, legends and evidence",
+      "Presentism: judging the past by today's standards",
+      "How archaeologists date things"
+     ]
+    },
+    {
+     "title": "Các triều đại phong kiến",
+     "langA": "vi",
+     "A": [
+      "Nhà Lý, nhà Trần: dựng nước và ba lần kháng chiến chống Nguyên Mông",
+      "Nhà Lê sơ và bộ luật Hồng Đức",
+      "Tây Sơn, nhà Nguyễn và cuộc gặp gỡ với phương Tây"
+     ],
+     "B": [
+      "Khoa cử ngày xưa: thi Hương, thi Hội, thi Đình",
+      "Văn Miếu – Quốc Tử Giám và bia tiến sĩ",
+      "Chữ Hán, chữ Nôm, chữ Quốc ngữ: chữ viết của người Việt đổi thay thế nào",
+      "Kinh thành Huế: vì sao được xây như vậy"
+     ],
+     "C": [
+      "Lễ nghĩa thời phong kiến còn lại gì trong cách cư xử hôm nay",
+      "Trọng văn, trọng học: gốc của thói quen hỏi 'học trường nào'",
+      "Kính lão đắc thọ: tôn trọng người lớn tuổi trong đời sống hiện đại"
+     ],
+     "D": [
+      "Counterfactual history: what if…? and its limits",
+      "Great individuals vs. structures: who really makes history",
+      "The narrative fallacy: the stories we impose on events"
+     ]
+    },
+    {
+     "title": "Thế kỷ XX đến Đổi mới",
+     "langA": "vi",
+     "A": [
+      "Thời Pháp thuộc: khai thác thuộc địa và các phong trào yêu nước",
+      "Cách mạng tháng Tám 1945 và Tuyên ngôn độc lập",
+      "Từ 1954 đến 1975 và thống nhất đất nước",
+      "Thời bao cấp và công cuộc Đổi mới năm 1986"
+     ],
+     "B": [
+      "Tem phiếu thời bao cấp: đời sống hằng ngày ra sao",
+      "Các ngày lễ lớn trong năm và ý nghĩa",
+      "Các quốc hiệu của Việt Nam qua các thời kỳ",
+      "Kinh tế thị trường định hướng xã hội chủ nghĩa nghĩa là gì"
+     ],
+     "C": [
+      "Nghe ông bà, cha mẹ kể chuyện thời bao cấp và chiến tranh",
+      "Nói về những chủ đề lịch sử nhạy cảm một cách tôn trọng",
+      "Khoảng cách thế hệ: vì sao bố mẹ tiết kiệm đến thế"
+     ],
+     "D": [
+      "Historiography: why historians disagree",
+      "Multiple perspectives: one event, many witnesses",
+      "Hindsight bias: it seemed obvious only afterwards"
+     ]
+    },
+    {
+     "title": "Địa lý, vùng miền & 54 dân tộc",
+     "langA": "vi",
+     "A": [
+      "Địa hình và khí hậu Việt Nam: núi, đồng bằng, bờ biển, ba miền",
+      "54 dân tộc Việt Nam: phân bố, ngôn ngữ, văn hoá",
+      "Các vùng kinh tế và các tỉnh, thành sau đợt sắp xếp năm 2025"
+     ],
+     "B": [
+      "Vì sao miền Bắc có bốn mùa còn miền Nam có hai mùa",
+      "Giọng nói ba miền: khác nhau ở thanh điệu và từ vựng",
+      "Ẩm thực ba miền: vì sao mặn, ngọt, cay khác nhau",
+      "Lũ miền Trung và mùa nước nổi miền Tây"
+     ],
+     "C": [
+      "Định kiến vùng miền: nhận ra và tránh",
+      "Làm việc với đồng nghiệp từ miền khác: những khác biệt dễ hiểu lầm",
+      "Đến vùng đồng bào dân tộc thiểu số: tôn trọng phong tục địa phương"
+     ],
+     "D": [
+      "Stereotypes and base rates: when generalizations mislead",
+      "Geography and culture: how environment shapes ways of life",
+      "Maps can mislead: projections and perspective"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "title": "Thế giới & địa chính trị",
+   "weeks": [
+    {
+     "title": "Bản đồ thế giới & tổ chức quốc tế",
+     "langA": "en",
+     "A": [
+      "The world in regions: building a mental map",
+      "The United Nations: what it can and cannot do",
+      "ASEAN, WTO, IMF, World Bank: who does what"
+     ],
+     "B": [
+      "Hộ chiếu, thị thực, miễn thị thực: đi nước ngoài cần gì",
+      "Múi giờ: vì sao Việt Nam là UTC+7",
+      "Vì sao mỗi nước lái xe một bên đường",
+      "Đồng tiền mạnh, đồng tiền yếu nghĩa là gì"
+     ],
+     "C": [
+      "Giao tiếp với người nước ngoài: chào hỏi, khoảng cách, chủ đề an toàn",
+      "Tiếp khách quốc tế ở cơ quan: những điều cơ bản",
+      "Sốc văn hoá: khi điều bình thường ở nhà lại lạ ở nơi khác"
+     ],
+     "D": [
+      "Context matters: reading the news with a map in mind",
+      "Scale: thinking in millions and billions",
+      "Ethnocentrism: seeing others through your own lens"
+     ]
+    },
+    {
+     "title": "Các thể chế chính trị",
+     "langA": "en",
+     "A": [
+      "Parliamentary, presidential and one-party systems compared",
+      "Constitutional monarchies: why kings and queens still exist",
+      "Elections around the world: how votes become power"
+     ],
+     "B": [
+      "Đọc tin quốc tế: chọn nguồn và đọc thế nào cho khỏi lệch",
+      "Bầu cử ở Mỹ vận hành thế nào",
+      "Liên minh châu Âu là gì và vận hành ra sao",
+      "Cánh tả, cánh hữu nghĩa là gì"
+     ],
+     "C": [
+      "Nói chuyện chính trị ở cơ quan, ở nhà: nên và không nên",
+      "Khi bạn bè khác quan điểm chính trị",
+      "Lắng nghe để hiểu, không phải để thắng"
+     ],
+     "D": [
+      "Steelmanning: state the other side at its strongest",
+      "Motivated reasoning: why smart people believe what they want",
+      "Spectrums and labels: left, right and their limits"
+     ]
+    },
+    {
+     "title": "Cường quốc, Biển Đông & ngoại giao Việt Nam",
+     "langA": "en",
+     "A": [
+      "The major powers today: the US, China, the EU, Russia, India, Japan",
+      "The South China Sea (East Sea): interests, law and disputes",
+      "Vietnam's foreign policy: independence, diversification and 'bamboo diplomacy'"
+     ],
+     "B": [
+      "Thuế quan và chiến tranh thương mại ảnh hưởng giá đồ mình mua thế nào",
+      "Chuỗi cung ứng: một chiếc điện thoại đi qua bao nhiêu nước",
+      "Vì sao nhiều nhà máy nước ngoài chuyển về Việt Nam",
+      "Công ước Liên hợp quốc về Luật biển 1982 (UNCLOS) quy định gì"
+     ],
+     "C": [
+      "Tự hào dân tộc và tôn trọng người nước khác: giữ được cả hai",
+      "Bàn chuyện thời sự quốc tế với người lớn tuổi",
+      "Đọc tin gây phẫn nộ trên mạng: dừng lại trước khi chia sẻ"
+     ],
+     "D": [
+      "Game theory: the prisoner's dilemma",
+      "Deterrence and credible threats",
+      "Zero-sum vs. positive-sum thinking"
+     ]
+    },
+    {
+     "title": "Toàn cầu hoá & thách thức chung",
+     "langA": "en",
+     "A": [
+      "Globalization: winners, losers and the backlash",
+      "Climate change: the science and the politics",
+      "Migration: why people move and what it changes"
+     ],
+     "B": [
+      "Biến đổi khí hậu ở Việt Nam: đồng bằng sông Cửu Long và nước biển dâng",
+      "Vì sao hàng sản xuất ở nhiều nước lại rẻ",
+      "Đi làm việc ở nước ngoài: con đường và rủi ro",
+      "Ô nhiễm không khí: đọc chỉ số AQI"
+     ],
+     "C": [
+      "Làm việc với người khác văn hoá",
+      "Bàn chuyện môi trường mà không lên lớp người khác",
+      "Thói quen nhỏ vì môi trường: rủ người khác cùng làm"
+     ],
+     "D": [
+      "Lateral reading: how fact-checkers verify claims",
+      "The tragedy of the commons",
+      "Collective action problems: why shared problems are hard"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "title": "Khoa học quanh ta",
+   "weeks": [
+    {
+     "title": "Vật lý đời thường",
+     "langA": "en",
+     "A": [
+      "Energy: the one idea behind all of physics",
+      "Heat and temperature: why metal feels colder than wood",
+      "Electricity and magnetism: the forces that run modern life"
+     ],
+     "B": [
+      "Vì sao bầu trời màu xanh và hoàng hôn màu đỏ",
+      "Nồi áp suất nấu nhanh hơn nhờ đâu",
+      "Vì sao gương nhà tắm bị mờ hơi nước",
+      "Sét đánh: vì sao, và trú ở đâu cho an toàn"
+     ],
+     "C": [
+      "Giải thích chuyện khoa học cho trẻ con trong nhà",
+      "Khi người lớn tin vào mẹo dân gian: nói chuyện không làm mất lòng",
+      "Hỏi 'vì sao' với người làm nghề: thợ, kỹ sư, bác sĩ"
+     ],
+     "D": [
+      "The scientific method: hypothesis, test, revise",
+      "Falsifiability: what makes a claim scientific",
+      "All models are wrong, some are useful"
+     ]
+    },
+    {
+     "title": "Hoá học trong bếp & trong nhà",
+     "langA": "en",
+     "A": [
+      "Chemistry in the kitchen: browning, caramel and fermentation",
+      "Acids and bases: from lemon juice to drain cleaner",
+      "Plastics: what they are and why they last so long"
+     ],
+     "B": [
+      "Vì sao không được trộn các chất tẩy rửa với nhau",
+      "Muối, đường, giấm giữ thức ăn lâu hỏng thế nào",
+      "Nước cứng, cặn trong ấm đun: vì sao và xử lý ra sao",
+      "Đọc ký hiệu tái chế trên đồ nhựa"
+     ],
+     "C": [
+      "Nấu ăn cùng người khác: chia việc, góp ý món ăn",
+      "Ăn cơm nhà người khác: những phép lịch sự",
+      "Khi món mình nấu bị chê"
+     ],
+     "D": [
+      "Toxicity: the dose makes the poison",
+      "'Chemical-free' and other marketing myths",
+      "The appeal to nature: natural is not always safe"
+     ]
+    },
+    {
+     "title": "Sự sống, gen & tiến hoá",
+     "langA": "en",
+     "A": [
+      "Evolution by natural selection",
+      "DNA and genes: the code of life",
+      "Microbes: the invisible majority"
+     ],
+     "B": [
+      "Vì sao con giống bố mẹ mà vẫn khác",
+      "Nhóm máu: ý nghĩa và vì sao quan trọng khi truyền máu",
+      "Vi khuẩn có lợi: sữa chua, dưa muối",
+      "Vì sao muỗi đốt người này nhiều hơn người kia"
+     ],
+     "C": [
+      "Nói chuyện về bệnh di truyền trong gia đình",
+      "Tránh nhận xét ngoại hình người khác",
+      "Nuôi thú cưng và tôn trọng hàng xóm"
+     ],
+     "D": [
+      "Population thinking vs. individual cases",
+      "Just-so stories: when evolutionary explanations go too far",
+      "Nature and nurture: a false dichotomy"
+     ]
+    },
+    {
+     "title": "Trái Đất, thời tiết & vũ trụ",
+     "langA": "en",
+     "A": [
+      "Weather and climate: what makes a typhoon",
+      "Earthquakes and volcanoes: the restless Earth",
+      "The solar system and our place in the universe"
+     ],
+     "B": [
+      "Đọc bản tin thời tiết: áp thấp, bão cấp mấy, gió giật",
+      "Vì sao có thuỷ triều",
+      "Mặt Trăng và âm lịch: trăng tròn, trăng khuyết",
+      "Gió mùa đông bắc: vì sao miền Bắc có mùa đông lạnh"
+     ],
+     "C": [
+      "Chuẩn bị cho mùa bão: việc trong nhà và hỏi thăm hàng xóm",
+      "Quyên góp cho vùng lũ: góp sức thế nào cho đúng",
+      "Rủ gia đình, bạn bè đi xem hiện tượng thiên văn"
+     ],
+     "D": [
+      "Logarithmic scales: earthquakes, sound and pH",
+      "Big numbers and deep time",
+      "Uncertainty in forecasts: what '70% chance of rain' means"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "title": "Công nghệ & thời đại số",
+   "weeks": [
+    {
+     "title": "Internet & máy tính vận hành thế nào",
+     "langA": "en",
+     "A": [
+      "How the internet works: packets, routers and protocols",
+      "Inside a computer: processor, memory, storage",
+      "The cloud: whose computer is it really?"
+     ],
+     "B": [
+      "Wifi chậm: các nguyên nhân thường gặp và cách xử lý",
+      "4G, 5G, cáp quang: khác nhau thế nào",
+      "Bộ nhớ điện thoại đầy: cái gì chiếm chỗ",
+      "Sao lưu dữ liệu: quy tắc 3-2-1"
+     ],
+     "C": [
+      "Giúp bố mẹ dùng điện thoại mà không mất kiên nhẫn",
+      "Nhóm chat cơ quan, nhóm chat gia đình: những phép lịch sự",
+      "Gọi điện, nhắn tin hay email: chọn kênh cho đúng việc"
+     ],
+     "D": [
+      "Abstraction layers: understanding complex systems",
+      "Exponential change: Moore's law and its lessons",
+      "Technical debt: shortcuts that cost later"
+     ]
+    },
+    {
+     "title": "AI & dữ liệu",
+     "langA": "en",
+     "A": [
+      "What AI is and isn't: from rules to machine learning",
+      "Large language models: how chatbots produce text",
+      "Data: the raw material of the digital economy"
+     ],
+     "B": [
+      "Dùng AI để học và làm việc: hỏi thế nào cho hiệu quả",
+      "Vì sao AI đôi khi bịa thông tin",
+      "Ảnh, video giả do AI tạo: nhận biết thế nào",
+      "Thuật toán đề xuất video, bài viết hoạt động ra sao"
+     ],
+     "C": [
+      "Dùng AI trong công việc: minh bạch với cấp trên, đồng nghiệp",
+      "Nói chuyện về AI với người lo mất việc",
+      "Tôn trọng công sức người khác khi dùng công cụ tự động"
+     ],
+     "D": [
+      "Goodhart's law: when a measure becomes a target",
+      "Algorithmic bias: garbage in, garbage out",
+      "Automation bias: trusting the machine too much"
+     ]
+    },
+    {
+     "title": "An toàn số & lừa đảo mạng",
+     "langA": "en",
+     "A": [
+      "Encryption: how secrets travel safely",
+      "Passwords, two-factor authentication and password managers",
+      "Privacy: who collects your data and why"
+     ],
+     "B": [
+      "Lừa đảo qua tin nhắn, đường link giả: nhận diện",
+      "Giả danh công an, ngân hàng, người quen qua mạng",
+      "Mã OTP: vì sao không bao giờ đưa cho ai",
+      "Cài đặt quyền riêng tư trên điện thoại và mạng xã hội"
+     ],
+     "C": [
+      "Đăng ảnh có người khác: xin phép và tôn trọng",
+      "Nhắc người thân về lừa đảo mà không làm họ thấy bị coi thường",
+      "Khi tài khoản bị chiếm: báo cho bạn bè thế nào"
+     ],
+     "D": [
+      "Threat modeling: thinking like an attacker",
+      "Social engineering: hacking people, not computers",
+      "Security vs. convenience trade-offs"
+     ]
+    },
+    {
+     "title": "Mạng xã hội & sự chú ý",
+     "langA": "en",
+     "A": [
+      "The attention economy: when you are the product",
+      "How social media shapes opinions and polarization",
+      "Digital wellbeing: what research says about screen time"
+     ],
+     "B": [
+      "Vì sao lướt mạng mãi không dừng được",
+      "Quản lý thời gian màn hình: công cụ có sẵn trên điện thoại",
+      "'Drama' trên mạng: vì sao lan nhanh",
+      "Vì sao những tiếng nói cực đoan thường to nhất trong phần bình luận"
+     ],
+     "C": [
+      "Bình luận, nhắn tin nơi công cộng trên mạng: phép lịch sự",
+      "Khi bị chỉ trích trên mạng: im lặng, giải thích hay rời đi",
+      "Giữ ranh giới giữa đời tư và công việc trên mạng xã hội"
+     ],
+     "D": [
+      "Echo chambers and filter bubbles",
+      "Outrage and virality: why anger spreads",
+      "Variable rewards: the slot machine in your pocket"
+     ]
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "title": "Triết học, đạo đức & tam quan",
+   "weeks": [
+    {
+     "title": "Những câu hỏi lớn Đông – Tây",
+     "langA": "en",
+     "A": [
+      "What philosophy is for: the big questions",
+      "Confucius, Laozi, the Buddha: three Eastern answers to how to live",
+      "Socrates, Plato, Aristotle: the Western beginnings"
+     ],
+     "B": [
+      "Những câu của Khổng Tử còn sống trong tiếng Việt hằng ngày",
+      "Vô thường: Phật giáo nói gì, và vì sao người Việt hay nói 'thôi kệ'",
+      "Vô vi của Lão Tử: 'không làm gì' hay điều khác",
+      "Triết học có ích gì cho một người đi làm bình thường"
+     ],
+     "C": [
+      "Bàn những câu hỏi lớn với bạn bè mà không thành giảng đạo",
+      "Khi gia đình theo một triết lý sống khác mình",
+      "Khiêm tốn về hiểu biết: nói 'mình chưa biết' thế nào"
+     ],
+     "D": [
+      "Logic basics: valid and sound arguments",
+      "Common fallacies: ad hominem, straw man, false dilemma",
+      "Socratic questioning"
+     ]
+    },
+    {
+     "title": "Đạo đức học",
+     "langA": "en",
+     "A": [
+      "Consequences, duties, virtues: three ways to judge right and wrong",
+      "The trolley problem and what it reveals",
+      "Moral psychology: why intuitions come before reasons"
+     ],
+     "B": [
+      "Lòng tốt và sự công bằng: khi giúp người này là thiệt người kia",
+      "Nói dối thiện ý: khi nào chấp nhận được",
+      "Lời hứa và chữ tín",
+      "Đạo đức nghề nghiệp: bác sĩ, giáo viên, công chức"
+     ],
+     "C": [
+      "Thấy đồng nghiệp làm sai: im lặng, nhắc riêng hay báo cáo",
+      "Giữ nguyên tắc mà không cứng nhắc",
+      "Tha thứ và quên: hai việc khác nhau"
+     ],
+     "D": [
+      "Thought experiments: how philosophers test ideas",
+      "Moral luck: judging outcomes vs. intentions",
+      "Is and ought: describing vs. prescribing"
+     ]
+    },
+    {
+     "title": "Công bằng, tự do & nhà nước",
+     "langA": "en",
+     "A": [
+      "The social contract: Hobbes, Locke, Rousseau",
+      "Justice as fairness: Rawls and the veil of ignorance",
+      "Liberty: Mill's harm principle and its critics",
+      "Marx and the critique of capitalism: main ideas and debates"
+     ],
+     "B": [
+      "Thuế và phúc lợi: vì sao các nước chọn khác nhau",
+      "Quyền và nghĩa vụ công dân trong Hiến pháp Việt Nam",
+      "Công bằng và bình đẳng: khác nhau ở đâu",
+      "Luật pháp và đạo đức: khi nào trùng, khi nào khác"
+     ],
+     "C": [
+      "Bàn về công bằng ở nơi làm việc: lương, thưởng, phân việc",
+      "Bênh vực người yếu thế một cách khéo léo",
+      "Nói về bất công mà không thành than phiền"
+     ],
+     "D": [
+      "Descriptive vs. normative claims",
+      "Trade-offs between values: freedom, equality, security",
+      "The veil of ignorance as a thinking tool"
+     ]
+    },
+    {
+     "title": "Tam quan & lẽ sống",
+     "langA": "en",
+     "A": [
+      "Worldview, outlook on life, values: what 'tam quan' means",
+      "Stoicism: control what you can",
+      "Existentialism and meaning: making a life"
+     ],
+     "B": [
+      "Thế giới quan, nhân sinh quan, giá trị quan: phân biệt bằng ví dụ đời thường",
+      "Giá trị của mình là gì: bài tập liệt kê và xếp hạng",
+      "Hạnh phúc: các nghiên cứu dài hạn nói gì",
+      "Thành công theo định nghĩa của ai"
+     ],
+     "C": [
+      "Sống cùng người khác tam quan: tôn trọng mà không đánh mất mình",
+      "Khi lựa chọn của mình khác kỳ vọng gia đình",
+      "Viết thư cho chính mình năm năm sau"
+     ],
+     "D": [
+      "Writing your personal philosophy: a synthesis exercise",
+      "Intellectual humility: holding beliefs lightly",
+      "Integrating a year of learning: drawing your own map"
+     ]
+    }
+   ]
+  }
+ ],
+ "cross": {
+  "title": "Tổng ôn giao thoa",
+  "pairs": [
+   {
+    "stages": [
+     5,
+     2
+    ],
+    "hint": "Thuế: tiền của mình đi vào bộ máy nhà nước thế nào"
+   },
+   {
+    "stages": [
+     3,
+     1
+    ],
+    "hint": "Tết trong từng ngôi nhà: phong tục và gia đình"
+   },
+   {
+    "stages": [
+     4,
+     2
+    ],
+    "hint": "Tâm lý công sở: thiên kiến uy quyền và văn hoá thứ bậc"
+   },
+   {
+    "stages": [
+     6,
+     5
+    ],
+    "hint": "Chi phí thật của một chiếc xe"
+   },
+   {
+    "stages": [
+     7,
+     4
+    ],
+    "hint": "Cơ thể và cảm xúc: sức khoẻ tinh thần"
+   },
+   {
+    "stages": [
+     8,
+     3
+    ],
+    "hint": "Lịch sử phía sau các phong tục"
+   },
+   {
+    "stages": [
+     9,
+     8
+    ],
+    "hint": "Lịch sử Việt Nam trên bàn cờ thế giới"
+   },
+   {
+    "stages": [
+     10,
+     7
+    ],
+    "hint": "Khoa học phía sau sức khoẻ: vaccine, dinh dưỡng, thuốc"
+   },
+   {
+    "stages": [
+     11,
+     4
+    ],
+    "hint": "Mạng xã hội và tâm lý con người"
+   },
+   {
+    "stages": [
+     12,
+     2
+    ],
+    "hint": "Đạo đức công vụ: người công chức và lẽ phải"
+   },
+   {
+    "stages": [
+     5,
+     9
+    ],
+    "hint": "Kinh tế thế giới và giá cả trong nước"
+   },
+   {
+    "stages": [
+     1,
+     6
+    ],
+    "hint": "Ngôi nhà như một cỗ máy: điện, nước, máy móc"
+   },
+   {
+    "stages": [
+     11,
+     5
+    ],
+    "hint": "Lừa đảo: khi công nghệ gặp tiền bạc"
+   },
+   {
+    "stages": [
+     12,
+     3
+    ],
+    "hint": "Tín ngưỡng và triết học: niềm tin và lý trí"
+   },
+   {
+    "stages": [
+     10,
+     1
+    ],
+    "hint": "Vật lý của ngôi nhà: nhiệt, điện, nước"
+   },
+   {
+    "stages": [
+     8,
+     1
+    ],
+    "hint": "Gia đình Việt qua các thời kỳ lịch sử"
+   },
+   {
+    "stages": [
+     9,
+     2
+    ],
+    "hint": "Bộ máy nhà nước Việt Nam đặt cạnh các nước"
+   },
+   {
+    "stages": [
+     4,
+     1
+    ],
+    "hint": "Tâm lý trong gia đình và họ hàng"
+   },
+   {
+    "stages": [
+     12,
+     4
+    ],
+    "hint": "Vì sao người tốt vẫn làm điều sai: đạo đức gặp tâm lý học"
+   },
+   {
+    "stages": [
+     7,
+     5
+    ],
+    "hint": "Sức khoẻ và tiền: bảo hiểm, chi phí y tế"
+   },
+   {
+    "stages": [
+     11,
+     2
+    ],
+    "hint": "Chính phủ số: dịch vụ công trực tuyến"
+   },
+   {
+    "stages": [
+     3,
+     9
+    ],
+    "hint": "Văn hoá Việt trong thế giới toàn cầu hoá"
+   },
+   {
+    "stages": [
+     6,
+     9
+    ],
+    "hint": "Giao thông và đô thị ở các nước"
+   },
+   {
+    "stages": [
+     12,
+     1
+    ],
+    "hint": "Tam quan trong đời sống gia đình"
+   }
+  ]
+ }
+}
