@@ -1,14 +1,10 @@
 {
  "items": [
   {
-   "d": "2026-11-09",
-   "a": "Ice Nine Kills",
-   "w": "A Very Vicious Christmas"
-  },
-  {
    "d": "2026-11-11",
    "a": "2hollis",
    "w": "Pirouette",
+   "g": "EDM, electropop, rage",
    "l": "Interscope"
   },
   {
@@ -47,6 +43,11 @@
   },
   {
    "d": "2026-11-13",
+   "a": "Alana Henderson",
+   "w": "Fine"
+  },
+  {
+   "d": "2026-11-13",
    "a": "Amira Elfeky",
    "w": "It Was Only a Dream",
    "l": "Atlantic"
@@ -79,6 +80,12 @@
    "a": "Blackhaine",
    "w": "Saints in the Wethouse",
    "l": "XL"
+  },
+  {
+   "d": "2026-11-13",
+   "a": "Breakkaway",
+   "w": "It All Feels the Same from Afar",
+   "l": "Epitaph"
   },
   {
    "d": "2026-11-13",
@@ -203,6 +210,11 @@
   },
   {
    "d": "2026-11-13",
+   "a": "Offset",
+   "w": "GMFU"
+  },
+  {
+   "d": "2026-11-13",
    "a": "Randy Travis",
    "w": "Same Old Way",
    "l": "Warner Records Nashville"
@@ -311,6 +323,7 @@
    "d": "2026-11-16",
    "a": "Tomorrow X Together",
    "w": "Perfect Storm",
+   "g": "Avant-pop",
    "l": "Big Hit Music"
   },
   {
@@ -449,7 +462,121 @@
    "a": "Wolf",
    "w": "Hour of the Wolf",
    "l": "Fireflash Records"
+  },
+  {
+   "d": "2026-11-25",
+   "a": "Pretty Lights",
+   "w": "A Trip Thru Time Fantastic"
+  },
+  {
+   "d": "2026-11-26",
+   "a": "Priya Ragu",
+   "w": "Madras"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Björk",
+   "w": "Björk Orkestral with the Hamrahlíð Choir",
+   "l": "One Little Independent"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Cliff Richard",
+   "w": "Only Number Ones"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Contrarian",
+   "w": "Escaping Depravity",
+   "l": "Willowtip Records"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Factory Floor",
+   "w": "One Trip",
+   "l": "Phantasy Sound"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Jon Bryant",
+   "w": "Harbour",
+   "l": "Nettwerk Music Group"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "King 810",
+   "w": "La Grande Mort or Silence of God"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Leviathan",
+   "w": "Die to This",
+   "l": "Profound Lore"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Molly Hatchet",
+   "w": "Lost Horizon",
+   "l": "Steamhammer/SPV"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Morten Harket",
+   "w": "Human Grace"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Mya Mehmi",
+   "w": "M1",
+   "l": "Dialled In Records"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Mystic Prophecy",
+   "w": "In Metal",
+   "l": "Perception Records, Reigning Phoenix"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Neal Morse and The Resonance",
+   "w": "River of Light"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Northlane",
+   "w": "Anemoia",
+   "l": "Immortal, Believe"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "PeelingFlesh",
+   "w": "PeelingFlesh",
+   "l": "Unique Leader"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Peter Gabriel",
+   "w": "O\\I",
+   "l": "Real World"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Purple Pilgrims",
+   "w": "Given to the Night",
+   "l": "AD 93"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "The Blue Aeroplanes",
+   "w": "Tales from the Silver Lounge",
+   "l": "Artstar Records"
+  },
+  {
+   "d": "2026-11-27",
+   "a": "Whiplash",
+   "w": "Roar",
+   "l": "Time To Kill Records"
   }
  ],
- "updated": "2026-11-14T06:09:18Z"
+ "updated": "2026-11-18T10:25:21Z"
 }
