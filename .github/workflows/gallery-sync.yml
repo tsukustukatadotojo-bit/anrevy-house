@@ -18,10 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Cài thư viện
-        run: pip install --quiet paho-mqtt==2.1.0 pillow cryptography
+        run: pip install --quiet paho-mqtt==2.1.0 pillow
       - name: Lưu tranh khách gửi
         run: python3 .github/scripts/gallery_sync.py
-      - name: Báo tin nhắn mới về điện thoại (Web Push)
-        env:
-          VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
-        run: python3 .github/scripts/chat_push.py
