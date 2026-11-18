@@ -37,6 +37,8 @@ READ_PFX = 'anrevy-house-9q2/reads/v1/n/'      # ghi chép sau bài đọc
 READNOTES = 'studio/data/readnotes.json'
 MYQ_PFX = 'anrevy-house-9q2/quotes/v1/q/'      # câu hay Vy tự chép trong Studio
 MYQUOTES = 'studio/data/myquotes.json'
+CHAT_PFX = 'anrevy-house-9q2/chat/v1/m/'       # tin Vy nhắn trong mục tin nhắn của Studio
+CHATME = 'studio/data/chat/me.json'
 DEFAULT_BROKERS = 'tcp://broker.emqx.io:1883,tcp://broker.hivemq.com:1883,tcp://test.mosquitto.org:1883'
 DB = 'gallery/uploads.json'
 DIR = 'gallery/uploads'
@@ -187,7 +189,7 @@ def main():
             print('không kết nối được', u, repr(e))
     if not links: print('không có máy chủ nào'); return
     time.sleep(2)
-    for u, c, store in links: c.subscribe(PFX + '#', 1); c.subscribe(NOTE_PFX + '#', 1); c.subscribe(READ_PFX + '+', 1); c.subscribe(MYQ_PFX + '+', 1)
+    for u, c, store in links: c.subscribe(PFX + '#', 1); c.subscribe(NOTE_PFX + '#', 1); c.subscribe(READ_PFX + '+', 1); c.subscribe(MYQ_PFX + '+', 1); c.subscribe(CHAT_PFX + '+', 1)
     t0 = LAST[0] = time.time()
     while True:                                          # đợi tới khi 10 giây không còn tin mới (tối đa 5 phút)
         time.sleep(1)
@@ -300,6 +302,9 @@ def main():
     rn_items, rn_changed, rn_stale = readnotes(links, now)
     mq_items, mq_changed, mq_stale = kvstore(links, now, MYQ_PFX, MYQUOTES, r'[a-z0-9]{8,24}',
         lambda m: {'t': clean(m['t'], 20000), 'c': m.get('c') if m.get('c') in ('doi', 'luan') else '', 'ti': clean(m.get('ti'), 200), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'note')
+    # 2d) tin nhắn Vy gửi trong mục tin nhắn: giữ lâu dài
+    ch_items, ch_changed, ch_stale = kvstore(links, now, CHAT_PFX, CHATME, r'[a-z0-9]{8,24}',
+        lambda m: {'t': clean(m['t'], 4000), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'tin nhắn')
 
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
@@ -309,7 +314,7 @@ def main():
             keep = time.time() - last > 45 * 86400
         except Exception: pass
 
-    if changed or keep or notes_changed or rn_changed or mq_changed:
+    if changed or keep or notes_changed or rn_changed or mq_changed or ch_changed:
         if changed or keep:
             items.sort(key=lambda it: it.get('at', 0))
             db = {'about': 'Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động). image = ảnh xem nhanh, full = bản gốc.', 'items': items}
@@ -323,7 +328,10 @@ def main():
             with open(READNOTES, 'w', encoding='utf-8') as f: json.dump({'items': rn_items}, f, ensure_ascii=False, indent=1)
         if mq_changed:
             with open(MYQUOTES, 'w', encoding='utf-8') as f: json.dump({'items': mq_items}, f, ensure_ascii=False, indent=1)
-        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '', f'ghi chép bài đọc: {sum(1 for v in rn_items.values() if v.get("t"))}' if rn_changed else '', f'note: {sum(1 for v in mq_items.values() if v.get("t"))}' if mq_changed else '']))
+        if ch_changed:
+            os.makedirs(os.path.dirname(CHATME), exist_ok=True)
+            with open(CHATME, 'w', encoding='utf-8') as f: json.dump({'items': ch_items}, f, ensure_ascii=False, indent=1)
+        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '', f'ghi chép bài đọc: {sum(1 for v in rn_items.values() if v.get("t"))}' if rn_changed else '', f'note: {sum(1 for v in mq_items.values() if v.get("t"))}' if mq_changed else '', f'tin nhắn: {sum(1 for v in ch_items.values() if v.get("t"))}' if ch_changed else '']))
         print(msg, added)
         if not DRY and not push(msg):
             print('push thất bại — không xoá tin giữ lại, lần sau thử lại')
@@ -335,7 +343,7 @@ def main():
     def mine(t):
         rest = t[len(PFX):].split('/')
         return len(rest) >= 2 and rest[0] in ('m', 'c', 'o') and rest[1] in keep_ids
-    clear = {t for t in clear if not mine(t)} | note_stale | rn_stale | mq_stale
+    clear = {t for t in clear if not mine(t)} | note_stale | rn_stale | mq_stale | ch_stale
     print('xoá', len(clear), 'tin giữ lại')
     if os.environ.get('GITHUB_ACTIONS'):
         print(f'::notice title=gallery-sync::{len(per)} mã trên máy chủ · đã lưu {len(items)} · thêm {len(added)} · không đạt {len(rejected)} · dọn {len(clear)} tin')
@@ -421,7 +429,7 @@ def git(*a): return subprocess.run(['git', *a], capture_output=True, text=True)
 def push(msg):
     git('config', 'user.name', 'github-actions[bot]')
     git('config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com')
-    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []), *([NOTES] if os.path.exists(NOTES) else []), *([READNOTES] if os.path.exists(READNOTES) else []), *([MYQUOTES] if os.path.exists(MYQUOTES) else []))
+    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []), *([NOTES] if os.path.exists(NOTES) else []), *([READNOTES] if os.path.exists(READNOTES) else []), *([MYQUOTES] if os.path.exists(MYQUOTES) else []), *([CHATME] if os.path.exists(CHATME) else []))
     r = git('commit', '-m', msg)
     if r.returncode != 0 and 'nothing to commit' not in r.stdout: print(r.stdout, r.stderr); return False
     for i in range(4):
