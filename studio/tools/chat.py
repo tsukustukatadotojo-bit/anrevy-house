@@ -176,7 +176,9 @@ def add(path):
         else:
             if not isinstance(txt, str) or not txt.strip():
                 errs.append(f'#{i}: t rỗng'); continue
-            txt = txt.strip()
+            txt = re.sub(r'(?<![.])[.]$', '', txt.strip()).strip()     # nhắn tin thật không chấm cuối câu (giữ "...")
+            if not txt:
+                errs.append(f'#{i}: t rỗng'); continue
             if len(txt) > 1500:
                 errs.append(f'#{i}: tin quá dài (>1500 ký tự) — tách thành nhiều tin'); continue
             if EMOJI.search(txt):
