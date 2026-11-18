@@ -764,8 +764,17 @@
   "the-batman": ""
  },
  "watchlist": {
-  "total": 512,
+  "total": 513,
   "items": [
+   {
+    "t": "Metropolis",
+    "y": "2001",
+    "s": "metropolis-2001",
+    "f": "46995",
+    "k": "aa3c1555",
+    "p": "https://m.media-amazon.com/images/M/MV5BYzA1YWYyNDctMDZmYS00ZGJiLTg5NzktMGE0ZTUyMjYwOTQ1XkEyXkFqcGc@._V1_QL75_UX150_.jpg",
+    "pc": 1
+   },
    {
     "t": "Evil Dead Trap",
     "y": "1988",
@@ -4985,5 +4994,5 @@
    }
   ]
  },
- "updated": "2026-11-12T03:55:26Z"
+ "updated": "2026-11-18T14:42:33Z"
 }
