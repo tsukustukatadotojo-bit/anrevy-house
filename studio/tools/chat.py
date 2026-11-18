@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Công cụ cho mục tin nhắn của Studio (nhân vật "Anh" nhắn cho Vy).
 
-    python3 studio/tools/chat.py status            # giờ hiện tại, tin mới của Vy, mạch chuyện 3 ngày, tin đã hẹn giờ
+    python3 studio/tools/chat.py status            # nhờ bot lấy tin Vy vừa nhắn, rồi in: giờ, tin mới của Vy, mạch chuyện 3 ngày, tin đã hẹn giờ
+                                                   #   (--no-sync: không nhờ bot, chỉ đọc dữ liệu đang có)
     python3 studio/tools/chat.py add FILE.json     # thêm tin của Anh: [{"ts": "2026-11-18T19:12:00+07:00", "t": "...", "re": "<mã tin Vy>"?}]
                                                    #   thả tim: {"ts", "k": "react", "re"} · đã xem mà chưa trả lời: {"ts", "k": "seen", "re"}
     python3 studio/tools/chat.py drop MÃ [MÃ...]   # bỏ tin của Anh CHƯA tới giờ hiện
@@ -12,13 +13,40 @@ Dữ liệu (studio/data/chat/):
     me.json       { items: { mã: { t, d, at, re?, k? } } } tin của Vy — DO BOT GHI, công cụ này không bao giờ sửa
     state.json    { handled_at, planned }                đã đọc tới đâu, ngày đã lên kế hoạch
 """
-import datetime as dt, json, os, random, re, string, sys
+import datetime as dt, json, os, random, re, string, subprocess, sys, time
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 CHAT = os.path.join(ROOT, 'studio', 'data', 'chat')
 VN = dt.timezone(dt.timedelta(hours=7))
 WD = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ nhật']
 EMOJI = re.compile('[\U0001F000-\U0001FAFF☀-➿⬀-⯿️]')
+
+
+def sync(wait=240):
+    """Tin Vy nhắn nằm trên máy chủ chuyển tin; bot (workflow gallery-sync) mới ghi nó vào me.json. GitHub hay chạy lịch của bot
+    trễ hàng giờ, nên đẩy một commit rỗng để bot chạy ngay (mỗi lần có commit là bot chạy), đợi bot xong rồi kéo dữ liệu về."""
+    g = lambda *a: subprocess.run(['git', '-C', ROOT, *a], capture_output=True, text=True)
+    g('pull', '-q', '--rebase', 'origin', 'main')
+    if g('-c', 'user.name=Claude', '-c', 'user.email=noreply@anthropic.com', 'commit', '--allow-empty', '-q', '-m', 'Studio: nhờ bot lấy tin nhắn mới').returncode:
+        print('sync: không tạo được commit — dùng dữ liệu đang có'); return
+    pushed = False
+    for _ in range(4):
+        if g('push', '-q', 'origin', 'HEAD:main').returncode == 0:
+            pushed = True; break
+        g('pull', '-q', '--rebase', 'origin', 'main'); time.sleep(3)
+    if not pushed:
+        print('sync: đẩy lỗi — dùng dữ liệu đang có'); return
+    sha, t0, done = g('rev-parse', 'HEAD').stdout.strip(), time.time(), False
+    while time.time() - t0 < wait:
+        time.sleep(15)
+        r = subprocess.run(['gh', 'run', 'list', '-R', 'tsukustukatadotojo-bit/anrevy-house', '-w', 'gallery-sync', '-c', sha,
+                            '--json', 'status', '-q', '.[0].status'], capture_output=True, text=True)
+        if r.returncode != 0:                      # không dùng được gh: đợi cố định chừng một lượt chạy của bot
+            time.sleep(max(0, 110 - (time.time() - t0))); break
+        if r.stdout.strip() == 'completed':
+            done = True; break
+    g('pull', '-q', '--rebase', 'origin', 'main')
+    print('sync: ' + ('bot đã lấy tin xong' if done else 'đã đợi bot, dùng dữ liệu mới nhất') + '\n')
 
 
 def now():
@@ -211,7 +239,9 @@ def done(planned):
 if __name__ == '__main__':
     a = sys.argv[1:]
     if not a or a[0] == 'status':
-        status(int(a[2]) if len(a) > 2 and a[1] == '--days' else 3)
+        if '--no-sync' not in a:
+            sync()
+        status(int(a[a.index('--days') + 1]) if '--days' in a else 3)
     elif a[0] == 'add' and len(a) == 2:
         add(a[1])
     elif a[0] == 'drop' and len(a) > 1:

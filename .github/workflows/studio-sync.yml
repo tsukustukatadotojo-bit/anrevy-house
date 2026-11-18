@@ -1,13 +1,10 @@
-# Studio: Letterboxd (haanvie) mỗi 30 phút; Watchlist, tin nhạc mới, bảng xếp hạng 2 giờ một lần.
+# Studio: Letterboxd (haanvie) mỗi lần chạy; Watchlist, tin nhạc mới, bảng xếp hạng khi lần trước đã quá ~2 giờ.
 name: studio-sync
 on:
   schedule:
     - cron: '11,41 * * * *'
   push:
-    branches: [main]
-    paths:
-      - '.github/scripts/studio_sync.py'
-      - '.github/workflows/studio-sync.yml'
+    branches: [main]             # GitHub hay bỏ lỡ lịch chạy, nên mỗi lần có commit mới (bài đọc, tin nhắn…) cũng chạy kèm
   workflow_dispatch:
 permissions:
   contents: write

@@ -8,7 +8,7 @@
 3. Bảng xếp hạng: Spotify US/UK hằng ngày, Apple Music Nga/Trung Quốc (kworb.net) → studio/data/charts.json
 4. Album phát hành quanh hôm nay (Wikipedia "List of 2026 albums") → studio/data/releases.json
 
-Lịch chạy 30 phút một lần: Letterboxd (RSS + phim đã xem) mỗi lần; Watchlist, nhạc mới, bảng xếp hạng 2 giờ một lần.
+Chạy theo lịch và mỗi lần có commit mới: Letterboxd (RSS + phim đã xem) mỗi lần; Watchlist, nhạc mới, bảng xếp hạng khi lần trước đã quá ~2 giờ.
 
 Chạy thử: python3 studio_sync.py --dry
 """
@@ -21,7 +21,16 @@ LB_USER = 'haanvie'
 LB_OUT = 'studio/data/letterboxd.json'
 MUSIC_OUT = 'studio/data/music.json'
 CHARTS_OUT = 'studio/data/charts.json'
-HEAVY = '--all' in sys.argv or os.environ.get('GITHUB_EVENT_NAME', 'schedule') != 'schedule' or (datetime.now(timezone.utc).hour % 2 == 0 and datetime.now(timezone.utc).minute < 30)
+def _stale(path, minutes):
+    """File chưa có, hoặc mốc 'updated' cũ hơn số phút cho trước."""
+    try:
+        u = json.load(open(path, encoding='utf-8')).get('updated', '')
+        return (datetime.now(timezone.utc) - datetime.strptime(u, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)).total_seconds() > minutes * 60
+    except Exception:
+        return True
+# Nhạc mới, bảng xếp hạng, album phát hành: làm lại khi lần cập nhật trước đã quá ~2 giờ.
+# (Trước đây dựa vào giờ chẵn và phút < 30, nhưng GitHub hay chạy lịch trễ hàng giờ nên điều kiện đó gần như không bao giờ đúng.)
+HEAVY = '--all' in sys.argv or os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch' or _stale('studio/data/music.json', 110)
 MAX_ITEMS = 40
 DRY = '--dry' in sys.argv
 UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
