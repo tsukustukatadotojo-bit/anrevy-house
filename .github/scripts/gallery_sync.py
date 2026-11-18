@@ -304,7 +304,10 @@ def main():
         lambda m: {'t': clean(m['t'], 20000), 'c': m.get('c') if m.get('c') in ('doi', 'luan') else '', 'ti': clean(m.get('ti'), 200), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'note')
     # 2d) tin nhắn Vy gửi trong mục tin nhắn: giữ lâu dài
     ch_items, ch_changed, ch_stale = kvstore(links, now, CHAT_PFX, CHATME, r'[a-z0-9]{8,24}',
-        lambda m: {'t': clean(m['t'], 4000), 'd': m['d']} if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'tin nhắn')
+        lambda m: {'t': clean(m['t'], 4000), 'd': m['d'],
+                   **({'k': 'react'} if m.get('k') == 'react' else {}),
+                   **({'re': m['re']} if isinstance(m.get('re'), str) and re.fullmatch(r'[A-Za-z0-9-]{1,40}', m['re']) else {})}
+                  if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'tin nhắn')
 
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
