@@ -2,7 +2,8 @@
 """Công cụ cho mục tin nhắn của Studio (nhân vật "Anh" nhắn cho Vy).
 
     python3 studio/tools/chat.py status            # giờ hiện tại, tin mới của Vy, mạch chuyện 3 ngày, tin đã hẹn giờ
-    python3 studio/tools/chat.py add FILE.json     # thêm tin của Anh: [{"ts": "2026-11-18T19:12:00+07:00", "t": "...", "re": "<mã tin Vy>"?, "k": "react"?}]
+    python3 studio/tools/chat.py add FILE.json     # thêm tin của Anh: [{"ts": "2026-11-18T19:12:00+07:00", "t": "...", "re": "<mã tin Vy>"?}]
+                                                   #   thả tim: {"ts", "k": "react", "re"} · đã xem mà chưa trả lời: {"ts", "k": "seen", "re"}
     python3 studio/tools/chat.py drop MÃ [MÃ...]   # bỏ tin của Anh CHƯA tới giờ hiện
     python3 studio/tools/chat.py done [--planned]  # đánh dấu đã đọc mọi tin của Vy hiện có; --planned: đã lên kế hoạch cho hôm nay
 
@@ -95,15 +96,16 @@ def status(days=3):
     rows = [(m['_t'], 'Anh', m) for m in his if since <= m['_t'] <= n] + [(m['_t'], 'Vy', m) for m in me if m['_t'] >= since and m.get('t')]
     print(f'\nMẠCH CHUYỆN {days} NGÀY QUA (đã hiện):')
     for t, who, m in sorted(rows, key=lambda r: r[0]):
-        if m.get('k') == 'react':
+        if m.get('k') in ('react', 'seen'):
             tgt = (byid if who == 'Anh' else hisid).get(m.get('re'), {})
-            print(f'  [{fmt(t)}] {who} thả tim «{(tgt.get("t") or "?")[:60]}»')
+            print(f'  [{fmt(t)}] {who} {"thả tim" if m["k"] == "react" else "đã xem"} «{(tgt.get("t") or "?")[:60]}»')
         else:
             print(f'  [{fmt(t)}] {who}{" ↩" + m["re"] if m.get("re") else ""}: {m["t"]}')
     up = [m for m in his if m['_t'] > n]
     print(f'\nTIN CỦA ANH ĐÃ HẸN GIỜ, CHƯA HIỆN: {len(up)}')
     for m in up:
-        print(f'  [{fmt(m["_t"])}] {m["id"]}{" (thả tim " + m["re"] + ")" if m.get("k") == "react" else ""}: {m["t"]}')
+        tag = {'react': ' (thả tim ', 'seen': ' (đã xem '}.get(m.get('k'))
+        print(f'  [{fmt(m["_t"])}] {m["id"]}{tag + m["re"] + ")" if tag else ""}: {m["t"]}')
 
 
 def rid(t):
@@ -131,18 +133,18 @@ def add(path):
             errs.append(f'#{i}: ts sai ({e})'); continue
         txt = r.get('t')
         k = r.get('k')
-        if k not in (None, '', 'react'):
-            errs.append(f'#{i}: k chỉ được là "react"'); continue
+        if k not in (None, '', 'react', 'seen'):
+            errs.append(f'#{i}: k chỉ được là "react" hoặc "seen"'); continue
         if t < n - dt.timedelta(minutes=10):
             errs.append(f'#{i}: ts {t:%H:%M} đã qua — không tạo tin lùi giờ'); continue
         if t > n + dt.timedelta(hours=30):
             errs.append(f'#{i}: ts quá xa (hơn 30 giờ)'); continue
         if r.get('re') and r['re'] not in vy:
             errs.append(f'#{i}: re {r["re"]} không phải mã tin của Vy'); continue
-        if k == 'react':
+        if k in ('react', 'seen'):
             if not r.get('re'):
-                errs.append(f'#{i}: thả tim cần re = mã tin của Vy'); continue
-            txt = '❤'
+                errs.append(f'#{i}: {k} cần re = mã tin của Vy'); continue
+            txt = '❤' if k == 'react' else ''
         else:
             if not isinstance(txt, str) or not txt.strip():
                 errs.append(f'#{i}: t rỗng'); continue
@@ -155,7 +157,7 @@ def add(path):
         while i_ in existing:
             i_ = rid(t)
         existing.add(i_)
-        clean.append({'id': i_, 'ts': t.isoformat(timespec='seconds'), 't': txt, **({'re': r['re']} if r.get('re') else {}), **({'k': 'react'} if k == 'react' else {})})
+        clean.append({'id': i_, 'ts': t.isoformat(timespec='seconds'), 't': txt, **({'re': r['re']} if r.get('re') else {}), **({'k': k} if k in ('react', 'seen') else {})})
     if errs:
         print('\n'.join('LỖI ' + e for e in errs))
         sys.exit('không thêm tin nào — sửa file rồi chạy lại')
