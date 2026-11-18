@@ -39,6 +39,9 @@ MYQ_PFX = 'anrevy-house-9q2/quotes/v1/q/'      # câu hay Vy tự chép trong St
 MYQUOTES = 'studio/data/myquotes.json'
 CHAT_PFX = 'anrevy-house-9q2/chat/v1/m/'       # tin Vy nhắn trong mục tin nhắn của Studio
 CHATME = 'studio/data/chat/me.json'
+PUSH_PFX = 'anrevy-house-9q2/push/v1/s/'       # máy nào bật thông báo tin nhắn (Web Push) — chat_push.py dùng để báo tin
+PUSHSUBS = 'studio/data/chat/push-subs.json'
+PUSH_EP = re.compile(r'https://(fcm\.googleapis\.com|updates\.push\.services\.mozilla\.com|web\.push\.apple\.com|[a-z0-9.-]+\.notify\.windows\.com)/[^\s]{8,900}$')
 DEFAULT_BROKERS = 'tcp://broker.emqx.io:1883,tcp://broker.hivemq.com:1883,tcp://test.mosquitto.org:1883'
 DB = 'gallery/uploads.json'
 DIR = 'gallery/uploads'
@@ -189,7 +192,7 @@ def main():
             print('không kết nối được', u, repr(e))
     if not links: print('không có máy chủ nào'); return
     time.sleep(2)
-    for u, c, store in links: c.subscribe(PFX + '#', 1); c.subscribe(NOTE_PFX + '#', 1); c.subscribe(READ_PFX + '+', 1); c.subscribe(MYQ_PFX + '+', 1); c.subscribe(CHAT_PFX + '+', 1)
+    for u, c, store in links: c.subscribe(PFX + '#', 1); c.subscribe(NOTE_PFX + '#', 1); c.subscribe(READ_PFX + '+', 1); c.subscribe(MYQ_PFX + '+', 1); c.subscribe(CHAT_PFX + '+', 1); c.subscribe(PUSH_PFX + '+', 1)
     t0 = LAST[0] = time.time()
     while True:                                          # đợi tới khi 10 giây không còn tin mới (tối đa 5 phút)
         time.sleep(1)
@@ -308,6 +311,8 @@ def main():
                    **({'k': 'react'} if m.get('k') == 'react' else {}),
                    **({'re': m['re']} if isinstance(m.get('re'), str) and re.fullmatch(r'[A-Za-z0-9-]{1,40}', m['re']) else {})}
                   if isinstance(m.get('d'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']) else None, 'tin nhắn')
+    # 2e) máy bật thông báo tin nhắn
+    ps_items, ps_changed, ps_stale = kvstore(links, now, PUSH_PFX, PUSHSUBS, r'[a-f0-9]{20}', push_sub, 'máy nhận thông báo')
 
     # 3) giữ cho lịch chạy không bị GitHub tắt khi lâu không có thay đổi (60 ngày)
     keep = False
@@ -317,7 +322,7 @@ def main():
             keep = time.time() - last > 45 * 86400
         except Exception: pass
 
-    if changed or keep or notes_changed or rn_changed or mq_changed or ch_changed:
+    if changed or keep or notes_changed or rn_changed or mq_changed or ch_changed or ps_changed:
         if changed or keep:
             items.sort(key=lambda it: it.get('at', 0))
             db = {'about': 'Tranh khách gửi qua nút Update ở cuối trang An Vy’s Gallery (lưu tự động). image = ảnh xem nhanh, full = bản gốc.', 'items': items}
@@ -334,7 +339,10 @@ def main():
         if ch_changed:
             os.makedirs(os.path.dirname(CHATME), exist_ok=True)
             with open(CHATME, 'w', encoding='utf-8') as f: json.dump({'items': ch_items}, f, ensure_ascii=False, indent=1)
-        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '', f'ghi chép bài đọc: {sum(1 for v in rn_items.values() if v.get("t"))}' if rn_changed else '', f'note: {sum(1 for v in mq_items.values() if v.get("t"))}' if mq_changed else '', f'tin nhắn: {sum(1 for v in ch_items.values() if v.get("t"))}' if ch_changed else '']))
+        if ps_changed:
+            os.makedirs(os.path.dirname(PUSHSUBS), exist_ok=True)
+            with open(PUSHSUBS, 'w', encoding='utf-8') as f: json.dump({'items': ps_items}, f, ensure_ascii=False, indent=1)
+        msg = 'Gallery: ' + ', '.join(filter(None, [f'thêm {len(added)} tranh khách gửi' if added else '', 'giữ lịch chạy' if keep and not changed else '', f'note: {len(note_items)} tin' if notes_changed else '', f'ghi chép bài đọc: {sum(1 for v in rn_items.values() if v.get("t"))}' if rn_changed else '', f'note: {sum(1 for v in mq_items.values() if v.get("t"))}' if mq_changed else '', f'tin nhắn: {sum(1 for v in ch_items.values() if v.get("t"))}' if ch_changed else '', 'máy nhận thông báo' if ps_changed else '']))
         print(msg, added)
         if not DRY and not push(msg):
             print('push thất bại — không xoá tin giữ lại, lần sau thử lại')
@@ -346,7 +354,7 @@ def main():
     def mine(t):
         rest = t[len(PFX):].split('/')
         return len(rest) >= 2 and rest[0] in ('m', 'c', 'o') and rest[1] in keep_ids
-    clear = {t for t in clear if not mine(t)} | note_stale | rn_stale | mq_stale | ch_stale
+    clear = {t for t in clear if not mine(t)} | note_stale | rn_stale | mq_stale | ch_stale | ps_stale
     print('xoá', len(clear), 'tin giữ lại')
     if os.environ.get('GITHUB_ACTIONS'):
         print(f'::notice title=gallery-sync::{len(per)} mã trên máy chủ · đã lưu {len(items)} · thêm {len(added)} · không đạt {len(rejected)} · dọn {len(clear)} tin')
@@ -393,6 +401,19 @@ def notes(links, now):
     print(f'note: {len(items)} tin trong 7 ngày, dọn {len(stale)} tin cũ/lỗi' + (f' (xoá toàn bộ tin trước {wipe})' if wipe else ''))
     return items, items != old, stale, wipe
 
+def push_sub(m):
+    """Đăng ký Web Push từ Studio: t = JSON {endpoint, keys:{p256dh, auth}} (t rỗng = huỷ)."""
+    if not isinstance(m.get('d'), str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', m['d']): return None
+    if m['t'] == '': return {'t': '', 'd': m['d']}
+    try: s = json.loads(m['t'])
+    except Exception: return None
+    ep, k = (s.get('endpoint'), s.get('keys') or {}) if isinstance(s, dict) else (None, {})
+    ok_ep = isinstance(ep, str) and (PUSH_EP.match(ep) or (os.environ.get('PUSH_TEST') == '1' and ep.startswith('http://localhost:')))
+    if not ok_ep or not isinstance(k, dict): return None
+    p, a = k.get('p256dh'), k.get('auth')
+    if not (isinstance(p, str) and re.fullmatch(r'[A-Za-z0-9_-]{86,88}={0,2}', p) and isinstance(a, str) and re.fullmatch(r'[A-Za-z0-9_-]{20,24}={0,2}', a)): return None
+    return {'t': json.dumps({'endpoint': ep, 'keys': {'p256dh': p, 'auth': a}}, separators=(',', ':')), 'd': m['d']}
+
 def readnotes(links, now):
     """Ghi chép sau bài đọc: mã là mã bài (YYYY-MM-DD-n)."""
     return kvstore(links, now, READ_PFX, READNOTES, r'\d{4}-\d{2}-\d{2}-\d{1,2}', lambda m: {'t': clean(m['t'], 8000)}, 'ghi chép bài đọc')
@@ -432,7 +453,7 @@ def git(*a): return subprocess.run(['git', *a], capture_output=True, text=True)
 def push(msg):
     git('config', 'user.name', 'github-actions[bot]')
     git('config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com')
-    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []), *([NOTES] if os.path.exists(NOTES) else []), *([READNOTES] if os.path.exists(READNOTES) else []), *([MYQUOTES] if os.path.exists(MYQUOTES) else []), *([CHATME] if os.path.exists(CHATME) else []))
+    git('add', '-A', DB, *([DIR] if os.path.isdir(DIR) else []), *([NOTES] if os.path.exists(NOTES) else []), *([READNOTES] if os.path.exists(READNOTES) else []), *([MYQUOTES] if os.path.exists(MYQUOTES) else []), *([CHATME] if os.path.exists(CHATME) else []), *([PUSHSUBS] if os.path.exists(PUSHSUBS) else []))
     r = git('commit', '-m', msg)
     if r.returncode != 0 and 'nothing to commit' not in r.stdout: print(r.stdout, r.stderr); return False
     for i in range(4):
