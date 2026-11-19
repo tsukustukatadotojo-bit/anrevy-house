@@ -1,35 +1,6 @@
 {
  "items": [
   {
-   "d": "2026-11-11",
-   "a": "2hollis",
-   "w": "Pirouette",
-   "g": "EDM, electropop, rage",
-   "l": "Interscope"
-  },
-  {
-   "d": "2026-11-11",
-   "a": "Anberlin",
-   "w": "Currency",
-   "l": "Equal Vision"
-  },
-  {
-   "d": "2026-11-11",
-   "a": "Bruiser Wolf and Conductor Williams",
-   "w": "The Dealer Wins"
-  },
-  {
-   "d": "2026-11-11",
-   "a": "Chanmina",
-   "w": "Legend",
-   "l": "No Label"
-  },
-  {
-   "d": "2026-11-11",
-   "a": "Eliza Rose",
-   "w": "Arcadia: Pleasuredome"
-  },
-  {
    "d": "2026-11-12",
    "a": "Ecco2k",
    "w": "Echo",
@@ -578,5 +549,5 @@
    "l": "Time To Kill Records"
   }
  ],
- "updated": "2026-11-18T10:25:21Z"
+ "updated": "2026-11-19T01:27:25Z"
 }
