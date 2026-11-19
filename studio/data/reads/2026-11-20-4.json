@@ -1,0 +1,76 @@
+{
+ "id": "2026-11-20-4",
+ "date": "2026-11-20",
+ "title": "Ten Cents or Five? Kahneman's Two Systems of the Mind",
+ "topic": "tư duy: hai hệ thống nhanh và chậm",
+ "kind": "small",
+ "lang": "en",
+ "minutes": 10,
+ "track": "D",
+ "role": "new",
+ "stage": null,
+ "week": null,
+ "unit": "Mở đầu: học cách học & tấm bản đồ của một năm",
+ "summary": "Daniel Kahneman described thinking as a fast, automatic System 1 and a slow, effortful System 2; the bat-and-ball puzzle shows how a fluent wrong answer feels right, the replication problems in the book's priming chapter show why evidence still needs checking, and a few simple rules help decide when to slow down.",
+ "body": "Try this before reading on. Answer as fast as you can:\n\n> A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost?\n\nIf a number jumped into your head, it was probably 10 cents. It feels obviously right. It is wrong. If the ball cost 10 cents, the bat would cost $1.10, and together they would cost $1.20. The correct answer is 5 cents (ball 5 cents, bat $1.05).\n\nThis little puzzle comes from the **Cognitive Reflection Test**, published by the economist Shane Frederick in the *Journal of Economic Perspectives* in 2005. Researchers who use it note that the \"10 cents\" answer seems to come to mind for most, if not all, people, and many people simply give it. The interesting part is not that people are bad at arithmetic. Almost everyone can do this sum. The interesting part is that the wrong answer arrives so quickly and confidently that we never think to check it.\n\nThat gap between the answer that *arrives* and the answer we *work out* is the subject of one of the most influential psychology books of this century: *Thinking, Fast and Slow* (2011) by Daniel Kahneman, published in Vietnamese as *Tư duy nhanh và chậm*.\n\n## Two characters in your head\n\nKahneman, a psychologist who won the Nobel memorial prize in economics in 2002 for his work with Amos Tversky on judgment and decision-making, organised the book around two \"characters\". He borrowed the neutral labels from other researchers:\n\n- **System 1** works fast, automatically and effortlessly. It recognises a friend's face, reads anger in a voice, completes \"bread and…\", drives a familiar road, and produces \"10 cents\".\n- **System 2** works slowly and deliberately, and it takes effort. It multiplies 17 by 24, fills in a tax form, checks whether an argument is valid, and, if you let it, catches the mistake in the bat-and-ball problem.\n\nKahneman was clear that these are not two physical parts of the brain. They are a convenient way of describing two modes of thinking. Most of the time, System 1 runs the show and does it well. System 2 is, in his phrase, rather lazy: it tends to accept what System 1 suggests unless something feels wrong.\n\nThe trouble is that System 1 does not tell you when it is guessing. A fluent, easy answer *feels* true. That is why the bat-and-ball problem works so well: the wrong answer feels exactly like a right one.\n\n## Two more questions from the test\n\nThe other two items on Frederick's original test work the same way:\n\n> If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?\n\n> In a lake, there is a patch of lily pads. Every day, the patch doubles in size. If it takes 48 days for the patch to cover the entire lake, how long would it take for the patch to cover half of the lake?\n\nThe intuitive answers are 100 minutes and 24 days. The correct answers are 5 minutes (each machine makes one widget in 5 minutes) and 47 days (if it doubles daily, it was half the size the day before). Notice the feeling as you correct yourself: a small jolt, then a slower, more effortful kind of thinking. That jolt is System 2 waking up.\n\n## Why this matters for learning\n\nThis week's theme in the Studio is learning how to learn, and the two systems explain several traps from earlier readings.\n\n**Fluency feels like knowing.** When you reread a page, it becomes familiar, and familiarity is a System 1 signal. It whispers \"I know this.\" But recognising something is not the same as being able to recall or use it. This is why Wednesday's reading on memory recommended testing yourself instead of rereading: retrieval forces System 2 to do real work.\n\n**Quick judgments about people.** Today's reading on observing without judging (*quan sát không phán xét*) is, in Kahneman's terms, a training programme for System 2. When a colleague walks in late and frowning, System 1 instantly writes a story: lazy, rude, careless. The skill is to notice that a story has arrived and ask System 2 to check it.\n\n**Tacit knowledge is trained System 1.** Today's foundation reading on tacit knowledge (*kiến thức ngầm*) has a link here too. An experienced official who \"just feels\" something is off in a draft is using a System 1 that has been trained by years of feedback. Kahneman, in later work with the researcher Gary Klein, argued that such expert intuition can be trusted when the environment is regular enough and the expert has had plenty of practice with quick, clear feedback. It is less trustworthy when those conditions are missing.\n\n## A necessary warning about the book itself\n\nThere is a twist that makes *Thinking, Fast and Slow* even more useful as a lesson in thinking. Some of the research it cites has not held up.\n\nChapter 4, on \"priming\" (the idea that, for example, reading words about old age makes people walk more slowly afterwards), relied on small studies that later attempts often failed to repeat. In 2017, the researchers Ulrich Schimmack, Moritz Heene and Kamini Kesavan analysed the studies cited in that chapter and concluded that their statistical evidence was weak. Kahneman responded publicly in a comment on their blog. He wrote that he accepted their basic conclusions and that \"I placed too much faith in underpowered studies.\" He had, years earlier, warned priming researchers in an open letter: \"I see a train wreck looming.\"\n\nA later analysis by Schimmack in 2020 suggested that the book's evidence is uneven: some chapters, like those on priming, are shaky, while other ideas, such as overconfidence, stand on firmer ground. The broad distinction between fast intuition and slow deliberation remains widely used, even as researchers debate the details.\n\nThis is not a reason to throw the book away. It is a reason to read it the way Kahneman himself recommended thinking: let System 1 enjoy the stories, and let System 2 ask how strong the evidence is. A Nobel laureate publicly admitting that he trusted weak studies too much is itself a model of good thinking.\n\n## Using the two systems at work\n\nYou cannot switch System 1 off, and you should not want to. It is what lets you read a room, greet a senior colleague correctly and finish routine tasks quickly. The goal is to know *when* to call in System 2. A few practical rules:\n\n1. **Slow down when the stakes are high and the answer came too easily.** Before signing off on figures in a report, or replying to a sensitive message from a superior, pause and ask: \"What would I check if this answer were wrong?\"\n2. **Watch for strong feelings.** Anger, embarrassment and the urge to impress all push us towards quick System 1 responses. A useful habit in Vietnamese office culture is the polite delay: \"Dạ, để em xem lại rồi báo anh/chị ạ\" (\"Let me check and get back to you\"). It buys System 2 time without seeming evasive.\n3. **Turn intuitions into questions.** Instead of \"this proposal won't work\", try \"my gut says this won't work; what exactly is bothering me?\" That moves the thought from System 1 to System 2.\n4. **Do the arithmetic on paper.** For anything involving numbers, percentages or dates (deadlines under a new regulation, a budget, a timeline) write it down. The bat-and-ball problem shows how easily mental arithmetic follows the first answer that feels right.\n\n## How to practise\n\n- **Catch one \"10 cents\" a day.** Each evening, recall one moment when your first answer, judgment or reaction turned out to be wrong or incomplete. Write one line about what System 2 would have noticed.\n- **Use a two-second check before replying.** When a message or question at work makes you want to answer instantly, take two breaths and ask yourself one question: \"Is there another way to read this?\"\n- **Teach the bat-and-ball problem to someone.** Watching another person fall for it, and then explaining why, fixes the idea in memory far better than reading about it. It is also a good test of whether you really understand it, in the spirit of the Feynman technique.\n\nFast thinking makes us capable; slow thinking keeps us honest. A thoughtful person is not someone who always thinks slowly, but someone who knows which kind of thinking the moment calls for.",
+ "sources": [
+  {
+   "title": "UBC Sauder DMIDI: Cognitive Reflection Test (Frederick, 2005, Journal of Economic Perspectives 19(4))",
+   "url": "https://dlab.sauder.ubc.ca/sjdm/dmidi/Cognitive%20Reflection%20Test.html"
+  },
+  {
+   "title": "Sinayev & Peters (2015), Cognitive reflection vs. calculation in decision making, Frontiers in Psychology",
+   "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00532/full"
+  },
+  {
+   "title": "Schimmack, Heene & Kesavan (2017): Reconstruction of a Train Wreck – How Priming Research Went off the Rails",
+   "url": "https://replicationindex.com/2017/02/02/reconstruction-of-a-train-wreck-how-priming-research-went-of-the-rails/"
+  },
+  {
+   "title": "Kahneman's comment on the Train Wreck post (14 February 2017)",
+   "url": "https://replicationindex.com/2017/02/02/reconstruction-of-a-train-wreck-how-priming-research-went-of-the-rails/comment-page-1/#comment-1454"
+  },
+  {
+   "title": "Schimmack (2020): A Meta-Scientific Perspective on 'Thinking: Fast and Slow'",
+   "url": "https://replicationindex.com/2020/12/30/a-meta-scientific-perspective-on-thinking-fast-and-slow/"
+  },
+  {
+   "title": "The Psychologist (BPS, 2023): Suspect primes",
+   "url": "https://bps.org.uk/psychologist/suspect-primes"
+  }
+ ],
+ "unsure": [
+  "Kahneman's 2002 Nobel memorial prize, the origin of the System 1 / System 2 labels in earlier work by other researchers, and his later work with Gary Klein on expert intuition are stated from general knowledge; the specific pages were not opened.",
+  "The 'reading words about old age makes people walk more slowly' example is a well-known priming study used for illustration; its exact details were not checked against the original paper.",
+  "No precise error rate for the bat-and-ball problem is given because the opened sources did not show a verified figure."
+ ],
+ "connect": [
+  {
+   "id": "2026-11-20-3",
+   "why": "Observing without judging is, in Kahneman's terms, noticing the instant story System 1 writes about a person and asking System 2 to check it."
+  },
+  {
+   "id": "2026-11-18-1",
+   "why": "Rereading creates fluency, a System 1 feeling of knowing; the memory reading's advice to test yourself forces System 2 to retrieve, which is what builds lasting memory."
+  },
+  {
+   "id": "2026-11-20-1",
+   "why": "Tacit expertise is a well-trained System 1; Kahneman's view helps decide when such gut feelings can be trusted."
+  }
+ ],
+ "check": [
+  {
+   "q": "Why do so many people answer '10 cents' to the bat-and-ball problem, even though they can do the arithmetic?",
+   "a": "System 1 produces a fluent answer that feels right, and a lazy System 2 accepts it without checking; the error is a failure to check, not a failure of arithmetic."
+  },
+  {
+   "q": "What did Kahneman admit about the priming chapter of his book, and what is the lesson for readers?",
+   "a": "He accepted critics' conclusions that the cited studies were weak and wrote that he had 'placed too much faith in underpowered studies'. The lesson is to enjoy the ideas but still ask how strong the evidence behind each claim is."
+  },
+  {
+   "q": "Name two situations at work where you should deliberately call in System 2.",
+   "a": "When stakes are high and the answer came too easily (e.g. signing off on figures), and when strong feelings such as anger or embarrassment push you to reply instantly; a polite delay or writing numbers on paper helps."
+  }
+ ],
+ "try": "This week, each evening, write one line about a moment when your first answer or judgment was wrong or incomplete, and what a slower check would have noticed."
+}
