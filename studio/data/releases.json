@@ -1,12 +1,6 @@
 {
  "items": [
   {
-   "d": "2026-11-12",
-   "a": "Ecco2k",
-   "w": "Echo",
-   "l": "9th"
-  },
-  {
    "d": "2026-11-13",
    "a": "Aesop Rock and Blockhead",
    "w": "Trouble Mountain",
@@ -547,7 +541,13 @@
    "a": "Whiplash",
    "w": "Roar",
    "l": "Time To Kill Records"
+  },
+  {
+   "d": "2026-11-30",
+   "a": "Taeyeon",
+   "w": "Unspecial",
+   "l": "SM"
   }
  ],
- "updated": "2026-11-19T01:27:25Z"
+ "updated": "2026-11-20T01:27:10Z"
 }
