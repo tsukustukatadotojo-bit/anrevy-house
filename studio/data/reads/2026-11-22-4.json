@@ -1,0 +1,94 @@
+{
+ "id": "2026-11-22-4",
+ "date": "2026-11-22",
+ "title": "Mười câu cuối tuần: tự kiểm tra tuần mở đầu",
+ "topic": "ôn tập: tự kiểm tra tuần mở đầu",
+ "kind": "small",
+ "lang": "vi",
+ "minutes": 10,
+ "track": "D",
+ "role": "quiz",
+ "stage": null,
+ "week": null,
+ "unit": "Mở đầu: học cách học & tấm bản đồ của một năm",
+ "summary": "Mười câu tự kiểm tra: bảy câu từ các bài tuần mở đầu (ôn giãn cách, Feynman, hai câu sau mỗi bài, mạng lưới mô hình, kiến thức ngầm, hai hệ thống, tư duy phản biện) và ba câu từ tuần trước (bình chữa cháy, lợi thế so sánh, tủ lạnh).",
+ "body": "Mười câu dưới đây lấy từ các bài của tuần mở đầu và ba bài của tuần trước. Với mỗi câu, cố trả lời trong đầu (hoặc nói thành tiếng) trước khi mở đáp án: chính việc cố gọi ra mới làm trí nhớ bền, còn khoảnh khắc \"à, mình quên mất\" lại là lúc tò mò nhất, dễ nhớ nhất. Câu nào quên hẳn thì bấm vào bài gốc đọc lại đúng đoạn đó, rồi tuần sau thử lại.\n",
+ "sources": [
+  {
+   "title": "PubMed: Roediger & Karpicke (2006), Test-enhanced learning: taking memory tests improves long-term retention",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/16507066/"
+  },
+  {
+   "title": "WashU Source (2006): Repeated test-taking better for retention than repeated studying, research shows",
+   "url": "https://source.washu.edu/2006/03/repeated-testtaking-better-for-retention-than-repeated-studying-research-shows/"
+  },
+  {
+   "title": "ScienceDaily (2014): How curiosity changes the brain to enhance learning",
+   "url": "https://www.sciencedaily.com/releases/2014/10/141002123631.htm"
+  }
+ ],
+ "unsure": [],
+ "connect": [
+  {
+   "id": "2026-11-22-1",
+   "why": "Bài tổng kết tuần kể lại mạch chuyện mà mười câu này kiểm tra từng mắt xích."
+  },
+  {
+   "id": "2026-11-18-1",
+   "why": "Bài về trí nhớ giải thích vì sao cố trả lời trước khi xem đáp án giữ kiến thức lâu hơn đọc lại."
+  }
+ ],
+ "check": [
+  {
+   "q": "Theo bài về đường cong quên, vì sao ôn rải ra với khoảng cách tăng dần lại hiệu quả hơn ôn dồn một lần, và muốn nhớ một điều đến một năm sau thì nên ôn sau khoảng bao lâu?",
+   "a": "Ta quên nhanh nhất lúc đầu rồi chậm dần, nên mỗi lần ôn đúng lúc sắp quên làm đường quên thoải ra. Nghiên cứu năm 2008 gợi ý khoảng 5–10% của thời gian muốn nhớ, tức vài tuần cho mốc một năm.",
+   "from": "2026-11-18-2"
+  },
+  {
+   "q": "Kỹ thuật Feynman có bốn bước nào, và vì sao bước quay lại nguồn để vá chỗ hổng là bước đáng giá nhất?",
+   "a": "Chọn một khái niệm hẹp; giải thích bằng lời đơn giản như cho người mới; tìm chỗ hổng và quay lại nguồn; đơn giản hoá bằng ví dụ. Bước ba đáng giá nhất vì nó sửa đúng những gì mình tưởng hiểu mà chưa hiểu.",
+   "from": "2026-11-18-4"
+  },
+  {
+   "q": "Câu thứ hai trong \"hai câu sau mỗi bài\" có nhiệm vụ gì? Viết thử một câu như thế cho chính bài tự kiểm tra này.",
+   "a": "Câu hai là cái móc treo ý cốt lõi vào đời mình, thường là một việc cụ thể sẽ làm. Ví dụ: \"Tối Chủ nhật nào mình cũng trả lời mười câu trước khi mở đáp án, câu sai thì ghi lại để thứ Tư thử lại.\"",
+   "from": "2026-11-19-2"
+  },
+  {
+   "q": "Nghiên cứu cờ vua của Chase và Simon cho thấy điều gì, và nó ủng hộ ý \"mạng lưới mô hình\" của Munger thế nào?",
+   "a": "Kiện tướng nhớ thế cờ thật giỏi hơn hẳn người mới nhưng mất gần hết lợi thế với thế cờ xếp ngẫu nhiên. Lợi thế đến từ các mẫu đã được tổ chức chứ không phải trí nhớ to hơn, đúng như kiến thức được nối thành lưới thì mới dùng được.",
+   "from": "2026-11-19-4"
+  },
+  {
+   "q": "Làm sao phân biệt một \"nếp ngầm\" đáng học với một lề thói không nên theo ở cơ quan?",
+   "a": "Hỏi ba câu: nó có trái quy định thành văn không; nó giúp công việc tốt hơn hay chỉ giúp né việc; nếu viết ra công khai thì mình có ngại không.",
+   "from": "2026-11-20-1"
+  },
+  {
+   "q": "Bài toán cây gậy và quả bóng cho thấy gì về Hệ thống 1 và Hệ thống 2, và nên chủ động gọi Hệ thống 2 trong những lúc nào?",
+   "a": "Hệ thống 1 đưa ra câu trả lời trôi chảy nhưng sai (10 xu), Hệ thống 2 lười kiểm tra nên chấp nhận; lỗi là không kiểm tra chứ không phải không biết tính. Gọi Hệ thống 2 khi việc quan trọng mà câu trả lời đến quá dễ, hoặc khi cảm xúc mạnh thúc mình phản hồi ngay.",
+   "from": "2026-11-20-4"
+  },
+  {
+   "q": "Kể ba trong sáu ngộ nhận về tư duy phản biện, và giải thích vì sao kết quả của tư duy phản biện hoàn toàn có thể là \"đồng ý\".",
+   "a": "Ví dụ: tư duy phản biện là cãi; là nghi ngờ tất cả; là chê bai (ngoài ra còn cố thủ chính kiến, là kỹ năng chung, trái với lễ độ). Theo Ennis, mục đích là quyết định nên tin gì, làm gì, nên nếu lý lẽ vững thì kết luận là đồng ý.",
+   "from": "2026-11-21-1"
+  },
+  {
+   "q": "Kỹ thuật PASS khi dùng bình chữa cháy gồm bốn bước nào, và khi nào nên bỏ bình mà chạy ra ngoài gọi 114?",
+   "a": "Pull – rút chốt; Aim – hướng vòi vào gốc lửa; Squeeze – bóp cò; Sweep – quét qua lại. Khi lửa không kiểm soát được (lan nhanh, khói nhiều, lối thoát có nguy cơ bị chặn) thì rời đi, đóng cửa và gọi 114.",
+   "from": "2026-11-14-4"
+  },
+  {
+   "q": "Vì sao bà luật sư gõ máy nhanh hơn trợ lý vẫn nên thuê trợ lý gõ, và điều đó minh hoạ khái niệm gì trong thương mại?",
+   "a": "Vì mỗi giờ bà tự gõ là một giờ mất đi cho việc luật, nơi bà giỏi hơn rất nhiều; chi phí cơ hội của bà khi gõ cao hơn của trợ lý. Đó là lợi thế so sánh: điều quyết định là chi phí tương đối, không phải ai giỏi hơn tuyệt đối.",
+   "from": "2026-11-15-1"
+  },
+  {
+   "q": "Tủ lạnh không \"tạo ra lạnh\" mà làm gì, và ngăn mát, ngăn đá nên để ở nhiệt độ bao nhiêu?",
+   "a": "Tủ lạnh chuyển nhiệt từ trong ra ngoài nhờ môi chất lạnh bay hơi ở dàn lạnh và ngưng tụ ở dàn nóng, với máy nén làm \"tim\". Ngăn mát nên ở 4°C trở xuống, ngăn đá khoảng −18°C.",
+   "from": "2026-11-14-2"
+  }
+ ],
+ "try": ""
+}

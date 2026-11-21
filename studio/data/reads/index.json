@@ -399,6 +399,21 @@
    "stage": null,
    "week": null,
    "unit": "Mở đầu: học cách học & tấm bản đồ của một năm"
+  },
+  {
+   "id": "2026-11-22-4",
+   "date": "2026-11-22",
+   "title": "Mười câu cuối tuần: tự kiểm tra tuần mở đầu",
+   "topic": "ôn tập: tự kiểm tra tuần mở đầu",
+   "kind": "small",
+   "lang": "vi",
+   "minutes": 10,
+   "summary": "Mười câu tự kiểm tra: bảy câu từ các bài tuần mở đầu (ôn giãn cách, Feynman, hai câu sau mỗi bài, mạng lưới mô hình, kiến thức ngầm, hai hệ thống, tư duy phản biện) và ba câu từ tuần trước (bình chữa cháy, lợi thế so sánh, tủ lạnh).",
+   "track": "D",
+   "role": "quiz",
+   "stage": null,
+   "week": null,
+   "unit": "Mở đầu: học cách học & tấm bản đồ của một năm"
   }
  ]
 }
