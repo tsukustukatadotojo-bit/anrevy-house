@@ -114,6 +114,7 @@
    "d": "2026-11-20",
    "a": "Take That",
    "w": "Dreamers",
+   "g": "Pop",
    "l": "EMI"
   },
   {
@@ -136,6 +137,7 @@
    "d": "2026-11-20",
    "a": "Trivium",
    "w": "Crown in the Grave",
+   "g": "Metalcore, thrash metal, heavy metal",
    "l": "Roadrunner"
   },
   {
@@ -281,5 +283,5 @@
    "l": "Epic Japan"
   }
  ],
- "updated": "2026-11-22T00:17:53Z"
+ "updated": "2026-11-22T16:27:08Z"
 }
