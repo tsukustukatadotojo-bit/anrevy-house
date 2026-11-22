@@ -26,6 +26,12 @@
   },
   {
    "d": "2026-11-20",
+   "a": "Atlas Sound",
+   "w": "Thanatos",
+   "l": "4AD"
+  },
+  {
+   "d": "2026-11-20",
    "a": "Desperate Journalist",
    "w": "Gilding the Lily",
    "l": "Fierce Panda"
@@ -78,9 +84,22 @@
   },
   {
    "d": "2026-11-20",
+   "a": "Ledbyher",
+   "w": "Midwinter",
+   "l": "Island"
+  },
+  {
+   "d": "2026-11-20",
    "a": "Lorenzo Senni",
    "w": "All Ages",
    "l": "Warp"
+  },
+  {
+   "d": "2026-11-20",
+   "a": "Marvin Sapp",
+   "w": "Restoration",
+   "g": "Gospel",
+   "l": "Roc Nation"
   },
   {
    "d": "2026-11-20",
@@ -283,5 +302,5 @@
    "l": "Epic Japan"
   }
  ],
- "updated": "2026-11-22T16:27:08Z"
+ "updated": "2026-11-22T21:14:47Z"
 }
