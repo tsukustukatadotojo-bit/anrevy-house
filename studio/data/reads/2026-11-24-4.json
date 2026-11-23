@@ -1,0 +1,76 @@
+{
+ "id": "2026-11-24-4",
+ "date": "2026-11-24",
+ "title": "Level or Rate? Stocks, Flows and Feedback, the Grammar of Systems Thinking",
+ "topic": "tư duy: kho, dòng và vòng phản hồi",
+ "kind": "small",
+ "lang": "en",
+ "minutes": 11,
+ "track": "D",
+ "role": "new",
+ "stage": 1,
+ "week": 1,
+ "unit": "Chặng 1/12 · Ngôi nhà & gia đình Việt · Tuần 1/4: Gia đình, họ hàng & xưng hô",
+ "summary": "Most people, even trained engineers, confuse what has piled up (a stock) with how fast it is changing (a flow). Learning to tell a level from a rate, and to watch for delays in feedback, makes patterns in families, offices and countries much easier to read.",
+ "body": "Here is a puzzle that MIT researchers gave to 173 graduate students, almost all with degrees in engineering, mathematics or science, and every one of whom had taken calculus. They saw a graph showing how many people entered and left a department store each minute over half an hour. Then four questions. When did the most people enter? 96% got it right. When did the most people leave? 95%. When were the most people inside the store? Only 44%. When were the fewest inside? 31%.\n\nThe first two questions ask you to read a **flow**. The last two ask you to think about a **stock**. The researchers, Matthew Cronin, Cleotilde Gonzalez and John Sterman, published the result in 2009 under a blunt title: \"Why don't well-educated adults understand accumulation?\" They called the error *stock-flow failure*.\n\nYesterday's piece used the family as a first example of a system, with roles, stocks and feedback loops. Today we slow down and learn the vocabulary properly, because the words that sound simplest are the ones most people get wrong.\n\n## Stocks: what has piled up\n\nThe environmental scientist Donella Meadows, in *Thinking in Systems* (2008), defines a stock as \"an accumulation of material or information that has built up in a system over time.\" A stock is anything you could, in principle, measure at a single moment: water in a tank, money in a savings book, the number of people over sixty in a country, the trust between two sisters.\n\nHer summary of systems principles puts it in one line worth remembering: \"A stock is the memory of the history of changing flows within the system.\" The stock is where the past is kept.\n\n## Flows: what changes the pile\n\nA **flow** is a rate: something per unit of time. Litres per minute into the tank, đồng per month into savings, people per year turning sixty. Inflows raise a stock, outflows lower it. That gives the one rule from which everything else follows:\n\n> If inflows exceed outflows, the stock rises. If outflows exceed inflows, it falls. If they are equal, it stays level, however large both flows are.\n\nThat last case has a name, **dynamic equilibrium**, which Meadows defines as a stock whose level is \"steady and unchanging, despite inflows and outflows.\" A lake fed by a river and drained by another can stay the same size for centuries while all its water is replaced.\n\n## The mistake almost everyone makes\n\nWhy did so many MIT students fail the store question? The authors concluded that people use a *correlation heuristic*: they assume the stock moves the way the flow moves. If entries are highest at minute 13, they assume the store is fullest at minute 13. But the store is fullest at the moment when entries stop exceeding exits, which can be much later. The researchers ruled out the obvious excuses: the problem was not poor graph reading, missing context, low motivation or limited mental capacity.\n\nAn earlier study by Linda Booth Sweeney and Sterman (2000) found the same pattern with a bathtub. When the inflow and outflow followed a simple square shape, about three quarters of participants drew the water level correctly. When the inflow rose and fell in a sawtooth pattern, fewer than half did. Their typical error was to draw the water level with the same shape as the inflow, as if the stock simply copied the flow.\n\nHere is the everyday version. A news report says Vietnam's birth rate is falling: the total fertility rate dropped from 1.96 in 2023 to 1.91 in 2024. It is tempting to conclude that the population, or the number of young people, must already be shrinking. Not necessarily. A falling *inflow* is not a falling *stock*. The stock shrinks only when the inflow drops below the outflow.\n\n## A Vietnamese example: the stock of older people\n\nConsider the number of Vietnamese aged sixty and over. That is a stock. Its inflow is people turning sixty each year; its outflow is deaths among older people.\n\nAccording to the General Statistics Office, there were about 14.2 million people aged sixty and over in 2024, out of a population of 101.3 million, and about 4.7 million more than a decade earlier. That is a net gain of roughly half a million a year. The official projections, based on the 2024 mid-term population and housing survey, put the figure at 20.9 million in 2034 and 27.5 million in 2044. Vietnam is expected to become an \"aged\" society, with 14% of people over sixty-five, around 2034.\n\nNotice what drives this. The people who will turn sixty over the next twenty years were born between the mid-1960s and the mid-1980s, a period of high births. That inflow is already fixed; nothing done today about birth rates changes it. Meanwhile people live longer, which shrinks the outflow. So the stock of older people keeps growing even while the inflow of babies at the other end of the system shrinks. A stock can rise for decades after the thing you are watching has turned around.\n\nFor a family, this is not an abstract statistic. It is the reason so many households in their forties now care for parents and children at the same time, and why the question of who lives with an elderly parent, discussed in this week's other readings, has become so pressing.\n\n## Stocks are buffers, and they are slow\n\nMeadows notes that \"stocks act as delays or buffers or shock absorbers in systems.\" This has two faces.\n\nThe good face: stocks give stability. A family with savings can absorb a hospital bill. A family whose members have built up years of goodwill can survive a bitter argument at a death anniversary (*đám giỗ*) without breaking apart. A clan's common fund (*quỹ họ*) lets it repair the ancestral hall without a sudden collection.\n\nThe hard face: stocks change slowly, so effort shows up late. If two brothers have drained their stock of trust over ten years, one warm Tết visit will not refill it. The inflow has to exceed the outflow for a long time before the level visibly rises. People often give up on repairing a relationship too early because they look at the stock, which barely moves, instead of the flow, which has already improved.\n\n## Feedback: when the stock talks back\n\nA **feedback loop**, in Meadows' words, is \"the mechanism (rule or information flow or signal) that allows a change in a stock to affect a flow into or out of that same stock.\" In plain terms: the level of the pile changes how fast things are added or removed.\n\nYesterday's article introduced the two kinds: *balancing* loops that pull a stock toward a target, and *reinforcing* loops that make it grow or shrink faster and faster. Today add one more ingredient that turns many balancing loops into trouble: **delay**.\n\nSterman's famous \"Beer Game\" shows it. Players manage the stock of beer in a supply chain: retailer, wholesaler, distributor, factory. Customer demand rises just once, from four to eight cases a week, and then stays flat. Yet orders and inventories swing wildly in cycles of about twenty weeks, and the swings grow larger up the chain. Sterman traced the cause to delays and to players ignoring orders already \"in the pipeline\". They kept ordering because the shelf still looked empty, then drowned in beer when the earlier orders arrived.\n\nFamilies do this too. A sibling who lives far away hears their mother is unwell and sends money and calls daily. By the time the help arrives, a sister nearby has already stepped in, so the mother is overwhelmed with attention for a week. Everyone backs off. A month later, nobody is checking in. Help comes in waves instead of a steady flow, because each person responds to what they see now, not to what is already on its way.\n\n## How to use the vocabulary\n\nYou do not need diagrams to benefit. Four questions do most of the work.\n\n1. **What is the stock here?** Name the thing that accumulates: savings, trust, a parent's strength, a backlog of unanswered messages.\n2. **What are the inflows and outflows?** List what adds and what drains. Problems often hide in a forgotten outflow.\n3. **Am I looking at the level or the rate?** When someone says \"it's getting better,\" ask whether the flow improved or the stock did. Both are worth knowing; they are not the same.\n4. **Where is the delay?** If a fix seems not to work, ask how long the effect takes to show, and what is already in the pipeline.\n\nTry it on something from your office. Take the pile of documents waiting to be processed (*hồ sơ tồn*) in a commune-level office under the new two-tier local government. The stock is the backlog. The inflow is new applications per day; the outflow is applications completed per day. Hiring one more officer raises the outflow, but if the inflow is also rising after a merger of administrative units, the backlog can keep growing. The question \"Are we processing more files than last month?\" (flow) and \"Is the backlog shrinking?\" (stock) can have different answers, and only the second tells you whether citizens are waiting less.\n\n## Practice for the week\n\n- **Name three stocks in your family.** One tangible (savings, a house, a plot of land), one human (a grandparent's health, the number of adults living nearby), one relational (trust between two relatives, the goodwill of the neighbours). For each, write one inflow and one outflow.\n- **Redo the store puzzle in your head.** Next time you are at a crowded market or a ward office, notice when the most people arrive and guess when the room will be fullest. Then check.\n- **Catch a correlation heuristic.** When you read a headline about a rate falling or rising, ask what stock it feeds, and whether that stock is actually moving the same way.\n\nStocks and flows are the grammar of systems. Once you can tell a level from a rate, many confusing patterns, in families, offices and countries, become much easier to read.",
+ "sources": [
+  {
+   "title": "Cronin, Gonzalez & Sterman (2009): Why don't well-educated adults understand accumulation? (PDF)",
+   "url": "https://web.mit.edu/jsterman/www/CroninGonzalezSterman061210.pdf"
+  },
+  {
+   "title": "Booth Sweeney & Sterman (2000): Bathtub dynamics, initial results of a systems thinking inventory (ISDC proceedings PDF)",
+   "url": "https://proceedings.systemdynamics.org/2000/PDFs/sweeney4.pdf"
+  },
+  {
+   "title": "Donella Meadows, Thinking in Systems: glossary and Summary of Systems Principles",
+   "url": "https://roegin.github.io/thinking_system/r8r70-6wtpl_files/index_split_020.html"
+  },
+  {
+   "title": "John Sterman: The Beer Distribution Game",
+   "url": "https://web.mit.edu/jsterman/www/SDG/beergame.html"
+  },
+  {
+   "title": "General Statistics Office: Viet Nam Population Projections 2024–2074 (factsheet)",
+   "url": "https://www.nso.gov.vn/wp-content/uploads/2025/12/ENG-Du-bao-DS_final_final.pdf"
+  },
+  {
+   "title": "VietnamNet: Vietnam urged to engage retirees as birth rate drops to 1.91",
+   "url": "https://vietnamnet.vn/en/vietnam-urged-to-engage-retirees-as-birth-rate-drops-to-1-91-2363254.html"
+  }
+ ],
+ "unsure": [
+  "Bathtub-study percentages are from the 2000 conference version; the journal version may report slightly different figures.",
+  "The net gain of about half a million people aged 60+ per year is an average computed from the 4.7 million increase over 2014–2024, not an official annual figure.",
+  "The family and office examples (waves of help, commune backlog) are illustrations, not documented cases."
+ ],
+ "connect": [
+  {
+   "id": "2026-11-23-4",
+   "why": "Yesterday's piece introduced stocks and loops through the family; this one defines the terms carefully and adds the stock-flow error and delays."
+  },
+  {
+   "id": "2026-11-23-1",
+   "why": "The shrinking household and the growing number of older people are a stock-flow story: a falling birth inflow does not immediately shrink the stock of elders."
+  },
+  {
+   "id": "2026-11-24-1",
+   "why": "A clan's common fund and ancestral hall are stocks that buffer the lineage against shocks, filled and drained by contributions and repairs."
+  }
+ ],
+ "check": [
+  {
+   "q": "In the department-store task, why can the store be fullest long after the moment of most entries?",
+   "a": "The number inside is a stock; it keeps rising as long as entries exceed exits, so it peaks when the inflow falls to equal the outflow, not when the inflow peaks."
+  },
+  {
+   "q": "Vietnam's fertility rate is falling. Why is the number of people aged 60+ still set to grow for decades?",
+   "a": "The inflow to that stock is people turning 60, who were born in high-birth decades and are already alive, while longer lives shrink the outflow; the falling birth rate affects a different inflow."
+  },
+  {
+   "q": "In the Beer Game, demand rises only once. What makes inventories swing so widely?",
+   "a": "Delays between ordering and receiving, combined with players ignoring orders already in the pipeline, so they over-order while the shelf looks empty and then get flooded."
+  }
+ ],
+ "try": "Pick one recurring problem at work or home and write down the stock, one inflow, one outflow and the likely delay. Then check whether the improvement you hoped for is in the flow or in the stock."
+}

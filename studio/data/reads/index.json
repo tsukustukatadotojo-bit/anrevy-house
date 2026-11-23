@@ -519,6 +519,21 @@
    "stage": 1,
    "week": 1,
    "unit": "Chặng 1/12 · Ngôi nhà & gia đình Việt · Tuần 1/4: Gia đình, họ hàng & xưng hô"
+  },
+  {
+   "id": "2026-11-24-4",
+   "date": "2026-11-24",
+   "title": "Level or Rate? Stocks, Flows and Feedback, the Grammar of Systems Thinking",
+   "topic": "tư duy: kho, dòng và vòng phản hồi",
+   "kind": "small",
+   "lang": "en",
+   "minutes": 11,
+   "summary": "Most people, even trained engineers, confuse what has piled up (a stock) with how fast it is changing (a flow). Learning to tell a level from a rate, and to watch for delays in feedback, makes patterns in families, offices and countries much easier to read.",
+   "track": "D",
+   "role": "new",
+   "stage": 1,
+   "week": 1,
+   "unit": "Chặng 1/12 · Ngôi nhà & gia đình Việt · Tuần 1/4: Gia đình, họ hàng & xưng hô"
   }
  ]
 }
