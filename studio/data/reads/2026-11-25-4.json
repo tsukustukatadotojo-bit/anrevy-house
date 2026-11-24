@@ -1,0 +1,76 @@
+{
+ "id": "2026-11-25-4",
+ "date": "2026-11-25",
+ "title": "Chín câu giữa tuần: ôn hệ thống, dòng họ và những bài tuần trước",
+ "topic": "ôn tập: ôn giãn cách giữa tuần gia đình và họ hàng",
+ "kind": "small",
+ "lang": "vi",
+ "minutes": 10,
+ "track": "D",
+ "role": "review",
+ "stage": 1,
+ "week": 1,
+ "unit": "Chặng 1/12 · Ngôi nhà & gia đình Việt · Tuần 1/4: Gia đình, họ hàng & xưng hô",
+ "summary": "Chín câu ôn giãn cách: ba câu từ tuần này (gia đình như một hệ thống, kho và dòng, tổ chức dòng họ) và sáu câu từ tuần trước (tam quyền phân lập, dự án trễ hạn, âm lịch, mạng lưới mô hình, hai hệ thống của Kahneman, tư duy phản biện).",
+ "body": "Hôm nay là bài ôn giữa tuần. Chín câu dưới đây đi qua hai mạch.\n\n**Mạch của tuần này** (ba câu): gia đình nhìn như một hệ thống, cách phân biệt \"kho\" với \"dòng\", và cách một dòng họ được tổ chức. Đây là ba bài làm nền cho mọi chuyện về gia đình và họ hàng mà tuần này còn đi tiếp, nên cố trả lời bằng lời của mình, đừng chỉ nhận ra đáp án.\n\n**Mạch của tuần trước** (sáu câu): tam quyền phân lập và mô hình của Việt Nam, những \"định luật\" khiến dự án trễ hạn, bài toán mười một ngày của âm lịch, mạng lưới mô hình tư duy, hai hệ thống nhanh và chậm của Kahneman, và tư duy phản biện. Những bài này đã cách một tuần, đúng lúc đường cong quên bắt đầu dốc xuống; nhớ lại được bây giờ thì sẽ giữ được lâu hơn nhiều so với đọc lại.\n\nCách làm: đọc câu hỏi, tự trả lời trong đầu hoặc nói thành tiếng, rồi mới mở đáp án. Câu nào quên hẳn thì bấm vào bài gốc, đọc lại đúng đoạn ấy.\n\nNếu chỉ có thời gian đọc lại một bài, hãy chọn bài về kho và dòng (*Level or Rate?*): ý tưởng ấy sẽ còn quay lại khi tuần sau bàn về già hoá dân số và chuyện ai chăm cha mẹ. Nếu sai từ hai câu ở mạch tuần trước trở lên, nên đọc lại bài *Ten Cents or Five?* về hai hệ thống của tâm trí, vì nó là chỗ dựa cho bài tư duy phản biện.\n",
+ "sources": [],
+ "unsure": [],
+ "connect": [
+  {
+   "id": "2026-11-18-2",
+   "why": "Bài đường cong quên giải thích vì sao ôn đúng lúc sắp quên, như hôm nay, giữ kiến thức lâu hơn đọc lại."
+  },
+  {
+   "id": "2026-11-24-4",
+   "why": "Bài kho và dòng là bài nên đọc lại nhất trong đợt ôn này vì ý tưởng ấy sẽ quay lại ở các tuần sau."
+  }
+ ],
+ "check": [
+  {
+   "q": "Hai anh em cứ đổ lỗi cho nhau vì không ai lo việc đưa mẹ đi khám. Dùng ý 'đổi người lấy vai' của tư duy hệ thống, bạn sẽ nhìn vấn đề này thế nào và tìm hướng gỡ ở đâu?",
+   "a": "Hỏi xem gần như ai ngồi vào vị trí ấy cũng sẽ làm vậy không; nếu có thì nguyên nhân nằm ở cấu trúc, nên tìm điểm đòn bẩy như một lịch phân công hay một người điều phối, thay vì đổ lỗi cho một người.",
+   "from": "2026-11-23-4"
+  },
+  {
+   "q": "Tỷ lệ sinh của Việt Nam đang giảm. Dùng khái niệm kho và dòng, giải thích vì sao số người từ 60 tuổi trở lên vẫn tăng trong nhiều thập kỷ.",
+   "a": "Số người cao tuổi là một kho; dòng vào là những người bước sang tuổi 60, sinh ra từ những thập kỷ đông con và đã có mặt hôm nay, còn tuổi thọ tăng làm dòng ra chậm lại. Tỷ lệ sinh giảm chỉ tác động vào một dòng vào khác.",
+   "from": "2026-11-24-4"
+  },
+  {
+   "q": "Vì sao trưởng họ theo lệ Bắc Bộ có thể là một người còn trẻ, và ngày nay dòng họ có thêm cơ chế nào bên cạnh trưởng họ?",
+   "a": "Trưởng họ là con trai trưởng của chi trưởng, cha truyền con nối, nên có thể còn trẻ. Ngày nay nhiều họ có thêm hội đồng gia tộc hoặc ban liên lạc gồm những người được con cháu tín nhiệm, kể cả phụ nữ.",
+   "from": "2026-11-24-1"
+  },
+  {
+   "q": "Mô hình tổ chức quyền lực của Việt Nam theo Hiến pháp 2013 khác tam quyền phân lập ở điểm cốt lõi nào?",
+   "a": "Việt Nam quy định quyền lực nhà nước là thống nhất, có phân công, phối hợp, kiểm soát giữa các cơ quan thực hiện lập pháp, hành pháp, tư pháp; không coi ba nhánh là những trung tâm quyền lực đối trọng độc lập với nhau.",
+   "from": "2026-11-16-1"
+  },
+  {
+   "q": "Một tổ đang mở cùng lúc hai mươi việc và mỗi tuần làm xong năm việc. Theo định luật Little, mỗi việc mất trung bình bao lâu, và muốn nhanh hơn thì nên làm gì?",
+   "a": "Khoảng bốn tuần (20 chia 5). Muốn nhanh hơn thì bớt mở việc mới, giới hạn số việc dở dang: 'thôi bắt đầu, hãy làm cho xong'.",
+   "from": "2026-11-16-3"
+  },
+  {
+   "q": "Vì sao âm lịch cần có tháng nhuận, và trung bình bao lâu thì có một năm nhuận?",
+   "a": "Mười hai tháng âm chỉ khoảng 354 ngày, ngắn hơn năm Mặt Trời khoảng 11 ngày, nên lịch sẽ trôi lệch mùa. Thêm 7 tháng nhuận trong mỗi chu kỳ 19 năm, tức khoảng hai đến ba năm có một năm nhuận.",
+   "from": "2026-11-17-3"
+  },
+  {
+   "q": "Thí nghiệm của Chase và Simon về cờ vua cho thấy điều gì về việc vì sao kiến thức có tổ chức dễ dùng hơn những sự kiện rời rạc?",
+   "a": "Kiện tướng nhớ thế cờ thật tốt hơn hẳn người mới, nhưng mất gần hết ưu thế khi quân xếp ngẫu nhiên; lợi thế của họ đến từ các mẫu hình có tổ chức chứ không phải trí nhớ lớn hơn.",
+   "from": "2026-11-19-4"
+  },
+  {
+   "q": "Nêu một tình huống ở cơ quan nên chủ động gọi 'hệ thống 2' vào cuộc, và vì sao.",
+   "a": "Ví dụ khi ký duyệt số liệu mà câu trả lời đến quá dễ, hoặc khi đang giận và muốn trả lời ngay. Hệ thống 1 cho ra đáp án trôi chảy nghe có vẻ đúng; chậm lại một nhịp, viết ra giấy giúp kiểm tra.",
+   "from": "2026-11-20-4"
+  },
+  {
+   "q": "Tư duy phản biện có phải là cãi để thắng không? Dựa vào định nghĩa của Ennis để trả lời.",
+   "a": "Không. Theo Ennis, tư duy phản biện nhằm quyết định nên tin gì hoặc làm gì; mục đích là quyết định đúng, nên kết quả có thể là đồng ý.",
+   "from": "2026-11-21-1"
+  }
+ ],
+ "try": ""
+}
