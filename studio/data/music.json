@@ -1,6 +1,44 @@
 {
  "items": [
   {
+   "s": "pitchfork",
+   "k": "news",
+   "t": "Ninajirachi Drops I Love My Computer Remix Album",
+   "u": "https://pitchfork.com/story/ninajirachi-drops-i-love-my-computer-remix-album/",
+   "d": "2026-11-24T23:06:25Z",
+   "x": "Wet Leg, Mallrat, Genesis Owusu, and more lend their hands to I Love My Computer, All My Friends Are Inside It",
+   "f": "https://pitchfork.com/feed/feed-news/rss",
+   "i": "https://media.pitchfork.com/photos/6b05db940ac6d3e6209ab0bd/master/w_200,c_limit/Ninajirachi%20by%20Tom%20Vanderzeil%20%5BLead%5D%20(1).jpg",
+   "v": 3
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Pearl Jam Rage Against ‘Unconscionable’ ICE Arrests at Seattle Airport",
+   "u": "https://www.rollingstone.com/music/music-news/pearl-jam-seattle-airport-ice-arrests-1235663883/",
+   "d": "2026-11-24T22:38:06Z",
+   "x": "\"We stand firmly against this kind of inhumane treatment,\" the band wrote after masked agents detained a father and daughter",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "rollingstone",
+   "k": "news",
+   "t": "Ninajirachi Throws a Party With All Her Friends on Surprise Remix Album",
+   "u": "https://www.rollingstone.com/music/music-news/ninajirachi-i-love-my-computer-remix-album-1235663118/",
+   "d": "2026-11-24T22:32:56Z",
+   "x": "I Love My Computer, All My Friends Are Inside It , a revamped version of the electronic artist's debut album, features Wet Leg, Underscores, Frost Children, and more",
+   "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "ILLIT’s “BREAK EVEN” Becomes Their 1st Album To Spend 3 Weeks On Billboard 200",
+   "u": "https://www.soompi.com/article/1890447wpp/illits-break-even-becomes-their-1st-album-to-spend-3-weeks-on-billboard-200",
+   "d": "2026-11-24T22:02:00Z",
+   "x": "ILLIT’s “BREAK EVEN” is their steadiest seller yet on the Billboard 200! Earlier this month, ILLIT’s latest mini album “BREAK EVEN” debuted at No. 6 on Billboard’s Top 200 Albums chart, making it the group’s first-ever top 10 album. To add to that achievement, “BREAK EVEN” has now become ILLIT’s first album ever to chart… Continue reading ILLIT’s “BREAK EVEN” Becomes Their 1st Album To Spend 3 Wee",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
    "s": "rollingstone",
    "k": "news",
    "t": "Cher’s Victory in Royalties War Under Fire as Mary Bono Pushes for Reversal",
@@ -8,6 +46,25 @@
    "d": "2026-11-24T21:24:18Z",
    "x": "The lower court “struggled with the concept that copyright terminations preempted Sonny’s right to contract freely and bargain away his heirs’ rights,\" the new filing reads",
    "f": "https://www.rollingstone.com/music/music-news/feed/"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "AMPERS&ONE Achieves Career High With 1st-Week Sales Of “PATHFINDER”",
+   "u": "https://www.soompi.com/article/1890441wpp/ampersone-achieves-career-high-with-1st-week-sales-of-pathfinder",
+   "d": "2026-11-24T21:23:00Z",
+   "x": "AMPERS&ONE has set a new personal record with their first full-length album! Last week, the FNC Entertainment boy group made their comeback with their first studio album “PATHFINDER” and its powerful title track “King’s Way” on November 17. Hanteo Chart has now reported that AMPERS&ONE achieved the highest first-week sales of their career with the… Continue reading AMPERS&ONE Achieves Career High",
+   "f": "https://www.soompi.com/feed"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "U2 Taps Wilson Jr., War On Drugs For Stadium Shows",
+   "u": "https://www.spinmagazine.com/2026/11/u2-north-american-stadiums/",
+   "d": "2026-11-24T21:20:49Z",
+   "x": "The North American leg begins Aug. 13 at Miami’s Hard Rock Stadium and concludes...",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/11/T_W23651_KQxCwA4l-scaled.jpeg"
   },
   {
    "s": "rollingstone",
@@ -28,6 +85,46 @@
    "f": "https://feeds.npr.org/1039/rss.xml"
   },
   {
+   "s": "spin",
+   "k": "news",
+   "t": "Noah Kahan Caps Wild Year With ‘Divide’ Live LP",
+   "u": "https://www.spinmagazine.com/2026/11/noah-kahan-live-album/",
+   "d": "2026-11-24T21:19:00Z",
+   "x": "The collection captures the singer/songwriter’s stadium-sized ascent, with performances drawn from 16 different cities.",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/02/2260265833-scaled.jpg"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "Ariana Grande Sets ‘Sunshine’ Tour Film, Doc",
+   "u": "https://www.spinmagazine.com/2026/11/ariana-grande-concert-film-documentary/",
+   "d": "2026-11-24T21:18:00Z",
+   "x": "Ariana Grande is giving fans a two-part encore of her Eternal Sunshine tour, with a behind-the-scenes documentary and concert film set to premiere",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/04/press-image-2_%40katiatemkin.jpg"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "Wilco Loads Up For 2027 Tour",
+   "u": "https://www.spinmagazine.com/2026/11/wilco-loads-up-for-2027-tour/",
+   "d": "2026-11-24T21:17:00Z",
+   "x": "Wilco will spend much of next spring on the road on a tour that will ...",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/11/Hi-Res-Image-Wilco-by-Jamie-Kelter-Davis-scaled.jpg"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "Slipknot, Dr. Martens Unite For Footwear, Accessories Collab",
+   "u": "https://www.spinmagazine.com/2026/11/slipknot-dr-martens/",
+   "d": "2026-11-24T21:16:00Z",
+   "x": "Slipknot is taking its particular brand of mayhem from the stage to the shoe rack.",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/09/SK2-2-FINAL-LANDSCAPE-scaled.jpg"
+  },
+  {
    "s": "consequence",
    "k": "news",
    "t": "Pearl Jam Decry “Cold Cruelty” of ICE Detainment at Seattle Airport",
@@ -40,12 +137,31 @@
   {
    "s": "spin",
    "k": "news",
-   "t": "R.E.M.’s music reveals itself 25 years later",
+   "t": "TIDAL Purging 29 Million AI-Generated Songs",
+   "u": "https://www.spinmagazine.com/2026/11/tidal-purging-ai-songs/",
+   "d": "2026-11-24T21:15:00Z",
+   "x": "TIDAL is moving from putting warning labels on AI-generated music to showing it the door.",
+   "f": "https://www.spin.com/feed/",
+   "i": "https://static.spinmagazine.com/files/2026/11/Tidal.jpeg"
+  },
+  {
+   "s": "spin",
+   "k": "news",
+   "t": "R.E.M.’s Music Reveals Itself 25 Years Later",
    "u": "https://www.spinmagazine.com/2026/11/r-e-m-s-music-reveals-itself-25-years-later/",
    "d": "2026-11-24T21:08:10Z",
    "x": "R.E.M. released three divisive albums that pushed the band’s sound in unexpected directions following drummer Bill Berry’s departure in 1997 and before the back-to-basics Accelerate (2008). Though it features latter-day R.E.M. favorites such as “Walk Unafraid” and “Daytripper,” Up (1998) sounds like an amputated band finding its way. Around the Sun (2004), often cited as […]",
    "f": "https://www.spin.com/feed/",
    "i": "https://static.spinmagazine.com/files/2026/11/GettyImages-51507662.jpg"
+  },
+  {
+   "s": "soompi",
+   "k": "news",
+   "t": "RIIZE Joins Star-Studded Lineup For Tecate Pa’l Norte 2027 In Mexico",
+   "u": "https://www.soompi.com/article/1890433wpp/riize-joins-star-studded-lineup-for-tecate-pal-norte-2027-in-mexico",
+   "d": "2026-11-24T20:50:00Z",
+   "x": "RIIZE will be performing at next year’s Tecate Pa’l Norte! On November 24, the major Mexican music festival Tecate Pa’l Norte announced its star-studded lineup for 2027. RIIZE will take the stage on Day 1 of the three-day festival, which will take place from March 26 to 28 at Parque Fundidora in Monterrey, Mexico. In… Continue reading RIIZE Joins Star-Studded Lineup For Tecate Pa’l Norte 2027 In M",
+   "f": "https://www.soompi.com/feed"
   },
   {
    "s": "consequence",
@@ -88,16 +204,6 @@
    "i": "https://www.billboard.com/wp-content/uploads/2026/06/billboard-2026-Midyear-Top-50-Albums-1800.jpg?w=237&h=147&crop=1"
   },
   {
-   "s": "spin",
-   "k": "news",
-   "t": "U2 Taps Wilson Jr., War On Drugs For Stadium Shows",
-   "u": "https://www.spinmagazine.com/2026/11/u2-north-american-stadiums/",
-   "d": "2026-11-24T19:50:49Z",
-   "x": "The North American leg begins Aug. 13 at Miami’s Hard Rock Stadium and concludes...",
-   "f": "https://www.spin.com/feed/",
-   "i": "https://static.spinmagazine.com/files/2026/11/T_W23651_KQxCwA4l-scaled.jpeg"
-  },
-  {
    "s": "billboard",
    "k": "news",
    "t": "Post Malone, Travis Scott & Charli xcx to Headline Tecate Pa’l Norte 2027: See the Full Lineup",
@@ -116,56 +222,6 @@
    "x": "In addition, Paramount+ and Peacock start at $2.99/month. \n Black Friday Streaming Deals: HBO Max, Disney+/Hulu Bundle, Apple TV Starting at $4.99/Month \n\n Eddie Fu",
    "f": "https://consequence.net/feed/",
    "i": "https://consequence.net/wp-content/uploads/2026/11/black-friday-streaming-deals-2026.jpg?quality=80"
-  },
-  {
-   "s": "spin",
-   "k": "news",
-   "t": "Noah Kahan Caps Wild Year With ‘Divide’ Live LP",
-   "u": "https://www.spinmagazine.com/2026/11/noah-kahan-live-album/",
-   "d": "2026-11-24T19:37:00Z",
-   "x": "The collection captures the singer/songwriter’s stadium-sized ascent, with performances drawn from 16 different cities.",
-   "f": "https://www.spin.com/feed/",
-   "i": "https://static.spinmagazine.com/files/2026/02/2260265833-scaled.jpg"
-  },
-  {
-   "s": "spin",
-   "k": "news",
-   "t": "Ariana Grande Sets ‘Sunshine’ Tour Film, Doc",
-   "u": "https://www.spinmagazine.com/2026/11/ariana-grande-concert-film-documentary/",
-   "d": "2026-11-24T19:36:00Z",
-   "x": "Ariana Grande is giving fans a two-part encore of her Eternal Sunshine tour, with a behind-the-scenes documentary and concert film set to premiere",
-   "f": "https://www.spin.com/feed/",
-   "i": "https://static.spinmagazine.com/files/2026/04/press-image-2_%40katiatemkin.jpg"
-  },
-  {
-   "s": "spin",
-   "k": "news",
-   "t": "Wilco Loads Up For 2027 Tour",
-   "u": "https://www.spinmagazine.com/2026/11/wilco-loads-up-for-2027-tour/",
-   "d": "2026-11-24T19:35:00Z",
-   "x": "Wilco will spend much of next spring on the road on a tour that will ...",
-   "f": "https://www.spin.com/feed/",
-   "i": "https://static.spinmagazine.com/files/2026/11/Hi-Res-Image-Wilco-by-Jamie-Kelter-Davis-scaled.jpg"
-  },
-  {
-   "s": "spin",
-   "k": "news",
-   "t": "Slipknot, Dr. Martens Unite For Footwear, Accessories Collab",
-   "u": "https://www.spinmagazine.com/2026/11/slipknot-dr-martens/",
-   "d": "2026-11-24T19:34:00Z",
-   "x": "Slipknot is taking its particular brand of mayhem from the stage to the shoe rack.",
-   "f": "https://www.spin.com/feed/",
-   "i": "https://static.spinmagazine.com/files/2026/09/SK2-2-FINAL-LANDSCAPE-scaled.jpg"
-  },
-  {
-   "s": "spin",
-   "k": "news",
-   "t": "TIDAL Purging 29 Million AI-Generated Songs",
-   "u": "https://www.spinmagazine.com/2026/11/tidal-purging-ai-songs/",
-   "d": "2026-11-24T19:33:00Z",
-   "x": "TIDAL is moving from putting warning labels on AI-generated music to showing it the door.",
-   "f": "https://www.spin.com/feed/",
-   "i": "https://static.spinmagazine.com/files/2026/11/Tidal.jpeg"
   },
   {
    "s": "billboard",
@@ -279,10 +335,10 @@
   {
    "s": "rollingstone",
    "k": "news",
-   "t": "Ariana Grande Tour Doc to Show the Process Behind ‘Eternal Sunshine’ and ‘Petal’",
+   "t": "Ariana Grande Doc to Show the Process Behind ‘Eternal Sunshine’ and ‘Petal’",
    "u": "https://www.rollingstone.com/music/music-news/ariana-grande-eternal-sunshine-tour-doc-1235663582/",
    "d": "2026-11-24T17:58:05Z",
-   "x": "Two-part film, set for December release, will document a behind-the-scenes look at the run-up to the tour, as well as a concert film",
+   "x": "Two-part special event, set for December release, will chronicle a behind-the-scenes look at the run-up to the tour, as well as a concert film",
    "f": "https://www.rollingstone.com/music/music-news/feed/"
   },
   {
@@ -697,15 +753,6 @@
    "f": "https://www.soompi.com/feed"
   },
   {
-   "s": "rollingstone",
-   "k": "news",
-   "t": "U2 Will Bring Their ‘Greatest Show on Earth’ Stadium Tour to North America in 2027",
-   "u": "https://www.rollingstone.com/music/music-news/u2-2027-north-america-tour-dates-1235662990/",
-   "d": "2026-11-24T14:00:00Z",
-   "x": "The band has finally announced shows in the U.S. and Canada in support of their latest LP, Carnaval de Luz",
-   "f": "https://www.rollingstone.com/music/music-news/feed/"
-  },
-  {
    "s": "stereogum",
    "k": "news",
    "t": "Bob Seger And The Silver Bullet Band Bassist Chris Campbell Dead At 78",
@@ -815,43 +862,6 @@
    "f": "https://www.soompi.com/feed"
   },
   {
-   "s": "nme",
-   "k": "news",
-   "t": "Don Toliver postpones two London arena gigs after fans left “screaming in pain” by mystery substance at Manchester’s Co-op Live",
-   "u": "https://www.nme.com/news/music/don-toliver-postpones-london-fans-screaming-pain-mystery-substance-manchester-3976832",
-   "d": "2026-11-24T10:22:31Z",
-   "x": "Almost 90 people reported symptoms following the incident, with police continuing to investigate the unidentified substance",
-   "f": "https://www.nme.com/news/music/feed",
-   "i": "https://www.nme.com/wp-content/uploads/2026/11/don_toliver_live-400x254.jpg"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Kim Seo Hyung Steps Down From Shin Hae Sun’s New Drama + Park Bo Kyung To Replace Her",
-   "u": "https://www.soompi.com/article/1890109wpp/kim-seo-hyung-steps-down-from-shin-hae-suns-new-drama-park-bo-kyung-to-replace-her",
-   "d": "2026-11-24T10:05:34Z",
-   "x": "Park Bo Kyung is stepping in for Kim Seo Hyung, who is withdrawing from SBS’s upcoming drama “Dash” (literal title). On November 24, SBS shared, “Kim Seo Hyung has withdrawn from ‘Dash,’ and Park Bo Kyung has been cast as her replacement.” Kim Seo Hyung is reportedly stepping down from the drama due to a… Continue reading Kim Seo Hyung Steps Down From Shin Hae Sun’s New Drama + Park Bo Kyung To Re",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "Yook Sungjae Sustains Chin Injury + To Attend “Nine To Six” Press Conference Wearing Mask",
-   "u": "https://www.soompi.com/article/1890327wpp/yook-sungjae-sustains-chin-injury-to-attend-nine-to-six-press-conference-wearing-mask",
-   "d": "2026-11-24T09:19:55Z",
-   "x": "BTOB’s Yook Sungjae has sustained an injury just one day before the premiere of his new drama “Nine to Six.” On November 24, Yook Sungjae took to his Instagram Stories to share the news with fans. He wrote, “Finally, ‘Nine to Six’ premieres tomorrow! I’m afraid I have some disappointing news for everyone who has… Continue reading Yook Sungjae Sustains Chin Injury + To Attend “Nine To Six” Press Co",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
-   "s": "soompi",
-   "k": "news",
-   "t": "13 Must-Watch K-Dramas Newly Available On Viki In Southeast Asia",
-   "u": "https://www.soompi.com/article/1889039wpp/13-must-watch-k-dramas-newly-available-on-viki-in-southeast-asia",
-   "d": "2026-11-24T09:08:23Z",
-   "x": "Following the release of classic K-dramas for streaming on Viki in Southeast Asia, Viki has made even more unforgettable K-dramas readily available in Southeast Asia. Check out the list to find your next binge-watch! “It’s Okay, That’s Love” In “It’s Okay, That’s Love,” prickly psychiatrist Ji Hae Soo (Kong Hyo Jin) finds her meticulously ordered… Continue reading 13 Must-Watch K-Dramas Newly Avai",
-   "f": "https://www.soompi.com/feed"
-  },
-  {
    "s": "guardian",
    "k": "news",
    "t": "Proposed Beatles attraction on Savile Row faces rooftop gigs ban",
@@ -860,16 +870,6 @@
    "x": "Westminster council to vote on restrictions at planned tourist venue and site of band’s final public concert The Beatles stunned onlookers when they pitched up on the rooftop of 3 Savile Row in London in 1969 for their final public performance, but now Westminster city council is seeking to ban live music being played there ahead of plans to convert the site into a tourist attraction. On Tuesday,",
    "f": "https://www.theguardian.com/music/rss",
    "i": "https://i.guim.co.uk/img/media/4a18877293afdaf5a165edfd4e26384248d1cf11/5_738_4303_3441/master/4303.jpg?width=140&quality=85&auto=format&fit=max&s=dd63ea5849a656d42f3a693768bc6040"
-  },
-  {
-   "s": "quietus",
-   "k": "news",
-   "t": "Rockfort! French Music for November, Reviewed by David McKenna",
-   "u": "https://thequietus.com/quietus-reviews/quietus-international/best-new-french-music-review-saravah-elizabeth-vogler-omerta-ino-casablanca/",
-   "d": "2026-11-24T08:00:00Z",
-   "x": "In his final French dispatch of 2026, David McKenna examines the pioneering legacy of the Saravah label as it turns 60 under bittersweet circumstances, and presents 10 essential new records from folk to hip hop \n Elizabeth Vogler and donkey friends by Albane Barrau \n 2026 marks 60 years since the founding of the Saravah label, but the festivities have been bittersweet since it has also been 10 yea",
-   "f": "https://thequietus.com/feed",
-   "i": "https://thequietus.com/app/uploads/2026/11/ALBUM-02-300x199.jpg"
   },
   {
    "s": "pitchfork",
@@ -1903,46 +1903,36 @@
  "hypem": [
   {
    "p": 1,
-   "a": "Black Doldrums",
-   "t": "Compulsion",
-   "s": "We All Want Someone To Shout For",
-   "lv": 21,
-   "i": "https://static.hypem.com/items_images/aa/3aexa_120.jpg",
-   "u": "https://hypem.com/track/3aexa",
-   "d": "2026-11-21T23:04:08Z"
-  },
-  {
-   "p": 2,
    "a": "Frog",
    "t": "Judy Garland",
    "s": "Austin Town Hall",
-   "lv": 123,
+   "lv": 131,
    "i": "https://static.hypem.com/items_images/57/2agjq_120.jpg",
    "u": "https://hypem.com/track/2agjq",
    "d": "2026-11-24T14:52:25Z"
   },
   {
-   "p": 3,
+   "p": 2,
    "a": "Fleeting Colours",
    "t": "Autumn",
    "s": "We All Want Someone To Shout For",
-   "lv": 11,
+   "lv": 13,
    "i": "https://static.hypem.com/items_images/66/3ag36_120.jpg",
    "u": "https://hypem.com/track/3ag36",
    "d": "2026-11-23T20:08:09Z"
   },
   {
-   "p": 4,
+   "p": 3,
    "a": "ViVii",
    "t": "You Go I Go",
    "s": "Phonograph Me",
-   "lv": 95,
+   "lv": 92,
    "i": "https://static.hypem.com/items_images/a4/3arn4_120.jpg",
    "u": "https://hypem.com/track/3arn4",
    "d": "2026-11-23T12:56:07Z"
   },
   {
-   "p": 5,
+   "p": 4,
    "a": "Factory Floor",
    "t": "Continuation",
    "s": "Escafandrista Musical",
@@ -1952,17 +1942,17 @@
    "d": "2026-11-23T11:12:09Z"
   },
   {
-   "p": 6,
+   "p": 5,
    "a": "Aztec Camera",
    "t": "Walk Out To Winter (single version)",
    "s": "THE VINYL VILLAIN",
-   "lv": 12,
+   "lv": 17,
    "i": "https://static.hypem.net/thumbs_new/14/742932.jpg",
    "u": "https://hypem.com/track/q79w",
    "d": "2026-11-23T05:52:26Z"
   },
   {
-   "p": 7,
+   "p": 6,
    "a": "Al Doyle",
    "t": "All I Want For Christmas",
    "s": "Christmas a Go Go",
@@ -1972,11 +1962,21 @@
    "d": "2026-11-22T04:16:08Z"
   },
   {
+   "p": 7,
+   "a": "TV People",
+   "t": "The Fall",
+   "s": "AnalogueTrash",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/c3/3asy3_120.jpg",
+   "u": "https://hypem.com/track/3asy3",
+   "d": "2026-11-24T21:52:15Z"
+  },
+  {
    "p": 8,
    "a": "10,000 Maniacs",
    "t": "Everyday is Like Sunday",
    "s": "THE VINYL VILLAIN",
-   "lv": 26,
+   "lv": 36,
    "i": "https://static.hypem.com/items_images/9b/ypcv_120.jpg",
    "u": "https://hypem.com/track/ypcv",
    "d": "2026-11-24T05:08:15Z"
@@ -2006,7 +2006,7 @@
    "a": "CHINAH",
    "t": "Can't Remember How It Feels",
    "s": "Where the Music Meets",
-   "lv": 380,
+   "lv": 418,
    "i": "https://static.hypem.com/items_images/c/2jd0c_120.jpg",
    "u": "https://hypem.com/track/2jd0c",
    "d": "2026-11-23T12:44:09Z"
@@ -2023,6 +2023,96 @@
   },
   {
    "p": 13,
+   "a": "Steve Strange",
+   "t": "Love & Logic (Extended Mix)",
+   "s": "Post-Punk Monk",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/c7/3asy7_120.jpg",
+   "u": "https://hypem.com/track/3asy7",
+   "d": "2026-11-24T22:56:09Z"
+  },
+  {
+   "p": 14,
+   "a": "Steve Strange",
+   "t": "Welcome To The Digital Age (Extended Mix)",
+   "s": "Post-Punk Monk",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/c8/3asy8_120.jpg",
+   "u": "https://hypem.com/track/3asy8",
+   "d": "2026-11-24T22:56:15Z"
+  },
+  {
+   "p": 15,
+   "a": "Steve Strange",
+   "t": "Le Palais de Danse (Extended Mix)",
+   "s": "Post-Punk Monk",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/c9/3asy9_120.jpg",
+   "u": "https://hypem.com/track/3asy9",
+   "d": "2026-11-24T22:56:22Z"
+  },
+  {
+   "p": 16,
+   "a": "Steve Strange",
+   "t": "Boys (Extended Mix)",
+   "s": "Post-Punk Monk",
+   "lv": 0,
+   "i": "https://static.hypem.com/items_images/ca/3asya_120.jpg",
+   "u": "https://hypem.com/track/3asya",
+   "d": "2026-11-24T22:56:28Z"
+  },
+  {
+   "p": 17,
+   "a": "Karl Mattar",
+   "t": "Winter Things",
+   "s": "electric sound of joy",
+   "lv": 4,
+   "i": "https://static.hypem.com/items_images/5a/3anjt_120.jpg",
+   "u": "https://hypem.com/track/3anjt",
+   "d": "2026-11-24T22:36:22Z"
+  },
+  {
+   "p": 18,
+   "a": "Amiture Music",
+   "t": "My Loose Thread",
+   "s": "electric sound of joy",
+   "lv": 3,
+   "i": "https://static.hypem.com/items_images/ff/3as7z_120.jpg",
+   "u": "https://hypem.com/track/3as7z",
+   "d": "2026-11-24T22:36:15Z"
+  },
+  {
+   "p": 19,
+   "a": "TV People",
+   "t": "Nothing More",
+   "s": "AnalogueTrash",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/c2/3asy2_120.jpg",
+   "u": "https://hypem.com/track/3asy2",
+   "d": "2026-11-24T21:52:08Z"
+  },
+  {
+   "p": 20,
+   "a": "T. G. Shand",
+   "t": "Sizing The Waltz",
+   "s": "electric sound of joy",
+   "lv": 2,
+   "i": "https://static.hypem.com/items_images/ef/3as7f_120.jpg",
+   "u": "https://hypem.com/track/3as7f",
+   "d": "2026-11-24T21:36:12Z"
+  },
+  {
+   "p": 21,
+   "a": "Arky Waters",
+   "t": "Pump Up the Volume",
+   "s": "acid stag",
+   "lv": 1,
+   "i": "https://static.hypem.com/items_images/c4/3asy4_120.jpg",
+   "u": "https://hypem.com/track/3asy4",
+   "d": "2026-11-24T22:32:10Z"
+  },
+  {
+   "p": 22,
    "a": "Wadeland Exploration Team",
    "t": "Count Up `Til Christmas",
    "s": "Christmas Underground",
@@ -2032,7 +2122,7 @@
    "d": "2026-11-24T20:48:11Z"
   },
   {
-   "p": 14,
+   "p": 23,
    "a": "Wadeland Exploration Team",
    "t": "Weihnachten im Krankenhaus",
    "s": "Christmas Underground",
@@ -2042,7 +2132,7 @@
    "d": "2026-11-24T20:48:19Z"
   },
   {
-   "p": 15,
+   "p": 24,
    "a": "Wadeland Exploration Team",
    "t": "XmasOramaX",
    "s": "Christmas Underground",
@@ -2052,7 +2142,7 @@
    "d": "2026-11-24T20:48:25Z"
   },
   {
-   "p": 16,
+   "p": 25,
    "a": "Putrid",
    "t": "disgusted",
    "s": "ReGen Magazine",
@@ -2062,17 +2152,17 @@
    "d": "2026-11-24T20:56:07Z"
   },
   {
-   "p": 17,
+   "p": 26,
    "a": "Putrid",
    "t": "disgusted (prado remix)",
    "s": "ReGen Magazine",
-   "lv": 0,
+   "lv": 1,
    "i": "https://static.hypem.com/items_images/bf/3asxz_120.jpg",
    "u": "https://hypem.com/track/3asxz",
    "d": "2026-11-24T20:56:13Z"
   },
   {
-   "p": 18,
+   "p": 27,
    "a": "Awning",
    "t": "I'm Up",
    "s": "Various Small Flames",
@@ -2082,7 +2172,7 @@
    "d": "2026-11-24T19:16:08Z"
   },
   {
-   "p": 19,
+   "p": 28,
    "a": "Elliot Maginot",
    "t": "Auld Lang Syne",
    "s": "Christmas Underground",
@@ -2092,7 +2182,7 @@
    "d": "2026-11-24T19:44:08Z"
   },
   {
-   "p": 20,
+   "p": 29,
    "a": "Moustache Prawn",
    "t": "Dear ghost",
    "s": "mp3hugger",
@@ -2102,7 +2192,7 @@
    "d": "2026-11-24T18:56:08Z"
   },
   {
-   "p": 21,
+   "p": 30,
    "a": "Rafael Toral",
    "t": "Long Ways Short 4 (single edit)",
    "s": "The Quietus",
@@ -2112,7 +2202,7 @@
    "d": "2026-11-24T18:48:27Z"
   },
   {
-   "p": 22,
+   "p": 31,
    "a": "S3A",
    "t": "Jabeau",
    "s": "When We Dip",
@@ -2122,7 +2212,7 @@
    "d": "2026-11-24T17:44:15Z"
   },
   {
-   "p": 23,
+   "p": 32,
    "a": "Céleri",
    "t": "The Pinch",
    "s": "Here Comes The Flood",
@@ -2132,7 +2222,7 @@
    "d": "2026-11-24T17:16:08Z"
   },
   {
-   "p": 24,
+   "p": 33,
    "a": "Dance Spirit",
    "t": "NEURAL NETWORKS 2026 LLM panic' mix)",
    "s": "When We Dip",
@@ -2142,7 +2232,7 @@
    "d": "2026-11-24T17:44:08Z"
   },
   {
-   "p": 25,
+   "p": 34,
    "a": "Huerco S.",
    "t": "Monks Mound (Arcology)",
    "s": "Super Super Sounds",
@@ -2152,7 +2242,7 @@
    "d": "2026-11-24T20:12:10Z"
   },
   {
-   "p": 26,
+   "p": 35,
    "a": "VENIN CARMIN",
    "t": "Hatefully Yours",
    "s": "Destroy//Exist",
@@ -2162,17 +2252,17 @@
    "d": "2026-11-24T15:40:30Z"
   },
   {
-   "p": 27,
+   "p": 36,
    "a": "StillWaves",
    "t": "Frayed",
    "s": "Destroy//Exist",
-   "lv": 0,
+   "lv": 1,
    "i": "https://static.hypem.com/items_images/b1/3asxh_120.jpg",
    "u": "https://hypem.com/track/3asxh",
    "d": "2026-11-24T15:40:24Z"
   },
   {
-   "p": 28,
+   "p": 37,
    "a": "Meïa",
    "t": "Sweet Devotion",
    "s": "Fresh On The Net",
@@ -2182,7 +2272,7 @@
    "d": "2026-11-24T15:28:08Z"
   },
   {
-   "p": 29,
+   "p": 38,
    "a": "Nicky Smith",
    "t": "“Forever",
    "s": "Fresh On The Net",
@@ -2192,7 +2282,7 @@
    "d": "2026-11-24T15:28:15Z"
   },
   {
-   "p": 30,
+   "p": 39,
    "a": "All's Fair",
    "t": "Temper's Heavy",
    "s": "Fresh On The Net",
@@ -2202,7 +2292,7 @@
    "d": "2026-11-24T15:28:22Z"
   },
   {
-   "p": 31,
+   "p": 40,
    "a": "EMMA DOHERTY",
    "t": "MOLLY AND TOM",
    "s": "Fresh On The Net",
@@ -2212,7 +2302,7 @@
    "d": "2026-11-24T15:28:28Z"
   },
   {
-   "p": 32,
+   "p": 41,
    "a": "Chwill",
    "t": "I Can't See The Stars",
    "s": "Fresh On The Net",
@@ -2222,7 +2312,7 @@
    "d": "2026-11-24T15:28:33Z"
   },
   {
-   "p": 33,
+   "p": 42,
    "a": "Dremar",
    "t": "Coffee",
    "s": "Fresh On The Net",
@@ -2232,7 +2322,7 @@
    "d": "2026-11-24T15:28:40Z"
   },
   {
-   "p": 34,
+   "p": 43,
    "a": "Bye Bye Maxwell",
    "t": "All in My Head",
    "s": "Fresh On The Net",
@@ -2242,7 +2332,7 @@
    "d": "2026-11-24T15:28:47Z"
   },
   {
-   "p": 35,
+   "p": 44,
    "a": "Los Blancos",
    "t": "Y Wiber",
    "s": "Fresh On The Net",
@@ -2252,7 +2342,7 @@
    "d": "2026-11-24T15:28:52Z"
   },
   {
-   "p": 36,
+   "p": 45,
    "a": "The Rumble Skulls",
    "t": "Whiz Kid",
    "s": "Fresh On The Net",
@@ -2262,7 +2352,7 @@
    "d": "2026-11-24T15:28:58Z"
   },
   {
-   "p": 37,
+   "p": 46,
    "a": "Eventually Flowers",
    "t": "Alaskan Boy",
    "s": "Destroy//Exist",
@@ -2272,7 +2362,7 @@
    "d": "2026-11-24T15:40:18Z"
   },
   {
-   "p": 38,
+   "p": 47,
    "a": "damasq",
    "t": "get lost",
    "s": "Austin Town Hall",
@@ -2282,7 +2372,7 @@
    "d": "2026-11-24T14:52:31Z"
   },
   {
-   "p": 39,
+   "p": 48,
    "a": "Hand Drawn Dracula",
    "t": "Big Things in Common",
    "s": "Destroy//Exist",
@@ -2292,7 +2382,7 @@
    "d": "2026-11-24T15:40:12Z"
   },
   {
-   "p": 40,
+   "p": 49,
    "a": "Sabertooth Unicorn",
    "t": "Santa Is a Psyop",
    "s": "Christmas a Go Go",
@@ -2302,7 +2392,7 @@
    "d": "2026-11-24T14:52:08Z"
   },
   {
-   "p": 41,
+   "p": 50,
    "a": "Sabertooth Unicorn",
    "t": "Resistmas",
    "s": "Christmas a Go Go",
@@ -2310,96 +2400,6 @@
    "i": "https://static.hypem.com/items_images/a2/3asx2_120.jpg",
    "u": "https://hypem.com/track/3asx2",
    "d": "2026-11-24T14:52:13Z"
-  },
-  {
-   "p": 42,
-   "a": "Sabertooth Unicorn",
-   "t": "Christmas Wish",
-   "s": "Christmas a Go Go",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/a3/3asx3_120.jpg",
-   "u": "https://hypem.com/track/3asx3",
-   "d": "2026-11-24T14:52:19Z"
-  },
-  {
-   "p": 43,
-   "a": "Hidden Spheres",
-   "t": "B1 - Gowanus",
-   "s": "Bolting Bits",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/a0/3asx0_120.jpg",
-   "u": "https://hypem.com/track/3asx0",
-   "d": "2026-11-24T14:36:42Z"
-  },
-  {
-   "p": 44,
-   "a": "Sigh Die",
-   "t": "Bad Memory",
-   "s": "Destroy//Exist",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/9f/3aswz_120.jpg",
-   "u": "https://hypem.com/track/3aswz",
-   "d": "2026-11-24T14:36:35Z"
-  },
-  {
-   "p": 45,
-   "a": "Caroline Fowler",
-   "t": "Medium Christmas",
-   "s": "Christmas Underground",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/5a/3ar2t_120.jpg",
-   "u": "https://hypem.com/track/3ar2t",
-   "d": "2026-11-24T14:36:11Z"
-  },
-  {
-   "p": 46,
-   "a": "Caroline Fowler",
-   "t": "My Christmas Tree",
-   "s": "Christmas Underground",
-   "lv": 1,
-   "i": "https://static.hypem.com/items_images/9c/3asww_120.jpg",
-   "u": "https://hypem.com/track/3asww",
-   "d": "2026-11-24T14:36:17Z"
-  },
-  {
-   "p": 47,
-   "a": "Caroline Fowler",
-   "t": "Priceless",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/9d/3aswx_120.jpg",
-   "u": "https://hypem.com/track/3aswx",
-   "d": "2026-11-24T14:36:22Z"
-  },
-  {
-   "p": 48,
-   "a": "Caroline Fowler",
-   "t": "My Christmas Tree",
-   "s": "Christmas Underground",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/9e/3aswy_120.jpg",
-   "u": "https://hypem.com/track/3aswy",
-   "d": "2026-11-24T14:36:28Z"
-  },
-  {
-   "p": 49,
-   "a": "Asha Wells",
-   "t": "Scaffolding Sky",
-   "s": "START-TRACK",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/9a/3aswt_120.jpg",
-   "u": "https://hypem.com/track/3aswt",
-   "d": "2026-11-24T14:28:08Z"
-  },
-  {
-   "p": 50,
-   "a": "Dirty Three",
-   "t": "Sues Last Ride (Demo)",
-   "s": "KLOF Magazine",
-   "lv": 0,
-   "i": "https://static.hypem.com/items_images/98/3aswr_120.jpg",
-   "u": "https://hypem.com/track/3aswr",
-   "d": "2026-11-24T13:52:07Z"
   }
  ],
  "bandcamp": [
@@ -2411,7 +2411,7 @@
    "g": "electronic",
    "u": "https://terabit.bandcamp.com/album/my-feelings-cant-be-so-sad",
    "i": "https://f4.bcbits.com/img/a829475269_7.jpg",
-   "s": "https://t4.bcbits.com/stream/8815eed97811f34f79d6a3083451cc65/mp3-128/810954336?p=0&ts=1795642045&t=603d19c47f5ea9addffdb14514ef854887fdc193&token=1795642045_68157455a13c6cbc4a42bac063059782837fe2cd",
+   "s": "https://t4.bcbits.com/stream/8815eed97811f34f79d6a3083451cc65/mp3-128/810954336?p=0&ts=1795649219&t=0e196182d9d596dc04e110d36a89a9de5ff953fd&token=1795649219_49120f0608780a7cd131732e41a639f26421860e",
    "ft": "001-MENTALNOISEATTACK.WAV",
    "dur": 114,
    "d": "2026-11-24T17:45:20Z"
@@ -2424,7 +2424,7 @@
    "g": "rock",
    "u": "https://petropolis1.bandcamp.com/album/dead-set-on-surrender-apollon",
    "i": "https://f4.bcbits.com/img/a199819520_7.jpg",
-   "s": "https://t4.bcbits.com/stream/4809c8f497732a2e1c5e088ffdabe2af/mp3-128/898001368?p=0&ts=1795642045&t=9e1c6956533cdfaeba5bb820517cc4902234c283&token=1795642045_fec6ee931f50bf849cf9d580f567876513f2717b",
+   "s": "https://t4.bcbits.com/stream/4809c8f497732a2e1c5e088ffdabe2af/mp3-128/898001368?p=0&ts=1795649219&t=c9807c05773f7b34621ebe3043b339adfc90325a&token=1795649219_499fce4687eb50a9c44f3a7ae9942296f5e9e567",
    "ft": "Dead Set on Surrender",
    "dur": 324,
    "d": "2026-11-20T09:55:58Z"
@@ -2437,7 +2437,7 @@
    "g": "soundtrack",
    "u": "https://pulgapixelmoir2.bandcamp.com/album/onomatozoopeia",
    "i": "https://f4.bcbits.com/img/a2974858780_7.jpg",
-   "s": "https://t4.bcbits.com/stream/0d1dae0b21c9fe7a2329b94daf97e62f/mp3-128/4160108846?p=0&ts=1795642045&t=907faf8e751e84616a3637c9e217413a013db937&token=1795642045_753d4e9b5a6e6f98da85c357d9002b12739c4f69",
+   "s": "https://t4.bcbits.com/stream/0d1dae0b21c9fe7a2329b94daf97e62f/mp3-128/4160108846?p=0&ts=1795649219&t=f42c5be0fae6d84ea868deb8e865d3cb6b29e52c&token=1795649219_9d311e17aadddb29245a443914b61d1d17c38ad8",
    "ft": "hipo argumentação p@rte I",
    "dur": 136,
    "d": "2026-11-23T14:37:50Z"
@@ -2450,7 +2450,7 @@
    "g": "electronic",
    "u": "https://ecliptones.bandcamp.com/album/walithyd-midge",
    "i": "https://f4.bcbits.com/img/a280856445_7.jpg",
-   "s": "https://t4.bcbits.com/stream/240fb57482f21db4f1fdd555adabcbe2/mp3-128/3863072664?p=0&ts=1795642045&t=d758641e9694d36920bff6178cf50220b2e56dbc&token=1795642045_116ced341116f545e002a92c720b66509934fa3f",
+   "s": "https://t4.bcbits.com/stream/240fb57482f21db4f1fdd555adabcbe2/mp3-128/3863072664?p=0&ts=1795649219&t=802a1a1d70a08248492ddc70abd5ad90698d4007&token=1795649219_c81236d91762e4f0cbe5463bb9a844a7665fc62e",
    "ft": "Return of The Tripods",
    "dur": 175,
    "d": "2026-11-24T17:44:59Z"
@@ -2463,7 +2463,7 @@
    "g": "electronic",
    "u": "https://ghost115breach.bandcamp.com/album/pulse-of-zircon-vocal-version",
    "i": "https://f4.bcbits.com/img/a2098641393_7.jpg",
-   "s": "https://t4.bcbits.com/stream/3a8810938052c772ef4081d8aa145ea9/mp3-128/1788807303?p=0&ts=1795642045&t=45dfd43b1d68aecd3fcb395290236ae2b0e0ff1d&token=1795642045_c90bbe6a09e5b5544b22a780cf5fd07b8e8b2d4e",
+   "s": "https://t4.bcbits.com/stream/3a8810938052c772ef4081d8aa145ea9/mp3-128/1788807303?p=0&ts=1795649219&t=fca08327c9fcdd5f709269d4b98289ccc6eb9144&token=1795649219_70564c5528ce60e25a9a6a461c167c0122ed05bf",
    "ft": "Pulse Of Zircon Vocal Version",
    "dur": 431,
    "d": "2026-11-24T17:43:06Z"
@@ -2476,7 +2476,7 @@
    "g": "alternative",
    "u": "https://kvraucous.bandcamp.com/album/snakebite-e-p",
    "i": "https://f4.bcbits.com/img/a1469526505_7.jpg",
-   "s": "https://t4.bcbits.com/stream/7e15be9226f38098bd9fa7928cac4801/mp3-128/4229732739?p=0&ts=1795642045&t=03431790aedf4c29dca124e765ded85933a0e714&token=1795642045_9ee3921086362f8f54f3afd0e0f5f477b9837ab9",
+   "s": "https://t4.bcbits.com/stream/7e15be9226f38098bd9fa7928cac4801/mp3-128/4229732739?p=0&ts=1795649219&t=056fe35e77f5a0da7cd1538ae9e7a93532abe563&token=1795649219_2250ace1fb63ceadd76ddeb2a293b4446e5264c7",
    "ft": "Snakebite",
    "dur": 151,
    "d": "2026-11-24T17:44:02Z"
@@ -2489,7 +2489,7 @@
    "g": "metal",
    "u": "https://prometheanmetal.bandcamp.com/album/global-cleansing",
    "i": "https://f4.bcbits.com/img/a1820688168_7.jpg",
-   "s": "https://t4.bcbits.com/stream/e43f1f0c7f50c50a4137631ecf4fbcf4/mp3-128/2753525630?p=0&ts=1795642045&t=57a3d88cfed40802288d8ee5063ca849e8303211&token=1795642045_c1c8ac2f922cfa765a2db2e8f261521421a2b8af",
+   "s": "https://t4.bcbits.com/stream/e43f1f0c7f50c50a4137631ecf4fbcf4/mp3-128/2753525630?p=0&ts=1795649219&t=cf5d428f7543db8375ddbc306e0ff0f4e9aeed89&token=1795649219_3696eb6f08484c3001f5dd548e5526222e10e5b5",
    "ft": "Khaos",
    "dur": 288,
    "d": "2026-11-24T16:25:54Z"
@@ -2502,7 +2502,7 @@
    "g": "alternative",
    "u": "https://hotelfoxtrotlima.bandcamp.com/album/heart-beats-in-birch-hertzs-dude",
    "i": "https://f4.bcbits.com/img/a2262134355_7.jpg",
-   "s": "https://t4.bcbits.com/stream/8bc86e2251063676072e78bf421e01d2/mp3-128/3812849357?p=0&ts=1795642045&t=952a76c8c9c9f8e241a8431a8bfd4e43eeece26a&token=1795642045_d1cbdb0eda844f887998b5b35bfe7547b43583a5",
+   "s": "https://t4.bcbits.com/stream/8bc86e2251063676072e78bf421e01d2/mp3-128/3812849357?p=0&ts=1795649219&t=5dc204a329959fbc29906f9960e3ce244b240992&token=1795649219_155439f9630b6fb69ab2b51e89064e7a6c369a83",
    "ft": "PT Chant",
    "dur": 354,
    "d": "2026-11-24T17:28:48Z"
@@ -2515,7 +2515,7 @@
    "g": "classical",
    "u": "https://flemingbaird.bandcamp.com/album/a-hebridean-mass",
    "i": "https://f4.bcbits.com/img/a326485822_7.jpg",
-   "s": "https://t4.bcbits.com/stream/be890cb830b2532eb7165af6814ffb58/mp3-128/2513726847?p=0&ts=1795642045&t=68ea8ae666bcedecf4eb7dbe72bd229fe797240c&token=1795642045_0a7bc165443429a8c644911e241e548a203327ed",
+   "s": "https://t4.bcbits.com/stream/be890cb830b2532eb7165af6814ffb58/mp3-128/2513726847?p=0&ts=1795649219&t=6cf0da9b8d229fdcd11b3906a0f02c33ceba51a1&token=1795649219_2155ba35705f50fabe37bf9ddf8923a90bc0c6ab",
    "ft": "Offertory for String Orchestra",
    "dur": 172,
    "d": "2026-11-23T21:07:42Z"
@@ -2528,7 +2528,7 @@
    "g": "rock",
    "u": "https://jpalmjpalmjpalm.bandcamp.com/album/writing-music-6",
    "i": "https://f4.bcbits.com/img/a2606744414_7.jpg",
-   "s": "https://t4.bcbits.com/stream/b3672fe6e9b869ca9105cb21e801d70a/mp3-128/1055842746?p=0&ts=1795642045&t=2c12dc798cb371dc6d85d8cca4af58389ab761ea&token=1795642045_4ed363458f5dbfe5f108ca3c3038e6dd09fac4af",
+   "s": "https://t4.bcbits.com/stream/b3672fe6e9b869ca9105cb21e801d70a/mp3-128/1055842746?p=0&ts=1795649219&t=2b7baef13c61a2b7e369e4e850ac10eca740e0d5&token=1795649219_0bb0e0ec11978e1f318c4c2de41144a050604fe0",
    "ft": "Spy",
    "dur": 163,
    "d": "2026-11-24T03:11:12Z"
@@ -2541,7 +2541,7 @@
    "g": "alternative",
    "u": "https://hbfisipub.bandcamp.com/album/bloomscape-vol-15",
    "i": "https://f4.bcbits.com/img/a2270882049_7.jpg",
-   "s": "https://t4.bcbits.com/stream/b1587e72655cf8563fd99cfd418a54d3/mp3-128/3425614948?p=0&ts=1795642045&t=485705beafc316c8566f1f6b3016de66e8fdfb5a&token=1795642045_f58bfb22c75c259034d53cc38bad0dab7a97b50a",
+   "s": "https://t4.bcbits.com/stream/b1587e72655cf8563fd99cfd418a54d3/mp3-128/3425614948?p=0&ts=1795649219&t=7795516d988059114bc90da88e7f57ba2e41ff77&token=1795649219_2212b0797bcfdab3f40507e4129f8c6d10c9e863",
    "ft": "Sailor",
    "dur": 225,
    "d": "2026-11-24T17:35:27Z"
@@ -2554,7 +2554,7 @@
    "g": "soundtrack",
    "u": "https://disorganizedschizophrenia.bandcamp.com/album/starting-rumors",
    "i": "https://f4.bcbits.com/img/a1548853646_7.jpg",
-   "s": "https://t4.bcbits.com/stream/c48d3b3229e47425a648fd845c298950/mp3-128/1995155123?p=0&ts=1795642045&t=ad0574d8e87d37744cb6c5ada8d8540e83b55619&token=1795642045_2af473c5c17a222f750b4ebcdcc0dfc8ec5c0203",
+   "s": "https://t4.bcbits.com/stream/c48d3b3229e47425a648fd845c298950/mp3-128/1995155123?p=0&ts=1795649219&t=8e68ac211ca2015130dd24461c3e1f0d6a5d35dc&token=1795649219_ace7c49df5c2e7e13c2bfaa28c2a21cb6ae9e176",
    "ft": "Hot Soup (boop)",
    "dur": 87,
    "d": "2026-11-24T17:42:09Z"
@@ -2567,7 +2567,7 @@
    "g": "pop",
    "u": "https://harumipier.bandcamp.com/album/a-part-of-days",
    "i": "https://f4.bcbits.com/img/a2736193098_7.jpg",
-   "s": "https://t4.bcbits.com/stream/474515529d9eeda18b14e4bcbf0f7c19/mp3-128/966968304?p=0&ts=1795642045&t=e011d1633d1d9fec3b95f4dec144c2644f23d97a&token=1795642045_b1275e49094a1eee237baa0eca66a8b3a0c273bf",
+   "s": "https://t4.bcbits.com/stream/474515529d9eeda18b14e4bcbf0f7c19/mp3-128/966968304?p=0&ts=1795649219&t=51eb14d6ee21320d760c9d47537dc980262470a6&token=1795649219_4fa676b9ee641c6490dafad9582f73032c94839f",
    "ft": "After The Party",
    "dur": 268,
    "d": "2026-11-24T17:42:01Z"
@@ -2580,7 +2580,7 @@
    "g": "acoustic",
    "u": "https://brucedavies.bandcamp.com/album/hidden-gems",
    "i": "https://f4.bcbits.com/img/a3725965524_7.jpg",
-   "s": "https://t4.bcbits.com/stream/5119d906359f16de55e32c342a4227a8/mp3-128/2553063069?p=0&ts=1795642045&t=5da4e7ba773801d7f0d0a44d624ee35c4e4297f5&token=1795642045_ff0dd21f610352647ee77a983866caf955e79254",
+   "s": "https://t4.bcbits.com/stream/5119d906359f16de55e32c342a4227a8/mp3-128/2553063069?p=0&ts=1795649219&t=bdc16a11f4d08609f778bb2a65f906406f3ad46f&token=1795649219_78c580db86a2fb11609d9bd519c26a722b031397",
    "ft": "Gettin' Up Early",
    "dur": 207,
    "d": "2026-11-24T17:23:35Z"
@@ -2593,7 +2593,7 @@
    "g": "devotional",
    "u": "https://agdavis3.bandcamp.com/album/black-mental",
    "i": "https://f4.bcbits.com/img/a1654405225_7.jpg",
-   "s": "https://t4.bcbits.com/stream/96ce1b92a6ffc434153fcc1c2703e1e1/mp3-128/1487209052?p=0&ts=1795642045&t=e2df45eea247acf97b2444109c5a6e93f9551647&token=1795642045_4ea190a9be4a23ac36db2c396207d0dac70c3a38",
+   "s": "https://t4.bcbits.com/stream/96ce1b92a6ffc434153fcc1c2703e1e1/mp3-128/1487209052?p=0&ts=1795649219&t=aedd0eaccec9c7a3f2475a734bd8dbc66f755456&token=1795649219_b92129a7ddc5b3ff536a98fef04c7ecd9c732d3c",
    "ft": "Light goes in, Light shines out",
    "dur": 88,
    "d": "2026-11-24T17:41:39Z"
@@ -2606,7 +2606,7 @@
    "g": "electronic",
    "u": "https://junction4recordings.bandcamp.com/album/the-first-trax-pt2-ep",
    "i": "https://f4.bcbits.com/img/a3923457721_7.jpg",
-   "s": "https://t4.bcbits.com/stream/4ea51af2eb3f360b0c5b95b6b1cb585d/mp3-128/1034753417?p=0&ts=1795642045&t=7c72c6e139cbbac29289453f49a34d2e7a6f4978&token=1795642045_0a5329b2bb2728921f3a88b7fd5878d97197cbbd",
+   "s": "https://t4.bcbits.com/stream/4ea51af2eb3f360b0c5b95b6b1cb585d/mp3-128/1034753417?p=0&ts=1795649219&t=e8dd7c6380be5f10ddf2bdc19aa1189bdd8ff476&token=1795649219_6b324acecc4c2d1852887cc72dc520304360524d",
    "ft": "Train Wreck",
    "dur": 442,
    "d": "2026-11-24T17:40:57Z"
@@ -2619,7 +2619,7 @@
    "g": "electronic",
    "u": "https://psyoldsportal.bandcamp.com/album/ultravoice-huff-puff-ep",
    "i": "https://f4.bcbits.com/img/a2687750683_7.jpg",
-   "s": "https://t4.bcbits.com/stream/fbb88cdd0612f1e757c6ca259116c4d6/mp3-128/3942361006?p=0&ts=1795642045&t=ed2c3238fa5eee37129b2a83cd65ca9619291a85&token=1795642045_4f5951e38f910143970867260cd1e28c5bccb5ba",
+   "s": "https://t4.bcbits.com/stream/fbb88cdd0612f1e757c6ca259116c4d6/mp3-128/3942361006?p=0&ts=1795649219&t=10cc5c843b7308422931ced686b052e55e5b221b&token=1795649219_b6e52acdd81b1b85fb284cc2bfd60909ceba384c",
    "ft": "Spyzer - I Feel So Free Ultravoice Vs. Switch Remix",
    "dur": 450,
    "d": "2026-11-24T17:40:39Z"
@@ -2632,7 +2632,7 @@
    "g": "experimental",
    "u": "https://steamabacusbootlegs.bandcamp.com/album/it-is-written-in-the-signs-in-the-stars-steamabacus-remix",
    "i": "https://f4.bcbits.com/img/a1156228606_7.jpg",
-   "s": "https://t4.bcbits.com/stream/1bee5c6427e5515ab332e4934950317a/mp3-128/1777732019?p=0&ts=1795642045&t=9d9609a3890f4d403513268cf92dd12bd89e8d06&token=1795642045_1f3381170d4027d400a1fc71a0930b269c8d61c9",
+   "s": "https://t4.bcbits.com/stream/1bee5c6427e5515ab332e4934950317a/mp3-128/1777732019?p=0&ts=1795649219&t=fccb48792aa933e333603cf9b0675d72bac6a71c&token=1795649219_de8eb46e63699eaa304b6540d71c496bb51b2c28",
    "ft": "It Is Written (In The Signs In The Stars) (SteamAbacus remix)",
    "dur": 332,
    "d": "2026-11-22T20:01:17Z"
@@ -2645,7 +2645,7 @@
    "g": "soundtrack",
    "u": "https://juhonurmela.bandcamp.com/album/crypto-boy-original-motion-picture-soundtrack",
    "i": "https://f4.bcbits.com/img/a1676533626_7.jpg",
-   "s": "https://t4.bcbits.com/stream/6f2ed8a28882a6ea66298c2a79295241/mp3-128/227225221?p=0&ts=1795642045&t=27901c6af5462797579c1ce357c5ac240a1e5704&token=1795642045_018fddabc6a335d4e933a2ea5ccd20d0c7c45538",
+   "s": "https://t4.bcbits.com/stream/6f2ed8a28882a6ea66298c2a79295241/mp3-128/227225221?p=0&ts=1795649219&t=3c7fded5ee32a10a188ac5793f02457edf103a5e&token=1795649219_b7da22036e0768288d758c21edb216c149d0cc7c",
    "ft": "The Promise",
    "dur": 167,
    "d": "2026-11-24T17:00:23Z"
@@ -2658,7 +2658,7 @@
    "g": "alternative",
    "u": "https://chorejacket.bandcamp.com/album/no-longer-waiting",
    "i": "https://f4.bcbits.com/img/a1407724659_7.jpg",
-   "s": "https://t4.bcbits.com/stream/41784f2fa130371a78d0553833bc0cd8/mp3-128/3799158346?p=0&ts=1795642045&t=f99bee4cc76b3bfbe5d9aa993e62861efedf504a&token=1795642045_0dd48a707986a75c8ca09ffe83bdbcfefef257b2",
+   "s": "https://t4.bcbits.com/stream/41784f2fa130371a78d0553833bc0cd8/mp3-128/3799158346?p=0&ts=1795649219&t=8364e0fce14131ddcae22deee7f188e926c5d28d&token=1795649219_5298b574d3226ec9f4454ab857004c8b7b5056d2",
    "ft": "No Longer Waiting",
    "dur": 238,
    "d": "2026-11-24T04:48:08Z"
@@ -2671,7 +2671,7 @@
    "g": "metal",
    "u": "https://dracoplasm.bandcamp.com/album/biohazard-alice",
    "i": "https://f4.bcbits.com/img/a3027482563_7.jpg",
-   "s": "https://t4.bcbits.com/stream/09dfdd24aa169942d871f83fbdca86bd/mp3-128/372104057?p=0&ts=1795642045&t=516d7cbfec4748f47d13dc8fa14127de457c6a38&token=1795642045_6cce3e89dacac43a20c7bdcf384274611b823450",
+   "s": "https://t4.bcbits.com/stream/09dfdd24aa169942d871f83fbdca86bd/mp3-128/372104057?p=0&ts=1795649219&t=3a93713911b077a5a915e50d76748efe7a3377a6&token=1795649219_f4c282189d901034a7b13792ced7f40ed33c52b5",
    "ft": "Biohazard",
    "dur": 283,
    "d": "2026-11-24T17:39:59Z"
@@ -2684,7 +2684,7 @@
    "g": "alternative",
    "u": "https://superphone.bandcamp.com/album/superphone-live-in-cleveland",
    "i": "https://f4.bcbits.com/img/a2905867846_7.jpg",
-   "s": "https://t4.bcbits.com/stream/455522acdbba68315a79dd0fc673cc1a/mp3-128/2205874510?p=0&ts=1795642045&t=8bce5f9bf3bd6cb4adb65d058aa307a17506aa1f&token=1795642045_e85852fd64f48f25aa1d70682ba354a65b8138f5",
+   "s": "https://t4.bcbits.com/stream/455522acdbba68315a79dd0fc673cc1a/mp3-128/2205874510?p=0&ts=1795649219&t=0520b4330e4a264f26195b83b1b5f8f5eba8d579&token=1795649219_915a8151a5f402ec0020fa49544252cf008d06df",
    "ft": "Fanfare for the Tube Minded Man",
    "dur": 40,
    "d": "2026-11-24T17:38:15Z"
@@ -2697,7 +2697,7 @@
    "g": "rock",
    "u": "https://sixbyseven.bandcamp.com/album/more-4-track-demos",
    "i": "https://f4.bcbits.com/img/a809228522_7.jpg",
-   "s": "https://t4.bcbits.com/stream/2ab2ab17e854bf89a070d062fabb5663/mp3-128/328578978?p=0&ts=1795642045&t=115ec710fdc925d3cdae3c368c9d65bb680910c8&token=1795642045_0b211fc2e934e8c0eba35087abf3b07ebfda47c6",
+   "s": "https://t4.bcbits.com/stream/2ab2ab17e854bf89a070d062fabb5663/mp3-128/328578978?p=0&ts=1795649219&t=d7a58e9c722ca44f2f9bd4c7e5faa221c8324141&token=1795649219_f292d6f7ebbc9b68ae5ec5808aebc90a882c4d33",
    "ft": "Show",
    "dur": 172,
    "d": "2026-11-24T16:34:44Z"
@@ -2710,7 +2710,7 @@
    "g": "electronic",
    "u": "https://ghost115breach.bandcamp.com/album/candy-girl",
    "i": "https://f4.bcbits.com/img/a4128735308_7.jpg",
-   "s": "https://t4.bcbits.com/stream/4ae41f7627ef3fee3b79a2d7e4a2aecf/mp3-128/2689696887?p=0&ts=1795642045&t=d6c67eb704c7758406bb9f84b178606de1d0c3e7&token=1795642045_bff49a36cbffc5aecf0e15396a62d4c76372215b",
+   "s": "https://t4.bcbits.com/stream/4ae41f7627ef3fee3b79a2d7e4a2aecf/mp3-128/2689696887?p=0&ts=1795649219&t=9eb0dedb8af2972ab92bba51cfe44899b3a9aef1&token=1795649219_e057d38942f12006585d1ccd65cd36657af7c702",
    "ft": "take shelter",
    "dur": 318,
    "d": "2026-11-24T02:19:28Z"
@@ -2723,7 +2723,7 @@
    "g": "country",
    "u": "https://brianpaul.bandcamp.com/album/lost-in-dreams-waltz",
    "i": "https://f4.bcbits.com/img/a1188844525_7.jpg",
-   "s": "https://t4.bcbits.com/stream/c8dc1ba962ba0ac954938325752bdc7d/mp3-128/613571248?p=0&ts=1795642045&t=50c0a9425817669abaec6fcce6b3d4a3be34479c&token=1795642045_47da1f3ed75e658e7cc6311df5f96a99922ee68c",
+   "s": "https://t4.bcbits.com/stream/c8dc1ba962ba0ac954938325752bdc7d/mp3-128/613571248?p=0&ts=1795649219&t=a9d0b24eee897d91d1182ae70f7e0cd3aac20cb3&token=1795649219_be74e9e31879af8b8b453dae449088284b9fa684",
    "ft": "Ballad Of My Teenage Years",
    "dur": 181,
    "d": "2026-11-24T17:38:32Z"
@@ -2736,7 +2736,7 @@
    "g": "soundtrack",
    "u": "https://juhonurmela.bandcamp.com/album/do-not-hesitate",
    "i": "https://f4.bcbits.com/img/a1427010999_7.jpg",
-   "s": "https://t4.bcbits.com/stream/e2489242da337558aca337021317df12/mp3-128/1556981688?p=0&ts=1795642045&t=c5fe4f823e309853670cfd9e09994f89b0eaaf49&token=1795642045_52351d6380e8c8b9c4870f42f1fdf6e64e7ce657",
+   "s": "https://t4.bcbits.com/stream/e2489242da337558aca337021317df12/mp3-128/1556981688?p=0&ts=1795649219&t=ebc1beb05d8164e75bc91c227a7a1eab79e946fa&token=1795649219_0ef2103b5ea28d1508b3581da562c40cc927dcf2",
    "ft": "Drying Out",
    "dur": 76,
    "d": "2026-11-24T17:37:13Z"
@@ -2749,7 +2749,7 @@
    "g": "electronic",
    "u": "https://afthr.bandcamp.com/album/afterhour2",
    "i": "https://f4.bcbits.com/img/a727153513_7.jpg",
-   "s": "https://t4.bcbits.com/stream/6b8c161a3dc0778d511ebac7012e6503/mp3-128/1999694305?p=0&ts=1795642045&t=2b528ffb4eee184b0a8b01bdff8a7c5f6589edab&token=1795642045_68b4ac167229b1d1094ae3cf55e56b3950df02cd",
+   "s": "https://t4.bcbits.com/stream/6b8c161a3dc0778d511ebac7012e6503/mp3-128/1999694305?p=0&ts=1795649219&t=f80949107fea490a3a5e82df0ddc0cd2ebf530a1&token=1795649219_7fba7801e9f73045d46ea12ace9e0ba63bf39af0",
    "ft": "Liftoff",
    "dur": 308,
    "d": "2026-11-21T12:40:12Z"
@@ -2762,7 +2762,7 @@
    "g": "electronic",
    "u": "https://harroldroeland.bandcamp.com/album/via-aquilonis-ii-bremen",
    "i": "https://f4.bcbits.com/img/a1584174485_7.jpg",
-   "s": "https://t4.bcbits.com/stream/879307d1f45e2bb70213312dd41efa98/mp3-128/1221411820?p=0&ts=1795642045&t=853e1a86177fbfedea57594f758e8dddc63a0cae&token=1795642045_3af381d8dc61ff6e02bb1679bf6e9ecc2eb5c16b",
+   "s": "https://t4.bcbits.com/stream/879307d1f45e2bb70213312dd41efa98/mp3-128/1221411820?p=0&ts=1795649219&t=e794a786edb147a76976136adf1ec3152c102ac7&token=1795649219_150ecebd514f488584d7c927e4739507488e19a6",
    "ft": "Introduction to Part 1",
    "dur": 74,
    "d": "2026-11-24T11:45:04Z"
@@ -2775,7 +2775,7 @@
    "g": "electronic",
    "u": "https://hakanolsson.bandcamp.com/album/uppdraget",
    "i": "https://f4.bcbits.com/img/a3679114227_7.jpg",
-   "s": "https://t4.bcbits.com/stream/8d4278e06adfe7ac433fdb6fa98a9f2c/mp3-128/2075306015?p=0&ts=1795642045&t=755baf70bebae113dbbbe19133d392db31074483&token=1795642045_782f96ee136508b64ebd8240f24483e3aa12e880",
+   "s": "https://t4.bcbits.com/stream/8d4278e06adfe7ac433fdb6fa98a9f2c/mp3-128/2075306015?p=0&ts=1795649219&t=10c8a4aa97aecb8b5d0cf95389f0a6f390f71eb7&token=1795649219_c952529e7ad8bb4031c2bab625b2bb496f91b766",
    "ft": "Håll motorn varm",
    "dur": 408,
    "d": "2026-11-21T06:52:20Z"
@@ -2788,7 +2788,7 @@
    "g": "world",
    "u": "https://strannikworld.bandcamp.com/album/a-world-of-melodies-instrumental-music-collection",
    "i": "https://f4.bcbits.com/img/a4030118372_7.jpg",
-   "s": "https://t4.bcbits.com/stream/b23c84e6ee4ff76b3abb0539453d0db5/mp3-128/2142309856?p=0&ts=1795642045&t=05d55006ee1fed2d412999a6bca3859ab0c5227f&token=1795642045_0fe278ba2556ecdbe8093268500c430bd1af1ae1",
+   "s": "https://t4.bcbits.com/stream/b23c84e6ee4ff76b3abb0539453d0db5/mp3-128/2142309856?p=0&ts=1795649219&t=73deb52a1d32f9a5ca6bae4caa3ff3ef9b8d4585&token=1795649219_63f7909b7cb3aa3d90919d157f02fe2205996aa3",
    "ft": "Obsession (Наваждение)",
    "dur": 173,
    "d": "2026-11-23T13:52:57Z"
@@ -2801,7 +2801,7 @@
    "g": "punk",
    "u": "https://twopiecefest.bandcamp.com/album/two-piece-fest-chicago-2027",
    "i": "https://f4.bcbits.com/img/a3367608708_7.jpg",
-   "s": "https://t4.bcbits.com/stream/4f7ec28ed84a543dbde91aa9d5948626/mp3-128/2519559300?p=0&ts=1795642045&t=73f544fae61a2ff9dcdbeb5ecffc71b2a59eed00&token=1795642045_0bb16d936334bd0efe4fa8a91ee9466129f30610",
+   "s": "https://t4.bcbits.com/stream/4f7ec28ed84a543dbde91aa9d5948626/mp3-128/2519559300?p=0&ts=1795649219&t=800c28d0b2f993c85d711cc7f439d3931ae6ac8a&token=1795649219_3db572d229e9141ffa0f8137ff3a892c5352cf1e",
    "ft": "REMO DRIVE - yer killin' me",
    "dur": 235,
    "d": "2026-11-18T01:37:19Z"
@@ -2814,7 +2814,7 @@
    "g": "devotional",
    "u": "https://gabrielyafet.bandcamp.com/album/the-flame-of-hope",
    "i": "https://f4.bcbits.com/img/a3220371979_7.jpg",
-   "s": "https://t4.bcbits.com/stream/4039ce46678f2fe7c54c511342a9e524/mp3-128/1904526501?p=0&ts=1795642045&t=20d95158f884f9c28f431db51aea3732383823cc&token=1795642045_139f98f7c5421bd03589e2cd84446d672fd5256f",
+   "s": "https://t4.bcbits.com/stream/4039ce46678f2fe7c54c511342a9e524/mp3-128/1904526501?p=0&ts=1795649219&t=8334ed1555f10a4e491e404082167e492c9bf699&token=1795649219_a94acabf90629226d380061752eb14d487261d7f",
    "ft": "Prologue",
    "dur": 225,
    "d": "2026-11-24T17:35:24Z"
@@ -2827,7 +2827,7 @@
    "g": "electronic",
    "u": "https://priciladiaz.bandcamp.com/album/dquebra-sample-pack-vol-1-227-original-sounds-by-pricila-diaz",
    "i": "https://f4.bcbits.com/img/a2913026969_7.jpg",
-   "s": "https://t4.bcbits.com/stream/c0b84ee8ddb64d08b262e532ee29fe3a/mp3-128/2871610483?p=0&ts=1795642045&t=15d6ab0fff75dd0d1050600dda30edb813675396&token=1795642045_dcf3b47a24c43eef97bd4209dc3602b7a77a5c47",
+   "s": "https://t4.bcbits.com/stream/c0b84ee8ddb64d08b262e532ee29fe3a/mp3-128/2871610483?p=0&ts=1795649219&t=e6e2c979ff8673b076a77e4c9812cdb76d071516&token=1795649219_c7738aed99488f9c95442c85c88232781bc8f8db",
    "ft": "DQPD_track DEMO",
    "dur": 150,
    "d": "2026-11-23T19:40:00Z"
@@ -2840,7 +2840,7 @@
    "g": "electronic",
    "u": "https://psyoldsportal.bandcamp.com/album/electro-sun-double-trouble",
    "i": "https://f4.bcbits.com/img/a2637979658_7.jpg",
-   "s": "https://t4.bcbits.com/stream/ac18c8f97e7b4d38dfa01379e6ef4916/mp3-128/3953941460?p=0&ts=1795642045&t=ffaf171fa3b247ea44cb37856c62e42b5430898f&token=1795642045_f1db892fb2439abc2806cebd40c3ef5aa206db86",
+   "s": "https://t4.bcbits.com/stream/ac18c8f97e7b4d38dfa01379e6ef4916/mp3-128/3953941460?p=0&ts=1795649219&t=ac1228cccd3fc7494055737fe9f62aaa69405b23&token=1795649219_bda7d59e17b25b00830041331b80e9833f78d597",
    "ft": "Electro Sun - Double Trouble",
    "dur": 467,
    "d": "2026-11-24T17:34:47Z"
@@ -2853,7 +2853,7 @@
    "g": "",
    "u": "https://gatewaygardenia.bandcamp.com/album/then-now",
    "i": "https://f4.bcbits.com/img/a3465106526_7.jpg",
-   "s": "https://t4.bcbits.com/stream/d9b942139aad7d54c5375c7e85794a75/mp3-128/312792061?p=0&ts=1795642045&t=9d73cb234f4a0135392ad97d55e07606b4a7a5b3&token=1795642045_a53ff62b0f37781cc12b25cd757ba1ecebbf855f",
+   "s": "https://t4.bcbits.com/stream/d9b942139aad7d54c5375c7e85794a75/mp3-128/312792061?p=0&ts=1795649219&t=d940fa0a37f919c44afa05daf9a38bc0cdd0b20e&token=1795649219_517433f13a1edf10f293dd1f0754fc87cbd4733a",
    "ft": "naag",
    "dur": 110,
    "d": "2026-11-24T17:19:59Z"
@@ -2866,7 +2866,7 @@
    "g": "alternative",
    "u": "https://nicholasja.bandcamp.com/album/open",
    "i": "https://f4.bcbits.com/img/a1650969019_7.jpg",
-   "s": "https://t4.bcbits.com/stream/78396d1a88d1b09ffc90bb2761d09841/mp3-128/2165598640?p=0&ts=1795642045&t=c7af11cabd49ad3b59d44c465bad8381ae0ea5e7&token=1795642045_f7af1742357d515a07172c553715f56492af6f82",
+   "s": "https://t4.bcbits.com/stream/78396d1a88d1b09ffc90bb2761d09841/mp3-128/2165598640?p=0&ts=1795649219&t=f26733095e0960a5afe8b09bd064bdef9e1c176e&token=1795649219_851b5e05a53997da323887a939aa62ad29ef6f92",
    "ft": "CHOKER",
    "dur": 398,
    "d": "2026-11-18T04:19:24Z"
@@ -2879,7 +2879,7 @@
    "g": "acoustic",
    "u": "https://mario-otto.bandcamp.com/album/ich-halte-dich",
    "i": "https://f4.bcbits.com/img/a2715434568_7.jpg",
-   "s": "https://t4.bcbits.com/stream/8eb1e9f6c4686088183f4256a28ec5f6/mp3-128/416370082?p=0&ts=1795642045&t=4fab8acf69827f357a9046b7fc6b77a20ac491a0&token=1795642045_5446d40556d64505f7865cf1dcab76f9276b5e72",
+   "s": "https://t4.bcbits.com/stream/8eb1e9f6c4686088183f4256a28ec5f6/mp3-128/416370082?p=0&ts=1795649219&t=863f46420574bcd26e2bfac5e05a71dafeee4b01&token=1795649219_d77977348fadbd7cc2f636f92e1284eb3bca28df",
    "ft": "Bis ans Ende dieser Zeit",
    "dur": 231,
    "d": "2026-11-24T17:27:45Z"
@@ -2892,7 +2892,7 @@
    "g": "world",
    "u": "https://fabriziofattori.bandcamp.com/album/the-collection-one",
    "i": "https://f4.bcbits.com/img/a2550416639_7.jpg",
-   "s": "https://t4.bcbits.com/stream/cfdd7c76af197a26984d0e6dc2274c4c/mp3-128/3205399121?p=0&ts=1795642045&t=99d36f54f0f8a22b426b8096d1d6487c8cf8668c&token=1795642045_dfa7e12dcf7136509771f418d53a435d856ae7a1",
+   "s": "https://t4.bcbits.com/stream/cfdd7c76af197a26984d0e6dc2274c4c/mp3-128/3205399121?p=0&ts=1795649219&t=aece1acb2dbcfcb4446f6e5b7a3ad72ee3ef5be4&token=1795649219_b405bfa0ae419d9ce9f87a2a3f8f76a6fa2873a6",
    "ft": "Human Lunch (feat Tbc)",
    "dur": 266,
    "d": "2026-11-23T18:35:29Z"
@@ -2905,7 +2905,7 @@
    "g": "ambient",
    "u": "https://kate08.bandcamp.com/album/i-need-my-heroes-ep",
    "i": "https://f4.bcbits.com/img/a4222860626_7.jpg",
-   "s": "https://t4.bcbits.com/stream/dfa6f49ba90596a1e6be214ab458d0fc/mp3-128/1366591819?p=0&ts=1795642045&t=3cdb089eaa4f1f9f37a5d62814d73a452f0d9a06&token=1795642045_cad8151c72ccf03c64283cdde4365e46e1f967ed",
+   "s": "https://t4.bcbits.com/stream/dfa6f49ba90596a1e6be214ab458d0fc/mp3-128/1366591819?p=0&ts=1795649219&t=035296a968c58a28cc067a6750e473c4faeda001&token=1795649219_8785a27e348ae7ff0e7831ada5ea217d22f7e87c",
    "ft": "I Need My Heroes (Long Version)",
    "dur": 463,
    "d": "2026-11-22T00:51:39Z"
@@ -2918,7 +2918,7 @@
    "g": "metal",
    "u": "https://personal-records.bandcamp.com/album/impera",
    "i": "https://f4.bcbits.com/img/a865235824_7.jpg",
-   "s": "https://t4.bcbits.com/stream/0014021219e541b713450a5124de24e3/mp3-128/70364654?p=0&ts=1795642045&t=23b691101667d6ea64409a5d240f69e1ef890ecb&token=1795642045_27cc7714b9f77cc05225c3488d99761eee92fb12",
+   "s": "https://t4.bcbits.com/stream/0014021219e541b713450a5124de24e3/mp3-128/70364654?p=0&ts=1795649219&t=39e885ba45c179af6618c96c88dfd8d800827fdd&token=1795649219_ae028ca84bc46b7db1be12dec09f59b653d411f8",
    "ft": "Embers",
    "dur": 276,
    "d": "2026-11-24T17:33:56Z"
@@ -2931,7 +2931,7 @@
    "g": "ambient",
    "u": "https://shamanicdreams.bandcamp.com/album/ship-of-fools",
    "i": "https://f4.bcbits.com/img/a278982838_7.jpg",
-   "s": "https://t4.bcbits.com/stream/af8c25e091b6e632cf883aa414d3b30b/mp3-128/1160138137?p=0&ts=1795642045&t=72e1c6e54b215503a8258ae638fc3c8c418ac070&token=1795642045_4fb614c25d5bd95f1b1190fbd8eb7c4d813f4919",
+   "s": "https://t4.bcbits.com/stream/af8c25e091b6e632cf883aa414d3b30b/mp3-128/1160138137?p=0&ts=1795649219&t=42594bf904fc915ab2f5380e67eb770b722717fa&token=1795649219_12d0ab18f77cf11c30bb19028c467a52f8707bb8",
    "ft": "Bread & Circuses",
    "dur": 259,
    "d": "2026-11-24T15:53:29Z"
@@ -2944,7 +2944,7 @@
    "g": "electronic",
    "u": "https://jottanavarroakacooldeeper.bandcamp.com/album/c-c-music-factory-remixes",
    "i": "https://f4.bcbits.com/img/a3396335938_7.jpg",
-   "s": "https://t4.bcbits.com/stream/037f8f7bf3691d2d167b2bbd9680b222/mp3-128/3963975875?p=0&ts=1795642045&t=2552508ee8417362816979a986b6b21a68025842&token=1795642045_8cf8aca68ea3b9b664e3b0181f2bdcd90b6ad1cc",
+   "s": "https://t4.bcbits.com/stream/037f8f7bf3691d2d167b2bbd9680b222/mp3-128/3963975875?p=0&ts=1795649219&t=1294066ecb5aaf1f1b33f5e2926793240eaa0a12&token=1795649219_58f945cf78a2560b0f4bb18540335b7e678adba7",
    "ft": "C & C Music Factory - Gonna Make You Sweat(Jotta Navarro Revibe)",
    "dur": 288,
    "d": "2026-11-24T17:33:46Z"
@@ -2957,7 +2957,7 @@
    "g": "experimental",
    "u": "https://cherechaircher.bandcamp.com/album/m-me-de-nuit-live-grafixx",
    "i": "https://f4.bcbits.com/img/a3390270478_7.jpg",
-   "s": "https://t4.bcbits.com/stream/a697bc24734b89f4c5dd22426b84cf84/mp3-128/2848650704?p=0&ts=1795642045&t=2b4aa60d0df45dd376810810ee60806445a5d371&token=1795642045_43e5e35d84fec0541930a939c7615a62ebfd46ab",
+   "s": "https://t4.bcbits.com/stream/a697bc24734b89f4c5dd22426b84cf84/mp3-128/2848650704?p=0&ts=1795649219&t=3590de107ce247c2c1f539c46e76cda798e4e448&token=1795649219_376a0a1f4c0998f633b27bdd1df7156a5b359299",
    "ft": "Noche Oscura",
    "dur": 423,
    "d": "2026-11-24T15:25:58Z"
@@ -2970,7 +2970,7 @@
    "g": "rock",
    "u": "https://brianbethke.bandcamp.com/album/hopeful-analogs-vol-1",
    "i": "https://f4.bcbits.com/img/a4087151691_7.jpg",
-   "s": "https://t4.bcbits.com/stream/b3be0746aff198fc8301ce703d4eb969/mp3-128/1131202628?p=0&ts=1795642045&t=3dbc7bf1863c5427d57d16472d532a535a12f1ae&token=1795642045_bb446e7dd57e78a8b2ae66f31a7ca1eef421cb01",
+   "s": "https://t4.bcbits.com/stream/b3be0746aff198fc8301ce703d4eb969/mp3-128/1131202628?p=0&ts=1795649219&t=52cd061d6fdd509223e5f2f7ed43253064bf3cee&token=1795649219_bc92c410b363d12cff64d89000f5ca2c01f96b99",
    "ft": "Out Of The Old",
    "dur": 145,
    "d": "2026-11-24T15:50:48Z"
@@ -2983,9 +2983,9 @@
    "g": "jazz",
    "u": "https://scottyboettcher.bandcamp.com/album/ghost-busters",
    "i": "https://f4.bcbits.com/img/a3711011259_7.jpg",
-   "s": "https://t4.bcbits.com/stream/4fee0fd51e63a169e2aec354087b0e13/mp3-128/506621889?p=0&ts=1795642045&t=1d5579f6e78b802bd9218fb90ec786a1d934bc8e&token=1795642045_b8423b532dfb1ddf7ef51758ab554f7a8ffe66ba",
-   "ft": "Ghost Busters",
-   "dur": 220,
+   "s": "https://t4.bcbits.com/stream/af33f387b2fad6b006a1aa3c45764611/mp3-128/459786546?p=0&ts=1795649219&t=4e683a3ad95e0bed33b274d4ba91bd4062abe249&token=1795649219_0ef5636968c4e3cfe606423fb8fb0c61563e8017",
+   "ft": "Nothing Like This",
+   "dur": 689,
    "d": "2026-11-24T17:32:49Z"
   },
   {
@@ -2996,7 +2996,7 @@
    "g": "alternative",
    "u": "https://levonjbrooking.bandcamp.com/album/the-bog-that-swallowed-us-whole-big-swamp",
    "i": "https://f4.bcbits.com/img/a69154165_7.jpg",
-   "s": "https://t4.bcbits.com/stream/45e17a3a2364baee1f2fcbcf1d361a2e/mp3-128/1476202133?p=0&ts=1795642045&t=78f8d7b4e7409369d2cac5eb87b6019385cd33ab&token=1795642045_f11dabdcaf13c6bee8a0381520d049d68d42e554",
+   "s": "https://t4.bcbits.com/stream/45e17a3a2364baee1f2fcbcf1d361a2e/mp3-128/1476202133?p=0&ts=1795649219&t=06f9d6484f21574b4173c62f39c0c1fdcba04061&token=1795649219_e7c19bd7d157c7b81ada05a3f8e6848177780fd7",
    "ft": "the bog",
    "dur": 150,
    "d": "2026-11-24T17:25:35Z"
@@ -3009,7 +3009,7 @@
    "g": "world",
    "u": "https://lulabat.bandcamp.com/album/racional",
    "i": "https://f4.bcbits.com/img/a3759619531_7.jpg",
-   "s": "https://t4.bcbits.com/stream/c617866da7d431a5348f6719571f53ea/mp3-128/4242234633?p=0&ts=1795642045&t=f4a609c8e0cbd07d7eb753eebf8206b5157156da&token=1795642045_624cf483942b6483233ec8c45f2ec242205dc2e4",
+   "s": "https://t4.bcbits.com/stream/c617866da7d431a5348f6719571f53ea/mp3-128/4242234633?p=0&ts=1795649219&t=80ad972fb4bd85ec5e58a6ea61044dc897484b53&token=1795649219_6409f65dabe4bed90101338d1d712fe8e4b1f8f0",
    "ft": "Hino Racional (2008)",
    "dur": 302,
    "d": "2026-11-23T22:10:20Z"
@@ -3022,11 +3022,11 @@
    "g": "world",
    "u": "https://mamukata.bandcamp.com/album/the-collection-two",
    "i": "https://f4.bcbits.com/img/a610899181_7.jpg",
-   "s": "https://t4.bcbits.com/stream/ecdcb08d7bb8a3cf8cdab027ed6c6b2e/mp3-128/669139319?p=0&ts=1795642045&t=fc91fff6376d07faf2b0d0cfc7b1290f26c212f5&token=1795642045_e7cda1e2b6b74eff4ae343a5e8361d597e68bbc6",
+   "s": "https://t4.bcbits.com/stream/ecdcb08d7bb8a3cf8cdab027ed6c6b2e/mp3-128/669139319?p=0&ts=1795649219&t=5453fa25ce21803765e5ca2e049c65443e6fa9fd&token=1795649219_868f02c197861833854c9c2905b1b94d64091548",
    "ft": "Ojios de Cielo",
    "dur": 255,
    "d": "2026-11-23T17:39:32Z"
   }
  ],
- "updated": "2026-11-24T21:27:25Z"
+ "updated": "2026-11-24T23:27:00Z"
 }
