@@ -160,19 +160,26 @@
   },
   {
    "d": "2026-11-25",
+   "a": "Anuel AA",
+   "w": "Real hasta la muerte 2",
+   "g": "Latin trap, Reggaeton",
+   "l": "Real Hasta la Muerte"
+  },
+  {
+   "d": "2026-11-25",
    "a": "Pretty Lights",
    "w": "A Trip Thru Time Fantastic"
+  },
+  {
+   "d": "2026-11-25",
+   "a": "Priya Ragu",
+   "w": "Madras"
   },
   {
    "d": "2026-11-25",
    "a": "Stray Kids",
    "w": "Suiatsu",
    "l": "Epic Japan"
-  },
-  {
-   "d": "2026-11-26",
-   "a": "Priya Ragu",
-   "w": "Madras"
   },
   {
    "d": "2026-11-27",
@@ -380,5 +387,5 @@
    "w": "Decembers"
   }
  ],
- "updated": "2026-11-25T03:27:16Z"
+ "updated": "2026-11-25T09:27:23Z"
 }
