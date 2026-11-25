@@ -1,0 +1,88 @@
+{
+ "id": "2026-11-26-2",
+ "date": "2026-11-26",
+ "title": "Sổ hộ khẩu đi đâu rồi: số định danh, căn cước và VNeID thay chỗ thế nào",
+ "topic": "thủ tục: cư trú và định danh điện tử",
+ "kind": "small",
+ "lang": "vi",
+ "minutes": 13,
+ "track": "B",
+ "role": "new",
+ "stage": 1,
+ "week": 1,
+ "unit": "Chặng 1/12 · Ngôi nhà & gia đình Việt · Tuần 1/4: Gia đình, họ hàng & xưng hô",
+ "summary": "Từ 1/1/2023, sổ hộ khẩu giấy hết giá trị; ba nhiệm vụ của nó (ghi nơi ở, ghi quan hệ trong hộ, làm bằng chứng) chuyển sang số định danh cá nhân, cơ sở dữ liệu dân cư, cơ sở dữ liệu cư trú, thẻ căn cước và VNeID. Bài giải thích vì sao, những điểm mới của Luật Cư trú sửa đổi từ 1/7/2026 và các bước cần làm cho bản thân, gia đình.",
+ "body": "Hồi trước, trong nhiều nhà, có một cuốn sổ bìa xanh hoặc bìa đỏ được cất kỹ trong ngăn tủ cùng với sổ đỏ và giấy khai sinh của các con. Đi làm giấy tờ gì cũng \"mang hộ khẩu theo, phô tô công chứng hai bản\". Cuốn sổ ấy ghi ai là chủ hộ, ai là vợ, con, cháu, ai đã \"cắt khẩu\" đi lấy chồng, ai mới \"nhập khẩu\". Nó vừa là giấy tờ hành chính, vừa là một tấm bản đồ thu nhỏ của gia đình.\n\nTừ ngày 1/1/2023, cuốn sổ ấy hết giá trị. Nhiều người vẫn giữ lại như kỷ vật, nhưng không cơ quan nào được đòi nó nữa. Vậy cái gì đã thay chỗ cuốn sổ, và hôm nay, khi cần chứng minh \"tôi ở đâu, tôi là ai trong gia đình này\", ta làm thế nào? Bài này trả lời câu hỏi đó từ gốc, rồi đi tới những bước cụ thể.\n\n## Cuốn sổ hộ khẩu thực ra làm nhiệm vụ gì\n\nMuốn hiểu cái thay thế, trước hết phải hiểu cái bị thay. Sổ hộ khẩu gánh ba việc cùng lúc:\n\n1. **Ghi nơi ở chính thức** của một người (nơi thường trú).\n2. **Ghi quan hệ trong hộ**: ai là chủ hộ, những người khác là gì của chủ hộ.\n3. **Làm bằng chứng** khi giao dịch: đi học, mua nhà, vay tiền, làm thủ tục ở phường.\n\nVấn đề là cả ba việc đều nằm trên giấy. Mỗi lần thay đổi phải ra công an ghi vào sổ; mỗi lần dùng phải mang bản gốc hoặc bản sao chứng thực; mỗi cơ quan lại lưu một chồng bản sao. Thông tin trong sổ của nhà mình, trong hồ sơ ở công an, trong hồ sơ ở trường học có thể không khớp nhau.\n\nÝ tưởng của cải cách là: **giữ ba nhiệm vụ đó, nhưng chuyển chúng từ cuốn sổ sang một cơ sở dữ liệu**. Thay vì người dân mang thông tin đi khắp nơi, cơ quan nhà nước tự tra thông tin ở một chỗ.\n\n## Cái thay chỗ: một số định danh và hai cơ sở dữ liệu\n\n**Luật Cư trú năm 2020**, có hiệu lực từ 1/7/2021, đặt nền cho thay đổi này. Luật cho phép sổ hộ khẩu, sổ tạm trú đã cấp tiếp tục dùng đến hết 31/12/2022; từ 1/1/2023 chúng chính thức hết giá trị.\n\nThay vào đó là ba thứ gắn với nhau:\n\n- **Số định danh cá nhân**: dãy 12 số gắn với mỗi công dân từ lúc đăng ký khai sinh, cũng là số in trên thẻ căn cước. Đây là \"chìa khóa\" để tra mọi thông tin khác.\n- **Cơ sở dữ liệu quốc gia về dân cư**: nơi lưu thông tin cơ bản của mỗi người (họ tên, ngày sinh, quê quán, quan hệ cha mẹ, vợ chồng...).\n- **Cơ sở dữ liệu về cư trú**: nơi lưu thông tin thường trú, tạm trú, và quan hệ với chủ hộ.\n\nNói gọn: cuốn sổ bìa xanh đã bị \"tháo rời\" thành các dòng dữ liệu, mỗi dòng gắn với số định danh của từng người. Quan hệ \"chủ hộ, vợ, con\" vẫn còn, chỉ là không còn in trên giấy.\n\n## Thẻ căn cước và căn cước điện tử\n\nMảnh thứ hai của bức tranh là **Luật Căn cước**, được Quốc hội thông qua ngày 27/11/2023 và có hiệu lực từ 1/7/2024. Những thay đổi chính:\n\n- **Đổi tên** \"căn cước công dân\" thành \"căn cước\". Thẻ cấp trước ngày 1/7/2024 vẫn dùng được đến hết hạn ghi trên thẻ; ai có nhu cầu thì đổi sang thẻ mới.\n- **Chứng minh nhân dân** chín số, mười hai số còn hạn chỉ dùng được đến hết 31/12/2024. Từ 1/1/2025, CMND hết hiệu lực.\n- **Thông tin trên mặt thẻ** gọn hơn: không còn quê quán và vân tay in trên thẻ; thay vào đó là *nơi đăng ký khai sinh* và *nơi cư trú*. Thông tin chi tiết nằm trong chip và trong cơ sở dữ liệu.\n- **Trẻ dưới 14 tuổi** được cấp thẻ nếu có nhu cầu. Với trẻ dưới 6 tuổi, cha mẹ làm thủ tục qua cổng dịch vụ công hoặc ứng dụng định danh và không phải thu nhận vân tay, mống mắt.\n- **Căn cước điện tử**: mỗi công dân được cấp một căn cước điện tử, có sau khi kích hoạt tài khoản định danh điện tử mức độ 2 trên ứng dụng **VNeID**.\n\nTừ đây, \"cái giấy chứng minh tôi là ai\" có hai dạng: tấm thẻ nhựa có chip trong ví, và bản điện tử trong điện thoại.\n\n## VNeID: cuốn sổ hộ khẩu bỏ túi\n\nỨng dụng VNeID do Bộ Công an quản lý. Với tài khoản mức độ 2 (đăng ký trực tiếp tại công an, có ảnh chân dung và vân tay xác thực), người dùng xem được thông tin căn cước, thông tin cư trú, và có thể tích hợp thêm nhiều giấy tờ khác như giấy phép lái xe, thẻ bảo hiểm y tế. Đây là chỗ gần nhất với cuốn sổ hộ khẩu cũ: mở ứng dụng ra là thấy mình thường trú ở đâu, chủ hộ là ai, thành viên trong hộ gồm những ai.\n\nĐiểm quan trọng nằm ở chỗ khác: **cơ quan nhà nước không được bắt mình nộp lại những gì đã có trong hệ thống**. Các sửa đổi về căn cước có hiệu lực từ 1/7/2026 cấm yêu cầu công dân xuất trình giấy tờ đã được tích hợp vào căn cước điện tử hoặc VNeID, trừ khi thông tin không khớp hoặc luật khác có quy định riêng.\n\n## Bảy cách chứng minh nơi cư trú\n\nKhi bỏ sổ hộ khẩu, Bộ Công an hướng dẫn bảy phương thức thay thế. Đến nay chúng vẫn là khung tham chiếu:\n\n1. **Thẻ căn cước (căn cước công dân) gắn chip.**\n2. **Quét mã QR** trên thẻ.\n3. **Đọc chip** trên thẻ bằng thiết bị chuyên dụng.\n4. **Tra cứu trực tuyến** Cơ sở dữ liệu quốc gia về dân cư qua cổng dịch vụ công.\n5. **Ứng dụng VNeID.**\n6. **Giấy xác nhận thông tin về cư trú** (mẫu CT07) do công an cấp.\n7. **Thông báo số định danh cá nhân**, dùng cho người chưa có thẻ.\n\nTrong đời sống, cách hay dùng nhất là cho xem VNeID hoặc thẻ căn cước. Giấy xác nhận cư trú vẫn cần trong một số việc, ví dụ khi cơ quan tiếp nhận không có thiết bị tra cứu, hoặc khi cần thông tin cả hộ. Theo hướng dẫn trước đây, giấy này có giá trị 30 ngày kể từ ngày cấp; có thể xin trực tiếp ở công an hoặc trực tuyến.\n\n## Luật Cư trú sửa đổi từ 1/7/2026: những điểm mới\n\nTừ ngày 1/7/2026, Luật Cư trú được sửa đổi cùng một số luật khác về an ninh, trật tự (Luật số 118/2025/QH15, thông qua ngày 10/12/2025), kèm Thông tư 116/2026/TT-BCA hướng dẫn chi tiết. Những điểm đáng biết:\n\n- **Cơ quan đăng ký cư trú là Công an cấp xã**, tức công an xã, phường, đặc khu, cho khớp với mô hình chính quyền hai cấp đã chạy từ 1/7/2025. Không còn khái niệm \"lên công an huyện\" cho việc cư trú.\n- **Trẻ dưới 6 tuổi** về ở với cha mẹ hoặc người giám hộ được đăng ký thường trú dễ hơn, kể cả ở chỗ ở hợp pháp không thuộc sở hữu của mình mà không cần chủ hộ, chủ sở hữu đồng ý.\n- **Tự động cập nhật**: thông tin sửa trong cơ sở dữ liệu dân cư sẽ tự sang cơ sở dữ liệu cư trú; khi địa giới hành chính thay đổi, địa chỉ cũng được điều chỉnh tự động. Người dân sau sắp xếp xã, phường không phải tự đi sửa địa chỉ.\n- **Làm hồ sơ gọn hơn**: khi nộp trực tiếp, công dân chỉ cần cung cấp thông tin cơ bản, cán bộ khai thác dữ liệu sẵn có để tạo hồ sơ; không bắt nộp lại giấy tờ đã có trong hệ thống; mỗi hồ sơ có mã số để tra tiến độ.\n- **Thông báo lưu trú**: khi có người đến ở qua đêm ngoài nơi thường trú, tạm trú của họ (kể cả người thân, bạn bè), hộ gia đình phải thông báo trước 23 giờ; đến sau 23 giờ thì thông báo trước 8 giờ sáng hôm sau. Có thể báo bằng điện thoại, thư điện tử, trang thông tin của công an, Cổng dịch vụ công, VNeID hoặc phần mềm thông báo lưu trú; không thu phí và không bắt đến trụ sở. Quy định này từng gây nhiều băn khoăn khi mới công bố, và Bộ Công an đã phải giải thích thêm về cách thực hiện.\n\n## Vì sao làm như vậy\n\nCó ba lý do chính, và cũng có những băn khoăn đáng nói.\n\n**Lý do thứ nhất là giảm giấy tờ.** Khi thông tin nằm ở một nơi, người dân không phải mang bản sao đi khắp các cơ quan, và các cơ quan không phải lưu những chồng giấy giống nhau.\n\n**Lý do thứ hai là thông tin đồng bộ.** Cuốn sổ giấy có thể sai mà không ai biết; dữ liệu điện tử được đối chiếu chéo giữa khai sinh, kết hôn, cư trú, căn cước.\n\n**Lý do thứ ba là làm nền cho dịch vụ công trực tuyến.** Muốn làm thủ tục qua mạng, nhà nước phải biết chắc người đang ngồi trước màn hình là ai. Tài khoản định danh điện tử là chiếc chìa khóa đó.\n\nMặt kia của bức tranh: tập trung dữ liệu cũng đặt ra yêu cầu rất cao về bảo mật và về quyền riêng tư. Đây là một lý do Việt Nam ban hành Luật Bảo vệ dữ liệu cá nhân, có hiệu lực từ 1/1/2026. Những người lớn tuổi, người không dùng điện thoại thông minh cũng dễ bị bỏ lại nếu mọi thứ chỉ có trên ứng dụng; vì vậy kênh làm trực tiếp vẫn được giữ.\n\n## Làm gì cho đúng: những bước cụ thể\n\n**Với bản thân:**\n\n1. Kích hoạt **VNeID mức độ 2** nếu chưa có (đến công an cấp xã, mang thẻ căn cước).\n2. Mở mục thông tin cư trú, kiểm tra kỹ: họ tên, ngày sinh, nơi thường trú, chủ hộ, quan hệ với chủ hộ. Sai thì đề nghị công an cấp xã điều chỉnh; có thể phản ánh qua VNeID.\n3. Nếu thẻ căn cước sắp hết hạn hoặc thông tin đã đổi, làm thủ tục đổi thẻ; phần lớn việc này nay làm được trực tuyến.\n\n**Với gia đình:**\n\n1. Giúp ông bà, bố mẹ kích hoạt VNeID, hoặc ít nhất ghi lại số định danh của từng người.\n2. Khi sinh con, đăng ký khai sinh và đăng ký thường trú cho bé; có thể làm liên thông trực tuyến.\n3. Khi có người thân đến ở qua đêm, nhớ thông báo lưu trú; cách nhanh nhất thường là qua VNeID.\n\n**Khi đi làm thủ tục ở cơ quan:**\n\n- Mang thẻ căn cước hoặc mở VNeID; không cần mang sổ hộ khẩu cũ.\n- Nếu bị yêu cầu nộp lại giấy tờ đã có trong hệ thống, có thể lịch sự hỏi lại: \"Thông tin này đã có trên VNeID, anh chị tra giúp em được không ạ?\"\n\n## Một góc nhìn từ phía người làm ở phường\n\nVới người làm việc ở cơ quan nhà nước, thay đổi này có hai mặt. Mặt dễ chịu: ít giấy tờ hơn, tra cứu nhanh hơn. Mặt cần chú ý: nhiều người dân, nhất là người lớn tuổi, vẫn quen với cuốn sổ hộ khẩu. Họ có thể đến quầy, đặt cuốn sổ cũ lên bàn và nói \"đây, nhà tôi có hộ khẩu đầy đủ\". Một câu đáp ân cần thường hiệu quả hơn một câu giải thích luật: \"Bác cứ cất sổ làm kỷ niệm ạ, giờ thông tin nhà mình đã có trong máy rồi, cháu tra bằng số căn cước của bác là được.\"\n\nCuốn sổ hộ khẩu từng là tấm bản đồ gia đình trên giấy. Bây giờ tấm bản đồ ấy nằm trong dữ liệu, gắn với từng con người. Bản đồ đổi chất liệu, nhưng câu hỏi nó trả lời vẫn vậy: ta ở đâu, và ta là ai với những người cùng mái nhà.\n",
+ "sources": [
+  {
+   "title": "Nhân Dân (02/01/2023): Chính thức bỏ sổ hộ khẩu, sổ tạm trú kể từ ngày 1/1/2023",
+   "url": "https://nhandan.vn/chinh-thuc-bo-so-ho-khau-so-tam-tru-ke-tu-ngay-112023-post732909.html"
+  },
+  {
+   "title": "Cổng TTĐT Hà Tĩnh: 7 cách thức tra cứu thông tin công dân thay sổ hộ khẩu",
+   "url": "https://hatinh.gov.vn/vi/bai-viet/7-cach-thuc-tra-cuu-thong-tin-cong-dan-thay-so-ho-khau"
+  },
+  {
+   "title": "Nhân Dân (01/04/2024): 10 điểm mới của Luật Căn cước",
+   "url": "https://nhandan.vn/10-diem-moi-cua-luat-can-cuoc-post802570.html"
+  },
+  {
+   "title": "Báo Luật sư Việt Nam (17/07/2026): Một số điểm mới cơ bản của Luật Cư trú sửa đổi và Thông tư 116/2026/TT-BCA",
+   "url": "https://lsvn.vn/mot-so-diem-moi-co-ban-cua-luat-cu-tru-sua-doi-va-thong-tu-116-2026-tt-bca-a176014.html"
+  },
+  {
+   "title": "Báo Luật sư Việt Nam (13/12/2025): Nhiều quy định mới về căn cước và cư trú có hiệu lực từ 01/7/2026",
+   "url": "https://lsvn.vn/nhieu-quy-dinh-moi-ve-can-cuoc-va-cu-tru-co-hieu-luc-thi-hanh-tu-01-7-2026-a167083.html"
+  },
+  {
+   "title": "Tuổi Trẻ (13/12/2025): Các quy định mới về cư trú, thủ tục thường trú cho trẻ em từ 1-7-2026",
+   "url": "https://tuoitre.vn/cac-quy-dinh-moi-ve-cu-tru-thu-tuc-nhap-khau-cho-tre-em-tu-1-7-2026-20251213102335209.htm"
+  },
+  {
+   "title": "Tuổi Trẻ (14/07/2026): Bộ Công an thông tin thêm về quy định người thân, bạn bè ở qua đêm phải thông báo lưu trú",
+   "url": "https://tuoitre.vn/bo-cong-an-thong-tin-them-ve-quy-dinh-nguoi-than-ban-be-o-qua-dem-phai-thong-bao-luu-tru-100260714114101586.htm"
+  },
+  {
+   "title": "Nhân Dân (15/07/2025): Từ tháng 7/2025, Công an cấp xã được quyền đột xuất thực hiện kiểm tra cư trú",
+   "url": "https://nhandan.vn/tu-thang-72025-cong-an-cap-xa-duoc-quyen-dot-xuat-thuc-hien-kiem-tra-cu-tru-post893799.html"
+  },
+  {
+   "title": "Cổng TTĐT Hà Tĩnh: Luật Bảo vệ dữ liệu cá nhân chính thức có hiệu lực thi hành từ ngày 1/1/2026",
+   "url": "https://hatinh.gov.vn/vi/bai-viet/luat-bao-ve-du-lieu-ca-nhan-chinh-thuc-co-hieu-luc-thi-hanh-tu-ngay-112026"
+  }
+ ],
+ "unsure": [
+  "Thời hạn 30 ngày của giấy xác nhận thông tin về cư trú là theo hướng dẫn năm 2021–2022; chưa rõ Thông tư 116/2026/TT-BCA có thay đổi thời hạn này không.",
+  "Chưa xác minh được ngày có hiệu lực cụ thể của Thông tư 116/2026/TT-BCA (ban hành 29/06/2026) và việc nó có thay thế Thông tư 55/2021, 53/2025 hay không.",
+  "Các chi tiết về giấy tờ tích hợp trên VNeID (giấy phép lái xe, bảo hiểm y tế) và liên thông khai sinh – thường trú trực tuyến viết theo hiểu biết chung, chưa đối chiếu nguồn trong lần soạn này."
+ ],
+ "connect": [
+  {
+   "id": "2026-11-23-1",
+   "why": "Bài gia đình hạt nhân đã nhắc việc bỏ sổ hộ khẩu như một dấu mốc; bài này giải thích cái gì thay thế nó và dùng ra sao."
+  },
+  {
+   "id": "2026-11-25-1",
+   "why": "Quan hệ vợ chồng, cha mẹ con mà luật gia đình quy định chính là dữ liệu được lưu trong cơ sở dữ liệu dân cư thay cho trang sổ hộ khẩu."
+  },
+  {
+   "id": "2026-11-26-1",
+   "why": "Khi khai nhận thừa kế, giấy tờ chứng minh quan hệ và nơi thường trú cuối cùng của người mất nay được tra từ chính các cơ sở dữ liệu này."
+  }
+ ],
+ "check": [
+  {
+   "q": "Sổ hộ khẩu giấy từng làm ba nhiệm vụ gì, và mỗi nhiệm vụ nay chuyển sang đâu?",
+   "a": "Ghi nơi ở, ghi quan hệ trong hộ, làm bằng chứng khi giao dịch. Nay nơi ở và quan hệ hộ nằm trong cơ sở dữ liệu dân cư và cư trú, gắn với số định danh; bằng chứng là thẻ căn cước, VNeID hoặc giấy xác nhận cư trú."
+  },
+  {
+   "q": "Từ 1/7/2026, nếu cán bộ yêu cầu bạn nộp bản sao giấy tờ đã có trên VNeID, bạn có thể nói gì và vì sao?",
+   "a": "Lịch sự đề nghị cán bộ tra trên hệ thống, vì luật sửa đổi cấm yêu cầu xuất trình giấy tờ đã tích hợp vào căn cước điện tử hoặc VNeID, trừ khi thông tin không khớp hay luật khác quy định."
+  },
+  {
+   "q": "Em họ từ quê lên ngủ lại nhà bạn hai đêm. Bạn phải làm gì?",
+   "a": "Thông báo lưu trú với công an cấp xã trước 23 giờ ngày em đến (đến sau 23 giờ thì trước 8 giờ sáng hôm sau), qua VNeID, điện thoại hay các kênh khác; không mất phí."
+  }
+ ],
+ "try": "Mở VNeID (hoặc nhờ người nhà mở), xem mục thông tin cư trú và đối chiếu với cuốn sổ hộ khẩu cũ nếu nhà còn giữ: ai là chủ hộ, quan hệ ghi thế nào, có gì đã đổi sau khi sắp xếp xã phường."
+}
